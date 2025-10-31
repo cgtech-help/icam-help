@@ -1,0 +1,74 @@
+.. _macro_development:
+
+Control Emulator Macros
+***********************
+
+Macros provide the developer with a means of customizing the control emulator,
+when the questions in QUEST fail to satisfy specific requirements.
+They also extend the range of CNC functionality recognized by Control Emulator.
+They are programmed in an easy-to-use APT-like language and input via
+the questionnaire using the macro editor.
+
+.. toctree::
+   :hidden:
+
+   language/index
+   cemacrocommands
+   stringformat
+
+-  :ref:`“The Macro Language”<macro_language>` describes the macro language syntax.
+
+   \
+
+-  :ref:`“Control Emulator Macro Commands”<ce_macro_commands>` describes the syntax of
+   various control emulator command (e.g., EXEC, LPRINT…), which are used in macros
+   to control special features and functions of the control emulator.
+
+   \
+
+-  :ref:`“String Formatting”<string_formatting>` describes the string formatting conventions
+   used within macros and in control emulator commands with text string parameters.
+
+**Syntax Format Conventions**
+
+The syntax for the macro language is listed using the following format conventions:
+
+-  Square brackets :math:`\big[ \; \big]` encase syntax that is optional.
+   The :small:`0:n` symbol preceding the bracketed item,
+   as in :math:`\icamrange{0.8}{0}\,\big[,a\,\big]`
+   indicates that the bracketed item *a* can be repeated zero or more times.
+
+   \
+
+-  Parentheses :math:`\big( \; \big)` encase syntax that lists a number of choices,
+   one of which is required. The parentheses are omitted when the syntax is a
+   simple choice among a number of keywords.
+   The :small:`1:n` symbol preceding the parenthesized item,
+   as in :math:`\icamrange{0.8}{1}\,\big(,a\,\big)`
+   indicates that the item *a* can be repeated one or more times.
+
+   \
+
+-  Any value not contained in square brackets or parentheses must be
+   programmed each time the command is used.
+
+   \
+
+-  Formal keywords are shown in bold upper case, as in **ON** and
+   **WHILE**.
+
+   \
+
+-  Lower case words within angled brackets identify common syntax, as in
+   <**axis_specifier**>. The syntax of **axis_specifier** is then
+   defined separately. This makes complex commands more readable.
+
+   \
+
+-  Italicized lower case words identify requirements for numeric or
+   string values, as in *offset* or *value*.
+
+   \
+
+-  Ellipses “...” are used to show continuation when the syntax is broken
+   up into sections.
