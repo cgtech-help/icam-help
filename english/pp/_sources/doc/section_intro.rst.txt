@@ -1,0 +1,33 @@
+.. _intro_section:
+
+Icam Post: Getting Started
++++++++++++++++++++++++++++++++++++
+
+This section describes the steps necessary to install, upgrade and configure your system to run this
+latest release of Icam Post.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   general/index
+   install/index
+   config/index
+
+**Section Overview**
+
+-  :ref:`“General Information”<general_information>` provides a brief overview of Icam Post
+   and its functionality.
+
+   \
+
+-  :ref:`“Installation and Upgrade”<installation>` describes the steps necessary
+   to install or upgrade the ICAM License Server (if using a floating license), as well as
+   the steps necessary to install or upgrade Icam Post and other ICAM Productivity Tools.
+
+   \
+
+-  :ref:`“Configuration”<configuration>` describes how to tailor the Icam Post
+   software to suit the needs of your specific installation, including a description of the
+   layout of the software installation directory, the use of optional environment variables
+   and the ICAM.DEF configuration file.
