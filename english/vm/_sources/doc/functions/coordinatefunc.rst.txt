@@ -1,0 +1,170 @@
+Coordinate System Functions
+===========================
+
+Coordinate system functions allow you to define, modify, and query coordinate frames within the virtual machine model.
+These functions support global and local coordinate systems, as well as model reference positions used for positioning and transformation.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`$FMSGCS<func_fmsgcs>`
+         -  Get coordinate system information
+      *  -  :ref:`$FMSGREF<func_fmsgref>`
+         -  Get model reference position
+      *  -  :ref:`$FMSLCS<func_fmslcs>`
+         -  Establish or remove a local coordinate system
+      *  -  :ref:`$FMSSCS<func_fmsscs>`
+         -  Set coordinate system information
+      *  -  :ref:`$FMSSREF<func_fmssref>`
+         -  Set model reference position
+
+.. _func_fmsgcs:
+.. index:: Functions; $FMSGCS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGCS(**\ *...*\ **)**                     | Returns the coordinate system information         |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGCS}\boldsymbol{(}\, id\, \bigg[,mode, \Big[,time\, \big[,channel\,\big]\Big]\bigg] \,\boldsymbol{)}`
+
+   This function returns the coordinate system information of an object,
+   optionally at a specified moment in *time* (default is current time) and
+   in a specified *channel* (default is channel 1). The *mode* value
+   determines the type of information returned, as shown below:
+
+      |  *mode* = 1
+      |     Return either tool tip or machine information, as defined by *id*:
+      |     *id* = 0 returns the tool tip coordinates in the RTCP frame.
+      |     *id* = 1 returns the machine origin frame.
+      |  *mode* = 2 (default)
+      |     Return the world coordinate location of the component specified by the object *id*.
+      |  *mode* = 3
+      |     Return the coordinate location of the component specified by the object id in relation to its parent (i.e., the component to which it is attached in the simulation).
+
+   A sequence of length 12 is returned containing a 3x4 matrix.
+
+.. _func_fmsgref:
+.. index:: Functions; $FMSGREF
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGREF(**\ *...*\ **)**                    | Returns axes values for model reference positions |
+|                                                |                                                   |
+|                                                | Returns: Sequence or Numeric                      |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGREF}\boldsymbol{(}\, \mathit{n1},\mathit{n2} \,\big[,\mathbf{ALL}\,\big] \,\boldsymbol{)}`
+
+   This function returns axes values for model reference positions, which
+   are defined by the model creator (in QUEST) on a per channel basis. The
+   *n1* parameter specifies the channel of interest; use $VMCHN to specify
+   the current active channel. The *n2* parameter defines the reference
+   position ID.
+
+   If the ALL keyword is specified, the return value is a sequence of
+   length 16 containing the reference position axes values for all possible
+   axes. Otherwise, the return value is a sequence of length 6 containing
+   the reference position axes values for the active axes (as defined by
+   the $AXES system variable). A sequence of zeros is returned if the
+   reference position ID *n2* is not defined in channel *n1*.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGREF}\boldsymbol{(}\, \mathit{n1}, \mathit{n2},
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Similar to the above, this form of the $FMSGREF function returns the
+   reference position value for the specified axis, identified either by an
+   *index* number or by a *keyword* identifier (a table of valid index
+   numbers and keywords can be found :ref:`here<tableindexnumbersandkeywords>`). A value of zero is
+   returned if the reference position ID *n2* is not defined in channel
+   *n1* or if axis is not defined in the post-processor or control
+   emulator.
+
+.. _func_fmslcs:
+.. index:: Functions; $FMSLCS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSLCS(**\ *...*\ **)**                     | Setup a local coordinate system transformation    |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSLCS}\boldsymbol{(} \big[\,matrix\,\big] \,\boldsymbol{)}`
+
+   This function is used to setup a local coordinate system transformation
+   on the simulation machine. The *matrix* argument is a sequence that must
+   contain the 12 numeric elements of a 3x4 matrix.
+
+   Call the $FMSLCS function without the *matrix* sequence to disable
+   local coordinate processing and return to normal coordinate processing.
+
+.. _func_fmsscs:
+.. index:: Functions; $FMSSCS
+
++------------------------------------------------+------------------------------------------------------+
+| **$FMSSCS(**\ *...*\ **)**                     | Sets the coordinate system information of components |
+|                                                |                                                      |
+|                                                | Returns: Sequence                                    |
++------------------------------------------------+------------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSCS}\boldsymbol{(}\, matrix,id\, \bigg[,mode\, \Big[,time\, \big[,channel\,\big]\Big]\bigg] \,\boldsymbol{)}`
+
+   This function sets the coordinate system information of the component
+   specified by the object *id*, optionally at a specified moment in *time*
+   (default is current time) in a specified *channel* (default is channel
+   1). The *mode* value determines how the 3x4 *matrix* sequence is interpreted, as
+   follows:
+
+      |  *mode* = 2 (default)
+      |     Sets the world coordinate location of the component specified by the object id. If optional timing data is specified, then the relationship of the component to its parent is computed at that time in the simulation, but the repositioning of the component with respect to its parent happens at the current time. I.e., this function does not retroactively reposition components.
+      |  *mode* = 3
+      |     Sets the coordinate location of the component specified by the object id in relation to its parent (i.e., the component to which it is attached in the simulation). Optional timing data is ignored.
+
+   Only objects of the following types can be set:
+
+   : 3: Reference axis component
+   : 8: Stock component
+   : 9: Fixture component
+   :10: Part component
+   :12: Tool component
+   :14: Head component
+   :16: Assembly container (17:Part, 9:Fixture)
+   :17: Part container (10:Design, 8:Stock)
+   :18: CAM system coordinate frame
+
+   A non-zero value is returned if the function is successful.
+
+.. _func_fmssref:
+.. index:: Functions; $FMSSREF
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSSREF(**\ *...*\ **)**                    | Sets axes values for model reference positions    |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSREF}\boldsymbol{(}\, \mathit{n1},\mathit{n2},position \,\boldsymbol{)}`
+
+   This function sets axes values for model reference positions, which will
+   overwrite any position already defined by macro or by the model creator
+   in QUEST. The *n1* parameter specifies the channel of interest; use
+   $VMCHN to specify the current active channel. The *n2* parameter defines
+   the reference position ID.
+
+   A sequence of 3, 6 or 16 values can be specified for the reference
+   *position*. A sequence of 3 will set the reference position for the X, Y
+   and Z axes. A sequence of 6 will set the reference position for the
+   active axis as defined by the $AXES system variable. A sequence of 16
+   will set the reference position for all axes.
+
+      :math:`\mathit{result} = \mathbf{\$FMSSREF}\boldsymbol{(}\, \mathit{n1}, \mathit{n2},
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Similar to the above, this form of the $FMSSREF function replaces the
+   reference position *value* for the specified axis, identified either by
+   an *index* number or by a *keyword* identifier (a table of valid index
+   numbers and keywords can be found :ref:`here<tableindexnumbersandkeywords>`).
