@@ -1,0 +1,28 @@
+.. _command_lprint:
+
+The LPRINT Command :kbd:`[MLEPCS]`
+==================================
+
+The LPRINT command is used to control output to the verification
+listing (.lst) file created by GENER. It is available for all machine
+types.
+
+   :math:`\textbf{LPRINT / } \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \mathit{lines} \end{array}\,\end{pmatrix}`
+
+If OFF is coded, output to the verification listing is disabled. The
+ON keyword enables output to the verification listing. A number can
+be coded to skip a given number of lines. The line skip is terminated
+when the next page is reached. A value of 0 advances output to the
+next page, providing that pagination is active.
+
+   :math:`\textbf{LPRINT / COORD}, \begin{pmatrix} \begin{array}{l} cs \begin{bmatrix} ,\! \begin{array}{l} \textbf{ABSOL} \\ \textbf{INCR} \end{array}\,\end{bmatrix} \\  \textbf{OFF} \end{array} \end{pmatrix}`
+
+The LPRINT/COORD command defines how coordinates are displayed in the
+columns of the verification listing. The “cs” value specifies the following
+coordinate types:
+
+:0: Coordinates expressed in Joint frame
+:1: Coordinates expressed in Machine frame
+:2: Coordinates expressed in WCS frame
+
+Specify OFF to reset the coordinate type to the default.
