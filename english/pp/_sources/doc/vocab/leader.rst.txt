@@ -1,0 +1,14 @@
+.. _command_leader:
+
+The LEADER Command :kbd:`[MLEPC]`
+=================================
+
+The LEADER command is used to output the leader character to the
+tape file for a length specified in the programmed command. This
+command is valid for all machine types.
+
+   :math:`\textbf{LEADER / } \mathit{length}`
+
+The value for the length must be given in the units currently being
+used in the CL file. GENER will output leader characters to the tape
+file to produce the required length of leader.
