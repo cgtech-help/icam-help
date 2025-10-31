@@ -1,0 +1,116 @@
+.. _environment_variables:
+
+Environment Variables
+=====================
+
+The use of environment variables is entirely optional. They are
+provided so that the software can be configured to suit particular
+needs (e.g., to use a networked database file). Environment variables
+can be added or modified from the System Control Panel as follows:
+
+1. Click the Advanced systems settings link.
+2. Click Environment Variables button.
+3. If software was installed “for you”, add the definition to the User
+   variables list, otherwise as an Administrator, add the definition to
+   the System variables list.
+
+You do not need to reboot the system, however it is good practice to
+log out and then back in again when adding or changing environment
+variables.
+
+The following environment variables have meaning to Control Emulator.
+
+-  **icam_lib** is a dynamically set variable that defines the installation directory.
+
+-  **icam_bin** is a dynamically set variable that defines the computer system type.
+
+-  **icam_appdata** and **icam_appdata_260** define the application data directory.
+
+-  **icam_dbf** defines the database file in which control emulators are stored.
+
+-  **icam_sec** defines the ICAM license server connection key file.
+
+-  **icam_lis** defines the default directory for QUEST listing files.
+
+-  **icam_lce** defines the default directory for CERUN listing files.
+
+.. index:: Environment variable; icam_lib
+
+The **icam_lib** environment variable is dynamically set when the
+software starts running. It points to the Control Emulator installation
+directory where the software is running from. This dynamic setting
+means that DEF file symbols and macros can use the *icam_lib*
+environment variable to refer to the installation directory. It also
+means that any setting of *icam_lib* before running the software will
+be ignored.
+
+.. index:: Environment variable; icam_bin
+
+The **icam_bin** environment variable is also dynamically set when
+the software starts running. It defines the system type of the
+computer running the software. The system type will match one of the
+Control Emulator installation “bin” subdirectory names. DEF file symbols and
+macros can use the *icam_bin* environment variable to refer to the
+system type. Any setting of *icam_bin* before running the software
+will be ignored.
+
+.. index:: Environment variable; icam_appdata
+.. index:: Environment variable; icam_appdata_260
+
+The **icam_appdata** and/or **icam_appdata_260** environment
+variables can optionally be set to define the application data
+directory. If *icam_appdata_260* is defined, it will temporarily
+override any value of *icam_appdata*. This enables different
+application data directories to be defined for different versions of
+Control Emulator. If neither environment variable is defined, Control Emulator will
+dynamically set *icam_appdata* by searching for the ICAM.DEF file as
+defined in :ref:`“Configuration Storage and Application Data”<configuration_storage>`.
+DEF file symbols and macros can reliably use the *icam_appdata* environment variable
+to refer to the application data directory, since *icam_appdata* will be dynamically set if missing.
+
+The remaining environment variables are not dynamically set.
+
+.. index:: Environment variable; icam_dbf
+
+The **icam_dbf** environment variable defines the database file that
+is used to store control emulators. When CERUN is run from the Windows
+command prompt, the default database is named campost.dbf and
+resides below the application data directory in a subdirectory named
+*work*. When CERUN is run in an interactive mode (i.e., via the
+“launch” panel), the default database is remembered from the last
+time CERUN was run interactively, unless *icam_dbf* is set. Do not
+use *icam_dbf* on systems running more than one version of Control Emulator,
+since each version of Control Emulator requires a different database. To use
+*icam_dbf*, set the environment variable to the full path and
+filename of the database.
+
+.. index:: Environment variable; icam_sec
+
+The **icam_sec** variable defines the ICAM license server connection
+file for the client computer. Control Emulator will look to the *icam_sec*
+environment variable, if defined, for the full path and filename of
+the license server connection file. If the variable is not defined or
+if the file does not exist, then Control Emulator will look for a license
+server connection file named *icam.key* in the application data
+directory, and if still not found then in the directory pointed to by
+the *icam_lib* dynamic variable (i.e., the ICAM Productivity Tools
+installation directory).
+
+.. index:: Environment variable; icam_lce
+
+The **icam_lce** variable simplifies the management
+of CERUN output files. By default, when CERUN is run in an
+interactive mode, all output files are created in the same directory
+as the input MCD file. When CERUN is run in a batch mode, all output
+files are created in the current working directory. The *icam_lce*
+variable defines the default directory where CERUN will write the
+listing and log files. It will be ignored if directory paths are used
+for listing or log file specifications on the CERUN command line.
+
+.. index:: Environment variable; icam_lis
+
+The **icam_lis** variable defines the directory where QUEST listing
+files should be written. These are created when a control emulator is
+generated, or on demand via the File»Listing menu selection. By
+default, QUEST writes listing files to the same directory as the one
+that contains the database the listing was created from.
