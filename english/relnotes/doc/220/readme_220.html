@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICAM V22 Release &mdash; ICAM V26 Release Notes 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ICAM V21 Release" href="../210/readme_210.html" />
+    <link rel="prev" title="ICAM V23 Release" href="../230/readme_230.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ICAM V26 Release Notes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../260/readme_260.html">ICAM V26 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../260/readme_260.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#product-availability">Product Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../260/readme_260.html#licensing">Licensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../260/readme_260.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#quest-developers">QUEST Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#gener-post-processing">GENER Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#gener-cerun">GENER &amp; CERUN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#macro-language">Macro Language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../260/readme_260.html#summary-of-macro-functions-and-system-variables">Summary of Macro Functions and System Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../260/readme_260.html#integration-tools">Integration Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../260/readme_260.html#supported-cam-systems">Supported CAM Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../260/readme_260.html#pqrs">PQRs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../251/readme_251.html">ICAM V25.1 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../251/readme_251.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#product-availability">Product Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../251/readme_251.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#portal">Portal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#gener-cerun">Gener &amp; Cerun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../251/readme_251.html#macro-functions-and-system-variables">Macro Functions and System Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../251/readme_251.html#integration-tools">Integration Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../251/readme_251.html#supported-cam-systems">Supported CAM Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../251/readme_251.html#pqrs">PQRs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../250/readme_250.html">ICAM V25.0 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../250/readme_250.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#product-availability">Product Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../250/readme_250.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#gener-cerun">Gener &amp; Cerun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#cerun-run-time">CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../250/readme_250.html#integration-tools">Integration Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#macro-functions-and-system-variables">Macro Functions and System Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../250/readme_250.html#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#cam-post">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#control-emulator">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../250/readme_250.html#virtual-machine-cam-integration">Virtual Machine/CAM Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../242/readme_242.html">ICAM V24.2 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../242/readme_242.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#product-availability">Product Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../242/readme_242.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#cerun-run-time">CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../242/readme_242.html#integration-tools">Integration Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#macro-functions-and-system-variables">Macro Functions and System Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../242/readme_242.html#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#cam-post">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#control-emulator">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#id1">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../242/readme_242.html#macro-processor">Macro Processor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../241/readme_241.html">ICAM V24.1 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../241/readme_241.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#product-availability">Product Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../241/readme_241.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#icam-portal">ICAM Portal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#gener-cerun-run-time">Gener &amp; CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../241/readme_241.html#integration-tools">Integration Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../241/readme_241.html#macros-and-customization">Macros and Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#macro-functions">Macro Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../241/readme_241.html#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#cam-post">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#control-emulator">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#id1">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#macro-processor">Macro Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../241/readme_241.html#licensing">Licensing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../240/readme_240.html">ICAM V24.0 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../240/readme_240.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#product-availability">Product Availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#licensing">Licensing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../240/readme_240.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#icam-portal">ICAM Portal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#cerun-control-emulation">CeRun Control Emulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#gener-cerun-run-time">Gener &amp; CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../240/readme_240.html#integration-tools">Integration Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../240/readme_240.html#macros-and-customization">Macros and Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#macro-functions">Macro Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#macro-variables">Macro Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../240/readme_240.html#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#cam-post">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#control-emulator">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#id1">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#macro-processor">Macro Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../240/readme_240.html#id2">Licensing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../230/readme_230.html">ICAM V23 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../230/readme_230.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#product-availability">Product Availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#licensing">Licensing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#maintenance-and-support">Maintenance and Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../230/readme_230.html#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#cerun-control-emulation">CeRun Control Emulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#gener-cerun-run-time">Gener &amp; CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../230/readme_230.html#integration-tools">Integration Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../230/readme_230.html#macros-and-customization">Macros and Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#macro-functions">Macro Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#macro-variables">Macro Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../230/readme_230.html#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#cam-post">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#control-emulator">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#id1">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#macro-processor">Macro Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../230/readme_230.html#id2">Licensing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ICAM V22 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#product-availability">Product Availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#image1installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#productivity-tools">Productivity Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gener-post-processing">Gener Post-processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cerun-control-emulation">CeRun Control Emulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#virtual-machine">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gener-cerun-run-time">Gener &amp; CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#macros-and-customization">Macros and Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-tools">Integration Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cam-post">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-emulator">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macro-processor">Macro Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#licensing">Licensing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../210/readme_210.html">ICAM V21 Release</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#systems-and-packaging">Systems and Packaging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#product-availability">Product Availability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#cam-post">CAM-POST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#quest-developers">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#gener-run-time">Gener Run-Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#smartpath">SmartPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#smartcut">SmartCUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#smartfeed">SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#virtual-machine">Virtual Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#quest-developers-1">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#gener-cerun-run-time">Gener &amp; CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#control-emulator">Control Emulator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#quest-developers-2">Quest Developer’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#cerun-run-time">CeRun Run-Time</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#macros-and-customization">Macros and Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#all-products">All Products</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#cam-post-1">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#id4">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#control-emulator-1">Control Emulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#cam-interfaces">CAM Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../210/readme_210.html#pqrs">PQRs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#security">Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#cam-post-2">CAM-POST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#virtual-machine-2">Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#control-emulator-2">Control Emulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#macro-processor">Macro Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../210/readme_210.html#cam-interfaces-1">CAM Interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ICAM V26 Release Notes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ICAM V22 Release</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="icam-v22-release">
+<h1>ICAM V22 Release<a class="headerlink" href="#icam-v22-release" title="Link to this heading"></a></h1>
+<p>These release notes describe the most significant V22 enhancements and
+problem corrections.</p>
+<p>We hope you enjoy your new release of ICAM products and we sincerely
+welcome your feedback.</p>
+<section id="systems-and-packaging">
+<h2>Systems and Packaging<a class="headerlink" href="#systems-and-packaging" title="Link to this heading"></a></h2>
+<section id="product-availability">
+<h3>Product Availability<a class="headerlink" href="#product-availability" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>System Manufacturer</p></td>
+<td><p>O/S Minimum Requirement</p></td>
+</tr>
+<tr class="row-even"><td><p>Microsoft Windows 32-bit</p></td>
+<td><p>7, 8, 8.1, 10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Microsoft Windows 64-bit</p></td>
+<td><p>7, 8, 8.1, 10, 2008R2, 2012, 2012R2, 2016</p></td>
+</tr>
+</tbody>
+</table>
+<p>ICAM software is no longer available for UNIX systems. An ICAM database
+previously created on a UNIX system is fully compatible with ICAM
+software running on Windows systems.</p>
+</section>
+<section id="image1installation">
+<h3><a class="reference internal" href="../../_images/image1.png"><img alt="image1" src="../../_images/image1.png" style="width: 3.75972in; height: 2.68958in;" /></a>Installation<a class="headerlink" href="#image1installation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A CAM-POST installation includes (where licensed) the complete suite
+of ICAM Productivity and Integration tools.</p></li>
+</ul>
+<p>ICAM <strong>Productivity Tools</strong> include the CAM-POST post-processor, Virtual
+Machine simulation and Control Emulator MCD based verification products,
+as well as other utility software components.</p>
+<p>ICAM <strong>Integration Tools</strong> are software components that integrate the
+Productivity Tools with popular CAD/CAM systems, simplifying
+post-processing and simulation.</p>
+<ul class="simple">
+<li><p>The <em>icam.key</em> license file is now located by default in the
+application data directory, which is typically
+“C:\Program Data\ICAM\220” when installing “for all users”, or
+“C:\Users\<em>username</em>\AppData\Roaming\ICAM\220” when
+installing “just for you”.</p></li>
+</ul>
+</section>
+</section>
+<section id="productivity-tools">
+<h2>Productivity Tools<a class="headerlink" href="#productivity-tools" title="Link to this heading"></a></h2>
+<section id="quest-developers">
+<h3>Quest Developer’s<a class="headerlink" href="#quest-developers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The questionnaire has been enhanced to support new machine types and
+features as follows.</p></li>
+<li><p>The <em>General Description / General Information</em> section now supports
+mill-turn machines with rotary A and/or B tables.</p></li>
+<li><p>The <em>Machine Description / Tool Change</em> section questions #1 and #2
+now support the case where the CNC machine automatically turns off
+the coolant and/or spindle at a tool change.</p></li>
+<li><p>The <em>Machine Description / Rotary Axes</em> section now includes new
+questions #<em>n</em>15.<em>nn</em> to determine if and how rotary axes can
+be unwound to modulo-360 equivalent values.</p></li>
+<li><p>The <em>Machine Description / Spindle</em> section now allows a spindle
+orient register to be defined without having to also define a spindle
+orient (M) code (e.g., SPOS=<em>n</em> for Siemens).</p></li>
+<li><p>The <em>Control Description / Coordinate Systems / Rotation</em> section now
+includes a new standard vs. list encoding question #31.5 that
+simplifies the output of subprogram style MCD for coordinate frame
+transformations. There is also a new question #37 that can
+automatically force RTCP to be set active when using LCS. Finally, a
+new question #91.5 defines how a zero rotation should be output.</p></li>
+<li><p>The <em>Control Description / Spline Interpolation</em> section includes new
+questions #91.<em>n</em> to simplify the output of list-style polynomial
+coefficients for each axis.</p></li>
+<li><p>The <em>Automated Canned Cycles / General Drill Cycle Information</em>
+section “G81-G89 canned cycles supported” question #1 includes a new
+“Macro” choice, which relies on macro processing to generate the
+appropriate cycle MCD. New RMD built-in actions are available for use
+with the Macro cycle format to support Siemens cycle subprograms and
+Heidenhain multi-line cycles. The cycle dwell capabilities have also
+been enhanced to support dwell in revolutions and the option to
+simply ignore any user specified dwell for cycles that do not support
+it rather than simulating the cycle.</p></li>
+<li><p>The <em>Automated Canned Cycles / Drill Cycles</em> section has been
+reorganized to support the application of dwell on a cycle by cycle
+basis, including dwelling for TAP, DEEP and BRKCHP cycles. The BORE
+with ORIENT cycle now asks for the orient angle register and its
+limitations rather than using those of the Spindle section, and it
+also now supports individual XY and optional Z orient jog clearance
+registers as well as the option to omit output of the jog clearance.</p></li>
+<li><p>The <em>Optional Post-processor Words / COOLNT Command</em> section now
+permits the definition of up to 5 additional user defined coolant
+types, up to 9 auxiliary on/off controlled coolant devices, a high
+pressure coolant pump, and coolant pressure controlled either via a
+range of (M) codes or a pressure register.</p></li>
+<li><p>The <em>Customization</em> section has been enhanced as follows:</p></li>
+<li><p>Control emulator Code Customization custom code names can now be
+renamed. The same is true for Data Customization custom data names.</p></li>
+<li><p>RMD actions can now be individually enabled/disabled.</p></li>
+<li><p>New “Siemens”, “Heidenhain Conversational” and “Heidenhain ISO” cycle
+startup macro RMD actions are available to generate cycle output for
+Siemens and Heidenhain controllers. These RMD actions support the new
+“Macro” cycle questionnaire format.</p></li>
+<li><p>Tape Editor expressions can now be individually enabled/disabled.</p></li>
+<li><p>The Dialog Editor provides the following new properties:</p></li>
+<li><p>An input edit box can now be set numeric-only with optional minimum
+and maximum range limits.</p></li>
+<li><p>All input controls can define optional tool-tip help text.</p></li>
+<li><p>The Model developer provides new options to simplify the renaming of
+components of a model branch. It is now possible to rename the
+components in a branch using regular expressions identical to those
+used in the $FEDIT macro function. The component re-indexing feature
+also now includes a step size to index at some increment other than 1
+(one).</p></li>
+<li><p>The Quest user interface has also been enhanced as follows:</p></li>
+<li><p>Dropping a database onto Quest will add the database to the Navigator
+and open the Database view.</p></li>
+<li><p>A new CTRL+SHIFT+F shortcut activates Finder.</p></li>
+<li><p>The Diffs window now includes 3 lines of context above and below
+differences when “Show Diffs Only” is selected.</p></li>
+<li><p>The “Go to Error/Tag” links to custom RMD macros in the Build, Finder
+and Diffs windows will now open the macro editor and focus on the
+selected line (previously the RMD custom entry was simply
+highlighted).</p></li>
+<li><p>The macro editor vertical scrollbar shows markers for Find results.</p></li>
+<li><p>The <em>Tools»Test</em> window now shows color encoded MCD tracing, provides
+a tool-tip identifying traced output under the mouse pointer, and
+provides a right-mouse context menu to “sync” Quest to the question
+that defined the selected code or register of interest.</p></li>
+</ul>
+</section>
+<section id="gener-post-processing">
+<h3>Gener Post-processing<a class="headerlink" href="#gener-post-processing" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Adaptive post-processing permits the NC programmer to concentrate
+solely on cutting tool-paths, leaving the connecting positioning
+tool-paths to be automatically generated by SmartPATH; long entry,
+exit and non-cutting feed motions to be minimized by SmartCUT; and
+cutting feed rates to be optimized by SmartFEED. These three modules
+are collectively known as SmartPACK.</p></li>
+<li><p>SmartPATH and SmartCUT have been continually improved and fine-tuned.
+They now support circular interpolation positioning entry/exit
+motions and better handle axial engage and disengage motions.</p></li>
+<li><p>SmartFEED has also been enhanced as follows:</p></li>
+<li><p>A new FEDOPT,SIMUL command option computes the optimal material
+removal rate while leaving the MCD unchanged. The Time Line window
+“Display feed optimization” view graphs the volume of material
+removed, the actual MRR (material removal rate) and the calculated
+optimal feed rate.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image2.png"><img alt="image2" src="../../_images/image2.png" style="height: 90px;" /></a></p>
+<ul class="simple">
+<li><p>SmartFEED also has a new FEDOPT,ACCEL command option that provides
+control of acceleration when changing feeds. Acceleration can be set
+per axis, per axis type or globally, or can be reset to the defaults
+defined in the questionnaire <em>Control Description / High Speed
+Machining</em> section.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image3.png"><img alt="image3" src="../../_images/image3.png" style="height: 60px;" /></a></p>
+<p><a class="reference internal" href="../../_images/image4.png"><img alt="image4" src="../../_images/image4.png" style="height: 120px;" /></a></p>
+<ul class="simple">
+<li><p>A new FEDOPT,STRVTM command option specifies a minimum block
+processing time limit, to guard against input NC block queue
+starvation.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image5.png"><img alt="image5" src="../../_images/image5.png" style="height: 90px;" /></a></p>
+<ul>
+<li><div class="line-block">
+<div class="line">SmartFEED also has better recognition of spring-passes and a new</div>
+<div class="line">FEDOPT,FLOOR,AUTO command option that computes an optimal feed
+velocity to use under these cutting conditions.</div>
+</div>
+</li>
+</ul>
+<p><a class="reference internal" href="../../_images/image6.png"><img alt="image6" src="../../_images/image6.png" style="height: 180px;" /></a></p>
+<ul class="simple">
+<li><p>Post-processor commands have been enhanced to provide new
+functionality as follows:</p></li>
+<li><p>The <strong>COOLNT</strong> command now supports 5 additional Quest defined single
+or double-keyword coolant types, up to 9 auxiliary Quest defined
+single or double-keyword coolant on/off devices, a high pressure
+coolant pump and coolant pressure setting.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image7.png"><img alt="image7" src="../../_images/image7.png" style="height: 270px;" /></a></p>
+<ul class="simple">
+<li><p>The <strong>CYCLE</strong> command now permits DWELL on all machine cycle types.
+The BORE with ORIENT wall clearance can be specified either as
+OFSETL,<em>dist</em> or OFSETL,<em>x</em>,<em>y</em> and a new liftoff clearance is
+specified as BACK,<em>z</em>. The new BACK,<em>clear</em> option can also be
+used with the DEEP, BRKCHP and THRU cycles in place of a second
+clearance value with the CLEAR option.</p></li>
+<li><p>The <strong>FEDRAT</strong> command has a new RAPID option to set the high feed
+threshold used by path planning to differentiate between positioning
+and cutting feed motions. This setting also continues to be available
+via the PPFUN/24 command.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image8.png"><img alt="image8" src="../../_images/image8.png" style="height: 180px;" /></a></p>
+<ul class="simple">
+<li><p>The <strong>INSERT</strong> command has a new NEXT option to insert MCD code at
+the end of a block, but before any DISPLY/NEXT operator message or
+TPRINT/NEXT MCD commentary.</p></li>
+<li><p>The <strong>LIMIT/POLAR</strong> command has a new CNC option to enable
+path-planning forward scanning of the program to determine if machine
+polar interpolation is needed to avoid overtravel conditions. This
+produces much smaller tape files than the reactive Cartesian-Polar
+switching logic of earlier releases.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image91.png"><img alt="image9" src="../../_images/image91.png" style="height: 90px;" /></a></p>
+<p>As many as four guard planes can now be defined to precisely define the
+polar travel zone. These planes do not have to be orthogonal.</p>
+<ul>
+<li><p>The <strong>LINTOL/TLVEC</strong> command has a new FINE modifier that when
+enabled limits the linearization of RTCP motions to those at cutting
+feed only; RAPID and high feed motions will not be linearized.</p></li>
+<li><div class="line-block">
+<div class="line">The <strong>LINTOL/ROTREF</strong> command rotary turn-around feature has a new
+AXIAL,</div>
+<div class="line">ON|OFF modifier that when enabled will straighten up the rotary
+axis before the turn-around motion. This produces a safer
+positioning tool-path.</div>
+</div>
+</li>
+<li><p>The <strong>MODE</strong> command has a new EXPAND option that activates 6-axis
+simultaneous solutions for co-linear and tri-rotary machine
+configurations.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image101.png"><img alt="image10" src="../../_images/image101.png" style="height: 180px;" /></a></p>
+<p>The above command provides the ability to share the linear motion
+requirements of the program between two machine linear axes (e.g., the Z
+and W axes). An optional RANGE qualifier defines the ratio of shared
+travel between the 6th axis and its co-linear counterpart; and an
+optional PROTCT qualifier defines behavior when approaching travel
+limits.</p>
+<p><a class="reference internal" href="../../_images/image111.png"><img alt="image11" src="../../_images/image111.png" style="height: 120px;" /></a></p>
+<p>The above command provides the ability to simultaneously control three
+rotary axes. The specified rotary axis is the third rotary, used
+primarily for feed interpolation in combination with another rotary
+axis; the other two rotary axes are used for positioning. The OPTION
+qualifier fine tunes the rotary solution.</p>
+<ul class="simple">
+<li><p>The <strong>ROTABL</strong> command has a new UNWIND option that resets the
+position of the specified rotary axis to its modulo-360 value, where
+supported by the controller.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image121.png"><img alt="image12" src="../../_images/image121.png" style="height: 120px;" /></a></p>
+<ul class="simple">
+<li><p>The <strong>TOOLNO/HEAD</strong> command has a new SETTCP[,<em>x</em>,<em>y *[,*z</em>]]
+setting that defines an alternate point on the tool-holder assembly
+that is to be controlled by the RTCP function of the controller. The
+post-processor computes and outputs this alternate position so that
+angled tool holders can be used with RTCP.</p></li>
+<li><p>Improved 4-axis (single rotary) post-processing to eliminate
+“Orientation vector contains unfeasible component” messages except
+when there is a significant difference between requested and actual
+tool axis angle. A new diagnostic #1413002 lists the angular
+difference.</p></li>
+<li><p>The polar pre-positioning (LIMIT/POLAR) optimization now respects
+rotary positioning (LIMIT/ROTREF) preferences if both are
+simultaneously active.</p></li>
+<li><p>The PPFUN/2 (minimum tape punching severity) and PPFUN/18 (G and M
+code substitution) both now accept a –1 value to reset to default
+processing.</p></li>
+</ul>
+</section>
+<section id="cerun-control-emulation">
+<h3>CeRun Control Emulation<a class="headerlink" href="#cerun-control-emulation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Control emulator can now recognize and process embedded macro
+processor expressions in the MCD code. This can be used to intermix
+macro variables and macro function results with regular MCD code,
+simplifying for example the development and subsequent emulation of
+CNC controller resident subprograms in the //ICAMFS internal file
+space.</p></li>
+<li><p>New preprocessors are available for Mazak EIA, Mazak ISO and Okuma
+controllers.</p></li>
+<li><p>Fanuc, Heidenhain and Siemens pre-processors have been enhanced as
+follows:</p></li>
+<li><p>Fanuc</p></li>
+<li><p>Support for GOTO[#<em>n</em>] and branch targets that are before the GOTO.</p></li>
+<li><p>A new $FCEPP('USENULL',<em>logical</em>) function call enables support for
+the Fanuc &lt;null&gt; type, including: #0 and #3100 variables; as a return
+for undefined variables in range #1 through #999; and in EQ and NE
+conditional tests.</p></li>
+<li><p>An M2 code_end or M30 code_rewind encountered in a subprogram is now
+processed as an M99 code_endsub instead of halting the process.</p></li>
+<li><p>Heidenhain</p></li>
+<li><p>Support for Q108, Q109, Q110, Q111 and Q113 controller variables.</p></li>
+<li><p>Support for INCH, MM and ICAM special UNDEF units on BEGIN PGM
+definition blocks.</p></li>
+<li><p>Support for word addresses followed by Q, QL, QR and QS variables.</p></li>
+<li><p>A new $FCEPP('CYCLEDEF',{<em>id1,id2</em>…}) function call registers
+Heidenhain \\ICAMFS\id<em>n</em>.h conversational and
+\\ICAMFS\id<em>n</em>.i ISO subprograms.</p></li>
+<li><p>Support for CYCL DEF 12.1, CYCL CALL, M99 and M89 subprogram calling.</p></li>
+<li><p>Siemens</p></li>
+<li><p>Support for GOTO using: N block; REAL/INT variable or expression
+defining N block; label; and STRING variable or expression defining
+label.</p></li>
+<li><p>Support for DC(<em>x</em>), ACP(<em>x</em>) and ACN(<em>x</em>) axis positioning
+modifiers.</p></li>
+<li><p>Support for ISVAR(…) and ISFILE(…) functions.</p></li>
+<li><p>Improved support for $P_GG[<em>n</em>] variable (more tolerant of unknown
+types).</p></li>
+<li><p>Support for $P_S, $P_S[<em>n</em>], $P_SDIR, $P_SDIR[<em>n</em>] and $P_S_TYPE
+spindle variables.</p></li>
+<li><p>Support for $P_DRYRUN (always false), $MN_SCALING_SYSTEM_IS_METRIC,
+$MN_SCALING_VALUE_INCH, $P_MSNUM, $P_PROG, $P_SUBPAR[<em>n</em>] and
+$P_STACK variables.</p></li>
+<li><p>Improved support for variable definition scope in multi-kernel
+architectures. Variables declared in the main program are CHAN by
+default (global to that kernel) unless declared NCK (global to all
+kernels). Variables declared in a sub-program are LOCAL by default.</p></li>
+<li><p>Control emulator now integrates with Dassault Systèmes 3DEXPERIENCE
+platform to support ISO based simulation of milling and mill-turn
+machines. Control emulator continues to integrate with CATIA V5, but
+for milling machines only.</p></li>
+</ul>
+</section>
+<section id="virtual-machine">
+<h3>Virtual Machine<a class="headerlink" href="#virtual-machine" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A new <em>Simulation»Chip and Split</em> menu selection activates a dialog
+listing all uncut portions of the in-process stock that have been cut
+off from the main stock body. This dialog provides various methods of
+organizing the uncut stock fragments, visually identifies selected
+fragments in the Simulation window, and can remove selected fragments
+if requested. Uncut stock fragments can also be automatically removed
+without user intervention (see MRS preferences below).</p></li>
+<li><p>Flute length optimization is available via a new ADAPTV/DEPTH,ON|OFF
+command option as well as via the $FMSADPT macro function. When
+enabled, the simulation will continuously test the cutting tool
+against the in-process stock. A message will be output when the tool
+is unloaded indicating the actual flute length required, and the time
+at which the maximum penetration first occurred. A warning will be
+output if the penetration exceeds the flute length. A listing file
+flute length summary is also created. This feature is available in
+both Gener and CeRun.</p></li>
+<li><p>A new <em>Simulation»Options»MRS</em> preferences dialog groups together all
+in-process stock related options. These include a new MRS (material
+removal simulation) checkpoint feature as well as control of
+automatic chip removal and flute length optimization features.</p></li>
+<li><p><a class="reference internal" href="../../_images/image131.png"><img alt="image13" src="../../_images/image131.png" style="width: 2.96944in; height: 3.62986in;" /></a>Optional in-process stock checkpoints can be automatically
+taken at tool change and operation boundaries, which enables viewing
+of in-process stock conditions at earlier moments in time when moving
+backwards and forwards in Time Line. Stock checkpoints also become
+available when later viewing a program that has been saved for
+review.</p></li>
+<li><p>VM can detect when uncut portions of the in-process stock are cut off
+from the main stock body. User preferences are available to
+automatically remove these stock fragments from the simulation if
+they have a volume less than a specified amount and/or if they lie
+entirely outside of the design part.</p></li>
+<li><p>User preferences are also available to enable or disable flute length
+optimization.</p></li>
+<li><p>A new <em>Simulation»Annotation</em> menu selection and associated VM
+Annotation tool-bar provides access to video recording, picture
+taking and simulation window annotation (markup) functions. It also
+provides File Explorer links to the user’s Pictures and Videos
+folders to simplify viewing of results. Pictures are taken in PNG
+format; videos are taken using the codec settings selected in the new
+<em>Simulation»Options»Misc»Video</em> preferences dialog. The customer
+section of the ICAM website includes download links to various codecs
+that have been tested with Virtual Machine.</p></li>
+<li><p><a class="reference internal" href="../../_images/image141.png"><img alt="image14" src="../../_images/image141.png" style="width: 2.11in; height: 0.90012in;" /></a>The <em>Simulation»Options»Misc</em> “ICAM 3DM” mouse scheme
+setting is designed to work with a 3D mouse. This scheme eliminates
+the “floor” bias of the traditional “ICAM Classic” scheme, allowing
+unrestricted rotation of the viewpoint. It also zooms in/out at the
+mouse pointer rather than screen center, and pans the model instead
+of the camera.</p></li>
+<li><p><a class="reference internal" href="../../_images/image151.png"><img alt="image15" src="../../_images/image151.png" style="width: 2.09in; height: 1.37in;" /></a>Simulation of PKM Tricept machines and Robot machines are
+available on an experimental basis.</p></li>
+<li><p>The position of axes that are moved while the simulation is paused,
+can now optionally be retained when the simulation is continued. A
+message box will indicate that axes have been moved and will ask if
+they should be left as-is or reset.</p></li>
+<li><p>Simulation tooling has been enhanced as follows:</p></li>
+<li><p>The Tool Builder dialog now supports the creation of generic mill
+tools, which can be used to create indexable multi-insert milling
+tools.</p></li>
+<li><p>The Tool Builder dialog now supports the creation of straight stylus
+and star probe tools.</p></li>
+<li><p>Arcs can be specified in profile tools and holders by appending
+“<strong>,</strong><em>rvalue</em>” to the “<em>x,y</em>” profile point, which applies
+the specified corner radius between the previous and next profile
+points.</p></li>
+</ul>
+</section>
+<section id="gener-cerun-run-time">
+<h3>Gener &amp; CeRun Run-Time<a class="headerlink" href="#gener-cerun-run-time" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The PSE concept of simultaneous post-processing and control-emulation
+with shared simulation was first introduced in V21. The following
+enhancements have been made in this new release:</p></li>
+<li><p>Composite and merging lathe type post-processors and
+control-emulators are now supported, eliminating the necessity to run
+post-processing and control emulation sequentially. There are no
+longer any machine type restrictions inhibiting merged PSE
+processing.</p></li>
+<li><p><a class="reference internal" href="../../_images/image161.png"><img alt="image16" src="../../_images/image161.png" style="width: 1.57in; height: 0.66in;" /></a>New right-mouse context menu selections in the Simulation
+and Time Line windows can be used to switch at any time between
+viewing either the Gener or CeRun representation of the simulation
+session. The ability to dynamically switch at any time has eliminated
+the necessity of the launch panel VM tab “Include GENER simulation
+under merged PSE” checkbox, which has been removed.</p></li>
+<li><p>The CeRun representation of the simulation tool-path now includes
+SmartPACK tool-path motion display styles. This is only possible with
+PSE processing, since the MCD data by itself does not indicate if it
+was affected by SmartPATH, SmartCUT or SmartFEED.</p></li>
+<li><p>The Trace windows (Input, Output, Macro, Console) include a new
+right-mouse “Split View” menu setting, which divides the trace window
+into left and right halves, with Gener output on the left and CeRun
+output on the right. This simplifies viewing of synchronized data.</p></li>
+<li><p>The Trace window new right-mouse “Split View” menu setting is also
+available with merging lathe processing, with MAIN head output on the
+left and SIDE head output on the right.</p></li>
+<li><p>Moving the mouse pointer in the Gener Output Trace window over the
+traced MCD will show a tool-tip identifying the code or register, the
+command that caused it to be output, and the CLN/ISN location of that
+command.</p></li>
+<li><p>The following are some Source window enhancements:</p></li>
+<li><p>The Trace and Time Line window Sync now also applies to the Source
+window.</p></li>
+<li><p>A new right-mouse context menu function is available to easily and
+quickly set/clear breakpoints on post-processor commands and control
+emulator codes.</p></li>
+<li><p>The vertical scrollbar now shows markers for breakpoints and Find
+results.</p></li>
+<li><p>A new right-mouse context menu option is available to show macro line
+numbers.</p></li>
+<li><p>The CeRun <em>Controller»Code Groups</em> window that lists the modal state
+of all known (G) and (M) codes is now also available for Gener. This
+window provides a quick reference to the internal post-processing
+state.</p></li>
+<li><p>A new <em>Controller»PPFUN</em> window is available for Gener, which lists
+the modal state of PPFUN commands. Designed for the post-processor
+developer, this window lists all PPFUN commands by number, indicating
+if they are active (i.e., have been coded) and the pending state of
+each.</p></li>
+<li><p>New <em>Tools»Preferences»Trace</em> user preferences are available to
+control tracing in the Console window of operator messages and (for
+developers) the state of MACRO I/O (OPEN, READ, WRITE, CLOSE)
+commands.</p></li>
+</ul>
+</section>
+</section>
+<section id="macros-and-customization">
+<h2>Macros and Customization<a class="headerlink" href="#macros-and-customization" title="Link to this heading"></a></h2>
+<section id="general">
+<h3>General<a class="headerlink" href="#general" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The macro editor line length restriction is now 512 characters
+instead of 80.</p></li>
+<li><p>When opening a macro for editing, any variable that conflicts with a
+Major or Minor keyword will appear with a % sign prefixed to the name
+thereby unambiguously defining the word as a variable. This ensures
+that macros that were previously successfully compiled will not be
+affected by changes to the built-in or user defined keywords.</p></li>
+<li><p>String formatting enhancements:</p></li>
+<li><p>The output and input numeric string formats now supports “hh:mm:ss.s”
+time values.</p></li>
+</ul>
+<p><a class="reference internal" href="../../_images/image171.png"><img alt="image17" src="../../_images/image171.png" style="height: 90px;" /></a></p>
+<p>Time values are also automatically recognized when inputting via the
+!(*) format numeric values containing one or two “:” characters.</p>
+<ul class="simple">
+<li><p>New !(#<em>x</em>) and !(#<em>n</em>) output format descriptors are similar to
+!(&#64;<em>x</em>) and !(&#64;<em>n</em>), but they output the numeric portion of the
+register only.</p></li>
+<li><p>The input string format descriptor !(A<em>n</em>) no longer requires the
+input width “<em>n</em>” value to be defined. If a width is omitted, the
+remainder of the input line is read as text.</p></li>
+<li><p>The !(T<em>n</em>) tab format descriptor is now recognized on input.</p></li>
+<li><p>The Gener Startup/Shutdown macros have been enhanced as follows:</p></li>
+<li><p>The Tool Change Startup macro now includes new variables $P45-47
+containing the SETTCP[,<em>x,y</em>[<em>,z</em>]] setting, which defines an
+alternate point on the tool-holder assembly that is to be controlled
+by the RTCP function of the controller thereby enabling angled tool
+holders to be used with RTCP.</p></li>
+<li><p>The Cycle Startup macro $P1 variable can be set to 0 to cancel cycle
+processing (the cycle point will be ignored) or to –1 to force the
+cycle to be simulated using point-to-point motions. The $P5 variable
+is now settable with “Macro” driven cycles to affect cycle axis
+register output. An OUTPUT command can be coded in the startup macro
+to indicate where cycle processing is to occur (a shutdown macro is
+not necessary in this case, but if defined will be called after the
+startup macro has completed).</p></li>
+<li><p>The Register macro $P3 (register position) variable can now be more
+easily set using the new $FREGPOS (get register position) function.</p></li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The following new and enhanced functions are common to all products:</p></li>
+<li><p>The <strong>$FCVINT</strong> and <strong>$FCVREAL</strong> functions were enhanced to convert
+any macro variable data type (excluding $NULL) to numeric.</p></li>
+<li><p>The <strong>$FDOC</strong> “Shop Documentation” function makes a copy of a
+Microsoft Word template (.dotx) file, substituting the placeholder
+text of Content Controls with the result of macro processor
+expressions contained within the Content Control tags, and saving the
+result as a Microsoft Word document (.docx) file. Examples can be
+found in the application data “samples/ShopDoc” directory.</p></li>
+<li><p>The <strong>$FMACSTA</strong> function returns and optionally sets the
+enabled/disabled state of macro identified by an “id”. The
+<strong>$FMACID</strong> function returns the id of a macro matching a specified
+regular expression string. Together these functions can be used to
+enable or disable any post-processor, control emulator, model or
+interface kit macro.</p></li>
+<li><p>The <strong>$FMRU</strong> family of functions are designed to simplify the saving
+and restoring of MRU “most recently used” information, such as user
+responses to interactive dialogs. On-line help documentation provides
+examples of how to use these functions.</p></li>
+<li><p>The <strong>$FREGPOS</strong> function returns a register index given a register
+descriptor. This function is designed to be used in a CAM-POST
+register macro, but can be used wherever a register position is
+required.</p></li>
+<li><p>The <strong>$FSPLIT</strong> function segments a string at a specified delimiter,
+returning a sequence of segmented parts.</p></li>
+<li><p>The <strong>$FTRIM</strong>, <strong>$FTRIML</strong> and <strong>$FTRIMR</strong> functions remove leading
+and/or trailing whitespace or other unwanted characters from a
+string.</p></li>
+<li><p>The <strong>$FUNWIND</strong> function internally resets a rotary axis to its
+modulo-360 value without physically moving the axis.</p></li>
+<li><p>Gener functions:</p></li>
+<li><p>The <strong>$FCLS</strong> function returns a range of arguments from a CLDATA
+record as a sequence.</p></li>
+<li><p>The <strong>$FGETSB</strong> function searches in the CLDATA file for feed motion
+records and returns a sequence of 6 values defining the CL xyz
+coordinate minimum and maximum (i.e., the potential stock boundary).</p></li>
+<li><p>CeRun functions:</p></li>
+<li><p>The <strong>$FCEGNCV</strong> and <strong>$FCESNCV</strong> now accept an optional third array
+dimension, needed when getting or setting Siemens 840D variables.</p></li>
+<li><p>The <strong>$FMSCHUCK</strong> function can be used when integrated with DELMIA to
+enable the transfer of the part from one chuck to another on a
+mill-turn machine.</p></li>
+<li><p>The following functions, previously only available with Gener, are
+now also available with CeRun: $FMAJOR and $FMINOR.</p></li>
+<li><p>Virtual Machine functions:</p></li>
+<li><p>The <strong>$FMSADPT</strong> function accepts a new DEPTH option to enable or
+disable tool flute length optimization.</p></li>
+<li><p>The <strong>$FMSCHIP</strong> function is used to remove in-process stock
+disconnected chips under macro control. There is also a run-time user
+interface dialog that allows the user to interactively remove
+disconnected stock.</p></li>
+<li><p>The <strong>$FMSCMRA</strong> function has been enhanced to provide control over a
+wide variety of Simulation display settings. The function return
+value can be used in a subsequent call to reset the display settings
+to their original values.</p></li>
+<li><p>The <strong>$FMSGPOS</strong> function returns the position of the specified axis.</p></li>
+<li><p>The <strong>$FMSGRCV</strong> and <strong>$FMSSRCV</strong> functions are used to get and set
+the 3D compensation corner radius value.</p></li>
+<li><p>The <strong>$FMSIDS</strong> function returns a sequence of component ID’s
+matching the specified criteria, such as a component name regular
+expression.</p></li>
+<li><p>The <strong>$FMSMOVE</strong> function accepts a new CLW|CCLW|SMALL argument for
+rotary axis motions, which optionally enforces the rotation direction
+of the model rotary axis.</p></li>
+<li><p>The <strong>$FMSNEAR</strong> function is used to get and optionally set the
+safety zones surrounding the various components of the simulation.</p></li>
+<li><p>The <strong>$FMSPIC</strong> function is used to take a picture of the simulation
+window, optionally using a specified simulation window size and/or
+temporary camera settings. This function has been designed to be used
+with $FDOC to include picture content in shop documentation.</p></li>
+<li><p>The <strong>$FMSSCS</strong> function can be used to reposition mountable objects.</p></li>
+<li><p>The <strong>$FMSTOOL</strong> function now supports the creation of straight
+stylus and star probe tools. The $FMSTOOL and $FMSHLD tool
+definitions now support a UNITS definition. The $FMSTOOL and $FMSHLD
+functions also accept a new RETURN option to return tool and holder
+properties, which can be used with $FDOC to include detailed tool and
+holder information in shop documentation.</p></li>
+<li><p>The <strong>$FMSUNWIND</strong> function is used to reset a model rotary axis to
+its modulo-360 value without physically moving the axis.</p></li>
+<li><p>The external macro function API is now at revision 3. It supports
+$NULL variables and Control Emulator CODE and DATA types (represented
+as strings). It also indicates the module (Gener or CeRun) and the
+channel number of the caller.</p></li>
+</ul>
+</section>
+<section id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Link to this heading"></a></h3>
+<ul>
+<li><p>The following new variables are available with both Gener and CeRun:</p></li>
+<li><p>New coolant variables include: <strong>$COOLTYP</strong> that defines the current
+coolant type as a value 0:OFF, 1:FLOOD, etcetera; <strong>$COOLDEV</strong> table
+length 9 that defines auxiliary coolant device status; <strong>$HPCOOL</strong>
+that defines the high pressure coolant pump state; $PRSSUR that
+defines the coolant pressure; and <strong>$MAXPRSSUR</strong> that overrides the
+Quest defined maximum coolant pressure. The $COOLNT variable will be
+a sequence when the current coolant is a Quest defined custom
+double-keyword type.</p></li>
+<li><p>New cycle variables include: <strong>$CYDWLS</strong> that defines the cycle dwell
+at each DEEP and BRKCHP step; <strong>$CYDWLT</strong> that defines the cycle
+dwell at each DEEP retraction and after TAP retract; and <strong>$CYMIN</strong>
+that defines the minimum DEEP and BRKCHP cycle step.</p></li>
+<li><p><strong>$EDTSTA</strong> is a new table (length <strong>$EDTMAX</strong>) of $TRUE/$FALSE
+values indicating which Tape Editor expressions are active.</p></li>
+<li><p>A variety of new <strong>$LCS…</strong> variables provide information about the
+current and pending local coordinate system state.</p></li>
+<li><p><strong>$LT</strong> indicates the last tool number.</p></li>
+<li><p>A new <strong>$OPTAB</strong> table provides information for up to 500 separate
+operations in the program in the same way that $TLTAB provides
+information by tool. <strong>$OPMERGE</strong> affects how operations are added to
+the $OPTAB table. <strong>$OI</strong> indicates the current operation table
+index. <strong>$OPSIZ</strong> indicates the total number of operation table
+entries.</p></li>
+<li><p>New <strong>$OPSUM</strong>, <strong>$OPMIN</strong> and <strong>$OPMAX</strong> tables provide summary and
+travel information per operation in the same way that $TLSUM, $TLMIN
+and $TLMAX provide summary and travel information per tool.</p></li>
+<li><p>New <strong>$TCLM</strong>, <strong>$TCDM</strong> and <strong>$TCFM</strong> variables define the current
+length, diameter and fixture (workpiece) compensations in effect.
+They differ (in Gener) from the $TCL, $TCD and $TCF variables that
+define the requested length, diameter and fixture compensations.</p></li>
+<li><p>$TLTAB has been extended to 50 columns, with columns 21-50 available
+for any purposes and all columns writable. $TLTAB(9,<em>n</em>) will now
+return the tool pocket number instead of $NULL if the machine does
+not support a tool id. <strong>$TLSORT</strong> affects the sorting of $TLTAB and
+related $TL<em>xxx</em> table rows.</p></li>
+<li><p><strong>$UNIMCH</strong> can be used to get/set the operational units (1:inch,
+25.4:mm).</p></li>
+<li><p><strong>$V_</strong> can be set in a $FDOC template multi-line Tag macro to
+specify the value to be substituted for the placeholder text in the
+content control. <strong>$I_</strong> can be used in $FDOC template macros to get
+the current range index value.</p></li>
+<li><p>The following variables, previously only available with Gener, are
+now also available with CeRun: $CYDWEL, $MAXRPM, $PCONFC, $S, $SDIR,
+$SMODE, $SR, $SS and $THMIN.</p>
+<p>Gener variables:</p>
+</li>
+<li><p><strong>$ANYLOOK</strong> will be $TRUE if any form of look-ahead is active.</p></li>
+<li><p><strong>$BRKMAC</strong> is used to enable/disable BREAK startup/shut-down macros.</p></li>
+<li><p><strong>$CYCLRX</strong>, <strong>$CYCLRY</strong> and <strong>$CYCLRZ</strong> define secondary cycle
+clearance in the xyz axes.</p></li>
+<li><p>$HLDTAB has also been extended to 50 columns, with columns 28-50
+available for any purposes and all columns writable. $HLDTAB(21,n)
+will now return the head pocket number instead of $NULL if the
+machine does not support a head id.</p></li>
+<li><p><strong>$LH</strong> indicates the last head number. $HI indicates the current
+head index.</p></li>
+<li><p><strong>$SCANMTN</strong> is set $TRUE when Gener is outputting motions generated
+by path planning or SmartPATH.</p></li>
+<li><p><strong>$SAFID</strong> and <strong>$SAFIDN</strong> identify when motion subdivision is
+occurring due to SAFETY command processing (can be useful in a tape
+macro).</p></li>
+<li><p><strong>$SCSTRV</strong> defines the SmartCUT starvation time limit, to avoid
+generation of very short motions.</p></li>
+<li><p><strong>$SUBNO</strong> and <strong>$SUBNAM</strong> identify the subprogram number or name
+currently active.</p></li>
+<li><p><strong>$TAPENS</strong> identifies the name of the subprogram tape file.</p></li>
+<li><p><strong>$TCMAC</strong> is used to enable/disable tool-change startup/shut-down
+macros.</p></li>
+<li><p>CeRun variables:</p></li>
+<li><p><strong>$EMBMAC</strong> is a new table defining the prefixes and suffixes used
+for embedded macro statements.</p></li>
+<li><p><strong>$TCMAC</strong> enables/disables the tool event macro.</p></li>
+<li><p><strong>$XMCD</strong> contains the remaining unrecognized text from the current
+MCD block.</p></li>
+<li><p>Virtual Machine variables:</p></li>
+<li><p><strong>$UNISIM</strong> returns the model units (1:inch, 25.4:mm).</p></li>
+<li><p><strong>$VM*MAC</strong> series of variables enables/disables the tape, motion,
+rapid, feed and tool change VM event macros.</p></li>
+<li><p><strong>$VMDBF</strong>, <strong>$VMFILE</strong> and <strong>$VMDATE</strong> identify the model database,
+model name and the creation date and time of the model.</p></li>
+<li><p><strong>$VMTIME</strong> returns the current simulation time.</p></li>
+</ul>
+</section>
+</section>
+<section id="integration-tools">
+<h2>Integration Tools<a class="headerlink" href="#integration-tools" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Integration Tools can be installed separately from Productivity
+Tools, enabling the update of manufacturing extractors and CAM
+integration functions without affecting the currently installed
+release of Productivity Tools. Productivity and Integration Tools
+must be at the same version (i.e., V22), but the modification level
+can be different.</p></li>
+<li><p>A common and consistent interface is now used for the <strong>CAM
+Integration</strong> setup utility, which provides the integration between
+the CAM system and ICAM Productivity Tools (i.e., post-processing,
+control emulation and simulation). The integration setup utility is
+typically run once-only, to enable the user to select the version (or
+versions) of ICAM products that are to be used by each of the CAM
+systems and versions automatically detected on the computer. Once
+this association is made, the CAM system post-processing function
+then knows what version(s) of CAM-POST to use for the selected
+post-processor. The extraction of CAM system manufacturing data for
+Virtual Machine simulation is similarly automated.</p></li>
+<li><p>A common and consistent interface is now used for all <strong>Manufacturing
+Extractors</strong>, which integrate with the CAM system to obtain
+manufacturing information (e.g., tooling, design, stock, fixtures,
+frames) needed for Virtual Machine simulation of a CAM process. This
+“unified” extractor supports multiple setups, either within a single
+CAM process or spanning multiple CAM processes. All extractors are
+designed to fully support milling, turning and mill-turn processes.</p></li>
+</ul>
+<p>A new diagnostic utility dialog can optionally be run in parallel with
+the unified extractor to obtain detailed information about the
+extraction process. This utility helps identify problems in CAM process
+tooling definitions, tool compensation settings, etcetera. It can also
+generate log files that can be shared with ICAM Support AE’s.</p>
+<ul class="simple">
+<li><p>New manufacturing extractors are available for:</p></li>
+<li><p>CATIA V6/3DEXPERIENCE 2015x</p></li>
+<li><p>Autodesk FeatureCAM 2015/2016</p></li>
+<li><p>Autodesk PowerMILL 2015/2016</p></li>
+<li><p>SolidCAM 2015</p></li>
+<li><p>Extractors are also available for:</p></li>
+<li><p>CATIA V5R20 through V5R26</p></li>
+<li><p>Creo Parametric 1, 2 and 3</p></li>
+<li><p>Mastercam X5 through X9, and 2017</p></li>
+<li><p>Mastercam X7, X8 and X9 for SolidWorks 2014 and 2015</p></li>
+<li><p>NX6 through NX11</p></li>
+<li><p>ICAM continues to enhance the NX CLSF ICAM template, used to generate
+customizable aptsource from an NX manufacturing process.</p></li>
+</ul>
+</section>
+<section id="pqrs">
+<h2>PQRs<a class="headerlink" href="#pqrs" title="Link to this heading"></a></h2>
+<p>The following is a list of corrections made to V22 as a result of
+customer related PQR’s. Corrections due to internally generated problem
+reports, user interface problems, as well as customer reports of an
+obscure nature, are not reported here. Most of these corrections are
+also available in updated releases of V21 (the updated release number is
+listed at the end of the description).</p>
+<section id="cam-post">
+<h3>CAM-POST<a class="headerlink" href="#cam-post" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>**
+PQR**</p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0
+58525</p></td>
+<td><p>The Console trace no longer wraps diagnostics at an 80
+column boundary.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+04058</p></td>
+<td><p>LIMIT/POLAR could fail with a circular arc, resulting in
+over-travel. [V21-1647]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+04049</p></td>
+<td><p>A “thread pitch is too coarse” diagnostic was incorrectly
+being output. [V21-1645]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+04047</p></td>
+<td><p>Merging lathe: In some circumstances, the current tool index
+and tool number was not saved and restored correctly when
+switching the head in merging lathe, which resulted in Gener
+using the wrong tool. [V21-1645]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+04042</p></td>
+<td><p>The Quest finder was not processing the &quot;whole word&quot; option
+properly. [V21-1644]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+04019</p></td>
+<td><p>Circular interpolation in polar mode on a mill-turn fails
+when B-axis head is at 180 degrees. [V21-1640]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+04002</p></td>
+<td><p>For lathe post-processors, a SELCTL could generate a
+diagnostic incorrectly indicating an error in the next tool
+change command. [V21-1636]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03995</p></td>
+<td><p>Corrected a problem in the Breakpoint Manager, which could
+cause the order and enable/disable state of breakpoints to
+change from one run to the next. [V21-1635]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03987</p></td>
+<td><p>Polar circular interpolation using the radius method was
+missing the radius value. [V21-1633]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03974</p></td>
+<td><p>$FINFO now returns a value of -2 instead of -1 to signal
+that the look-ahead was ended due to the end of program
+being reached. [V20-1629, V21-1629]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03952</p></td>
+<td><p>The Find function in the trace windows is now significantly
+faster. [V20-1621, V21-1621]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03919</p></td>
+<td><p>Wrong circular motion output generated by arc fitting if the
+last circular block generated used polar
+interpolation. [V20-1615, V21-1615]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03907</p></td>
+<td><p>The MOVETO command will no longer be affected by the SAFETY
+command split motion requirements. [V21-1614]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03906</p></td>
+<td><p>The LCS generated during subprogram INDEX &amp; COPY processing
+was not respecting the ORIGIN definition. [V21-1613]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03883</p></td>
+<td><p>Gener is no longer forcing a block purge after a G90/91 code
+is output at start of processing or following a G28 style
+home motion. The PPFUN/9 function should be used to force a
+block purge if desired with specific G codes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03870</p></td>
+<td><p>The Gener tool summary was being output in primary units
+instead of current units (the feed and travel summaries were
+fine).</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03818</p></td>
+<td><p>The Gener listing ISN and CLN column displays are no longer
+restricted to 5-digit output but are instead truncated at
+the Quest defined column width. [V20-1548,
+V21-1548]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03817</p></td>
+<td><p>$INFO.ISTX* and $INFO.ISSX* variables were initialized to
+the current state when $FINFO was called, but they should
+have been initialized $FALSE and only evaluated for motions
+encountered during $FINFO look-ahead. [V20-1548, V21-1548]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03798</p></td>
+<td><p>The $FINFO function was treating feed motions that exceeded
+the machine limits as non-cutting, affecting the $INFO.ISCR
+setting. [V21-1545]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03773</p></td>
+<td><p>For post-processors with “linear” as the positioning
+preference, Gener sometimes canceled cycles and made an
+out-of-cycle motion to produce straight line positioning
+when the in-cycle motion was safe as-is.</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03764</p></td>
+<td><p>A CYCLE command syntax error will now cause the active cycle
+(if any) to be immediately cancelled. Also, cycles were not
+consistently being cancelled before a tool change and at the
+end of the program (if left active).</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03748</p></td>
+<td><p>Canned cycle axes were not respecting PPFUN/12 and LCS
+questionnaire axes modality settings. [V21-1536]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03743</p></td>
+<td><p>Cycle motion splitting was not reflecting standard machine
+behavior of separating the cycle axis motion from all other
+axes motions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03736</p></td>
+<td><p>The $RAPLIN “rapid linearization” test now checks for moving
+axes as opposed to the presence of an axis letter in the
+tape for redundancy purposes. If two or more linear axes are
+moving, then rapid linearization will be used. If one or
+more rotary axes are moving, then rapid linearization will
+be ignored. [V21-1534]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03718</p></td>
+<td><p>LCS/NOW was being deferred to the next motion instead of
+outputting the LCS definition immediately. [V20-1531,
+V21-1531]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03713</p></td>
+<td><p>The TLVEC option produced incorrect results when used with a
+LOAD/TOOL command (it is fine with LOAD/HEAD). [V21-1529]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03711</p></td>
+<td><p>The questionnaire cycle &quot;Cancel cycle code required between
+cycles&quot; response was being ignored. [V21-1529]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03710</p></td>
+<td><p>The questionnaire cycle &quot;Motion allowed with cancel G code&quot;
+response was being ignored.</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03707</p></td>
+<td><p>The Parametric cycle activator block (i.e., cycle
+definition) was not being output for a CYCLE/ON that
+modified the current active cycle. [V21-1528]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03674</p></td>
+<td><p>PPFUN/12 axis modality not respected with RTCP and polar
+output. [V21-1523]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03661</p></td>
+<td><p>A “missing PARTNO” resulted in the primary/secondary and
+abs/incr codes being output before the Machine Startup
+macro. They are now output after the startup macro
+completes, in the same way that they would have had a PARTNO
+command been present. [V21-1520]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="control-emulator">
+<h3>Control Emulator<a class="headerlink" href="#control-emulator" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>**
+PQR**</p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0
+60193</p></td>
+<td><p>Setting $TLNAME before a tool change was not resulting in
+$TLTAB(20,<em>n</em>) being set following the tool change.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+04088</p></td>
+<td><p>The control emulator now outputs a warning diagnostic if a
+post-processor command is encountered during macro
+processing.</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+04041</p></td>
+<td><p>The CeRun diagnostic window was not listing the active tool
+number. [V21-1644]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+04032</p></td>
+<td><p>Drilling cycles with an “activator” type were ignoring the
+cycle axis control point position and instead were using the
+last machine position. [V21-1642]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+04020</p></td>
+<td><p>Simulation would hang on Windows 10 when showing the
+right-mouse context pop-up menu from within a simulation
+window. [V20-1641, V21-1641]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03953</p></td>
+<td><p>Simulation failed when emulating a program for a merging
+lathe where a lower turret program was not given. [V21-1622]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03936</p></td>
+<td><p>The CeRun launch panel OPSKIP setting was not applied when
+running in Progress or Background mode. [V21-1618]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03933</p></td>
+<td><p>In some cases, a disabled breakpoint would still be
+triggered. [V20-1618, V21-1618]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03901</p></td>
+<td><p>The $OPSKIPL and $OPSKIP variables are now behaving as
+described in the documentation. In particular, $OPSKIPL is
+now a sequence of logical values instead of keyword
+values. [V21-1612]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03827</p></td>
+<td><p>CeRun was not using the NC pre-processor when the control
+emulator is defined as a link to a
+post-processor. [V20-1550, V21-1550]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03821</p></td>
+<td><p>CeRun outputs an invalid warning 2008031 “The positioning
+mode (absolute vs. incremental) is not known and a machine
+default mode is not available” when absolute vs. incremental
+positioning is determined by the register word address
+instead of a G or M code. [V21-1549]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03820</p></td>
+<td><p>An M30 rewind code in a Fanuc subprogram is now processed as
+M99 return from subprogram. [V21-1549]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03762</p></td>
+<td><p>CeRun macro related diagnostics were not appearing in the
+Diagnostics window and could not be controlled using the
+$FERSTA function. [V20-1537, V21-1537]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03702</p></td>
+<td><p>Circular interpolation was incorrectly processed when the X
+axis was in diameter mode. [V21-1528]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03649</p></td>
+<td><p>Setting $P1=0 in a data macro was not causing the register
+to be ignored as it should. [V20-1519, V21-1519]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03639</p></td>
+<td><p>CeRun would crash if an EXEC command was encountered in a
+Program Shutdown macro after an M30 code was
+processed. [V20-1517, V21-1517]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03587</p></td>
+<td><p>Processing would hang if a Fanuc subprogram call block also
+contained an operator message. [V20-1512, V21-1512]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h3>Virtual Machine<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>**
+PQR**</p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0
+04036</p></td>
+<td><p>Virtual Machine ICAM Classic scheme will now zoom in/out
+based on the cursor position. This is the same method used
+by the ICAM 3DM scheme.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+04031</p></td>
+<td><p>Circular interpolation could be simulated in an incorrect
+plane following cancellation of RTCP mode. [V21-1642]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+04026</p></td>
+<td><p>Model load time at the start of processing has been
+significantly reduced in cases where the model has
+components with a large count of triangles. [V21-1641]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03874</p></td>
+<td><p>When testing a model from Quest, the model in memory was
+incorrectly marked as “modified”. [V21-1607]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03868</p></td>
+<td><p>Virtual Machine now simulates spindle activity for bore and
+tap cycles.</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03756</p></td>
+<td><p>DEEP and BRKCHP cycle simulation was not accurate for cycles
+with step decrement or multiple step registers. [V21-1536]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="macro-processor">
+<h3>Macro Processor<a class="headerlink" href="#macro-processor" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>**
+PQR**</p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0
+03959</p></td>
+<td><p>The $FMRU functions were not validating key and parameter
+names to ensure they conformed to the XML standard. An
+underscore character is now quietly substituted in place of
+invalid characters in key and parameter names. [V21-1624]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03872</p></td>
+<td><p>The $FIK and $FDK functions were working in primary units
+only; they now work in the currently active machine
+units. [V21-1621]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03716</p></td>
+<td><p>With “strong declaration” active, the compiler would
+incorrectly diagnose an undeclared local variable whenever a
+%L<em>nn</em> variable was used. [V21-1531]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03690</p></td>
+<td><p>The variable watch window now shows the default value for
+variables that are declared but not yet
+initialized. [V20-1526, V21-1526]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+03615</p></td>
+<td><p>The $FEDIT and $FMATCH functions would fail to match a
+trailing wild carded string. E.g., “zz*” would not find the
+trailing match in “xyz”, whereas a simple “z” match
+would. [V20-1515, V21-1515]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+03601</p></td>
+<td><p>Corrected problem with macro compiler type checking of
+sequence system variables. For example,
+“IF/$OE.P1.C(6).GT.1” would fail to compile. [V20-1513,
+V21-1513]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="licensing">
+<h3>Licensing<a class="headerlink" href="#licensing" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>**
+PQR**</p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0
+61603</p></td>
+<td><p>The licensing diagnostic message box could be obscured by
+the application window or start-up splash screen. [090-1646]</p></td>
+</tr>
+<tr class="row-odd"><td><p>0
+60962</p></td>
+<td><p>The ICAMID utility Find button could in some circumstances
+find a floating license server computer but fail to list
+it. [090-1636]</p></td>
+</tr>
+<tr class="row-even"><td><p>0
+60956</p></td>
+<td><p>The ICAMID utility Find button fails with Windows
+10. [090-1636]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../230/readme_230.html" class="btn btn-neutral float-left" title="ICAM V23 Release" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../210/readme_210.html" class="btn btn-neutral float-right" title="ICAM V21 Release" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
