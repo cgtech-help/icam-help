@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using QUEST &mdash; Control Emulator V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The ICAM Database" href="icamdb.html" />
+    <link rel="prev" title="QUEST Inputs and Outputs" href="questinout.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Control Emulator V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../section_intro.html">Control Emulator: Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/index.html">General Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../general/aboutce.html">About Control Emulator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../general/aboutce.html#types-of-machines-supported">Types of Machines Supported</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../general/questcerun.html">About QUEST and CERUN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general/portal.html">About the ICAM Portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index.html">Installation and Upgrade</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install/license.html">Licensing Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icam-key-server-connection-file">icam.key server connection file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icamls-key-server-license-file">icamls.key server license file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/server.html">License Server Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#new-license-server-installation">New license server installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#uninstall-the-license-server">Uninstall the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#repair-the-license-server">Repair the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#upgrade-the-license-server">Upgrade the license server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install.html">Control Emulator Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#new-control-emulator-installation">New Control Emulator installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#uninstall-control-emulator">Uninstall Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#modify-or-repair-control-emulator">Modify or Repair Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#upgrade-control-emulator-installation">Upgrade Control Emulator Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/dbupgrade.html">Database Upgrade Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config/index.html">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../config/configutil.html">The ICAM Configuration Utility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#configuration-storage-and-application-data">Configuration Storage and Application Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-the-desktop">Starting CONFIG from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-a-command-prompt">Starting CONFIG from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-quest-and-cerun">Starting CONFIG from QUEST and CERUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#using-the-configuration-utility">Using the Configuration Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/content.html">Installation Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#installation-directory">Installation directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#application-data-directory">Application Data Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/envvar.html">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config/deffile.html">The ICAM.DEF File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../section_quest.html">QUEST: Control Emulator Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">QUEST</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#importing-control-emulators">Importing Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="questinout.html">QUEST Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#the-icam-database">The ICAM Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#exported-imported-control-emulator">Exported/Imported Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#dedicated-control-emulators">Dedicated Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#basic-control-emulators">Basic Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#the-quest-listing">The QUEST Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="questinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="questinout.html#standard-listing-format">Standard Listing Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-quest-interface">The QUEST Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-new-control-emulator">Creating a New Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#control-emulator-definition">Control Emulator Definition</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#creating-a-ce-linked-to-a-post-processor">Creating a CE linked to a Post-Processor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#creating-a-ce-based-on-a-post-processor">Creating a CE based on a Post-Processor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#creating-a-ce-from-scratch">Creating a CE from scratch</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#specifying-a-pre-processor">Specifying a Pre-Processor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#questionnaire-chapters-and-sections">Questionnaire Chapters and Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saving-and-generating-your-work">Saving and Generating your work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-your-control-emulator">Testing your Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modifying-an-existing-control-emulator">Modifying an Existing Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wrapping-up">Wrapping Up</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="icamdb.html#control-emulator-file-name-conventions">Control Emulator File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="icamdb.html#control-emulators">Control Emulators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="customization.html">Control Emulator Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#code-customization">Code Customization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#modifying-code-identifiers">Modifying Code Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#creating-custom-codes">Creating Custom Codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#deleting-custom-codes">Deleting Custom Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#data-customization">Data Customization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#modifying-data-identifiers">Modifying Data Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#creating-custom-data-identifiers">Creating Custom Data Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#deleting-custom-data-identifiers">Deleting Custom Data Identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#tape-editor">Tape Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#startup-shutdown-macros">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#program-startup-shutdown-macros">Program Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#subprogram-startup-shutdown-macros">Subprogram Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#pre-processor-startup-shutdown-macros">Pre-Processor Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#block-startup-shutdown-macros">Block Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#event-macros">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#motion-event-macros">Motion Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#cycle-event-macros">Cycle Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#tool-event-macros">Tool Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#diagnostic-event-macro">Diagnostic Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#pre-processor-identification-macros">Pre-Processor Identification Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#code-macros">Code Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#create-code-macros">Create Code Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#the-code-macro-editor">The Code Macro Editor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#code-macros-match-order">Code Macros Match Order</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#modify-code-macro-matching-conditions">Modify Code Macro Matching Conditions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#delete-or-disable-code-macros">Delete or Disable Code Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#data-macros">Data Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#create-data-macros">Create Data Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#the-data-macro-editor">The Data Macro Editor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#data-macros-match-order">Data Macros Match Order</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#modify-data-macro-matching-conditions">Modify Data Macro Matching Conditions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="customization.html#delete-or-disable-data-macros">Delete or Disable Data Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#the-dialog-editor">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="customization.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="customization.html#file-storage">File Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ceprocessing.html">Control Emulator Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-startup-processing">CERUN Startup Processing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ceprocessing.html#normal-ce">Normal CE</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ceprocessing.html#multi-kernel-ce">Multi-Kernel CE</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-main-processing-loop">CERUN Main Processing Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-code-processing-loop">CERUN Code Processing Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-shutdown-processing">CERUN Shutdown Processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../macros/index.html">Control Emulator Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#outputting-the-identifier-or-event-output">Outputting the Identifier or Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/cemacrocommands.html">Control Emulator Macro Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-exec-command">The EXEC Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-lprint-command">The LPRINT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-pprint-command">The PPRINT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-taperd-command">The TAPERD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-tapewt-command">The TAPEWT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-search-command">The SEARCH Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-rstmodal-command">The RSTMODAL Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-savmodal-command">The SAVMODAL Command</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#register-index-output-formats">Register Index Output Formats</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#predefined-register-output-format">Predefined Register Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#current-predefined-register-value">Current Predefined Register Value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#canned-cycle-variables">Canned cycle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#composite-control-emulator-variables">Composite control emulator variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#constants">Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#control-emulator-variables">Control emulator variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#conversion-factor-variables">Conversion factor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#coolant-feed-rate-and-spindle-variables">Coolant feed rate and spindle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#cutter-compensation-variables">Cutter compensation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#error-message-variables">Error message variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#lathe-variables">Lathe variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machine-and-workpiece-coordinate-variables">Machine and Workpiece coordinate variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machining-time-variables">Machining time variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#macro-variables">Macro variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#mcd-tape-variables">MCD/Tape variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#miscellaneous-variables">Miscellaneous variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#motion-related-variables">Motion related variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#multi-kernel-variables">Multi-kernel variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#operation-variables">Operation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#subprogram-variables">Subprogram variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#tooling-variables">Tooling variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/constantvar.html">Variables Defining Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coordinatevar.html">Machine &amp; Workpiece Coordinate Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/motionvar.html">Motion-Related Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/conversionvar.html">Conversion Factor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coolfedspinvar.html">Coolant, Feed Rate and Spindle Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cuttercompvar.html">Cutter Compensation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/opvar.html">Operation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/toolvar.html">Tooling Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/lathevar.html">Lathe Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cyclevar.html">Automated Canned Cycle Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#drill-cycle-variables">Drill Cycle Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#thread-cycle-variables">Thread Cycle Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/tapevar.html">MCD/Tape Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/machtimevar.html">Machining Time Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Control Emulator Definition Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/errorvar.html">Error Message Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/multikernelvar.html">Multi-Kernel Control Emulator Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/compositevar.html">Composite Control Emulator Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/subprogvar.html">Subprogram Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/miscvar.html">Miscellaneous Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/mathfunc.html">Mathematical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/numericfunc.html">Numeric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/geometricfunc.html">Geometric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/vectorfunc.html">Vector Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/matrixfunc.html">Matrix Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conditionalfunc.html">Conditional Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conversionfunc.html">Conversion Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/charseqfunc.html">Character and Sequence Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/commandlinefunc.html">Command Line Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/filedirecfunc.html">File and Directory Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/cefunc.html">Control Emulator Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/delmiafunc.html">DELMIA Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../section_cerun.html">CERUN: The Control-Emulator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cevm/index.html">CERUN with Virtual Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/startcerun.html">Starting CERUN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-an-extractor">Starting CERUN from an Extractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-the-desktop">Starting CERUN from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-the-command-prompt">Starting CERUN from the Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-pse-from-a-command-prompt">Starting PSE from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#cerun-return-codes">CERUN Return Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#the-launch-panel">The Launch Panel</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#cerun-tab">CERUN Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#vm-tab">VM Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#preferences-tab">Preferences Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#options-dialog">Options Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#db-manager">DB Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#job-button">JOB Button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/ceruninout.html">CERUN Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#input-mcd-file">Input MCD File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#subprograms">Subprograms</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#segmented-programs">Segmented Programs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-verification-listing">Output Verification Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-identification">Program Identification</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-listing">Program Listing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-summary">Program Summary</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tooling-summary">Tooling Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tool-flute-length-summary">Tool Flute Length Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tool-travel-summary">Tool Travel Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#machining-time-summary">Machining Time Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#diagnostic-summary">Diagnostic Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-log-file">Output Log File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-review-file">Output Review File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/usingcerun.html">Using CERUN with Virtual Machine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#diagnostics">Diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#tracing">Tracing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#debugging">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#menus">Menus</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/file.html">File Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/run.html">Run Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/view.html">View Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/debug.html">Debug Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/cerun.html">CERUN Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/simulation.html">Simulation Menu</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/main.html">Simulation»Virtual Machine</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/controller.html">Simulation»Controller</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-code-groups">Simulation»Controller: Code Groups</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-mdi">Simulation»Controller: MDI</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-opskip">Simulation»Controller: Opskip</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/mode.html">Simulation»Mode</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#tools">Tools</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#holders">Holders</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/show.html">Simulation»Show</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-path-ctrl-t">Simulation»Show»Tool Path (Ctrl T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-vector">Simulation»Show»Tool Vector</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t">Simulation»Show»Tool Path as Overlay (Ctrl Shift T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowfilters">Simulation»Show»Filters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowcross-section">Simulation»Show»Cross Section</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowworkpiece-coords-ctrl-w">Simulation»Show»Workpiece Coords (Ctrl W)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshownext-display-ctrl-d">Simulation»Show»Next Display (Ctrl D)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowprevious-display-ctrl-shift-d">Simulation»Show»Previous Display (Ctrl Shift D)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionhide-in-view-ctrl-b">Simulation»Selection»Hide in View (Ctrl B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionhide-in-all-views">Simulation»Selection»Hide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b">Simulation»Selection»Show All/Rehide (Ctrl Alt B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionshow-all-rehide-in-all-views">Simulation»Selection»Show All/Rehide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b">Simulation»Selection»Invert Hide State (Ctrl Shift B)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/setup.html">Simulation»Open Setup</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/setup.html#simulationsave-setup">Simulation»Save Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/tools.html">Tools Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/window.html">Window Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/help.html">Help Menu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cedelmia/index.html">CERUN with DELMIA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/setupce.html">Setup CERUN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/setupce.html#cam-selection">CAM Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/setupce.html#cam-integration">CAM Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html">MCD Based Simulation with CATIA V5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#machining-and-simulation-setup">Machining and Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#part-operation-settings">Part Operation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#post-processing-with-gener">Post-Processing with GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#mcd-file-selection-override">MCD File Selection Override</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#tool-and-workpiece-compensation-settings">Tool and Workpiece Compensation Settings</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#cutter-compensation-panel">Cutter Compensation Panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#origin-compensation-panel">Origin Compensation Panel</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#using-cerun-with-catia">Using CERUN with CATIA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/mcdsim3dx.html">MCD Based Simulation with 3DEXPERIENCE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#machining-and-simulation-setup">Machining and Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#part-operation-settings">Part Operation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#post-processing-with-gener">Post-Processing with GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#mcd-file-selection-override">MCD File Selection Override</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#tool-and-workpiece-compensation-settings">Tool and Workpiece Compensation Settings</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#cutter-compensation-management-for-simulation">Cutter Compensation Management for Simulation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#define-workpiece-compensation">Define Workpiece Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#using-cerun-with-3dexperience">Using CERUN with 3DEXPERIENCE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../diag/index.html">Diagnostic Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../diag/geninfo.html">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/modify.html">Modifying Diagnostic Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/errorfile.html">Error File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back/annex.html">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../back/characterset.html">Character Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/codeident.html">Code Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/dataident.html">Data Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/reservedwords.html">Reserved Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/userdefquest.html">User-Defined Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#question-tags">Question Tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#s-user-defined-section">/S User-defined section</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#q-number-type">/Q number type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#p-prompt-text-or-short-description-text">/P prompt text, or short description text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#t-question-text">/T question text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#d-default-answer">/D default answer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#l-response-location">/L response location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#o-options">/O options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#comment-character">! comment character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#case">CASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cchar">CCHAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cvalue">CVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#ivalue">IVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#wvalue">WVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#yesno">YESNO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#macro-system-variables">Macro System Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../back/cemacrosample.html">Control Emulator Macro Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/cemacrosample.html#macro-example-1">Macro Example #1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/cemacrosample.html#macro-example-2">Macro Example #2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Control Emulator V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../section_quest.html">QUEST: Control Emulator Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">QUEST</a></li>
+      <li class="breadcrumb-item active">Using QUEST</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-quest">
+<span id="id1"></span><h1>Using QUEST<a class="headerlink" href="#using-quest" title="Link to this heading"></a></h1>
+<p>This section describes the QUEST interface and other details
+necessary to effectively create and maintain control emulators.</p>
+<p>The <a class="reference internal" href="#quest-windows-interface"><span class="std std-ref">image below</span></a> shows the various components of the
+complete QUEST interface. This reference manual does not describe how
+to interact with standard Windows components (such as toolbars,
+list-boxes or push-buttons). Instead, this section will concentrate
+on the purpose of each of the main windows (there are three:
+navigator, working and information) and some of the key functions
+available through the menu-bar and toolbar menus.</p>
+<figure class="align-center" id="id2">
+<span id="quest-windows-interface"></span><a class="reference internal image-reference" href="../../_images/quest_interface.png"><img alt="../../_images/quest_interface.png" src="../../_images/quest_interface.png" style="width: 6.077in;" /></a>
+<figcaption>
+<p><span class="caption-text">QUEST Windows Interface</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="the-quest-interface">
+<h2>The QUEST Interface<a class="headerlink" href="#the-quest-interface" title="Link to this heading"></a></h2>
+<p>The QUEST interface consists of three main windows:</p>
+<p>1) The left hand window is the <strong>Navigator</strong>, which is used to view the
+list of control emulators in a database as well as to access the
+different information components of a control emulator. Select the
+“Database” tab at the bottom of the navigator window to see the list
+(if any) of databases. Individual control emulators can be read into
+QUEST from the database so they can be viewed or modified. Each
+control emulator, once loaded, can be accessed by selecting one of the
+named tabs at the bottom of the navigator window. The Help tab in the
+Information window displays information about the entry selected in
+the Navigator. Double-click on a section entry in the Navigator
+window to make changes to that section.</p>
+<p>2) The upper right window is the <strong>Main</strong> working window. This window
+will change to show lists of questions, tables of results, dialog
+panels, macro editors, et cetera, primarily as a result of selections
+made in the Navigator. Most of your interaction with QUEST will occur
+in the main window. You can press the F1 function key to obtain
+context sensitive on-line help on how to use the main window.</p>
+<p>3) The lower right window is the <strong>Information</strong> window. This window
+holds various types of information, each of which can be accessed by
+selecting one of the organizational tabs arranged along the bottom
+edge of the window. Most of the time, QUEST will automatically select
+the proper tab for you based on the last feature or action requested.
+The tab names and their purpose are as follows:</p>
+<ul>
+<li><p>The <strong>Help</strong> tab provides detailed help when the Main window focus is
+on a question, or when a section is selected in the Navigator window.</p>
+<p></p>
+</li>
+<li><p>The <strong>Build</strong> tab lists informational and diagnostic messages when
+they occur. You can often double-click on a diagnostic message to
+address the problem in the Main window.</p>
+<p></p>
+</li>
+<li><p>The <strong>Consistency</strong> tab lists inconsistencies found in the
+control emulator. Use the <strong>Tools» Consistency</strong> menu-bar selection
+(Ctrl Shift G shortcut) to run the consistency checks. Double click
+on a line in the Consistency tab to review or correct a listed
+inconsistency. This opens the appropriate section with the
+problematic item in focus. The F4 and Shift F4 keys can be used to
+move forwards and backwards through the list of inconsistencies. The
+following checks are performed:</p>
+<ul class="simple">
+<li><p>Differences in question responses as compared to the <em>General
+Description/General Information</em> question 4 “Machine defaults”
+selection. The expected response is shown on the line within
+parentheses; the actual response is shown at the end of the line.</p></li>
+<li><p>Differences in question responses as compared to the <em>General
+Description/General Information</em> question 5 “Control defaults”
+selection. The expected response is shown on the line within
+parentheses; the actual response is shown at the end of the line.</p></li>
+<li><p>Inconsistencies between question responses from different
+sections. This is shown in the same way as during a File»Generate,
+with the root question listed first and those with inconsistent
+responses listed with a slight indent below it.</p></li>
+<li><p>Code inconsistencies, which are the result of two or more functions
+sharing the same G or M code. These are also listed during a
+Generate.</p></li>
+<li><p>Data inconsistencies, which are typically caused by custom DATA
+identifiers that reference deleted registers. These are also
+listed during a Generate.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple" id="finder-tab">
+<li><p>The <strong>Finder</strong> tab lists the results of the last search operation.
+Use the <strong>Tools»Finder</strong> menu-bar selection (Ctrl Shift F shortcut)
+to find questions, tape editor definitions, dialogs and macros
+containing text matching a “search” string (press F1 to obtain help
+on search features). Double-click on any line listed in the Finder
+tab to change the Main window focus to the selected item. Use F4 and
+Shift F4 to sequentially shift the Finder tab focus (and indirectly
+the Main window focus) forwards and backwards through the list of
+items found.</p></li>
+</ul>
+<ul id="diffs-tab">
+<li><p>The <strong>Diffs</strong> tab lists the differences between two selected
+control emulators and/or post-processors. Use the <strong>Tools»Diffs</strong>
+menu-bar selection (Ctrl I shortcut) to identify the objects to
+compare (press F1 to obtain help on comparison features). You can
+double-click on any line with a solid arrow to change the Main
+window focus to the selected item. Various right-mouse context menu
+functions are also available in the Diffs tab to help view the
+comparison results.</p>
+<p></p>
+</li>
+<li><p>The <strong>Axes</strong> tab lists all machine axes and provides sliders that can
+be used to exercise the machine model. This feature is only available
+with a Virtual Machine Developer’s license (vmq260).</p></li>
+</ul>
+<p>The <strong>menu-bar</strong> at the top of the application window provides access
+to QUEST functions. Not all menu actions are available at all times.
+For example, some database actions are only available when a database
+or control emulator is selected in the navigator. Other menu actions
+are related to the macro editor and will only be available when a
+macro is being edited. Keyboard shortcuts are available for some
+common menu actions (the shortcut key is listed in the menus to the
+right of the menu selection).</p>
+<p>The most common menu actions are also available through <strong>toolbar</strong>
+shortcuts (the little icons arranged below the menu-bar). Toolbars
+are dockable (i.e., they can be dragged to any side of the
+application window, or even be made to appear as a separate window).
+Like the menu-bar selections they represent, toolbar icons may not be
+selectable at all times.</p>
+<p>The right-mouse button can be used to bring up a <strong>pop-up menu</strong>
+(context sensitive menu), listing the most common menu choices that
+can be made in the current window or on the item last selected.
+Pop-up menus also provide access to modal display and processing
+options. This feature is highly recommended to those who are new to
+QUEST, since it lists the most common actions based on the current
+context.</p>
+<p>The <strong>vertical splitter bar</strong> can be used to increase or decrease the
+width of the Navigator window. The <strong>horizontal splitter bar</strong>
+likewise determines how the main working window and informational
+window share the full application window height. You can double-click
+on the splitter bar to quickly reset it to its last position.</p>
+</section>
+<section id="creating-a-new-control-emulator">
+<h2>Creating a New Control Emulator<a class="headerlink" href="#creating-a-new-control-emulator" title="Link to this heading"></a></h2>
+<p id="quest-interface">When QUEST is first run, the application window will appear as shown
+below.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../../_images/quest_start.png"><img alt="../../_images/quest_start.png" src="../../_images/quest_start.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">QUEST as it looks when first run</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>You create a new control emulator using the <strong>File»New CE</strong> drop down menu selection.
+A control emulator can be developed from scratch by selecting the <strong>Blank</strong> menu sub-option.
+It can also be developed, based on information previously entered for a post-processor
+in the database, by selecting either the <strong>From Existing Post</strong> or <strong>Link to Post</strong> sub-options.
+These choices are described in more detail <a class="reference internal" href="#cedefinition"><span class="std std-ref">below</span></a>.</p>
+<p>Regardless of how the control emulator is created, the
+Main work window will then change to show a short list of questions,
+with tabs arranged along the bottom. Your first action should be to
+change the control emulator name (i.e., NONAME,1) to something more
+appropriate.</p>
+<p>QUEST supports two different question display styles. The “classic”
+style is a top-down list of questions, organized one per line. This
+is the format that is used in textual examples in this manual (as
+shown in the text example below). A more modern “graphic” question
+style uses typical windows controls such as radio-buttons,
+checkboxes, drop-down lists, et cetera. This is the format that is
+used in example images in this manual (as shown in the
+<a class="reference internal" href="#stopper-question"><span class="std std-ref">“A stopper question”</span></a> image).
+You can switch between styles at any time using the
+<strong>View»Graphic Questions</strong> menu-bar toggle or the right-mouse
+button <strong>Graphic Questions</strong> pop-up menu toggle. You can also enable
+or disable the organization of questions by bottom tabs using the
+right-mouse button <strong>Use tab</strong> pop-up menu toggle.</p>
+<p>When creating a control emulator from scratch, the third question in
+the list will be shown highlighted in red (a stopper question)
+indicating that an answer must be provided before you can continue or
+even exit the section.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.00</span> <span class="n">Machine</span> <span class="nb">type</span><span class="p">:</span> <span class="p">[</span><span class="n">Contour</span><span class="p">,</span><span class="n">Lathe</span><span class="p">,</span><span class="n">Mill</span><span class="o">-</span><span class="n">Turn</span><span class="p">,</span><span class="n">Mill</span><span class="p">,</span><span class="n">Robot</span><span class="p">,</span><span class="n">Composite</span><span class="p">]</span> <span class="p">(</span><span class="n">No</span> <span class="n">Response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>All classic style questions have this same appearance. The square
+brackets <strong>[ ]</strong> define the acceptable responses (answers) to the
+question. The parentheses <strong>( )</strong> show the current response to the
+question. Answers can be typed by first selecting the question using
+the mouse or arrow keys, typing your response (abbreviations are
+accepted) and then pressing the Enter key. You can also answer a
+question using the mouse. When you move the mouse pointer over the
+items in the brackets and parentheses, they will be highlighted in a
+same way a browser does. You can click on a highlighted item to
+change the response to the question. For example, to answer “Mill”
+for question #3, you can move the mouse pointer over the word inside
+the [ ] brackets and then click the left-mouse button.</p>
+<p>Graphic style questions have a more varied appearance. Lists of
+acceptable responses to a question are sometimes listed vertically in
+a selection box and at other times in a drop-down list. Simple yes/no
+questions often use a checkbox, where a checked response means
+“yes”. Some questions show a list of acceptable responses in square
+brackets [ ] as part of the question prompt. The interface is
+designed, as much as possible, to show the list of possible responses
+to each question, along with the current response. You change the
+current (default) response to a question by using the mouse and
+left-mouse button to point to and select another listed choice for
+that question. For simple edit box type controls, such as the
+control emulator name selection, you must select the edit box using the
+mouse and then either type in a new response or edit the current
+response. Many question types include a <strong>[…]</strong> button, which when
+selected will activate a dialog box to assist you in changing the
+response to the question.</p>
+<p>The “Help” information window (bottom right of the application
+window) will always describe the selected question in more detail.
+The selected question is normally listed in blue. When using the
+graphic question style, help information will be shown as a balloon
+tooltip when you leave the mouse pointer over the input field of a
+question. You can enable or disable help tooltips at any time using
+the right-mouse button <strong>Show Help Tips</strong> pop-up menu toggle.</p>
+<p>Red “stopper” questions are those that do not have a default
+response. They must be answered before you can continue. In fact, all
+questions following the stopper one will not be shown, nor can the
+section be exited until a valid answer is given (the OK button will
+not be selectable). If the questions are grouped under organizational
+tabs, the tab containing the stopper question will be shown in red.
+In the image below, question 3.00 is a stopper question.</p>
+<figure class="align-center" id="id4">
+<span id="stopper-question"></span><a class="reference internal image-reference" href="../../_images/quest_stopper.png"><img alt="../../_images/quest_stopper.png" src="../../_images/quest_stopper.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">A “stopper” question</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Questions are listed in green if they have a response that is
+different from the default (i.e., those where you selected or typed
+an answer different from what was shown in the ( ) parentheses). You
+can reset a question back to its default state (provided it had a
+default) using the right-mouse context menu. One of the menu choices
+will be <strong>Reset to “whatever”</strong>. You can reset every question in
+the section back to its default by clicking on the Reset button at
+the bottom of the window.</p>
+<p>Depending on the right-mouse button <strong>Auto Clear</strong> pop-up menu
+setting, questions and tabs might be shown in a light grey. If a
+question is greyed out, it means that it is no longer applicable
+based on some earlier response in the section. If an organizational
+tab is greyed out, then all questions listed in that section are no
+longer applicable, based on some response in another tabbed section
+(generally to the left). To see this in action, uncheck the Auto
+Clear option and then choose different responses to the machine type
+question (#3). Questions that are appropriate for milling machines
+will be greyed out when the machine type is changed to a lathe. Some
+people prefer to see this effect when they are answering questions in
+a section, others find it confusing. Greyed out questions are cleared
+when a section is exited or the right-mouse button <strong>Clear Now</strong>
+pop-up menu is selected.</p>
+<p>All questions are numbered. You can choose to see or not see the
+question numbers using the right-mouse <strong>Show Question Numbers</strong>
+pop-up menu toggle. This setting affects the appearance of questions
+in the work window, but has no effect on the Finder, Diffs and other
+QUEST functions.</p>
+</section>
+<section id="control-emulator-definition">
+<span id="cedefinition"></span><h2>Control Emulator Definition<a class="headerlink" href="#control-emulator-definition" title="Link to this heading"></a></h2>
+<p>The easiest way to develop a control emulator (CE) is to base it on an
+existing Icam Post post-processor or if that is not possible, then to
+base it on a pre-existing controller architecture (i.e., a “basic
+CE”). Your choices when creating a new control emulator are listed
+below.</p>
+<section id="creating-a-ce-linked-to-a-post-processor">
+<h3>Creating a CE linked to a Post-Processor<a class="headerlink" href="#creating-a-ce-linked-to-a-post-processor" title="Link to this heading"></a></h3>
+<p>The information needed by Control Emulator to process the MCD is, for
+the most part, identical to the information needed by Icam Post to
+generate the MCD. If a post-processor has already been
+written for the CNC, then a control emulator can be created as a
+“link” to the post-processor. The advantage with a link is that if
+the post-processor is later edited, then the control emulator will
+use the most recent version of the post-processor when emulating the
+CNC.</p>
+<p>Use the <strong>File»New CE»Link to Post</strong> menu selection to create a
+control emulator that is linked to a post-processor residing in the
+same database. You will be prompted to select the post-processor from
+a list of post-processors in the current database. You can select a
+different database to use as the basis, but the control emulator
+being developed must be saved to the same database as the post-
+processor to which it is linked.</p>
+<p>The following General Description / General Information questions
+define the link setting and the name of the post-processor to which
+the control emulator is linked:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2.10 Data from another post-processor: [Yes,No] Yes
+2.20 Associated post-processor: name,id
+</pre></div>
+</div>
+<p>With this setting, the questionnaire responses are obtained from the
+specified post-processor. If the questionnaire section of the
+post-processor is modified, then the control emulator will use the
+most recent responses when it is opened in QUEST or run with CERUN.</p>
+<p>Only the questionnaire section of the post-processor is used by the
+control emulator. The customization section of the post-processor
+is not used since the control emulator has its own unique
+customization capabilities.</p>
+</section>
+<section id="creating-a-ce-based-on-a-post-processor">
+<h3>Creating a CE based on a Post-Processor<a class="headerlink" href="#creating-a-ce-based-on-a-post-processor" title="Link to this heading"></a></h3>
+<p>Use the <strong>File»New CE»From Existing Post</strong> menu selection to create a
+control emulator that is based on the questionnaire section data of a
+post-processor. You will be prompted to select the post-processor
+from a list of post-processors in the current or selected database.
+The control emulator does not have to be saved to the same database
+as the post-processor, since the data is copied when the control
+emulator is created; there is no link to the post-processor.</p>
+<p>Only the questionnaire section of the post-processor is copied and
+used by the control emulator. The customization section of the
+post-processor is not copied since the control emulator has its own
+unique customization capabilities.</p>
+<p>The <strong>Tools»Diff</strong> utility can be used to compare the questionnaire
+section differences between a control emulator and a post-processor
+to check for divergence.</p>
+</section>
+<section id="creating-a-ce-from-scratch">
+<h3>Creating a CE from scratch<a class="headerlink" href="#creating-a-ce-from-scratch" title="Link to this heading"></a></h3>
+<p>Use the <strong>File»New CE»Blank</strong> menu selection to create a control
+emulator that is not based on a post-processor or other control
+emulator. In this case, you will have to go through the questionnaire
+sections and enter the appropriate responses to define the properties
+and behavior of your CNC machine.
+This process can be greatly simplified if you can base your answers on
+a known controller architecture. QUEST provides many “basic CE” defaults
+in support of popular and less well known controllers.
+You specify the controller basic CE
+using question 5.00 in the General Information section:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.00</span> <span class="n">Control</span> <span class="n">defaults</span><span class="p">:</span> <span class="p">[</span><span class="n">NA</span><span class="p">,</span><span class="n">File_name</span><span class="p">,</span><span class="n">File_panel</span><span class="p">]</span> <span class="p">(</span><span class="n">NA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Click on File_panel and then choose an appropriate controller from
+the list that will be presented. If a basic CE is not selected,
+then QUEST follows the ISO 6983 standard where possible.</p>
+<p>Every question originally starts off in an unanswered state and most
+unanswered questions have a default response. QUEST determines the
+default response for a question in a number of ways.</p>
+<ul class="simple">
+<li><p><em>From the basic CE:</em> Basic CEs define default responses to just
+those questions that apply. For example, a control-type basic CE
+won’t define default answers for machine specific features (e.g.,
+number of spindle gears).</p></li>
+<li><p><em>From the ISO 6983 standard:</em> Default responses for control related
+questions will follow this international standard where applicable.</p></li>
+<li><p><em>Derived from earlier answers:</em> QUEST will propose default responses
+that are consistent with earlier responses in the same section and
+sometimes from other sections higher up in the Navigator list.</p></li>
+</ul>
+<p>All questions in a section are marked as answered when you press the
+OK button to leave the section. All questions in every section are
+marked as answered when you Generate the control emulator (i.e., save
+it in a format ready to be used by CERUN). All questions in a section
+are reset to an unanswered state when you press the Reset button.
+Individual questions can be reset using the “Reset to” pop-up context
+menu. Answering a particular question in a section marks all lower
+numbered questions in that section as answered. To take advantage of
+QUEST’s capability to derive default responses, try to answer
+questions in a section in order from lowest numbered to highest
+numbered.</p>
+<p>Changing your Control and Machine default choices will have no effect
+on any question that has already been answered.</p>
+</section>
+<section id="specifying-a-pre-processor">
+<h3>Specifying a Pre-Processor<a class="headerlink" href="#specifying-a-pre-processor" title="Link to this heading"></a></h3>
+<p>The questionnaire section does not cover the use of CNC variables,
+flow control, functions and expressions. There is no plausible set of
+questions that can handle the variances in this functionality from
+one controller to another and even if there were, answering these
+questions would likely prove difficult. Control Emulator instead
+comes with a number of predefined “pre-processors” that include all
+of the necessary logic to handle these advanced CNC capabilities.</p>
+<p>QUEST provides pre-processors for some well known controllers. You
+specify the pre-processor using question 7.00 in the General
+Information section:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">7.00</span> <span class="n">Controller</span> <span class="n">Pre</span><span class="o">-</span><span class="n">Processor</span><span class="p">:</span> <span class="p">[</span><span class="n">NA</span><span class="p">,</span><span class="n">File_name</span><span class="p">,</span><span class="n">File_panel</span><span class="p">]</span> <span class="p">(</span><span class="n">NA</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Click on File_panel and then choose an appropriate pre-processor from
+the list that will be presented.</p>
+<p>When a pre-processor is selected, the control emulator customization
+section will include three additional macros that can be used to
+fine-tune the behavior of the pre-processor. The <strong>Pre-Processor
+Startup</strong> and <strong>Pre-Processor Shutdown</strong> macros provide access to the
+MCD block before and after it is processed by the pre-processor. A
+<strong>Pre-Processor Identification</strong> macro can be written to extend the
+functionality of the pre-processor to handle additional variables and
+functions.</p>
+<p>More information about pre-processors and their capabilities can be
+found by selecting the “online documentation” link at the bottom of
+the descriptive text in the Controller Pre-Processor selection dialog.</p>
+</section>
+</section>
+<section id="questionnaire-chapters-and-sections">
+<h2>Questionnaire Chapters and Sections<a class="headerlink" href="#questionnaire-chapters-and-sections" title="Link to this heading"></a></h2>
+<p>The QUEST Navigator window will list a series of chapters and
+sections that comprise the knowledge base for the current control emulator
+see the Navigator contents in the <a class="reference internal" href="#quest-windows-interface"><span class="std std-ref">“QUEST Windows Interface”</span></a> image).
+Each control emulator consists of a number of
+chapters. Each chapter in turn consists of a number of sections. Most
+(but not all) sections present a list of questions as described
+earlier. Section icons in the navigator use different colors and
+emphasis to show if the section has been answered or not and, in some
+cases, if the feature is available on the machine/controller or not.
+Double-click on a section name in the Navigator to view and/or change
+the knowledge base for that section in the Main window (i.e., the
+upper right working window). Single-click on a section name in the
+Navigator to view the knowledge base for that section in the Help
+window.</p>
+<p>The following is a list of chapters and sections of the
+questionnaire. Depending on the CNC type and its features, some of
+these sections and chapters might not be listed (since they do not
+apply).</p>
+<ul>
+<li><p>The <strong>General Description</strong> chapter has sections that obtain a
+variety of important upfront information
+The <em>General Information</em> section for example determines the
+control emulator name, machine type, kinematics configuration, units
+and positioning.
+Use the <em>Comments</em> section to record revision change information
+and other important notes about the control emulator.
+The <em>Registers</em> section determines the format of the word addresses
+supported by your control. This section should be answered early on,
+since many questions derive their default answers based on the
+availability and format of specific word addresses.
+The <em>G/M Code Assignments</em> section defines the (G) and (M) code
+word addresses.
+The <em>Output Format</em> section determines some important information
+about the format of the NC program codes that will be
+processed by CERUN.
+The <em>Integration</em> section contains information that CERUN requires
+to properly control a Dassault Systèmes DELMIA model.</p>
+<p>If a control emulator is created as a <strong>link</strong> to an existing
+post-processor, then only the <em>Comment</em>, <em>General Information</em> and
+<em>Integration</em> sections of the General Description chapter will be
+listed. No other chapters and sections will appear, since the
+questionnaire data is supplied by the linked post-processor.</p>
+<p></p>
+</li>
+<li><p>The <strong>Machine Description</strong> chapter has sections that define the
+particulars about each of the machine’s axes (e.g., sign of the axis,
+velocity, travel limitations, offsets).
+The <em>Home Position and Reference Point</em> section defines information about the primary home
+point.
+The <em>Feedrate</em> section defines how interpolation velocity is controlled.
+The <em>Tool Change</em> and <em>Spindle</em> sections (not present for contouring machines)
+define the capabilities of the tool change device and those of the
+milling and turning spindles.</p>
+<p></p>
+</li>
+<li><p>The <strong>Control Description</strong> chapter is mostly concerned with the
+various interpolation types and motion related advanced features that
+are supported by the controller.
+The <em>Coordinate System</em> section defines the plane selection codes (e.g.,
+G17-19), in addition to translation, rotation, scaling and mirror (LCS)
+capabilities of the control.
+The <em>Rapid Positioning</em>, <em>Linear Interpolation</em> and
+<em>Circular and Helical Interpolation</em> sections define the particulars
+of these three main interpolation types.
+The <em>Tool and Fixture Compensation</em> section defines
+tool length, tool radius, 3D tool and fixture compensation
+capabilities and codes.
+The <em>Advanced 5D Machining</em> section defines
+tool-tip programming (RTCP) and Cartesian-to-polar (C2P) features available
+for machines with continuous rotary axes.
+The <em>High Speed Machining</em> section (only available with a xhs260 license)
+enables accel/decel with Virtual Machine models.</p>
+<p></p>
+</li>
+<li><p>The <strong>Automated Canned Cycles</strong> chapter is only present for lathes
+and for mills with a Z axis. It has a <em>General Drill Cycle
+Information</em> section and a <em>Drill Cycles</em> section that handle the
+requirements for single-point cycles such as drilling, tapping,
+boring et cetera. Answer the <em>General Drill Cycle</em> section first,
+since answers in this section have an effect on the <em>Drill Cycles</em>
+section. The <em>Thread Cycles</em> section handles single-pass and
+multi-pass threading cycles available on many lathe controllers.</p>
+<p></p>
+</li>
+<li><p>The <strong>Optional Post-processor Words</strong> chapter has sections that deal
+with various features of the machine and controller. They are
+organized by their related ISO 4343:2000 standard control emulator
+command name. For example, the <em>COOLNT Command</em> section has questions
+dealing with various types of coolant, which are controlled in the
+post-processor using a COOLNT command.</p>
+<p></p>
+</li>
+<li><p>The <strong>Control Emulator Customization</strong> chapter is designed to handle
+machine and controller requirements that are not supported in any of
+the other sections. Note that in most cases, customizing a control emulator
+requires a knowledge of the ICAM macro programming language. This
+section starts with <em>Code Customization</em> and <em>Data Customization</em>
+sections that are used to fine tune the codes and register
+information gathered from the questionnaire section. It has a set of
+<em>Startup/Shutdown Procedures</em> and <em>Event Macros</em> that can be used at
+key points in the program (for example, start of program or tool
+change) to handle special or repetitive requirements. The <em>Code
+Macros</em> and <em>Data Macros</em> sections allow you to define the actions of
+the CNC to simulate features of your machine not covered by Control
+Emulator. A <em>Tape Editor</em> section can be used to define a series of
+find/replace strings, which will be applied to the MCD as it is read.
+The <em>Dialog Editor</em> section can be used to define dialog boxes that can
+be used by your control emulator, through macros, to prompt the NC
+programmer for input while CERUN is running.
+The <em>User Function Macros</em> section allows you to create your own macro
+functions that can be called by other macros in the control emulator.
+Finally, a <em>File Storage</em> section is available to store
+resident CNC subprograms that can be used by CERUN, or other
+data that can be read by the macro processor.
+See <a class="reference internal" href="customization.html#quest-customization"><span class="std std-ref">“Control Emulator Customization”</span></a> for more details.</p>
+<p></p>
+</li>
+<li><p>The <strong>Code Table</strong> section is a reference table listing the codes
+that have been defined in all questions asking for a G or M code. The
+code is listed as it will appear in the MCD along with: its code
+identifier, the register and value(s) that identify the code, and a
+description if available. If a code has associated registers, they
+are listed below the code. Double-click on a code or register to go
+directly to the question where that code or register was defined.
+Click on a column header to sort the list using the selected column.</p></li>
+</ul>
+<p>The <em>General Description / Registers</em> section contains a “Use default
+resolution/minimum/maximum values” checkbox that when selected will
+inhibit the resolution, minimum and maximum value questions that
+typically immediately follow each register definition. When checked,
+the resolution and minimum responses will be set to the smallest
+value that can be represented by the register; the maximum response
+will be set to the largest value that can be represented by the
+register. The checkbox is enabled by default on new
+control emulators. The checkbox setting is saved with the control emulator
+when exporting, saving or generating.</p>
+<p>New and even experienced users sometimes have trouble finding a
+question that relates to a feature of the control or machine they are
+trying to define or modify. Before trying to customize a control emulator,
+we strongly recommend that you first use the
+<strong>Tools»Finder</strong> menu-bar selection (Ctrl Shift F shortcut) to find
+questions related to the feature (see <a class="reference internal" href="#finder-tab"><span class="std std-ref">here</span></a>).</p>
+</section>
+<section id="saving-and-generating-your-work">
+<h2>Saving and Generating your work<a class="headerlink" href="#saving-and-generating-your-work" title="Link to this heading"></a></h2>
+<p>Changes made to a control emulator occur in the in-memory copy. To
+preserve your work, you have to either Save or Generate the
+control emulator to the control emulator database (see <a class="reference internal" href="icamdb.html#icamdb"><span class="std std-ref">The ICAM Database</span></a>
+for details on the database). Save your
+work periodically when performing extensive or time consuming
+changes, since your changes will be lost if a power failure or system
+hang-up occurs.</p>
+<p>The <strong>File»Save</strong> menu-bar selection saves a copy of the
+control emulator exactly as-is. Use this to save your work on an
+interim or periodic basis.</p>
+<p>The <strong>File»Generate</strong> menu-bar selection first checks the
+control emulator for inconsistencies, then marks all questions as
+answered and finally creates control emulator documentation for
+record-keeping purposes, before saving the control emulator to the database.
+Generated control emulators can be used by CERUN in a production
+setting. A QUEST listing will be created while generating, which
+contains the responses, macro source and other data that comprises
+the control emulator. The listing is written to the same directory as
+the control emulator database, or to the directory specified by the
+<em>icam_lis</em> environment variable if set.</p>
+<p>Two types of errors can be detected during the consistency checking:
+invalid or missing responses to questions in a particular section;
+and inconsistent responses to questions in different sections.</p>
+<ul>
+<li><p>The first type of error occurs when a section or question is
+encountered that has not been answered and for which defaults
+responses are not available (i.e., stopper questions). This type of
+error will cause the Generate function to abort after creating the
+control emulator documentation but before saving to the database (i.e.,
+a new control emulator <strong>will not</strong> be generated). As each error is
+detected, a message will appear in the documentation at the point of
+error and a similar message will be shown in the Build information
+window.
+The most common error
+is when two or more functions of the control emulator have been answered
+using the exact same MCD, as shown in the example below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Conflicting</span> <span class="n">codes</span><span class="p">:</span>
+   <span class="n">M6</span> <span class="p">(</span><span class="n">code_tool_load</span><span class="p">)</span>
+   <span class="n">M6</span> <span class="p">(</span><span class="n">code_tool_load_manual</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The solution is to change the questionnaire responses so that either
+the codes are unique or one of the functions is removed. Double-click
+on the error message in the Build window, or right-mouse on the error
+and select “Go to Error/Tag”, to correct the question in error.
+Right-mouse and select “Disable Code” to ignore the conflicting code
+(this action can be undone in the Code Customization section).</p>
+<p></p>
+</li>
+<li><p>The second type of error occurs when an answer to a particular
+question is inconsistent with answers to one or more other questions
+in other sections. This type of error (warning actually) will not
+cause the Generate function to abort (i.e., a new control emulator
+<strong>will</strong> be generated). As each inconsistency is detected, the
+problem is registered, grouped together with related problems and
+displayed in both the Build information window and the
+documentation. Double-click on the indented consistency warning (in
+the Build window) to correct what QUEST believes is the root or
+source of the problem. Double-click on outdented consistency warnings
+to correct the result or target of the problem.</p></li>
+</ul>
+<p>Regenerate once all problems have been corrected. It is not an error
+to have control emulators with inconsistencies.</p>
+</section>
+<section id="testing-your-control-emulator">
+<h2>Testing your Control Emulator<a class="headerlink" href="#testing-your-control-emulator" title="Link to this heading"></a></h2>
+<p>The <strong>Tools»Start Runtime</strong> menu-bar selection (F9 shortcut) provides
+a convenient method of running CERUN against any of the
+control emulators currently being edited. When testing the control emulator
+in this manner, it is not necessary to generate or even
+save the control emulator before starting CERUN. The standard CERUN
+launch panel will appear (see <a class="reference internal" href="../cevm/startcerun.html#launch-panel"><span class="std std-ref">“The Launch Panel”</span></a>).
+When it does, the default database will show “QUEST --
+(CE's
+in Memory)” and the control emulator name drop-down selection will list those
+control emulators out for editing that can generate without errors.</p>
+<p>Any changes made to your control emulator after selecting the
+Tools»Start Runtime menu-bar item, but before pressing OK on the
+CERUN launch panel, will be respected. Changes made after CERUN
+starts processing will not be respected. The CERUN interface supports
+a restart capability. Any control emulator changes made prior to
+restarting will be respected once CERUN restarts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because the test feature does not require a saved or
+generated control emulator, you might be tempted to go long periods of
+time before saving or generating. You are cautioned to save your work
+periodically to minimize loss of data caused by power failures or
+other serious problems.</p>
+</div>
+<p>In addition, a <strong>Tools»Test</strong> menu-bar selection (F10 shortcut) provides
+a simple interface to test your control emulator. First drag &amp; drop a test
+MCD file onto the dialog, or use the […] browse button to locate a file,
+or type or paste sample MCD into the window. Then press the Test button.
+An output window will appear, as shown below, tracing the input and processing
+of the MCD along with any diagnostic messages.
+The <strong>Tools»Retest</strong> menu-bar selection (Shift F10 shortcut) can be used to
+quickly test a control emulator using the last specified MCD file and test settings.</p>
+<a class="reference internal image-reference" href="../../_images/quest_test.png"><img alt="../../_images/quest_test.png" class="align-center" src="../../_images/quest_test.png" style="width: 4.500in;" /></a>
+<p></p>
+<p>The input MCD is always shown in the form “<em>line-number</em><strong>!</strong>
+<em>mcd</em>” as each block is processed, as are the actions that the
+block generates, which are shown in the form “ <strong>|</strong> <em>action</em>”.
+Trace options exposes the internal CERUN processing of each block of
+MCD. Traced output appears as shown below:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>12! G1X12Y8.5S1200F#14M3
+   Block : G1X12Y8.5S1200F#14M3
+      PrePrc : G1X12Y8.5S1200F20M3
+      G:1
+      X:12.
+      Y:8.5
+      S:1200
+      F:20
+      M:3
+         code_spindle_clw
+            reg_spindle_rpm 1200
+               | spindle clw, rpm=1200
+         code_interp_linear
+            reg_feed_upm 20
+            reg_axis_x 12
+            reg_axis_y 8.5
+               | feed f=20
+               | goto x=12, y=8.5
+</pre></div>
+</div>
+</div></blockquote>
+<p>Selecting the <strong>Input</strong> tracing check-box will show the various
+stages of input MCD processing. The Block line lists the MCD as read,
+but aligned so that you can better see the effect of any tape editor
+string substitution (identified by a TapEdt header), OPSKIP
+processing (DelOn and DelOff headers), pre-processor substitution
+(PrePrc header), embedded macro processing (EmbMac header) and
+block startup macro processing (BlkMac header). This is followed by
+the recognized words (i.e., registers) and their values in the
+left-to-right order that they appear on the block, listed one per
+line using the format “<em>register</em><strong>:</strong><em>data</em>”. Finally, the
+recognized CODE and DATA identifiers are traced as they are
+processed, in the form code_<em>name</em> and reg_<em>name</em>. The order of
+code processing is dependent on the code’s Order property and not the
+position of the code the block.</p>
+<p>If macros are defined in the control emulator and the <strong>Macro</strong>
+tracing checkbox is selected, then macro processing will traced as
+follows, showing a mixture of macro code and other trace data as it
+occurs between the point where the macro was activated up until it
+completed processing:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>* Entering macro_name
+…
+* Leaving macro_name
+</pre></div>
+</div>
+</div></blockquote>
+<p>Finally, diagnostic messages and completion status information will
+be traced in the output where they occur during processing if the
+<strong>Diagnostics</strong> tracing checkbox is selected. For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>12! G1X12Y8.5S1200F#14M3L4
+   …
+      | feed f=20
+      | goto x=12, y=8.5
+
+      Warning: L4 not recognized in &#39;G1X12Y8.5S1200F#14M3L4&#39;
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="modifying-an-existing-control-emulator">
+<h2>Modifying an Existing Control Emulator<a class="headerlink" href="#modifying-an-existing-control-emulator" title="Link to this heading"></a></h2>
+<p>The <strong>File»Open…</strong> menu-bar selection can be used to open a
+control emulator that has been previously saved or generated. You can
+also open a control emulator by selecting it from the Database Navigator (more on
+that in the next section). When opened, it is copied into a
+new or unused Navigator tab. Use the Navigator to select the sections
+you need to modify.</p>
+<p>The <strong>Tools»Finder</strong> menu-bar selection (Ctrl Shift F shortcut) can
+help you find pertinent questions or a list of changes you have made
+to the control emulator. Matching results are shown in the lower right
+Finder information window (see <a class="reference internal" href="#finder-tab"><span class="std std-ref">here</span></a>).</p>
+<p>The <strong>Tools»Diffs</strong> menu-bar selection (Ctrl I shortcut) can be used
+to compare the control emulator you are editing against another
+control emulator or post-processor in memory or in the current or a
+selected database. The difference output appears in the lower right
+Diffs information window (see <a class="reference internal" href="#diffs-tab"><span class="std std-ref">here</span></a>).</p>
+<p>The <strong>File»Listing</strong> menu-bar selection produces control emulator
+documentation, which you may find useful for locating where changes
+are necessary. The listing is written to the same directory as the
+ICAM database, or to the directory specified by the <em>icam_lis</em>
+environment variable if set.</p>
+</section>
+<section id="wrapping-up">
+<h2>Wrapping Up<a class="headerlink" href="#wrapping-up" title="Link to this heading"></a></h2>
+<p>When you close a control emulator (<strong>File»Close</strong> or <strong>File»Close
+All</strong>), it is removed from the Navigator window. You will be prompted
+to save your work if you attempt to close an unsaved control emulator,
+or if you attempt to exit QUEST (<strong>File»Exit</strong>) before saving all
+opened control emulators.</p>
+<p>If one of the control emulators being edited is stuck on a stopper
+question, you will receive the message “You must provide a response
+to this question” when you attempt to close the control emulator or
+exit QUEST. The stopper condition must be corrected, or the section
+containing the stopper question must be canceled (using the Cancel
+button), before you can proceed.</p>
+<div class="keep-together docutils container">
+<a class="reference internal image-reference" href="../../_images/quest_restart.png"><img alt="../../_images/quest_restart.png" class="align-right" src="../../_images/quest_restart.png" style="width: 3.008in;" /></a>
+<p>When exiting, you will be prompted (as shown at right) for
+the startup configuration to use the next time you run QUEST. You can
+choose to restart with a new post-processor
+(note: <em>not control emulator</em>)
+ready for creation, or to resume
+with the control emulators, post-processors and models currently open
+for editing, or to start with an empty session. If this prompt is
+disabled, you can re-enable it and/or change the restart settings
+from the “General” tab of the <strong>Tools»Preferences</strong> menu-bar selection.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="questinout.html" class="btn btn-neutral float-left" title="QUEST Inputs and Outputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="icamdb.html" class="btn btn-neutral float-right" title="The ICAM Database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
