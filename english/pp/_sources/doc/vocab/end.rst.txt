@@ -1,0 +1,19 @@
+.. _command_end:
+
+The END Command :kbd:`[MLEPC]`
+==============================
+
+The END command is used to signal the machine that it has reached the
+end of the program, typically using an M02 code. This command is
+valid for all machine types and will always be available.
+
+   :math:`\textbf{END}`
+
+The END command is programmed without parameters. For some machines,
+GENER will shut off the spindle and/or the coolant device if so
+requested in QUEST. On some machines this function is automatic.
+
+GENER treats the END command just like a STOP or OPSTOP command. It
+cannot be used to break up a tape into smaller segments or reels. If
+a tape break is desired, the BREAK command must be coded to perform
+one.
