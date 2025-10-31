@@ -1,0 +1,163 @@
+.. |file| replace:: abc
+.. |File| replace:: ABC
+
+.. _quest_inout:
+
+QUEST Inputs and Outputs
+========================
+
+This section describes the various files that can be imported
+(input), maintained and exported (output) by QUEST.
+
+The ICAM Database
+-----------------
+
+The database contains information about each post-processor that has
+been defined using QUEST. The database also contains information
+about control emulator and Virtual Machine models. The default
+database is named *campost.dbf* and can be found in the *work*
+subdirectory of the *icam_appdata* directory
+(see :ref:`“Configuration Storage and Application Data”<configuration_storage>`).
+This default can be changed by creating an environment variable named *icam_dbf*
+that defines the path and filename of a different database. The database
+is in an ICAM proprietary format. Each database (there can
+be more than one) can hold many post-processors. Each post-processor
+in the database can in turn have many revisions, since by default
+QUEST keeps all changed copies of a post-processor.
+
+Inside the database, post-processors that have been deemed ready for
+production are “generated”. Generated post-processor are those that have been
+checked for inconsistencies while being saved by QUEST. This is
+indicated by a gold colored icon beside the post-processor name when
+viewed in the Database Navigator in QUEST. Only generated
+post-processors can be used with
+GENER to produce
+CNC programs (except for testing, but more on that later).
+
+See :ref:`“Database Upgrade Procedure”<database_upgrade>` for step-by-step details on
+upgrading the post-processor database to V26.
+
+Exported/Imported Post-Processor
+--------------------------------------
+
+Individual post-processors can be **exported** from (copied out of)
+the database. This is done using QUEST. An exported post-processor is
+an exact replica of the information stored in the database, stored in
+its original binary format. The default file name for an exported
+post-processor is the name of the post-processor itself, with a file
+type of *dmp* (e.g., |file|\_1.dmp for a post-processor named |File|\,1).
+
+Exported post-processors can be **imported** (read) into another
+database using the Import button on the GENER launch panel, or by
+dragging and dropping the exported post-processor file onto a running
+portal application or the portal desktop icon, or via the QUEST
+Database»Import menu-bar selection.
+
+QUEST 2000/13.0 and earlier versions provided a “transfer file” or
+“trn” file export/import feature, which was used to copy
+post-processors from one system type to another. This is no longer
+necessary since both databases and exported post-processors are now
+cross-platform compatible.
+Use the *dmp* file format when
+transferring post-processors between databases or when e-mailing them to ICAM
+technical support.
+
+Dedicated Post-Processors
+-------------------------------
+
+Dedicated post-processors are ready-made to user specifications and
+are delivered by ICAM or one of our representatives. Dedicated
+post-processors are restricted for operation on specifically licensed
+systems. Dedicated post-processors have a file extension of *dp*
+(e.g., |file|\_1.dp).
+
+Dedicated post-processors are imported into the database using GENER or QUEST
+in the same way as other exported post-processors. Once imported, the
+dedicated post-processor is ready-to-run (i.e., does not have to be generated).
+
+Dedicated post-processors have special restrictions not placed on
+other post-processors. For example, they cannot be modified or
+printed. Do not change the name of a dedicated post-processor since
+the licensing system expects to find a post-processor with the
+as-delivered name.
+
+Basic Post-Processors
+---------------------------
+
+Basic post-processors change the default responses for questions (in
+QUEST) to more accurately reflect a particular controller or machine.
+Basic post-processors are supplied for both machines and controls
+(they reside in the *basic* subdirectory where Icam Post is
+installed). They can be easily selected when a new post-processor is
+being created with QUEST.
+One of the steps in the *New-Post Wizard*
+is to select the basic post (from a list) that most closely matches
+that of the CNC controller.
+The machine and controller basic post-processors
+can also be selected using questions 4.00 and 5.00 of the *General Information,
+General Description* section.
+
+The QUEST Listing
+-----------------
+
+Listings are created when the QUEST Print or Generate utilities are
+run and whenever a macro is compiled. Two outputs formats are
+supported: HTML and standard listing, controlled by the
+*use_html_list* definition file symbol. Listing files use the same
+name as the post-processor, with an appropriate file extension
+(“.lis” or “.htm”) depending on the output format (e.g.,
+|file|\_1.lis for a post-processor named |File|,1).
+
+HTML Listing Format
+~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../../media/quest_htm.png
+   :width: 4.881in
+   :align: right
+
+With HTML format, the post-processor listing is contained within 3 files.
+
+The main file (e.g., |file|\_1.htm) organizes the layout of the screen
+using the <frameset> feature available on most browsers. This file includes
+links to two other files:
+
+One of these files contains the complete post-processor listing (e.g., |file|\_1_list.htm), which is also
+suitable for viewing or printing on its own.
+
+The other file (e.g., |file|\_1_nav.htm) acts like a table of contents,
+providing a means of quickly navigating the post-processor listing.
+
+By default, listing files are created with an extension of *htm* in
+the same directory as the database that holds the post-processor. The
+*icam_lis* environment variable (see :ref:`“Environment Variables<environment_variables>`)
+can be set to define a different directory where QUEST will write post-processor
+listing files. The *html_ext_list* DEF file symbol can be set to change the verification
+listing file extension default (see :ref:`here<def_html_ext>`).
+
+Macro compilation listings are always output in standard listing
+format, described immediately below.
+
+Standard Listing Format
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The standard listing format can use one of two carriage-control
+forms: FCC and list. The choice is controlled by the *page_format*
+definition file symbol. The FCC form, which stands for Fortran
+Carriage Control, reserves the first character of each line for page
+formatting purposes. QUEST will output: a 1 in this position to
+advance to a new page; a 0 to double space an output line; and a
+blank for regular single spacing. This file can be printed on any
+printer or driver recognizing FCC output. The list form does not
+reserve a character for carriage control. Instead, a form-feed
+character is output at the start of a record to advance to a new
+page. All other records are output one per line.
+
+The page length is set in the definitions file using the
+*lines_per_page* variable.
+
+By default, listing files are created with an extension of *lis* in
+the same directory as the database that holds the post-processor. The
+*icam_lis* environment variable (see :ref:`“Environment Variables”<environment_variables>`)
+can be set to define a different directory where QUEST will write post-processor listing files.
+The *file_ext_list* DEF file symbol can be set to change the verification
+listing file extension default (see :ref:`here<def_file_ext>`).
