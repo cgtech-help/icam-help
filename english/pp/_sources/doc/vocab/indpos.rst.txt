@@ -1,0 +1,32 @@
+.. _command_indpos:
+
+The INDPOS Command :kbd:`[ML]`
+==============================
+
+This command defines a safe machine location to position to when
+moving rotary axes at high speed. It is valid for mills with rotary
+axes, or mill-turn lathes while in milling mode.
+
+   :math:`\textbf{INDPOS /} \!
+   \icamrange{2.6}{1}\! \begin{pmatrix}
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \end{array}\end{pmatrix}
+   ,\mathit{value} \end{pmatrix}`
+
+   :math:`\textbf{INDPOS / NOMORE}`
+
+The XAXIS, YAXIS, ZAXIS syntax is used to specify the position in
+machine coordinates. Note that the keyword XAXIS will refer to the
+X-axis or to the U-axis, depending on which is currently active. The
+same applies to the Y-axis and the Z-axis.
+
+When INDPOS is coded before a ROTABL command, the machine will move
+to the requested position and then execute the rotary move. The tool
+will not engage the part until another motion is requested. When
+INDPOS is coded before a MULTAX move, the tool will move to the index
+position, move the rotary axes and then move the linear axes to
+complete the requested move.
+
+The INDPOS command is modal. That is, once an indexing position has
+been declared, the tool will always move to that position before
+performing any rotary moves. The tool will continue to do so until
+the INDPOS/NOMORE command has been issued.
