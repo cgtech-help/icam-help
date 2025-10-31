@@ -1,0 +1,189 @@
+Okuma Pre-Processor Syntax
+==========================
+
+This document list the specific Okuma syntax supported by the
+pre-processor.
+
+--------------
+
+#. `Pre-processor Setup <#setup>`__
+#. `Operators <#operators>`__
+#. `Arithmetic operators <#arithmetic>`__
+#. `Unconditional branching <#unconditional>`__
+#. `Conditional branching <#conditional>`__
+#. `Variables <#variables>`__
+#. `Sub-program <#subprogram>`__
+#. `Other matching patterns <#other>`__
+
+--------------
+
+1. Pre-processor setup
+~~~~~~~~~~~~~~~~~~~~~~
+
+The Okuma pre-processor can be setup in order to be a little bit more
+flexible. This is done via the macro function $FCEPP( ). This function’s
+purpose is really to communicate information that are specific to some
+pre-processor without being standard on every one of them. These are the
+configuration parameter supported by the Okuma pre-processor.
+
+-  $FCEPP('PROCESS', 'COMMENTS', *value* )
+
+| Value: $TRUE to let the pre-processor process the comments (this is
+  the default).
+| $FALSE to have the pre-processor leave the comments as-is on the
+  blocks.
+
+-  $FCEPP('PROCESS', 'MESSAGES', *value* )
+
+| Value: $TRUE to let the pre-processor process the operator
+  messages(this is the default).
+| $FALSE to have the pre-processor leave the operator messages as-is on
+  the blocks.
+
+-  $FCEPP('PROCESS', 'SUBPROGRAMS', *value* )
+
+| Value: $TRUE to let the pre-processor process the subprogram calls
+  (this is the default).
+| $FALSE to have the pre-processor leave the subprogram call block
+  as-is. This is for command CALL, MODIN and MODOUT
+
+-  $FCEPP('PROCESS', 'SEQNAME', *value* )
+
+Value: $TRUE to have pre-processor remove the sequence name when
+processing the block. This can be used to avoid having the CERUN
+questionnaire handle them as they can have more flexible definition than
+the questionnaire can handle via register. If $FALSE, the CERUN need to
+handle it from the questionnaire(this is the default).
+
+2. Operators
+~~~~~~~~~~~~
+
+-  EQ: Is equal
+-  NE: Not equal
+-  GE: Greater or equal then
+-  GT: Greater than
+-  LE: Less or equal than
+-  LT: Less than
+-  AND: Logical AND
+-  OR: Logical OR
+-  EOR: Exclusive OR
+
+3. Arithmetic operators
+~~~~~~~~~~~~~~~~~~~~~~~
+
+========== ========================================
+-          Subtraction
++          Addition
+\*         Multiplication
+/          Division
+=          Assignation
+[ ]        Priority
+SIN[x]     Sinus
+ASIN[x]    ArcSinus
+COS[x]     Cosinus
+ACOS[x]    ArcCosinus
+TAN[x]     Tangent
+ATAN[x]    ArcTangeant
+ATAN2[x,y] ArcTangeant
+SQRT[x]    Square root
+ABS[x]     Absolute value
+ROUND[x]   Rounding value
+FIX[x]     Nearest integer part closest to 0
+FUP[x]     Nearest integer part farthest to 0
+DROUND[x]  Rounding value based on unit
+DFIX[x]    Nearest part closest to 0 based on unit
+DFUP[x]    Nearest part farthest to 0 based on unit
+MOD[x]     Modulo (get the remainder part)
+========== ========================================
+
+4. Unconditional branching
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| GOTO                              | | Jump to a specific sequence     |
+|                                   |   name in the MCD.                |
+|                                   | | GOTO NLBL                       |
++-----------------------------------+-----------------------------------+
+
+5. Conditional branching
+~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| IF                                | | Evaluate boolean condition and  |
+|                                   |   optionally branch.              |
+|                                   | | IF [VC1 LT 5] N100              |
++-----------------------------------+-----------------------------------+
+
+6. Variables
+~~~~~~~~~~~~
+
++-----------------+---------------------------------------------------+
+| Type            | Description                                       |
++-----------------+---------------------------------------------------+
+| Local Variable  | Ex: LA=5                                          |
++-----------------+---------------------------------------------------+
+| Common Variable | Ex: VC1=5                                         |
++-----------------+---------------------------------------------------+
+| System Variable | System variables are not implicitly supported.    |
+|                 | When one is encountered on the left or right side |
+|                 | of an expression, the identification macro will   |
+|                 | be called and the variable has to be handled by   |
+|                 | the macro.                                        |
++-----------------+---------------------------------------------------+
+
+7. Sub-program related
+~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| CALL <name> <repeat> <param>      | | Call subprogram non-modal. The  |
+|                                   |   repeat register Q can be used   |
+|                                   |   and parameters can be passed.   |
+|                                   | | Ex: CALL O1 Q2 LA=1 LB=LB       |
++-----------------------------------+-----------------------------------+
+| MODIN                             | | Call subprogram modal (will     |
+|                                   |   repeat on every motion block    |
+|                                   |   until a MODOUT is encountered). |
+|                                   | | Ex: MODIN O1 Q2 LA=1 LB=LB      |
++-----------------------------------+-----------------------------------+
+| MODOUT                            | Cancel the last MODIN coded.      |
++-----------------------------------+-----------------------------------+
+| RTS                               | End current subprogram.           |
++-----------------------------------+-----------------------------------+
+| O[0-9A-Z]+                        | | Specify the subprogram name to  |
+|                                   |   call.                           |
+|                                   | | Ex: CALL OSUB01                 |
+|                                   | | This is also used as beginning  |
+|                                   |   of program and subprogram       |
+|                                   | | Ex: OSUB01                      |
++-----------------------------------+-----------------------------------+
+| Q[0-9]+                           | | Specify repeat count to the     |
+|                                   |   subprogram. Q1 means 1 repeat   |
+|                                   |   (2 execution).                  |
+|                                   | | CALL OSUB01 Q2                  |
++-----------------------------------+-----------------------------------+
+
+8. Other matching patterns
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| (<Comments>)                      | | Comments. Text enclosed between |
+|                                   |   ( )                             |
+|                                   | | Ex: (this is a comment)         |
++-----------------------------------+-----------------------------------+
+| MSG(<message>);                   | | Operator message                |
+|                                   | | Ex: MSG(this is my operator     |
+|                                   |   message))                       |
++-----------------------------------+-----------------------------------+
+| /[1-9]                            | Optional block skip               |
++-----------------------------------+-----------------------------------+
+| IF VPBR[1-9] <sequence name>      | Program branch function           |
++-----------------------------------+-----------------------------------+
+
