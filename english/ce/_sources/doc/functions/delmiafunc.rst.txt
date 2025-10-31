@@ -1,0 +1,86 @@
+DELMIA Functions
+================
+
+DELMIA functions are specific for use by CERUN when running the
+control emulator integrated within the Dassault Systèmes CATIA V5 or
+V6 products, using a DELMIA machine model. These functions can be
+used to identify and move auxiliary model axes.
+
+.. _func_fmschuck:
+.. index:: Functions; $FMSCHUCK
+
++-----------------------------------+---------------------------------+
+| **$FMSCHUCK(**\ *n*,ON-OFF\ **)** | Clamp or unclamp a chuck device |
+|                                   |                                 |
+|                                   | Returns: Numeric                |
++-----------------------------------+---------------------------------+
+
+   Clamps (ON) or unclamps (OFF) the DELMIA chuck identified by the
+   number *n*, where 1 is the chuck on the main turning spindle and 2 is
+   the chuck on the sub-spindle. A value of (one) 1 is returned if the
+   function is successful, otherwise 0 (zero) is returned. This function
+   is only available with CATIA V6 2015x or later.
+
+.. _func_fmsid:
+.. index:: Functions; $FMSID
+
++-----------------------------------+---------------------------------------+
+| **$FMSID(AXIS,**\ *n/name*\ **)** | Get the component ID of a DELMIA axis |
+|                                   |                                       |
+|                                   | Returns: Numeric                      |
++-----------------------------------+---------------------------------------+
+
+   Returns the component ID of the DELMIA axis identified by the number
+   *n* or the string *name*. The returned component ID can be used in
+   $FMSIDN, $FMSIDT and $FMSMOVE functions to obtain axis properties or
+   to move the given axis. A value of 0 (zero) is returned if the DELMIA
+   axis number does not exist.
+
+.. _func_fmsidn:
+.. index:: Functions; $FMSIDN
+
++---------------------------+-------------------------------------------+
+| **$FMSIDN(**\ *id*\ **)** | Get the name of a component, given its ID |
+|                           |                                           |
+|                           | Returns: String                           |
++---------------------------+-------------------------------------------+
+
+   Returns the name of the component identified by the component ID
+   specified by *id*. Component ID’s are obtained using the $FMSID
+   function.
+
+.. _func_fmsidt:
+.. index:: Functions; $FMSIDT
+
++---------------------------+-------------------------------------------+
+| **$FMSIDT(**\ *id*\ **)** | Get the type of a component, given its ID |
+|                           |                                           |
+|                           | Returns: Numeric                          |
++---------------------------+-------------------------------------------+
+
+   Returns one of the following numeric code types that identify the
+   component ID specified by *id*. Component ID’s are obtained using the
+   $FMSID function.
+
+         |   0: Unknown type
+         |   4: Linear axis
+         |   5: Rotary axis
+
+.. _func_fmsmove:
+.. index:: Functions; $FMSMOVE
+
++-----------------------------------------------------------+-------------------------------------+
+| **$FMSMOVE(**\ *id,position,velocity*\ [,NOW-NEXT]\ **)** | Move a model axis                   |
+|                                                           |                                     |
+|                                                           | Returns: Numeric (always returns 1) |
++-----------------------------------------------------------+-------------------------------------+
+
+   Moves the model axis identified by the component ID specified by *id*
+   (axis ID’s are obtained using the $FMSID function), to the specified
+   *position* in model axis units, at the specified *velocity* in model
+   units per minute.
+
+   If NEXT is specified, this axis motion will be deferred and included
+   with the next model motion event. NOW (the default) causes the axis
+   to move immediately. All pending NEXT motions can be processed by
+   calling $FMSMOVE(0,0,0,NOW).
