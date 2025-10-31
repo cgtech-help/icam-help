@@ -1,0 +1,247 @@
+.wy-nav-content {
+	max-width: 100% !important;
+}
+
+/*	ReadTheDocs uses very large font sizes for heading and a margin of 24px by default, which is too
+	large in comparison to the text. The following rules reduce the heading sizes and tighten up the
+	margins.
+*/
+/* General content spacing, ws 24px */
+.rst-content p,
+.rst-content blockquote,
+.rst-content ul,
+.rst-content section ul,
+.rst-content div[class^="highlight"] {
+	margin-bottom: 14px;
+}
+/* Heading spacing, was h1 175%, h2 150%, h3 125%, h4 110%, h5-h6 100% */
+.wy-nav-content h1 {
+	font-size: 135%;
+	margin-bottom: 16px;
+}
+.wy-nav-content h2,
+.rst-content .toctree-wrapper > p.caption {
+	font-size: 120%;
+	margin-top: 4px;
+	margin-bottom: 14px;
+}
+.wy-nav-content h3 {
+	font-size: 105%;
+	margin-top: 4px;
+	margin-bottom: 8px;
+}
+.wy-nav-content h4,
+.wy-nav-content h5,
+.wy-nav-content h6 {
+	font-size: 95%;
+	margin-top: 2px;
+	margin-bottom: 6px;
+}
+.rst-content .toctree-wrapper > p.caption {
+	margin-bottom: 12px;
+}
+
+/*	Specify ".. rst-class:: multi-heading" prior to a heading to reduce the space between it and the
+	following heading. Use this when a heading with no body text is followed by another heading.
+*/
+section.multi-heading > h2,
+section.multi-heading > h3,
+section.multi-heading > h4,
+section.multi-heading > h5,
+section.multi-heading > h6 {
+	margin-bottom: 0.1em; /* adjust as needed */
+}
+
+/*	The RTD :code: directive is the only way to create inline monospaced text, but it shows the text
+	in red and enclosed within a text box. The :mono: and :monobold: roles have been created so that
+	we can output regular and bold monospaced inline text.
+*/
+.mono {
+	font-family: monospace;
+	font-weight: normal;
+}
+.boldmono {
+	font-family: monospace;
+	font-weight: bold;
+}
+
+/*	Use the :small: directive, which uses the smalltext CSS definition below, to get text output
+	smaller than normal.
+*/
+.smalltext {
+	font-size: smaller;
+}
+
+/*	Use ":class: image-lowered" with the .. image: directive to slightly lower them and to reduce
+	the default 24px spacing. The top spacing makes icon images appear better aligned with the text.
+	The reduced lower margin allows text to flow closer to the bottom of the image.
+*/
+.rst-content img.image-lowered {
+	margin-top: 0.04in;
+	margin-bottom: 4px;
+}
+/*	Right-aligned images are always lowered as described above. */
+.rst-content .align-right {
+	margin: 0 0 4px 24px;
+}
+
+/*	Figure captions are output immediately below the image. Adding some spacing above the caption
+	makes it look better.
+*/
+.rst-content figure .caption-text {
+	line-height: 36px;
+}
+
+/*	Field lists display the left hand term in bold, but it looks better for our purposes when the
+	term is shown using the normal font weight.
+	The spacing at the top and bottom of the field list has been reduced so they are not too far
+	offset from the text that surrounds the list.
+	The term and data and now consistently aligned, and the field list margins have been tightened
+	up to remove additional space.
+	The line height of 20px is a compromise between the 16px line height that is used in tables and
+	the 24px height used for general text.
+*/
+/* Keep dt light in all definition lists */
+.rst-content dl dt {
+	font-weight: normal;
+}
+/* Field list spacing */
+html.writer-html5 .rst-content dl.field-list {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+/* Remove default margins ONLY for field-list dd */
+.rst-content dl.field-list dt,
+.rst-content dl.field-list dd {
+	margin-top: 0;
+	margin-bottom: 4px;
+	padding: 0;
+	line-height: 20px;
+}
+.rst-content dl.field-list dd {
+	margin-left: 12px;
+}
+.rst-content dl.field-list dd p {
+	margin-top: 0;
+	margin-bottom: 4px;
+	line-height: 20px;
+}
+/* Restore spacing for glossary items */
+.rst-content dl.glossary dd {
+	margin-left: 24px;
+	margin-bottom: 12px;
+}
+.rst-content dl.glossary dt {
+	margin-top: 12px;
+	font-weight: bold;
+}
+/* Fix paragraph spacing inside tables */
+.rst-content table.docutils td p:last-child {
+	margin-bottom: 4px !important;
+}
+
+/*	The LaTeX default font is too large. You must be very careful when adjustign the font size to
+	ensure that uppercase letters all have the same font height and that the braces and parentheses
+	that surround syntax don't have breaks in them. I've found that 79% and 89% both produce fairly
+	good results, but 79% better matches the font size of the normal document text.
+*/
+.math {
+	font-size: 0.79em;  /* Using 79% of default size */
+}
+
+/* The following customizations are for the ".. container" directive */
+
+/*	Use ".. container:: two-column"  to get two column "flexbox" output with a 20 pixel margin
+	between columns (gap: 20px) and equal width columns (flex: 1).
+*/
+.two-column {
+	display: flex;
+	gap: 20px;
+}
+.two-column > div {
+	flex: 1;
+}
+
+/*	Use ".. container:: keep-together" to keep images defined in a container from flowing around
+	other text and images in a following container. This is only needed when images and text are
+	alternated in the document without enough text to keep the images from overlapping (and
+	therefore flowing around) each other.
+*/
+.keep-together::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/*	Use ".. container:: icon-bullet" to create a list where the left item is an image, typically
+	a toolbar button, dialog button or icon image, and the the right item is the text that
+	describes the bullet or icon. Use the class "icon-multi-bullet" to put additional icon images
+	inline with the text.
+*/
+.icon-bullet {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5em;
+}
+.icon-bullet img {
+	display: inline-block;
+	flex-shrink: 0;
+	max-width: none;
+}
+.icon-multi-bullet {
+	vertical-align: top;
+	margin-right: 0.125em;
+	display: inline-block;
+	max-width: none;
+}
+
+/*	The following customizations are for wrapping text in in table output, since by default the
+	"Read The Docs" theme disables wrapping in tables. When using these classes, table data is
+	vertically top aligned instead of center aligned.
+
+		:class: wrap-last			enables wrapping only on the last column
+		:class: wrap-first			enable wrapping only on the first column
+		:class: allow-wrap			enables normal table wrapping
+
+	Use the following class to allow wrapping with cells vertically middle aligned.
+
+		:class: allow-wrap-middle	enables normal table wrapping with middel alignment
+*/
+.wrap-last td:last-child,
+.wrap-last th:last-child,
+.wrap-first td:first-child,
+.wrap-first th:first-child,
+.allow-wrap-middle td,
+.allow-wrap-middle th,
+.allow-wrap td,
+.allow-wrap th {
+	white-space: normal !important;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+.rst-content table.wrap-last td,
+.rst-content table.wrap-first td,
+.rst-content table.allow-wrap td {
+	vertical-align: top;
+}
+/*	The following inhibits shrinking of images in the last column of the "wrap-first" table class.
+	This is used in the CYCLE syntax, where the action list in the first column needs to wrap, but
+	the image in the right (last) column must not shrink.
+*/
+.wrap-first td:last-child img {
+	max-width: none;
+	height: auto;
+	display: block;
+}
+
+/*	The RTD ``literal text`` directive displays 75% scaled red text in a white box, which is hard
+	to read. The following makes the text much easier to read.
+*/
+.rst-content code.literal,
+.rst-content tt.literal {
+	font-size: 93%; /* reasonably larger without overpowering the body text */
+	color: #404040; /* dark gray, same as the RTD body text */
+	background: #ffffcc; /* yellow, same as the RTD highlight used in text blocks */
+	padding: 0 3px; /* slim padding for inline readability */
+	border-radius: 3px; /* slightly softened box corners */
+}
