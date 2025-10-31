@@ -1,0 +1,109 @@
+VM View Filter Toolbar
+~~~~~~~~~~~~~~~~~~~~~~
+
+|image1|
+
++-----------+---------------------------------------------------------+
+| |image24| | **Simulation»Show»Filters»Machine**: Toggles the        |
+|           | display of all components defined within the model.     |
+|           | This includes the machine, heads and any other model    |
+|           | objects as defined and saved in the model with QUEST.   |
++-----------+---------------------------------------------------------+
+| |image25| | **Simulation»Show»Filters»Tools**: Toggles the display  |
+|           | of all tooling components defined at run-time via the   |
+|           | Simulation»Tools (Ctrl Alt T) dialog. This includes     |
+|           | tools and their holders, both active and inactive.      |
++-----------+---------------------------------------------------------+
+| |image26| | **Simulation»Show»Filters»Fixtures**: Toggles the       |
+|           | display of the holding devices as defined at run-time   |
+|           | via the Simulation»Parts/Fixtures (Ctrl Alt P) dialog   |
+|           | Fixtures tab.                                           |
++-----------+---------------------------------------------------------+
+| |image27| | **Simulation»Show»Filters»Stock**: Toggles the display  |
+|           | of the workpiece original un-cut raw stock as defined   |
+|           | at run-time via the Simulation»Parts/Fixtures dialog    |
+|           | Part tab.                                               |
++-----------+---------------------------------------------------------+
+| |image28| | **Simulation»Show»Filters»Parts**: Toggles the display  |
+|           | of the workpiece design part as defined at run-time via |
+|           | the Simulation»Parts/Fixtures dialog Part tab.          |
++-----------+---------------------------------------------------------+
+| |image29| | **Simulation»Show»Filters»In-process Stock**: Toggles   |
+|           | the display of the stock as modified by the cutting     |
+|           | action of the tools. At the start of processing, the    |
+|           | Stock and In-process Stock are identical, but they      |
+|           | should be quite different by the end of processing.     |
++-----------+---------------------------------------------------------+
+| |image30| | **Simulation»Show»Filters»Stock Checkpoints**: Toggles  |
+|           | the display of the in-process stock as it appeared at   |
+|           | earlier moments in time when moving the Time Line       |
+|           | backwards and forwards. These earlier checkpoints can   |
+|           | be taken at each tool change, at each operation and/or  |
+|           | periodically during long cutting sequences as           |
+|           | controlled from the Simulation»Options menu MRS tab     |
+|           | “In-process stock checkpoints” settings.                |
++-----------+---------------------------------------------------------+
+| |image31| | **Simulation»Show»Filters»Boolean Overcut**: Toggles    |
+|           | the display of any gouges in the in-process stock as    |
+|           | compared to the original part. Gouges are shown in red. |
+|           | VM only compares those in-process stock and part        |
+|           | components that are associated to each other.           |
+|           | Part/stock association is done from the                 |
+|           | Simulation»Parts/Fixtures menu.                         |
++-----------+---------------------------------------------------------+
+| |image32| | **Simulation»Show»Filters»Boolean Undercut**: As above, |
+|           | but toggles the display of excess in-process stock when |
+|           | compared to the original part. Excess material is shown |
+|           | in blue.                                                |
++-----------+---------------------------------------------------------+
+| |image33| | **Simulation»Show»Filters»Colorized Boolean**: Modifies |
+|           | the color of the Boolean overcut and undercut regions,  |
+|           | based on the thickness of the gouge or excess material. |
+|           | Colorized Boolean settings are controlled from the      |
+|           | Simulation»Compare (Ctrl Alt Q) dialog.                 |
++-----------+---------------------------------------------------------+
+| |image34| | **Simulation»Show»Filters»Transparent Zero**: modifies  |
+|           | the display of the colorized Boolean comparison, to     |
+|           | show in a transparent color all faces of the object     |
+|           | that are in the tolerance zone between gouge and excess |
+|           | material. This setting can be used to see a gouge or    |
+|           | excess in the context of the entire part.               |
++-----------+---------------------------------------------------------+
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/aacbcb23939c96761bdc70770888ab2639eb9352.bmp
+.. |image2| image:: ./media/ce465fa006bb5fc8428243aad426b17b87a61688.bmp
+.. |image3| image:: ./media/3848078182769bbc1a78c1cb6ca0f403b0732347.bmp
+.. |image4| image:: ./media/64ef64babae95f618581b7c5b231b505f0c24019.bmp
+.. |image5| image:: ./media/3c9014e3a37eed80b1c06267519adf6a50c3398d.bmp
+.. |image6| image:: ./media/80b348340667ecef4b664ba624ebd242c36a6071.bmp
+.. |image7| image:: ./media/da399bc295249953c754a2afebc945b379e7085e.bmp
+.. |image8| image:: ./media/b306ab2885097f8c3ed891e2da6d8ba9e2220991.bmp
+.. |image9| image:: ./media/615855d16fa7f9f63fd5820e7237b7a21f7be1ea.bmp
+.. |image10| image:: ./media/7e36d65055fa73c1f430ea9d1147169c38bf8692.bmp
+.. |image11| image:: ./media/80ccb5d6bbb5f0fc62bb9db2a1acd111bad8f230.bmp
+.. |image12| image:: ./media/19216bcd0e98e69b74575af004a3c6f1c3f9be43.bmp
+.. |image13| image:: ./media/ce465fa006bb5fc8428243aad426b17b87a61688.bmp
+.. |image14| image:: ./media/3848078182769bbc1a78c1cb6ca0f403b0732347.bmp
+.. |image15| image:: ./media/64ef64babae95f618581b7c5b231b505f0c24019.bmp
+.. |image16| image:: ./media/3c9014e3a37eed80b1c06267519adf6a50c3398d.bmp
+.. |image17| image:: ./media/80b348340667ecef4b664ba624ebd242c36a6071.bmp
+.. |image18| image:: ./media/da399bc295249953c754a2afebc945b379e7085e.bmp
+.. |image19| image:: ./media/b306ab2885097f8c3ed891e2da6d8ba9e2220991.bmp
+.. |image20| image:: ./media/615855d16fa7f9f63fd5820e7237b7a21f7be1ea.bmp
+.. |image21| image:: ./media/7e36d65055fa73c1f430ea9d1147169c38bf8692.bmp
+.. |image22| image:: ./media/80ccb5d6bbb5f0fc62bb9db2a1acd111bad8f230.bmp
+.. |image23| image:: ./media/19216bcd0e98e69b74575af004a3c6f1c3f9be43.bmp
+.. |image24| image:: ./media/ce465fa006bb5fc8428243aad426b17b87a61688.bmp
+.. |image25| image:: ./media/3848078182769bbc1a78c1cb6ca0f403b0732347.bmp
+.. |image26| image:: ./media/64ef64babae95f618581b7c5b231b505f0c24019.bmp
+.. |image27| image:: ./media/3c9014e3a37eed80b1c06267519adf6a50c3398d.bmp
+.. |image28| image:: ./media/80b348340667ecef4b664ba624ebd242c36a6071.bmp
+.. |image29| image:: ./media/da399bc295249953c754a2afebc945b379e7085e.bmp
+.. |image30| image:: ./media/b306ab2885097f8c3ed891e2da6d8ba9e2220991.bmp
+.. |image31| image:: ./media/615855d16fa7f9f63fd5820e7237b7a21f7be1ea.bmp
+.. |image32| image:: ./media/7e36d65055fa73c1f430ea9d1147169c38bf8692.bmp
+.. |image33| image:: ./media/80ccb5d6bbb5f0fc62bb9db2a1acd111bad8f230.bmp
+.. |image34| image:: ./media/19216bcd0e98e69b74575af004a3c6f1c3f9be43.bmp
+
