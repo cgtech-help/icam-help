@@ -1,0 +1,84 @@
+.. _backplot_file_variables:
+
+Backplot File Variables
+=======================
+
+.. _var_bkpdta:
+.. index:: Variables; $BKPDTA
+
++------------------+------------------------------------------+
+| **$BKPDTA**      | Backplot file output coordinates         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable defines the backplot file output coordinates. Valid
+   values are 0 for machine coordinates and 1 for cutter location (CL)
+   file coordinates.
+
+.. _var_bkpint:
+.. index:: Variables; $BKPINT
+
++------------------+-------------------------------------------------------------+
+| **$BKPINT**      | Back plot the effect of rotary axis motion on the tool tip. |
+|                  |                                                             |
+|                  | Type: Logical, Read/Write                                   |
++------------------+-------------------------------------------------------------+
+
+   Setting $BKPINT to $TRUE will generate intermediate tool position
+   data in the back plot file, showing the effect of rotary motion on
+   the tool tip path.
+
+.. _var_bkpon:
+.. index:: Variables; $BKPON
+
++------------------+------------------------------------------+
+| **$BKPON**       | Backplotting is currently on             |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable indicates if backplotting is currently on. It is set to
+   $TRUE if backplotting is on, $FALSE if backplotting is off.
+
+.. _var_bkpout:
+.. index:: Variables; $BKPOUT
+
++------------------+------------------------------------------+
+| **$BKPOUT**      | Direct all output to backplot file       |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable allows the user to direct all output to the backplot
+   file. When the variable is set to $TRUE, the input record is not processed;
+   it is simply written to the backplot file. The default for this variable is
+   $FALSE, normal processing.
+
+.. _var_bkprot:
+.. index:: Variables; $BKPROT
+
++------------------+---------------------------------------------------+
+| **$BKPROT**      | Maximum delta rotary move for back plot purposes. |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   When $BKPINT is set, the $BKPROT variable defines the maximum delta
+   rotary move between each intermediate back plot point. Lower values
+   produce more detailed output, at the expense of a larger back plot
+   file.
+
+.. _var_bkptyp:
+.. index:: Variables; $BKPTYP
+
++------------------+------------------------------------------+
+| **$BKPTYP**      | Backplot file type                       |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable controls the output format of the backplot file. If the
+   variable is set to 0, the backplot is output using a binary format.
+   If the variable is set to 1, the backplot file is written in an ASCII
+   APT-like format.
