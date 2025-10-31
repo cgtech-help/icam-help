@@ -1,0 +1,15 @@
+Simulation»Camera»Fit (Ctrl+Space)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Camera Fit function first points the camera towards the center of
+the currently selected object, and then pans in or out so that the
+selected object is fully visible within the active simulation window. If
+no object is selected, then the camera will be adjusted to view the
+entire model. You can use this function to quickly reorient the camera
+when you are unsure of where you are pointing or if you cannot see the
+model. The Fit function is also available from the VM View toolbar.
+
+When the current focus is on the Controller Time-Line window, the Fit
+function will adjust the scale of the time line so that the entire
+process is visible.
+
