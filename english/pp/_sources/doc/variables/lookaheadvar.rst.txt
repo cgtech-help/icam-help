@@ -1,0 +1,283 @@
+.. _lookahead_variables:
+
+Look-Ahead Variables
+====================
+
+There are many cases in which GENER goes into look-ahead mode to find
+the next CL record of a particular type. During look-ahead mode, tape
+generation is turned off and there is very limited processing of CL
+records. Look-ahead variables indicate if a certain type of
+look-ahead processing is in effect. Macros can test for these
+variables and exit processing (using a TERMAC command) to speed up
+the look-ahead process, or the macro can issue a post-processor
+command to trigger the end of the look-ahead (e.g., by outputting a
+LOAD/TOOL command to satisfy a tool look-ahead).
+
+All look-aheads in a Composite post-processor, with the exception of
+$FLOOK, are limited to the current composite post-processor
+component. Look-aheads will end when an APPLY command is encountered
+that switches processing to a different component post-processor.
+
+For more details about look-ahead processing, see :ref:`“Macro Look-Ahead Processing”<macro_lookahead>`.
+
+.. _var_anylook:
+.. index:: Variables; $ANYLOOK
+
++------------------+------------------------------------------+
+| **$ANYLOOK**     | True when in any form of look-ahead mode |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is processing the macro in
+   any form of look-ahead, which includes:
+
+   -  Built-in look-aheads as indicated by the $LOOKAH variable
+   -  Operation event (OE) look-aheads as indicated by the $OELOOK variable
+   -  $FLOOK function look-aheads as indicated by the $LOOK array variable
+   -  $FINFO function look-aheads as indicated by the $ILOOK variable
+
+   At all other times $ANYLOOK is set to $FALSE
+
+.. _var_clook:
+.. index:: Variables; $CLOOK
+
++------------------+------------------------------------------+
+| **$CLOOK**       | True when in $FCLINFO() look-ahead mode  |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable indicates whether or not $FCLINFO() is scanning and
+   analyzing CL file. This variable is deigned to help output OPTYPE or
+   other commands while $FCLINFO() scan is active.
+
+.. _var_hdlook:
+.. index:: Variables; $HDLOOK
+
++------------------+---------------------------------------------------------+
+| **$HDLOOK**      | True when in merging lathe HEAD command look-ahead mode |
+|                  |                                                         |
+|                  | Type: Logical, Read-only                                |
++------------------+---------------------------------------------------------+
+
+   This variable indicates whether or not GENER is looking for a HEAD
+   command before merging two head sequences in merge mode. It is set to
+   $TRUE between the HEAD/BOTH and the HEAD/MAIN or HEAD/SIDE command
+   that should immediately follow. It is also set to $TRUE when scanning
+   through the first head sequence specified looking for the HEAD/SIDE
+   or HEAD/MAIN command that divides it from the second head sequence.
+   At all other times it is set to $FALSE.
+
+.. _var_holook:
+.. index:: Variables; $HOLOOK
+
++------------------+------------------------------------------------+
+| **$HOLOOK**      | True when in LOAD/HEAD command look-ahead mode |
+|                  |                                                |
+|                  | Type: Logical, Read-only                       |
++------------------+------------------------------------------------+
+
+   This variable indicates whether or not GENER is looking for the next
+   head to be loaded. It is set to
+   $TRUE when scanning for the next head information and set to $FALSE
+   otherwise.
+
+.. _var_ilook:
+.. index:: Variables; $ILOOK
+
++------------------+------------------------------------------+
+| **$ILOOK**       | True when in $FINFO look-ahead mode      |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is performing a $FINFO
+   function look-ahead. A
+   $FINFO look-ahead can be terminated early by setting the $ILOOK
+   system variable to $FALSE.
+
+.. _var_info:
+.. index:: Variables; $INFO
+
++------------------+------------------------------------------------------+
+| **$INFO.\***     | Information gathered while in $FINFO look-ahead mode |
+|                  |                                                      |
+|                  | Type: Various, Read/Write                            |
++------------------+------------------------------------------------------+
+
+   The $INFO.\* system variables contain the information gathered during
+   a $FINFO look-ahead. These variables are preserved when the $FINFO or
+   Operation Event (OE) look-ahead completes. The $FINFO variables are
+   listed in :ref:`“$FINFO Operation Look-ahead”<operation_lookahead>`.
+
+.. _var_lcslook:
+.. index:: Variables; $LCSLOOK
+
++------------------+------------------------------------------+
+| **$LCSLOOK**     | True when in LCS motion look-ahead mode  |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is analyzing positioning
+   motions during automatic LCS activation or deactivation. It is set to
+   $FALSE in normal circumstances.
+
+.. _var_look:
+.. index:: Variables; $LOOK
+
++------------------------------+---------------------------------------------------+
+| **$LOOK(**\ *context*\ **)** | Look-ahead result for a $FLOOK look function call |
+|                              |                                                   |
+|                              | Type: Numeric, Read/Write                         |
++------------------------------+---------------------------------------------------+
+
+   This array variable when used on the left hand side of an “=” sign
+   will set the result for the $FLOOK function. At that instant, the
+   original saved post-processing state is restored, the tape and
+   listing outputs are re-enabled and the matching $FLOOK(*n*) function
+   will return whatever value
+   $LOOK(*n*) was set to. This variable can also be used on the right
+   hand side of an “=” to determine if a look-ahead is active for the
+   specified context number, returning 1 if active or 0 if not. For more
+   details refer to :ref:`“$FLOOK Generic Look-ahead”<flook_generic_lookahead>`.
+
+.. _var_lookah:
+.. index:: Variables; $LOOKAH
+
++------------------+------------------------------------------+
+| **$LOOKAH**      | True when in internal look-ahead mode    |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is processing the macro in
+   one of the following forms of internal look-aheads: $CLOOK, $HDLOOK, $HOLOOK,
+   $MLOOK, $LCSLOOK, $PLOOK, $PPLOOK, $SCLOOK, $SCTLOOK and $TLOOK.
+   It is set to $FALSE under normal circumstances.
+
+   Note that operation event (OE), $FLOOK() and $FINFO() type
+   look-aheads do not affect the state of $LOOKAH.
+
+.. _var_mlook:
+.. index:: Variables; $MLOOK
+
++------------------+------------------------------------------+
+| **$MLOOK**       | True when in motion look-ahead mode      |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is looking for a motion due
+   to a motion look-ahead macro system variable being specified. It is
+   set to $FALSE in normal circumstances.
+
+.. _var_oe:
+.. index:: Variables; $OE
+
++------------------+--------------------------------------------------+
+| **$OE.\***       | Information gathered while in OE look-ahead mode |
+|                  |                                                  |
+|                  | Type: Various, Read/Write                        |
++------------------+--------------------------------------------------+
+
+   The $OE.\* system variables contain the information gathered during
+   an Operation Event (OE) look-ahead. These variables are preserved
+   when the Operation Event look-ahead completes. The $OE variables are
+   listed in :ref:`“Operation Event Look-ahead”<op_event_lookahead>`.
+
+.. _var_oelook:
+.. index:: Variables; $OELOOK
+
++------------------+------------------------------------------+
+| **$OELOOK**      | True when in OE look-ahead mode.         |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is performing an Operation
+   Event (OE) look-ahead. The OE look-ahead can be terminated early by
+   setting the $OELOOK system variable to $FALSE.
+
+.. _var_plook:
+.. index:: Variables; $PLOOK
+
++------------------+------------------------------------------+
+| **$PLOOK**       | True when in PARTNO look-ahead mode      |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE at the start of GENER processing, when
+   a search for the first PARTNO CL record is performed. It is set to
+   $FALSE otherwise.
+
+.. _var_pplook:
+.. index:: Variables; $PPLOOK
+
++------------------+--------------------------------------------+
+| **$PPLOOK**      | True when in path planning look-ahead mode |
+|                  |                                            |
+|                  | Type: Logical, Read-only                   |
++------------------+--------------------------------------------+
+
+   This variable is set to $TRUE when GENER is performing LINTOL/SCAN
+   and related path planning look-ahead processing. It is set to $FALSE
+   otherwise.
+
+.. _var_sclook:
+.. index:: Variables; $SCLOOK
+
++------------------+--------------------------------------------+
+| **$SCLOOK**      | True when in SPINDL/COOLNT look-ahead mode |
+|                  |                                            |
+|                  | Type: Logical, Read-only                   |
++------------------+--------------------------------------------+
+
+   This variable is set to $TRUE when GENER is looking ahead for a
+   SPINDL or COOLNT command, for the purpose of outputting a combined
+   spindle and coolant (M) code. It is set to $FALSE otherwise.
+
+.. _var_sctlook:
+.. index:: Variables; $SCTLOOK
+
++------------------+----------------------------------------------------+
+| **$SCTLOOK**     | True when in SmartCUT or SmartFEED look-ahead mode |
+|                  |                                                    |
+|                  | Type: Logical, Read-only                           |
++------------------+----------------------------------------------------+
+
+   This variable is set to $TRUE when GENER is looking ahead during
+   SmartCUT and SmartFEED processing. It is set to $FALSE otherwise.
+   Note that SmartPATH processing is a form of path-planning
+   look-ahead, identified by the $PPLOOK variable.
+
+.. _var_tlook:
+.. index:: Variables; $TLOOK
+
++------------------+------------------------------------------+
+| **$TLOOK**       | True when in tooling look-ahead mode     |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when GENER is performing standard
+   tooling look-ahead, or when it is looking ahead to determine the
+   value of the $T variable. It is set to $FALSE otherwise.
+
+.. _var_ulkhed:
+.. index:: Variables; $ULKHED
+
++------------------+----------------------------------------------------+
+| **$ULKHED**      | Set True when processing a user written look-ahead |
+|                  |                                                    |
+|                  | Type: Logical, Read/Write                          |
++------------------+----------------------------------------------------+
+
+   This variable should be set $TRUE before processing TAPERD and/or
+   SEARCH functions as part of a user written look-ahead operation. This
+   variable should be set $FALSE after the final SEARCH that resets the
+   CL input position following the look-ahead processing. GENER uses
+   this information to more accurately update the progress bar to show
+   true progress.
