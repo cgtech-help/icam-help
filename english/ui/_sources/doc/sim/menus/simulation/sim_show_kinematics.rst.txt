@@ -1,0 +1,26 @@
+Simulation»Show»Kinematics
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Show Kinematics function activates or deactivates the markers that
+show all axes types except for Reference Axes. The visible marker types
+are as follows:
+
+-  A **linear axis** appears as a pale blue ribbon line with arrows at
+   each end. The current axis position is indicated by a darker colored
+   band.
+-  A **rotary axis** appears as a light mauve ribbon arc, with a single
+   arrow serving the dual purpose of pointing in the positive rotation
+   direction and indicating the current position.
+-  A **curve axis** appears as a dark mauve ribbon connecting each of
+   the points in the curve axis profile. The current axis position is
+   indicated by a lighter colored band.
+-  A **tool axis** appears as two 2D profiles of a holder and tool; one
+   aligned with the X axis and the other with the Y axis.
+-  A **stock axis** appears as a gold colored rectangle, with an
+   internal red-green-blue coordinate frame marker.
+-  A **head axis** appears as a gold colored 2D profile of a 90º head.
+-  A **reference axis** appears as a red-green-blue coordinate frame
+   marker.
+
+The kinematics markers can also be toggled from the VM Grid toolbar.
+
