@@ -1,0 +1,309 @@
+.. _command_clamp:
+
+The CLAMP Command :kbd:`[MLEPC]`
+================================
+
+The CLAMP command is available for all machine types and it has two
+functions. On all machines it can be used to activate and deactivate
+movement along specified axes. It can also be used to physically
+clamp and unclamp axes using auxiliary function codes. Axes can be
+clamped at their current location or at a specified location. The
+second application of the CLAMP command is to relocate the table for
+a punch press.
+
+This command is most useful when programming NC machines having
+redundant axis capabilities (e.g., two Z axes), or to move axes to
+specific positions.
+
+The following CLAMP command functions are available:
+
+-  :ref:`“Parametric CLAMP Format”<clamp_parametric>`
+-  :ref:`“Axis-Specific CLAMP Format”<clamp_axis>`
+-  :ref:`“Table Clamping for Punch Presses”<clamp_table>`
+-  :ref:`“Linear Positioning with Rotary Axes”<clamp_polar>`
+
+.. _clamp_parametric:
+
+Parametric CLAMP Format
+-----------------------
+
+   :math:`\textbf{CLAMP / } \big[ \textbf{ MANUAL}, \big] \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \; , \end{bmatrix} \, a , b \big[ ,c \, \big]`
+
+Specify MANUAL to suppress the output of NC control tape.
+This can be used to preset axes to desired locations without causing codes to appear in the tape file.
+GENER will continue processing in exactly the same manner whether MANUAL is coded or not.
+
+The initial ON or OFF indicates whether the clamps are to be applied,
+or removed. If omitted, ON is assumed (i.e., axes are to be
+immobilized).
+
+The *a,b,c* scalar values specify in machine coordinates the axis
+positions to move to either before clamping or after clamps are
+removed. The machine axes represented by the three scalars are
+dependent on the type of machine and the machining mode.
+
+  .. list-table::
+      :widths: auto
+      :header-rows: 1
+
+      *  -  Machine
+         -  a
+         -  b
+         -  c
+      *  -  Horizontal lathe in turn mode
+         -  Z
+         -  X
+         -  na
+      *  -  Vertical lathe in turn mode
+         -  X
+         -  Z
+         -  na
+      *  -  Any lathe in mill mode
+         -  X
+         -  Y
+         -  Z
+      *  -  2 axis mill or punch press
+         -  X/U
+         -  Y/V
+         -  na
+      *  -  Other mills
+         -  X/U
+         -  Y/V
+         -  Z/W
+
+Since this command either applies or removes clamps to all active
+linear axes its usefulness is rather limited. The most common
+application would be to preset the linear axes to some known
+position. For example the following command on a mill would cause a
+movement of the X axis to 15.2, the Y axis to 4 and the Z axis to 3:
+
+   .. code-block:: text
+
+      CLAMP/OFF,15.2,4,3
+
+The specified positions are in machine coordinates, not CL
+coordinates. Note that coding MANUAL would cause GENER to internally
+reset the machine position to the specified location but no motion
+record would be output.
+
+.. _clamp_axis:
+
+Axis-Specific CLAMP Format
+--------------------------
+
+This command format allows one or more axes to be clamped or
+unclamped individually by name.
+
+   :math:`\textbf{CLAMP / } \big[ \textbf{ MANUAL}, \big]
+   \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{AUTO} \end{array} \; , \, \end{bmatrix} \;\;
+   \icamrange{14}{1}\! \begin{pmatrix} ,
+   \begin{pmatrix}\begin{array}{l}
+   \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\
+   \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\
+   \textbf{QUILL} \\
+   \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\
+   \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\
+   \textbf{RAM} \big[ ,n \, \big] \\
+   \textbf{ALL} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{AUTO} \end{array} \, \end{bmatrix}
+   \big[ ,\mathit{value} \, \big] \end{pmatrix}`
+
+Specify MANUAL to suppress the output of NC control tape.
+This can be used to preset axes to desired locations without causing codes to appear in the tape file.
+GENER will continue processing in exactly the same manner whether MANUAL is coded or not.
+
+The initial ON, OFF or AUTO indicates whether the clamps are to be
+applied, removed, or automatically applied and removed. If omitted,
+ON is assumed. This initial ON, OFF or AUTO can be overridden for any
+specific axis by explicitly coding an ON, OFF or AUTO following the
+axis name.
+
+Automatic clamping is triggered with the AUTO keyword. Automatic
+clamping of an axis specifies that the axis shall remain clamped by
+default. When motion is programmed for the axis, the clamps
+will be automatically removed before the motion commences and
+reapplied before the next move where the axis is not moving.
+
+Automatic clamping is done differently for in cycle and out of cycle
+motions. When out of cycles, an axis is automatically clamped if it
+does not appear on a motion block. When in cycles, the axis is
+automatically clamped on every cycle motion. It is unclamped only for
+ramping motions (if needed).
+
+The AUTO feature can be disabled by specifying the ON or OFF keyword
+for a given axis. The axis names are specified by one or two
+keywords\ [#]_.
+
+.. _axis_names:
+
+  .. list-table::
+      :widths: auto
+      :header-rows: 1
+
+      *  -  Specifier
+         -  Description
+      *  -  XAXIS
+         -  Primary X axis
+      *  -  YAXIS
+         -  Primary Y axis
+      *  -  ZAXIS
+         -  Primary Z axis
+      *  -  UAXIS
+         -  Secondary X axis
+      *  -  VAXIS
+         -  Secondary Y axis
+      *  -  WAXIS
+         -  Secondary Z axis
+      *  -  AAXIS
+         -  Only A axis or head A axis
+      *  -  BAXIS
+         -  Only B axis or head B axis
+      *  -  CAXIS
+         -  Only C axis or head C axis
+      *  -  AAXIS,TABLE
+         -  Table A axis
+      *  -  BAXIS,TABLE
+         -  Table B axis
+      *  -  CAXIS,TABLE
+         -  Table C axis
+      *  -  RAM [,1]
+         -  Primary attachable head/nutating axis
+      *  -  RAM,2
+         -  Secondary attachable head/nutating axis
+
+The ALL keyword can be used to select all axes that have physical clamp/unclamp capability
+codes defined in the CLAMP section of the questionnaire.
+
+The scalar *value* in the second CLAMP command format specifies in
+machine coordinates the axis position to move to either before
+clamping or after clamps are removed.
+
+When clamping rotary axes, the angle specified is the exact angle to
+which the axis will be clamped. For example, if a C-axis is wrapped
+around to 730 degrees and a CLAMP/CAXIS,ON,0 is coded, the C-axis
+will not move 10 degrees to 720. Rather, it will wrap all the way
+back to 0 (zero) degrees.
+
+There are two main uses of the CLAMP command. One is to define a new
+position in machine coordinates and optionally output the codes to
+move to that position. The other use is to switch control back and
+forth between two similar axes on a machine (e.g., Z and W axes).
+
+The following commands cause a rapid motion in only the Z and X axes
+of the machine. All of the other axes remain unchanged.
+
+   .. code-block:: text
+
+      RAPID
+      CLAMP/OFF,XAXIS,16,ZAXIS,10
+
+When using the CLAMP command to switch control between similar axes,
+it is important to understand that the following two commands are not
+equivalent.
+
+   .. code-block:: text
+
+      CLAMP/ZAXIS,ON
+      CLAMP/WAXIS,OFF
+
+When GENER is told to clamp an axis ON, it physically clamps the
+axis, outputting an (M) code if one is available. The only way to
+unclamp the axis is to code another CLAMP command, this time
+specifying OFF.
+
+When GENER is told to clamp an axis OFF, it removes physical clamps
+using an (M) code if it was physically clamped on the machine. If a
+parallel axis exists on the machine, output to that axis will be
+inhibited, but it will not be physically clamped.
+
+Switching control between X,Y,Z type linear axes may always be done
+by coding CLAMP/OFF commands with the name of the axis to be used
+next. GENER will insure that the appropriate NC control tape is
+created to switch control back and forth. This method is not
+recommended for rotary axes. For switching control between rotaries,
+first code the appropriate CLAMP/ON commands for axes to be
+deactivated. Next, code CLAMP/OFF commands for the ones you want to
+activate. At most two (2) rotaries may be active at any one time.
+
+In the following example, the initial machining state has both the Z
+and W axes unclamped and the Z axis selected for output.
+
+   .. list-table::
+      :widths: auto
+
+      *  -  CLAMP/WAXIS,OFF
+         -  Subsequent Z movement will be done using the W axis.
+      *  -  CLAMP/ZAXIS,OFF
+         -  Subsequent Z movement will be done using the Z axis.
+      *  -  CLAMP/WAXIS,OFF
+         -  Subsequent Z movement will be done using the W axis.
+      *  -  CLAMP/ZAXIS,ON
+         -  The Z axis is immobilized.
+
+            Subsequent Z movement will be done using the W axis.
+      *  -  CLAMP/WAXIS,ON
+         -  The W axis is immobilized.
+
+            Any attempt to move a Z or W axis will now cause an error.
+      *  -  CLAMP/ZAXIS,ON
+         -  The Z axis is already immobilized!
+
+.. [#] Note that secondary linear axes may still be designated using the
+   obsolete couplets: XAXIS,SIDE; YAXIS, SIDE; and ZAXIS,SIDE.
+
+.. _clamp_table:
+
+Table Clamping for Punch Presses
+--------------------------------
+
+   :math:`\textbf{CLAMP / TABLE} \,\icamrange{1.6}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \end{array}\end{pmatrix} \, ,\mathit{value} \end{pmatrix}`
+
+With this format the parameter TABLE is required in addition to
+XAXIS,\ *value* and/or YAXIS,\ *value*. For punch presses, axis
+values are specified as delta amounts and not as absolute values.
+
+Two types of table repositioning are supported by GENER. The machine
+may support a single (G) or (M) code that causes the entire table
+repositioning sequence to occur. Axis shift values are output with
+the code to indicate the new clamp position. Alternatively,
+repositioning may have to be done in steps. In this case a
+repositioning start code is output to begin the repositioning
+sequence. A motion to the delta amount specified on the CLAMP command
+is then output. Finally, the repositioning end code is output.
+
+On some machines, the machine axes readouts are reset automatically.
+Other machines depend on GENER to adjust for the new clamp positions.
+
+.. _clamp_polar:
+
+Linear Positioning with Rotary Axes
+-----------------------------------
+
+Clamping can also be used to force a machine to perform linear moves
+using a table rotary axis. This is known as “Polar” positioning.
+
+.. note::
+
+   The use of the CLAMP command to enable Polar positioning
+   and Polar interpolation has been deprecated in favor of the
+   MODE/POLAR command (see :ref:`“Polar Interpolation”<polar_interpolation>` and
+   :ref:`“Polar Emulation”<polar_emulation>`).
+
+In order for Polar positioning to work, there can be only two linear
+axes active. They must be perpendicular and one of them must be
+parallel to the table rotary axis that is to be used. For example, a
+Y axis may be clamped on a mill. Full X,Y,Z capability is maintained
+by using the X axis and the C rotary table for XY positioning and the
+Z axis for Z positioning.
+
+Full LINTOL capability is available and will be needed to cut
+straight lines in the plane of the rotary axis. If LINTOL is not
+used, all feed moves will be curved because of the motion of the C
+axis.
+
+Tool vectors that are not parallel to the rotary axis can be
+supported using the SETANG and ATANGL options on the LOAD/TOOL (or
+TOOLNO) commands. In order that they be supported, the tool vectors
+must be possible at the desired rotary axis destination. If they are
+not, a fatal error will occur saying that the desired tool vector
+cannot be reached.
