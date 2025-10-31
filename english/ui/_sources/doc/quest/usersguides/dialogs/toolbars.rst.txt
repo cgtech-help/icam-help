@@ -1,0 +1,34 @@
+Toolbars
+--------
+
+|image1|
+
+This dialog appears when Tools»Toolbar... is selected from the menu.
+Toolbars can also be toggled visible or invisible by a right-mouse
+pop-up window in the toolbar area.
+
+**Tools:** The *Tools* toolbar provides quick access to the Generate,
+Finder, Calculator and Test functions.
+
+**Edit:** The *Edit* toolbar provides quick access to Save, Open, Do,
+Undo and other functions.
+
+**VM...:** The Virtual Machine toolbars are very useful when developing
+models. They provide quick access to the Simulation menu functions.
+
+**Dialog...:** The *Dialog Controls* toolbar provides quick access
+dialog controls creation functions. The *Dialog Utilities* toolbar
+provides quick access dialog control positioning, resizing and test
+functions. See the `dialog
+editor <../maininterface/workspaces/dialogedtview.html>`__ section for
+more information.
+
+**Use tooltips...:** When the *Use tooltips* checkbox is selected, a
+tooltip (i.e., small window) will appear describing the actions of
+toolbar buttons when the cursor is momentarily left over the button.
+When the *Use tooltips on VM controller* checkbox is selected, tooltips
+will appear when the cursor is momentarily left over an axis in the Axes
+window.
+
+.. |image1| image:: ./media/9741d8713e581b817fa006cb7b6f85bfc005c158.gif
+
