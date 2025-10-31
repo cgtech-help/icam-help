@@ -1,0 +1,187 @@
+.. _vocabulary:
+
+Post-Processor Vocabulary
+*************************
+
+This chapter contains the individual post-processor commands and related options recognized by
+GENER. Commands are listed in alphabetic order below. The string of letters within the square
+brackets [ ] in each of the section titles identifies the NC applications that the command is applicable
+to, as follows:
+
+   | :kbd:`[M]` mill
+   | :kbd:`[L]` lathe
+   | :kbd:`[E]` wire EDM
+   | :kbd:`[P]` punch press
+   | :kbd:`[C]` flame, laser or other contouring
+   | :kbd:`[S]` composite post-processor
+
+.. toctree::
+   :maxdepth: 2
+
+   air
+   am
+   apply
+   arcslp
+   assist
+   auxfun
+   break
+   calsub
+   channl
+   clamp
+   clearp
+   clrsrf
+   coolnt
+   couple
+   cutcom
+   cycle
+   defsub
+   delay
+   disply
+   end
+   endsub
+   fedrat
+   gohome
+   head
+   homept
+   indpos
+   insert
+   lcs
+   leader
+   limit
+   lintol
+   load
+   loadtl
+   locate
+   lprint
+   machin
+   mchtol
+   mode
+   moveto
+   msys
+   ofstno
+   opname
+   opskip
+   opstop
+   optype
+   origin
+   partno
+   pendwn
+   penup
+   pitch
+   pivotz
+   plot
+   power
+   pprint
+   prefun
+   rapid
+   retrct
+   rewind
+   rotabl
+   safety
+   safpos
+   selctl
+   select
+   seqno
+   shuttr
+   smartp
+   spindl
+   stop
+   synctr
+   thread
+   tlmark
+   tlname
+   toolno
+   torch
+   tprint
+   trans
+   turret
+   unload
+   vtlaxs
+   cldata
+
+**Syntax Format Conventions**
+
+The syntax for each command is listed using the following format conventions:
+
+-  Square brackets :math:`\big[ \; \big]` encase syntax that is optional.
+   The :small:`0:n` symbol preceding the bracketed item,
+   as in :math:`\icamrange{0.8}{0}\,\big[,a\,\big]`
+   indicates that the bracketed item *a* can be repeated zero or more times.
+
+   \
+
+-  Parentheses :math:`\big( \; \big)` encase syntax that lists a number of choices,
+   one of which is required. The parentheses are omitted when the syntax is a
+   simple choice among a number of keywords.
+   The :small:`1:n` symbol preceding the parenthesized item,
+   as in :math:`\icamrange{0.8}{1}\,\big(,a\,\big)`
+   indicates that the item *a* can be repeated one or more times.
+
+   \
+
+-  Any value not contained in square brackets or parentheses must be
+   programmed each time the command is used.
+
+   \
+
+-  Formal keywords are shown in bold upper case, as in **ON** and
+   **COOLNT**.
+
+   \
+
+-  Lower case words within angled brackets identify common syntax, as in
+   <**axis_specifier**>. The syntax of **axis_specifier** is then
+   defined separately. This makes complex commands more readable.
+
+   \
+
+-  Italicized lower case words identify requirements for numeric or
+   string values, as in *offset* or *value*.
+
+   \
+
+-  Ellipses “...” are used to show continuation when the syntax is broken
+   up into sections.
+
+Most syntax consists of zero or more fixed parameters that must be
+coded in a specific order, followed by optional qualifiers that can
+appear in any order. Many qualifiers are couplets, which consist of a
+qualifier keyword followed by a value (either numeric or keyword).
+The order of the couplet cannot be reversed; if the syntax is
+“[,RANGE,\ *value* ]” then coding “3,RANGE” will result in an error,
+only “RANGE,3” is permitted.
+
+Alternative forms for a command are listed separately, with the
+command name repeated. Consider the following example for fixture
+compensation:
+
+   :math:`\textbf{CUTCOM / ON} \;\icamrange{2.6}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XCOORD} \\ \textbf{YCOORD} \\ \textbf{ZCOORD} \end{array}\end{pmatrix} \big[ ,\mathit{offset} \,\big] \end{pmatrix}`
+
+   :math:`\textbf{CUTCOM / OFF} \;\icamrange{2.6}{1}\! \begin{pmatrix} \!,\! \begin{array}{l} \textbf{XCOORD} \\ \textbf{YCOORD} \\ \textbf{ZCOORD} \end{array}\end{pmatrix}`
+
+Two alternate forms are listed to show that the optional *offset*
+scalar is only permitted when using the ON command.
+
+In the first form, the ON keyword must be coded at the start of the
+command. The ON keyword can then be followed by one or more axis
+qualifiers. The axis qualifier is a choice of XCOORD, YCOORD or
+ZCOORD, optionally followed by an offset number. The following
+commands would be valid:
+
+   .. code-block::
+
+      CUTCOM/ON,XCOORD
+      CUTCOM/ON,ZCOORD,4,XCOORD,7,YCOORD,12
+      CUTCOM/ON,YCOORD,XCOORD,ZCOORD
+
+The following commands however would not be valid:
+
+   .. code-block::
+
+      CUTCOM/XCOORD                  Missing ON at start
+      CUTCOM/ON                      Missing axis specifier
+      CUTCOM/ON,4,YCOORD             Couplet order reversed
+
+In the second form of the CUTCOM command, the OFF keyword must be
+coded at the start, followed by one or more axis qualifiers. The axis
+qualifier is a choice of XCOORD, YCOORD or ZCOORD.
