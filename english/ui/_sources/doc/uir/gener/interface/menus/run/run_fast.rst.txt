@@ -1,0 +1,17 @@
+Run»Fast (F8)
+-------------
+
+In this mode, the display window will be closed and a small `Progress
+Window <../../dialogs/progresswindows.html>`__ will appear just to
+display the process status with a progress bar, where you can choose
+“Abort” to terminate the process or “More info...” to restore the
+multi-window display.
+
+Continues processing after it has been paused, hiding the full display
+window and showing instead the smaller progress window. The progress
+window requires much less CPU to update than the full display window.
+Use the Fast-forward function to more quickly advance through the CL
+file from one point of interest to another. Break-point checking remains
+enabled when the progress window is active. The [More Info»] button on
+the progress window can be pressed to restore the full display window.
+
