@@ -1,0 +1,25 @@
+Generate
+--------
+
+|image1|
+
+This dialog appears when Generating multiple post processors from a
+database. Generation is somewhat similar to saving, except that final
+consistency checks are made, which enable the post processors to be used
+by GENER.
+
+**Yes:** Will generate the post indicated in the dialog.
+
+**Yes to all:** Will generate the post indicated in the dialog and all
+others that were selected for generation.
+
+**No:** Will not generate the post indicated in the dialog, but will
+continue by prompting for the next post selected for generation (if
+any).
+
+**Cancel:** Cancels the operation. Will not generate the post indicated
+in the dialog or any other post selected for generation.
+
+.. |image1| image:: ./media/c9289e6497c03b6c811ae5f546638b24c41202bd.gif
+
+
