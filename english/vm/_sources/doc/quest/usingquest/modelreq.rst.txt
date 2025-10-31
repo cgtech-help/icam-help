@@ -1,0 +1,62 @@
+Basic Model Requirements
+------------------------
+
+It is a common but true dictum that the accuracy of a result depends on
+the accuracy of the data used to determine the result (or more plainly:
+garbage in, garbage out). Using a rough approximation of the machine
+work envelope will reduce the effectiveness of the simulation. There is
+little comfort knowing that a collision probably did not occur. However,
+using a rough approximation of the machine enclosure (or omitting it
+entirely) is perfectly valid, if you do not intend to test for
+collisions against the roughly defined object.
+
+The first step is to know what to model and what not to model. The
+answer is quite simple:
+
+-  **Only model components of the machine that are to be collision
+   tested.**
+
+You should carefully and accurately model the table and any devices that
+are normally attached to the table. You should model the spindle face
+and any devices that are attached to it if they can get in the way of
+the work. If your work area is enclosed and you are concerned with
+collisions, then you should model this area too. Modeling the tool
+changer, the stand-alone power supply, chip conveyor, and so on bring a
+certain degree satisfaction, but they add nothing to the accuracy of the
+result you are trying to achieve, which is to detect collisions.
+
+VM models are built up from components, all attached together on a
+kinematics chain. Simple rectangular, cylindrical, conical, spherical,
+revolved and swept volume components can be created with VM’s
+construction features. Components can also be imported as STL objects
+from a CAD system. VM is not a CAD system; VM relies on your CAD system
+to prepare model components, which can then be imported as STL files.
+
+Curved components are represented in VM as a series of closely meshed
+triangles. Even simple objects, such as a cube, are built of many
+triangles (a cube requires 12). The more triangles a component is
+constructed with, the longer it will take for VM to perform collision
+testing, and also the longer it will take for the component to be drawn
+in the simulation windows. This leads us to the next important maxim:
+
+-  **Use reasonably coarse faceting for cylindrical and STL
+   components.**
+
+Models with hundreds of thousands of triangular facets will have poor
+rendering (drawing) performance and might have poor collision
+performance. VM surrounds each component with a simplified box that it
+uses in a form of pre-test for collisions, and only looks at the
+triangles inside the box if necessary. A model with components that are
+defined localized (not spread out) will have much better collision
+testing performance than one whose components are not. For example,
+modeling the entire enclosure of the machine in a single STL will ensure
+that every triangle of the enclosure will be tested on every motion (and
+in fact, many times for each motion). It is better to model the
+enclosure in sections: left, right, top and so on.
+
+If a computerized model of the machine cannot be obtained from your
+machine tool builder, then you will have to create the model components
+yourself. If your machine can be modeled using the simple primitives
+described earlier, then you will not need the assistance of a CAD
+system. Complex curved surfaces can only be created with the assistance
+of a CAD system capable of exporting an STL file.
