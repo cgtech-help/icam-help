@@ -1,0 +1,49 @@
+.. _command_couple:
+
+The COUPLE Command :kbd:`[L]`
+=============================
+
+The COUPLE command is used to synchronize the linear axes of a lathe
+with the spindle. This command can be used to machine single or
+multiple start threads in one pass. It is only valid for lathes but
+may not be available on a specific lathe.
+
+   :math:`\textbf{COUPLE /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+ON is used to begin synchronization of the linear axes with the
+spindle. OFF returns the machine to the normal mode of operation. All
+motions will be synchronized, from the machine’s position when ON is
+coded to the last position before OFF is coded.
+
+A PITCH command must be specified before the first COUPLE command is
+coded. The PITCH command indicates the number of threads per CL unit
+and the number of starts. Once PITCH is coded, it will remain in
+effect until changed by another PITCH command.
+
+When creating a thread that has multiple starts, only a single pass
+is needed in the CL file. GENER will repeat the motions between the
+COUPLE/ON and COUPLE/OFF commands for as many starts as are
+specified. A maximum of 20 motions may be coded in the CL file
+between the COUPLE/ ON and COUPLE/OFF commands when machining threads
+with multiple starts.
+
+The following example cuts a 10 TPu (threads/unit) thread with 2
+starts:
+
+   .. code-block:: text
+
+      RAPID,GOTO/5.25,1.25  $$ Position clear thread
+      PITCH/10,MULTRD,2
+      RAPID,GOTO/5.25,1     $$ Start of thread COUPLE/ON $$ Synchronize
+      GOTO/0.1,1            $$ Cut thread
+      GODLTA/-0.1,.1        $$ Ramp out
+      COUPLE/OFF            $$ Disengage
+
+The second start will be cut automatically. The machine will retract
+in a direction opposite to the feed-in direction, rapid to the
+initial clearance point, rapid to the startup point offset by one
+pitch and then cut the second thread to the disengage point.
+
+A THREAD command must not be coded within a COUPLE block. This is
+because they are both used to synchronize the linear axes with the
+spindle. An error message will be output if this is attempted.
