@@ -1,0 +1,74 @@
+.. _command_insert:
+
+The INSERT Command :kbd:`[MLEPC]`
+=================================
+
+The INSERT command is used to allow a part programmer to insert any
+command line directly onto NC control tape. This command is valid for
+all machine types.
+
+   :math:`\textbf{INSERT / }
+   \big[\,\textbf{NEXT},\big] \;
+   \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+   :math:`\textbf{INSERT /}
+   \begin{pmatrix}\begin{array}{l} \textbf{MAIN} \\ \textbf{SIDE} \\ \mathit{channel\_id} \end{array}\end{pmatrix},
+   \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+The optional values can be formatted into the string using the format
+specifications described in :ref:`“String Formatting”<string_formatting>`.
+String formatting can be disabled if desired using the PPFUN/17 command
+described in :ref:`“PPFUN 17: String Formatting”<string_formatting_ppfun>`.
+
+GENER may automatically add to the *string* a sequence number, an end
+of block code, a block delete character (if OPSKIP is on) and might
+also remove spaces or convert letter case, depending on QUEST
+responses. By default, any buffered tape is first output in a block,
+followed by the inserted text on its own block. If NEXT is specified,
+the text is instead appended to the buffered tape block prior to any
+DISPLY/NEXT operator messages or TPRINT/NEXT tape commentary.
+
+To disable sequence numbers, code a SEQNO/OFF command before the
+INSERT and code a SEQNO/ON command after (to continue sequencing on
+subsequent blocks).
+
+The MAIN, SIDE and *channel\_id* options can be used with multi-channel lathes to
+designate the channel to which the inserted text applies, irrespective of the
+channel that is currently active. A value 1 can be used in place of MAIN
+and a value 2 can be used in place of SIDE.
+
+The following is an example of how INSERT can be used to output a
+character string to the tape file:
+
+   .. code-block::
+
+      ISN
+      …
+      0009 GOTO/10,12,14
+      0010 SEQNO/OFF
+      0011 INSERT/’(THE TOOL IS LOCATED AT !@X,!@Y,!@Z)’
+      0012 GOTO/10,10,10
+      0013 SEQNO/ON
+      0014 INSERT/’(NEW LOCATION :!@X,!@Y,!@Z)’
+      …
+
+ISN 9 specifies a motion to location 10,12,14. ISN 10 turns off the
+generation of sequence numbers. ISN 11 outputs a text string to the
+tape file without a sequence number. ISN 12 specifies a motion to
+location 10,10,10. ISN 13 turns on the generation of sequence
+numbers. ISN 14 outputs a text string to the tape file with a
+sequence number.
+
+The following is what would appear in the tape file as a result of
+this sequence of commands.
+
+   .. code-block::
+
+      N010X10.0Y12.0Z14.0$
+      (THE TOOL IS LOCATED AT X10.0,Y12.0,Z14.0)$
+      Y10.0Z10.0$
+      N011(NEW LOCATION : X10.0,Y10.0,Z10.0)$
+
+..
