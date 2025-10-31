@@ -1,0 +1,109 @@
+.. _error_message_variables:
+
+Error Message Variables
+=======================
+
+.. _var_dbglvl:
+
++------------------+--------------------------------------------------+
+| **$DBGLVL**      | The debug level                                  |
+|                  |                                                  |
+|                  | Type: Numeric, Read/Write                        |
++------------------+--------------------------------------------------+
+
+   The debug level can be set from levels 0 through 3.
+   A higher level also includes all messages of lower levels.
+
+   :0: Turns debug traces to OFF.
+   :1: Is intended for user-defined debug information issued from macros and must be implemented by the control emulator developer.
+   :2: Internal debug information that can be useful when investigating issues.
+   :3: Additional information containing more details.
+
+   User implementing their own debug messages using this mechanism should test the $DBGLVL
+   and issue their message if the value is not zero.
+
+.. _var_diaglist:
+.. index:: Variables; $DIAGLIST
+
++------------------+--------------------------------------------------+
+| **$DIAGLIST**    | List of diagnostic numbers in the order reported |
+|                  |                                                  |
+|                  | Type: Sequence, Read/Write                       |
++------------------+--------------------------------------------------+
+
+   This sequence variable contains a list of diagnostic numbers in the
+   order that they have been reported. This informational variable is
+   settable, to simplify testing for diagnostics that occur following an
+   event. Use the :ref:`$FFIND function<func_ffind>` to test if a specific diagnostic has
+   occurred.
+
+.. _var_errmsg:
+.. index:: Variables; $ERRMSG
+
++------------------+-----------------------------------------------+
+| **$ERRMSG**      | Error message on indicator                    |
+|                  |                                               |
+|                  | Type: Logical, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable indicates if error messages are to be output or not.
+   Error messages may be disabled by setting $ERRMSG to $FALSE. To
+   enable error message output set $ERRMSG to $TRUE.
+
+.. _var_errno:
+.. index:: Variables; $ERRNO
+
++------------------+-----------------------------------------------+
+| **$ERRNO**       | Last I/O status                               |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   I/O status code returned by the system following the last OPEN, READ,
+   WRITE or CLOSE command. I/O status codes are system specific, but
+   most systems use a status of zero for success, negative for warning
+   (like end-of-file) and positive for errors.
+
+.. _var_err08:
+.. index:: Variables; $ERR08
+
++------------------+-----------------------------------------------+
+| **$ERR08**       | Number of error diagnostics                   |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   Current number of diagnostics at severity levels 8 through 15.
+
+.. _var_ftl16:
+.. index:: Variables; $FTL16
+
++------------------+-----------------------------------------------+
+| **$FTL16**       | Number of fatal error diagnostics             |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   Current number of diagnostics at severity level 16 or higher.
+
+.. _var_msg00:
+.. index:: Variables; $MSG00
+
++------------------+-----------------------------------------------+
+| **$MSG00**       | Number of informational diagnostics           |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   Current number of diagnostics at severity levels 0 through 3.
+
+.. _var_wrn04:
+.. index:: Variables; $WRN04
+
++------------------+-----------------------------------------------+
+| **$WRN04**       | Number of warning diagnostics                 |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   Current number of diagnostics at severity levels 4 through 7.
