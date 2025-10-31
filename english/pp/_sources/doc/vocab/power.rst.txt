@@ -1,0 +1,25 @@
+.. _command_power:
+
+The POWER Command :kbd:`[PC]`
+=============================
+
+The POWER command is used to control power settings on hybrid punch
+press machines with contouring attachments and contouring machines.
+
+   :math:`\textbf{POWER / } \mathit{flow}`
+
+   :math:`\textbf{POWER / } \Big[\,\big[\,\textbf{WATTS},\big]\,w \,\Big] \,
+   \begin{bmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{PULSE} \\ \textbf{CONST} \end{array}\end{pmatrix} \big[,a \,\big] \end{bmatrix} \;
+   \big[,\textbf{PERSEC},\mathit{freq} \,\big]`
+
+   :math:`\textbf{POWER / } \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+For flame cutting, the *flow* parameter specifies the flame intensity
+or power setting.
+
+For laser cutting: WATTS specifies the power setting; PULSE and CONST
+indicate either a pulsed width or constant wave beam; and PERSEC
+specifies the pulse frequency.
+
+Specify OFF to turn the laser or flame off. Specify ON to turn the
+flame or laser back on at the previously specified settings.
