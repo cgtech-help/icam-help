@@ -1,0 +1,121 @@
+.. _var_cedate:
+.. index:: Variables; $CEDATE
+.. _var_cefile:
+.. index:: Variables; $CEFILE
+.. |Object| replace:: Post-processor
+
+Post-Processor Definition Variables
+=========================================
+
+.. _var_author:
+.. index:: Variables; $AUTHOR
+
++------------------+------------------------------------------+
+| **$AUTHOR**      | |Object| developer’s name                |
+|                  |                                          |
+|                  | Type: String, Read/Write                 |
++------------------+------------------------------------------+
+
+   This variable contains the post-processor developer’s name. The value
+   is defined in the *General Description* / *General Information*
+   section of the questionnaire.
+
+.. _var_dbfile:
+.. index:: Variables; $DBFILE
+
++------------------+------------------------------------------+
+| **$DBFILE**      | |Object| database file name              |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the name of the post-processor database file
+   currently in use.
+
+.. _var_machin:
+.. index:: Variables; $MACHIN
+
++------------------+------------------------------------------+
+| **$MACHIN**      | |Object| MACHIN name                     |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the post-processor MACHIN name, not including
+   the MACHIN number. This variable is the name portion of the
+   post-processor being executed.
+
+.. _var_mchdsc:
+.. index:: Variables; $MCHDSC
+
++------------------+------------------------------------------+
+| **$MCHDSC**      | |Object| machine descriptor              |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the post-processor machine descriptor. The
+   machine descriptor is built based on machine characteristics (machine
+   type, positioning modes available, primary output units, etcetera).
+   The machine descriptor can be seen in the QUEST View»Database
+   listing.
+
+.. _var_mchnum:
+.. index:: Variables; $MCHNUM
+
++------------------+------------------------------------------+
+| **$MCHNUM**      | |Object| MACHIN number (0:NA)            |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the post-processor MACHIN number. This
+   variable is the number portion of the post-processor being executed.
+   A value of zero (0) indicates that a MACHIN identification number was
+   not defined for the post-processor.
+
+.. _var_plev:
+.. index:: Variables; $PLEV
+
++------------------+------------------------------------------+
+| **$PLEV**        | Product level                            |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the level number of the Icam Post product.
+
+.. _var_ppdate:
+.. index:: Variables; $PPDATE
+
++------------------+------------------------------------------+
+| **$PPDATE**      | |Object| creation date                   |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the creation date of the post-processor.
+
+.. _var_ppfile:
+.. index:: Variables; $PPFILE
+
++------------------+------------------------------------------+
+| **$PPFILE**      | |Object| file name                       |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the full name of the post-processor being
+   executed. This is the file name under which the post-processor is
+   stored in the database.
+
+.. _var_pver:
+.. index:: Variables; $PVER
+
++------------------+------------------------------------------+
+| **$PVER**        | Product version                          |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the version number of the Icam Post product.
