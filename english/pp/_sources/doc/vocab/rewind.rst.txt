@@ -1,0 +1,22 @@
+.. _command_rewind:
+
+The REWIND Command :kbd:`[MLEPC]`
+=================================
+
+The REWIND command is used to signal the machine that it has reached
+the end of the program and that it must rewind the tape to the rewind
+stop code, typically using an M30 code. This command is valid for all
+machine types.
+
+   :math:`\textbf{REWIND } \Big[ \textbf{ / } \mathit{number} \;\Big]`
+
+To conform to APT standard, the REWIND command requires at least one
+parameter. This parameter can be any number that you may want to use
+as it will be ignored by GENER.
+
+GENER may shut off the spindle and/or the coolant device if requested
+to do so in QUEST. On some machines this function is automatic.
+
+A REWIND command is treated just like a STOP or END command. It
+cannot be used to break up a tape into smaller segments or reels. If
+a tape break is desired, a BREAK command must be coded.
