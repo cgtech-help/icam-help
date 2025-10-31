@@ -1,0 +1,24 @@
+Main interface
+--------------
+
+|image1|
+
+The main interface is divided into 3 main parts:
+
+The `Navigator <navigator.html>`__ occupies the left hand side of the
+display. It is used to quickly navigate through databases and post
+processors. The button tabs at the bottom of the navigator switch
+between the database and individual post processors that have been
+loaded into memory.
+
+The `Workspace <workspaces/workspaces.html>`__ occupies the upper right
+hand section of the display. This window is used for virtually all input
+and modification of post processors.
+
+The `Console View <consoleview.html>`__ occupies the lower right hand
+section of the display. This view contains various tabs that display
+help information, the current state of processing, found text and
+differences between post processors.
+
+.. |image1| image:: ./media/8d54a26308bc0066330f0716956d218a5ae43308.png
+
