@@ -1,0 +1,66 @@
+Other Macro Commands
+--------------------
+
+.. _macro_command_error:
+
+Outputting Error Messages (ERROR)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ERROR command outputs a diagnostic message to the listing file.
+Two forms of ERROR command syntax are available, to output
+user-defined and standard error messages, as follows:
+
+   :math:`\textbf{ERROR / } \mathit{severity}, \,\mathit{format\_string} \; \,\icamrange{0.8}{0}\, \big[,\mathit{expression}\,\big]`
+
+   :math:`\textbf{ERROR / } \mathit{errnum} \; \,\icamrange{0.8}{0}\, \big[,\mathit{expression}\,\big]`
+
+The “severity” form of the ERROR command is used to output a user
+defined error. The diagnostic message severity must be a whole number in the range 0-99, where by
+standard convention: 0 is a message, 4 a warning, 8 an error and 16 a
+severe error. The diagnostic message text follows the severity. See
+the :ref:`“Output String Format”<output_string_format>` for a description of how the string to
+be written is constructed using the *format_string* argument.
+
+For example:
+
+   ::
+
+      ERROR/0,'Pallet change'
+      ERROR/4,'Cannot determine diameter of tool !(\*)',$T
+
+The “errnum” form of the ERROR command is used to output standard
+error diagnostics. The diagnostic error number must be a whole number
+greater than 99, matching one of the standard diagnostics found in the
+cer260.err file (see :ref:`“Error File”<error_file>`).
+Some standard diagnostics include “!(…)” output string format descriptors.
+The ERROR command must include a text or numeric expression (as appropriate)
+for each such descriptor.
+
+.. code-block:: text
+
+      ERROR/2009001
+      ERROR/2007001,'XYPLAN'
+
+.. _calling_other_programs:
+.. _macro_command_system:
+
+Calling other programs (SYSTEM)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The SYSTEM command is used to spawn processes from within the control emulator.
+The SYSTEM command allows the macro processor to run another program or
+issue an operating system command from within a macro. The command
+takes the form:
+
+   :math:`\textbf{SYSTEM / } \mathtt{'}string \,\mathtt{'}`
+
+The command defined within the string is sent to the Windows command
+shell, relative to the current working directory. If the command name
+and/or file name specifications contain embedded blanks, they must be
+enclosed in quotes as they would if typed in the command shell.
+Executable files in the File Storage section can be run using an
+“//ICAMFS/” path for the file name.
+
+The $ERRNO system variable contains the status code returned by the
+operating system when control was returned to the macro processor.
+
