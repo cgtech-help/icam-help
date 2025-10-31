@@ -1,0 +1,212 @@
+.. _command_safety:
+
+The SAFETY Command :kbd:`[MLC]`
+===============================
+
+The SAFETY command controls the safe positioning analysis feature.
+This command is valid for contouring machines, lathes and mills.
+The following SAFETY command functions are available:
+
+-  :ref:`“Modal Safety Setting”<modal_safety_setting>`
+-  :ref:`“Safe Positioning Motion Squaring”<safe_positioning_motion_squaring>`
+-  :ref:`“Safe Positioning Motion Splitting”<safe_positioning_motion_splitting>`
+-  :ref:`“Safe Positioning Path Selection”<safe_positioning_path_select>`
+
+.. _modal_safety_setting:
+
+Modal Safety Setting
+--------------------
+
+   :math:`\textbf{SAFETY /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{RECALL} \end{array}\end{pmatrix}`
+
+OFF turns the safe positioning feature off. All axes that are capable
+of positioning together on a block will do so.
+
+ON re-enables the last specified safety setting.
+
+RECALL restores the default state of the safe positioning feature as
+it was defined in QUEST by the post-processor developer.
+
+.. _safe_positioning_motion_squaring:
+
+Safe Positioning Motion Squaring
+--------------------------------
+
+   :math:`\textbf{SAFETY /}
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{NEXT} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{TLVEC} \\ \textbf{XYPLAN} \\ \textbf{YZPLAN} \\ \textbf{ZXPLAN} \end{array}\,\end{bmatrix}
+   \begin{bmatrix} ,\textbf{OPTION}, \begin{pmatrix} 1 \\ 2 \end{pmatrix} \end{bmatrix}`
+
+The ON keyword activates the safe positioning feature. The OPTION
+couplet can be used to define the method of safe positioning.
+OPTION,1 uses a CL frame based analysis to determine the clearance
+plane or planes. This is the form of safe analysis used by GENER
+prior to V16 and is included for compatibility with existing
+post-processors. OPTION,2 uses a machine frame based motion analysis
+to determine the clearance plane. This is the default.
+
+NEXT is a non-modal form of safe positioning that will occur on the
+next motion only.
+
+The XYPLAN, YZPLAN and ZXPLAN keywords override the default logic
+that attempts to determine the traverse plane and plunge direction.
+XYPLAN forces the analysis of plunge motion to be along the Z axis,
+regardless of tool vector or rotary axis alignment. Similarly, YZPLAN
+and ZXPLAN force the analysis of plunge motion along the X and Y axes
+respectively. TLVEC (the default) uses the tool axis vector
+(OPTION,1) or machine head orientation (OPTION,2) to determine the
+plunge direction for safe motion analysis.
+
+.. _safe_positioning_motion_splitting:
+
+Safe Positioning Motion Splitting
+---------------------------------
+
+   :math:`\textbf{SAFETY / }
+   \big[\,\textbf{NEXT},\big] \!
+   \icamrange{8.6}{0} \begin{bmatrix}\;\begin{array}{l}
+   \mathtt{<\!axis\!>} \big[,\textbf{NOW-ALL}\,\big] \\
+   \textbf{RTCP} \big[,\mathit{type}\textbf{-ON-OFF}\,\big] \\
+   \textbf{LENGTH} \big[,\mathit{offset}\textbf{-ON-OFF}\,\big] \big[,\textbf{SET},\mathit{type}\,\big] \\
+   \textbf{LCS} \big[,\textbf{ON-OFF}\,\big] \\
+   \\
+   \textbf{RAPID} \\
+   \textbf{FEED},\mathit{value}\big[,\mathit{units}\,\big] \\
+   \\
+   \textbf{NEXT}
+   \end{array}\,\end{bmatrix}`
+
+This axis specific form of safe positioning defines a specific order
+of output of the machine axes over multiple NC code blocks for the
+next or all subsequent positioning motions.
+
+Specify NEXT as the first parameter on the command to define a
+non-modal motion split pattern that applies to the next positioning
+motion only. Omit the leading NEXT keyword to modally apply motion
+splitting to all subsequent positioning motions.
+
+The safety split motion pattern can contain any combination of axes
+motions, RTCP settings, tool length compensation settings and local
+coordinate system settings. The interpolation mode can also be forced
+to rapid or a specified feed positioning velocity on individual split
+motion blocks.
+
+   :math:`\textbf{NEXT}`
+
+Each occurrence of the NEXT keyword (with the exception of an
+optional leading NEXT) indicates a forced break to a new block of NC
+code. If there is nothing to be output, then NEXT has no effect.
+
+   :math:`\icamrange{15}{1} \begin{pmatrix}\,\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} [,n] \\ \textbf{LINEAR} \\ \textbf{REV} \end{array}\,\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{NOW} \\ \textbf{ALL} \end{array}\,\end{bmatrix}`
+
+Specify a list of one or more axis keywords identifying the axes to
+be moved together on a positioning motion block, followed by the NEXT
+keyword, to indicate a break to a new positioning motion block.
+Multiple sets of “\*AXIS[,*AXIS…],NEXT” can be specified, to define a
+safe motion that is split over multiple blocks. Note that any
+unreferenced axes that are required to move or be output will be
+output together on the first motion block. See :ref:`here<axis_names>`
+for a table correlating axes name keywords
+with machine axes. Specify **LINEAR** to move all active linear axes;
+Specify **REV** to move all active rotary axes.
+
+Note that only those axes that are required to be output will be
+output. The SAFETY command does not force axes to be output that are
+not moving or that would not be output on a “normal” positioning
+motion. Specify **ALL** to force the listed axes to be output for the
+current block.
+
+Each axis can be moved at most one time over the entire safe split
+motion. However, the current position of any axis can be output as
+many times as required by using the **NOW** keyword.
+
+   :math:`\textbf{RTCP} \begin{bmatrix} ,\! \begin{array}{l} \mathit{type} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{bmatrix}`
+
+This defines a change in RTCP status equivalent to coding a MODE/RTCP
+command (see :ref:`“Rotating Tool Center Point”<rotating_tool_center_point>`). ON is assumed
+if RTCP is coded alone.
+
+   :math:`\textbf{LENGTH} \begin{bmatrix} ,\! \begin{array}{l} \mathit{offset} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{bmatrix} \big[,\textbf{SET},\mathit{type}\,\big]`
+
+This defines a change in tool length compensation status equivalent
+to coding a CUTCOM/ LENGTH command (see :ref:`“Length Compensation”<length_compensation>`).
+ON is assumed if LENGTH is coded alone. The optional SET,\ *type* couplet defines the tool length
+compensation type on machines where there are multiple length
+compensation types defined. If omitted, the last type will be used.
+
+   :math:`\textbf{LCS} \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \, \end{bmatrix}`
+
+This defines a change in local coordinate system (LCS) status
+equivalent to coding an LCS command (see :ref:`“The LCS Command”<command_lcs>`).
+ON is the equivalent of LCS/NOW; OFF the equivalent of LCS/OFF. ON is assumed if LCS is coded alone.
+
+   :math:`\textbf{RAPID}`
+
+   :math:`\textbf{FEED},\mathit{value} \begin{bmatrix} ,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array}\,\end{bmatrix}`
+
+RAPID indicates that the axes on the split motion block are to be
+output using rapid positioning (e.g. G00). FEED indicates a
+positioning feed motion at the specified velocity (e.g. G01). These
+override the CLDATA defined velocity of the positioning move for a
+single split motion block only. These velocity overrides must be
+specified with axes definitions to have any effect.
+
+Example:
+
+   .. code-block::
+
+      SAFETY/NEXT, RAPID,XAXIS,YAXIS,ALL,NEXT, LENGTH,ZAXIS,ALL
+
+The above command will apply to the next RAPID or high feed
+positioning motion in the program, It will force out the X and Y axes
+on the first block using rapid positioning, and force out the Z axis
+with tool length compensation on the second block at the CLDATA
+defined velocity (i.e., either RAPID or high feed positioning).
+
+.. _safe_positioning_path_select:
+
+Safe Positioning Path Selection
+-------------------------------
+
+   :math:`\textbf{SAFETY / ROTATE} \begin{pmatrix} \!,\! \begin{array}{l} \textbf{TLVEC} \\ \textbf{RETRCT} \\ \textbf{OPTION},n \\ \textbf{ALL} \end{array}\,\end{pmatrix}
+   \begin{pmatrix} \!,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The SAFETY/ROTATE command provides a means of overriding the default
+rotary axes behavior during various types of positioning motions.
+GENER’s default positioning behavior is to choose a rotary axis
+solution (also known as a pose, or a path) that results in the least
+amount of rotary axis motion. GENER may however choose an alternate
+solution that has a greater (i.e., longer) rotary axis motion so as
+to avoid an overtravel condition, or due to LIMIT/ORIENT command
+preferences, or due to path-planning optimizations.
+
+The following SAFETY/ROTATE options can individually force GENER to
+choose the pose resulting in the least amount of rotary axis motion,
+regardless of other considerations, on specific types of positioning
+motions. Each option can individually be turned ON or OFF. All
+options are OFF by default at the start of post-processing.
+
+TLVEC,ON forces the shortest rotary solution on any positioning
+motion where there is no change in tool axis vector.
+
+RETRCT,ON forces the shortest rotary solution on any positioning
+motion where there is no change in tool axis vector *and* the
+positioning motion is directly along the tool axis (i.e., a retract
+or plunge motion).
+
+OPTION,1,ON forces the shortest rotary solution on any positioning
+motion processed while the
+$RAPLIN macro variable is in a $TRUE state.
+
+OPTION,2,ON forces the shortest rotary solution to be applied to both
+RAPID and high feed positioning motions (see :ref:`FEDRAT/RAPID<set_high_feed_threshold>`),
+for any option that is active.
+
+ALL,ON enables all of the above options; ALL,OFF disables all of the
+above options.
+
+   :math:`\textbf{SAFETY / ROTATE} \begin{pmatrix} \!,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command enables (ON) or disables (OFF) the positioning path
+override functionality, without affecting individual options.
