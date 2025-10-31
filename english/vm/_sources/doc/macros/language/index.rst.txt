@@ -1,0 +1,36 @@
+.. _macro_language:
+
+The Macro Language
+==================
+
+The ICAM macro language is used for the customization of Virtual Machine
+models, as well as for the customization of Icam Post post-processors and
+ICAM control emulators. Model macros share the same macro environment as
+the post-processor and control emulator, giving them full access to
+system variables as well as user defined global variables. However, care
+should be taken to clearly separate the macro functions necessary in the
+model, from those necessary in the post-processor (GENER) or control
+emulator (CERUN).
+
+For example, global variables used in model macros should be defined
+(using “object” scoping) in the model Declaration macro, and not in the
+Declaration macro of the post or control emulator. This ensures that the
+model is fully self-contained and can be used with another
+post-processor or control emulator if desired without undue changes.
+
+Model macros should not generate post-processor commands. This is
+because the model customization environment is not post-processor
+command based; therefore, any post-processor command contained in a
+model macro will have to be interpreted by GENER. This makes the model
+unavailable for use with CERUN, which does not recognize post-processor
+commands.
+
+.. toctree::
+   :hidden:
+
+   fundamentals
+   functioncall
+   flowcontrol
+   invocation
+   textio
+   others
