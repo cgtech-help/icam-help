@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Creo NC Interface Kit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="">Creo</a>
+                <a href="../FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../Fusion360/readme.htm">Fusion 360</a>
+                <a href="../Mastercam/readme.htm">Mastercam</a>
+                <a href="../NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../Cadds5/readme.htm">Cadds5</a>
+                <a href="../Cadra/readme.htm">Cadra</a>
+                <a href="../Camand/readme.htm">Camand</a>
+                <a href="../CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../Cimatron/readme.htm">Cimatron</a>
+                <a href="../Em_Machine/readme.htm">Em Machine</a>
+                <a href="../Generic/readme.htm">Generic</a>
+                <a href="../GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../ICAM/readme.htm">ICAM</a>
+                <a href="../IDEAS/readme.htm">IDEAS</a>
+                <a href="../Intercim/readme.htm">Intercim</a>
+                <a href="../Intergraph/readme.htm">Intergraph</a>
+                <a href="../NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../NICAM/readme.htm">NICAM</a>
+                <a href="../NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../index.htm"><i class="fa fa-home">Kit</i></a>
+            <h1><img align="right" src="../../images/camlogo_ptc.jpg" />Creo</h1>
+            <hr />
+            <br />
+            <img src="../../images/camscrsh_ptc.jpg" width="240" height="130">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: Pro/Engineer</li>
+                <li>Company: PTC, Inc.</li>
+                <li>Website: <a href="https://www.ptc.com/">www.ptc.com</a></li>
+            </ul>
+            <br />
+            <div class="table">
+                <div class="card">
+                    <a href="../../integration/Creo/Integration/index.htm"><img src="../../images/integration.png" />&nbsp;&nbsp;Creo integration</a>
+                </div>
+                <div class="card">
+                    <a href="../../integration/Creo/Extractor/index.htm"><img src="../../images/mfg.png" />ICAM MFG Extractor for Creo</a>
+                </div>
+            </div>
+            <br />
+            <!-- Content -->
+            <hr />
+            <h2>Creo TO CAM-POST INTERFACE DOCUMENTATION</h2>
+            <h3>Overview</h3>
+            <p>
+                The Creo Interface Kit is designed to accommodate differences in syntax between
+                Pro/NC and ICAM's postprocessing languages. Creo's APT commands in a cutter
+                location source (.ncl) file are input to CAD-APT and/or CAM-POST. See the
+                CAM-POST chapter "Post-processor Vocabulary" for more information on CAM-POST
+                supported syntax.
+            </p>
+            <p>
+                Only automatically generated Pro/NC commands are accounted for in this Creo
+                Interface Kit. Other postprocessor statements are passed through unchanged.
+                Not all translations shown in this document may be used with all ICAM posts.
+                For example, a CYCLE statement may be output by NC and correctly reformatted
+                by the interface, but the post-processor may not support that CYCLE type; a
+                postprocessing error would result.
+            </p>
+            <p>
+                CAD-APT and/or CAM-POST can be invoked from within the Pro/NC menu by defining
+                the "menu_def.pro" in the user's HOME directory. An example entry is as follows:
+            </p>
+            <ul style="list-style: none;">
+                <li>@setbutton_exec UTILITIES CAM-POST "C:\Program Files\CAMPOST\gener" "Execute CAM-POST"</li>
+            </ul>
+            <p>
+                An "*.ncl" file will be posted regardless of the number of translations that
+                cannot be made. The messages in the "*.lis" and "*.lst" files are meant to
+                warn users that there are items in the "*.ncl" file that could not be
+                interpreted. These items should be checked to ensure valid tape output.
+            </p>
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
+
