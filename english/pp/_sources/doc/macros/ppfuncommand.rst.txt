@@ -1,0 +1,916 @@
+.. _command_ppfun:
+
+The PPFUN Command
+=================
+
+The PPFUN command is used to access internal GENER functions. This
+command is valid for all machine types. The following is the general
+format of the PPFUN command:
+
+   :math:`\textbf{PPFUN / } \mathit{function\_number}, \mathit{function\_parameters}`
+
+The function number is used to indicate which function is to be
+performed by GENER and must be the first argument of the command. The
+function parameters depend on the function and may be text strings,
+minor words and/or numeric values.The following is a list of the different functions
+that can be accessed with the PPFUN command, organized by function number.
+
+   .. The following table uses the en space character [ ] to better control spacing
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+
+      *  -   :kbd:`1` :ref:`Set Error Message Minimum Severity<command_ppfun_1>`
+      *  -   :kbd:`2` :ref:`Set Tape Punching Minimum Severity<command_ppfun_2>`
+      *  -   :kbd:`3` :ref:`Creating Custom Error Messages<command_ppfun_3>`
+      *  -   :kbd:`4` :ref:`Modifying Time Summaries<command_ppfun_4>`
+      *  -   :kbd:`7` :ref:`Assigning Values to Registers<command_ppfun_7>`
+      *  -   :kbd:`8` :ref:`Modify Registers<command_ppfun_8>`
+      *  -   :kbd:`9` :ref:`Replace or Disable G and M Codes<command_ppfun_9>`
+      *  -  :kbd:`10` :ref:`Disable Block Purging<command_ppfun_10>`
+      *  -  :kbd:`11` :ref:`Force Block Purging<command_ppfun_11>`
+      *  -  :kbd:`12` :ref:`Linear and Rotary Axes Frequency<command_ppfun_12>`
+      *  -  :kbd:`14` :ref:`Outputting Standard Error Messages<command_ppfun_14>`
+      *  -  :kbd:`15` :ref:`Modifying Error Messages<command_ppfun_15>`
+      *  -  :kbd:`16` :ref:`Ordering Multiple G and M Codes<command_ppfun_16>`
+      *  -  :kbd:`17` :ref:`String Formatting<command_ppfun_17>`
+      *  -  :kbd:`18` :ref:`G and M Code Substitution<command_ppfun_18>`
+      *  -  :kbd:`19` :ref:`G and M Code Block Purge<command_ppfun_19>`
+      *  -  :kbd:`20` :ref:`Enabling Radial Distance Registers<command_ppfun_20>`
+      *  -  :kbd:`21` :ref:`Macro I/O Error Handling<command_ppfun_21>`
+      *  -  :kbd:`22` :ref:`Tape File Functions<command_ppfun_22>`
+      *  -  :kbd:`23` :ref:`Reset Travel and Timing Data<command_ppfun_23>`
+      *  -  :kbd:`24` :ref:`Set High Feed Threshold<command_ppfun_24>`
+      *  -  :kbd:`25` :ref:`Load Tool and Head Tables<command_ppfun_25>`
+
+The GENER full interface provides a View»Controller»PPFUN window listing the current state of
+all PPFUN commands that have a modal or non-modal effect on processing.
+
+.. _command_ppfun_1:
+
+:kbd:`1` Set Error Message Minimum Severity
+-------------------------------------------
+
+   :math:`\textbf{PPFUN / 1},\, \mathit{severity}`
+
+This function allows the user to set the minimum severity level at
+which to start displaying error messages in the GENER listing file.
+The *severity* parameter may have any value between 0 and 99. For
+example, if set to 4, then all error messages with severity level
+below 4 would not appear in the listing file. GENER will still keep
+track of how many errors occurred below severity level 4 and display
+this information in the diagnostics summary at the end of the listing
+file.
+
+.. _command_ppfun_2:
+
+:kbd:`2` Set Tape Punching Minimum Severity
+-------------------------------------------
+
+   :math:`\textbf{PPFUN / 2},\, \mathit{severity}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{bmatrix}`
+
+This function allows the user to set the minimum severity level at
+which tape punching should be discontinued or deleted, overriding the
+default severity level and tape disposition defined by the
+post-processor developer. The *severity* parameter may have any value
+between 0 and 99. For example, if set to 8, then any diagnostic with
+severity level 8 and higher would discontinue tape punching. GENER
+will still continue to output the verification listing file. If the
+minor word ON is specified, the tape file will be deleted. OFF is the
+default and merely discontinues output.
+
+Code PPFUN/2,–1 to reset the minimum severity level to the
+post-processor defined default.
+
+.. _command_ppfun_3:
+
+:kbd:`3` Creating Custom Error Messages
+---------------------------------------
+
+   :math:`\textbf{PPFUN / 3},\,
+   \mathit{severity}, \mathtt{'}name \,\mathtt{'} \; \,\icamrange{0.8}{0}\, \big[,\mathit{parameters}\,\big]`
+
+This function allows the user to output error messages to the GENER
+listing file using the standard error message format.
+
+The *severity* is used to indicate the severity level of the message
+and may have any value between 0 and 99. A value between 0 and 3 will
+be considered a message, a value between 4 to 7 will be considered a
+warning, a value between 8 to 15 will be considered an error and a
+value between 16 to 99 will be considered fatal. The *string* field
+specifies the error message that should be output to the listing
+file. The *parameters* field is optional and defines arguments for
+the *string* field. See :ref:`“String Formatting”<string_formatting>`
+for more information about coding character strings in conjunction with parameters.
+
+.. _command_ppfun_4:
+
+:kbd:`4` Modifying Time Summaries
+---------------------------------
+
+   :math:`\textbf{PPFUN / 4},\,
+   \big[\,\textbf{TIMES},\big] \mathit{misc} \Big[,\mathit{rapid}\,\big[,\mathit{feed}\,\big]\Big]`
+
+   :math:`\textbf{PPFUN / 4},\,
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}
+   \big[,\mathit{password}\,\big]`
+
+The first format of this function allows the user to add to or
+subtract from the amount of time that the machine has recorded for
+miscellaneous, rapid and/or feed rate timing. It can also be used to
+set multiplicative values for one or more timing categories.
+
+To add or subtract time, specify one, two or three values specifying
+the number of seconds to add or subtract. For example, the following
+command will add 4 seconds to the feed time category:
+
+   ::
+
+      PPFUN/4,0,0,4
+
+To set multiplication values, specify the minor word TIMES followed
+by one, two or three values specifying the amount for each category.
+The current time value is not modified, but all future times will be
+multiplied by this value when recorded. For example, the following
+command will result in all subsequent miscellaneous times recorded to
+be double their normal amounts:
+
+   ::
+
+      PPFUN/4,TIMES,2
+
+The second format of this function can be used to lock out changes to
+the time summaries. Coding OFF disables further changes until ON is
+coded. To avoid unauthorized changing, a value can be coded with OFF;
+only an ON command with the same value will permit changes to be
+made. By default the PPFUN/4 capability is available.
+
+.. _command_ppfun_7:
+
+:kbd:`7` Assigning Values to Registers
+---------------------------------------
+
+   :math:`\textbf{PPFUN / 7 } \,
+   \icamrange{1.6}{1}\! \begin{pmatrix}\begin{array}{l} ,\textbf{0} \\,\mathit{register},\mathit{value} \end{array}\,\end{pmatrix}
+   \big[,\textbf{SAME},\mathit{register\_list}\,\big]`
+
+This function allows the user to place register values directly into
+the NC control tape buffer, to output text at a register position, or
+to force pending tape codes in the buffer to be output. Processing
+can optionally be deferred until a register is output that matches
+one listed with the SAME option.
+
+To place a value into a register, a pair of arguments must be given.
+The first argument of the pair indicates what *register* is to
+receive the specified value, either by specifying the index number of
+the register, or by specifying a text string (maximum 6
+characters\ [#]_) matching one or more leading characters of the
+register’s descriptor. If two or more descriptors match the specified
+text, the one with the lower index number will be used. If a register
+is specified using the descriptor method, the descriptor must be
+enclosed by single quotes. Register indices and descriptors can be
+found in the “Register Assignment Summary” section of the
+post-processor listing file created by QUEST.
+
+For example, to output an M3 you can use:
+
+   ::
+
+      PPFUN/7,'M',3
+
+The *value* field can specify either a numeric value or a text
+string. When placing text in a register, the text must be enclosed in
+single quotes. There can be only a single “register,text-string” pair
+per PPFUN/7 command.
+
+To force out the current block of buffered control tape, the number
+zero (0) must be coded as a non-paired argument on the command. This
+will also purge any pending DISPLY/NEXT, INSERT/ NEXT and TPRINT/NEXT
+data.
+
+Specify SAME followed by one or more registers to defer the action of
+the PPFUN/7 command until such time as one of the listed registers is
+output. Matching registers can be defined by index
+number or string descriptor. The keyword XYZ can be specified in
+place of individual X, Y and Z axes registers. Axis specific keywords
+(:ref:`see the table<axis_names>`) can be specified in
+place of axis specific registers. For example, to output an M3 on the
+next NC block containing an S register:
+
+   ::
+
+      PPFUN/7,'M',3,SAME,'S'
+
+Note that this command cannot control the order in which registers
+appear on an NC control block. The order of the registers is defined
+in QUEST.
+
+.. [#] The $FREGPOS function can be used to obtain a register
+         index given a descriptor without limitations.
+
+.. _command_ppfun_8:
+
+:kbd:`8` Modify Registers
+-------------------------
+
+   :math:`\textbf{PPFUN / 8} \;
+   \big[,\textbf{NEXT}\,\big] ,\mathit{register} \,\big[,\mathtt{<\!options\!>}\,\big]`
+
+   :math:`\textbf{PPFUN / 8},\, \textbf{0}`
+
+This function allows the user to replace a register name and format
+for another or to disable the output of specific registers. It also allows the user to set
+multiplication and addition factors to specific registers.
+
+The NEXT option makes the modification non-modal.
+
+Registers are defined either by specifying the index number of the
+register or by specifying a text string (maximum 6 characters)
+matching one or more leading characters of the register’s descriptor.
+If two or more descriptors match the specified text, the one with the
+lower index number will be used. If a register is specified using the
+descriptor method, the descriptor must be enclosed by single quotes.
+Register indices and descriptors can be found in the “Register
+Assignment Summary” section of the post-processor listing file
+created by QUEST.
+
+To redefine a register name and format using another register name
+and format, specify the two registers. The first register of the pair
+defines the register that will receive a new name and format. The
+name and format is taken from the second register specified.
+
+   :math:`\textbf{PPFUN / 8 } \,\icamrange{0.8}{1}\, \big(,\mathit{register}, \mathit{register}\,\big)`
+
+For example, in order to output a register number 3 value using the
+name and format of register number 7 the following command would be
+used:
+
+   ::
+
+      PPFUN/8,3,7
+
+The register descriptor (maximum 6 characters) may be used instead of
+the register index number. To output a Z register value using the W
+register name and format use the following command:
+
+   ::
+
+      PPFUN/8,'Z','W'
+
+To reset the Z register back to normal, code the register twice
+
+   ::
+
+      PPFUN/8,'Z','Z'
+
+To reset all registers back to the formats defined in QUEST, specify
+0 as an unpaired value on the command. If the minor word OFF is also
+specified the multiplication and addition factors will be canceled
+(more on these later).
+
+   :math:`\textbf{PPFUN / 8},\,\textbf{0}\,\big[,\textbf{OFF}\,\big]`
+
+When replacing registers, the multiplication and addition factors of
+the second register are carried over to the first. If this feature is
+not required, the factors may be changed or canceled while redefining
+a register name and format.
+
+   :math:`\textbf{PPFUN / 8 } \icamrange{6.6}{1}\! \begin{pmatrix} ,\mathit{register,register}
+   \begin{bmatrix}\begin{array}{l}
+   , \textbf{OFF} \\ \\
+   , \begin{pmatrix}\,\begin{array}{l} \textbf{PLUS} \\ \textbf{MINUS} \end{array}\,\end{pmatrix} ,\mathit{value} \,\big[,\textbf{TIMES},\mathit{factor}\,\big] \\ \\
+   , \textbf{TIMES},\mathit{factor} \begin{bmatrix} ,\begin{pmatrix}\begin{array}{l} \textbf{PLUS} \\ \textbf{MINUS} \end{array}\,\end{pmatrix} ,\mathit{value}\, \end{bmatrix}
+   \end{array}\end{bmatrix}\end{pmatrix}`
+
+Multiplication and addition factors can be applied to a register
+value just prior to its output. The TIMES option is used to set the
+multiplication factor. The addition factor is set using the PLUS and
+MINUS options. Each register can have both a multiplication and
+addition factor that is applied to all values output to the register.
+The factors are applied in the same order in which they were
+specified. If only one factor is specified, the other factor is
+canceled if previously defined. The OFF option is used to cancel both
+the multiplication and addition factors.
+
+As mentioned above, register factors may be changed while redefining
+a register’s name and format. The factors may also be modified for a
+single register. To modify a single register’s factors, specify the
+register followed by the multiplication and/or addition factors.
+
+   :math:`\textbf{PPFUN / 8 } \icamrange{6.6}{1}\! \begin{pmatrix} ,\mathit{register}
+   \begin{pmatrix}\begin{array}{l}
+   , \textbf{OFF} \\ \\
+   , \begin{pmatrix}\,\begin{array}{l} \textbf{PLUS} \\ \textbf{MINUS} \end{array}\,\end{pmatrix} ,\mathit{value} \,\big[,\textbf{TIMES},\mathit{factor}\,\big] \\ \\
+   , \textbf{TIMES},\mathit{factor} \begin{bmatrix} ,\begin{pmatrix}\begin{array}{l} \textbf{PLUS} \\ \textbf{MINUS} \end{array}\,\end{pmatrix} ,\mathit{value}\, \end{bmatrix}
+   \end{array}\end{pmatrix}\end{pmatrix}`
+
+For example, to multiply the S register value by 10 each time it is
+output use the following command:
+
+   ::
+
+      PPFUN/8,'S',TIMES,10
+
+To revert back to regular S register output use the following
+command:
+
+   ::
+
+      PPFUN/8,'S',OFF
+
+To disable the output of a register, specify the register followed by
+a value of 0.
+
+   :math:`\textbf{PPFUN / 8 } \,\icamrange{0.8}{1}\, \big(,\mathit{register}, \textbf{0}\,\big)`
+
+For example:
+
+   ::
+
+      PPFUN/8,'F',0
+
+To enable or disable the punching of all registers, use the optional
+word ALL.
+
+   :math:`\textbf{PPFUN / 8},\,
+   \textbf{ALL},\begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+.. _command_ppfun_9:
+
+:kbd:`9` Replace or Disable G and M Codes
+-----------------------------------------
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{9 } \big[,\textbf{NEXT}\,\big]\, \,\icamrange{0.8}{1}\, \big(\mathit{,gcode,gcode}\,\big)`
+
+   :math:`\textbf{PPFUN / -9 } \big[,\textbf{NEXT}\,\big]\, \,\icamrange{0.8}{1}\, \big(\mathit{,mcode,mcode}\,\big)`
+
+This function allows the user to replace G and M codes with different
+G and M codes or to disable the output of specific G and M codes.
+
+The NEXT option makes the substitution non-modal.
+
+To replace a code with another, a pair of arguments must be given.
+The first argument of the pair is a number indicating what code is to
+be replaced. The second argument is a number indicating the new code
+to output in place of the first. The code numbers must fall within
+the range of 0 through 999.9 inclusive. For example:
+
+   ::
+
+      PPFUN/9,501,54
+
+To disable the output of a code, a format similar to replacing a code
+is used. The only difference is that the second argument of the pair
+is the number negative one (–1). The NEXT option disables the next
+output of the code only. For example:
+
+   ::
+
+      PPFUN/9,501,-1
+
+To reset the complete code table to the original code values, the
+number negative one (–1) must appear as the first and only argument
+on the command. For example:
+
+   ::
+
+      PPFUN/9,-1 $$ reset G codes
+      PPFUN/-9,-1 $$ reset M codes
+
+The maximum number of G and M codes that can be replaced, disabled or
+substituted (see PPFUN/ 18) at one time is 80 codes.
+
+.. _command_ppfun_10:
+
+:kbd:`10` Disable Block Purging
+-------------------------------
+
+One of the functions of GENER is to automatically separate blocks
+according to the user requirements as defined in QUEST. However, a
+situation may arise in which two blocks must be combined. Therefore,
+one or more successive block purges should be disabled to attain the
+desired results.
+
+The command syntax to accomplish this is:
+
+   :math:`\textbf{PPFUN / 10}\,\, \big[,\mathit{skip}\,\big] ,\mathit{merge}`
+
+   :math:`\textbf{PPFUN / 10},\, \textbf{0}`
+
+The *skip* parameter defines the number of blocks to skip before
+starting the disable operation. The *merge* parameter defines the
+number of block purges to disable.
+
+The number zero (0) cancels any outstanding PPFUN/10.
+
+.. _command_ppfun_11:
+
+:kbd:`11` Force Block Purging
+-----------------------------
+
+Occasions arise in which the programmer would like to purge the tape
+buffer before, after, or before and after the output of a specific
+register. To accomplish this, use the following syntax:
+
+   :math:`\textbf{PPFUN / 11},\, \mathit{register, flag}`
+
+The register is defined either by specifying its index number or a
+text string (maximum 6 characters) matching one or more leading
+characters of the register’s descriptor. If two or more descriptors
+match the specified text, the one with the lower index number will be
+used. If a register is specified using the descriptor method, the
+descriptor must be enclosed by single quotes. Register indices and
+descriptors can be found in the “Register Assignment Summary” section
+of the post-processor listing file created by QUEST.
+
+The flag following the register indicates when the block purge should
+occur in relation to the register and the duration of the command.
+
+: 1: purge block before register is output (done once)
+: 2: purge block after register is output (done once)
+: 3: purge block before and after register is output (done once)
+
+The above flags indicate that the command should affect only the next
+output of the defined register. Once the register is output, the
+PPFUN/11 command is no longer in effect. It is also possible for the
+command to be modal (to be in effect for all subsequent output). To
+activate the command as modal, simply negate the flag.
+
+:–1: purge block before register is output (modal)
+:–2: purge block after register is output (modal)
+:–3: purge block before and after register is output (modal)
+
+To reset the register to normal processing specify 0 after the
+register.
+
+: 0: reset register to normal processing
+
+For example, to force a block purge before and after the H register
+is output, use the following command:
+
+   ::
+
+      PPFUN/11,'H',-3
+
+The block purge remains in effect for all of the subsequent
+processing until the following command is encountered, which resets
+the register to regular output:
+
+   ::
+
+      PPFUN/11,'H',0
+
+.. _command_ppfun_12:
+
+:kbd:`12` Linear and Rotary Axes Frequency
+------------------------------------------
+
+The linear and rotary axes are by default modal. The following
+command can be used to change the default:
+
+   :math:`\textbf{PPFUN / 12},\, \big[\,\textbf{NEXT},\big] \mathit{axes\_flag} \,\big[,\mathit{modal\_flag}\,\big]`
+
+The NEXT option makes the change in modality non-modal.
+
+The *axes_flag* defines whether the command applies to the linear or
+rotary axes.
+
+:1: linear axes
+:2: rotary axes
+:3: both linear and rotary axes
+
+The *modal_flag* defines if the register output is modal or
+non-modal.
+
+:0: QUEST default
+:1: modal (output axis only if it has changed)
+:2: non-modal (always output axis)
+:3: incremental non-modal (always output axis, even when incremental has zero delta)
+
+If the modal flag is omitted then 1 will be assumed
+(i.e., set axis output to modal).
+
+.. _command_ppfun_14:
+
+:kbd:`14` Outputting Standard Error Messages
+--------------------------------------------
+
+   :math:`\textbf{PPFUN / 14},\, \mathit{error\_number} \; \,\icamrange{0.8}{0}\, \big[,\mathit{parameters}\,\big]`
+
+This function allows the user to output error messages to the GENER
+listing file using a standard error message number as defined in the
+error text file. The function is quite similar to the PPFUN/ 3
+command except an error number is specified instead of error text and
+error severity.
+
+The parameters field is optional and defines arguments for the error
+text (which is defined by the error number given). Refer to the
+:ref:`“String Formatting”<string_formatting>` for more
+information about coding character strings in conjunction with
+parameters.
+
+.. _modifying_error_messages:
+.. _command_ppfun_15:
+
+:kbd:`15` Modifying Error Messages
+----------------------------------
+
+   :math:`\textbf{PPFUN / 15},\, \mathit{error}
+   \begin{pmatrix} \!,\! \begin{array}{l} \mathit{severity} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This function allows the user to modify output of an error as defined
+by the given *error* number. The error can be disabled using the OFF
+keyword. It can be enabled by specifying the ON keyword. The error
+severity for an error can be modified by specifying the *severity*
+level, which may have any value between 0 and 99. A value between 0
+and 3 will be considered a message, a value between 4 and 7 will be
+considered a warning, a value between 8 and 15 will be considered an
+error and a value between 16 and 99 will be considered fatal.
+
+.. _command_ppfun_16:
+
+:kbd:`16` Ordering Multiple G and M Codes
+------------------------------------------
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{16},\, \mathit{gcode},\, \mathit{gcode}\;
+   \,\icamrange{0.8}{0}\, \big[\mathit{,gcode}\,\big]`
+
+   :math:`\textbf{PPFUN / -16},\, \mathit{mcode},\, \mathit{mcode}\;
+   \,\icamrange{0.8}{0}\, \big[\mathit{,mcode}\,\big]`
+
+This command will force multiple G or M codes to be output in a
+specific order. List all codes in
+
+the order desired in the tape. The code numbers must fall within the
+range of 0 through 999.9 inclusive. Whenever two or more G or M codes
+appear on one block, they will follow the ordering that was
+requested. PPFUN/16 defines the sequence for G codes, PPFUN/–16
+defines the sequence for M codes. A sequence of up to 20 G or M codes
+can be defined at one time.
+
+To remove any previously defined ordering, the number negative one
+(–1) must appear as the first and only argument on the command. For
+example:
+
+   ::
+
+      PPFUN/16,-1  $$ reset G ordering
+      PPFUN/-16,-1 $$ reset M ordering
+
+.. _string_formatting_ppfun:
+.. _command_ppfun_17:
+
+:kbd:`17` String Formatting
+---------------------------
+
+   :math:`\textbf{PPFUN / 17}, \begin{pmatrix}\,\begin{array}{l} \mathit{level} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command will control formatting of strings on INSERT, DISPLY and
+similar commands. ON is the default and indicates that formatting of
+numeric arguments into text strings will always take place. OFF
+indicates that formatting will never take place. If a number is
+specified, the formatting will take place on macros nested at that
+level and lower. For example, if 1 is specified, string expansion
+will take place for all macros but not for the CL file records. If 2
+is specified, only macros that are invoked by other macros will
+format arguments into strings.
+
+.. _command_ppfun_18:
+
+:kbd:`18` G and M Code Substitution
+-----------------------------------
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{18},\, \big[\,\textbf{NEXT},\big] \, \mathit{gcode}
+   \begin{pmatrix}\begin{array}{l},\mathit{register,value} \\ ,\textbf{OFF} \end{array}\,\end{pmatrix}`
+
+   :math:`\textbf{PPFUN / -18},\, \big[\,\textbf{NEXT},\big] \, \mathit{mcode}
+   \begin{pmatrix}\begin{array}{l},\mathit{register,value} \\ ,\textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command allows the user to substitute a (G) or (M) code with a
+value formatted into a register. PPFUN/18 is used for G codes, –18 is
+used for M codes. The *gcode* and *mcode* parameters specify the code
+to be replaced. The code numbers must fall within the range of 0
+through 999.9 inclusive. The *register* parameter specifies a
+register index either numerically or by descriptor (maximum 6
+characters). The *value* will be output to the specified register
+where ever the G or M code would appear. OFF resets processing back
+to normal for the specified G or M code.
+
+The NEXT option makes the substitution non-modal.
+
+To reset the complete substitution table to the original code values,
+the number negative one (–1) must appear as the first and only
+argument on the command. For example:
+
+   .. code-block::
+
+      PPFUN/18,-1  $$ reset G codes
+      PPFUN/-18,-1 $$ reset M codes
+
+The maximum number of G and M codes that can be substituted, replaced
+or disabled (see PPFUN/ 9) at one time is 80 codes.
+
+.. _command_ppfun_19:
+
+:kbd:`19` G and M Code Block Purge
+----------------------------------
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{19},\, \mathit{gcode} \,\big[,\mathit{flag}\,\big]`
+
+   :math:`\textbf{PPFUN / -19},\, \mathit{mcode} \,\big[,\mathit{flag}\,\big]`
+
+This command allows the user to force block purging before and/or
+after (G) or (M) codes. This
+function is similar to PPFUN/11 except is allows finer control over
+the (G) and (M) registers. PPFUN/19 is used for G codes, –19 is used
+for M codes. The second parameter is the code that triggers the block
+purge. The code numbers must fall within the range of 0 through 999.9
+inclusive. The third parameter is a flag:
+
+: 1: purge before, one shot
+: 2: purge after, one shot
+: 3: purge before and after, one shot
+:–1: purge before, modal
+:–2: purge after, modal
+:–3: purge before and after, modal
+: 0: cancel purge
+
+If the third parameter is not specified, the default is 1 (purge
+before, one shot).
+
+.. _command_ppfun_20:
+
+:kbd:`20` Enabling Radial Distance Registers
+--------------------------------------------
+
+   :math:`\textbf{PPFUN / 20},
+   \begin{pmatrix}\,\begin{array}{l}\textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM}\,\big[,n \,\big] \end{array}\,\end{pmatrix}
+   ,\mathit{register} \,\Big[,\mathit{flag}\,\big[,\mathit{value}\,\big]\Big]`
+
+This command allows the user to enable Radial Distance output (i.e.,
+distance from the tool tip point to the rotary axis vector) for the
+specified rotary axis.
+
+If RAM is specified, the user has to code 1 or 2 to specify the lower
+or upper nutating axis.
+
+*Register* identifies the register to be used for the distance
+output. The user may either specify the index number of the register,
+or a text string (maximum 6 characters) matching one or more leading
+characters of the register’s descriptor (e.g., “R”).
+
+The *flag* optionally sets modality of this register output. You can
+select 0 (default) for non-modal and 1 for modal.
+
+The *value* optionally sets the value of the radial distance that
+turns off the radial distance register.
+
+The following example will enable distance output from the tool tip
+point to the vector of the table C-axis. The output will be modal. R0
+will be output when the rotary axis does not move:
+
+   ::
+
+      PPFUN/20,CAXIS,TABLE,'R',1,0
+
+The user can disable radial distance output for the selected rotary
+by coding:
+
+   ::
+
+      PPFUN/20,CAXIS,TABLE,0
+
+The radial distance output may be enabled and disabled several times
+for rotary axes that are defined in QUEST. Modality and turning off
+value options may only be set when the PPFUN/20 command is issued for
+the first time. These options will be ignored if they are coded on
+the following PPFUN/ 20 commands.
+
+Furthermore, if these options were defined in QUEST, they cannot be
+set in GENER even by the first PPFUN/20 command. The specification of
+these values is common to all rotary axes.
+
+.. _command_ppfun_21:
+
+:kbd:`21` Macro I/O Error Handling
+----------------------------------
+
+   :math:`\textbf{PPFUN / 21}, \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command is used to control the status of macros after an I/O
+error occurs using any one of the OPEN, READ, WRITE or CLOSE macro
+commands. The default action (PPFUN/21,OFF) is to terminate the
+current macro if an I/O error occurs.
+
+Coding PPFUN/21,ON changes the default to allow macros to continue
+after an I/O error. The error return code will be stored in the
+$ERRNO macro system variable (see :ref:`“Error Message Variables”<error_message_variables>`).
+Macros must test for I/O errors and act accordingly since GENER will not output any message to
+indicate an I/O failure.
+
+The PPFUN/21 command is modal and is OFF by default.
+
+.. _command_ppfun_22:
+
+:kbd:`22` Tape File Functions
+-----------------------------
+
+Tape File Wrap-up
+~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{PPFUN / 22}`
+
+This command indicates the point where final tape processing should
+occur. Final tape processing includes the output of deferred
+subprograms, the RWS code and trailer, followed by closure of the
+tape. Once the final tape processing has completed, the tape file can
+be modified using macro I/O commands such as OPEN, READ, WRITE, CLOSE
+and SYSTEM.
+
+Macro variables exist to simplify tape file processing. For example,
+$TAPEN and $TAPENS contain the file names for the primary and
+subprogram tape files (see :ref:`“MCD/Tape Variables<mcd_tape_variables>`).
+$CPPTNP and $CPPTNS are arrays containing the primary and secondary
+
+tape file names for each composite post-processor component (see
+:ref:`“Composite Post-processor Variables”<composite_variables>`).
+
+The PPFUN/22 command is only valid during the machine shutdown macro
+processing.
+
+Tape File Production Status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{PPFUN / 22},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command controls the generation of MCD data (i.e., tape file
+production).
+
+When MCD production is disabled (OFF), further output to the tape
+file or files is stopped, as is output of MCD data to the operator
+listing file and operation of the tape macro (if any). While
+disabled, commands such as INSERT, DISPLY and PPFUN/7 all have no
+effect. However, commands that modally or non-modally change the
+status of registers and codes continue to be processed and will be
+applied once tape production is re-enabled.
+
+Code PPFUN/22,ON to re-enable MCD output.
+
+The tape production can also be set and/or checked using the $TAPACT
+macro variable.
+
+Multiple Tape Files
+~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{PPFUN / 22},
+   \begin{bmatrix}\,\begin{array}{l} \textbf{FRONT} \\ \textbf{REAR} \end{array}\,,\end{bmatrix}
+   \big[\,\textbf{NOW},\big] \,\mathit{file\_name}`
+
+This command indicates that when the next BREAK command is activated,
+it should switch the tape output to the specified file.
+
+When the FRONT keyword is specified, the file is rewound and any
+existing contents of the tape file will be removed. This is the
+default.
+
+When the REAR keyword is specified, the file is positioned at the
+end. The new tape output will be appended to the existing file
+contents.
+
+The NOW keyword will cause an instant change of the tape output file,
+regardless whether BREAK command is active or not. No standard BREAK
+tape sequence is output in this case.
+
+.. _command_ppfun_23:
+
+:kbd:`23` Reset Travel and Timing Data
+--------------------------------------
+
+General recording of Travel and Timing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{23},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command can be used to enable and disable travel limit
+processing, including the recording of travel information. Specify ON
+(the default) to enable travel limit processing; specify OFF to
+disable travel limit processing.
+
+    :math:`\textbf{PPFUN / -23},
+    \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+This command can be used to enable and disable the recording of
+machine timing and tool summary information. Specify ON (the default)
+to enable timing and summary processing; specify OFF to disable
+timing and summary processing.
+
+Enabling, disabling and resetting the tool travel and summary arrays
+will affect the tooling summary information printed in the listing at
+the end of post-processing, unless the reset is done during a
+look-ahead operation.
+
+Recording of Tool Travel and Timing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{23},\,
+   \textbf{TOOL},\mathit{row}`
+
+This command (the TOOL keyword is optional) can be used to zero
+(i.e., reset) the $TLMIN and
+$TLMAX tool travel macro system variable arrays for a specific tool
+index (see :ref:`“Tooling Variables”<tooling_variables>`). Row 1 contains travel for the
+entire program to date. Rows 2 and later contain travel information
+for specific tools. The number of rows is defined by the $TLSIZ macro
+system variable. Use the $TI variable as a row index to reset travel
+information for the current tool. Specify a row number of 0 (zero) to
+reset the entire $TLMIN and $TLMAX arrays.
+
+   :math:`\textbf{PPFUN / -23},\,
+   \textbf{TOOL},\mathit{row}`
+
+This command (the TOOL keyword is optional) can be used to zero
+(i.e., reset) the $TLSUM tool summary system variable array for a
+specific tool index. Row 1 contains information for the dummy tool
+(e.g., tool 0). Rows 2 and later contain summary information for
+specific tools. The number of rows is defined by the $TLSIZ macro
+system variable. Use the $TI variable as a row index to reset summary
+information for the current tool. Specify a row number of 0 (zero) to
+reset the entire $TLSUM array.
+
+Recording of Operation Travel and Timing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{PPFUN / }\hspace{.16cm}\textbf{23},\,
+   \textbf{OP},\mathit{row}`
+
+This command can be used to zero (i.e., reset) the $OPMIN and $OPMAX
+operation travel macro system variable arrays for a specific
+operation index (see :ref:`“Operation Variables”<operation_variables>`).
+Row 1 contains travel for the entire program to date. Rows 2 and
+later contain travel information for specific operations. The number
+of rows is defined by the $OPSIZ macro system variable. Use the $OI
+variable as a row index to reset travel information for the current
+operation. Specify a row number of 0 (zero) to reset the entire
+$OPMIN and $OPMAX arrays.
+
+   :math:`\textbf{PPFUN / -23},\,
+   \textbf{OP},\mathit{row}`
+
+This command can be used to zero (i.e., reset) the $OPSUM operation
+summary system variable array for a specific operation index. Row 1
+contains information for the dummy operation (i.e., data recorded
+before the first operation is specified). Rows 2 and later contain
+summary information for specific operations. The number of rows is
+defined by the $OPSIZ macro system variable. Use the
+$OI variable as a row index to reset summary information for the
+current operation. Specify a row number of 0 (zero) to reset the
+entire $OPSUM array.
+
+.. _command_ppfun_24:
+
+:kbd:`24` Set High Feed Threshold
+----------------------------------
+
+   :math:`\textbf{PPFUN / 24},\, \textbf{RAPID},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{MAXIPM} \\ \textbf{MXMMPM} \\ \textbf{MXPERM} \end{array}\,\end{pmatrix}
+   ,\mathit{feed}`
+
+Path planning optimizations by default look for RAPID motions to
+delimit the start and end of cutting passes. This command can be used
+to set a feed rate threshold that defines a feed positioning motion.
+Path planning will treat feed motions as positioning ones, if the
+interpolation rate exceeds or matches the specified *feed* value. The
+maximum feed threshold can be specified in inches per minute (MAXIPM),
+millimeters per minute (MXMMPM) or CL units per minute (MXPERM).
+
+   :math:`\textbf{PPFUN / 24},\, \textbf{RAPID},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+ON reinstates the last specified feed as the threshold to include
+both RAPID and high feed motions as part of the positioning sequence.
+OFF (the default) only recognizes RAPID motions as positioning ones.
+
+The FEDRAT/RAPID command can also be used to set the high feed
+threshold (see :ref:`“Set High Feed Threshold”<set_high_feed_threshold>`).
+
+.. _command_ppfun_25:
+
+:kbd:`25` Load Tool and Head Tables
+-----------------------------------
+
+   :math:`\textbf{PPFUN / 25}`
+
+This command will cause a look-ahead operation to load the $TLTAB and
+$HLDTAB system variable tables with tooling information (see :ref:`“Tooling Variables”<tooling_variables>`).
+This command can be called at any point in the program and need only be called once.
+
+The following system variables are affected by the PPFUN/25 command:
+
+-  $TLSIZ
+-  $TLTAB
+-  $HLDSIZ
+-  $HLDTAB
