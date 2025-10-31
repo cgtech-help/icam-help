@@ -1,0 +1,65 @@
+.. _command_plot:
+
+The PLOT Command :kbd:`[MLEPC]`
+===============================
+
+The PLOT command is used to control GENER’s output to a backplotting
+file. The following PLOT command functions are available:
+
+-  :ref:`“PLOT Activation”<plot_activation>`
+-  :ref:`“PLOT Transformation”<plot_transformation>`
+
+.. _plot_activation:
+
+PLOT Activation
+---------------
+
+   :math:`\textbf{PLOT / }\begin{pmatrix}\begin{array}{l}\textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+PLOT/ON will start output to a backplot file. This file will contain
+the points and vectors to which the tool will move in the course of
+processing. Such files are normally used for such purposes as NC tool
+path verification.
+
+The user may select the output method and the coordinate type of the
+backplot file. This is done by selecting symbols in the ICAM.DEF
+definition file. The method of output — ISO 3592 binary or APT file —
+is selected using the plot_type symbol. The two valid choices are
+*apt* and *binary*. The coordinate type — CL or Machine — is selected
+using the plot_data symbol. Valid choices are *cl* and *machine*.
+
+For information about macro system variables pertaining to the
+manipulation of PLOT output, see :ref:`“Backplot File Variables”<backplot_file_variables>`.
+
+.. _plot_transformation:
+
+PLOT Transformation
+-------------------
+
+   :math:`\textbf{PLOT / TRFORM } \big[,\textbf{LAST}\,\big]
+   \begin{bmatrix} ,\! \begin{array}{l}\mathtt{<\!matrix\!>} \\ \textbf{ON} \\ \textbf{OFF} \end{array} \end{bmatrix}`
+
+The PLOT/TRFORM command transforms machine coordinate data by the
+specified matrix before outputting it to the back-plot file. This
+command can be used to properly manage back-plotting when outputting
+machine coordinates that have been transformed in some fashion
+outside of GENER’s normal control.
+
+.. note::
+
+   The PLOT/TRFORM command should not be used at the same time
+   as the LCS local coordinate transformation command. LCS already
+   manages plotting transformations.
+
+Two separate transformations can be applied and removed individually.
+PLOT/TRFORM defines the primary transformation, PLOT/TRFORM,LAST
+defines a second transformation.
+
+The <matrix> defines the location and orientation of the resultant
+after-transformation coordinates on the machine, with respect to the
+normal coordinates. The matrix can be specified using the standard
+post-processor transformation syntax (see :ref:`“The ORIGIN Command”<command_origin>`).
+
+The ON and OFF keywords enable or disable plotting transformations.
+OFF ignores the effect of the matrix. ON re-establishes the
+previously specified matrix.
