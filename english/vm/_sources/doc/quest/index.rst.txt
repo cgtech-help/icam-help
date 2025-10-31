@@ -1,0 +1,32 @@
+.. _quest:
+
+QUEST
+*****
+
+ICAM’s Model questionnaire **QUEST** enables the developer to quickly and easily create 
+Virtual Machine models, by graphically defining the kinematics (i.e., axes) and physical components of the CNC machine.
+QUEST also provides the developer with various customization features to fine-tune models.
+
+This section provides details about QUEST and its interface.
+
+.. toctree::
+   :hidden:
+
+   startquest
+   usingquest
+   icamdb
+   customization
+
+-  “:ref:`start_quest`” explains how to start QUEST from the desktop as well as from the Windows command prompt.
+
+   \
+
+-  “:ref:`using_quest`” describes the QUEST interface and other details necessary to effectively create and maintain models.
+
+   \
+
+-  “:ref:`icamdb`” describes model file naming conventions as well as important functions of the Database Navigator window.
+
+   \
+
+-  “:ref:`quest_customization`” describes the customization aspects (e.g., macros) of Virtual Machine in detail.
