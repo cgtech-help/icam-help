@@ -1,0 +1,38 @@
+.. _configuration:
+
+Configuration
+*************
+
+This chapter describes how to tailor Icam Post software to suit the needs of your specific
+installation. It may be of interest to those wanting to understand how the software can be
+configured or to those with CAM systems that do not appear in the standard list of interface kits.
+Others can refer to this chapter to learn how to change the default choice of file types or
+directories, or how to display the software in different languages. These are just a few of
+the many items that can be configured.
+
+.. toctree::
+   :hidden:
+
+   configutil
+   content
+   envvar
+   deffile
+
+-  :ref:`“The ICAM Configuration Utility”<configuration_utility>` describes the preferred
+   method of configuring Icam Post.
+
+   \
+
+-  :ref:`“Installation Content”<installation_content>` describes the contents of the installation
+   and application data directories.
+
+   \
+
+-  :ref:`“Environment Variables”<environment_variables>` lists the key environment variables
+   that control software behavior.
+
+   \
+
+-  :ref:`“The ICAM.DEF File”<def_file>` lists the Icam Post configuration variables.
+
+Other CAM related configuration details are listed in the :ref:`“CAD/CAM System Interfaces”<annex_cadcamsystem>` annex.
