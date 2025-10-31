@@ -1,0 +1,51 @@
+.. _command_clrsrf:
+
+The CLRSRF Command :kbd:`[ML]`
+==============================
+
+This command defines a clearance surface. It is used with the RETRCT
+command to withdraw the tool tip to the clearance surface. A
+clearance surface will remain in effect until changed by a new CLRSRF
+command, or a CLEARP command. This command is valid for lathes and
+3-axis+ mills.
+
+There are three possible ways in which CLRSRF can be programmed. The
+clearance surface can be defined by a point, a plane, or a cylinder.
+
+   :math:`\textbf{CLRSRF / } x,y,z`
+
+   :math:`\textbf{CLRSRF / } a,b,c,d`
+
+   :math:`\textbf{CLRSRF / } x,y,z,i,j,k,r`
+
+   :math:`\textbf{CLRSRF / NOMORE}`
+
+The first format defines a point with coordinates *x,y,z*. A symbolic
+point can generally be used by the APT programmer. When a RETRCT
+command is encountered, the tool will be retracted along the tool
+axis to a plane passing through this point and perpendicular to the
+tool axis.
+
+The second format defines a plane using the canonical form where
+*a,b,c* specify the unit vector that is normal to the plane and *d*
+is the normal distance from the part coordinate origin to the plane.
+A symbolic plane can generally be used by the APT programmer. When a
+RETRCT command is encountered, the tool will be retracted along the
+tool axis until the tool tip rests on this plane.
+
+The last format defines a cylinder using the canonical form where
+*x,y,z* refers to any point in the cylinder axis, *i,j,k* are the
+direction cosines of the cylinder axis and *r* is the radius of the
+cylinder. A symbolic circle or cylinder can generally be used by the
+APT programmer. When a RETRCT command is encountered, the tool will
+be retracted along the tool axis until the tool tip rests on the
+cylinder.
+
+Note that the CLRSRF command only defines the clearance surface, a
+RETRCT command is needed to position the tool tip on the defined
+surface. See :ref:`“The RETRCT Command”<command_retrct>` for more information on tool
+retraction processing.
+
+NOMORE removes the definition of the clearance surface that was
+defined by CLEARP or CLRSRF commands. It is an error to code RETRCT
+without a defined clearance surface.
