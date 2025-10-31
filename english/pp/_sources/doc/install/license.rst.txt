@@ -1,0 +1,226 @@
+
+.. _license_overview:
+
+Licensing Overview
+==================
+
+.. index:: ICAMLS license service
+
+Icam Post, QUEST and other ICAM Productivity Tools require a
+valid license to run. Each license identifies an ICAM program or
+option, the number of simultaneous uses allowed of the license, and
+the date range in which the license is active. Licenses are managed
+by a separate license server program developed by ICAM (called
+ICAMLS) that is constantly running in the background. When an ICAM
+product is started, it communicates over your network with the
+license server program and checks out the appropriate licenses,
+making them unavailable for anyone else. This is called a
+“check-out”. While the product is running, it periodically tells the
+license server that the checked-out licenses are still in use. This
+is called a “heartbeat”. When the product exits, it tells the license
+server to check the licenses back in so they are once again available
+to everyone else. This is called a “check-in”.
+
+.. index:: Cloud licensing
+.. index:: Local licensing
+
+ICAM supports both **Cloud** and **Local** license servers. With
+cloud licenses, the ICAM license server program runs in a computer
+managed by ICAM on the Internet. With local licenses, the ICAM
+license server program runs on a computer within your local network.
+
+.. index:: Node-locked licensing
+.. index:: Floating licensing
+
+There are two types of local license servers: **Node-locked** and
+**Floating**. Node-locked licenses are locked to a specific computer
+(i.e., your desktop or laptop computer) on which both the ICAM
+license server and the ICAM products are run. Floating licenses are
+shared by a group of computers on your local network, with the ICAM
+license server typically running on a separate computer that is
+ideally up 24/7. Cloud licenses are always floating, allowing you to
+access the license from anywhere there is an Internet connection.
+
+.. index:: Permanent license
+.. index:: Unlimited license
+.. index:: Time limited license
+.. index:: Client computer license limit
+
+There are three limits placed on licenses:
+
+-  The first limit is the **range of dates** in which the license is
+   valid. The start date is typically the date on which the license is
+   issued, so in reality you are only concerned with the end date of the
+   license. Leased licenses for example have an end date that matches
+   the lease end date. A “permanent” license has the string “unlimited”
+   as an end date, meaning not limited.
+
+   \
+
+-  The second limit is the **number of copies** of software that are
+   available for simultaneous use. If for example two copies of Icam Post
+   are licensed, then at any given time, no more than two NC programs can be
+   post-processed.
+   You must exit the GENER program to free up the license.
+
+   \
+
+-  The third limit, for cloud and floating license methods, is the
+   **number of client computers** that are entitled to check out
+   licenses. For example, a 2/10 license permits up to ten different
+   computers to share two GENER licenses. The license server log file
+   lists each new computer as it is encountered on a first come / first
+   served basis. Once this limit is reached, new computers (i.e.,
+   those not already on the list) will be refused access. Node-locked
+   licenses have a client count of 1 (one) that restricts the licenses
+   to be used on the same computer as the license server.
+
+.. index:: ICAMLM license manager
+
+ICAM provides a License Manager (ICAMLM) utility that can be used to
+view license availability and to manage the group of client computers
+that share floating and cloud licenses. This utility can be run on
+any computer where ICAM software is installed.
+
+.. _serverconnection:
+
+icam.key server connection file
+-------------------------------
+
+.. index:: icam.key file
+.. index:: File extension; key
+
+Every computer that runs ICAM products must have an **icam.key** file
+that identifies the connection to the ICAM license server. This key
+file generally resides in the ICAM Productivity Tools application
+data directory (e.g., C:\\ProgramData\\ICAM\\260\\icam.key).
+
+-  With **cloud** licenses, the *icam.key* file will be emailed to you
+   by ICAM’s licensing department from
+   `keyfiles@icam.com. <mailto:keyfiles@icam.com>`__ This file contains
+   the web address, port number and security identifier that uniquely
+   identify your cloud license server. This key file must be selected
+   during the Icam Post installation process. The installer will confirm
+   that there is a good connection to the license server.
+
+   \
+
+-  With **node-locked** licenses, the *icam.key* file will be
+   automatically generated for you during the Icam Post installation
+   process. The key file identifies the local computer using a local
+   loop-back address (i.e., 127.0.0.1) and by default uses port 6670 to
+   communicate with the local license server. The port number can be
+   changed during installation.
+
+   \
+
+-  With **floating** licenses, the *icam.key* file will be automatically
+   generated for you during the Icam Post installation process. During
+   the installation you must indicate the hostname or IP address of the
+   ICAM server computer, and the port number used for communications.
+   The installer will confirm that there is a good connection to the
+   license server and create an *icam.key* file with the connection
+   information.
+
+The *icam.key* file is readable, containing a single line that
+identifies the hostname or IP address of the server computer. The
+server identification optionally includes the port number used for
+communications with the server (this defaults to 6670 if not
+specified). For cloud licenses, a unique security string is appended
+that protects your server from being used by anyone else. Some
+examples of key files follow.
+
+A key file for a local floating server with IP address 192.168.1.2
+using default port 6670:
+
+   ::
+
+      000 192.168.1.2
+
+A key file for a local floating server with hostname “myserver” using
+port 55100:
+
+   ::
+
+      000 myserver:55100
+
+A key file for a node-locked license will generally appear as
+follows:
+
+   ::
+
+      000 127.0.0.1:6670
+
+A key file for a cloud license would appear as follows:
+
+   ::
+
+      005 35.238.180.21:50000 d30bc6da-068b-4d59-9eff-16449530bbee
+
+If the key file is not named *icam.key* or if it is not placed in the
+application data directory, you must create an *icam_sec* environment
+variable that defines the path and filename of the key file (see
+:ref:`“Environment Variables”<environment_variables>`).
+
+icamls.key server license file
+------------------------------
+
+.. index:: icamls.key file
+.. index:: File extension; key
+
+Node-locked and floating license servers must have an **icamls.key**
+file. This file lists the ICAM products that are available, the
+simultaneous usage count of each, the start date on which the
+licenses become available and the end date after which they expire
+(licenses with an end date of “unlimited” do not expire). This key
+file will be emailed to you by ICAM’s licensing department from
+`keyfiles@icam.com. <mailto:keyfiles@icam.com>`__ The key file
+generally resides in the ICAM License Server application data
+directory (e.g., C:\\ProgramData\\ICAM\\Server\\icamls.key).
+
+-  With **cloud** licenses, you do not receive an *icamls.key* file
+   since ICAM manages the license server for you on a computer in the
+   cloud.
+
+   \
+
+-  With **node-locked** licenses, the license server runs on the same
+   computer as where the ICAM software products will be run. The license
+   server will be installed and started at the same time as the other
+   products in the ICAM software bundle are installed. The *icamls.key*
+   file must be selected during the Icam Post installation process
+   (described :ref:`here<installation>`).
+
+   \
+
+-  With **floating** licenses, the system administrator must choose a
+   computer in the corporate network that will run the license server.
+   This server computer will share out the ICAM product licenses to
+   other computers (called “clients”) in the network that need to use
+   the ICAM software. The *icamls.key* file must be selected during the
+   license server installation process (described in :ref:`“License Server
+   Installation”<license_server>`). To simplify ICAM product installation, install
+   the license server first and then install Icam Post on the client computers
+   afterwards.
+
+.. index:: ICAMID utility
+
+Node-locked and floating license servers are licensed by ICAM to run
+on a specific computer. For a node-locked license, that computer is
+the same one on which other ICAM software is to be run. With a
+floating license, that computer is the one in your network that will
+service license requests. ICAM licensing uses a unique system ID to
+identify the computer on which the license server will run. You can
+obtain this ID by running an “ICAM ID Security Utility” (called
+*icamid*). This utility is also included with any ICAM installation.
+
+.. image:: ../../media/icamid.png
+   :width: 2.867in
+   :align: right
+
+To get the ICAM ID of a computer, run the *icamid* utility
+and press the large “Generate ICAM System ID Data” button. This will
+create a file named *icamid.txt* in your Documents folder. Attach
+this text file to an email reply back to ICAM. License generation is
+not automatic, so there can be a delay of up to one business day in
+receiving your *icamls.key* file.
