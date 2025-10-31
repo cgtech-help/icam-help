@@ -1,0 +1,46 @@
+Control Emulator Pre-Processors
+===============================
+
+CNC Pre-processors are meant to handle specific NC control syntax for
+the main NC controller brands. The database CE object can identify
+register and codes and handle them accordingly but when there is advance
+syntax, the CERUN processor needs to have a way to handle those without
+requiring the user to write complicated macros.
+
+The pre-processor is selected from the CE questionnaire in the "General
+Information" section at question #7.00.
+
+|image1|
+
+Click the "..." browse button to select one of the available
+pre-processors or use the text box drop-down arrow to reset it to "NA".
+Shown below is the pre-processor selection panel.
+
+|image2|
+
+Here are the available CNC pre-processors:
+
+-  `Fanuc <Fanuc/intro.html>`__
+-  `Heidenhain <Heidenhain/intro.html>`__
+-  `Mazak EIA/ISO <Mazak/intro.html>`__
+-  `Okuma <Okuma/intro.html>`__
+-  `OSAI 10 Series <Osai/intro.html>`__
+-  `Siemens <Siemens/intro.html>`__
+-  `Z32 <Z32/intro.html>`__
+-  `ABB <ABB/intro.html>`__
+
+.. |image1| image:: ./media/fe4180494b8e3fe8c035b16ba73752c3c1070740.gif
+.. |image2| image:: ./media/1bcb01ebfcd45b5ab3d4c319517dd24b0136f806.png
+
+.. toctree::
+   :hidden:
+
+   ABB/intro
+   Fanuc/intro
+   Heidenhain/intro
+   Mazak/intro
+   Okuma/intro
+   Osai/intro
+   Siemens/intro
+   Z32/intro
+
