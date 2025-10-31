@@ -1,0 +1,49 @@
+Welcome to GENER Help
+=====================
+
+The CAM-POST post-processor tape generator “GENER” provides the
+capability to post-process a center line data file (called CLDATA or CL
+for short), which has been created by a CAM system.
+
+GENER does not require that the MACHIN/*postname,n* statement specifying
+the post-processor name be present in the CL line. Instead, the desired
+post-processor can be selected at the start of GENER processing.
+
+Once the tool path (i.e., CL file) is ready, it is time to convert the
+instructions to the format required by your NC machine. This machine
+specific format is sometimes called *tape code* or *NC tape*, which
+refers to the original 8-track paper (mylar) tape format used to
+transfer programs to the NC machine. It is now more commonly referred to
+as the NC control program, or just NC program. CAM-POST GENER is the
+module that makes this transformation.
+
+GENER requires the name of the file containing the tool path data, and
+the name of the post-processor to use to make the transformation. One
+post-processor is required for each NC machine or group of identical
+machines. Additional post-processors can be created for specialized
+purposes (e.g., a post-processor for foam program prove-out might adjust
+the spindle and feed and omit coolant). CAM-POST comes pre-configured to
+run all of the more popular controllers, so you can easily create a
+post-processor to see how things work without actually having to go into
+the details.
+
+|image1|
+
+--------------
+
+(c) Copyright 1983 - 2020 ICAM Technologies Corporation. All rights
+reserved. This notice is intended as a precaution against inadvertent
+publication and does not imply publication or any waiver of
+confidentiality. The years included in this notice are the years of
+creation of the work.
+
+This software has been provided pursuant to a software license agreement
+containing restrictions on its use. The software contains valuable trade
+secrets and proprietary information of ICAM Technologies Corporation and
+is protected by copyright law. It may not be copied or distributed in
+any form or medium, disclosed to third parties, or used in any manner
+not provided for in the software license agreement except with written,
+prior approval from ICAM Technologies Corporation.
+
+.. |image1| image:: ./media/4ede6213bceac6245d4b13b63ceb2983a27431b0.png
+
