@@ -1,0 +1,21 @@
+.. _command_ofstno:
+
+The OFSTNO Command :kbd:`[ML]`
+==============================
+
+The OFSTNO command is used to change in the offset value for the tool
+currently loaded. This command is valid for machines using tool
+correction.
+
+   :math:`\textbf{OFSTNO /} \begin{pmatrix}\begin{array}{l} \mathit{offset} \\ \textbf{NOMORE} \end{array}\end{pmatrix}`
+
+The OFSTNO command must contain either the keyword NOMORE or an
+integer *offset* value.
+
+The *offset* value specifies a correction register to account for the
+difference between requested tool settings and actual settings at the
+machine. The offset number must be zero or a positive integer not
+exceeding the number of offset values available on the machine.
+
+The NOMORE keyword specifies that the offset number last used will be
+canceled.
