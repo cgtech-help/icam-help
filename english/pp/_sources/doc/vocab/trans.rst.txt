@@ -1,0 +1,133 @@
+.. _command_trans:
+
+The TRANS Command :kbd:`[MLEPC]`
+================================
+
+The TRANS command is used to translate coordinates.
+This command is valid for all machine types.
+The following TRANS command functions are available:
+
+-  :ref:`“Parametric TRANS Format”<trans_parametric>`
+-  :ref:`“Axis-Specific TRANS Format”<trans_axis>`
+-  :ref:`“Applying and Removing Last Translation Values”<trans_on_off>`
+
+Two translations can be in effect simultaneously. The
+second translation amount is specified using the TRANS/LAST format,
+which is identical in syntax and functionality to the primary
+translation (omit LAST).
+
+   :math:`\textbf{TRANS / }
+   \big[ \textbf{ LAST}, \big] \; \ldots`
+
+The TRANS command may or may not have a cumulative effect depending
+on responses to QUEST. ICAM recommends that the same method be used
+for all post-processors at an installation. With cumulative
+translation, if one TRANS command translates all coordinates by 1
+unit and a second TRANS command translates them by 2 units, the net
+effect is to translate all coordinates by 3 units. With
+non-cumulative translation, if one TRANS command translates all
+coordinates by 1 unit and a second TRANS command translates them by 2
+post units, the net effect is to translate all coordinates by 2 units
+(i.e., the last translation specified).
+
+.. _trans_parametric:
+
+Parametric TRANS Format
+-----------------------
+
+This command format affects only linear axes and requires them to be
+entered in a set order.
+
+   :math:`\textbf{TRANS / }
+   \big[ \textbf{ LAST}, \big]
+   \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \;,\, \end{bmatrix} \;
+   a,b \,\big[,c \,\big]`
+
+The initial ON or OFF indicates whether the axes translations are
+being set to specific values or are being removed. If omitted, ON is
+assumed (i.e., axes translations are being applied).
+
+The *a*, *b* and *c* scalar values specify in machine coordinates the
+new axis translations. Values must be coded when adding translations:
+Values must not be coded when removing them (i.e., OFF
+coded). The machine axes to which the three scalars are applied
+depends on the machine type and machining mode.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+
+      *  -  Machine
+         -  a
+         -  b
+         -  c
+      *  -  Horizontal lathe in turn mode
+         -  Z
+         -  X
+         -  na
+      *  -  Vertical lathe in turn mode
+         -  X
+         -  Z
+         -  na
+      *  -  Any lathe in mill mode
+         -  X
+         -  Y
+         -  Z
+      *  -  2 axis mill or punch press
+         -  X/U
+         -  Y/V
+         -  na
+      *  -  Other mills
+         -  X/U
+         -  Y/V
+         -  Z/W
+
+.. _trans_axis:
+
+Axis-Specific TRANS Format
+--------------------------
+
+This command format allows translations to be applied to one or more
+axes or removed individually by name. Translations applied to rotary
+axes will be added to (cumulative TRANS), or will replace
+(non-cumulative TRANS), those applied using the ROTABL command with
+no ROTREF coded.
+
+   :math:`\textbf{TRANS / }
+   \big[ \textbf{ LAST}, \big]
+   \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \;,\, \end{bmatrix} \!
+   \icamrange{13}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[ ,n \, \big] \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \, \end{bmatrix} \big[ ,\mathit{value} \, \big] \end{pmatrix}`
+
+The initial ON or OFF indicates whether the translations are being
+added or removed respectively. If omitted, ON is assumed. This can be
+overridden for any specific axis by explicitly coding an ON or OFF
+following the axis name.
+
+See :ref:`here<axis_names>` for a table correlating axes name
+keywords with machine axes.
+
+The scalar *value* must be coded if an axis translation is being
+applied; it must not be coded if the axis translation is being
+removed (i.e., OFF coded). The value specifies the translation amount
+to be applied to the axis represented by the axis specifier.
+
+.. _trans_on_off:
+
+Applying and Removing Last Translation Values
+---------------------------------------------
+
+This command format may be used to quickly remove, or reinstate
+translation amounts for a number of axes at one time.
+
+   :math:`\textbf{TRANS / }
+   \big[ \textbf{ LAST}, \big]
+   \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{bmatrix}`
+
+If TRANS/OFF is coded, the translation amounts currently applied to
+all axes will be removed. After having removed axis translations
+using a TRANS/OFF or TRANS/OFF,XAXIS,YAXIS… command, they may be
+reinstated automatically if TRANS/ON is coded.
+
+Coding TRANS/LAST,OFF and TRANS/LAST,ON removes and reinstates
+secondary axis translations in the same manner.
