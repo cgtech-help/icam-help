@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The CYCLE Command [ML] &mdash; Icam Post V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"tex": {"macros": {"icamrange": ["{\\scriptsize \\raise#1em\\hbox{#2:n}}\\!", 2]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The DEFSUB Command [MLEPC]" href="defsub.html" />
+    <link rel="prev" title="The CUTCOM Command [MLEPC]" href="cutcom.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Icam Post V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../section_intro.html">Icam Post: Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/index.html">General Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../general/aboutpp.html">About Icam Post</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../general/aboutpp.html#types-of-machines-supported">Types of Machines Supported</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../general/postprocessing.html">About Post-Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general/questgener.html">About QUEST and GENER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general/portal.html">About the ICAM Portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index.html">Installation and Upgrade</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install/license.html">Licensing Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icam-key-server-connection-file">icam.key server connection file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icamls-key-server-license-file">icamls.key server license file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/server.html">License Server Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#new-license-server-installation">New license server installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#uninstall-the-license-server">Uninstall the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#repair-the-license-server">Repair the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#upgrade-the-license-server">Upgrade the license server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install.html">Icam Post Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#new-icam-post-installation">New Icam Post installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#uninstall-icam-post">Uninstall Icam Post</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#modify-or-repair-icam-post">Modify or Repair Icam Post</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#upgrade-icam-post-installation">Upgrade Icam Post Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/dbupgrade.html">Database Upgrade Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config/index.html">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../config/configutil.html">The ICAM Configuration Utility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#configuration-storage-and-application-data">Configuration Storage and Application Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-the-desktop">Starting CONFIG from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-a-command-prompt">Starting CONFIG from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-quest-and-gener">Starting CONFIG from QUEST and GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#using-the-configuration-utility">Using the Configuration Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/content.html">Installation Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#installation-directory">Installation directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#application-data-directory">Application Data Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/envvar.html">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config/deffile.html">The ICAM.DEF File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../section_quest.html">QUEST: Post-Processor Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#pre-compiling-macros-for-gener">Pre-Compiling Macros for GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#importing-post-processors">Importing Post-Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/questinout.html">QUEST Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#the-icam-database">The ICAM Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#exported-imported-post-processor">Exported/Imported Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#dedicated-post-processors">Dedicated Post-Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#basic-post-processors">Basic Post-Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#the-quest-listing">The QUEST Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/questinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/questinout.html#standard-listing-format">Standard Listing Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#the-quest-interface">The QUEST Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#creating-a-new-post-processor">Creating a New Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#questionnaire-defaults">Questionnaire Defaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#questionnaire-chapters-and-sections">Questionnaire Chapters and Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#saving-and-generating-your-work">Saving and Generating your work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#testing-your-post-processor">Testing your Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#modifying-an-existing-post-processor">Modifying an Existing Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#wrapping-up">Wrapping Up</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#post-processor-file-name-conventions">Post-Processor File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#post-processors">Post-Processors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/customization.html">Post-Processor Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#startup-shutdown-procedures">Startup/Shutdown Procedures</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#break-startup-shutdown-macros">Break Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#tool-change-startup-shutdown-macros">Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#first-tool-change-startup-shutdown-macros">First Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#cycle-startup-shutdown-macros">CYCLE Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#motion-startup-shutdown-macros">Motion Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#lcs-startup-shutdown-macros">LCS Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#operation-event-macro">Operation Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#register-macro">Register Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#tape-macro">Tape Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#diagnostic-macro">Diagnostic Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-rmd-facility">The RMD Facility</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#tape-editor">Tape Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#the-dialog-editor">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#user-defined-syntax-macros">User Defined Syntax Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#adding-macros">Adding Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#loading-and-exporting-macros">Loading and Exporting macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#macro-editor">Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#ordering-macros">Ordering Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#modifying-and-deleting-macros">Modifying and Deleting Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#file-storage">File Storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../macros/index.html">Post-Processor Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#outputting-the-identifier-or-event-output">Outputting the Identifier or Event (OUTPUT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#invoking-startup-shutdown-procedures">Invoking Startup/Shutdown Procedures</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#break-startup-shutdown-macros">Break Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#first-tool-change-startup-shutdown-macros">First Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#tool-change-startup-shutdown-macros">Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#cycle-startup-shutdown-macros">Cycle Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#motion-startup-shutdown-macros">Motion Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#lcs-startup-shutdown-macros">LCS Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#operation-event-macro">Operation Event Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#register-macro">Register Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#tape-macro">Tape Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#diagnostic-macro">Diagnostic Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#invoking-user-defined-macros">Invoking User Defined Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/invocation.html#sdl-class-subclass">SDL Class:Subclass</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/invocation.html#sdl-arguments">SDL Arguments</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/invocation.html#required-sdl-arguments">Required SDL Arguments</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/invocation.html#optional-sdl-arguments">Optional SDL Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/clrecords.html">Generating CL Records in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clrecords.html#post-processor-commands-in-a-macro">Post-Processor Commands in a Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clrecords.html#suppressing-post-processor-commands">Suppressing Post-Processor Commands</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clrecords.html#outputting-the-matched-record-output">Outputting the Matched Record (OUTPUT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clrecords.html#generating-other-cl-record-types">Generating Other CL Record Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clrecords.html#motion-cl-records">Motion CL Records</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clrecords.html#environment-control-cl-records">Environment Control CL Records</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/clfileio.html">CL File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#repositioning-the-cl-file-search">Repositioning the CL File (SEARCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#reading-a-cl-record-taperd">Reading a CL Record (TAPERD)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#functions-to-examine-the-last-cl-record">Functions to Examine the Last CL Record</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#modifying-the-last-cl-record-clput">Modifying the Last CL Record (CLPUT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#processing-the-last-cl-record-tapewt">Processing the Last CL Record (TAPEWT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#deleting-cl-file-records-tapeop">Deleting CL File Records (TAPEOP)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/clfileio.html#cl-file-processing-examples">CL File Processing Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/ppfuncommand.html">The PPFUN Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#set-error-message-minimum-severity"><kbd class="kbd docutils literal notranslate">1</kbd> Set Error Message Minimum Severity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#set-tape-punching-minimum-severity"><kbd class="kbd docutils literal notranslate">2</kbd> Set Tape Punching Minimum Severity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#creating-custom-error-messages"><kbd class="kbd docutils literal notranslate">3</kbd> Creating Custom Error Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#modifying-time-summaries"><kbd class="kbd docutils literal notranslate">4</kbd> Modifying Time Summaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#assigning-values-to-registers"><kbd class="kbd docutils literal notranslate">7</kbd> Assigning Values to Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#modify-registers"><kbd class="kbd docutils literal notranslate">8</kbd> Modify Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#replace-or-disable-g-and-m-codes"><kbd class="kbd docutils literal notranslate">9</kbd> Replace or Disable G and M Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#disable-block-purging"><kbd class="kbd docutils literal notranslate">10</kbd> Disable Block Purging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#force-block-purging"><kbd class="kbd docutils literal notranslate">11</kbd> Force Block Purging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#linear-and-rotary-axes-frequency"><kbd class="kbd docutils literal notranslate">12</kbd> Linear and Rotary Axes Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#outputting-standard-error-messages"><kbd class="kbd docutils literal notranslate">14</kbd> Outputting Standard Error Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#command-ppfun-15"><kbd class="kbd docutils literal notranslate">15</kbd> Modifying Error Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#ordering-multiple-g-and-m-codes"><kbd class="kbd docutils literal notranslate">16</kbd> Ordering Multiple G and M Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#string-formatting"><kbd class="kbd docutils literal notranslate">17</kbd> String Formatting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#g-and-m-code-substitution"><kbd class="kbd docutils literal notranslate">18</kbd> G and M Code Substitution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#g-and-m-code-block-purge"><kbd class="kbd docutils literal notranslate">19</kbd> G and M Code Block Purge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#enabling-radial-distance-registers"><kbd class="kbd docutils literal notranslate">20</kbd> Enabling Radial Distance Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#macro-i-o-error-handling"><kbd class="kbd docutils literal notranslate">21</kbd> Macro I/O Error Handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#tape-file-functions"><kbd class="kbd docutils literal notranslate">22</kbd> Tape File Functions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/ppfuncommand.html#tape-file-wrap-up">Tape File Wrap-up</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/ppfuncommand.html#tape-file-production-status">Tape File Production Status</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/ppfuncommand.html#multiple-tape-files">Multiple Tape Files</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#reset-travel-and-timing-data"><kbd class="kbd docutils literal notranslate">23</kbd> Reset Travel and Timing Data</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/ppfuncommand.html#general-recording-of-travel-and-timing">General recording of Travel and Timing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/ppfuncommand.html#recording-of-tool-travel-and-timing">Recording of Tool Travel and Timing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/ppfuncommand.html#recording-of-operation-travel-and-timing">Recording of Operation Travel and Timing</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#set-high-feed-threshold"><kbd class="kbd docutils literal notranslate">24</kbd> Set High Feed Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/ppfuncommand.html#load-tool-and-head-tables"><kbd class="kbd docutils literal notranslate">25</kbd> Load Tool and Head Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/macrolookahead.html">Macro Look-Ahead Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#standard-look-ahead-searches">Standard Look-Ahead Searches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#look-ahead-variables">Look-Ahead Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#variable-look-ahead-mechanism">Variable Look-Ahead Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#limitations-of-look-ahead-processing">Limitations of Look-Ahead Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#testing-for-look-ahead-mode">Testing for Look-Ahead Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#forcing-a-particular-look-ahead-result">Forcing a Particular Look-Ahead Result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#flook-generic-look-ahead">$FLOOK Generic Look-ahead</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#ending-a-look-ahead-using-the-look-macro-system-variable">Ending a Look-ahead using the $LOOK Macro System Variable</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#effect-of-duplicate-and-nested-flook-functions">Effect of Duplicate and Nested $FLOOK Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#effect-of-fini-on-flook">Effect of FINI on $FLOOK</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#finfo-operation-look-ahead">$FINFO Operation Look-ahead</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#operation-status-at-start-of-cut">Operation status at start of cut</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#operation-processing-conditions">Operation processing conditions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#operation-key-motion-data">Operation key motion data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#operation-user-defined-variables">Operation user-defined variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#ending-a-finfo-look-ahead">Ending a $FINFO look-ahead</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/macrolookahead.html#operation-event-look-ahead">Operation Event Look-ahead</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#id4">Operation status at start of cut</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#operation-key-motion-data-1">Operation key motion data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#operation-event-macro-processing">Operation event macro processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/macrolookahead.html#ending-an-operation-event-look-ahead">Ending an operation event look-ahead</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#register-index-output-formats">Register Index Output Formats</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#predefined-register-output-format">Predefined Register Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#current-predefined-register-value">Current Predefined Register Value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#back-plot-file-variables">Back-plot file variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#canned-cycle-variables">Canned cycle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#composite-post-processor-variables">Composite post-processor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#constants">Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#contouring-variables">Contouring variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#conversion-factor-variables">Conversion factor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#coolant-feed-rate-and-spindle-variables">Coolant feed rate and spindle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#cutter-compensation-variables">Cutter compensation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#error-message-variables">Error message variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#lathe-variables">Lathe variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#look-ahead-variables">Look-ahead variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#licensed-option-variables">Licensed option variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machine-and-workpiece-coordinate-variables">Machine and Workpiece coordinate variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machining-time-variables">Machining time variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#macro-variables">Macro variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#mcd-tape-variables">MCD/Tape variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#miscellaneous-variables">Miscellaneous variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#motion-related-variables">Motion related variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#operation-variables">Operation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#post-processor-variables">Post-processor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#post-processor-verification-listing-variables">Post-processor verification listing variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#subprogram-variables">Subprogram variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#tooling-variables">Tooling variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/constantvar.html">Variables Defining Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coordinatevar.html">Machine, CL &amp; Workpiece Coordinate Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/motionvar.html">Motion-Related Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/lookaheadvar.html">Look-Ahead Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/conversionvar.html">Conversion Factor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coolfedspinvar.html">Coolant, Feed Rate and Spindle Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cuttercompvar.html">Cutter Compensation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/opvar.html">Operation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/toolvar.html">Tooling Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/lathevar.html">Lathe Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/contourvar.html">Contouring Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cyclevar.html">Automated Canned Cycle Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#drill-cycle-variables">Drill Cycle Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#thread-cycle-variables">Thread Cycle Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/tapevar.html">MCD/Tape Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/backplotvar.html">Backplot File Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/machtimevar.html">Machining Time Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Post-Processor Definition Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/listingvar.html">Verification Listing Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/errorvar.html">Error Message Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/compositevar.html">Composite Post-Processor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/subprogvar.html">Subprogram Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/licensevar.html">Licensed Option Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/licensevar.html#arc-and-spline-fitting-variables">Arc and Spline Fitting Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/licensevar.html#high-speed-machining-variables">High Speed Machining Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/licensevar.html#smartpath-variables">SmartPATH Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/licensevar.html#smartcut-variables">SmartCUT Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/licensevar.html#smartfeed-variables">SmartFEED Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/miscvar.html">Miscellaneous Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/mathfunc.html">Mathematical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/numericfunc.html">Numeric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/geometricfunc.html">Geometric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/vectorfunc.html">Vector Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/matrixfunc.html">Matrix Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conditionalfunc.html">Conditional Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conversionfunc.html">Conversion Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/charseqfunc.html">Character and Sequence Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/commandlinefunc.html">Command Line Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/filedirecfunc.html">File and Directory Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/cldatafunc.html">CL Data Parsing Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../section_gener.html">GENER: The Post-Processor</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../gener/index.html">GENER</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gener/startgener.html">Starting GENER</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../gener/startgener.html#starting-gener-from-an-extractor">Starting GENER from an Extractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/startgener.html#starting-gener-from-the-desktop">Starting GENER from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/startgener.html#starting-gener-from-a-command-prompt">Starting GENER from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/startgener.html#starting-pse-from-a-command-prompt">Starting PSE from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/startgener.html#gener-return-codes">GENER Return Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/startgener.html#the-launch-panel">The Launch Panel</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#gener-tab">GENER Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#vm-tab">VM Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#preferences-tab">Preferences Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#options-dialog">Options Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#cam-dialog">CAM Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#db-manager">DB Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/startgener.html#job-button">JOB Button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../gener/generinout.html">GENER Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../gener/generinout.html#input-cl-file">Input CL File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/generinout.html#output-nc-program-file">Output NC Program File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/generinout.html#output-verification-listing">Output Verification Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../gener/generinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/generinout.html#standard-listing-format">Standard Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/generinout.html#identification-page">Identification Page</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/generinout.html#the-nc-control-tape-listing">The NC Control Tape Listing</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#title-block">Title Block</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#display-data">Display Data</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/generinout.html#summary-data">Summary Data</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#section-summary">Section Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#page-summary">Page Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#tooling-summary">Tooling Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#tool-flute-length-summary">Tool Flute Length Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#tool-travel-summary">Tool Travel Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#machining-time-summary">Machining Time Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/generinout.html#diagnostic-summary">Diagnostic Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/generinout.html#output-log-file">Output Log File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/generinout.html#output-review-file">Output Review File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/generinout.html#output-backplot-file">Output Backplot File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../gener/usinggener.html">Using GENER</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../gener/usinggener.html#diagnostics">Diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/usinggener.html#tracing">Tracing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/usinggener.html#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/usinggener.html#debugging">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gener/usinggener.html#menus">Menus</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/file.html">File Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/run.html">Run Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/view.html">View Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/debug.html">Debug Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/simulation.html">Simulation Menu</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/main.html">Simulation»Virtual Machine</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/controller.html">Simulation»Controller</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/controller.html#simulationcontroller-code-groups">Simulation»Controller: Code Groups</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/controller.html#simulationcontroller-ppfun">Simulation»Controller: PPFUN</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/mode.html">Simulation»Mode</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/toolholderhead.html#tools">Tools</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/toolholderhead.html#holders">Holders</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/show.html">Simulation»Show</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowtool-path-ctrl-t">Simulation»Show»Tool Path (Ctrl T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowtool-vector">Simulation»Show»Tool Vector</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t">Simulation»Show»Tool Path as Overlay (Ctrl Shift T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowfilters">Simulation»Show»Filters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowcross-section">Simulation»Show»Cross Section</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowworkpiece-coords-ctrl-w">Simulation»Show»Workpiece Coords (Ctrl W)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshownext-display-ctrl-d">Simulation»Show»Next Display (Ctrl D)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/show.html#simulationshowprevious-display-ctrl-shift-d">Simulation»Show»Previous Display (Ctrl Shift D)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/selection.html#simulationselectionhide-in-view-ctrl-b">Simulation»Selection»Hide in View (Ctrl B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/selection.html#simulationselectionhide-in-all-views">Simulation»Selection»Hide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b">Simulation»Selection»Show All/Rehide (Ctrl Alt B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/selection.html#simulationselectionshow-all-rehide-in-all-views">Simulation»Selection»Show All/Rehide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b">Simulation»Selection»Invert Hide State (Ctrl Shift B)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../gener/simulation/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/setup.html">Simulation»Open Setup</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../gener/simulation/setup.html#simulationsave-setup">Simulation»Save Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/tools.html">Tools Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/window.html">Window Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../gener/uirmenus/help.html">Help Menu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Post-Processor Vocabulary</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="air.html">The AIR Command <kbd class="kbd docutils literal notranslate">[MLPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="am.html">The AM Command <kbd class="kbd docutils literal notranslate">[MLC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="apply.html">The APPLY Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="apply.html#milling-vs-turning-for-c-axis-lathes">Milling vs. Turning for C Axis Lathes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="apply.html#punching-vs-contouring">Punching vs. Contouring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="apply.html#composite-machines">Composite Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arcslp.html">The ARCSLP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arcslp.html#d-arc-control">2D Arc Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arcslp.html#id1">3D Arc Control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="assist.html">The ASSIST Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="auxfun.html">The AUXFUN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="break.html">The BREAK Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="calsub.html">The CALSUB Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="channl.html">The CHANNL Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clamp.html">The CLAMP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="clamp.html#parametric-clamp-format">Parametric CLAMP Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="clamp.html#axis-specific-clamp-format">Axis-Specific CLAMP Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="clamp.html#table-clamping-for-punch-presses">Table Clamping for Punch Presses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="clamp.html#linear-positioning-with-rotary-axes">Linear Positioning with Rotary Axes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="clearp.html">The CLEARP Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="clrsrf.html">The CLRSRF Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="coolnt.html">The COOLNT Command <kbd class="kbd docutils literal notranslate">[MLE]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="coolnt.html#primary-coolant">Primary Coolant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coolnt.html#coolant-pressure">Coolant Pressure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coolnt.html#auxiliary-coolant">Auxiliary Coolant</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="couple.html">The COUPLE Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cutcom.html">The CUTCOM Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#diameter-compensation">Diameter Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#diameter-compensation-cornering">Diameter Compensation Cornering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#diameter-compensation-offset">Diameter Compensation Offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#diameter-compensation-filleting">Diameter Compensation Filleting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#d-tool-compensation">3D Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#fixture-compensation">Fixture Compensation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="cutcom.html#per-axis-fixture-compensation">Per-Axis Fixture Compensation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cutcom.html#all-axes-fixture-compensation">All-Axes Fixture Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="cutcom.html#rotary-table-dynamic-fixture-compensation">Rotary Table Dynamic Fixture Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The CYCLE Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-cycle-on-command">The CYCLE/ON Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-cycle-off-command">The CYCLE/OFF Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-cycle-auto-command">The CYCLE/AUTO Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-cycle-return-command">The CYCLE/RETURN Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-cycle-parameters">Common Cycle Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#depth-of-operation">Depth of Operation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#cutting-feed">Cutting Feed</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#clearance-height">Clearance Height</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#common-cycle-options">Common Cycle Options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#return-height">Return Height</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#additional-rapid-plunge">Additional Rapid Plunge</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#dwell">Dwell</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#the-drill-cycle">The DRILL Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-face-cycle">The FACE Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-tap-cycle">The TAP Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-bore-cycle">The BORE Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-bore-back-cycle">The BORE-BACK Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-ream-cycle">The REAM Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-drill-deep-cycle">The DRILL-DEEP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#absolute-step-format">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#incremental-step-format">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#the-tap-deep-cycle">The TAP-DEEP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id1">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id2">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id3">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#the-drill-brkchp-cycle">The DRILL-BRKCHP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id4">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id5">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id6">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#the-tap-brkchp-cycle">The TAP-BRKCHP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id7">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id8">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id9">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#the-thru-cycle">The THRU Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-csink-cycle">The CSINK Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-manual-cycle">The MANUAL Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="defsub.html">The DEFSUB Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="defsub.html#subprogram-definition">Subprogram Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="defsub.html#subprogram-output">Subprogram Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="defsub.html#index-and-copy-behavior">Index and Copy Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="delay.html">The DELAY Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="disply.html">The DISPLY Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="end.html">The END Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="endsub.html">The ENDSUB Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fedrat.html">The FEDRAT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#feed-rate-value-and-mode">Feed Rate Value and Mode</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="fedrat.html#general-syntax">General Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="fedrat.html#wire-edm-syntax">Wire EDM Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="fedrat.html#punch-press-syntax">Punch Press Syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#inverse-time-selection">Inverse Time Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#set-high-feed-threshold">Set High Feed Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#feed-rate-limiting">Feed Rate Limiting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#feed-rate-coverage-control">Feed Rate Coverage Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#feed-scaling">Feed Scaling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fedrat.html#feed-adjustment">Feed Adjustment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gohome.html">The GOHOME Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="head.html">The HEAD Command <kbd class="kbd docutils literal notranslate">[LEC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="head.html#merging-lathes">Merging Lathes</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="head.html#the-non-merge-mode">The Non-Merge Mode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="head.html#the-merge-mode">The Merge Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="head.html#axis-wire-edm-machines">4-Axis Wire EDM Machines</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="head.html#id2">The Non-Merge Mode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="head.html#id3">The Merge Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="head.html#contouring-heads">Contouring Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="homept.html">The HOMEPT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="homept.html#reference-home-position-definition">Reference Home Position Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="homept.html#machine-home-position-definition">Machine Home Position Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="homept.html#reset-home-position">Reset Home Position</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="indpos.html">The INDPOS Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="insert.html">The INSERT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcs.html">The LCS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lcs.html#fixed-lcs-formats">Fixed LCS Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lcs.html#automatic-lcs-formats">Automatic LCS Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lcs.html#lcs-activation-deactivation">LCS Activation/Deactivation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="leader.html">The LEADER Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="limit.html">The LIMIT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#travel-limit-checking">Travel Limit Checking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#travel-limit-tool-compensation">Travel Limit Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#travel-limit-fixture-compensation">Travel Limit Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#travel-limit-frame-transformation">Travel Limit Frame Transformation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#preferred-rotary-solution-modulo-360-range">Preferred Rotary Solution – Modulo-360 Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#preferred-rotary-solution-physical-range">Preferred Rotary Solution – Physical Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#limit-based-cartesian-polar-switching">Limit Based Cartesian-Polar Switching</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="limit.html#polar-interpolation-switching">Polar Interpolation Switching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="limit.html#polar-emulation-switching">Polar Emulation Switching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="limit.html#polar-switching-activation">Polar Switching Activation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="limit.html#limit-based-singular-positioning">Limit Based Singular Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lintol.html">The LINTOL Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-activation">Linearization Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-tool-tip-tolerance">Linearization Tool-Tip Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-tool-length-adjustment">Linearization Tool Length Adjustment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-angular-tolerance">Linearization Angular Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-stepping-control">Linearization Stepping Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#singularity-push-thru">Singularity Push-Thru</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#tool-tip-only-linearization">Tool-Tip-Only Linearization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-with-rtcp">Linearization with RTCP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-spline-fitting">Linearization Spline Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#rotary-turn-around">Rotary Turn-Around</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#linearization-path-planning">Linearization Path Planning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#forced-path-planning-scan">Forced Path-Planning Scan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#singular-pre-positioning">Singular Pre-Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lintol.html#rotary-winding">Rotary Winding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="load.html">The LOAD Command <kbd class="kbd docutils literal notranslate">[MLEP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="load.html#wire-edm-machines">Wire EDM machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="load.html#punch-press-machines">Punch Press machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="load.html#mill-and-lathe-machines">Mill and Lathe machines:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="loadtl.html">The LOADTL Command <kbd class="kbd docutils literal notranslate">[MLEP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loadtl.html#wire-edm-machines">Wire EDM machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loadtl.html#punch-press-machines">Punch Press machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loadtl.html#mill-and-lathe-machines">Mill and Lathe machines:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="locate.html">The LOCATE Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="locate.html#parametric-format">Parametric Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locate.html#axis-specific-format">Axis-Specific Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locate.html#applying-and-removing-last-preset-positioning-offset">Applying and Removing Last Preset Positioning Offset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lprint.html">The LPRINT Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="machin.html">The MACHIN Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mchtol.html">The MCHTOL Command <kbd class="kbd docutils literal notranslate">[MLPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mchtol.html#exact-stop-machining-tolerance">Exact-Stop Machining Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mchtol.html#high-speed-machining-tolerance">High Speed Machining Tolerance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mode.html">The MODE Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#absolute-vs-incremental-positioning">Absolute vs. Incremental Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#diameter-vs-radius-positioning">Diameter vs. Radius Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#polar-interpolation">Polar Interpolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#polar-emulation">Polar Emulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#rotating-tool-center-point">Rotating Tool Center Point</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#axis-post-processing-functions">6-Axis Post-Processing Functions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mode.html#cancel-6-axis-processing">Cancel 6-Axis Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="mode.html#shared-linear-axes">Shared Linear Axes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="mode.html#tri-rotary-interpolation">Tri-Rotary Interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#skip-code">Skip Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#arc-and-helix-fitting">Arc and Helix Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#spline-fitting">Spline Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#turning-curve-fitting-off">Turning Curve Fitting Off</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mode.html#pattern-fitting">Pattern Fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="moveto.html">The MOVETO Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="msys.html">The MSYS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ofstno.html">The OFSTNO Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="opname.html">The OPNAME Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="opskip.html">The OPSKIP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="opstop.html">The OPSTOP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="optype.html">The OPTYPE Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="origin.html">The ORIGIN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="partno.html">The PARTNO Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pendwn.html">The PENDWN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="penup.html">The PENUP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pitch.html">The PITCH Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pivotz.html">The PIVOTZ Command <kbd class="kbd docutils literal notranslate">[EP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pivotz.html#punch-presses">Punch Presses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pivotz.html#wire-edm-machines">Wire EDM Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html">The PLOT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot.html#plot-activation">PLOT Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot.html#plot-transformation">PLOT Transformation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="power.html">The POWER Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pprint.html">The PPRINT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prefun.html">The PREFUN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rapid.html">The RAPID Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="retrct.html">The RETRCT Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rewind.html">The REWIND Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rotabl.html">The ROTABL Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rotabl.html#position-rotary-axis">Position Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rotabl.html#unwind-rotary-axis">Unwind Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rotabl.html#preferred-singular-rotary-axis">Preferred Singular Rotary Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="safety.html">The SAFETY Command <kbd class="kbd docutils literal notranslate">[MLC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="safety.html#modal-safety-setting">Modal Safety Setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="safety.html#safe-positioning-motion-squaring">Safe Positioning Motion Squaring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="safety.html#safe-positioning-motion-splitting">Safe Positioning Motion Splitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="safety.html#safe-positioning-path-selection">Safe Positioning Path Selection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="safpos.html">The SAFPOS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="safpos.html#reference-tool-head-change-position">Reference Tool/Head Change Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="safpos.html#machine-tool-head-change-position">Machine Tool/Head Change Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="safpos.html#reset-tool-head-change-position">Reset Tool/Head Change Position</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="selctl.html">The SELCTL Command <kbd class="kbd docutils literal notranslate">[MLP]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="select.html">The SELECT Command <kbd class="kbd docutils literal notranslate">[MLP]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="seqno.html">The SEQNO Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="shuttr.html">The SHUTTR Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartp.html">The SMARTP Command <kbd class="kbd docutils literal notranslate">[M]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="smartp.html#smartpath">SmartPATH</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="smartp.html#positioning-clearance">Positioning Clearance:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="smartp.html#positioning-velocity">Positioning Velocity:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="smartp.html#reference-home-positioning">Reference Home Positioning:</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="smartp.html#smartcut">SmartCUT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="smartp.html#air-cut-clearance">Air-cut Clearance:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="smartp.html#air-cut-velocity">Air-cut Velocity:</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="smartp.html#smartfeed">SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spindl.html">The SPINDL Command <kbd class="kbd docutils literal notranslate">[MLEP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spindl.html#wire-edm-machines">Wire EDM Machines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spindl.html#punch-presses">Punch Presses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spindl.html#mills-and-lathes">Mills and Lathes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="stop.html">The STOP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="synctr.html">The SYNCTR Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="thread.html">The THREAD Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#single-pass-thread">Single Pass Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#multi-pass-thread">Multi-Pass Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#specifying-the-thread-depth">Specifying the Thread Depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#specifying-the-thread-entry">Specifying the Thread Entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#specifying-the-thread-chamfer-and-exit">Specifying the Thread Chamfer and Exit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#specifying-the-thread-size">Specifying the Thread Size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html#specifying-the-thread-contour">Specifying the Thread Contour</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tlmark.html">The TMARK Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tlname.html">The TLNAME Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolno.html">The TOOLNO Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="toolno.html#tool-parameters">Tool Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toolno.html#head-parameters">Head Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="torch.html">The TORCH Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="tprint.html">The TPRINT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trans.html">The TRANS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="trans.html#parametric-trans-format">Parametric TRANS Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trans.html#axis-specific-trans-format">Axis-Specific TRANS Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trans.html#applying-and-removing-last-translation-values">Applying and Removing Last Translation Values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="turret.html">The TURRET Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="unload.html">The UNLOAD Command <kbd class="kbd docutils literal notranslate">[MLE]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="unload.html#wire-edm-machines">Wire EDM machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="unload.html#mill-and-lathe-machines">Mill and Lathe machines:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vtlaxs.html">The VTLAXS Command <kbd class="kbd docutils literal notranslate">[M]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vtlaxs.html#rotary-axis-tolerance">Rotary Axis Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vtlaxs.html#tool-vector-tolerance">Tool Vector Tolerance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cldata.html">Other CL File Commands Affecting Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-isn-command">The ISN Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-tracut-command">The TRACUT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-index-command">The INDEX Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-copy-command">The COPY Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-block-command">The BLOCK Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-defcopy-and-copy-commands">The DEFCOPY and COPY Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-from-command">The FROM Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-godlta-command">The GODLTA Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-goto-command">The GOTO Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-cont-command">The CONT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-move-command">The MOVE Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-movarc-command">The MOVARC Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-dntcut-and-cut-commands">The DNTCUT and CUT Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-toler-intol-and-outtol-commands">The TOLER, INTOL and OUTTOL Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-cutter-command">The CUTTER Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-multax-command">The MULTAX Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-units-command">The UNITS Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-tlaxis-command">The TLAXIS Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-fini-command">The FINI Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-contrl-command">The CONTRL Command</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#input-card-length">Input Card Length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#output-listing-control">Output Listing Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#setting-internal-epsilon">Setting Internal Epsilon</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#diagnostic-message-control">Diagnostic Message Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#circular-interpolation-direction-control">Circular Interpolation Direction Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#circle-record-type-control">Circle Record Type Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#circle-quadrant-segmentation">Circle Quadrant Segmentation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#multi-point-motion-control">Multi-point Motion Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#tracut-command-processing">TRACUT Command Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#index-and-copy-command-processing">INDEX and COPY Command Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#block-defcopy-and-copy-command-processing">BLOCK, DEFCOPY and COPY Command Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cldata.html#nested-copy-matrix-multiplication">Nested COPY Matrix Multiplication</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-includ-command">The INCLUD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-ppword-command">The PPWORD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-syn-command">The SYN Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cldata.html#the-synex-command">The SYNEX Command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../diag/index.html">Diagnostic Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../diag/geninfo.html">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/modify.html">Modifying Diagnostic Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/errorfile.html">Error File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back/annex.html">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../back/characterset.html">Character Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/majorword.html">Post-Processor Major Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/minorword.html">Post-Processor Minor Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/reservedwords.html">Reserved Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/userdefquest.html">User-Defined Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#question-tags">Question Tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#s-user-defined-section">/S User-defined section</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#q-number-type">/Q number type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#p-prompt-text-or-short-description-text">/P prompt text, or short description text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#t-question-text">/T question text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#d-default-answer">/D default answer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#l-response-location">/L response location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#o-options">/O options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#comment-character">! comment character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#case">CASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cchar">CCHAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cvalue">CVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#ivalue">IVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#wvalue">WVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#yesno">YESNO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#macro-system-variables">Macro System Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../back/cadcaminterface.html">CAD/CAM System Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/cadcaminterface.html#cam-interface-kits">CAM Interface Kits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../back/cadcaminterface.html#selecting-a-cam-interface">Selecting a CAM Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/cadcaminterface.html#typical-interface-kit-files">Typical Interface Kit Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/cadcaminterface.html#creating-or-modifying-interface-kits">Creating or Modifying Interface Kits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../back/cadcaminterface.html#cam-integration-setup">CAM Integration Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../back/cadcaminterface.html#cam-selection">CAM Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/cadcaminterface.html#cam-integration">CAM Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../back/ppmacrosample.html">Post-Processor Macro Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/ppmacrosample.html#macro-example-1">Macro Example #1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/ppmacrosample.html#macro-example-2">Macro Example #2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/ppmacrosample.html#macro-example-3">Macro Example #3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Icam Post V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../section_gener.html">GENER: The Post-Processor</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Post-Processor Vocabulary</a></li>
+      <li class="breadcrumb-item active">The CYCLE Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-cycle-command-ml">
+<span id="command-cycle"></span><h1>The CYCLE Command <kbd class="kbd docutils literal notranslate">[ML]</kbd><a class="headerlink" href="#the-cycle-command-ml" title="Link to this heading"></a></h1>
+<p>The CYCLE command is used to perform drilling, tapping and boring
+operations. These operations can be performed automatically by some
+machine controls using the ISO 1056 G81-G89 cycle codes. If your
+machine does not have this capability, GENER can emulate cycles using
+point-to-point motions if desired. This command is valid for lathes
+and milling machines having a Z axis.</p>
+<p>The following CYCLE command functions are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#cycle-on"><span class="std std-ref">“The CYCLE/ON Command”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-off"><span class="std std-ref">“The CYCLE/OFF Command”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-auto"><span class="std std-ref">“The CYCLE/AUTO Command”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-return"><span class="std std-ref">“The CYCLE/RETURN Command”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-parameters"><span class="std std-ref">“Common Cycle Parameters”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-options"><span class="std std-ref">“Common Cycle Options”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-drill"><span class="std std-ref">“The DRILL Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-face"><span class="std std-ref">“The FACE Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-tap"><span class="std std-ref">“The TAP Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-bore"><span class="std std-ref">“The BORE Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-bore-back"><span class="std std-ref">“The BORE-BACK Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-ream"><span class="std std-ref">“The REAM Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-drill-deep"><span class="std std-ref">“The DRILL-DEEP Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-tap-deep"><span class="std std-ref">“The TAP-DEEP Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-drill-brkchp"><span class="std std-ref">“The DRILL-BRKCHP Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-tap-brkchp"><span class="std std-ref">“The TAP-BRKCHP Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-thru"><span class="std std-ref">“The THRU Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-csink"><span class="std std-ref">“The CSINK Cycle”</span></a></p></li>
+<li><p><a class="reference internal" href="#cycle-manual"><span class="std std-ref">“The MANUAL Cycle”</span></a></p></li>
+</ul>
+<p>GENER supports two syntax formats for the CYCLE language. An obsolete
+ISO 4343:1978 standard format uses fixed position parameters. This
+format is not documented. The newer ISO 4343:2000 standard format
+uses “keyword,value” couplets instead of fixed parameters. It is this
+newer format that is documented here.</p>
+<p>The following is a summary of the cycle types and their parameters:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE /} \begin{pmatrix}\,\begin{array}{l} \textbf{DRILL} \\ \textbf{FACE} \\ \textbf{TAP} \\ \textbf{BORE} \\ \textbf{BORE},\textbf{BACK} \\ \textbf{REAM} \end{array}\end{pmatrix} \, \mathtt{,&lt;\!depth\!&gt;} \, \mathtt{,&lt;\!feed\!&gt;} \, \big[ \mathtt{,&lt;\!clear\!&gt;} \big] \, \big[ \mathtt{,&lt;\!options\!&gt;} \big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / } \begin{bmatrix}\,\begin{array}{l} \textbf{DRILL} \\ \textbf{TAP} \end{array}\,\end{bmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{DEEP} \\ \textbf{BRKCHP} \end{array}\end{pmatrix} \mathtt{,&lt;\!depth\!&gt;} \, \big[ \mathtt{,&lt;\!steps\&amp;feeds\!&gt;} \big] \, \big[ \mathtt{,&lt;\!clear\!&gt;} \big] \, \big[ \mathtt{,&lt;\!options\!&gt;} \big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / THRU} \mathtt{,&lt;\!depth\!&gt;} \, \mathtt{,&lt;\!step\_data\!&gt;} \, \mathtt{,&lt;\!feed\!&gt;} \, \big[ \mathtt{,&lt;\!clear\!&gt;} \big] \, \big[ \mathtt{,&lt;\!options\!&gt;} \big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / CSINK} \mathtt{,&lt;\!odia\!&gt;} \, \mathtt{,&lt;\!angle\!&gt;} \, \big[ \mathtt{,&lt;\!idia\!&gt;} \big] \, \mathtt{,&lt;\!feed\!&gt;} \, \big[ \mathtt{,&lt;\!clear\!&gt;} \big] \, \big[ \mathtt{,&lt;\!options\!&gt;} \big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / MANUAL} \, \mathtt{,&lt;\!clear\!&gt;}\)</span></p>
+</div></blockquote>
+<p>The following is a summary of other cycle control commands:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / ON } \big[ \mathtt{,&lt;\!parameters\!&gt;} \big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / } \begin{pmatrix}\begin{array}{l} \textbf{OFF} \\ \textbf{NOMORE} \end{array}\end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / AUTO} \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{CYCLE / RETURN} \ldots\)</span></p>
+</div></blockquote>
+<p>GENER will treat all motions between the CYCLE/<em>type</em> and CYCLE/OFF
+(or CYCLE/NOMORE)</p>
+<p>commands as the reference points for cycle processing. Cycle
+dimensions, such as clearance and depth, are defined as signed
+distances measured along the tool axis relative to these reference
+points. Note that not all parameters have the same positive sense
+(e.g., clearance and depth are opposite) and some parameters are
+unsigned (e.g., stepping distance).</p>
+<p>RAPID motions encountered during a cycle are considered to be
+out-of-cycle avoidance moves. No cycle action will be performed (nor
+clearance applied) at a RAPID motion point. A RAPID coded before the
+CYCLE/<em>type</em> command will not affect the first motion point in the
+cycle (however, a RAPID coded immediately after the CYCLE/<em>type</em>
+command will affect the first motion).</p>
+<p>The cycle in-feed must be specified on the CYCLE/<em>type</em> command. Any
+FEDRAT rate specification coded during a cycle will be diagnosed with
+a warning and ignored. The original feed rate in effect before the
+cycle will be reinstated following the cycle.</p>
+<p>CYCLE commands can generally be coded without regard to whether or
+not the machine provides a corresponding built-in (or canned) cycle.
+GENER will use built-in cycles where possible and where necessary
+will emulate a cycle using rapid positioning and linear interpolation
+motions, or even other available built-in cycles. When emulating a
+multi-axis cycle plunge or retract along the tool axis, GENER may use
+high feed interpolation instead of a positioning motion if QUEST
+settings indicate that the positioning axes move independently (see
+<a class="reference internal" href="../variables/motionvar.html#var-raplin"><span class="std std-ref">“$RAPLIN”</span></a>).</p>
+<p>Depending on QUEST specified cycle motion squaring and rotary
+positioning requirements, GENER may temporarily cancel a cycle in
+order to properly position the tool above or at the cycle clearance
+plane.</p>
+<section id="the-cycle-on-command">
+<span id="cycle-on"></span><h2>The CYCLE/ON Command<a class="headerlink" href="#the-cycle-on-command" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / ON } \big[ \mathtt{,&lt;\!parameters\!&gt;} \big]\)</span></p>
+</div></blockquote>
+<p>The last cycle can be reactivated by coding CYCLE/ON. You may
+optionally include any cycle parameters that are different from the
+old cycle, with the following two exceptions:</p>
+<ol class="arabic simple">
+<li><p>The cycle <em>type</em> cannot be changed using the CYCLE/ON format.</p></li>
+<li><p>The CYCLE/ON format cannot be used to remove the effect of options,
+such as INVERS, that have no reverse representation.</p></li>
+</ol>
+</section>
+<section id="the-cycle-off-command">
+<span id="cycle-off"></span><h2>The CYCLE/OFF Command<a class="headerlink" href="#the-cycle-off-command" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE /} \begin{pmatrix}\begin{array}{l} \textbf{OFF} \\ \textbf{NOMORE} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>A CYCLE/OFF command ends special cycle processing and implies RAPID
+positioning for the next motion point. This following motion may be
+segmented depending on QUEST specified cycle motion squaring
+requirements. A FEDRAT command must be coded following a CYCLE/OFF to
+feed interpolate to the next motion point.</p>
+<p>CYCLE/NOMORE is an alias for CYCLE/OFF.</p>
+</section>
+<section id="the-cycle-auto-command">
+<span id="cycle-auto"></span><h2>The CYCLE/AUTO Command<a class="headerlink" href="#the-cycle-auto-command" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / AUTO}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>This command controls whether or not built-in cycles should be used
+by the post-processor. ON is the default, which enables the use of
+built-in cycles where available. OFF inhibits the use of built-in
+cycles, which results in all cycles being emulated using rapid
+positioning and feed interpolation motions. Note that rigid tapping
+cycles cannot be emulated, so the CYCLE/AUTO state has no effect on
+these cycles.</p>
+<p>The CYCLE/AUTO command can be coded at any time, including when cycle
+processing is active, to affect the processing of subsequent cycle
+reference point motions.</p>
+</section>
+<section id="the-cycle-return-command">
+<span id="cycle-return"></span><h2>The CYCLE/RETURN Command<a class="headerlink" href="#the-cycle-return-command" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / RETURN}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{AUTO} \\ \mathit{value} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>This command provides a means to override the cycle return plane
+parameter specified on subsequent CYCLE commands (see <a class="reference internal" href="#cycle-return-option"><span class="std std-ref">“Return Height”</span></a>).
+This is sometimes
+necessary due to the lack of control over return plane settings on
+CAM generated CYCLE commands.</p>
+<p>ON specifies that the current tool position at the start of the cycle
+will be used as the cycle return plane for all cycle points in the
+cycle, regardless of whether or not a RETURN parameter is specified
+on the CYCLE/<em>type</em> command.</p>
+<p>OFF disables the use of a cycle return plane. The tool position at
+the end of the cycle point will be the same as the clearance position
+at the start of the point, regardless of whether or not a RETURN
+parameter is specified on the CYCLE/<em>type</em> command.</p>
+<p>A return plane <em>value</em> can be given to set the cycle return plane the
+specified distance above the first motion control point of the cycle,
+regardless of whether or not a RETURN parameter is specified on the
+CYCLE/<em>type</em> command.</p>
+<p>Finally, AUTO can be specified to select the default mode of
+operation, which is to use the RETURN parameter specified on the
+CYCLE/<em>type</em> command to define the return plane, if any.</p>
+</section>
+<section id="common-cycle-parameters">
+<span id="cycle-parameters"></span><h2>Common Cycle Parameters<a class="headerlink" href="#common-cycle-parameters" title="Link to this heading"></a></h2>
+<p>All cycles except MANUAL have common parameters. These are the depth
+of the operation, startup clearance distance and operation feed rate.
+The MANUAL cycle is a special case, it only requires the clearance
+value that is specified where one would normally code the depth.</p>
+<section id="depth-of-operation">
+<h3>Depth of Operation<a class="headerlink" href="#depth-of-operation" title="Link to this heading"></a></h3>
+<p>The depth of the operation is always required. It is the distance
+below each point that the operation is to be performed to. A negative
+depth specifies an end position above the control point, it does not
+cause a reversed operation. The depth value must always result in a
+position at or below the cycle clearance plane. The depth is coded as
+follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{DEPTH},\mathit{value}\)</span></p>
+</div></blockquote>
+</section>
+<section id="cutting-feed">
+<h3>Cutting Feed<a class="headerlink" href="#cutting-feed" title="Link to this heading"></a></h3>
+<p>All cycles must specify a feed rate. The DEEP and BRKCHP may specify
+multiple feed rates. The feed rate consists of two parts: the feed
+<em>type</em> and the feed <em>value</em>. The feed is coded as follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\boldsymbol{\mathit{type}},\mathit{value}\)</span></p>
+</div></blockquote>
+<p>The feed <em>type</em> can be any one of the following (if the machine does
+not support the feed type selected, GENER will convert the feed
+<em>value</em> into the units of a type that is supported):</p>
+<dl class="field-list simple">
+<dt class="field-odd">IPM<span class="colon">:</span></dt>
+<dd class="field-odd"><p>inches per minute</p>
+</dd>
+<dt class="field-even">IPR<span class="colon">:</span></dt>
+<dd class="field-even"><p>inches per revolution</p>
+</dd>
+<dt class="field-odd">MMPM<span class="colon">:</span></dt>
+<dd class="field-odd"><p>millimeters per minute</p>
+</dd>
+<dt class="field-even">MMPR<span class="colon">:</span></dt>
+<dd class="field-even"><p>millimeters per revolution</p>
+</dd>
+<dt class="field-odd">PERMIN<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CL file units per minute</p>
+</dd>
+<dt class="field-even">PERREV<span class="colon">:</span></dt>
+<dd class="field-even"><p>CL file units per revolution</p>
+</dd>
+<dt class="field-odd">TPI<span class="colon">:</span></dt>
+<dd class="field-odd"><p>threads per inch</p>
+</dd>
+</dl>
+</section>
+<section id="clearance-height">
+<h3>Clearance Height<a class="headerlink" href="#clearance-height" title="Link to this heading"></a></h3>
+<p>The clearance height is the distance above each point that the
+machine will position to prior to actually performing the requested
+operation. At the conclusion of the operation, the cutter will be
+repositioned to this same location. The clearance is coded as follows</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CLEAR} ,\mathit{value} \big[ ,\mathit{value_2} \, \big]\)</span></p>
+</div></blockquote>
+<p>If a clearance value is not coded, the last clearance value specified
+will be used. The default clearance value on the first cycle command
+is the value answered in QUEST in the “General Cycle Information”
+topic of the “Automated Canned Cycles” section. A negative clearance
+specifies a start position below the control point, it does not cause
+a reversed operation. The clearance value must always result in a
+position at or above the cycle depth (or first cycle step).</p>
+<p>For BORE, DEEP, BRKCHP and THRU cycles, a second clearance value can
+also be specified, which is applied to intermediate positions during
+the cycle. The ways in which secondary clearances are applied are
+different between cycle types. They are explained in more detail
+under the individual cycle descriptions.</p>
+</section>
+</section>
+<section id="common-cycle-options">
+<span id="cycle-options"></span><h2>Common Cycle Options<a class="headerlink" href="#common-cycle-options" title="Link to this heading"></a></h2>
+<p>The following options can be applied to any cycle type excluding the
+MANUAL cycle.</p>
+<section id="return-height">
+<span id="cycle-return-option"></span><h3>Return Height<a class="headerlink" href="#return-height" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{RETURN } \big[ ,\mathit{value} \, \big]\)</span></p>
+</div></blockquote>
+<p>The RETURN option specifies a single clearance plane for all points
+in the cycle. The tool tip will move to this plane regardless of the
+control points and clearance heights for individual points. The
+RETURN plane will be set by the clearance on the first control point
+of a CYCLE by specifying RETURN alone. Specifying RETURN with a value
+will set the clearance plane at a distance above the first control
+point. In either case, the tool tip will always return to that plane
+at the end of each cycle move.</p>
+<p>If it should happen that a cycle control point is above the RETURN
+plane, the machine will simply retract to the regular clearance
+height above the control point. If the next control point is below
+the RETURN plane, the RETURN plane will again be used as the final
+clearance height.</p>
+</section>
+<section id="additional-rapid-plunge">
+<h3>Additional Rapid Plunge<a class="headerlink" href="#additional-rapid-plunge" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{RAPTO} ,\mathit{value}\)</span></p>
+</div></blockquote>
+<p>The RAPTO option is used to cause an additional rapid positioning
+operation at each point in the cycle. This option is used when
+performing any cycle where an additional move at high speed is
+desired to move the tool tip from the clearance plane to the start of
+the hole. For example, RAPTO can be used when performing cycle
+operations on points that are below the surface of the part and that
+can be approached at high speed, such as counter-bores.</p>
+<p>Normally, the tool tip is positioned to the clearance plane of each
+point and the cycle feed motion is performed from the clearance plane
+to the cycle depth. When the RAPTO option is used, the tool tip is
+positioned to the clearance plane and is then moved at RAPID to a
+depth specified by the RAPTO <em>value</em>. Only then will the tool start
+to move at feed. Note that for the BORE-BACK cycle, the RAPTO <em>value</em>
+is required and is measured from the control point and not the
+clearance plane.</p>
+</section>
+<section id="dwell">
+<h3>Dwell<a class="headerlink" href="#dwell" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\begin{pmatrix} \begin{array}{l} \textbf{DWELL} \\ \textbf{REV} \end{array}\end{pmatrix} ,\mathit{value}\)</span></p>
+</div></blockquote>
+<p>The DWELL option is used to cause a programmed wait for a number of
+seconds when the machine reaches the specified cycle depth. The REV
+option waits instead for a number of spindle revolutions. When
+applied to DEEP and BRKCHP cycles, the delay might also occur at each
+step depth. When applied to DEEP and TAP cycles, the delay might also
+occur after the tool retracts.</p>
+<p>If the machine cycle has a delay capability, the cycle will be output
+with the appropriate register (unless the delay is a fixed value).
+When emulating cycles with point-to-point motions, the DELAY command
+is called internally to perform the dwell. If the machine does not
+have a delay feature, an error message may occur at each point.</p>
+</section>
+</section>
+<section id="the-drill-cycle">
+<span id="cycle-drill"></span><h2>The DRILL Cycle<a class="headerlink" href="#the-drill-cycle" title="Link to this heading"></a></h2>
+<p>The DRILL cycle performs a sequence of operations equivalent to the
+G81 fixed cycle in ISO 1056. This cycle plunges at feed and then
+retracts at rapid. If a DWELL option is specified, GENER will process
+the DRILL cycle as a FACE cycle.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>):</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / DRILL},
+\;\textbf{DEPTH} ,\mathit{depth} \,
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\; \big[ , \textbf{CLEAR} ,\mathit{clear} \,\big] \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The DRILL cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/DRILL,DEPTH,<strong>f</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f+r</strong> at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_drill.png">
+        <img src="../../_images/gener_cycle_drill.png" style="width: 3.317in;" alt="Drill Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_drill.png" />
+</section>
+<section id="the-face-cycle">
+<span id="cycle-face"></span><h2>The FACE Cycle<a class="headerlink" href="#the-face-cycle" title="Link to this heading"></a></h2>
+<p>The FACE cycle performs a sequence of operations equivalent to the
+G82 fixed cycle in ISO 1056. This cycle plunges at feed, dwells for a
+specified or default period and then retracts at rapid. If the DWELL
+common option is not specified then the most recent DWELL from a
+previous cycle will be used, or if none then the QUEST defined
+default dwell will be used.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>):</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / FACE},
+\; \textbf{DEPTH} ,\mathit{depth} \,
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\; \big[ , \textbf{CLEAR} ,\mathit{clear} \,\big]\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The FACE cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/FACE,DEPTH,<strong>f</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong>,DWELL,<strong>t</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f+r</strong> at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Dwell for specified <strong>t</strong> or default period</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_face.png">
+        <img src="../../_images/gener_cycle_face.png" style="width: 3.313in;" alt="Face Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_face.png" />
+</section>
+<section id="the-tap-cycle">
+<span id="cycle-tap"></span><h2>The TAP Cycle<a class="headerlink" href="#the-tap-cycle" title="Link to this heading"></a></h2>
+<p>The TAP cycle performs a sequence of operations equivalent to the G84
+fixed cycle in ISO 1056. This cycle plunges at feed, optionally
+dwells, reverses the spindle, retracts at feed and then reverses the
+spindle again.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>):</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / TAP} \begin{bmatrix} ,\! \begin{array}{l} \textbf{FLOAT} \\ \textbf{RIGID} \end{array}\,\end{bmatrix} ,
+\; \textbf{DEPTH} ,\mathit{depth} \,
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\; \big[ , \textbf{CLEAR} ,\mathit{clear} \,\big] \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{RATIO} ,\mathit{mult} \,\big]
+\; \big[ , \textbf{MULTRD} ,\mathit{starts} \,\big]
+\; \big[ , \textbf{INVERS} \,\big]
+\begin{bmatrix} ,\! \begin{array}{l} \textbf{NOREVR} \\ \textbf{RAPOUT} \end{array}\,\end{bmatrix}
+\; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The FLOAT option specifies a tap cycle using a floating tap head. The
+RIGID option specifies a rigid tap cycle. If neither is specified,
+then the default tapping cycle type defined in the post-processor
+will be used.</p>
+<p>The RATIO option indicates a velocity multiplier to apply when feed
+retracting (default is 1).</p>
+<p>The MULTRD option indicates (for rigid tapping only) the number of
+thread starts to generate (default is 1). Multiple starts will cause
+the cycle to be output multiple times, with a different starting tool
+orientation if supported, or with an adjusted starting clearance
+position.</p>
+<p>The INVERS option will cause a reverse tapping cycle to be output
+(i.e., the spindle rotates counter-clockwise on entry and clockwise
+on exit).</p>
+<p>The NOREVR option will cause GENER to process the TAP cycle as a FACE
+cycle. The RAPOUT option will cause GENER to process the TAP cycle as
+a DRILL cycle.</p>
+<p>The TAP cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/TAP,DEPTH,<strong>f</strong>,IPR,<strong>feed</strong>,CLEAR,<strong>r</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f+r</strong> at <strong>feed</strong> inches/revolution</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Reverse spindle direction</p></li>
+        <li><p>Feed retract to a position <strong>r</strong> above the control point</p></li>
+        <li><p>Reinstate initial spindle direction</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_tap.png">
+        <img src="../../_images/gener_cycle_tap.png" style="width: 3.313in;" alt="Tap Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_tap.png" />
+</section>
+<section id="the-bore-cycle">
+<span id="cycle-bore"></span><h2>The BORE Cycle<a class="headerlink" href="#the-bore-cycle" title="Link to this heading"></a></h2>
+<p>The BORE cycle performs a sequence of operations equivalent to the
+G86 fixed cycle in ISO 1056. This cycle plunges at feed, optionally
+dwells, stops the spindle, retracts at rapid and then restarts the
+spindle. If the DWELL common option is specified, the G87 fixed cycle
+in ISO 1056 is used. If the ORIENT option is specified, the G88 fixed
+cycle in ISO 1056 is used.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>)</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / BORE},
+\; \textbf{DEPTH} ,\mathit{depth} \,
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\; \Big[ , \textbf{CLEAR} ,\mathit{clear} \,\big[ ,\mathit{jog} \,\big] \,\Big] \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{ORIENT} \big[ ,\mathit{ang} \,\big] \,\Big]
+\begin{bmatrix} ,\textbf{OFSETL},\, \begin{array}{l} \mathit{x,y} \\ \mathit{jog} \end{array}\,\end{bmatrix}
+\; \big[ , \textbf{BACK} ,\!z \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The ORIENT option specifies a fine boring cycle. With this cycle
+type, the tool is oriented to the specified or default angle once the
+full cycle depth has been reached, then the tool is jogged laterally
+to disengage the cutting tip from the hole surface before retracting
+the tool out of the hole. The angle, if specified, must be in
+degrees, where 0 is the X axis radial. If an angle is not specified,
+the QUEST default will be used. The jog amount can be specified
+either as a second CLEAR value or with the OFSETL option. The OFSETL
+option can alternately specify the x and y components of the jog
+amount. A QUEST defined jog clearance will be used if a jog value is
+not defined. Lastly, the tool tip can optionally be jogged along the
+tool axis using the BACK option.</p>
+<p>The BORE cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="wrap-first docutils align-default">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/BORE,DEPTH,<strong>f</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f+r</strong> at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Stop the spindle direction</p></li>
+        <li><p>Optionally orient the spindle and jog tool tip away from the surface (if ORIENT is specified)</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+        <li><p>Jog the tool back over the center of the hole (if ORIENT is specified)</p></li>
+        <li><p>Restart the spindle</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_bore.png">
+        <img src="../../_images/gener_cycle_bore.png" style="width: 3.313in;" alt="Bore Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_bore.png" />
+</section>
+<section id="the-bore-back-cycle">
+<span id="cycle-bore-back"></span><h2>The BORE-BACK Cycle<a class="headerlink" href="#the-bore-back-cycle" title="Link to this heading"></a></h2>
+<p>The BORE-BACK cycle performs a sequence of operations equivalent to
+the G87 fixed back-boring cycle available on some machines. This
+cycle positions the tool to the upper clearance plane, orients the
+spindle, positions the tool off center, plunges to a bottom clearance
+plane, positions the tool back on center, starts the spindle, feeds
+upwards to the cycle depth plane, optionally dwells, orients the
+spindle a second time, positions the tool off center, positions to
+the upper clearance plane, positions the tool back on center, and
+starts the spindle.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>)</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / BORE},\textbf{BACK},
+\;\textbf{DEPTH} ,\mathit{depth} \,
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\; ,\textbf{RAPTO} ,\mathit{bottom} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \,\big[ ,\mathit{jog} \,\big] \,\Big]
+\; \big[ , \textbf{ORIENT} ,\mathit{ang} \,\big]
+\begin{bmatrix} ,\textbf{OFSETL}, \,\begin{array}{l} \mathit{x,y} \\ \mathit{jog} \end{array}\,\end{bmatrix} \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{BACK} ,\!z \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The RAPTO couplet is required and, unlike with other cycles, it
+specifies the unsigned distance from the <em>control point</em> (not the
+upper clearance plane) to the bottom clearance plane.</p>
+<p>The cycle orients the tool to a QUEST defined default angle and uses
+a QUEST defined default jog clearance. These defaults can be changed
+by coding the ORIENT, OFSETL and BACK options. With this cycle, the
+tool is oriented to the specified or default angle at the start of
+the cycle and again once the upward feed motion to the cycle depth
+has been reached. After orienting, the tool is jogged laterally to
+disengage the cutting tip from the hole surface before plunging or
+retracting the tool in or out of the hole. Specify the angle in
+degrees, where 0 is the X axis radial. The BACK jog <em>z</em> amount is
+applied after the second orient along the tool axis opposite to the
+upward feed motion.</p>
+<p>The BORE-BACK cycle causes the following to occur at each
+non-rapid point within the cycle.</p>
+<blockquote>
+<div><table class="wrap-first docutils align-default">
+  <tr class="row-odd">
+    <td style="font-family: monospace;">
+      <p>CYCLE/BORE,BACK,DEPTH,<strong>f</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong>,RAPTO,<strong>b</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Orient the spindle and jog (-x,-y) tool tip away from the surface</p></li>
+        <li><p>Rapid plunge to <strong>b</strong> below the control point</p></li>
+        <li><p>Jog (+x,+y) the tool back to the center of the hole</p></li>
+        <li><p>Restart the spindle</p></li>
+        <li><p>Feed upwards to <strong>f</strong> below the control point at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Orient the spindle and jog (-x,-y,-z) tool tip away from the surface</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+        <li><p>Jog (+x,+y) the tool back over the center of the hole</p></li>
+        <li><p>Restart the spindle</p></li>
+      </ol>
+    </td>
+  </tr>
+</table></div></blockquote>
+</section>
+<section id="the-ream-cycle">
+<span id="cycle-ream"></span><h2>The REAM Cycle<a class="headerlink" href="#the-ream-cycle" title="Link to this heading"></a></h2>
+<p>The REAM cycle performs a sequence of operations equivalent to the
+G85 fixed cycle in ISO 1056. This cycle plunges at feed, optionally
+dwells and then retracts at feed.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>)</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / REAM},
+\; \textbf{DEPTH} ,\mathit{depth} \,
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\; \big[ , \textbf{CLEAR} ,\mathit{clear} \,\big] \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{RATIO} ,\mathit{mult} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The RATIO option indicates a velocity multiplier to apply when feed retracting (default is 1).</p>
+<p>The REAM cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/REAM,DEPTH,<strong>f</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f+r</strong> at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Feed retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_ream.png">
+        <img src="../../_images/gener_cycle_ream.png" style="width: 3.313in;" alt="Ream Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_ream.png" />
+</section>
+<section id="the-drill-deep-cycle">
+<span id="cycle-drill-deep"></span><h2>The DRILL-DEEP Cycle<a class="headerlink" href="#the-drill-deep-cycle" title="Link to this heading"></a></h2>
+<p>The DRILL-DEEP cycle performs a sequence of operations equivalent to
+the G83 fixed cycle in ISO 1056. This cycle plunges at feed,
+periodically retracting at rapid to clear chips. An optional DWELL if
+specified will be applied at the full cycle depth as well as
+(depending on QUEST settings) at each step and/or following each
+retract.</p>
+<p>There are two formats for the DRILL-DEEP cycle (<em>common-options</em> are
+listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>). For backwards
+compatibility, the DRILL keyword can be omitted.</p>
+<section id="absolute-step-format">
+<h3>Absolute Step Format<a class="headerlink" href="#absolute-step-format" title="Link to this heading"></a></h3>
+<p>The absolute step format of the cycle specifies the individual step
+depths relative to the control point. The tool will feed to each
+specified depth, retracting to the clearance plane between feeds.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / DRILL},\textbf{DEEP} \icamrange{5.2}{1}\! \begin{pmatrix}
+,\textbf{DEPTH} ,\mathit{depth} \;\icamrange{0.8}{0}\, \big[ ,\mathit{depth} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\end{pmatrix} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \,\big[ ,\mathit{clear_2} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{clear_2} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="incremental-step-format">
+<h3>Incremental Step Format<a class="headerlink" href="#incremental-step-format" title="Link to this heading"></a></h3>
+<p>The incremental step format of the cycle specifies both the total
+cycle depth (i.e., DEPTH,<em>depth</em>) and the individual step depths
+(i.e., STEP,<em>step</em>) as incremental amounts each measured from the
+last depth reached. A QUEST defined default step will be used if the
+STEP amount is not specified. The last specified step is repeated
+until the final depth is reached. If the DECR option is specified,
+then the last repeated step value will be reduced by the DECR amount
+at each peck. A MINSTP specified or fixed minimum step distance will
+prevent the DECR option from reducing the final peck distance to
+zero. The cycle will be terminated once the cycle depth is reached,
+regardless of whether or not all steps have been used.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / DRILL},\textbf{DEEP},
+\; \textbf{DEPTH} ,\mathit{depth} \icamrange{5.2}{1}\! \begin{pmatrix}
+,\textbf{STEP} ,\mathit{step} \;\icamrange{0.8}{0}\, \big[ ,\mathit{step} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\end{pmatrix} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \,\big[ ,\mathit{clear_2} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{clear_2} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{DECR} ,\mathit{value} \, \big[ , \textbf{MINSTP} ,\mathit{min} \,\big] \,\Big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>At least one depth and feed must be specified. The feed rate
+specification applies to all of the depths or step amounts that
+precede it. The entire group (step amounts and feed rate) can be
+repeated as many times as required. If multiple feed rates are
+specified, the cycle will be emulated using point-to-point motions.</p>
+<p>The clearance distances are optional. The primary clearance is
+applied at the start of the cycle as usual. The secondary clearance,
+which can be specified either as a second CLEAR value or with the
+BACK option, is used when plunging back into the hole after each full
+retract.</p>
+<p>The DRILL-DEEP cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/DRILL,DEEP,DEPTH,<strong>f1</strong>,<strong>f2</strong>,<strong>f3</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong>,BACK,<strong>n</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f1</strong> below the control point at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+        <li><p>Rapid back down a distance <strong>f1–n</strong> below the control point</p></li>
+        <li><p>Feed to a distance <strong>f2</strong> below the control point</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+        <li><p>Rapid back down a distance <strong>f2–n</strong> below the control point</p></li>
+        <li><p>Feed to a distance <strong>f3</strong> below the control point</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_deep.png">
+        <img src="../../_images/gener_cycle_deep.png" style="width: 3.213in;" alt="Deep Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_deep.png" />
+<p>The following examples illustrate the effects of different options on
+the DRILL-DEEP cycle syntax.</p>
+<p><strong>Example #1</strong></p>
+<p>This example shows the automatic repeating feature available when the
+total depth is specified.</p>
+<p>The NC programmer must drill a 3 inch deep hole in steps of 0.5
+throughout. The feed rate will remain constant at 0.02 inches per
+spindle revolution. The clearance distance will be 0.05 at each step.
+The initial hole clearance will be 0.25 inches.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CYCLE/DRILL,DEEP,DEPTH,3,STEP,.5,IPR,.02,CLEAR,.25,BACK,.05
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Example #2</strong></p>
+<p>This example shows the automatic repeating feature, the specification
+of different feed rates at different depths and the use of the DECR
+option. The clearance height defaults to whatever was specified by
+the user in QUEST.</p>
+<p>The NC programmer must drill a 5 inch deep hole. A stepping distance
+of 0.5 inches is required until the cutter reaches a depth of 3
+inches, thereafter the stepping distance should be reduced by
+0.05 inches each peck. The initial feed rate is 10 inches per minute.
+It should decrease to 8 after a depth of 2.5 inches is reached.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CYCLE/DRILL,DEEP,DEPTH,5,STEP,.5,.5,.5,.5,.5,IPM,10,$
+        STEP,.5,IPM,8,DECR,.05
+</pre></div>
+</div>
+</div></blockquote>
+<p>The tool will make five pecks of 0.5 inches at a feed rate of 10 IPM.
+Then, it will make one more peck of 0.5 inches at a feed rate of 8
+IPM. Keeping the last feed rate, all subsequent pecks will be
+decremented by 0.05 inches until a depth of 5 inches is reached.</p>
+<p><strong>Example #3</strong></p>
+<p>This example shows a deep hole cycle that does not use the depth
+specification. Again, the default clearance is used.</p>
+<p>The NC programmer must drill a 4.5 inch deep hole. The first 2 inches
+can be handled in steps of 1 inch at 0.02 inches per spindle
+revolution. The step will decrease by 0.1 thereafter at a feed rate
+of 4 inches per minute. The final breakthrough of 0.1 inches is done
+at 1 IPM by protruding the drill point 0.5 inches below the bottom
+surface.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CYCLE/DRILL,DEEP,DEPTH,1,2,IPR,.02,$
+        DEPTH,2.9,3.7,4.4,IPM,4,$
+        DEPTH,5,IPM,1
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="the-tap-deep-cycle">
+<span id="cycle-tap-deep"></span><h2>The TAP-DEEP Cycle<a class="headerlink" href="#the-tap-deep-cycle" title="Link to this heading"></a></h2>
+<p>The TAP-DEEP cycle performs a sequence of operations equivalent to
+the G83 fixed cycle in ISO 1056, but using a rigid tap instead of a
+drill. This cycle plunges at feed, periodically retracting at the
+same or higher feed to clear chips. An optional DWELL if specified
+will be applied at the full cycle depth as well as (depending on
+QUEST settings) at each step and/or following each retract.</p>
+<p>There are two formats for the TAP-DEEP cycle (<em>common-options</em> are
+listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>)</p>
+<section id="id1">
+<h3>Absolute Step Format<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>The absolute step format of the cycle specifies the individual step
+depths relative to the control point. The tool will feed to each
+specified depth, retracting to the clearance plane between feeds.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / TAP},\textbf{DEEP},
+\; \textbf{DEPTH} ,\mathit{depth} \;\icamrange{0.8}{0}\, \big[ ,\mathit{depth} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array} \end{pmatrix} \! ,\mathit{feed} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \,\big[ ,\mathit{clear_2} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{clear_2} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{RATIO} ,\mathit{mult} \,\big]
+\; \big[ , \textbf{MULTRD} ,\mathit{starts} \,\big]
+\; \big[ , \textbf{INVERS} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="id2">
+<h3>Incremental Step Format<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>The incremental step format of the cycle specifies both the total
+cycle depth (i.e., DEPTH,<em>depth</em>) and the individual step depths
+(i.e., STEP,<em>step</em>) as incremental amounts each measured from the
+last depth reached. A QUEST defined default step will be used if the
+STEP amount is not specified. The last specified step is repeated
+until the final depth is reached. If the DECR option is specified,
+then the last repeated step value will be reduced by the DECR amount
+at each peck. A MINSTP specified or fixed minimum step distance will
+prevent the DECR option from reducing the final peck distance to
+zero. The cycle will be terminated once the cycle depth is reached,
+regardless of whether or not all steps have been used.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / TAP},\textbf{DEEP},
+\; \textbf{DEPTH} ,\mathit{depth}
+\; ,\textbf{STEP} ,\mathit{step} \;\icamrange{0.8}{0}\, \big[ ,\mathit{step} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array} \end{pmatrix} \! ,\mathit{feed} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{DECR} ,\mathit{value} \, \big[ , \textbf{MINSTP} ,\mathit{min} \,\big] \,\Big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \big[ ,\mathit{clear_2} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{clear_2} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{RATIO} ,\mathit{mult} \,\big]
+\; \big[ , \textbf{MULTRD} ,\mathit{starts} \,\big]
+\; \big[ , \textbf{INVERS} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>The clearance distances are optional. The primary clearance is
+applied at the start of the cycle as usual. The secondary clearance,
+which can be specified either as a second CLEAR value or with the
+BACK option, is used when plunging back into the hole after each full
+retract.</p>
+<p>The RATIO option indicates a velocity multiplier to apply when feed
+retracting and plunging to the start of the next step (default is 1).</p>
+<p>The MULTRD option indicates the number of thread starts to generate
+(default is 1). Multiple starts will cause the cycle to be output
+multiple times, with a different starting tool orientation if
+supported, or with an adjusted starting clearance position.</p>
+<p>The INVERS option will cause a reverse tapping cycle to be output
+(i.e., the spindle rotates counter-clockwise on entry and clockwise
+on exit).</p>
+<p>See <a class="reference internal" href="#cycle-drill-deep"><span class="std std-ref">the DRILL-DEEP cycle</span></a> for examples of usage.</p>
+</section>
+</section>
+<section id="the-drill-brkchp-cycle">
+<span id="cycle-drill-brkchp"></span><h2>The DRILL-BRKCHP Cycle<a class="headerlink" href="#the-drill-brkchp-cycle" title="Link to this heading"></a></h2>
+<p>The DRILL-BRKCHP cycle performs a sequence of operations equivalent
+to the G83 fixed cycle in ISO 1056. This cycle plunges at feed,
+jogging back slightly to break chips and optionally periodically
+fully retracting to clear chips. An optional DWELL if specified will
+be applied at the full cycle depth as well as (depending on QUEST
+settings) at each step and/or following each retract.</p>
+<p>There are two formats for the BRKCHP cycle (<em>common-options</em> are
+listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>). For backwards
+compatibility, the DRILL keyword can be omitted.</p>
+<section id="id4">
+<h3>Absolute Step Format<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>The absolute step format of the cycle specifies the individual step
+depths relative to the control point. The tool will feed to each
+specified depth, jogging back slightly to break chips between feeds.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / DRILL},\textbf{BRKCHP} \icamrange{5.2}{1}\! \begin{pmatrix}
+,\textbf{DEPTH} ,\mathit{depth} \,\icamrange{0.8}{0}\, \big[ ,\mathit{depth} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\end{pmatrix} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \big[ ,\mathit{jog} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{jog} \,\big]
+\; \big[ , \textbf{TIMES} ,\mathit{count} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="id5">
+<h3>Incremental Step Format<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>The incremental step format of the cycle specifies both the total
+cycle depth (i.e., DEPTH,<em>depth</em>) and the individual step depths
+(i.e., STEP,<em>step</em>) as incremental amounts each measured from the
+last depth reached. A QUEST defined default step will be used if the
+STEP amount is not specified. The last specified step is repeated
+until the final depth is reached. If the DECR option is specified,
+then the last repeated step value will be reduced by the DECR amount
+at each peck. A MINSTP specified or fixed minimum step distance will
+prevent the DECR option from reducing the final peck distance to
+zero. The cycle will be terminated once the cycle depth is reached,
+regardless of whether or not all steps have been used.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / DRILL},\textbf{BRKCHP}
+\; ,\textbf{DEPTH} ,\mathit{depth} \icamrange{5.2}{1}\! \begin{pmatrix}
+,\textbf{STEP} ,\mathit{step} \,\icamrange{0.8}{0}\, \big[ ,\mathit{step} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \,
+\end{pmatrix} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \big[ ,\mathit{jog} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{jog} \,\big]
+\; \big[ , \textbf{TIMES} ,\mathit{count} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{DECR} ,\mathit{value} \, \big[ , \textbf{MINSTP} ,\mathit{min} \,\big] \,\Big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="id6">
+<h3>Parameters<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>At least one depth and feed must be specified. The feed rate
+specification applies to all of the depths or step amounts that
+precede it. The entire group (step amounts and feed rate) can be
+repeated as many times as required. If multiple feed rates are
+specified, the cycle will be emulated using point-to-point motions.</p>
+<p>The clearance distances are optional. The primary clearance is
+applied at the start of the cycle as usual. The jog clearance, which
+can be specified either as a second CLEAR value or with the BACK
+option, is used when jogging the tool back slightly to break chips.</p>
+<p>The TIMES option can be coded to specify how many pecks should be
+done between each full retract to the original clearance point. If
+this option is omitted, the tool will not perform any full
+retractions. If specified, the cycle will be emulated using
+point-to-point motions</p>
+<p>The BRKCHP cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/DRILL,BRKCHP,<strong>f1</strong>,<strong>f2</strong>,<strong>f3</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong>,BACK,<strong>n</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f1</strong> below the control point at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Small retraction of <strong>n</strong></p></li>
+        <li><p>Feed to a distance <strong>f2</strong> below the control point</p></li>
+        <li><p>Small retraction of <strong>n</strong></p></li>
+        <li><p>Feed to a distance <strong>f3</strong> below the control point</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_brkchp.png">
+        <img src="../../_images/gener_cycle_brkchp.png" style="width: 3.213in;" alt="Brkchp Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_brkchp.png" />
+</section>
+</section>
+<section id="the-tap-brkchp-cycle">
+<span id="cycle-tap-brkchp"></span><h2>The TAP-BRKCHP Cycle<a class="headerlink" href="#the-tap-brkchp-cycle" title="Link to this heading"></a></h2>
+<p>The TAP-BRKCHP cycle performs a sequence of operations equivalent to
+the G83 fixed cycle in ISO 1056, but using a rigid tap instead of a
+drill. This cycle plunges at feed, jogging back slightly to break
+chips and optionally periodically fully retracting to clear chips. An
+optional DWELL if specified will be applied at the full cycle depth
+as well as (depending on QUEST settings) at each step and/or
+following each retract.</p>
+<p>There are two formats for the TAP-BRKCHP cycle (<em>common-options</em> are
+listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>).</p>
+<section id="id7">
+<h3>Absolute Step Format<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>The absolute step format of the cycle specifies the individual step
+depths relative to the control point. The tool will feed to each
+specified depth, jogging back slightly to break chips between feeds.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / TAP},\textbf{BRKCHP},
+\; \textbf{DEPTH} ,\mathit{depth} \,\icamrange{0.8}{0}\, \big[ ,\mathit{depth} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array} \end{pmatrix} \! ,\mathit{feed} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \big[ ,\mathit{jog} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{jog} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{RATIO} ,\mathit{mult} \,\big]
+\; \big[ , \textbf{MULTRD} ,\mathit{starts} \,\big]
+\; \big[ , \textbf{INVERS} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="id8">
+<h3>Incremental Step Format<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>The incremental step format of the cycle specifies both the total
+cycle depth (i.e., DEPTH,<em>depth</em>) and the individual step depths
+(i.e., STEP,<em>step</em>) as incremental amounts each measured from the
+last depth reached. A QUEST defined default step will be used if the
+STEP amount is not specified. The last specified step is repeated
+until the final depth is reached. If the DECR option is specified,
+then the last repeated step value will be reduced by the DECR amount
+at each peck. A MINSTP specified or fixed minimum step distance will
+prevent the DECR option from reducing the final peck distance to
+zero. The cycle will be terminated once the cycle depth is reached,
+regardless of whether or not all steps have been used.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / TAP},\textbf{BRKCHP},
+\; \textbf{DEPTH} ,\mathit{depth}
+\; ,\textbf{STEP} ,\mathit{step} \,\icamrange{0.8}{0}\, \big[ ,\mathit{step} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array} \end{pmatrix} \! ,\mathit{feed} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{DECR} ,\mathit{value} \, \big[ , \textbf{MINSTP} ,\mathit{min} \,\big] \,\Big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \big[ ,\mathit{jog} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{jog} \,\big] \; \ldots\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \big[ , \textbf{RATIO} ,\mathit{mult} \,\big]
+\; \big[ , \textbf{MULTRD} ,\mathit{starts} \,\big]
+\; \big[ , \textbf{INVERS} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>The clearance distances are optional. The primary clearance is
+applied at the start of the cycle as usual. The jog clearance, which
+can be specified either as a second CLEAR value or with the BACK
+option, is used when jogging the tool back slightly to break chips.</p>
+<p>The RATIO option indicates a velocity multiplier to apply when feed
+retracting at the end of the cycle (default is 1).</p>
+<p>The MULTRD option indicates the number of thread starts to generate
+(default is 1). Multiple starts will cause the cycle to be output
+multiple times, with a different starting tool orientation if
+supported, or with an adjusted starting clearance position.</p>
+<p>The INVERS option will cause a reverse tapping cycle to be output
+(i.e., the spindle rotates counter-clockwise on entry and clockwise
+on exit).</p>
+<p>See <a class="reference internal" href="#cycle-drill-brkchp"><span class="std std-ref">the DRILL-BRKCHP cycle</span></a> for an example of usage.</p>
+</section>
+</section>
+<section id="the-thru-cycle">
+<span id="cycle-thru"></span><h2>The THRU Cycle<a class="headerlink" href="#the-thru-cycle" title="Link to this heading"></a></h2>
+<p>The THRU cycle performs a series of feed and rapid motions to support
+multiple web drilling. There is no ISO 1056 standard for this cycle
+type. An optional DWELL if specified will be applied at the full
+cycle depth.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>):</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / THRU},
+\; \textbf{DEPTH} ,\mathit{depth} \,\icamrange{0.8}{0}\, \big[ ,\mathit{start,depth} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \; \Big[ , \textbf{CLEAR} ,\mathit{clear} \big[ ,\mathit{clear_2} \,\big] \,\Big]
+\; \big[ , \textbf{BACK} ,\mathit{clear_2} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The first <em>depth</em> value specifies the depth of cut to drill the first
+web. It is followed by pairs of values that indicate the starting
+depth and depth of cut for the following webs. All depth values are
+measured from the control point.</p>
+<p>The clearance distances are optional. The primary clearance is
+applied at the start of the cycle as usual. The secondary clearance,
+which can be specified either as a second CLEAR value or with the
+BACK option, is applied at the start of subsequent webs. If omitted,
+the defaults specified in QUEST will be used.</p>
+<p>The THRU cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/THRU,DEPTH,<strong>f1</strong>,<strong>f2</strong>,<strong>f3</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong>,BACK,<strong>r2</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance <strong>f1</strong> below the control point at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Rapid to a distance <strong>f2-r2</strong> below the control point</p></li>
+        <li><p>Feed to a distance <strong>f3</strong> below the control point</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_thru.png">
+        <img src="../../_images/gener_cycle_thru.png" style="width: 3.300in;" alt="Thru Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_thru.png" />
+</section>
+<section id="the-csink-cycle">
+<span id="cycle-csink"></span><h2>The CSINK Cycle<a class="headerlink" href="#the-csink-cycle" title="Link to this heading"></a></h2>
+<p>The CSINK cycle performs a sequence of operations equivalent to the
+DRILL G81 fixed cycle in ISO 1056. This cycle is used to chamfer
+holes and provides a convenient input syntax suited to this function.
+If a DWELL option is specified, the FACE G82 fixed cycle in ISO 1056
+will be used to perform the operation.</p>
+<p>The syntax is as follows (<em>common-options</em> are listed <a class="reference internal" href="#cycle-options"><span class="std std-ref">here</span></a>):</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / CSINK},
+\; \textbf{DIAMET},\mathit{odia},\textbf{TLANGL},\mathit{angle}
+\; \big[ ,\textbf{HOLDIA},\mathit{idia} \,\big]
+\begin{pmatrix} \!,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array} \end{pmatrix} \! ,\mathit{feed} \; \ldots\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\hspace{.8cm} \ldots \;  \big[ , \textbf{CLEAR} ,\mathit{clear} \,\big]
+\; \big[ ,\mathit{common\_options} \,\big]\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>The <em>odia</em> is the final outside diameter of the chamfered hole. For
+example, if a <strong>0.06</strong> chamfer is required on a <strong>1</strong> inch diameter
+hole, the final diameter is <strong>1.12</strong> or <strong>(0.06*2)+1</strong>.</p>
+<p>The <em>angle</em> (in degrees) specifies the included angle of the tool.
+For example, a 45 degree chamfer will require a tool having a 90
+degree included angle. The angle must be specified as 90, not 45, in
+the CSINK command.</p>
+<p>The optional <em>idia</em> specifies the original inside diameter of the
+hole. If this is specified, GENER will plunge the tool at a rapid
+rate to a calculated point clear of the original hole and then feed
+the remaining distance. If the inside diameter is omitted, the entire
+plunge motion will be performed at the specified feed.</p>
+<p>The CSINK cycle causes the following motions to occur at each
+non-rapid point within the cycle:</p>
+<blockquote>
+<div><table class="docutils wrap-first">
+  <tr class="row-odd">
+    <td colspan="2" style="font-family: monospace;">
+      <p>CYCLE/CSINK,DIAMET,<strong>k</strong>,TLANGL,<strong>l</strong>,IPM,<strong>feed</strong>,CLEAR,<strong>r</strong></p>
+    </td>
+  </tr>
+  <tr class="row-even">
+    <td>
+      <ol class="arabic simple">
+        <li><p>Position at rapid to <strong>r</strong> above the control point</p></li>
+        <li><p>Feed to a distance TAN(<strong>l</strong>/2)*<strong>k</strong>/2+<strong>r</strong> at <strong>feed</strong> inches/minute</p></li>
+        <li><p>Optionally dwell (if DWELL is specified)</p></li>
+        <li><p>Rapid retract to a position <strong>r</strong> above the control point</p></li>
+      </ol>
+    </td>
+    <td>
+      <a class="reference internal image-reference" href="../../_images/gener_cycle_csink.png">
+        <img src="../../_images/gener_cycle_csink.png" style="width: 2.029in;" alt="Csink Cycle" />
+      </a>
+    </td>
+  </tr>
+</table></div></blockquote>
+<img alt="Dummy ref to ensure image is copied" class="hidden" src="../../_images/gener_cycle_csink.png" />
+</section>
+<section id="the-manual-cycle">
+<span id="cycle-manual"></span><h2>The MANUAL Cycle<a class="headerlink" href="#the-manual-cycle" title="Link to this heading"></a></h2>
+<p>The MANUAL cycle does not activate a built-in machine cycle. Instead,
+the tool is positioned to each cycle point at the specified clearance
+and a STOP command is executed. The operator is then expected to
+perform some manual operation and then restart the NC machine when
+complete.</p>
+<p>The syntax is as follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CYCLE / MANUAL}
+\; \big[ ,\textbf{CLEAR},\mathit{clear} \,\big]\)</span></p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cutcom.html" class="btn btn-neutral float-left" title="The CUTCOM Command [MLEPC]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="defsub.html" class="btn btn-neutral float-right" title="The DEFSUB Command [MLEPC]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
