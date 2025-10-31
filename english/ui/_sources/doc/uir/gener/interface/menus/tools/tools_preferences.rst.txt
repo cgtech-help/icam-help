@@ -1,0 +1,63 @@
+Tools»Preferences...
+--------------------
+
+**General tab**
+
+The General preferences tab allows the user to customize general
+appearance and behavior.
+
+|image1|
+
+-  Fonts and colors used in the Trace windows
+-  Automatic generation of a “Save for Review” zpj file on exit
+-  Display of a “Loading…” dialog at the start of processing
+
+| 
+
+**Debug tab**
+
+The Debug preferences tab allows the user to customize the visual
+debugger appearance and behavior.
+
+|image2|
+
+-  Colorization settings of text in the Source and Trace windows
+-  Various debugging options, including:
+
+   -  the display of variables with $NULL value in the Variables window;
+   -  the display of a Pause/Continue dialog when a breakpoint is
+      encountered;
+   -  the ability to debug into $FLOOK type look-aheads; and
+   -  the option to diagnose uninitialized macro variables when they are
+      used in an expression.;
+
+-  Enable contextual help of codes and registers in the Output trace
+   window
+-  Macro strong declaration setting, uninitialized variable testing and
+   formatting
+-  Selection of either the C style or standard APT style representation
+   format of macro source
+
+| 
+
+**Trace tab**
+
+The Trace preferences tab allows the user to customize Trace/Source
+window size and content.
+
+|image3|
+
+-  Limit number of lines written to the Trace and Source windows
+-  Console trace window options, including:
+
+   -  tracing of operator (DISPLY command) and other messages;
+   -  tracing of MACRO I/O command processing; and
+   -  tracing of diagnostic messages at or above a specified minimum
+      severity.
+
+| 
+
+.. |image1| image:: ./media/599c9af66c33cd1fc9cba8db7903fe3f244fda34.png
+.. |image2| image:: ./media/f9173a0987e3c29eb077275330ea2a3fce42689b.png
+.. |image3| image:: ./media/90e1629c243a842fb7758f81d04d0d927fcdc694.png
+
