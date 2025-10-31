@@ -1,0 +1,126 @@
+.. _command_rotabl:
+
+The ROTABL Command :kbd:`[ML]`
+==============================
+
+The ROTABL command is used to cause the rotation of a rotary table,
+rotary head, or lathe C-axis. This command is not valid for machines
+that do not have controllable rotary axes.
+The following ROTABL command functions are available:
+
+-  :ref:`“Position Rotary Axis”<position_rotary_axis>`
+-  :ref:`“Unwind Rotary Axis”<unwind_rotary_axis>`
+-  :ref:`“Preferred Singular Rotary Axis”<preferred_rotary_axis>`
+
+.. _position_rotary_axis:
+
+Position Rotary Axis
+--------------------
+
+   :math:`\textbf{ROTABL / }
+   \begin{pmatrix}\,\begin{array}{l} a \\ \textbf{INCR},b \\ \textbf{ATANGL},a \end{array}\,\end{pmatrix}
+   \begin{pmatrix} \!,\! \begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array} \end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{CLW} \\ \textbf{CCLW} \end{array}\,\end{bmatrix} \,
+   \big[,\textbf{ROTREF} \,\big] \; \ldots`
+
+      :math:`\hspace{1.34cm} \ldots \; \begin{bmatrix} \big[,\textbf{ADJUST} \,\big]
+      \begin{pmatrix} \!,\! \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array}\end{pmatrix}\end{bmatrix}`
+
+This command positions a rotary axis (not just rotary tables). The
+first two parameters are mandatory. The first parameter indicates the
+angle and must be the first option programmed in the command. The
+second parameter indicates the rotary axis and may be programmed
+anywhere in the remaining parameter list. Other parameters are
+optional and may be programmed in any order.
+
+   :math:`\begin{pmatrix}\,\begin{array}{l} a \\ \textbf{INCR},b \\ \textbf{ATANGL},a \end{array}\,\end{pmatrix}`
+
+This parameter specifies the angle of rotation. If the format *a* is
+used, the device will be positioned to the nearest modulus of the
+angle specified. For example, if ROTABL/90 was coded and the axis
+started at –180 degrees, the axis would move to –270 degrees, which
+is effectively the same position as 90 degrees. If the format
+ATANGL,\ *a* is used, the device will be positioned to the exact
+angle specified, regardless of the modulus of the angle. Using the
+same example, the rotary axis would move the full 270 degrees from
+–180 to +90, rather than the shorter 90 degrees to –270. If the
+format INCR,\ *b* is used, the device will be rotated to a position
+equal to the current position plus the increment *b*.
+
+   :math:`\begin{pmatrix} \!,\! \begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array} \end{pmatrix}`
+
+This parameter specifies the rotary device to be rotated. See :ref:`here<axis_names>`
+for a table correlating axes name keywords with machine rotary axes.
+
+   :math:`\begin{bmatrix} ,\! \begin{array}{l} \textbf{CLW} \\ \textbf{CCLW} \end{array}\,\end{bmatrix}`
+
+The direction of the rotation of the device to reach the desired
+angle can be controlled by the modifiers CLW and CCLW. Normally,
+GENER determines the optimum direction of rotation from one position
+to the next. If the device is capable of rotating in both directions,
+the post-processor determines the shortest path, without violating
+limits (if they exist) and outputs the proper angle and/or codes to
+perform the rotation. The CLW modifier will force the rotation to be
+performed in a clockwise direction whether or not the direction would
+have been chosen by GENER. Similarly, the CCLW modifier will cause
+the device to be rotated in a counter-clockwise direction. If neither
+modifier is programmed, GENER will determine the direction to rotate.
+
+In the case of a ROTABL/ATANGL,\ *a* command, there can be only one
+direction by which the desired angle can be reached. CLW and CCLW, if
+they are coded, will be ignored.
+
+   :math:`\big[,\textbf{ROTREF} \,\big]`
+
+The ROTREF modifier makes the post *aware* of the fact that a
+rotation has taken place. Tool vector and positioning information
+will be adjusted accordingly. If ROTREF is not programmed, the angle
+will be output, the axis will move and the coordinate system will
+stay where it is. Coding a ROTABL with no ROTREF will have an effect
+similar to that of coding a TRANS command.
+
+   :math:`\begin{bmatrix} \big[,\textbf{ADJUST} \,\big]
+   \begin{pmatrix} \!,\! \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array}\end{pmatrix}\end{bmatrix}`
+
+The timing of the effect of ROTREF can be controlled by the modifiers
+NOW and NEXT. The modifier NOW will cause the angle and any ROTREF
+actions to be done immediately. The modifier NEXT, will delay the
+actions until the next motion block. A ROTABL/NEXT command may not be
+issued while MULTAX is in effect. If neither is programmed, NOW will
+be used as the default. The keyword ADJUST preceding NOW or NEXT is
+optional.
+
+.. _unwind_rotary_axis:
+
+Unwind Rotary Axis
+-------------------
+
+   :math:`\textbf{ROTABL / UNWIND},
+   \begin{pmatrix} \begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array} \end{pmatrix}`
+
+This command will cause the CNC to logically (but not physically)
+unwind the specified rotary axis to its nearest modulo-360 value. See
+:ref:`here<axis_names>` for a table correlating axes name
+keywords with machine rotary axes. A diagnostic will be output if the
+machine does not have the ability to logically unwind the specified
+rotary axis.
+
+.. _preferred_rotary_axis:
+
+Preferred Singular Rotary Axis
+------------------------------
+
+   :math:`\textbf{ROTABL / SINGLR } \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{NEXT} \end{array}\,\end{bmatrix}
+   \big[, \mathit{angle} \,\big]`
+
+This command can be used to set a preferred rotary axis position when it becomes singular. A rotary axis becomes singular when the tool is oriented parallel to the rotary axis of revolution. In this configuration, the rotary axis no longer influences tool orientation due to the loss of a degree of freedom. Many optimization features take advantage of this by positioning the rotary axis to avoid overtravel or collisions later in the program. If the optimization algorithm does not require a specific orientation for a singular axis, its position remains as it was in the last motion.
+
+From a machining perspective, it is sometimes necessary or desirable to move the axis to a specific position, such as zero or another predefined value. The ROTABL/SINGLR command can specify a preferred singular position. Icam Post will move the singular axis to this position unless other constraints or requirements are specified.
+
+The **angle** option specifies the value of the preferred singular position. If not specified, the default is zero degrees. The singular preferred position always applies to the active singular axis.
+
+**ON** activates the last active modal preferred position. If no value is specified and no previous value is defined, zero is assumed. This modal command remains active for all subsequent RAPID sequences.
+
+**NEXT** activates a non-modal preferred singular position. This non-modal position is valid for one positioning sequence. The first motion at cutting feed cancels the active non-modal position.
+
+**OFF** cancels the active preferred position, whether modal or non-modal. If **ON** is used later in the program, it will reinstate the last active preferred position (modal or non-modal).
