@@ -1,0 +1,321 @@
+.. _def_file:
+
+The ICAM.DEF File
+=================
+
+.. index:: icam.def file
+.. index:: File extension; def
+
+The ICAM.DEF file contains parameter definitions that control the
+operation of both QUEST and CERUN. This file is located in the
+icam_appdata directory.
+
+ICAM.DEF can be modified by running the Configuration Utility from
+the desktop or Windows command prompt (see :ref:`“The ICAM Configuration
+Utility”<configuration_utility>`) or by
+selecting Tools»Configuration from the QUEST or CERUN menu bar.
+
+The ICAM.DEF file can also be modified using a text editor. When
+editing the file, keep the following in mind: The “begin *xxx*\ ” and
+paired “end” commands indicate that the values assigned with the
+“let” commands between these commands are for a specific purpose. Do
+not move the “let” commands out of the “begin … end” block. Each
+“let” command defines a symbol, where the text string on the right of
+the **=** is assigned to the symbol named on the left. Text not
+surrounded by quotes will be converted to uppercase characters. Quote
+the text to preserve case. Environment variables may be used as all
+or part of the text value. A **$** symbol in front of a name
+identifies it as an environment symbol (e.g., $icam_lib). Enclose the
+symbol name in braces **{ }** if the name contains characters other
+than digits, characters and underscores, or to distinguish the symbol
+name from immediately following text (e.g., ${icam_lib}tmp). Use $$
+to specify $ as text. Anything following a **#** character (outside
+of a quoted string) on a line is considered a comment and is not
+processed.
+
+The following list describes the meaning of each symbol that is
+referenced by Control Emulator, with the default shown in ( ) parenthesis.
+Items are listed alphabetically.
+
+.. _def_erfile:
+.. index:: erfile config parameter
+
+:boldmono:`erfile`
+
+   Specifies the path and file name of the CERUN error message file. If
+   a file is not specified (the default), internal error messages are
+   used.
+
+.. _def_file_ext:
+.. index:: file_ext config parameter
+.. _def_file_ext_list:
+.. index:: file_ext_list config parameter
+.. _def_file_ext_log:
+.. index:: file_ext_log config parameter
+.. _def_file_ext_celist:
+.. index:: file_ext_celist config parameter
+.. container:: two-column
+
+   .. container::
+
+      | :boldmono:`file_ext_celist`
+      | :boldmono:`file_ext_list`
+      | :boldmono:`file_ext_log`
+      | :boldmono:`file_ext_sub`
+
+   .. container::
+
+      | :boldmono:`(lce)`
+      | :boldmono:`(lis)`
+      | :boldmono:`(log)`
+      | :boldmono:`(tps)`
+
+..
+
+   Specifies default file extensions (or file types) for the various
+   output files that are created by QUEST and CERUN. The default file
+   extension is used when a specific name is not specified on the CERUN
+   command line.
+   The QUEST listing file (*file_ext_list*)
+   extension is used when its listing is generated in a regular file format (i.e., not HTML).
+   The CERUN listing file (*file_ext_celist*) is not available in HTML output.
+   The subprogram tape file extension can be changed using the $SUBEXT macro variable.
+
+.. _def_file_locks:
+.. index:: file_locks config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`file_locks`
+
+   .. container::
+
+      :boldmono:`(system)`
+
+..
+
+   Specifies how the Control Emulator database is locked when it is being
+   written to. The default “system” lock uses Windows file locking. For
+   legacy purposes, Control Emulator supports the simulation of Windows file
+   locking by creating a temporary lock file indicating that the
+   database is in use. This is called a “file” lock. Database file
+   locking can be disabled by specifying “no”. ICAM recommends that
+   Windows file locking always be used. This is the default.
+
+.. _def_html_ext:
+.. index:: html_ext config parameter
+.. _def_html_ext_list:
+.. index:: html_ext_list config parameter
+
+.. container:: two-column
+
+   .. container::
+
+      | :boldmono:`html_ext_list`
+
+   .. container::
+
+      | :boldmono:`(htm)`
+
+..
+
+   Specifies the default file extension (or file type) for the QUEST
+   listing (*html_ext_list*) file
+   when using the HTML output format.
+
+.. _def_icam_appdata:
+.. index:: icam_appdata config parameter
+
+:boldmono:`icam_appdata`
+
+   If used, this configuration setting *must be manually added* at the
+   start of the ICAM.DEF file before the first “begin” command.
+
+      ::
+
+         let ICAM_APPDATA = "directory path"
+
+   Specifies the application data directory path, overriding all other
+   application data directory definitions to this point. The content of
+   the current DEF file (i.e., the one containing the *icam_appdata*
+   definition) is ignored. The target directory ICAM.DEF file, if one
+   exists, may contain an *icam_appdata* setting, which will be
+   recursively applied. A circular reference will be diagnosed with an
+   error.
+
+   If an ICAM.DEF file does not exist in the specified application data
+   directory, then default values will be used for all configuration
+   settings.
+
+.. _def_language:
+.. index:: language config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`language`
+
+   .. container::
+
+      :boldmono:`(english)`
+
+..
+
+   Specifies the name of the default language to use for all text
+   output. The language name must match a subdirectory name of the
+   “$icam_lib/bin/$icam_bin/lang” directory. If “language” is not
+   specified, or if it is invalid, all text output will be in English.
+   This symbol takes precedence over the LANG environment variable.
+
+.. _def_lines_per_page:
+.. index:: lines_per_page config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`lines_per_page`
+
+   .. container::
+
+      :boldmono:`(60)`
+
+..
+
+   Specifies the number of lines per page on
+   QUEST output listings (CERUN does not paginate its listing file).
+   If 0 (zero) is specified, there will be no page breaks and headers will be
+   output at the top of the program and at the top of the program summary only.
+
+.. _def_page_format:
+.. index:: page_format config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`page_format`
+
+   .. container::
+
+      :boldmono:`(list)`
+
+..
+
+   Defines the output page format for QUEST output listings
+   (CERUN uses the “list” page format control exclusively).
+   Either “list” or “fcc” can be
+   specified. List type output uses a form-feed character to advance the
+   printer carriage to a new page. FCC type output (also known as ASA)
+   reserves the first character of each line as a carriage control
+   indicator, where values of 1, 0 and space cause a page advance,
+   double space or single space action.
+
+.. _def_units:
+.. index:: units config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`units`
+
+   .. container::
+
+      :boldmono:`(inch)`
+
+..
+
+   Specifies the default unit of measure to use when creating new
+   control emulators with QUEST. It can be set to “mm” or “inch”. The
+   default unit of measure can be overridden in QUEST.
+
+.. _def_use_html:
+.. index:: use_html config parameter
+.. _def_use_html_list:
+.. index:: use_html_list config parameter
+.. _def_use_html_nclist:
+.. index:: use_html_nclist config parameter
+.. container:: two-column
+
+   .. container::
+
+      | :boldmono:`use_html_list`
+
+   .. container::
+
+      | :boldmono:`(no)`
+
+..
+
+   Specifies if the HTML output format option should be used for the
+   QUEST listing (*use_html_list*)
+   files.
+   Valid choices are “yes” and “no” (the default).
+
+.. _def_user_questions:
+.. index:: user_questions config parameter
+
+:boldmono:`user_questions`
+
+   This symbol specifies the full path and file name of a user-defined
+   questions file. QUEST uses this file to present a customized question
+   section to the user. See the :ref:`“User-Defined Questions”<annex_user_defined_questions>`
+   annex for file format details.
+
+.. _def_vm_picture_dir:
+.. index:: vm_picture_dir config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`vm_picture_dir`
+
+   .. container::
+
+      :boldmono:`("My Pictures\\ICAM\\260\\")`
+
+..
+
+   This symbol specifies the directory to use when creating screenshots
+   of a Virtual Machine simulation window. The default is the system “My
+   Pictures\\ICAM\\260” directory. If this symbol defines a relative
+   path, then the pictures directory will be relative to the input
+   CLDATA file.
+
+.. _def_vm_video_dir:
+.. index:: vm_video_dir config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`vm_video_dir`
+
+   .. container::
+
+      :boldmono:`("My Videos\\ICAM\\260\\")`
+
+..
+
+   This symbol specifies the directory to use when creating videos of a
+   Virtual Machine simulation window. The default is the system “My
+   Videos\\ICAM\\260” directory. If this symbol defines a relative
+   path, then the videos directory will be relative to the input CLDATA
+   file.
+
+.. _def_words:
+.. index:: words config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`words`
+
+   .. container::
+
+      :boldmono:`("$icam_appdata\\dwords.dat")`
+
+..
+
+   Specifies a file containing additional major and minor words and
+   codes used by your CAM system. By default, ICAM uses the ISO standard
+   words with common extensions. This symbol can be overridden using the
+   /words command line qualifier (valid for both QUEST and CERUN).
