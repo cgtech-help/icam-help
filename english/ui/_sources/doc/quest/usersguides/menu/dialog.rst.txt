@@ -1,0 +1,48 @@
+Dialog
+------
+
+**Controls:** Let you create new controls for the dialog being edited
+(see `Dialog Editor
+View <../maininterface/workspaces/dialogedtview.html>`__).
+
+-  **Text**: Simple static text.
+-  **Frame**: Used to group related controls.
+-  **Button**: Used to signal an OK, Cancel or Reset action.
+-  **Edit**: An EditBox, used to accept any input.
+-  **Check**: A CheckBox, used for logical True/False prompts.
+-  **Radio**: Radio buttons, used for multiple exclusive choices.
+-  **Combo**: A ComboBox, used to select one of a number of listed
+   choices.
+-  **List**: A ListBox, similar to ComboBox, but all choices are
+   visible.
+-  **Picture**: An image in bmp, gif, jpg or png format.
+
+**Utilities:** Let you position and resize selected controls in the
+dialog being edited.
+
+-  **Align Left**: Align the left edges of the selected controls with
+   the dominant control.
+-  **Align Right**: Align the right edges of the selected controls with
+   the dominant control.
+-  **Align Top**: Align the top edges of the selected controls with the
+   dominant control.
+-  **Align Bottom**: Align the bottom edges of the selected controls
+   with the dominant control.
+-  **Center Vertically**: Center the selected controls vertically within
+   the dialog.
+-  **Center Horizontally**: Center the selected controls horizontally
+   within the dialog.
+-  **Space Vertically**: Evenly space the selected controls vertically.
+-  **Space Horizontally**: Evenly space the selected controls
+   horizontally.
+-  **Same Width**: Resize the selected controls to have the same width
+   as the dominant control.
+-  **Same Height**: Resize the selected controls to have the same height
+   as the dominant control.
+-  **Same Size**: Resize the selected controls to have the same size as
+   the dominant control.
+
+**Tab Order:** Let you change dialog controls tab order
+
+**Test:** Runs the dialog box to test the layout and behavior.
+
