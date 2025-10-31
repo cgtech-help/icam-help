@@ -1,0 +1,121 @@
+.. _var_ppdate:
+.. index:: Variables; $PPDATE
+.. _var_ppfile:
+.. index:: Variables; $PPFILE
+.. |Object| replace:: Control emulator
+
+Control Emulator Definition Variables
+=========================================
+
+.. _var_author:
+.. index:: Variables; $AUTHOR
+
++------------------+------------------------------------------+
+| **$AUTHOR**      | |Object| developer’s name                |
+|                  |                                          |
+|                  | Type: String, Read/Write                 |
++------------------+------------------------------------------+
+
+   This variable contains the control emulator developer’s name. The value
+   is defined in the *General Description* / *General Information*
+   section of the questionnaire.
+
+.. _var_cedate:
+.. index:: Variables; $CEDATE
+
++------------------+------------------------------------------+
+| **$CEDATE**      | |Object| creation date                   |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the creation date of the control emulator.
+
+.. _var_cefile:
+.. index:: Variables; $CEFILE
+
++------------------+------------------------------------------+
+| **$CEFILE**      | |Object| file name                       |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the full name of the control emulator being
+   executed. This is the file name under which the control emulator is
+   stored in the database.
+
+.. _var_dbfile:
+.. index:: Variables; $DBFILE
+
++------------------+------------------------------------------+
+| **$DBFILE**      | |Object| database file name              |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the name of the control emulator database file
+   currently in use.
+
+.. _var_machin:
+.. index:: Variables; $MACHIN
+
++------------------+------------------------------------------+
+| **$MACHIN**      | |Object| MACHIN name                     |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the control emulator MACHIN name, not including
+   the MACHIN number. This variable is the name portion of the
+   control emulator being executed.
+
+.. _var_mchdsc:
+.. index:: Variables; $MCHDSC
+
++------------------+------------------------------------------+
+| **$MCHDSC**      | |Object| machine descriptor              |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the control emulator machine descriptor. The
+   machine descriptor is built based on machine characteristics (machine
+   type, positioning modes available, primary output units, etcetera).
+   The machine descriptor can be seen in the QUEST View»Database
+   listing.
+
+.. _var_mchnum:
+.. index:: Variables; $MCHNUM
+
++------------------+------------------------------------------+
+| **$MCHNUM**      | |Object| MACHIN number (0:NA)            |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the control emulator MACHIN number. This
+   variable is the number portion of the control emulator being executed.
+   A value of zero (0) indicates that a MACHIN identification number was
+   not defined for the control emulator.
+
+.. _var_plev:
+.. index:: Variables; $PLEV
+
++------------------+------------------------------------------+
+| **$PLEV**        | Product level                            |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the level number of the Control Emulator product.
+
+.. _var_pver:
+.. index:: Variables; $PVER
+
++------------------+------------------------------------------+
+| **$PVER**        | Product version                          |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the version number of the Control Emulator product.
