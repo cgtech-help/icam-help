@@ -1,0 +1,31 @@
+.. _macro_language:
+
+The Macro Language
+==================
+
+The ICAM macro language is used for the customization of
+control emulators, as well as for the customization of Icam Post
+post-processors and Virtual Machine models. When a control emulator is
+running in tandem with a Virtual Machine model, the control emulator
+macro environment is shared with the model macro environment. Care
+must be taken to avoid conflicts in variable usage between macros of
+these different components. CERUN does not run within the same
+environment as GENER, so conflicts between control emulator and
+post-processor macros are not an issue.
+
+Macros allow the control emulator to manipulate the blocks of the
+input MCD to alter how they are processed. Macros can construct new
+MCD blocks for processing, or suppress or modify individual codes and
+data registers on a block. Macro features also exist to reposition
+the input MCD file block pointer and to read and write to external
+files (and much more).
+
+.. toctree::
+   :hidden:
+
+   fundamentals
+   functioncall
+   flowcontrol
+   invocation
+   textio
+   others
