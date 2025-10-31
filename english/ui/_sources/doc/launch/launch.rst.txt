@@ -1,0 +1,119 @@
+Launch Panel
+============
+
+The launch panel provides a simple and interactive method of selecting
+the appropriate set of postprocessing options. The launch panel
+remembers the last settings used and saves this information in the
+Windows Registry. Remembered settings can be recalled via the drop-down
+lists that appear beside most launch panel input fields.
+
+When GENER is started, the launch panel will appear as shown below.
+
+When CERUN is started, the launch panel will appear as shown below.
+
+Center tab selections
+~~~~~~~~~~~~~~~~~~~~~
+
+There are separate tabs for GENER, CERUN, Virtual Machine and user
+preferences. Availability of these tabs are controlled by licensing and
+the **Processing** selection choice.
+
+-  `GENER: specifies post-processing options <../launch/gener.html>`__
+-  `CERUN: specifies control emulator options <../launch/cerun.html>`__
+-  `VM: specifies simulation options <../launch/sim.html>`__
+-  `Optimizer/Force: specifies Vericut Optimizer/Force integration options <../launch/vo.html>`__
+-  `Preferences: specifies personal preferences <../launch/preferences.html>`__
+
+Processing
+~~~~~~~~~~
+
+This setting defines the type of processing desired. Choices are as follows:
+
+-  GENER Run the post-processor
+-  CERUN Run the control emulator
+-  PSE Run the post-processor and control emulator together
+-  REVIEW Review results of a previously saved job
+
+Select the GENER option to post-process a CL file to MCD code.
+
+The CERUN and PSE selections are described in the Control Emulator User
+Guide. In brief, CERUN starts execution of the ICAM Control Emulator.
+PSE starts execution of GENER and CERUN together, along with a Virtual
+Machine simulation.
+
+The REVIEW selection is only available after selecting a zrj review file
+using the JOB button or after dropping a zrj file on the launch panel.
+This reviews the results of a previously run job.
+
+Interface
+~~~~~~~~~
+
+GENER can run hidden as a background process or interactively as a
+foreground process.
+
+Select **Background** to run as a background process. When in background
+mode, GENER will inhibit I/O operations to the console and will also
+inhibit the display of dialog boxes. This will ensure uninterrupted
+post-processing.
+
+Select **Full** to run GENER with a interactive interface that can be
+used to view and debug the actions of the post-processor. With Full
+mode, GENER can show the interaction between input CL, output tape and
+the macro processor using a variety of tracing and debugging features.
+GENER starts in a paused state when running in Full mode; use the Run
+menu or toolbar shortcuts to start post-processing.
+
+Select Progress to run GENER with only a simple progress bar visible on
+the desktop. When running with the progress bar, you can switch to the
+full display by pressing the “More info” button. When post-processing
+has completed, you can view the verification listing file by pressing
+the “View Listing” button.
+
+Select Minimize to run GENER in the background. When running in this
+mode, no information is given about the execution progress. The less
+information GENER is asked to present, the faster execution will be. At
+any time you can restore the window to view the progress state, and from
+there, switch to a full display.
+
+When GENER is started in Back, Progress or Minimize modes, the Trace
+windows will not be enabled unless “Save for review” is enabled. This is
+done to speed up processing, since generating and recording trace
+information consumes CPU and memory resources. To enable tracing from
+the start of post-processing, run in Full mode and select Run»Fast (F8).
+
+ICAM recommends that Background or Minimize mode be used when using
+GENER in a production mode, since the CPU requirements are reduced.
+
+Merged PSE Processing
+~~~~~~~~~~~~~~~~~~~~~
+
+This checkbox is available for PSE processing. If selected, GENER and
+CERUN will run in parallel, with the MCD output of GENER being
+immediately input and simulated by CERUN. PSE processing runs in series
+if this checkbox is not selected. Once GENER reaches the end of
+post-processing, CERUN will then simulate the generated MCD.
+
+DEF file
+~~~~~~~~
+
+This field specifies the DEF file to use. By default, the definition
+file is named ICAM.DEF and is stored in the application data directory
+You can browse for a specific DEF file using the […] button.
+
+OK, Cancel and other buttons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Press the **OK** button to start post-processing. GENER requires the CL
+file name, the database and the post-processor name before it can
+proceed. Everything else is optional.
+
+Press **Cancel** to quit the launch panel without running GENER (changed
+settings are not remembered in the Windows Registry when Cancel is
+pressed).
+
+Press `DB Manager (or AUTOPOST) button to perform database
+management. <../launch/dbman.html>`__
+
+Press `JOB button to save/recall launch panel
+settings. <../launch/job.html>`__
+
