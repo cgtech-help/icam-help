@@ -1,0 +1,16 @@
+Run»Details
+-----------
+
+Similar to Step mode, using this option, you can click your left mouse
+button in Output window to control the output stepping and the system
+will output one register at a time. In this way, it tells you in which
+order the software outputs registers so that macros can be written with
+an understanding of the register output order, if the post processor is
+on testing stage.
+
+This toggle affects the stepping and display of NC program data in the
+Output window. When Details are not activated, a Step in the Output
+window completes when a new block of NC program code is output. When
+Details are activated, a Step in the Output window completes each time
+register data is written to the tape buffer.
+
