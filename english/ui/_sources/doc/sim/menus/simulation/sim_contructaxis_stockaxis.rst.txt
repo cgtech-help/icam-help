@@ -1,0 +1,10 @@
+Simulation»Construct Axis»Stock Axis
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Creates a stock axis given an XYZ origin. Stock axes define the table
+control point (TCP) of the machine. When stock, fixtures and parts are
+loaded onto the machine (using CERUN or GENER), they are mounted
+relative to a predefined stock axis.
+
+See `Stock Axis Dialog <../../dialogs/vmstockaxis.html>`__
+
