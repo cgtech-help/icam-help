@@ -1,0 +1,329 @@
+.. _command_cutcom:
+
+The CUTCOM Command :kbd:`[MLEPC]`
+=================================
+
+The CUTCOM command is used to compensate at the machine for tool
+length, tool wear and fixture alignment.\ [#]_ This command is
+valid for all machine types, but some functions may not be available
+on specific machines.
+
+The following CUTCOM command functions are available:
+
+-  :ref:`“Length Compensation”<length_compensation>`
+-  :ref:`“Diameter Compensation”<diameter_compensation>`
+-  :ref:`“Diameter Compensation Cornering”<diameter_compensation_cornering>`
+-  :ref:`“Diameter Compensation Offset”<diameter_compensation_offset>`
+-  :ref:`“Diameter Compensation Filleting”<diameter_compensation_filleting>`
+-  :ref:`“3D Tool Compensation”<3d_tool_compensation>`
+-  :ref:`“Fixture Compensation”<fixture_compensation>`
+-  :ref:`“Rotary Table Dynamic Fixture Compensation”<rotary_table_dynamic_fixture_compensation>`
+
+.. [#] The CUTCOM/TRFORM command documented in releases prior to V16 has
+   been replaced by the LCS command. GENER continues to support the
+   original CUTCOM/TRFORM syntax.
+
+.. _length_compensation:
+
+Length Compensation
+-------------------
+
+Length compensation is used to compensate for differences between the
+expected and actual tool length. This capability is available for
+lathes and for mills having a Z axis. Length compensation can also be
+controlled when loading the tool.
+
+   :math:`\textbf{CUTCOM / ON},\;\textbf{LENGTH} \;\big[ , \mathit{offset} \,\big]
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{POSX} \\ \textbf{POSY} \\ \textbf{POSZ} \\ \textbf{NEGX} \\ \textbf{NEGY} \\ \textbf{NEGZ} \\ \textbf{XYZ} \end{array} \, \end{bmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array} \, \end{bmatrix} \;
+   \big[ , \textbf{RTCP} , \mathit{type} \,\big]`
+
+   :math:`\textbf{CUTCOM / OFF},\;\textbf{LENGTH} \begin{bmatrix} ,\! \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array} \, \end{bmatrix}`
+
+The LENGTH keyword is always required when controlling the
+application of length compensation. ON is used to enable
+compensation, OFF is used to disable it.
+
+The *offset* value specifies the compensation switch number to use to
+control the amount of length compensation. If omitted, the last value
+specified for the current tool will be reused. If a length
+compensation value has yet to be defined for a tool, a default may be
+used, depending on QUEST settings. Not all machines support this
+capability.
+
+The keywords, POS\ *XYZ*, NEG\ *XYZ* and XYZ define the direction of
+compensation. GENER assumes compensation is along the positive Z axis
+(POSZ) for all machine types except those with
+rotary heads, in which case GENER assumes compensation is along the
+tool axis (XYZ). Not all machines support the ability to define the
+direction of compensation.
+
+The keywords NOW and NEXT control the deferring of length
+compensation. The keyword NOW causes the NC control codes to be
+output immediately; NEXT causes these codes to be deferred until
+there is a motion in the Z axis. If omitted, the default action
+specified in QUEST will be used.
+
+The RTCP keyword couplet defines the tool length compensation type on
+machines where there are multiple length compensation types defined.
+If omitted, the last type specified will be used. Type 1 (the
+default) is the standard length compensation supported by all
+machines. Types 2 through 4 are defined by the post-processor
+developer and include various RTCP settings. The $TCLSET macro
+variable indicates and can change the default type.
+
+.. _diameter_compensation:
+
+Diameter Compensation
+---------------------
+
+Diameter compensation is used to compensate for differences between
+the expected and actual cutting tool diameter.
+
+   :math:`\textbf{CUTCOM /} \begin{pmatrix}\begin{array}{l} \textbf{LEFT} \\ \textbf{RIGHT} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{XYPLAN} \\ \textbf{YZPLAN} \\ \textbf{ZXPLAN} \\ \textbf{XYZ} \end{array} \, \end{bmatrix} \;
+   \big[ ,\textbf{OSETNO} ,\mathit{offset} \,\big]`
+
+   :math:`\textbf{CUTCOM /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+Cutter diameter compensation can be applied to the right or left of
+the tool or wire in the direction of motion, generally using G41 and
+G42 codes. The first time diameter compensation is used, RIGHT or
+LEFT must be specified. Thereafter, ON can be specified to reinstate
+the last mode. OFF is used to disable diameter compensation,
+generally using a G40 code.
+
+For machines having X, Y and Z axes, diameter compensation can be
+applied in different planes. If a plane is not specified then the
+ZXPLAN is assumed for lathes; the XYPLAN is assumed for all other
+machine types. The XYZ option activates 3D diameter compensation.
+
+The *offset* value specifies the compensation switch number to use to
+control the amount of diameter compensation. If omitted, the last
+value specified will be reused. Not all machines support this
+capability.
+
+.. _diameter_compensation_cornering:
+
+Diameter Compensation Cornering
+-------------------------------
+
+Some machines require that the diameter compensation outside corner
+interpolation strategy be explicitly defined via G codes. The
+following command can be used to select the required interpolation
+type, if required by the machine.
+
+   :math:`\textbf{CUTCOM / CORNER}, \begin{pmatrix} \begin{array}{l} \textbf{LINEAR} \\ \textbf{CIRCUL} \end{array} \end{pmatrix}`
+
+The LINEAR keyword selects straight line interpolation of outside
+corners. This can result in long non-cutting motions on acute angle
+corners
+
+The CIRCUL keyword selects corner rounding, which joins the two edges
+using circular interpolation. This can result in slightly rounded
+instead of sharp edges at the part surface.
+
+Most machines handle outside corner interpolation by automatically
+switching between the these two methods based on the corner angle.
+The CUTCOM/CORNER command has no effect on machines that
+automatically handle corner interpolation.
+
+.. _diameter_compensation_offset:
+
+Diameter Compensation Offset
+----------------------------
+
+The diameter offset capability enables the user to modify the final
+tool path by a given amount. Thus, an offset applied by the CAM
+system can be removed by the post-processor. This command must be
+coded before diameter compensation is activated. The compensation
+distance cannot be changed once diameter compensation is active. The
+syntax is as follows:
+
+   :math:`\textbf{CUTCOM / TRANSL}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{AUTO} \\ \mathit{dist} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{ROUGH} \big[ ,\mathit{angle} \,\big] \\ \textbf{FINCUT} \end{array} \, \end{bmatrix}`
+
+The ON and OFF keywords enables or disables this feature. The AUTO
+keyword specifies that the offset value will be determined from the
+DIAMET couplet in the LOAD/TOOL command. If the DIAMET couplet is not
+used, the last cutter value is applied. You must always establish a
+CUTTER diameter before using the AUTO option. Each LOAD/TOOL command
+causes the offset value to be changed. The offset value is taken from
+the CUTTER command only if the DIAMET value is not used. In this
+case, the CUTTER command must appear before the first GOTO following
+a LOAD/TOOL command.
+
+The CUTCOM/TRANSL,\ *dist* specifies that the value coded will be
+applied rather than using the cutter diameter. When diameter
+compensation is turned off, the above feature is also turned off.
+When diameter compensation is reestablished, so is the above feature.
+
+The FINCUT keyword specifies that when offsetting inside corners,
+GENER should output a circular arc representing the curved surface.
+It also restricts the size of the tool that can be used in the
+machine to be no larger than the offset amount. This is the default.
+It also ensures that the finish geometry is respected.
+
+The ROUGH keyword does not use arcs to represent inside corners,
+outputting instead a motion to the intersection point. This permits
+larger tools to be used during roughing. By default, a change in
+direction of 170 degrees or larger will be represented using a
+circular arc. This default can be changed by specifying a different
+angle following the ROUGH keyword.
+
+.. _diameter_compensation_filleting:
+
+Diameter Compensation Filleting
+-------------------------------
+
+The CUTCOM command can also be used to insert fillets between non
+tangential moves while in diameter compensation. Filleting inserts
+tangential circular and helical moves between other CL moves while in
+diameter compensation. The inserted fillets (circles or helices), are
+always in the plane of the compensation. If the inserted fillet end
+points are in different planes, then the generated move is a helical
+interpolation, otherwise it is circular. Filleting also considers
+whether the corner is an inner or an outer corner.
+
+   :math:`\textbf{CUTCOM / ROUND}, \, \mathit{radius} \;\icamrange{0.8}{0}\, \big[ ,\mathit{angle,radius} \,\big]`
+
+   :math:`\textbf{CUTCOM / ROUND} \,\icamrange{1.6}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{IN} \\ \textbf{OUT} \end{array}\end{pmatrix}
+   ,\mathit{radius} \;\icamrange{0.8}{0}\, \big[ ,\mathit{angle,radius} \,\big] \end{pmatrix}`
+
+   :math:`\textbf{CUTCOM / ROUND}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+Where: *radius* is the required radius of the inserted fillets and
+*angle* is the calculated angle of progression between the move
+vectors, projected in the plane of compensation. Multiple “\ *angle,
+radius*\ ” pairs can be specified, to vary the size of the fillet
+based on the discontinuity angle. For example:
+
+   .. code-block:: text
+
+      CUTCOM/ROUND,0,10,.5,45,.75,90,1.0,120,0
+
+In this case, GENER will insert fillets only if the deviation angle
+between moves is larger or equal to 10 and less than 120. If angle is
+GE 10 and LT 45, then the fillet radius is 0.5. If angle is GE 45 and
+LT 90, then the fillet radius is 0.75. If angle is GE 90 and LE 120,
+then the fillet radius is 1.
+
+The IN and OUT modifiers limit the filleting to moves that will
+generate inside fillets or outside fillets only. OFF will stop the
+occurrence of filleting. ON will restart filleting on all upcoming
+diameter compensation moves, using the last ROUND parameters set.
+
+If the fillet end point goes beyond the existing move, an error
+message is output and no filleting is attempted.
+
+.. _3d_tool_compensation:
+
+3D Tool Compensation
+--------------------
+
+3D tool compensation is used to compensate for changes in cutting
+tool geometry, typically when using ball or bull nosed milling tools.
+When 3D compensation is active, the post-processor includes the
+surface normal at the tool contact point in the motion data that it
+outputs. This additional information is used by the 3D compensation
+function of the machine, to account for differenced between
+programmed and actual tool geometry.
+
+3D tool compensation can be activated and deactivated as follows:
+
+   :math:`\textbf{CUTCOM / NORMAL}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+3D tool compensation requires that the CAM system generate an
+additional triplet of motion data defining the surface normal vector
+at the tool contact point. The generation of this additional surface
+normal information is CAM system dependent. However generated though,
+GENER requires that
+a MULTAX/ROLL (or MULTAX/3) command be present in the CL file before
+activating 3D compensation. If the CAM system generates more than 3
+triplets of data (e.g., MUTLAX/4) then a MULTAX/OPTION command can be
+used to identify the meaning of the various triplets of data in
+subsequent GOTO commands (see :ref:`“The MULTAX Command”<command_multax>`).
+
+.. _fixture_compensation:
+
+Fixture Compensation
+--------------------
+
+Fixture compensation is used to compensate for differences between
+the expected and actual fixture location on machines. Depending on
+the type of fixture compensation supported by the machine (if any),
+one of two possible formats can be used.
+
+Per-Axis Fixture Compensation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The first method of controlling fixture compensation is by applying
+or removing it from one or more linear axes. The keywords XCOORD,
+YCOORD and ZCOORD indicate which axes are to be affected. At least
+one axis must be programmed.
+
+   :math:`\textbf{CUTCOM / ON} \,\icamrange{2.6}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XCOORD} \\ \textbf{YCOORD} \\ \textbf{ZCOORD} \end{array}\end{pmatrix} \big[ ,\mathit{offset} \,\big] \end{pmatrix}`
+
+   :math:`\textbf{CUTCOM / OFF} \,\icamrange{2.6}{1}\! \begin{pmatrix} \!,\! \begin{array}{l} \textbf{XCOORD} \\ \textbf{YCOORD} \\ \textbf{ZCOORD} \end{array}\end{pmatrix}`
+
+The *offset* value specifies the compensation switch number to use to
+control the amount of fixture compensation. If omitted, the last
+value specified will be reused. Modern machines generally do not use
+this format.
+
+All-Axes Fixture Compensation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The second method of controlling fixture compensation is by applying
+or removing the offset from all linear axes simultaneously. Commonly
+called work coordinate systems, this can be controlled by the keyword
+ADJUST and an offset number.
+
+   :math:`\textbf{CUTCOM / ON},\;\textbf{ADJUST},\mathit{offset} \begin{bmatrix} ,\! \begin{array}{l} \textbf{MAIN} \\ \textbf{EXPAND} \\ \textbf{AUTO} \end{array} \, \end{bmatrix} \begin{bmatrix} ,\, \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array} \, \end{bmatrix}`
+
+   :math:`\textbf{CUTCOM / OFF},\;\textbf{ADJUST} \begin{bmatrix} ,\! \begin{array}{l}\textbf{NOW} \\ \textbf{NEXT} \end{array} \, \end{bmatrix}`
+
+If (G) or (M) codes are used to identify the work coordinate system,
+code the numbers 1 through the number of available systems. GENER
+will make the proper adjustments to output the corresponding code,
+typically a G54 series of codes. Do not program the actual (G) or (M)
+code on the command.
+
+The keywords NOW and NEXT control the deferring of fixture
+compensation. The keyword NOW causes the NC control codes to be
+output immediately; NEXT causes these codes to be deferred until
+there is a motion. If omitted, the default action specified in QUEST
+will be used.
+
+To remove fixture compensation, code the OFF parameter alone with the
+ADJUST keyword.
+
+Some machines support an extended range (or bank) of fixture
+compensation codes. These can be used by specifying the EXPAND
+option. Specify MAIN to use the “normal” range. AUTO can be specified
+to let the post-processor automatically choose the range based on the
+number of offsets available in the normal range. If the range choice
+is omitted, the QUEST defined default range will be used. This
+default can be changed by using the following command:
+
+   :math:`\textbf{CUTCOM / ADJUST} \begin{bmatrix} ,\! \begin{array}{l} \textbf{MAIN} \\ \textbf{EXPAND} \\ \textbf{AUTO} \end{array} \, \end{bmatrix}`
+
+The MAIN, EXPAND or AUTO choices are modal and will be used if a
+range choice is not explicitly specified on a CUTCOM/ON,ADJUST
+command.
+
+.. _rotary_table_dynamic_fixture_compensation:
+
+Rotary Table Dynamic Fixture Compensation
+-----------------------------------------
+
+Rotary table dynamic fixture compensation compensates for the
+position of the workpiece on a rotary table, but it does so for
+positioning rotary motions only. This form of fixture compensation
+cannot be used for continuous rotary motions.
+
+   :math:`\textbf{CUTCOM / TABLE}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+ON enables dynamic rotary table compensation. OFF disables it. The
+$DYNFIX macro variable indicates and can change the activation
+status.
