@@ -1,0 +1,36 @@
+.. _sim_grid:
+
+Simulation»Grid (Ctrl Alt G)
+----------------------------
+
+Activates the Grid dialog, which defines the boundaries and appearance
+of the world. The Reset button resets the grid appearance and size to
+reasonable values.
+
+*Grid Units* can be set to any convenient value and need not match the
+units used when the model was created. For optimal display and control,
+the *Min/Max grid value* dimensions should exceed the dimensions of
+the model itself. The *Grid subdivision size* defines the spacing of the
+grid for visual clarity only (excessively small spacing can greatly
+increase the CPU requirements during scene rendering). The
+*Snap to grid* checkbox and associated input field define a rounding
+factor that can optionally be used when interactively constructing
+objects using the mouse pointer.
+
+Select *Grid color* to set the color of the grid lines (the background
+color is set in the Simulation»Options dialog Misc tab).
+
+The main axis (model origin), grid contour boundary and grid subdivision
+lines can all be toggled visible or invisible using the *Display Show*
+checkboxes.
+
+The coordinate frame marker size, color and style can also be controlled
+from the Grid dialog. Three horizontal sliders control the size of the
+arrow. Colors for each axis of the marker can be set in the *Colors* area.
+The arrow style can be set using the *Arrow type* selection.
+
+.. image:: ../../../media/sim_grid.png
+   :width: 5.058in
+   :align: center
+
+\
