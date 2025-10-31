@@ -1,0 +1,46 @@
+Optimizer/Force Options
+===========================
+
+This tab is named either "Optimizer" or "Force" depending which Vericut
+application the integration is set to.
+
+The content of this panel is used to set-up CL file feed & speed optimization
+from a Vericut Force or Vericut Optimizer project file.
+
+Use Vericut Optimizer/Force on CL File
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This checkbox toggle the integration. If enabled, a valid vcproject/voproject file as well as a valid path to the output opti file are required.
+
+Project File
+~~~~~~~~~~~~~~
+
+This input field is used to select the Vericut Optimizer or Vericut Force
+project file to use (\*.vcproject or \*.voproject).
+
+You can browse for a project file using the square
+browse button […] located immediately to the right of the text window,
+or you can drag and drop a file (vcproject or voproject) file onto the
+launch panel window. The last four project file selections are remembered.
+They can be re-accessed by selecting them from the drop-down list.
+
+Optimized CL File
+~~~~~~~~~~~~~~~~~~
+
+This input field is used to select the output opti file path. The "opti"
+file is the generated optimized CL file that GENER will use.
+
+You can browse for a directory and file name where the output will be written to by
+using the browse button […] located immediately to the right of the text window.
+
+User Interface
+~~~~~~~~~~~~~~~
+
+This drop down provide the choice to launch Optimizer/Force as full interface to interact with
+or to be run entirely in background (default).
+
+Optimizer/Force launch button
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This button is provided as a shortcut to launch Vericut Optimizer/Force
+in order to create or configure the project.
