@@ -1,0 +1,170 @@
+Heidenhain ISO Pre-Processor Syntax
+===================================
+
+This document lists the Heidenhain 430/530 CONVERSATIONAL syntax
+supported by the pre-processor.
+
+--------------
+
+#. `“D” Functions <#d>`__
+#. `Supported arithmetic operators & functions <#arithmetic>`__
+#. `String variable declaration <#stringvar>`__
+#. `String functions <#stringfun>`__
+#. `Variables / Parameters <#variables>`__
+#. `Program / Label / Sub-programming <#program>`__
+
+--------------
+
+1. “D” Functions
+~~~~~~~~~~~~~~~~
+
+============== =============== =============================
+**D Function** **Description** **Example**
+D00            Assignation     D00 Q1 P01 23.1
+D01            Addition        D01 Q2 P01 +5.5 P02 Q1
+D02            Subtraction     D02 Q2 P01 Q01 P02 +10
+D03            Multiplication  D03 Q2 P01 Q1 P02 2
+D04            Division        D04 Q2 P01 +Q2 P02 4
+D05            Square root     D05 Q2 P01 36
+D06            Sinus           D06 Q2 P01 1
+D07            Cosinus         D07 Q2 P01 1
+D08            Tangent         D08 Q2 P01 3 p02 4
+D09            If equal        D09 P01 Q30 P02 1 P03 "LBL11"
+D10            If not equal    D10 P01 Q30 P02 4 P03 "LBL10"
+D11            If greater      D11 P01 Q30 P02 4 P03 "LBL12"
+D12            If lower        D12 P01 Q30 P02 4 P03 "LBL13"
+D13            Angle           D13 Q2 P01 3 p02 4
+D14            Error output    D14 P01 15
+============== =============== =============================
+
+2. Supported arithmetic operators & functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  - Subtraction
+-  + Addition
+-  \* Multiplication
+-  / Division
+-  = Assignation
+-  % Modulo
+-  ^ Power
+-  PI Constant
+-  LN Natural logarithm
+-  LOG Logarithm
+-  EXP Exponential
+-  NEG Negation
+-  INT Integer part
+-  ABS Absolute value
+-  FRAC Fractional part
+-  SGN Sign (1.0 or -1.0)
+-  SQ Square
+-  SQRT Square root
+-  SIN Sinus
+-  COS Cosinus
+-  ASIN ArcSinus
+-  ACOS ArcCosinus
+-  TAN Tangent
+-  ATAN ArcTangeant
+-  ( ) Priority operators
+
+3. String variable declaration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+============= ================== =================================
+**Syntax**    **Description**    **Example**
+DECLAR STRING String declaration DECLARE STRING QS10 = “WORKPIECE”
+============= ================== =================================
+
+4. String functions
+~~~~~~~~~~~~~~~~~~~
+
++--------------+--------------------------+--------------------------+
+| **Function** | **Description**          | **Example**              |
++--------------+--------------------------+--------------------------+
+| TOCHAR       | Convert real to string   | QS11 = TOCHAR ( DAT+Q50  |
+|              |                          | DECIMALS3 )              |
++--------------+--------------------------+--------------------------+
+| SUBSTR       | Extract part of a string | QS13 = SUBSTR ( SRC_QS10 |
+|              |                          | BEG2 LEN4 )              |
++--------------+--------------------------+--------------------------+
+| TONUMB       | String to real           | Q82 = TONUMB ( SRC_QS11  |
+|              |                          | )                        |
++--------------+--------------------------+--------------------------+
+| INSTR        | String search            | Q50 = INSTR ( SRC_QS10   |
+|              |                          | SEA_QS13 BEG2 )          |
++--------------+--------------------------+--------------------------+
+| STRLEN       | String length            | Q52 = STRLEN ( SRC_QS15  |
+|              |                          | )                        |
++--------------+--------------------------+--------------------------+
+| STRCOMP      | Compare strings          | Q52 = STRCOMP ( SRC_QS12 |
+|              |                          | SEA_QS14 )               |
++--------------+--------------------------+--------------------------+
+| \|\|         | String concatenation     | QS10 = QS12 \|\| QS13    |
+|              |                          | \|\| QS14                |
++--------------+--------------------------+--------------------------+
+
+5. Variables / Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
++------------+--------------------------------------------------------+
+| **Syntax** | **Description**                                        |
++------------+--------------------------------------------------------+
+| Q<index>   | Variable accepting real values. Index is 1-1999. They  |
+|            | are all undefined variable. The pre-processor do not   |
+|            | support any pre-defined system variables.              |
++------------+--------------------------------------------------------+
+| QL<index>  | Program/Sub-Program local variable accepting real      |
+|            | values. Index is 0-499.                                |
++------------+--------------------------------------------------------+
+| QR<index>  | CeRun handle the QR variables just like the Q ones.    |
+|            | They are not non-volatile like on the real controller. |
+|            | Index is 0-499.                                        |
++------------+--------------------------------------------------------+
+| QS<index>  | Variable accepting string values. Index is 1-1999.     |
++------------+--------------------------------------------------------+
+| P<index>   | Parameter number. this is used with most of the        |
+|            | Heidenhain functions                                   |
++------------+--------------------------------------------------------+
+
+6. Program / Label / Sub-program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| **Syntax**                        | **Description**                   |
++-----------------------------------+-----------------------------------+
+| G98 L<number>                     | Beginning of internal subprogram. |
++-----------------------------------+-----------------------------------+
+| | L<number>                       | | Predefined calsub command. This |
+| | L<number>.<nummber>             |   would call a internal           |
+|                                   |   subprogram in the same current  |
+|                                   |   program file.                   |
+|                                   | | If the number is a decimal, the |
+|                                   |   fraction indicated the repeat   |
+|                                   |   count.                          |
++-----------------------------------+-----------------------------------+
+| G98 L0                            | End of internal subprogram        |
++-----------------------------------+-----------------------------------+
+| % <subprogram name>               | Call a separate subprogram with   |
+|                                   | the provided name. Use the        |
+|                                   | subprogram startup macro in the   |
+|                                   | CE to identify the target         |
+|                                   | subprogram file.                  |
++-----------------------------------+-----------------------------------+
+| % TNC:<filepath>                  | Call a subprogram using an        |
+|                                   | explicit file path. The “TNC:” is |
+|                                   | automatically mapped to the CE    |
+|                                   | internal file storage root        |
+|                                   | folder.                           |
++-----------------------------------+-----------------------------------+
+| % <program name> <unit>           | This is the ISO beginning of      |
+|                                   | program line. The pre-processor   |
+|                                   | will switch to ISO syntax if the  |
+|                                   | configuration has been set to     |
+|                                   | “Auto”                            |
++-----------------------------------+-----------------------------------+
+| N<seqno> %                        | End of ISO program line.          |
++-----------------------------------+-----------------------------------+
+| G79 / M99                         | Cycle call (non-modal)            |
++-----------------------------------+-----------------------------------+
+| M89                               | Cycle call (modal)                |
++-----------------------------------+-----------------------------------+
+
