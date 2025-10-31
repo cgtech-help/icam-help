@@ -1,0 +1,250 @@
+.. _license_server:
+
+License Server Installation
+===========================
+
+There are no license server installation requirements when using
+cloud and node-locked licensing. Skip this section if you are using
+either of these license types. The section below describes the
+installation of the ICAM license server for floating licenses.
+
+.. note::
+
+   You must have or be able to provide administrator
+   credentials to install the license server. This is because elevated
+   privileges are required to install software in the Program Files
+   area, and to setup the floating license server as a Windows
+   “service”.
+
+Floating licenses permit the shared use of a restricted number of
+Control Emulator and other ICAM licenses by a group of computers connected on
+a local area network. There are two components to a floating license,
+the “server” (which manages the distribution of licenses) and the
+“clients” (which is where the Control Emulator software is run). This section
+of the documentation describes the installation of the floating
+license server. “Control Emulator Installation” (see :ref:`here<installation>`)
+describes the installation of the ICAM software on client computers.
+It is strongly recommended that the license server be installed first
+before later installing the ICAM software bundle on client computers.
+
+Installation of the license server (and other ICAM software) is
+conditional upon your acceptance of the ICAM End User License
+Agreement (EULA), which will be listed during the installation
+process.
+
+Requirements
+------------
+
+.. index:: Port, for licensing
+
+The general requirements for the license server are:
+
+-  An Intel or compatible workstation running Windows 8.1, 10 or 11, or
+   an Intel or compatible server running Windows Server 2012, 2012 R2,
+   2016, 2019 or 2022
+
+-  TCP port 6670 open (this can be changed during installation)
+
+-  ICMPv4 enabled
+
+.. index:: Firewall settings
+
+The license server (the service responsible for checking licenses in
+and out) communicates with client computers using TCP port 6670. The
+license server also performs an ICMPv4 “ping” of the client computer
+whenever a license is checked out. The license manager (a utility run
+on the server or client computers to display license status) uses the
+same TCP port as the server. If using a firewall, you must open TCP
+port 6670, and enable ICMPv4. The default port number can be changed
+during the installation process.
+
+.. index:: Hop, network
+
+The license server is node-locked to a specific computer. You will
+have to identify one Windows computer in your network that will act
+as the license server. You should choose a file server, or other
+fairly robust computer, since the loss of the server will interrupt
+the use of ICAM software. ICAM restricts the use of floating licenses
+to a local area network (LAN) and generally requires that the server
+and client machines all coexist in the same facility. Computers that
+are separated by more than three network hops (routers or gateways)
+or that have latency exceeding 150 ms, are considered on wide area
+networks (WAN) *and require “multi-hop” licensing from ICAM*.
+
+*Measuring hops and latency*
+
+You can measure latency and the number of network hops between your
+potential server computer and client computers by running an “ICAM ID
+Security Utility” (called *icamid*). This utility is also included with any ICAM installation.
+
+To check hops and latency from the server computer, run *icamid* and
+select “More…”. Next, enter the client computer name or IP address.
+Select “Hop-Count” to list the number of hops from the server to the
+client, or “Ping.!” to measure the latency.
+
+If you have an ICAM license server running, you can also check hops
+and latency from the client computer to the server. Run *icamid* on
+the client computer and select “More…”. Next, enter the license
+server computer name or IP address followed by the communication port
+number if it’s not the default 6670. Select “Server?” to establish a
+connection to the ICAM license server. Finally, select “Test” to
+verify the connection. The “Server Tests / Hop-Count” entry lists the
+latency and number of hops from the server to the current computer
+and indicates if either exceeds the licensed limit.
+
+Installing from USB flash drive
+-------------------------------
+
+Insert the ICAM USB to start the installation. Not all drives are
+Autorun enabled, so if nothing happens after a short while, use File
+Explorer to locate the USB drive and then double-click on the
+*autorun.exe* file in that drive’s root directory. When the
+installation program starts, select “Install ICAM License Server
+64-bit” to install the 64-bit license server\ [#f1]_.
+
+Installing from download link
+-----------------------------
+
+ICAM makes the latest release of the license server available for
+download from the Internet. Clients under maintenance can contact
+`support@icam.com. <mailto:support@icam.com>`__ to obtain time-limited download links by return
+email. These links provide access to the license server in Windows
+Installer “msi” format.
+Select **icamls_260-yyww_win64.msi** file to install the 64-bit
+license server\ [#f1]_. The “yyww” in the file name is the 2 digit
+year and 2 digit week number of the software release. Double-click on
+the downloaded msi file (or right click the file and select “Install”)
+to begin the installation.
+
+New license server installation
+-------------------------------
+
+Because Windows does not allow a service to be changed while it is
+running, the currently installed release of the license server, if
+running, will be automatically stopped during the installation of the
+new release. Applications that have licenses checked out will fail to
+reacquire their license after the license server is restarted. ICAM
+recommends therefore that an upgrade of the license server only be
+done when licenses are not in use (i.e., not checked out).
+
+The first step during the installation will request the location
+where to install the software. The default installation directory is
+“C:\\Program Files\\ICAM License Server”. Windows services must be
+installed on a local physical drive. Do not install the license
+server on a remote drive (i.e., one not physically connected to the
+server computer) since the drive might not yet be mounted when
+Windows tries to start the license server.
+
+Next, you will be asked for the TCP port number to be used by the
+license server when communicating with other ICAM software running on
+client computers. The default port number 6670 should be used unless
+another application on the server computer already uses that port. If
+a different port is chosen, then this number must be specified in the
+*icam.key* license server connection file on all client computers
+(see :ref:`“icam.key server connection file”<serverconnection>`).
+
+You must have an *icamls.key* file, sent to you by ICAM’s licensing
+department, to install the license server. This key file lists the
+products licenses that you are entitled to run. This key file also
+identifies the computer on which the server is being installed. The
+license server installation gives you the following choices depending
+on whether or not you have yet received your key file:
+
+1. **“I have received an ICAM license key file (“icamls.key”) for this new release of the software
+   and the key file is accessible from this computer.”**
+
+   Select this choice if you have already received your *icamls.key*
+   file from ICAM’s licensing department. The installer will let you
+   browse for and select the key file. A copy of the key file will then
+   be created by the installer in the license server application data
+   directory (i.e., C:\\ProgramData\\ICAM\\Server\\icamls.key).
+
+2. **“I want to register by e-mail, so as to obtain an ICAM license key file.
+   I will install the software later, once I have received my key file from ICAM.”**
+
+   Select this action if you do not yet have a license key file. The
+   installer will assist you by creating a key file request form named
+   *icam_registration.txt* in your Documents folder, which you must
+   e-mail to `keyfiles@icam.com. <mailto:keyfiles@icam.com>`__
+
+   When you receive your license data by return e-mail, save the
+   *icamls.key* text file attachment to any directory on your computer.
+   Then, restart the installation and this time select choice #1 above
+   “*I have received an ICAM license key file…*”.
+
+You will be given an opportunity to view the *install.log* file,
+which lists your installation choices, before proceeding with the
+installation.
+
+.. index:: License server, starting
+.. index:: ICAMLS server, starting
+
+.. image:: ../../media/inst_service_rmb.png
+   :width: 1.233in
+   :align: right
+
+.. |services_icon| image:: ../../media/inst_service_icon.png
+   :height: 0.260in
+
+The installation procedure will stop the currently running
+license server before the installation of the new one and will start
+the new license server once the installation has completed. You can
+also start and stop the license server manually. To do so, double-click
+the “Services” Control Panel icon |services_icon|, in the main services window
+or in the “Administrative Tools” subdirectory, or select the Windows Start
+button and search for “services”. When the Services panel appears, scan down
+the Name column for a service named “ICAM License Server”. Right-mouse on the
+entry to access a pop-up menu giving start, stop and other choices as shown
+in the image at right.
+
+Once the installation is completed, run the “License Manager” from
+the “License Manager (SERVER)” Start menu to verify that your license
+information has been correctly read from the *icamls.key* file and is
+ready for use.
+
+Uninstall the license server
+----------------------------
+
+To uninstall the license server, first locate the “\ **ICAM LS**
+.\ *build*.\ *n*\ ” entry in the “Apps & features” Windows Settings
+or the “Program and Features” Windows Control Panel, then select
+“Uninstall”. Alternatively, run the original USB or downloaded
+installation media and select “Remove”.
+
+Uninstalling will stop the license server and then will completely
+remove the license server from the computer, leaving behind log
+files, key files and ``HKEY_LOCAL_MACHINE\\SOFTWARE\\ICAM`` registry
+entries.
+
+Repair the license server
+-------------------------
+
+ICAM recommends that the license server be uninstalled and then
+reinstalled instead of repaired.
+
+Upgrade the license server
+--------------------------
+
+When installing a version of the license server more recent than the
+one currently installed, the installation program will indicate this
+and request permission to **upgrade** to the newer version.
+
+Because Windows does not allow a service to be changed while it is
+running, the currently installed release of the license server, if
+running, will be automatically stopped during the installation of the
+new release. Applications that have licenses checked out will fail to
+reacquire their license after the license server is restarted. ICAM
+recommends therefore that an upgrade of the license server only be
+done when licenses are not in use (i.e., not checked out).
+
+During an upgrade, the installation program will stop the license
+server, install the newer release of the license server into the same
+directory as the current one and then start the license server up
+again using the current key file.
+
+.. note::
+   It is not possible to **downgrade** to an earlier (i.e.,
+   older) release without first uninstalling the current version of the
+   license server.
+
+.. [#f1] A 32-bit version of the license server is available on request for download only.
