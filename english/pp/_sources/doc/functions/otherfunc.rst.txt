@@ -1,0 +1,1258 @@
+.. _other_functions:
+.. _func_fkinrot:
+.. index:: Functions; $FKINROT
+
+Other Functions
+===============
+
+.. _func_fapply:
+.. index:: Functions; $FAPPLY
+
++------------------------------------------------+-----------------------------------------------+
+| **$FAPPLY(**\ *a*\ **)**                       | Activate composite post-processor component   |
+|                                                |                                               |
+|                                                | Returns: Logical                              |
++------------------------------------------------+-----------------------------------------------+
+
+   This function is used select the composite post-processor component
+   to activate, as identified using the component designator keyword. A
+   value of $TRUE is returned if a component change is made. When the
+   component is changed, the
+   machine shutdown macro of the current active component is first executed, followed by the machine
+   startup macro of the newly activated component.
+
+.. _func_fappos:
+.. index:: Functions; $FAPPOS
+
++------------------------------------------------+------------------------------------------+
+| **$FAPPOS(**\ *id*\ [*,type*]\ **)**           | Get SmartPATH™ positioning motion        |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function is used to examine the motions generated in a SmartPATH
+   positioning sequence. The *id* parameter specifies the motion number
+   for which information is desired. The total number of motions
+   generated in the positioning sequence can be obtained using the
+   $APIDN system variable. Specifying an id outside the range 1:$APIDN
+   will result in a $NULL sequence being returned. The type of motion
+   data returned is as follows:
+
+   :1: CL part frame, equivalent to the $P2 motion macro variable
+   :2: Machine frame, equivalent to $XM, $YM… macro variables
+   :3: Workpiece frame, equivalent to the $P3 motion macro variable (default)
+
+   If type is omitted, coordinate data is returned in the workpiece frame.
+
+.. _func_farg:
+.. index:: Functions; $FARG
+
++------------------------------------------------+------------------------------------------+
+| **$FARG(**\ *a*\ **)**                         | Extract argument                         |
+|                                                |                                          |
+|                                                | Returns: Any                             |
++------------------------------------------------+------------------------------------------+
+
+   This function is used to get an argument from the data portion of the
+   record matching the current macro. $FARG returns the value of
+   argument number *a*. The resulting value of an $FARG function call
+   could have KEYWORD, REAL or STRING type.
+
+.. _func_fdialog:
+.. index:: Functions; $FDIALOG
+
++------------------------------------------------+------------------------------------------+
+| **$FDIALOG(**\ *s1*\ [*,s2*] **)**             | Activate a dialog                        |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function can activate a dialog that has been defined inside the
+   post-processor, or one that has been saved to a file on disk. The
+   first *s1* parameter is a string specifying the name of the dialog.
+   The second *s2* parameter is optional. If present it specifies the
+   name of the external file that contains the dialog. The $FDIALOG
+   function returns a text string, which is the label of the button that
+   was pressed to close the dialog (e.g., “OK”).
+
+   Each “control” in the dialog (e.g., checkbox, combobox, etc.) is
+   associated with a macro variable when the dialog is created in QUEST.
+   When the dialog is activated in a GENER macro, each dialog control is
+   initialized to an appropriate state based on the current setting of
+   its associated macro variable. If a dialog control references a
+   variable that has not yet been defined, a local variable is created
+   and set to the default value defined within the dialog. When the
+   dialog exits, the macro variables associated with each control take
+   on whatever value the user may have entered. In cases where the user
+   value’s type is ambiguous, the dialog processor will try to maintain
+   the same variable type on exit as there was on input. Strongly typing
+   variables with the DECLAR macro command
+   will ensure the correct return value (the dialog processor will issue
+   a diagnostic and keep the dialog active if the wrong type of data is
+   entered, for example text in a numeric field).
+
+   Combobox and Drop-list controls can optionally have a second
+   associated variable that defines the set of valid choices. These
+   variables must be initialized as arrays or sequences. They must be
+   set to appropriate values, before calling the $FDIALOG function.
+
+   There are three button types in a dialog: OK, Cancel and Reset.
+   Buttons with OK and Cancel types cause the dialog processor to return
+   control to the macro. Reset type buttons don’t return control to the
+   macro, they instead reset the dialog controls to their initial values
+   and keep the dialog active. OK type buttons return control with macro
+   variables updated; Cancel type buttons return control with macro
+   variables unchanged (but initialized if necessary). The $FDIALOG
+   function returns the text string associated with the OK or Cancel
+   type button that was pressed (buttons can be labeled with any text
+   and there can be multiple buttons of the same type).
+
+.. _func_fdist:
+.. index:: Functions; $FDIST
+
++------------------------------------------------+------------------------------------------+
+| **$FDIST(**\ *x1,y1,z1,x2,y2,z2*\ **)**        | Distance between points                  |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function the distance between two points defined by *x1,y1,z1*
+   and *x2,y2,z2*.
+
+.. _func_fdk:
+.. index:: Functions; $FDK
+
++------------------------------------------------+------------------------------------------------------+
+| **$FDK(**\ [*q*]\ **)**                        | Convert machine coordinates to workpiece coordinates |
+|                                                |                                                      |
+|                                                | Returns: Sequence                                    |
++------------------------------------------------+------------------------------------------------------+
+
+   This function returns the workpiece coordinate that represents the
+   specified machine position (see :ref:`$FIK<func_fik>` for the reverse functionality).
+   The return value is a sequence of length 6, representing the
+   workpiece *XYZIJK* tool position. The input is a sequence *q* of
+   length 6 representing the machine axes positions as defined by the
+   current $AXES system variable. Sequence values for inactive axes are
+   ignored, as are excess trailing zero sequence values. Missing
+   trailing sequence values are replaced by the current machine
+   position. Use the {} sequence operator to create an input machine
+   coordinate sequence if necessary. For example, to obtain the
+   workpiece equivalent position of the machine coordinate X=0, Y=0,
+   Z=10:
+
+      ::
+
+        W=$FDK({0,0,10})
+
+   Calling $FDK without a machine coordinate argument returns a sequence
+   equivalent to: <$XC, $YC, $ZC, $IC, $JC, $KC>.
+
+.. _func_fdoc:
+.. index:: Functions; $FDOC
+
++------------------------------------------------+------------------------------------------+
+| **$FDOC(**\ *template*\ [,\ *document*]\ **)** | Generate custom documentation            |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function makes a copy of a Microsoft Word (2007 and later)
+   *template* (.dotx) file, substituting the placeholder text of Content
+   Controls with the result of macro processor expressions, and saving
+   the final result as a Microsoft Word *document* (.docx) file.
+
+   If the input *template* filename is specified with a relative or
+   missing path, then the $FDOC function looks first in the ICAM_APPDATA
+   directory and next in the ICAM_LIB directory. The template file can
+   also reside in the post-processor internal file space (i.e., //ICAMFS).
+
+   The output *document* defaults to the same name and directory as the
+   output listing file, with a file type of “.docx”.
+
+   The $FDOC function returns a value of 1 if the document was created
+   and 0 (zero) otherwise.
+
+   **Template Content Controls**
+
+   The $FDOC function uses a Word template as the master file for the
+   document creation process. Within the template, information to be
+   extracted from the GENER process can be visually organized
+   using the standard functionality of Word (e.g., headers, footers,
+   text, tables…). Word provides various Content Controls (accessible
+   from the Developer menu\ [#f1]_) that can be used to embed the
+   contents of ICAM macro expressions into the generated document. These
+   content controls include:
+
+   -  Rich Text & Plain Text
+   -  Picture
+   -  Date Picker
+   -  Check Box (Word 2010 and later)
+   -  Combo Box & Drop-Down List
+   -  Group
+
+   The link to the macro processor is done by typing an ICAM macro
+   expression, variable name or constant into the “Tag” field of the
+   content control\ [#f2]_. The tag field macro code will only be
+   compiled and executed when the template file is later processed in
+   GENER calling the $FDOC function. The macro expression
+   return value will replace the “placeholder” text originally shown for
+   the content control in the template file. Tag macros have access to
+   external and built-in functions, system variables, CNC
+   variables (for Control Emulator CERUN),
+   GLOBAL and OBJECT variables, as well as the LOCAL variables
+   of the macro that called $FDOC.
+
+   Tag macros are normally prefixed with the string “$V\_=” just before
+   the macro is compiled. The
+   :ref:`$V\_ system variable<var_v_>` will hold the actual value to be substituted for
+   the placeholder text in the content control when the tag macro is
+   executed. If more complex macro logic is required, multi-line macros
+   can be saved in a tag by using semicolons in place of line breaks
+   (since these are not permitted in the Word Tag field). A multi-line
+   macro must assign a value to the $V\_ system variable before exiting.
+
+   $FDOC Tag macros are listed in the Macro Trace window. The $V\_
+   variable can be watched in the debugger Variable window. The debugger
+   Step-Into (F11) function can be used to step in tag macros.
+   Breakpoints cannot be set on individual tag macros.
+
+   $FDOC unique range operators **\***, **::** and **:::** can be used
+   with array variables and with sequences in Tag field macro
+   expressions, to generate multiple rows of a table, one for each data
+   element in the array or sequence. Range operators are only valid
+   within Word tables and within areas grouped using the Group content
+   control. All variables within a table or grouped area must have an
+   identical range.
+
+   -  The **\*** range operator selects all elements of the array or
+      sequence. For example,
+      $TLTAB(1,\*) would produce one table row for each tool number in the
+      tooling table.
+
+      \
+
+   -  The *m*\ **::**\ *n* range operator selects just those elements of
+      the array or sequence starting at element *m* (default is 1 if
+      omitted) and ending at element *n* (default is the array or
+      sequence size if omitted). For example, $TLTAB(1,2::) would produce
+      one table row for each tool number in the tooling table excluding the
+      dummy tool. If the *m* or *n* components of a range expression
+      contain characters other than digits, the range expression is
+      separately compiled and executed to determine the range limits. These
+      appear as $FDOC Range macros in the Macro Trace window.
+
+      \
+
+   -  The **:::** ditto range operator is provided as a convenience and
+      selects the same range as the first range operator defined in the
+      table or grouped area. For example,
+      $TLSUM(5,:::) would list the corresponding maximum tool feed rate
+      information in the same table or grouped area as other information
+      requested.
+
+   Range operator expressions are replaced by the system variable “$I\_”
+   just before the tag macro is compiled. The :ref:`$I\_ system variable<var_i_>` will
+   hold the actual range value for the current table row or grouped area
+   when the tag macro is executed. The $I\_ variable can be watched in
+   the debugger Variable window.
+
+.. image:: ../../media/fdoc_ctl.png
+   :width: 3.375in
+   :align: right
+
+..
+
+   **Rich Text and Plain Text controls**
+
+   The Text and Rich Text controls are nearly identical; the Text
+   control provides an additional option to output multiple lines. The
+   Tag macro expression result is converted at run-time to a text
+   representation and then output in replacement of the original
+   placeholder text.
+
+   If “\ *Use a style*\ ” is selected in the content control Properties,
+   the selected style is applied to the resulting text. If “\ *Allow
+   carriage returns*\ ” is selected and the Tag expression evaluates
+   to a sequence, then each element of the sequence appears on a
+   separate line in the generated document, otherwise a single space
+   will separate each element of the sequence. If “\ *Remove content
+   control*\ ” is selected, then the generated document will appear the
+   same but the content control will no longer be present (this
+   simplifies the generated document).
+
+   **Picture control**
+
+   The Tag expression must evaluate to a STRING defining a filename
+   containing an image in a format that is supported by Word (e.g., png,
+   jpg, gif, tif, bmp). A filename with a missing path is taken from the
+   same directory as is used by the $FMSPIC function. The specified
+   image is resized (maintaining aspect ratio) to fit within the
+   placeholder image area.
+
+   **Date Picker control**
+
+   The Tag expression must evaluate either to a STRING in ICAM date
+   format (e.g., $DATE,
+   $PPDATE…)
+   or to a REAL value representing the number of seconds since
+   an operating system specific “epoch” date (i.e., as returned by the
+   $FSTAT function). The date is output in the generated document using
+   the date picker Properties format string.
+
+   **Check Box control**
+
+   The Tag expression must evaluate either to a LOGICAL value where
+   $TRUE specifies a checked state and $FALSE specifies an unchecked
+   state, or to a REAL value where non-zero specifies a checked state
+   and 0 (zero) specifies an unchecked state. The same font must be used
+   for both the checked and unchecked character representations in the
+   check box Properties.
+
+   **Combo Box and Drop-Down List controls**
+
+   The Tag expression must evaluate to a non-empty SEQUENCE, which will
+   be used as the available choices that can be selected when later
+   opening the generated Word document.
+
+   **Group control**
+
+   The $FDOC function will automatically repeat a single row of a table
+   that includes macro variables with range operators. If two or more
+   rows in the same table use range operators, then the $FDOC function
+   will repeat the entire table for each instance of the range. If the
+   repeated range must include more than just a single row or a single
+   table, then the Group control can be used to identify the region of
+   the template file to be repeated for each instance of the range.
+
+   Note that the Group control does not have a Tag field. The grouped
+   region is repeated for each instance of the first range operator
+   defined in the group. All other variables in the grouped region with
+   range operators must specify the same range. The “:::” ditto operator
+   can be used to ensure consistency.
+
+.. [#f1] To access the **Developer** tab on an Office application, first
+         select the **File** tab, choose the **Options** button, choose the
+         **Customize Ribbon** button, and then select the **Developer check
+         box** in the list of main tabs.
+
+.. [#f2] Word 2007 and 2010 limit the amount of text that can be entered into
+         a Tag field to 64 characters.
+
+.. _func_fersev:
+.. index:: Functions; $FERSEV
+
++------------------------------------------------+------------------------------------------+
+| **$FERSEV(**\ *n1*\ [*,n*\ 2]\ **)**           | Get or set severity of error number      |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the error severity (0 through 99) of error
+   number *n1*. A severity of –1 (negative one) is returned if the error
+   number is not known. The current severity can optionally be modified
+   by specifying a second parameter *n2* with the new severity value.
+
+.. _func_fersta:
+.. index:: Functions; $FERSTA
+
++------------------------------------------------+---------------------------------------------------+
+| **$FERSTA(**\ *n*\ [*,a*]\ **)**               | Get or set enabled/disabled state of error number |
+|                                                |                                                   |
+|                                                | Returns: Logical                                  |
++------------------------------------------------+---------------------------------------------------+
+
+   This function returns the current state (enabled or disabled) of
+   error number *n*. A status of $TRUE is returned if the error number
+   is enabled for output. A status of $FALSE is returned if the error
+   number is disabled (i.e., a diagnostic will not be output even if
+   that specific error condition occurs). The current state can
+   optionally be modified by specifying a second parameter *a* with a logical
+   $TRUE or $FALSE value giving the required state.
+   $FERSTA provides the same functionality as the PPFUN/15 command
+   (see :ref:`“Modifying Error Messages”<modifying_error_messages>`).
+
+.. _func_fertxt:
+.. index:: Functions; $FERTXT
+
++------------------------------------------------+------------------------------------------+
+| **$FERTXT(**\ *n*\ **)**                       | Text of error number                     |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the error text of error number *n*. A blank
+   string is returned if the error number is not known.
+
+.. _func_fgetdef:
+.. index:: Functions; $FGETDEF
+
++------------------------------------------------+------------------------------------------+
+| **$FGETDEF(**\ *s*\ **)**                      | Get DEF file variable definition         |
+|                                                |                                          |
+|                                                | Returns: String or $NULL                 |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the value of the case insensitive DEF file
+   variable named *s*. The variable name must be fully qualified with
+   the names of all surrounding “begin” blocks in the DEF file (see the
+   example below). The return value is a case sensitive string. $NULL is
+   returned if the DEF file
+   variable has not been defined or if some other error occurs while
+   attempting to obtain the variable definition.
+
+   The following example gets the value of the “interface_kit” DEF file
+   symbol:
+
+       ::
+
+          %L01=$FGETDEF('campost.interface_kit')
+
+.. _func_fgetenv:
+.. index:: Functions; $FGETENV
+
++------------------------------------------------+------------------------------------------+
+| **$FGETENV(**\ *s*\ **)**                      | Get environment variable definition      |
+|                                                |                                          |
+|                                                | Returns: String or $NULL                 |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the value of a (potentially case sensitive)
+   environment variable identified by the string *s*. $NULL is returned
+   if the environment variable has not been defined or if some other
+   error occurs while attempting to obtain the variable definition.
+
+.. _func_fik:
+.. index:: Functions; $FIK
+
++------------------------------------------------+------------------------------------------------------+
+| **$FIK(**\ [[ *q,*] *n*]\ **)**                | Convert workpiece coordinates to machine coordinates |
+|                                                |                                                      |
+|                                                | Returns: Sequence                                    |
++------------------------------------------------+------------------------------------------------------+
+
+   This function returns the machine coordinate that would be output
+   given the specified workpiece coordinate (see :ref:`$FDK<func_fdk>` for the reverse functionality).
+   The return value is a sequence of length 6, representing the machine axes
+   positions as defined by the current $AXES system variable. The input
+   is a sequence *q* of length 6 representing the workpiece *XYZIJK*
+   tool position. Excess trailing zero sequence values are ignored.
+   Missing trailing sequence values are replaced by the current
+   workpiece position or tool axis vector component. The vector need not
+   be normalized.
+   $FIK ignores any effect due to pending rotary motions (via ROTABL/…,NEXT).
+
+   On 5 axis machines there can be 2 different
+   machine configurations that satisfy the tool-to-part relationship
+   specified by a CL coordinate. A second parameter to $FIK specifies
+   the solution number *n*, as follows:
+
+   :0: Return solution #2 if it is the only solution inside travel limits,
+         otherwise return solution #1. (default)
+
+   :1: Return the solution that has the shortest rotary component, or if
+         rotary components are equal the shortest linear component, or if
+         linear components are equal the first component computed. This is
+         equivalent to the solution that would be chosen when
+         LINTOL is active.
+
+   :2: Return the opposite solution of #1 if there is one, otherwise return
+         the only solution.
+
+   Calling $FIK without a workpiece coordinate value returns the current
+   actual or current alternate machine solution. Calling $FIK without
+   any arguments, or with just the solution number set to zero, returns
+   a sequence equivalent to <$XM, $YM…> for the current set of active
+   axes.
+
+.. _func_finfo:
+.. index:: Functions; $FINFO
+
++------------------------------------------------+-----------------------------------------------------+
+| **$FINFO(**\ [[*start,*] *end*]\ **)**         | Return information concerning upcoming operation(s) |
+|                                                |                                                     |
+|                                                |  Returns: Numeric                                   |
++------------------------------------------------+-----------------------------------------------------+
+
+   This function performs a look-ahead of the next operation and returns
+   information about that operation via $INFO.\* system variables. The
+   $FINFO function returns a wide variety of information, such as
+   operation starting and ending positions, feed and speed,
+   compensations, flags indicating positioning and interpolation modes
+   encountered, as well as custom data for user-defined purposes.
+   :ref:`“$FINFO Operation Look-ahead”<operation_lookahead>` describes the $FINFO function in
+   detail.
+
+.. _func_fkincfg:
+.. index:: Functions; $FKINCFG
+
++------------------------------------------------+-----------------------------------------------------------------------+
+| **$FKINCFG(**\ *axis,x,y,z,i,j,k* **)**        | Modify the position and orientation of a rotary axis or the tool axis |
+|                                                |                                                                       |
+|                                                | Returns: Numeric                                                      |
++------------------------------------------------+-----------------------------------------------------------------------+
+
+   This function internally sets the position and the orientation of a
+   rotary axis or a tool axis. The *axis* identifier is either a whole
+   number index or a keyword, as listed in the table below. The position
+   and orientation of the axis is given by *xyzijk* data. This function
+   returns a value of 1 (one) if successful; otherwise a value of 0
+   (zero) is returned.
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 1
+         :class: wrap-last
+
+         *  -  Index
+            -  Keyword
+            -  Axis
+         *  -  0
+            -  TOOL
+            -  Tool axis
+         *  -  7
+            -  AAXIS,TABLE
+            -  Rotary A table
+         *  -  8
+            -  BAXIS,TABLE
+            -  Rotary B table
+         *  -  9
+            -  CAXIS,TABLE
+            -  Rotary C table
+         *  -  10
+            -  AAXIS
+            -  Rotary A head
+         *  -  11
+            -  BAXIS
+            -  Rotary B head
+         *  -  12
+            -  CAXIS
+            -  Rotary C head
+         *  -  14
+            -  RAM,1
+            -  Primary rotary on exchangeable head
+         *  -  15
+            -  RAM,2
+            -  Secondary rotary on exchangeable head
+
++------------------------------------------------+----------------------------------------------------------------------+
+| **$FKINCFG(**\ *axis,*\ OFF\ **)**             | Reset the position and orientation of a rotary axis or the tool axis |
+|                                                |                                                                      |
+|                                                | Returns: Numeric                                                     |
++------------------------------------------------+----------------------------------------------------------------------+
+
+   This function resets the specified *axis* (see table above) to its
+   original position and orientation as defined in the Questionnaire.
+   This function returns a value of 1 (one) if successful; otherwise a
+   value of 0 (zero) is returned.
+
+.. _func_flook:
+.. index:: Functions; $FLOOK
+
+.. list-table::
+   :widths: auto
+   :header-rows: 0
+
+   *  -  **$FLOOK(**\ *a1* :math:`\icamrange{0.8}{0}\,\big[`\ *,a2*\ :math:`\big]`\ **)**
+      -  Return information concerning a future event or processing state
+
+         Returns: Numeric
+
+..
+
+   This function is used to invoke a generic look-ahead on an event
+   *a1*. :ref:`“$FLOOK Generic Look-ahead”<flook_generic_lookahead>` describes the
+   $FLOOK function in detail.
+
+.. _func_fmacid:
+.. index:: Functions; $FMACID
+
++------------------------------------------------+------------------------------------------+
+| **$FMACID(** [*string*\ [*,mask*]] **)**       | Find matching macro id’s                 |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   The $FMACID and $FMACSTA functions are used to enable or disable individual macros.
+   The $FMACID function obtains numeric identifiers of the macros to be enabled or disabled.
+   The $FMACSTA function then interrogates or changes the state of the specified macros.
+
+   The $FMACID function searches through all macros for a match with the
+   *string*, and returns a sequence containing pairs of
+   “\ *id*,'*description*'” for each match. If the search string is
+   blank or omitted, the current macro index and description is
+   returned. Otherwise, the search string is compared against the
+   first line of all user-defined macro SDL lines as well as the built-in
+   names for startup, shutdown and event macros (including those of the
+   Model and CAM interface kit).
+
+   The search string can contain special characters in the form of a
+   regular expression (RE). For example, the search string **'.'** will
+   match all macros. See :ref:`the $FEDIT function<func_fedit>` for
+   description of RE’s.
+
+   The candidate macros to search can be restricted using combinations
+   of the *mask* value, as follows. If mask is omitted, all macros are
+   searched. Note that composite post-processors cannot match or modify
+   macro states in another component, nor in the composite master (and
+   vice versa).
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 1
+         :class: wrap-last
+
+         *  -  Mask
+            -  Macros to search
+         *  -  1
+            -  post-processor macros
+         *  -  10
+            -  Model macros
+         *  -  100
+            -  CAM interface before and after macros
+
+   If no macro matches the search string, then an empty sequence is
+   returned. Otherwise, the sequence will contain two elements for each
+   matching macro. The first element of the pair is the macro index
+   number. The second element of the pair is the macro description. This
+   return sequence can be used with the $FMACSTA() function to enable or
+   disable the matched macros.
+
+.. _func_fmacsta:
+.. index:: Functions; $FMACSTA
+
++------------------------------------------------+----------------------------------------------------------+
+| **$FMACSTA(**\ *seq*\ [*,state*]\ **)**        | Set or query enabled/disabled state of *multiple* macros |
+|                                                |                                                          |
+|                                                | Returns: Sequence                                        |
++------------------------------------------------+----------------------------------------------------------+
+| **$FMACSTA(**\ *id*\ [*,state*]\ **)**         | Set or query enabled/disabled state of *a single* macro  |
+|                                                |                                                          |
+|                                                | Returns: Sequence                                        |
++------------------------------------------------+----------------------------------------------------------+
+
+   The $FMACID and $FMACSTA functions are used to enable or disable individual macros.
+   The $FMACID function obtains numeric identifiers of the macros to be enabled or disabled.
+   The $FMACSTA function then interrogates or changes the state of the specified macros.
+
+   The $FMACSTA function returns the current enabled ($TRUE) or disabled
+   ($FALSE) state of macros identified using the $FMACID function. If a
+   logical *state* is specified, the macro states are changed
+   accordingly (the returned value is the enabled/disable state *before*
+   applying the change). Macros can be specified either by a sequence
+   *seq* containing macro id’s (non-numeric entities in *seq* are
+   ignored) or by a simple numeric *id*. The returned sequence contains
+   pairs of “\ *id,state*\ ” for each macro, where *id* identifies the
+   macro and *state* is a logical variable set $TRUE if the macro was
+   enabled.
+
+   For example, the following disables all COOLNT user-defined macros in
+   the post-processor:
+
+     ::
+
+       %L01=$FMACSTA($FMACID('^COOLNT'),$FALSE)
+
+   Either of the following re-enables all COOLNT user-defined macros:
+
+     ::
+
+       %L01=$FMACSTA(%L01,$TRUE)
+       %L01=$FMACSTA($FMACID('^COOLNT'),$TRUE)
+
+   The following inverts the enabled/disabled state of all COOLNT
+   user-defined macros:
+
+     ::
+
+       %L01=$FMACSTA($FMACID('^COOLNT'))
+       DO/I=1,$FLEN(%L01),2
+         %L02=$FMACSTA(%L01(I),.NOT.%L01(I+1))
+       ENDOF/DO
+
+.. _func_fmru:
+.. index:: Functions; $FMRU
+
++-------------+
+| **$FMRU…**  |
++-------------+
+
+   The $FMRU family of functions are designed to simplify the saving and
+   restoring of MRU “most recently used” information, such as user
+   responses to interactive dialogs.
+
+   MRU data is stored on disk in XML format. When called from a
+   post-processor macro, the MRU file will by default have the same name
+   as the post-processor and be stored in the same directory as the post-processor database.
+   When called from a model macro, the default name and directory are
+   those of the model name and database respectively.
+
+   The MRU file is organized at the highest level using named **keys**.
+   Key names are strings that uniquely identify the information stored
+   with the key. For example, if MRU data should be remembered between
+   runs of the same input file, then the key name should be based on the
+   input file name (this is the default). If MRU data is to be
+   remembered for individual users, then the string returned from
+   $FGETENV('USERNAME') would make a good key. If information is to be
+   remembered regardless of input file or user, then a key name such as
+   **'\*'** could be used (i.e., something that won’t conflict with a
+   valid file or user name).
+
+   Each key in the MRU file can have zero or more **parameters**. Each
+   parameter has a name that identifies the parameter and a value.
+   Parameter names are strings that can be anything other than blank.
+   Parameter values can be any macro data type, including sequences.
+   Named parameters eliminate the requirement to know the order in which
+   they are saved in the MRU file.
+
+   The following functions are available:
+
+   :Opening:      :ref:`$FMRU_OPEN<func_fmru_open>`
+   :Closing:      :ref:`$FMRU_CLOSE<func_fmru_close>`
+   :Keys:         :ref:`$FMRU_GETKEY<func_fmru_getkey>`,
+                  :ref:`$FMRU_GETKEYS<func_fmru_getkeys>`,
+                  :ref:`$FMRU_DELKEY<func_fmru_delkey>`,
+                  :ref:`$FMRU_DELKEYS<func_fmru_delkeys>`
+   :Parameters:   :ref:`$FMRU_GETPARAM<func_fmru_getparam>`,
+                  :ref:`$FMRU_GETPARAMS<func_fmru_getparams>`,
+                  :ref:`$FMRU_SETPARAM<func_fmru_setparam>`,
+                  :ref:`$FMRU_DELPARAM<func_fmru_delparam>`,
+                  :ref:`$FMRU_DELPARAMS<func_fmru_delparams>`
+
+   The following is an example of how to remember a user’s response to a
+   dialog box entry. For demonstration purposes, the dialog is named
+   “Startup” and the dialog box entry to remember is a logical variable
+   named “DLG_X”. Defaults are used for both the MRU file and the key
+   name. The parameter name is “X”.
+
+       ::
+
+           DECLAR/LOCAL,REAL,H
+           H=$FMRU_OPEN()
+           DLG_X=$FMRU_GETPARAM(H,0,'X',$TRUE)
+           IF/$FDIALOG('Startup').EQ.'OK'
+             %L01=$FMRU_SETPARAM(H,0,'X',DLG_X)
+           ENDOF/IF
+           %L01=$FMRU_CLOSE(H)
+
+.. _func_fmru_close:
+.. index:: Functions; $FMRU_CLOSE
+
++------------------------------------------------+------------------------------------------+
+| **$FMRU_CLOSE(** *handle* **)**                | Close an MRU file                        |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function writes out all changes and then closes the MRU file
+   identified by the numeric *handle*
+   (returned from $FMRU_OPEN). The function returns a numeric status
+   value of 1 if successful. A
+   return value of 0 indicates an error where $ERRNO contains the actual
+   error code. $NULL will be returned if *handle* does not point to an
+   open MRU file.
+
+.. _func_fmru_delkey:
+.. index:: Functions; $FMRU_DELKEY
+
++------------------------------------------------+------------------------------------------+
+| **$FMRU_DELKEY(** *handle*\ [*,key* ]\ **)**   | Delete a key in an MRU file              |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function deletes the specified *key* (string or numeric) from
+   the MRU file identified by the numeric *handle* (returned from
+   $FMRU_OPEN). If *key* is omitted, blank or zero, then the key name to
+   delete is derived from the input file. The function returns a count
+   of the number of keys deleted (i.e., either 0 or 1). $NULL will be
+   returned if *handle* does not point to an open MRU file.
+
+.. _func_fmru_delkeys:
+.. index:: Functions; $FMRU_DELKEYS
+
++----------------------------------------------------+------------------------------------------+
+| **$FMRU_DELKEYS(**\ *handle*\ [*,sequence*]\ **)** | Delete multiple keys in an MRU file      |
+|                                                    |                                          |
+|                                                    | Returns: Numeric                         |
++----------------------------------------------------+------------------------------------------+
+
+   This function deletes the key names and/or key id’s specified in
+   *sequence* from the MRU file identified by the numeric *handle*
+   (returned from $FMRU_OPEN). If *sequence* is omitted, all keys are
+   deleted. The function returns a count of the number of keys deleted.
+   $NULL will be returned if *handle* does not point to an open MRU
+   file.
+
+.. _func_fmru_delparam:
+.. index:: Functions; $FMRU_DELPARAM
+
++-------------------------------------------------+---------------------------------------------+
+| **$FMRU_DELPARAM(** *handle, key, param*\ **)** | Delete a key/parameter value in an MRU file |
+|                                                 |                                             |
+|                                                 | Returns: Numeric                            |
++-------------------------------------------------+---------------------------------------------+
+
+   This function deletes the parameter named *param* associated with the
+   *key* in the MRU file identified by the numeric *handle* (returned
+   from $FMRU_OPEN). If *key* is blank or zero, then the key name is
+   derived from the input file. The function returns a count of the
+   number of parameters deleted (i.e., either 0 or 1). $NULL will be
+   returned if *handle* does not point to an open MRU file.
+
+.. _func_fmru_delparams:
+.. index:: Functions; $FMRU_DELPARAMS
+
++----------------------------------------------------------+------------------------------------------------------+
+| **$FMRU_DELPARAMS(** *handle, key* [*,sequence* ]\ **)** | Delete multiple key/parameters values in an MRU file |
+|                                                          |                                                      |
+|                                                          | Returns: Numeric                                     |
++----------------------------------------------------------+------------------------------------------------------+
+
+   This function deletes the parameters specified in *sequence*
+   associated with the *key* in the MRU file identified by the numeric
+   *handle* (returned from $FMRU_OPEN). If *key* is blank or zero, then
+   the key name is derived from the input file. If *sequence* is
+   omitted, all parameters of the key are deleted. The function returns
+   a count of the number of parameters deleted. $NULL will be returned
+   if *handle* does not point to an open MRU file.
+
+.. _func_fmru_getkey:
+.. index:: Functions; $FMRU_GETKEY
+
++------------------------------------------------+---------------------------------------------+
+| **$FMRU_GETKEY(**\ *handle*\ [*,key* ]\ **)**  | Get specified or default key in an MRU file |
+|                                                |                                             |
+|                                                | Returns: Numeric                            |
++------------------------------------------------+---------------------------------------------+
+
+   This function looks in the MRU file identified by the numeric *handle*
+   (returned from $FMRU_OPEN) for a *key* matching the name specified.
+   If the key name is omitted or blank, then the key name to find is derived
+   from the input file using
+   $FBASNAM($CLNAME,'.').
+   The function returns a
+   numeric key identifier that can be used in all other $FMRU functions
+   wherever a key name is required. A return value of 0 indicates that
+   the key name does not exist. Note that when writing MRU information,
+   a key id value of 0 will save the MRU information under the default
+   key name derived from the input file. $NULL will be returned if
+   *handle* does not point to an open MRU file.
+
+.. _func_fmru_getkeys:
+.. index:: Functions; $FMRU_GETKEYS
+
++-------------------------------------------------+------------------------------------------+
+| **$FMRU_GETKEYS(**\ *handle* [*,order* ]\ **)** | Get all keys in an MRU file              |
+|                                                 |                                          |
+|                                                 | Returns: Sequence                        |
++-------------------------------------------------+------------------------------------------+
+
+   This function returns all of the keys in the MRU file identified by
+   the numeric *handle* (returned from $FMRU_OPEN), either in order of
+   when they were last updated (*order*\ =0, the default) or in ASCII
+   collating order (*order* =–1 descending, *order* =+1 ascending). The
+   function returns a sequence of key name strings. An empty sequence
+   will be returned if the MRU file is empty. $NULL will be returned if
+   *handle* does not point to an open MRU file.
+
+.. _func_fmru_getparam:
+.. index:: Functions; $FMRU_GETPARAM
+
++--------------------------------------------------------------------+------------------------------------------+
+| **$FMRU_GETPARAM(** *handle, key, param* [*,default-value*]\ **)** | Set a key/parameter value in an MRU file |
+|                                                                    |                                          |
+|                                                                    | Returns: Any                             |
++--------------------------------------------------------------------+------------------------------------------+
+
+   This function returns the value associated with the
+   key-name/parameter-name combination in the MRU file identified by the
+   numeric *handle* (returned from $FMRU_OPEN). If *key* is blank or
+   zero, then the key name to find is derived from the input file. The
+   parameter name *param* must not be blank. The function returns
+   whatever value was originally stored in the MRU file using the
+   $FMRU_SETPARAM function. If the specified key or parameter name does
+   not exist, then the function will return the *default value* if
+   specified, or will return $NULL if a default is not specified.
+   $NULL will also be returned if *handle* does not point to an open MRU
+   file.
+
+.. _func_fmru_getparams:
+.. index:: Functions; $FMRU_GETPARAMS
+
++-------------------------------------------------+-----------------------------------------------+
+| **$FMRU_GETPARAMS(**\ *handle*\ [*,key*]\ **)** | Get all parameters for the key in an MRU file |
+|                                                 |                                               |
+|                                                 | Returns: Sequence                             |
++-------------------------------------------------+-----------------------------------------------+
+
+   This function returns all of the parameter names associated with the
+   specified *key* in the MRU file identified by the numeric *handle*
+   (returned from $FMRU_OPEN). If *key* is omitted, blank or zero, then
+   the key name to find is derived from the input file. The function
+   returns a sequence of parameter name strings. An empty sequence will
+   be returned if the key does not exist in the MRU file or if the key
+   has no parameter values. $NULL will be returned if *handle* does not
+   point to an open MRU file.
+
+.. _func_fmru_open:
+.. index:: Functions; $FMRU_OPEN
+
++------------------------------------------------+------------------------------------------+
+| **$FMRU_OPEN(**\ [*filename*] **)**            | Open an MRU file                         |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function opens an MRU file. If *filename* is omitted or blank,
+   then the default filename is the post-processor or model name
+   (depending upon which object the macro processor is running from). If
+   the path portion of the filename is missing, then the default path is
+   the directory containing the post-processor or model database. An
+   empty MRU file is created if one does not already exist.
+
+   The function returns a numeric **handle** value that *must be used*
+   in all other $FMRU functions to identify the MRU file being used. A
+   return value of 0 indicates an error where $ERRNO contains the actual
+   error code.
+
+.. _func_fmru_setparam:
+.. index:: Functions; $FMRU_SETPARAM
+
++-------------------------------------------------------------+------------------------------------------+
+| **$FMRU_SETPARAM(**\ *handle, key, param, new-value*\ **)** | Set a key/parameter value in an MRU file |
+|                                                             |                                          |
+|                                                             | Returns: Any                             |
++-------------------------------------------------------------+------------------------------------------+
+
+   This function writes the *new value* to the key-name/parameter-name
+   combination in the MRU file identified by the numeric *handle*
+   (returned from $FMRU_OPEN). If *key* is blank or zero, then the
+   key name to write is derived from the input file. The parameter name
+   *param* must not be blank. The function returns whatever old value
+   was previously stored in the MRU file for the key-name /
+   parameter-name combination being set. $NULL is returned if this is
+   the first time writing this parameter data. $NULL will also be
+   returned if *handle* does not point to an open MRU file.
+
+.. _func_foppath:
+.. index:: Functions; $FOPPATH
+
++------------------------------------------------+------------------------------------------------------+
+| **$FOPPATH(...)**                              | Access to the generated list of positioning motions  |
+|                                                |                                                      |
+|                                                | Returns: Sequence.                                   |
++------------------------------------------------+------------------------------------------------------+
+
+   This macro function forms an extended version of **$FAPPOS()** macro
+   function. The major difference is that $FAPPOS() was applicable only
+   to SmartPATH generated positioning sequence. $FOPPATH() applies also
+   to other optimization motion sequences. In particular, this
+   function provides access to Rotary-Turn-Around (RTA) positioning
+   sequence, to LINTOL Path Planning positioning sequence (LPP), to LPP
+   sequence generated by LIMIT/POLAR,...,SCAN,ON singular optimization
+   and to variants of the motion lists re-generated by SmartPATH.
+
+   The first form of the function call returns general description of the
+   motion list, if any is present.
+
+      PATHDESC=$FOPPATH() will return the following information:
+
+      .. code-block:: text
+
+         - PATHDESC(1) returns type of the
+               0: no list is present
+               1: SmartPATH positioning motion list is present (AP)
+               2: Lintol Path Planning posiitoning motion list is present (LPP)
+               3: Rotary Turn Around motion list is present (RTA)
+         - PATHDESC(2) Total number of motions on the list
+         - PATHDESC(3) CL record number of the first motion on the list
+         - PATHDESC(4) CL record number of the last motion on the list
+         - PATHDESC(5) *id* of the first motion on the list moving rotary axis
+         - PATHDESC(6) *id* of the last motion on the list moving rotary axis
+
+   MOTDESC=$FOPPATH((id\|AUTO)[,type]) returns motion description.
+
+   This function is used to examine the motions present on a RTA, LPP or
+   AP positioning sequence. The id parameter specifies the motion number
+   for which information is desired. The total number of motions generated
+   in the positioning sequence can be obtained using the PATHDESC(2) after
+   $FOPPATH() is called.
+
+   AUTO or $OPPATHI macro variable can be used to retrieve data of the next
+   move to be processed.
+
+   Specifying an *id* outside of the range 1:PATHDESC(2) will result in a
+   $NULL sequence being returned.
+
+   PATHDESC(2:3) indicates the range of CL motions that are being matched
+   and replaced by generated motion sequence. All RTA motions are matching
+   one particular CL motion. Path Planning (LPP) motions are having, typically,
+   one-to-one correspondence between CL GOTOs and list motions. Exceptions
+   are cases when the user is asking for RTA-like sequence to be generated,
+   to increase safety of LPP positioning in case when SmartPATH is not
+   available. In case of SmartPATH generated motions all combinations
+   are possible. In other words, many CL motions can be replaced by one
+   SmartPATH generated move and one CL motion may be replaced by many
+   SmartPATH generated motion. When processing, the general rules are that
+   the first CL motion in the sequence is matched and replaced by first
+   SmartPATH motion in the sequence. The last CL motion in the sequence is
+   matched and replaced by all remaining, SmartPATH generated moves. Any
+   remaining CL motion between first and last are omitted (skipped) by the
+   process. No actions should be forced, generated for these motions!
+   The “skip” action is indicated by MOTDESC(4)==1.
+
+   The *type* of motion data Indicates the frame in which returned coordinates
+   are expressed:
+
+   :1: CL part frame, equivalent to the $P2 motion macro variable
+   :2: Machine frame, equivalent to $XM, $YM… macro variables
+   :3: Workpiece frame, equivalent to the $P3 motion macro variable (default)
+
+   Invoking **MOTDESC=$FOPPATH($OPPATHI)** will return the following information:
+
+      ::
+
+        - MOTDESC(1): It returns the sequence number of the motion on the list.
+            If $OPPATHI was utilized to call the function its value will be repeated here
+        - MOTDESC(2): ID of the motion.
+            Similar to current $RTAID, $SCANID, $APID whichever is applicable
+        - MOTDESC(3): Returns matching CL record number.
+            Typically, all RTA motions are matching the same CL record number, the same GOTO motion,
+            LPP motions are often matching CL motions uniquely, and for SmartPATH the match is arbitrary.
+            Many SP motions can match single CL motion.
+        - MOTDESC(4): 1: skip the motion, 0: do not skip, execute the motion.
+            Once the motion is matched against the CL motion a scheduled action can be
+            0: execute the generated motion instead of CL motion. This is always the case for
+            RTA and LPP list. For SmartPATH list the action can 1: skip the motion or 0:execute.
+            When the action is 1:skip then nothing is output for this list motion.
+        - MOTDESC(5): Algorithm type that generated the motion.
+            For example, an RTA motion list can be constructed of SmartPATH motions.
+            This information is provided mostly for debugging, in case of an unexpected result.
+        - MOTDESC(6:11): Coordinates of the motion specified as per *type* argument.
+            Checking coordinates of upcoming or just executed motion the pos-processor developer
+            can decide if specific motion “decoration” should be output, if the specific NC codes
+            need to be OUTPUT.
+
+.. _func_fpause:
+.. index:: Functions; $FPAUSE
+
++------------------------------------------------+------------------------------------------+
+| **$FPAUSE(**\ *[string]*\ **)**                | Pause processing with optional message   |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function will pause GENER processing and display a message-box
+   with the specified or default *string*. The user will be given a
+   choice to either pause or continue processing. When paused, the full
+   GENER interface is made active. Once GENER processing resumes, this
+   function will return a logical value of $TRUE if the user chose to
+   pause processing, or $FALSE otherwise.
+
+   The message-box is not displayed when running in background mode.
+   Instead, the $FPAUSE function immediately returns a value of $FALSE
+   and processing continues uninterrupted.
+
+.. _func_fregfmt:
+.. index:: Functions; $FREGFMT
+
++------------------------------------------------+------------------------------------------------------+
+| **$FREGFMT(**\ *a*\ **)**                      | Return $FSWRIT compatible output format for register |
+|                                                |                                                      |
+|                                                | Returns: String                                      |
++------------------------------------------------+------------------------------------------------------+
+
+   This function takes as input either a register index number, or a
+   text string matching one or more characters of a register’s
+   descriptor. It returns a format string that can be used with the
+   $FSWRIT() function to output a register value.
+   This function was designed to be used in the register macro to modify register values.
+
+.. _func_fregpos:
+.. index:: Functions; $FREGPOS
+
++------------------------------------------------+-----------------------------------------------------+
+| **$FREGPOS(**\ *string*\ **)**                 | Return a register index given a register descriptor |
+|                                                |                                                     |
+|                                                | Returns: Numeric                                    |
++------------------------------------------------+-----------------------------------------------------+
+
+   This function takes as input a text *string* matching one or more
+   characters of a register’s descriptor. It returns the register index
+   number or –1 if a match cannot be found.
+   This function was designed to be used in the register macro.
+
+.. _func_fsort:
+.. index:: Functions; $FSORT
+
+.. list-table::
+   :widths: auto
+   :header-rows: 0
+
+   *  -  **$FSORT(**\ *infile, outfile* [*,delimiters*] :math:`\icamrange{0.8}{0}\,\big[`\ *,field,type,order*\ :math:`\big]`\ **)**
+      -  Sort records in a file
+
+         Returns: Numeric
+
+   *  -  **$FSORT(**\ *sequence*\ :math:`\Big[`\ *,fields* :math:`\icamrange{0.8}{0}\,\big[`\ *,field,order*\ :math:`\big]\Big]`\ **)**
+      -  Sort elements of a sequence
+
+         Returns: Numeric
+
+..
+
+   This function can be used to sort the contents of a file or the
+   contents of a sequence variable.
+
+   When **sorting a file**, the contents of the input file are first
+   read into memory, sorted, then written to the output file. The same
+   file name can be specified for both input and output files. Sorting
+   occurs on specific fields (or columns) of data in the file. By
+   default, a run of spaces defines the boundary from one field to the
+   next. Specify an optional *delimiters* string to define a different
+   character or set of characters to be used as field separators (e.g.,
+   specify $FCHAR(9) to use a tab character as a delimiter). The default
+   increasing ASCII text order of sorting can be changed by specifying a
+   “\ *field,type,order*\ ” sort key parameter, where: *field*
+   identifies a field number; *type* is a string 'N' or 'S' defining a
+   numeric or string field type; and *order* is one of the keywords INCR
+   or DECR. Additional sort keys can be specified to further sort
+   records with matching sort key fields. If all sort keys are the same,
+   then the original record order is maintained (i.e., a “stable” sort).
+   The $FSORT function will return the number of records in the output file, or –1
+   if the sort failed. The $ERRNO system variable will be set to a
+   non-zero value if the sort failed.
+
+   When **sorting a sequence**, the input sequence is specified as the
+   first parameter of the $FSORT function and the sorted result is
+   returned as a sequence. If all elements of the sequence are the same
+   type (e.g., all numbers or all strings), then $FSORT can be called
+   with just the input sequence to sort the elements in increasing
+   order. If the sequence represents a table (e.g., alternating pairs of
+   number and string elements), then the *fields* parameter must be
+   specified to tell the sort function the number of fields (or columns)
+   that make up each record (or row) to be sorted in the sequence. The
+   default increasing order of sorting can be changed by specifying a
+   “\ *field,order*\ ” sort key parameter, where *field* identifies a
+   field number and *order* is one of the keywords INCR or DECR.
+   Additional sort keys can be specified to sort records with identical
+   sort key fields. If all sort keys are the same, then the original
+   record order is maintained. If the sort fails, a null sequence (i.e.,
+   $NULL) will be returned and the $ERRNO system variable will be set to
+   a non-zero value.
+
+.. _func_ftltab:
+.. index:: Functions; $FTLTAB
+
++------------------------------------------------+------------------------------------------+
+| **$FTLTAB(** [[ *start,*] *end* ] **)**        | Scan CL file for tool changes            |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function scans forward in the CL file looking for tool change
+   operations (e.g., LOAD, UNLOAD, LOADTL and TURRET) and returns a
+   sequence of $TLTAB indices identifying the tools loaded, in the order
+   that they were loaded. An empty sequence is returned if no tool
+   change operations were encountered during the scan.
+
+   The *start* and *end* CL record numbers are optional.
+
+   -  If omitted or zero (0), the *end* CL record defaults to the end of
+      the CL file. Note that when called while a subprogram is active, the
+      end of file is actually the end of the subprogram. Also note that
+      with Composite post-processors, the end of the scan will occur when
+      an APPLY command is encountered that switches processing to a
+      different component post-processor.
+
+      \
+
+   -  If omitted or zero, the *start* CL record defaults to the current CL
+      input position (i.e., the next CL record to be read). Calling $FTLTAB
+      without any arguments causes a scan from the current CL input
+      position to the end of the CL file or subprogram.
+
+   The $TLTAB tooling array is updated for any tool encountered during a
+   $FTLTAB scan, so that tooling information can be obtained using the
+   returned $TLTAB index values.
+
+   The following example lists the tool number and tool name of every
+   tool loaded up to the next BREAK command (if any):
+
+     ::
+
+       SEQ=$FTLTAB($FGET(BREAK))
+       DO/I=1,$FLEN(SEQ)
+         J=SEQ(I)
+         PPRINT/'!(*) - !(*)',$TLTAB(1,J),$TLTAB(20,J)
+       ENDOF/DO
+
+   Macro processing is enabled during the $FTLTAB scan. If necessary,
+   the $TLOOK and/or
+   $LOOKAH system variables can be used in macros to determine if a
+   look-ahead is active. The
+   $FTLTAB function does not affect the current CL file location.
+
+.. _func_funwind:
+.. index:: Functions; $FUNWIND
+
++------------------------------------------------+------------------------------------------+
+| **$FUNWIND(** axis [,\ *modifier*] [,…] **)**  | Reset rotary axis to modulo-360 value    |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function internally resets one or more rotary axes to their
+   modulo-360 value. No motion is generated. Specify the *axis* using
+   either a whole number index or a keyword, as listed in the table
+   below:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 1
+         :class: wrap-last
+
+         *  -  Index
+            -  Keyword
+            -  Axis
+         *  -  0
+            -  TOOL
+            -  Tool axis
+         *  -  7
+            -  AAXIS,TABLE
+            -  Rotary A table
+         *  -  8
+            -  BAXIS,TABLE
+            -  Rotary B table
+         *  -  9
+            -  CAXIS,TABLE
+            -  Rotary C table
+         *  -  10
+            -  AAXIS
+            -  Rotary A head
+         *  -  11
+            -  BAXIS
+            -  Rotary B head
+         *  -  12
+            -  CAXIS
+            -  Rotary C head
+         *  -  14
+            -  RAM,1
+            -  Primary rotary on exchangeable head
+         *  -  15
+            -  RAM,2
+            -  Secondary rotary on exchangeable head
+
+   An optional *modifier* keyword can be specified to control the
+   360-degree range of the final rotary axis position, as follows:
+
+   :NORMAL: Range [–179.9999,180] (the default)
+   :PLUS:   Range [0,359.9999] forces a positive result
+   :MINUS:  Range [–359.9999,359.9999] respects the current axis sign
+
+   Multiple rotary axes can be reset by repeating the “\ *axis*
+   [,\ *modifier*]” specification for each additional axis to be reset.
+
+   This function returns a value of 1 (one) if successful; otherwise a
+   value of 0 (zero) is returned.
