@@ -1,0 +1,130 @@
+Conditional Functions
+=====================
+
+Conditional functions return the $TRUE or $FALSE status of a
+conditional test, or the value of a function argument based on or
+associated with an expression.
+
+.. _func_fchoose:
+.. index:: Functions; $FCHOOSE
+
++-----------------------------------------------------------+------------------------------------------------------+
+| **$FCHOOSE(**\ *index, value1* [ *,value2* [ *,…*]] **)** | Selects and returns a value from a list of arguments |
+|                                                           |                                                      |
+|                                                           | Returns: Any or $NULL                                |
++-----------------------------------------------------------+------------------------------------------------------+
+
+   This function returns the *n*\ th value from a list of choices based
+   on the value of *index*. If *index* is 1,
+   $FCHOOSE returns *value\ 1* (i.e., the first choice in the list). If
+   *index* is 2, it returns *value\ 2* and so on.
+
+   The *index* value is rounded to the nearest whole number before being
+   evaluated. The $FCHOOSE function returns a value of $NULL if *index*
+   is less than 1 or greater than the number of values listed.
+
+   $FCHOOSE evaluates all of the *value* expressions, even though it
+   returns only one of them. For this reason, you should watch for
+   undesirable side effects. For example, if the evaluation of any of
+   the *value* expressions results in a division by zero error, an error
+   occurs regardless of the value of *index*.
+
+.. _func_fif:
+.. index:: Functions; $FIF
+
++------------------------------------------------+-----------------------------------------------------------------+
+| **$FIF(**\ *expr, truearg, falsearg*\ **)**    | Returns one of two arguments, depending on a logical expression |
+|                                                |                                                                 |
+|                                                | Returns: Any                                                    |
++------------------------------------------------+-----------------------------------------------------------------+
+
+   This function evaluates the logical expression *expr* and returns the
+   argument *truearg* if the logical expression is true, or the argument
+   *falsearg* if the logical expression is false.
+
+   $FIF always evaluates both *truearg* and *falsearg*, even though it
+   returns only one of them. Because of this, you should watch for
+   undesirable side effects. For example, if evaluating *falsearg*
+   results in a division by zero error, an error occurs even if *expr*
+   is true.
+
+.. _func_fisnum:
+.. index:: Functions; $FISNUM
+
++------------------------------------------------+------------------------------------------+
+| **$FISNUM(**\ *a*\ **)**                       | Test if numeric                          |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns $TRUE if the argument *a* is a number. $FALSE
+   is returned if the argument is any other type, including $NULL.
+
+.. _func_fisseq:
+.. index:: Functions; $FISSEQ
+
++------------------------------------------------+------------------------------------------+
+| **$FISSEQ(**\ *a*\ **)**                       | Test if sequence                         |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns $TRUE if the argument *a* is a sequence. $FALSE
+   is returned if the argument is any other type, including $NULL.
+
+.. _func_fisstr:
+.. index:: Functions; $FISSTR
+
++------------------------------------------------+------------------------------------------+
+| **$FISSTR(**\ *a*\ **)**                       | Test if string                           |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns $TRUE if the argument *a* is a string or
+   character. $FALSE is returned if the argument is any other type,
+   including $NULL.
+
+.. _func_fiswrd:
+.. index:: Functions; $FISWRD
+
++------------------------------------------------+------------------------------------------+
+| **$FISWRD(**\ *a*\ **)**                       | Test if keyword (minor)                  |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns $TRUE if the argument *a* is a MINOR word.
+   $FALSE is returned if the argument is any other type, including
+   $NULL.
+
+.. _func_fswitch:
+.. index:: Functions; $FSWITCH
+
++-----------------------------------------------------------------+----------------------------------------------------------------+
+| **$FSWITCH(**\ *expr1, value1* [ *,expr2,value2* [ *,…*]] **)** | Returns argument associated with first true logical expression |
+|                                                                 |                                                                |
+|                                                                 | Returns: Any or $NULL                                          |
++-----------------------------------------------------------------+----------------------------------------------------------------+
+
+   This function’s argument list consists of pairs of logical
+   expressions and values. The logical expressions *expr* are evaluated
+   from left to right. The *value* associated with the first expression
+   that evaluates true is returned. For example, if *expr\ 1* is true,
+   $FSWITCH returns *value\ 1*. If *expr\ 1* is false, but *expr\ 2* is
+   true, $FSWITCH returns *value\ 2* and so on.
+
+   $FSWITCH returns a value of $NULL if none of the expressions are
+   true. To return some other value if all expressions are false, use
+   .TRUE. or $TRUE as a final expression paired with the required value.
+   For example:
+
+      ::
+
+        $FSWITCH( … ,.TRUE.,value)
+
+   $FSWITCH evaluates all of the *expr* and *value* expressions, even
+   though it returns only one *value*. For this reason, you should watch
+   for undesirable side effects. For example, if the evaluation of any
+   *expr* or *value* expression results in a division by zero error, an
+   error occurs regardless of the *expr* true/false conditions.
