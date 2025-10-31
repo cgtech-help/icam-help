@@ -1,0 +1,12 @@
+Simulation»Camera»Attach
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Attaches the camera to the currently selected object. If no object is
+selected, the camera is attached to the world coordinate system (this is
+the default). When the camera is attached to an object, the camera moves
+with the object. Standard viewpoints are always in relation to the
+attached object. The camera can also be attached to an object using the
+right-mouse “Attach Camera” context menu on that object. The camera can
+be detached by doing the same in the background. A checkmark in the menu
+indicates that the camera is attached to an object.
+
