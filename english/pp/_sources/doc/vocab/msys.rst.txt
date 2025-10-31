@@ -1,0 +1,53 @@
+.. _command_msys:
+
+The MSYS Command :kbd:`[MLEPC]`
+===============================
+
+The MSYS command is used to specify a machine coordinate frame for
+subsequent CL data. The MSYS command is informational, unless a form
+of automatic LCS is enabled based on the MSYS command definition.
+This command is valid for all machines.
+
+   :math:`\textbf{MSYS / } \big[ \,\textbf{LAST}, \big] \,\mathtt{<\!matrix\!>}`
+
+Two separate coordinate frames can be defined. MSYS defines the
+primary coordinate frame and MSYS/LAST defines a second coordinate
+frame.
+
+The <matrix> typically defines the location and orientation of the
+machine coordinate frame with respect to the part coordinate system.
+The matrix can be specified using the standard post-processor
+transformation syntax (see :ref:`“The ORIGIN Command”<command_origin>`).
+
+A coordinate frame defined by MSYS can be subsequently referenced by
+any of the post-processor commands that support a transformation
+capability. These include LCS, LIMIT, PLOT and ORIGIN. With the
+exception of the LCS/AUTO command (see :ref:`here<command_lcs>`), the MSYS frame definition is informational.
+The updated frame definition only takes effect when one of these
+other transformation commands is next coded. For example:
+
+   .. code-block::
+
+      MSYS/*matrix1*
+      GOTO/…            $$ no frame in effect
+      LCS/MSYS
+      GOTO/…            $$ *matrix1* in effect
+      MSYS/*matrix2*
+      GOTO/…            $$ *matrix1* still in effect
+      LCS/MSYS
+      GOTO/…            $$ *matrix2* in effect
+
+When LCS/AUTO,3 or LCS/AUTO,4 is active, the MSYS command defines the
+new local coordinate system, which is applied immediately. For
+example:
+
+   .. code-block::
+
+      MSYS/*matrix1*
+      GOTO/…            $$ no frame in effect
+      LCS/AUTO,3
+      GOTO/…            $$ *matrix1* in effect
+      MSYS/*matrix2*
+      GOTO/…            $$ *matrix2* in effect
+
+..
