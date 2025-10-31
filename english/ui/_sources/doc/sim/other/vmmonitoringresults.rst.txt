@@ -1,0 +1,306 @@
+Virtual Machine's Results
+=========================
+
+Monitoring Virtual Machine's Results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Monitoring the simulation is actually the responsibility of CERUN and
+GENER. GENER monitors the simulation during look-ahead operations
+(activated by LINTOL/SCAN and the SMARTP command features) in an attempt
+to avoid positioning or interpolating the machine into situations where
+collisions might occur. GENER reports all unavoidable collisions and
+overtravel conditions in the diagnostic window and post-processor
+listing file. CERUN monitors the simulation at all times and reports all
+collisions and overtravel conditions in the diagnostic window and
+control emulator log file. CERUN and GENER perform these actions
+regardless of whether the Diagnostic and simulation windows are visible
+or not.
+
+|image1|
+
+VM provides various controls and features to aid visual monitoring of
+the simulation. Two of these, the HUD (head-up display) and tool path
+displays, can both be toggled from the VM Mode toolbar, as well as from
+the Simulation»Show»Display and Simulation»Show»Tool Path (Ctrl T
+shortcut) menus. Animation control options, tool path display options
+and various other miscellaneous options are all controlled from the
+Simulation»Options menu (Ctrl Alt O shortcut). The animation options are
+also available from the VM Animation toolbar.
+
+|image2|
+
+The VM View Filter toolbar provides toggle buttons to display or hide
+various types of objects in the scene, such as (from left to right): the
+machine, tools, fixtures, rough stock and design part. When running with
+MRS (material removal simulation) active, additional toggle buttons are
+available to view or hide: the in-process stock, in-process stock
+checkpoints, Boolean overcut and undercut stock (gouge and excess
+material), a color graduated Boolean difference between part and stock,
+and a cross section cutout of the stock. These view filter toggles are
+also available from the Simulation»Show»Filters menu. A
+Simulation»Compare (Ctrl Q shortcut) menu selection defines settings for
+colorized differences.
+
+|image3|
+
+VM provides various functions to measure the distance and angles between
+objects. Measurement mode is toggled using a button on the VM Mode
+toolbar. Once in measurement mode, clicking with the left-mouse button
+causes measurements to be taken between the selected objects. Press and
+hold the Ctrl key to manipulate the camera with the mouse while taking
+measurements. Within VM, objects are constructed of triangles. The VM
+Measure toolbar provides a middle series of three toggle buttons that
+filter the parts of the triangles that can be selected with the mouse.
+The left-most toggle on the VM Measure toolbar switches between chained
+(one to the next) and fanned (one to many) measurements. The rightmost
+toggle affects the visibility of the objects being measured; when in
+“overlay” mode they will not be hidden by other objects that might be
+between you (the viewer) and the measured ones.
+
+VM also provides a Time-Line feature on the VM Controller window that
+can be used to review and play back the simulation.
+
+Finally, VM provides the ability to synchronize both the timeline
+display and the simulation window with any of the other tracing windows
+available with the CERUN and GENER UI. This can be used to see the state
+of the simulation at a particular CLDATA record, NC block, macro command
+and operator or diagnostic message (e.g., a collision).
+
+Animation Control
+^^^^^^^^^^^^^^^^^
+
+|image4|
+
+Animation options are controlled from the VM Animation toolbar as well
+as from the Simulation»Options menu (Ctrl Alt O shortcut).
+
+The animation control options affect the simulation display speed.
+Selecting the “Continuous” mode will slow the simulation down to a
+specified factor of real time within the limitations of the CPU and
+graphics capabilities of your computer. When “Motion Step” is selected,
+the display is updated at the specified interval in motions, meaning
+that the simulation display is updated after every n motion steps. A
+third “Time Interval” method refreshes the display at the specified
+interval in seconds, which has the least impact in terms of CPU
+requirements.
+
+When in continuous animation mode, extremely slow motions may give the
+impression that the software is no longer operating. If unsure, activate
+the HUD motion display, which will show if axes are in fact moving. The
+Simulation Options dialog can be activated while the simulation is
+running (and even mid interpolation), allowing you to change the mode
+from continuous to another.
+
+Head-Up Display
+^^^^^^^^^^^^^^^
+
++-----------------------------------+-----------------------------------+
+| The HUD superimposes status       | |image5|                          |
+| information on the simulation     |                                   |
+| window. To change the content or  |                                   |
+| position of the HUD, select the   |                                   |
+| Simulation»Display (Ctrl Alt D    |                                   |
+| shortcut) menu to bring up the    |                                   |
+| Display dialog. Status            |                                   |
+| information can be organized into |                                   |
+| different schemes, which can be   |                                   |
+| labeled by name and saved in the  |                                   |
+| Windows Registry (the Default     |                                   |
+| scheme cannot be changed). You    |                                   |
+| can cycle between different       |                                   |
+| display schemes listed in the     |                                   |
+| simulation window using the       |                                   |
+| Simulation»Show»Next Display and  |                                   |
+| »Previous Display (Ctrl D and     |                                   |
+| Ctrl Shift D) menu selections.    |                                   |
+| Uncheck the “Use default schemes  |                                   |
+| in cycle” box to omit the Default |                                   |
+| scheme when cycling through       |                                   |
+| different displays.               |                                   |
+|                                   |                                   |
+| The FPS Status Information item   |                                   |
+| can be selected to measure the    |                                   |
+| simulation window display rate,   |                                   |
+| in the form “FPS a / b” (useful   |                                   |
+| when testing Graphic card         |                                   |
+| setting). The number “a” is the   |                                   |
+| theoretical maximum number of     |                                   |
+| screen updates per second that VM |                                   |
+| could do if all it had to do was  |                                   |
+| redraw the display. The number    |                                   |
+| “b” is the actual number of       |                                   |
+| updates per second, and takes     |                                   |
+| into account all other processing |                                   |
+| requirements.                     |                                   |
++-----------------------------------+-----------------------------------+
+
+Tool Path Display
+^^^^^^^^^^^^^^^^^
+
+|image6|
+
+Select the Simulation»Show»Tool Path (Ctrl T shortcut) menu toggle to
+enable and disable tool path tracing. Tool path tracing can also be
+toggled from the VM Mode toolbar by selecting the left button in the
+pair shown circled above. Tracing shows the motion of the tool in
+relation to the part, taking into account the sweep effects caused by
+rotary motions and the “hockey stick” effect caused by independent axis
+positioning. The trace is shown fixed in relation to the part (meaning
+that the trace moves with the part).
+
+Select the Simulation»Show»Tool Path as Overlay menu toggle to control
+the visibility of the tool path. Tool path visibility can also be
+toggled from the VM Mode toolbar by selecting the right button in the
+pair shown circled above. When the tool path is shown in “overlay” mode
+it will not be hidden by objects that might be between you (the viewer)
+and the tool path.
+
++-----------------------------------+-----------------------------------+
+| Select Simulation»Options (Ctrl   |                                   |
+| Alt O shortcut) to change tool    |                                   |
+| path display options, which will  |                                   |
+| bring up the Simulation Options   |                                   |
+| dialog. Tool path options         |                                   |
+| include:                          |                                   |
+|                                   |                                   |
+| -  The colors used to distinguish |                                   |
+|    feed motions, rapid motions    |                                   |
+|    and motions being              |                                   |
+|    “synchronized” with the CERUN  |                                   |
+|    and GENER trace windows.       |                                   |
+| -  Whether to show the tool path  |                                   |
+|    trace at the SCP (spindle      |                                   |
+|    control point) or the tool     |                                   |
+|    tip.                           |                                   |
+| -  The extent of the tool path to |                                   |
+|    display. Tool paths containing |                                   |
+|    many motions slow down the     |                                   |
+|    simulation speed due to the    |                                   |
+|    CPU requirements to draw each  |                                   |
+|    motion. The tool path display  |                                   |
+|    can be reduced to show only    |                                   |
+|    those motions within a         |                                   |
+|    specified period.              |                                   |
+| -  The tolerance used when        |                                   |
+|    tracing curved motions, while  |                                   |
+|    respecting an upper limit on   |                                   |
+|    the number of segments that    |                                   |
+|    should be used to show a       |                                   |
+|    curved motion. Note that this  |                                   |
+|    tolerance is used for display  |                                   |
+|    purposes only and has no       |                                   |
+|    effect on collision testing.   |                                   |
++-----------------------------------+-----------------------------------+
+
+VM Controller Time-Line
+^^^^^^^^^^^^^^^^^^^^^^^
+
+|image7|
+
+The VM Virtual Controller includes a Time-Line feature that can be used
+to review and replay the simulation at any point. The VM controller can
+be activated from the View toolbar by selecting the button shown circled
+in the toolbar above. Select the button a second time to either hide the
+controller window or to restore a controller window that has been
+minimized. This window can also be controlled by selecting
+Simulation»Controller from the menu bar. Once the VM Controller window
+is active, select the Time-Line tab to view a time graph of the process.
+
+|image8|
+
+The time scale listed horizontally at the top of the window represents
+the run time of the process. The pale blue vertical bar shows the moment
+in time that the simulation window is currently showing. The light gray
+vertical line marks the end of the simulation. When MRS (material
+removal simulation) is active, all collisions involving the in-process
+stock (e.g., tool rapids into stock) are identified by horizontal amber
+bars at the top edge of the window; the left edge of the amber bar marks
+the start of the motion where a collision occurs and the corresponding
+right edge marks the start of the next motion where the in-process stock
+is again collision free. All other non in-process stock related
+collisions are identified by a red bar; the left edge of the red bar
+marks the moment in time where a collision occurs and the corresponding
+right edge marks the point where the simulation is again collision free.
+Each motion axis is listed horizontally. Motion axes overtravel
+conditions are individually identified by horizontal light purple bars
+drawn level with the axis on which an overtravel occurs; the left edge
+of the light purple bar marks the moment in time where an overtravel
+occurs and the corresponding right edge marks the point where the axis
+is once again within travel.
+
+When the simulation is paused, you can click with the left mouse button
+anywhere within the window to see, in the simulation window, the state
+of the simulation at that moment in time. Hold the left mouse button
+down and drag the mouse left and right to replay the simulation forwards
+and backwards in time. Use the up and down arrow keys or the mouse wheel
+to adjust the time scale to see more or less detail. The
+Simulation»Camera»Fit (Ctrl Space) function will fit the entire process
+within the timeline window. Use the left and right arrow keys or the
+horizontal scroll bar to move the timescale left and right. The
+Simulation»Camera»Center (Ctrl Shift Space) function will center the
+timescale at the current selected time.
+
+Click with the right mouse button anywhere within the window to see a
+pop-up context menu. The “play from here” choice will replay the
+simulation from the selected point, using the continuous animation
+control setting. The “synchronize” choice will synchronize the selected
+moment in the timeline display with the simulation window and any of the
+other tracing windows available with the CERUN and GENER UI.
+
+Part vs. Stock Comparison
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+|image9|
+
+Comparison between the design part and the in-process stock is only
+available with a MRS (Material Removal Simulation) license available and
+enabled via the SIM button on the GENER and CERUN launch panels. The MRS
+license provides the added functionality to compute the effect of the
+cutting process of the tool on the rough stock. The resultant shape is
+called the “in-process stock”.
+
+The left-most of the circled buttons above toggles the display of the
+in-process stock. The two buttons to its immediate right toggle the
+display of Boolean Overcut (gouge) and Boolean Undercut (excess)
+material. The gouge and excess calculations are done using an exact
+comparison between in-process stock and its associated part. These
+associations must first be setup using the “Associated Part” setting in
+the Simulation»Stock (Ctrl Alt S shortcut) dialog (on page 18).
+
+|image10|
+
+The Boolean excess and overcut results can sometimes be misleading,
+since it can be difficult to judge the thickness of the excess or gouge
+material. VM provides a Simulation»Compare (Ctrl Alt Q shortcut) color
+graduated part/stock comparison feature to address this issue. The
+comparison colorization settings are applied only to gouge and excess
+material, which must first be enabled by selecting one or both of the
+Boolean Overcut and Boolean Undercut filters. Select the Colorized
+Boolean filter (second from right in the circled buttons above) to
+compute and view the results.
+
+The comparison is done by sampling the surface of the gouge and/or
+excess material, and computing the shortest distance to the part. The
+distance is then used to assign a fixed or graduated color, as defined
+using the various options of the Compare dialog. If the sample size is
+small, or the part very large, the colorization process may take a long
+time to compute. The comparison can be canceled at any time, in which
+case the displayed results will be incomplete (but perhaps still
+useful).
+
+When viewing the gouge material in combination with either the part or
+the in-process stock, it helps to select the part with the mouse so that
+its surface becomes transparent, allowing the gouged material surface to
+be seen.
+
+.. |image1| image:: ./media/c0f054c23fb270884c9e0cd73f49ce7a56a900d9.bmp
+.. |image2| image:: ./media/aacbcb23939c96761bdc70770888ab2639eb9352.bmp
+.. |image3| image:: ./media/8fec47ee71b9031199fe1420dbecf42ee0a6ecb3.bmp
+.. |image4| image:: ./media/ce7054f2b2b248e3487e0a4c030e943b882ff2df.bmp
+.. |image5| image:: ./media/b19c15ece1bcfa3cb692030616594474d1273a91.bmp
+.. |image6| image:: ./media/c0f054c23fb270884c9e0cd73f49ce7a56a900d9.bmp
+.. |image7| image:: ./media/68515ad395090cfbe35de7a126a309750f568e4e.bmp
+.. |image8| image:: ./media/5188f66890d11686bda4471293333b536fb55b60.bmp
+.. |image9| image:: ./media/aacbcb23939c96761bdc70770888ab2639eb9352.bmp
+.. |image10| image:: ./media/f73cf148da4707e3731483600e46989a44ef04d2.bmp
+
