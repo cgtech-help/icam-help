@@ -1,0 +1,69 @@
+.. _about_pp:
+
+About Icam Post
+=======================
+
+Icam Post is a post-processor generator designed for end users with no
+software programming expertise. It can accommodate a wide variety of
+CNC machine types having up to six axes of continuous path control.
+
+Icam Post allows you to create and update post-processors quickly and
+easily. Its built-in Wizard and menu-driven questionnaire make it
+easy for anyone to create usable post-processors.
+
+Icam Post has a powerful, yet easy to use macro language that allows
+you to completely customize your NC post-processor to support unusual
+CNC control and machine tool features.
+
+Types of Machines Supported
+---------------------------
+
+.. index:: Machine; types supported
+
+Icam Post’s Motion Processor is perhaps what most significantly
+differentiates it from previous generations of post-processors. To
+address the inconsistencies inherent in traditional NC
+post-processors, a state-of-the-art Inverse Kinematics motion processor
+was implemented. All machine tools, present and in the foreseeable
+future, are mechanical subsets of this tested and proven mathematical
+model.
+
+-  Primary linear axes ( X Y Z )
+
+-  Secondary co-linear axes ( U V W )
+
+-  Head rotary axes to orient the tool ( A B C )
+
+-  Table rotary axes to orient the workpiece ( A' B' C' )
+
+-  Any Extending axis or quill ( E )
+
+-  Any exchangeable head including nutating ( N N' )
+
+In addition to the high level of consistency, Icam Post’s motion
+processor further presents the user with advanced capabilities to
+automatically support new and diverse types of machine tools:
+
+-  Milling machines and machining centers (5 axes and up — all
+   combinations of linear and rotary axes)
+
+-  Lathes (2 and 4 axes) and merging lathes (4 axes), with optional
+   sub-spindle
+
+-  Mill-Turn centers (XZC), with additional Y axis, rotary heads and/or
+   tables, merging turrets, and optional sub-spindle
+
+-  Lasers, flame cutters and profilers
+
+-  Wire EDM (2 to 6 axes) and punch presses (2 and 3 axes)
+
+-  Robots (6 revolute axes)
+
+-  Composite or Hybrid machining centers, which can combine the
+   capabilities of multiple machining technologies and are supported by
+   combining the capabilities of multiple post-processors
+
+Furthermore, since Icam Post is based on a machine model that is aware
+of the state of the machine tool at every moment, intelligent
+decisions can be made to ensure that Machinable Data Output is
+produced, rather than just controller-correct data.
