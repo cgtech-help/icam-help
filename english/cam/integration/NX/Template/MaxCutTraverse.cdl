@@ -1,0 +1,18 @@
+MACHINE SIEMENS
+# INCLUDE {$UGII_CAM_USER_DEF_EVENT_DIR/Siemens_Cycles.cdl $UGII_CAM_USER_DEF_EVENT_DIR/ude.cdl}
+#
+#---------------------------------------------------------------------------
+
+#---------------------------------------------------------------------------
+EVENT MaxCutTraverse
+{
+   POST_EVENT "MaxCutTraverse"
+   UI_LABEL "Max Cut Traverse"
+
+   PARAM max_cut_traverse
+   {
+      TYPE   d
+      DEFVAL "0.0000"
+      UI_LABEL "Max Cut Traverse"
+   }
+}
