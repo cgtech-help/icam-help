@@ -1,0 +1,332 @@
+Control Emulator Functions
+==========================
+
+Control emulator functions are specific for use by CERUN. Control
+emulator functions all start with “$FCE…”. These functions cannot be
+called from post-processor or model macros.
+
+.. _func_fceadd:
+.. index:: Functions; $FCEADD
+
++-------------------------------------------+-----------------------------------------------------------------+
+| **$FCEADD(**\ *code*\ **)**               | Add a CODE identifier to the current block                      |
+|                                           |                                                                 |
+|                                           | Returns: Logical                                                |
++-------------------------------------------+-----------------------------------------------------------------+
+| **$FCEADD(**\ *data*\ **[**\ *,n*\ **])** | Add a DATA identifier and associated value to the current block |
+|                                           |                                                                 |
+|                                           | Returns: Logical                                                |
++-------------------------------------------+-----------------------------------------------------------------+
+
+   Use the $FCEADD function to add a code identifier *code* to the
+   current block and/or to add a data identifier *data* and its
+   associated numeric value *n* to the current block. The $FCEADD
+   function differs from the EXEC command in that its actions apply to
+   the current MCD block being processed, whereas the EXEC either
+   inserts new blocks in front of the current block or appends new
+   blocks after the current block.
+
+   This function returns a value of $TRUE if the code or data identifier
+   was added. A value of $FALSE is returned if the code or data
+   identifier could not be added to the current block.
+
+   The $FCEADD function must not be called in a startup macro since the
+   block has yet to be broken down into its identifier components, nor
+   is it useful to call this function in any shutdown macro since at
+   that point all processing of identifiers has been completed.
+
+.. _func_fcedac:
+.. index:: Functions; $FCEDAC
+
++-------------------------------------------+------------------------------------------------------+
+| **$FCEDAC(**\ *data*\ **[**\ *,n*\ **])** | Associate a DATA identifier with a code group number |
+|                                           |                                                      |
+|                                           | Returns: Logical                                     |
++-------------------------------------------+------------------------------------------------------+
+
+The $FCEDAC function (meaning Data As Code) is used to allow a data
+identifier *data* to fire actions without the explicit need for a
+code definition. By associating a specific data identifier to a code
+group number *n*, an MCD block containing this data identifier will
+fire the current modal code from the group; provided that there is no
+other code from that same group already queued for processing on the
+block.
+
+The second parameter *n* can be omitted, or set to –1, in order to
+remove the association of the data identifier with a code group.
+
+.. _func_fcegac:
+.. index:: Functions; $FCEGAC
+
++-----------------------------+---------------------------------+
+| **$FCEGAC(**\ *code*\ **)** | Get active CODE from code group |
+|                             |                                 |
+|                             | Returns: CODE identifier        |
++-----------------------------+---------------------------------+
+
+   The $FCEGAC function returns the currently active code from the code
+   group to which the specified *code* identifier belongs. Code groups
+   are defined in the QUEST :ref:`“Code Customization section”<code_customization>`. If
+   the specified code is non-modal or not enabled, then a special code
+   value of CODE_NONE is returned.
+
+.. _func_fceget:
+.. index:: Functions; $FCEGET
+
++---------------------------+-----------------------------------------------------------------+
+| **$FCEGET(**\ *id*\ **)** | Get and remove a CODE or DATA identifier from the current block |
+|                           |                                                                 |
+|                           | Returns: Numeric or $NULL                                       |
++---------------------------+-----------------------------------------------------------------+
+
+   The $FCEGET function is used to get *and remove* either a code or
+   data identifier *id* from the current block. Use the $FCESEEK command
+   instead to get the value of a code or data identifier without
+   removing it from the current block. To replace a code or data
+   identifier on a block, first call
+   $FCEGET to remove the old identifier and then call $FCEADD to add the
+   new identifier.
+
+   If the code or data identifier is found on the current block, then
+   the $FCEGET function returns the value associated with the code or
+   data identifier (or zero) and the identifier is then removed from the
+   block. A value of $NULL is returned if the code or data identifier is
+   not found.
+
+   The $FCEGET function must not be called in a startup macro since the
+   block has yet to be broken down into its identifier components, nor
+   is it useful to call this function in any shutdown macro since at
+   that point all processing of identifiers has been completed.
+
+.. _func_fcegncv:
+.. index:: Functions; $FCEGNCV
+
++------------------------------------------------------------------------+--------------------------------------------+
+| **$FCEGNCV(**\ *s*\ **[**\ *,n1*\ **[**\ *,n2*\ **[**\ *,n3*\ **]]])** | Get CNC variable from pre-processor        |
+|                                                                        |                                            |
+|                                                                        | Returns: Numeric, Logical, String or $NULL |
++------------------------------------------------------------------------+--------------------------------------------+
+
+   The pre-processor has logic to identify and process MCD that sets the
+   value of CNC variables, so that it can later replace any use of a
+   variable in the MCD with its actual value. The $FCEGNCV function can
+   be used if it is necessary to obtain the value of a CNC variable
+   previously identified by the pre-processor. The variable must be
+   specified in its native CNC format using the string *s*. If the
+   variable represents a single, double or triple dimensioned table,
+   then the table indices *n1*, *n2* and *n3* can be specified.
+   Alternately, the variable definition *s* can include the proper CNC
+   notation to de-reference the array or table cell instead of providing
+   the indices as arguments.
+
+   The $FCEGNCV function returns the numeric, logical or string value of
+   the CNC variable specified. The special constant $NULL will be
+   returned if the CNC variable is not defined or if a pre-processor is
+   not in use.
+
+.. _func_fcepp:
+.. index:: Functions; $FCEPP
+
++-------------------------+---------------------------------------+
+| **$FCEPP(**\ *…*\ **)** | Pre-processor specific communications |
+|                         |                                       |
+|                         | Returns: Any                          |
++-------------------------+---------------------------------------+
+
+   The $FCEPP function is used for communication with the pre-processor.
+   The arguments and return values are unique to each pre-processor.
+
+.. _fcerst:
+.. _func_fcerst:
+.. index:: Functions; $FCERST
+
++-----------------------------------------------------------------+------------------------------------------------+
+| **$FCERST(**\ *file*\ **[**\ *,line*\ **[**\ *,reset*\ **]] )** | Select the next NC program file for processing |
+|                                                                 |                                                |
+|                                                                 | Returns: Logical                               |
++-----------------------------------------------------------------+------------------------------------------------+
+
+   The $FCERST function is used to process NC programs that have been
+   fragmented into multiple files. This function can only be called from
+   the machine shutdown macro, and causes a restart when the shutdown
+   macro completes. The next program *file* will be used on the restart.
+   Reading will start at the specified *line* number (default is line 1)
+   of the new file. Specify $TRUE for the optional *reset* parameter to
+   reset processing as though this was the first NC program file in the
+   series. This function returns $TRUE if successful or $FALSE if it
+   failed and a diagnostic was generated.
+
+.. _func_fcesac:
+.. index:: Functions; $FCESAC
+
++-----------------------------+-------------------------------+
+| **$FCESAC(**\ *code*\ **)** | Set active CODE in code group |
+|                             |                               |
+|                             | Returns: CODE identifier      |
++-----------------------------+-------------------------------+
+
+   The $FCESAC function sets the specified *code* identifier as the
+   currently active code of the code group to which the specified
+   identifier belongs. Code groups are defined in the QUEST :ref:`“Code Customization section”<code_customization>`.
+   The $FCESAC function returns the
+   code that was previously active. If the specified code is non-modal
+   or not enabled, then a special code value of CODE_NONE is returned
+   instead.
+
+.. _func_fceseek:
+.. index:: Functions; $FCESEEK
+
++-----------------------------------------------+---------------------------+
+| **$FCESEEK(**\ *code*\ **)**                  | Get a CODE identifier     |
+|                                               |                           |
+|                                               | Returns: Numeric or $NULL |
++-----------------------------------------------+---------------------------+
+| **$FCESEEK(**\ *data*\ **[**\ *,type*\ **])** | Get a DATA identifier     |
+|                                               |                           |
+|                                               | Returns: Numeric or $NULL |
++-----------------------------------------------+---------------------------+
+
+   The first form of the $FCESEEK function is used to test for the
+   presence of the specified *code* identifier on the current MCD block,
+   without removing the code from the block. If the specified code is
+   found, the code value (or zero) will be returned. If the code is not
+   present on the current block, then a value of $NULL is returned.
+
+   The second form of the $FCESEEK function is used to test for the
+   presence of the specified *data* identifier on the current or an
+   earlier MCD block. The optional *type* keyword defines the scoping
+   rules that are used when looking for the data identifier. Omit the
+   *type* keyword to restrict the search to the current MCD block only.
+   Specify MODAL to search first on the current MCD block and if not
+   found, then return the modal value of the data identifier. Specify
+   LAST to return the modal value of the data identifier excluding any
+   value that might be coded on the current MCD block. The MODAL and
+   LAST keywords are only applicable to data identifiers with a modal
+   property set. Data identifier modality is defined in the QUEST :ref:`Data
+   Customization section<data_customization>` . If the
+   specified data identifier is found, the data value will be returned,
+   otherwise a value of $NULL is returned.
+
+   The $FCESEEK function must not be called in a startup macro since the
+   block has yet to be broken down into its identifier components, nor
+   is it useful to call this function in any shutdown macro since at
+   that point all processing of identifiers has been completed.
+
+.. _func_fcesncv:
+.. index:: Functions; $FCESNCV
+
++-------------------------------------------------------------------------+-----------------------------------+
+| **$FCESNCV(**\ *s,a* **[**\ *,n1*\ **[**\ *,n2*\ **[**\ *,n3*\ **]]])** | Set CNC variable in pre-processor |
+|                                                                         |                                   |
+|                                                                         | Returns: Logical                  |
++-------------------------------------------------------------------------+-----------------------------------+
+
+   The pre-processor has logic to identify and process MCD that sets the
+   value of CNC variables, so that it can later replace any use of a
+   variable in the MCD with its actual value. The $FCESNCV function can
+   be used if it is necessary to set the value of a CNC variable
+   *previously identified by the pre-processor*. The variable must be
+   specified in its native CNC format using the string *s*. If the
+   variable represents a single, double or triple dimensioned table,
+   then the table indices *n1*, *n2* and *n3* can be specified.
+   Alternately, the variable definition *s* can include the proper CNC
+   notation to de-reference the array or table cell instead of providing
+   the indices as arguments. The value of the variable is specified with
+   *a* which can be any data type supported by the CNC excluding a
+   sequence.
+
+   A variable must be defined in the pre-processor before attempting to
+   set it via the $FCEGNCV function. The EXEC/'*string'* command can be
+   used to define the CNC variable in whatever format the CNC expects.
+
+   The $FCEGNCV function returns a status of $TRUE if the CNC variable
+   was successfully set. A value of $FALSE is returned if the CNC
+   variable could not be set or if a pre-processor is not in use.
+
+.. _func_fcetimesync:
+.. index:: Functions; $FCETIMESYNC
+
++---------------------+-----------------------------------------------------------------+
+| **$FCETIMESYNC( )** | Enable merging lathe or composite CE channel synchronization.   |
+|                     |                                                                 |
+|                     | Returns: Logical                                                |
++---------------------+-----------------------------------------------------------------+
+
+   Return $TRUE if channel time synchronization is successfully turned ON. Otherwise, return $FALSE and diagnose
+
+   When running the CERUN in merging lathe or composite CE, multiple kernels are used to process
+   the NC programs at the same time. With Virtual Machine, the simulation does synchronize the
+   multiple channel in time but the NC programs processing are not and would process as fast as
+   possible to the end.
+
+   This function can be called to use the Virtual Machine calculated cycle time on the different
+   channels in order to limit the processing of the programs so they stay synchronized across the
+   multiple CERUN kernels.
+
+   Requirement:
+   * Merging lathe or composite CE configuration.
+   * Using Virtual Machine for simulation.
+   * Can only be called in the super CE &quot;Machine Startup&quot; macro.
+
+.. _func_feof_ce:
+.. index:: Functions; $FEOF
+
++--------------+--------------------------+
+| **$FEOF( )** | Test for end of MCD file |
+|              |                          |
+|              | Returns: Logical         |
++--------------+--------------------------+
+
+   If the $FEOF function is called without arguments, it tests the
+   end-of-file status of the input MCD file. It returns $TRUE if the MCD
+   file has bee fully processed and $FALSE otherwise.
+
+   Note that the $FEOF function can be called with an argument to test
+   for an end-of-file on any unit. See the :ref:`$FEOF function<func_feof>`
+   in :ref:`“File and Directory Functions”<file_directory_functions>`.
+
+.. _func_fget:
+.. index:: Functions; $FGET
+.. _func_fgetr:
+.. index:: Functions; $FGETR
+
++--------------------------------------------------+-------------------------------------------+
+| **$FGET(**\ *string* [*,start* [*,end*]]\ **)**  | Search forwards for a matching MCD block  |
+|                                                  |                                           |
+|                                                  | Returns: Numeric                          |
++--------------------------------------------------+-------------------------------------------+
+| **$FGETR(**\ *string* [*,start* [*,end*]]\ **)** | Search backwards for a matching MCD block |
+|                                                  |                                           |
+|                                                  | Returns: Numeric                          |
++--------------------------------------------------+-------------------------------------------+
+
+   The $FGET function searches forward in the MCD file and the $FGETR
+   function searches backward in the MCD file, looking for a record
+   containing MCD matching the search string defined by the *string*
+   argument. The search string can contain special characters, in the
+   form of a regular expression (RE). See the :ref:`$FEDIT<func_fedit>` function
+   for a description of RE’s.
+
+   Either a single search string or a sequence of search strings can be
+   specified. The order of strings in the sequence is not important; the
+   search ends at the first MCD block containing a match of any of the
+   specified search strings.
+
+   The search starts at the current MCD block if the optional parameter
+   *start* is not specified or is specified as 0 (zero). A $FGET
+   searches forward in the MCD file, to the end of the MCD file or to
+   the record designated by *end* if specified. A $FGETR searches
+   backwards, to the start of the MCD file or to the record designated
+   by *end* if specified. These functions return the MCD block index
+   number of the first matching MCD block, and save a copy of the
+   matching MCD block in the $MCDRD system variable.
+   A value of 0 (zero) is returned if no matching MCD could be found.
+
+   Note that record numbers used and returned by these functions are not
+   N block numbers; instead they are the block index number as counted
+   from the start of the MCD file. The record number returned by these
+   functions is compatible with the :ref:`SEARCH command<macro_command_search>`
+   and the $MCDNO system variable.
+
+   The $FGET and $FGETR functions do not affect the current MCD input
+   location.
