@@ -1,0 +1,24 @@
+Save As
+-------
+
+|image1|
+
+This dialog appears when Saving a single post processor. Saving a post
+stores the latest revision of the post processor in the database, but
+does not make it available for use by GENER. Use Generate if the post
+should be saved and made available for use by GENER.
+
+**Post Name:** Name of the post to save. The name NONAME01 appears when
+the post has not been specifically assigned a name.
+
+**All posts in the selected database:** This window lists the names of
+all posts in the selected database for reference. You can select a name
+from this list, which will then change the *Post Name* entry.
+
+**Select database:** This drop-down lists all databases that are open.
+The latest version of the post processor will be written to the selected
+database. Use the *...* button to browse for the database if it does not
+appear in the drop-down list.
+
+.. |image1| image:: ./media/ad11048812399c7651b72ff8f1f31480c91a896d.gif
+
