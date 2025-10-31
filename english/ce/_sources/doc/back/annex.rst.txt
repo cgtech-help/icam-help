@@ -1,0 +1,49 @@
+.. _appendix:
+
+Appendix
+++++++++
+
+This following annexes list information of possible interest to both users and developers alike.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   characterset
+   codeident
+   dataident
+   reservedwords
+   userdefquest
+   cemacrosample
+
+**Section Overview**
+
+-  :ref:`“ASCII Character Set”<annex_character_set>` provides a table listing the ASCII
+   character set and associated integer codes.
+
+   \
+
+-  :ref:`“Code Identifiers”<annex_code_ident>` provides a table listing all Code
+   identifiers recognized by Control Emulator. Code identifiers are used in macros and
+   diagnostic messages to identify functions of the CNC.
+
+   \
+
+-  :ref:`“Data Identifiers”<annex_data_ident>` provides a table listing all Data
+   identifiers recognized by Control Emulator. Data identifiers are used in macros and
+   diagnostic messages to identify function input requirements of the CNC.
+
+   \
+
+-  :ref:`“Reserved Words”<annex_reserved_words>` lists special words reserved for use
+   by the macro processor.
+
+   \
+
+-  :ref:`“User-Defined Questions”<annex_user_defined_questions>` describes a feature that can
+   be used by control emulator developers to add questions to the questionnaire.
+
+   \
+
+-  :ref:`“Control Emulator Macro Samples”<annex_macro_samples>` shows a couple of
+   examples of macro usage.
