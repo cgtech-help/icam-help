@@ -1,0 +1,2976 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Emulator Customization &mdash; Control Emulator V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Control Emulator Processing" href="ceprocessing.html" />
+    <link rel="prev" title="The ICAM Database" href="icamdb.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Control Emulator V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../section_intro.html">Control Emulator: Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/index.html">General Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../general/aboutce.html">About Control Emulator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../general/aboutce.html#types-of-machines-supported">Types of Machines Supported</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../general/questcerun.html">About QUEST and CERUN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general/portal.html">About the ICAM Portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index.html">Installation and Upgrade</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install/license.html">Licensing Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icam-key-server-connection-file">icam.key server connection file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icamls-key-server-license-file">icamls.key server license file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/server.html">License Server Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#new-license-server-installation">New license server installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#uninstall-the-license-server">Uninstall the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#repair-the-license-server">Repair the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#upgrade-the-license-server">Upgrade the license server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install.html">Control Emulator Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#new-control-emulator-installation">New Control Emulator installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#uninstall-control-emulator">Uninstall Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#modify-or-repair-control-emulator">Modify or Repair Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#upgrade-control-emulator-installation">Upgrade Control Emulator Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/dbupgrade.html">Database Upgrade Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config/index.html">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../config/configutil.html">The ICAM Configuration Utility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#configuration-storage-and-application-data">Configuration Storage and Application Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-the-desktop">Starting CONFIG from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-a-command-prompt">Starting CONFIG from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-quest-and-cerun">Starting CONFIG from QUEST and CERUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#using-the-configuration-utility">Using the Configuration Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/content.html">Installation Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#installation-directory">Installation directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#application-data-directory">Application Data Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/envvar.html">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config/deffile.html">The ICAM.DEF File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../section_quest.html">QUEST: Control Emulator Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">QUEST</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#importing-control-emulators">Importing Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="questinout.html">QUEST Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#the-icam-database">The ICAM Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#exported-imported-control-emulator">Exported/Imported Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#dedicated-control-emulators">Dedicated Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#basic-control-emulators">Basic Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="questinout.html#the-quest-listing">The QUEST Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="questinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="questinout.html#standard-listing-format">Standard Listing Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#the-quest-interface">The QUEST Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#creating-a-new-control-emulator">Creating a New Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#control-emulator-definition">Control Emulator Definition</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="usingquest.html#creating-a-ce-linked-to-a-post-processor">Creating a CE linked to a Post-Processor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="usingquest.html#creating-a-ce-based-on-a-post-processor">Creating a CE based on a Post-Processor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="usingquest.html#creating-a-ce-from-scratch">Creating a CE from scratch</a></li>
+<li class="toctree-l5"><a class="reference internal" href="usingquest.html#specifying-a-pre-processor">Specifying a Pre-Processor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#questionnaire-chapters-and-sections">Questionnaire Chapters and Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#saving-and-generating-your-work">Saving and Generating your work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#testing-your-control-emulator">Testing your Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#modifying-an-existing-control-emulator">Modifying an Existing Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usingquest.html#wrapping-up">Wrapping Up</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="icamdb.html#control-emulator-file-name-conventions">Control Emulator File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="icamdb.html#control-emulators">Control Emulators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Control Emulator Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#code-customization">Code Customization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#modifying-code-identifiers">Modifying Code Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#creating-custom-codes">Creating Custom Codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#deleting-custom-codes">Deleting Custom Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#data-customization">Data Customization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#modifying-data-identifiers">Modifying Data Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#creating-custom-data-identifiers">Creating Custom Data Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#deleting-custom-data-identifiers">Deleting Custom Data Identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#tape-editor">Tape Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#startup-shutdown-macros">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#program-startup-shutdown-macros">Program Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#subprogram-startup-shutdown-macros">Subprogram Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pre-processor-startup-shutdown-macros">Pre-Processor Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#block-startup-shutdown-macros">Block Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#event-macros">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#motion-event-macros">Motion Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#cycle-event-macros">Cycle Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#tool-event-macros">Tool Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#diagnostic-event-macro">Diagnostic Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pre-processor-identification-macros">Pre-Processor Identification Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#code-macros">Code Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#create-code-macros">Create Code Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#the-code-macro-editor">The Code Macro Editor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#code-macros-match-order">Code Macros Match Order</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#modify-code-macro-matching-conditions">Modify Code Macro Matching Conditions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#delete-or-disable-code-macros">Delete or Disable Code Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#data-macros">Data Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#create-data-macros">Create Data Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#the-data-macro-editor">The Data Macro Editor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#data-macros-match-order">Data Macros Match Order</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#modify-data-macro-matching-conditions">Modify Data Macro Matching Conditions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#delete-or-disable-data-macros">Delete or Disable Data Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#the-dialog-editor">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#file-storage">File Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ceprocessing.html">Control Emulator Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-startup-processing">CERUN Startup Processing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="ceprocessing.html#normal-ce">Normal CE</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ceprocessing.html#multi-kernel-ce">Multi-Kernel CE</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-main-processing-loop">CERUN Main Processing Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-code-processing-loop">CERUN Code Processing Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ceprocessing.html#cerun-shutdown-processing">CERUN Shutdown Processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../macros/index.html">Control Emulator Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#outputting-the-identifier-or-event-output">Outputting the Identifier or Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/cemacrocommands.html">Control Emulator Macro Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-exec-command">The EXEC Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-lprint-command">The LPRINT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-pprint-command">The PPRINT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-taperd-command">The TAPERD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-tapewt-command">The TAPEWT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-search-command">The SEARCH Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-rstmodal-command">The RSTMODAL Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/cemacrocommands.html#the-savmodal-command">The SAVMODAL Command</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#register-index-output-formats">Register Index Output Formats</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#predefined-register-output-format">Predefined Register Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#current-predefined-register-value">Current Predefined Register Value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#canned-cycle-variables">Canned cycle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#composite-control-emulator-variables">Composite control emulator variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#constants">Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#control-emulator-variables">Control emulator variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#conversion-factor-variables">Conversion factor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#coolant-feed-rate-and-spindle-variables">Coolant feed rate and spindle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#cutter-compensation-variables">Cutter compensation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#error-message-variables">Error message variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#lathe-variables">Lathe variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machine-and-workpiece-coordinate-variables">Machine and Workpiece coordinate variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machining-time-variables">Machining time variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#macro-variables">Macro variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#mcd-tape-variables">MCD/Tape variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#miscellaneous-variables">Miscellaneous variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#motion-related-variables">Motion related variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#multi-kernel-variables">Multi-kernel variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#operation-variables">Operation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#subprogram-variables">Subprogram variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#tooling-variables">Tooling variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/constantvar.html">Variables Defining Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coordinatevar.html">Machine &amp; Workpiece Coordinate Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/motionvar.html">Motion-Related Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/conversionvar.html">Conversion Factor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coolfedspinvar.html">Coolant, Feed Rate and Spindle Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cuttercompvar.html">Cutter Compensation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/opvar.html">Operation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/toolvar.html">Tooling Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/lathevar.html">Lathe Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cyclevar.html">Automated Canned Cycle Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#drill-cycle-variables">Drill Cycle Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#thread-cycle-variables">Thread Cycle Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/tapevar.html">MCD/Tape Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/machtimevar.html">Machining Time Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Control Emulator Definition Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/errorvar.html">Error Message Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/multikernelvar.html">Multi-Kernel Control Emulator Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/compositevar.html">Composite Control Emulator Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/subprogvar.html">Subprogram Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/miscvar.html">Miscellaneous Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/mathfunc.html">Mathematical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/numericfunc.html">Numeric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/geometricfunc.html">Geometric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/vectorfunc.html">Vector Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/matrixfunc.html">Matrix Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conditionalfunc.html">Conditional Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conversionfunc.html">Conversion Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/charseqfunc.html">Character and Sequence Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/commandlinefunc.html">Command Line Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/filedirecfunc.html">File and Directory Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/cefunc.html">Control Emulator Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/delmiafunc.html">DELMIA Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../section_cerun.html">CERUN: The Control-Emulator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cevm/index.html">CERUN with Virtual Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/startcerun.html">Starting CERUN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-an-extractor">Starting CERUN from an Extractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-the-desktop">Starting CERUN from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-the-command-prompt">Starting CERUN from the Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-pse-from-a-command-prompt">Starting PSE from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#cerun-return-codes">CERUN Return Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#the-launch-panel">The Launch Panel</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#cerun-tab">CERUN Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#vm-tab">VM Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#preferences-tab">Preferences Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#options-dialog">Options Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#db-manager">DB Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#job-button">JOB Button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/ceruninout.html">CERUN Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#input-mcd-file">Input MCD File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#subprograms">Subprograms</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#segmented-programs">Segmented Programs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-verification-listing">Output Verification Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-identification">Program Identification</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-listing">Program Listing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-summary">Program Summary</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tooling-summary">Tooling Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tool-flute-length-summary">Tool Flute Length Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tool-travel-summary">Tool Travel Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#machining-time-summary">Machining Time Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#diagnostic-summary">Diagnostic Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-log-file">Output Log File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-review-file">Output Review File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/usingcerun.html">Using CERUN with Virtual Machine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#diagnostics">Diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#tracing">Tracing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#debugging">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#menus">Menus</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/file.html">File Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/run.html">Run Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/view.html">View Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/debug.html">Debug Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/cerun.html">CERUN Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/simulation.html">Simulation Menu</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/main.html">Simulation»Virtual Machine</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/controller.html">Simulation»Controller</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-code-groups">Simulation»Controller: Code Groups</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-mdi">Simulation»Controller: MDI</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-opskip">Simulation»Controller: Opskip</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/mode.html">Simulation»Mode</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#tools">Tools</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#holders">Holders</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/show.html">Simulation»Show</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-path-ctrl-t">Simulation»Show»Tool Path (Ctrl T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-vector">Simulation»Show»Tool Vector</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t">Simulation»Show»Tool Path as Overlay (Ctrl Shift T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowfilters">Simulation»Show»Filters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowcross-section">Simulation»Show»Cross Section</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowworkpiece-coords-ctrl-w">Simulation»Show»Workpiece Coords (Ctrl W)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshownext-display-ctrl-d">Simulation»Show»Next Display (Ctrl D)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowprevious-display-ctrl-shift-d">Simulation»Show»Previous Display (Ctrl Shift D)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionhide-in-view-ctrl-b">Simulation»Selection»Hide in View (Ctrl B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionhide-in-all-views">Simulation»Selection»Hide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b">Simulation»Selection»Show All/Rehide (Ctrl Alt B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionshow-all-rehide-in-all-views">Simulation»Selection»Show All/Rehide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b">Simulation»Selection»Invert Hide State (Ctrl Shift B)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/setup.html">Simulation»Open Setup</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/setup.html#simulationsave-setup">Simulation»Save Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/tools.html">Tools Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/window.html">Window Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/help.html">Help Menu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cedelmia/index.html">CERUN with DELMIA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/setupce.html">Setup CERUN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/setupce.html#cam-selection">CAM Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/setupce.html#cam-integration">CAM Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html">MCD Based Simulation with CATIA V5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#machining-and-simulation-setup">Machining and Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#part-operation-settings">Part Operation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#post-processing-with-gener">Post-Processing with GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#mcd-file-selection-override">MCD File Selection Override</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#tool-and-workpiece-compensation-settings">Tool and Workpiece Compensation Settings</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#cutter-compensation-panel">Cutter Compensation Panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#origin-compensation-panel">Origin Compensation Panel</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#using-cerun-with-catia">Using CERUN with CATIA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/mcdsim3dx.html">MCD Based Simulation with 3DEXPERIENCE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#machining-and-simulation-setup">Machining and Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#part-operation-settings">Part Operation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#post-processing-with-gener">Post-Processing with GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#mcd-file-selection-override">MCD File Selection Override</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#tool-and-workpiece-compensation-settings">Tool and Workpiece Compensation Settings</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#cutter-compensation-management-for-simulation">Cutter Compensation Management for Simulation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#define-workpiece-compensation">Define Workpiece Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#using-cerun-with-3dexperience">Using CERUN with 3DEXPERIENCE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../diag/index.html">Diagnostic Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../diag/geninfo.html">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/modify.html">Modifying Diagnostic Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/errorfile.html">Error File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back/annex.html">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../back/characterset.html">Character Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/codeident.html">Code Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/dataident.html">Data Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/reservedwords.html">Reserved Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/userdefquest.html">User-Defined Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#question-tags">Question Tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#s-user-defined-section">/S User-defined section</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#q-number-type">/Q number type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#p-prompt-text-or-short-description-text">/P prompt text, or short description text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#t-question-text">/T question text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#d-default-answer">/D default answer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#l-response-location">/L response location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#o-options">/O options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#comment-character">! comment character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#case">CASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cchar">CCHAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cvalue">CVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#ivalue">IVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#wvalue">WVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#yesno">YESNO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#macro-system-variables">Macro System Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../back/cemacrosample.html">Control Emulator Macro Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/cemacrosample.html#macro-example-1">Macro Example #1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/cemacrosample.html#macro-example-2">Macro Example #2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Control Emulator V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../section_quest.html">QUEST: Control Emulator Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">QUEST</a></li>
+      <li class="breadcrumb-item active">Control Emulator Customization</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="control-emulator-customization">
+<span id="quest-customization"></span><h1>Control Emulator Customization<a class="headerlink" href="#control-emulator-customization" title="Link to this heading"></a></h1>
+<p>This section outlines the Control Emulator customization features of QUEST.
+The <a class="reference internal" href="#figure-ce-customization-nav"><span class="std std-ref">image below</span></a>
+shows the main customization features accessible using the Navigator.</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="#code-customization"><span class="std std-ref">Code Customization</span></a> table lists all
+of the functions of the CNC defined in the questionnaire
+section. Similarly, the <a class="reference internal" href="#data-customization"><span class="std std-ref">Data Customization</span></a>
+table lists all of the defined register related data.
+These tables can be edited to fine-tune the behavior of
+the control emulator and to define your own customized codes and
+data.</p></li>
+<li><p>The <a class="reference internal" href="#tape-editor"><span class="std std-ref">Tape Editor</span></a> allows you to perform
+systematic search/replace string operations on the MCD as it is
+read by CERUN.</p></li>
+<li><p><a class="reference internal" href="#startup-shutdown-macros"><span class="std std-ref">Startup and Shutdown Macros</span></a>
+as well as <a class="reference internal" href="#event-macros"><span class="std std-ref">Event Macros</span></a> allow you to
+customize processing at predefined events during control emulation.</p></li>
+<li><p><a class="reference internal" href="#code-macros"><span class="std std-ref">Code Macros</span></a> and <a class="reference internal" href="#data-macros"><span class="std std-ref">Data Macros</span></a>
+are used both to modify built-in processing of
+known codes and register data, as well as to support features of the
+CNC that are not handled by built-in control emulator functionality.</p></li>
+<li><p><a class="reference internal" href="#user-function-macros"><span class="std std-ref">User Function Macros</span></a> are used
+to develop your own macro functions that can be called by other
+macros in the control emulator.</p></li>
+<li><p>The <a class="reference internal" href="#dialog-editor"><span class="std std-ref">Dialog Editor</span></a> allows you to
+build dialog boxes, which can then be used by CERUN to query the NC
+programmer for any additional information that is necessary during
+control emulation.</p></li>
+<li><p>The <a class="reference internal" href="#file-storage"><span class="std std-ref">File Storage</span></a> section holds
+read-only data files, such as controller resident subprograms, that
+can be accessed by CERUN.</p></li>
+</ul>
+<figure class="align-center" id="id10">
+<span id="figure-ce-customization-nav"></span><a class="reference internal image-reference" href="../../_images/quest_cecust.png"><img alt="../../_images/quest_cecust.png" src="../../_images/quest_cecust.png" style="height: 4.042in;" /></a>
+<figcaption>
+<p><span class="caption-text">Control Emulator Customization Navigator View</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="code-customization">
+<span id="id1"></span><h2>Code Customization<a class="headerlink" href="#code-customization" title="Link to this heading"></a></h2>
+<p>Double-click on the “Code Customization” heading in the Navigator to
+open the Code Customization view in the working window. This view
+contains a table of all code related functions available on the
+machine and control, as defined in the questionnaire section of the
+current CE. You can edit this table to fine-tune the actions of the
+CE.</p>
+<p>An image of the Code Customization main view is shown below.</p>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../../_images/quest_code_cust.png"><img alt="../../_images/quest_code_cust.png" src="../../_images/quest_code_cust.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Code Customization Facility</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="modifying-code-identifiers">
+<h3>Modifying Code Identifiers<a class="headerlink" href="#modifying-code-identifiers" title="Link to this heading"></a></h3>
+<p>The following information is listed from left to right in the table
+for each function of the CNC that is identified by a code:</p>
+<ul>
+<li><p><strong>MCD:</strong> Shows the code (e.g., G1) or range of codes (e.g., G54-G59)
+that represent each machine or controller function that can be
+recognized by CERUN. The code is listed in the exact format that it
+is expected to be found on the MCD, with the exception of optional
+leading and/or trailing zeroes, decimal and sign, as defined by the
+register (typically the G or M) that defines the code formatting
+details.</p>
+<p></p>
+</li>
+<li><p><strong>Enable:</strong> If this box is selected (the default for any code defined
+in the questionnaire) then the code will be recognized by CERUN if it
+appears in the MCD or in an EXEC command. If this box is cleared,
+then CERUN will ignore this entry in the code customization table.</p>
+<p></p>
+</li>
+<li><p><strong>Process:</strong> If this box is selected (the default), then CERUN will
+process the code when it is encountered. If this box is cleared, then
+CERUN will remove the code from the input block and discard it
+without further processing.</p>
+<p>The combination of the Process and Enable checkboxes determines how
+CERUN handles a code, as follows:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enable?</p></th>
+<th class="head"><p>Process?</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Clear</p></td>
+<td><p>-</p></td>
+<td><p>Do not attempt to recognize this code</p></td>
+</tr>
+<tr class="row-odd"><td><p>Set</p></td>
+<td><p>Clear</p></td>
+<td><p>Recognize this code, but remove it from further processing</p></td>
+</tr>
+<tr class="row-even"><td><p>Set</p></td>
+<td><p>Set</p></td>
+<td><p>Recognize and process this code</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p><strong>Order:</strong> Specifies the processing order of the code, in the range
+1-999, with respect to other codes on the same block. CERUN processes
+codes from lowest to highest order when multiple codes appear on a
+block. If two or more codes on a block have the same order value,
+then they are processed from left to right. CERUN assigns a default
+order to codes based on industry standards, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">100<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Settings</p>
+</dd>
+<dt class="field-even">300<span class="colon">:</span></dt>
+<dd class="field-even"><p>Activation functions</p>
+</dd>
+<dt class="field-odd">400<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cycles</p>
+</dd>
+<dt class="field-even">500<span class="colon">:</span></dt>
+<dd class="field-even"><p>Motions</p>
+</dd>
+<dt class="field-odd">700<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deactivation functions</p>
+</dd>
+<dt class="field-even">900<span class="colon">:</span></dt>
+<dd class="field-even"><p>Stop, End, Return …</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>Group:</strong> Defines the group number, in the range 0-999, to which the
+code belongs. Group number 0 (zero) is reserved for non-modal codes.
+CERUN assigns a default group number to codes based on industry
+standards. When CERUN encounters a code during processing, it marks
+that code as active within the group and marks all other codes in the
+same group as inactive. The same group can contain both modal and
+non-modal codes, in which case the non-modal code overrides the modal
+state for the current block only. The current active code for each
+group can be seen in the full interface CERUN»Code Groups window. The
+active code for each group can also be queried or set using the
+$FCEGAC and $FCESAC macro functions.</p>
+<p></p>
+</li>
+<li><p><strong>Modality:</strong> Defines the modality of the code.</p>
+<p>A “<strong>Non-Modal</strong>” code is one that applies to the current block
+only. Non-modal codes are always assigned to modality group 0. A
+dwell code (e.g., G4) is an example of a non-modal code, since the
+action to dwell applies to the current block only.</p>
+<p>A “<strong>Modal</strong>” code is one whose state is remembered from one
+block to the next. The absolute vs. incremental codes (e.g., G90,
+G91) are examples of modal codes, where axes departures are
+interpreted in the last specified absolute or incremental mode.
+Interpolation codes (e.g., G0, G1…) are another example of modal
+codes, which effects how axes departures are interpolated.</p>
+<p>A “<strong>Persistent</strong>” code is similar to a modal code, with the
+added effect that the code is reactivated on each block until
+canceled by another code from the same group. Persistent codes can
+be used in special cases where it is necessary to “fire” a code on</p>
+<p>each block, rather than passively rely on a modal setting. More
+information on this topic can be found in the description of Code
+Macros.</p>
+<p></p>
+</li>
+<li><p><strong>Identifier:</strong> Lists the macro language identifier, in the form
+CODE_<em>name</em>, for the code identified by the MCD. The code
+identifier is how CERUN identifies the function that the code
+performs. This identifier is used in the macro processor to identify
+the code. For example, it can be used in EXEC commands to process a
+code without having to know its MCD equivalent (e.g.,
+EXEC/CODE_SPINDLE_OFF). It can also be used in Code Macros to “catch”
+a code and customize how it is processed.</p>
+<p></p>
+</li>
+<li><p><strong>Register, Min, Max, *n, +n</strong>
+The remaining columns in the table define the code register and its
+value or range of values.</p>
+<a class="reference internal image-reference" href="../../_images/quest_code_prop.png"><img alt="../../_images/quest_code_prop.png" class="align-right" src="../../_images/quest_code_prop.png" style="width: 3.347in;" /></a>
+<p>Double-click (or select and modify) a code on the table to
+view the different ways a code can be defined:</p>
+<p>Select the “<strong>N/A</strong>” (meaning not applicable) radio button to
+define a code that has no MCD representation. A code like this cannot
+be recognized from the MCD, but it can be activated via the EXEC
+macro command.</p>
+<p>Select the “<strong>ALT String</strong>” radio button and enter the code as a
+text string.</p>
+<p>Select the “<strong>Register</strong>” radio button and choose a register
+from the drop-down list. Then enter the code value in the “Min”
+field, or the range of valid codes by specifying both a “Min” and a
+“Max” (i.e., minimum and maximum) value. If you write a Code Macro to
+perform custom processing on the code, the MCD code will be passed to
+the macro using the formula: $P2=(<em>code_value</em><strong>*n</strong>)<strong>+n</strong></p>
+<p>Select the “<strong>Register as data</strong>” radio button and choose a Data
+identifier from the drop-down list if the code has an associated
+REG_<em>name</em> data identifier. Then enter the code value in the “Min”
+field, or the range of valid codes by specifying both a “Min” and a
+“Max” (i.e., minimum and maximum) value. The Data identifier value is
+calculated from the Code value using the formula:
+<em>data_value</em>=(<em>code_value</em><strong>*n</strong>)<strong>+n</strong></p>
+<p>The difference between “Register” and “Register as data” is that the
+first is typically used for a simple code that activates or
+deactivates a function, whereas the second “as data” is used for a
+range of codes that both activate a function and specify “data” to
+that function at the same time. A common example of an “as data” type
+is the workpiece compensation G54-G59 range of codes, where the code
+both activates compensation and defines the compensation offset to
+use.</p>
+<p>Select the <strong>Add</strong> button to define a new custom register if the
+required register format does not exist in the register drop-down
+list. Custom registers are identified by the string “(Custom)” in the
+drop-down list. Select the <strong>Edit</strong> button to modify or delete the
+selected custom register. Take care to not delete a custom register
+being used for other purposes.</p>
+</li>
+</ul>
+<p>Click on a column header to sort the list of codes in increasing or
+decreasing order based on the contents of the selected column.</p>
+<p>Double-click on a row to bring up a Code Properties dialog that can
+be used to modify the selected code. You can change similar
+properties of multiple codes by double-clicking on a range of rows,
+or by selecting multiple rows and pressing the Modify button at the
+top of the table or the Modify menu selection on the right-mouse
+context menu. Any code property that is modified will be shown
+highlighted in the table.</p>
+<a class="reference internal image-reference" href="../../_images/quest_code_popup.png"><img alt="../../_images/quest_code_popup.png" class="align-right" src="../../_images/quest_code_popup.png" style="width: 1.306in;" /></a>
+<p>The right-mouse context menu provides various options to
+reset modified code fields. The “Reset to '…'” menu selection will
+reset the modified field selected by the mouse to the default value
+shown. The “Reset…” menu selection activates a small dialog with
+checkboxes identifying the various fields to be reset. The “Reset
+All” menu selection resets all fields of all selected codes to their
+default value. The “Reset” at the top of the context menu resets the
+code table back to the state it was at when you entered the section.</p>
+<p>You can also modify a code by changing the answers to the
+Questionnaire concerning a particular code. Select a code and use the
+right-mouse context menu “Go to Definition” selection to modify the
+question that defined the selected code.</p>
+</section>
+<section id="creating-custom-codes">
+<h3>Creating Custom Codes<a class="headerlink" href="#creating-custom-codes" title="Link to this heading"></a></h3>
+<p>There are three different types of customized codes that can be
+created depending on the circumstances:</p>
+<ul>
+<li><p>An “<strong>Alias</strong>” is a code that duplicates the functions of an
+existing code in the table. If there are two or more codes that
+provide the same functionality and you already have a code defined to
+handle the function, then an “alias” can be created to define an
+alternate code representation.</p>
+<a class="image-lowered reference internal image-reference" href="../../_images/quest_code_alias.png"><img alt="../../_images/quest_code_alias.png" class="image-lowered align-left" src="../../_images/quest_code_alias.png" style="width: 1.306in;" /></a>
+<p>Right-mouse on the code function to be duplicated and
+select “Create Alias” from the context menu. This will create a copy
+of the code with the string “(alias)” appended to the identifier. You
+then use the Code Properties dialog to define the alternate
+representation of the code function.</p>
+<p>One example of an alias is the use of the G54-G57 codes that overlap
+the G501-G599 range of workpiece compensation codes on a Siemens
+control. The larger range of codes should first be defined in the
+questionnaire (i.e., G501-G599). Then an alias of the workpiece compensation
+code can be created in the Code Customization table with Min/Max values of 54
+and 57 and with a “+n” offset of “–53”. Once this is done, the range of codes
+G54-G57 will be processed in exactly the same way as the range G501-G504.</p>
+<p></p>
+</li>
+<li><p>A new custom code can be created by selecting the “<strong>New</strong>”
+button at the top of the table. This will create a new code entry
+with a default name (e.g., CODE_CUSTOM_1) that you can change at any
+time to whatever is appropriate, provided it does not conflict with a
+built-in code name. You then use the Code Properties dialog to define
+the code, processing order and modality etcetera, as you would for
+any other built-in code.</p>
+<p>If the custom code has been created simply to catch and ignore codes
+that have no effect on simulation, then choose <strong>CODE_IGNORE</strong> for
+the custom code name identifier. If desired, you can use a more
+meaningful code name, but you must then clear the “Process” checkbox
+so that the code will be ignored when read.</p>
+<p>If a custom code does have an effect on simulation, then the
+“Process” checkbox must remain set and a Code Macro will have to be
+written to process this code when it is encountered in the MCD. The
+code identifier name is how the code is later recognized during Code
+Macro processing.</p>
+<p></p>
+</li>
+<li><p>Lastly, an undefined built-in code can be used by first selecting
+“<strong>Show All Codes</strong>” and then enabling the appropriate undefined
+code. By default there will be no MCD associated with the newly
+enabled code since there is no information in the questionnaire
+section about that code. You must modify the code to define its code
+properties as appropriate.</p>
+<p>Because built-in code processing functions often rely on additional
+data from the questionnaire, which will not be available in this
+case, the use of undefined codes is not recommended.</p>
+</li>
+</ul>
+</section>
+<section id="deleting-custom-codes">
+<h3>Deleting Custom Codes<a class="headerlink" href="#deleting-custom-codes" title="Link to this heading"></a></h3>
+<p>Aliases and new custom codes can be deleted, by selecting one or more
+customized codes in the Code Customization table and either pressing
+the Delete key or selecting the Delete button at the top of the
+table.</p>
+<p>Built-in codes cannot be deleted. To disable processing of a built-in
+code, simply clear the “Enable” checkbox associated with the code.</p>
+</section>
+</section>
+<section id="data-customization">
+<span id="id2"></span><h2>Data Customization<a class="headerlink" href="#data-customization" title="Link to this heading"></a></h2>
+<p>Double-click on the “Data Customization” heading in the Navigator to
+open the Data Customization view in the working window. This view
+contains a table of all register related functions available on the
+machine and control, as defined in the questionnaire section of the
+current CE. You can edit this table to fine-tune the actions of the
+CE.</p>
+<p>An image of the Data Customization main view is shown below.</p>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="../../_images/quest_data_cust.png"><img alt="../../_images/quest_data_cust.png" src="../../_images/quest_data_cust.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Data Customization Facility</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Unlike codes, the same register can be used for a variety of input
+functions. A common example is the X register that specifies the X
+axis position, but which can often specify a dwell time if a G4 code
+is present. Each of these input functions associated with the X
+register is assigned to a unique <strong>data identifier</strong>. CERUN uses data
+identifiers to access information from registers that it needs when
+it processes an action.</p>
+<section id="modifying-data-identifiers">
+<h3>Modifying Data Identifiers<a class="headerlink" href="#modifying-data-identifiers" title="Link to this heading"></a></h3>
+<p>The following information is listed from left to right in the table
+for each function of the CNC that requires register data input:</p>
+<ul>
+<li><p><strong>Enable:</strong> If this box is selected (the default for any data
+identifier defined in the questionnaire) then the data identifier and
+its associated register will be recognized by CERUN if they appear in
+the MCD or in an EXEC command. If this box is cleared, then CERUN
+will output a diagnostic if the data identifier is needed during
+processing and the associated register will not be added to the list
+of allowable input words.</p>
+<p></p>
+</li>
+<li><p><strong>Process:</strong> If this box is selected (the default), then CERUN will
+process the data identifier as necessary. If this box is cleared,
+then CERUN will remove the register from the input block and discard
+it without further processing if it is still present after all
+functions have been processed on the block. Note though that CERUN
+will output a diagnostic if the data identifier is needed during
+processing.</p>
+<p>The combination of the Process and Enable checkboxes determines how
+CERUN handles a register, as follows:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enable?</p></th>
+<th class="head"><p>Process?</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Clear</p></td>
+<td><p>-</p></td>
+<td><p>Do not attempt to recognize this register</p></td>
+</tr>
+<tr class="row-odd"><td><p>Set</p></td>
+<td><p>Clear</p></td>
+<td><p>Recognize this register, but remove it from further processing</p></td>
+</tr>
+<tr class="row-even"><td><p>Set</p></td>
+<td><p>Set</p></td>
+<td><p>Recognize and process this register</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p><strong>Modality:</strong> If this box is checked, the register value will be
+remembered and be available for use on blocks where the register does
+not appear. If this box is cleared, the register is non-modal and
+must be used on the current block. Any unused, non-modal registers on
+a block will be diagnosed by CERUN.</p>
+<p>By default, CERUN currently sets all registers to non-modal despite
+the modality setting that may have been defined or implied in the
+Questionnaire, since it is our experience that the presence of an
+unused register on a block generally indicates a problem.</p>
+<p></p>
+</li>
+<li><p><strong>Identifier:</strong> Lists the macro language identifier, in the form
+DATA_<em>name</em>, for the register input function. The data identifier
+is how CERUN identifies the data that the register supplies. This
+identifier is used in the macro processor to identify the data. For
+example, it can be used in EXEC commands to supply register data
+without having to know its MCD equivalent (e.g.,
+EXEC/DATA_SPINDLE_RPM,1200). It can also be used in Data Macros to
+“catch” a register and customize how it is processed.</p>
+<p></p>
+</li>
+<li><p><strong>Register, Min, Max, *n, +n</strong></p>
+<a class="reference internal image-reference" href="../../_images/quest_data_prop.png"><img alt="../../_images/quest_data_prop.png" class="align-right" src="../../_images/quest_data_prop.png" style="width: 3.340in;" /></a>
+<p>The remaining columns in the table define the register and
+its value or range of values.
+Double-click (or select and modify) a data identifier on the table to
+view the different ways a register can be defined:</p>
+<p>The register that supplies the input data can be selected from the drop-down
+list of all registers defined in Registers section of the Questionnaire.
+Select the <strong>Add</strong> button to define a new custom register if the required
+register format does not exist in the register drop-down list.
+Custom registers are identified by the string “(Custom)” in the drop-down list.
+Select the <strong>Edit</strong> button to modify or delete the selected custom register.
+Take care to not delete a custom register being used for other purposes.</p>
+<p>The “<strong>--NA--</strong>” (meaning not applicable) selection can be used
+to define a data identifier having no MCD representation. A register
+like this cannot be recognized from the MCD, but it can be activated
+via the EXEC macro command and $FCEADD macro functions. Using the
+combination of NA codes and NA registers makes it possible to
+construct a series of MCD commands (using EXEC) that call up custom
+functions and provide custom data, without interfering with normal
+code and data processing.</p>
+<p>Optional minimum and/or maximum range validations can be enabled by
+specifying “Min” and “Max” (i.e., minimum and maximum) values. The
+Data identifier value is calculated from the register value using the
+formula: <em>data_value</em>=(<em>register_value</em><strong>*n</strong>)<strong>+n.</strong></p>
+</li>
+</ul>
+<p>Click on a column header to sort the list of data identifiers in
+increasing or decreasing order based on the contents of the selected
+column.</p>
+<p>Double-click on a row to bring up a Register Properties dialog that
+can be used to modify the selected data identifier. You can change
+similar properties of multiple identifiers by double-clicking on a
+range of rows, or by selecting multiple rows and pressing the Modify
+button at the top of the table or the Modify menu selection on the
+right-mouse context menu. Any register property that is modified will
+be shown highlighted in the table.</p>
+<a class="reference internal image-reference" href="../../_images/quest_data_popup.png"><img alt="../../_images/quest_data_popup.png" class="align-right" src="../../_images/quest_data_popup.png" style="width: 1.306in;" /></a>
+<p>The right-mouse context menu provides various options to
+reset modified data identifier fields. The “Reset to '…'” menu
+selection will reset the modified field selected by the mouse to the
+default value shown. The “Reset…” menu selection activates a small
+dialog with checkboxes identifying the various fields to be reset.
+The “Reset All” menu selection resets all fields of all selected data
+identifiers to their default value. The “Reset” at the top of the
+context menu resets the data table back to the state it was at when
+you entered the section.</p>
+<p>You can also modify a data identifier by changing the answers to the
+Questionnaire concerning a particular register. Select a data
+identifier and use the right-mouse context menu “Go to Definition”
+selection to modify the register question that defined the selected
+data identifier.</p>
+</section>
+<section id="creating-custom-data-identifiers">
+<h3>Creating Custom Data Identifiers<a class="headerlink" href="#creating-custom-data-identifiers" title="Link to this heading"></a></h3>
+<p>There are three different types of customized data identifiers that
+can be created depending on the circumstances:</p>
+<ul>
+<li><p>An “<strong>Alias</strong>” is a data identifier that duplicates the functions
+of an existing data identifier in the table. If there are two or more
+registers that provide the same functionality and you already have a
+data identifier defined to handle the function, then an “alias” can
+be created to define an alternate register representation.</p>
+<a class="image-lowered reference internal image-reference" href="../../_images/quest_data_alias.png"><img alt="../../_images/quest_data_alias.png" class="image-lowered align-left" src="../../_images/quest_data_alias.png" style="width: 1.435in;" /></a>
+<p>Right-mouse on the data identifier to be duplicated and
+select “Create Alias” from the context menu. This will create a copy
+of the data identifier with the string “(alias)” appended to the
+name. You then use the Register Properties dialog to define the
+alternate representation of the data.</p>
+<p>One example of an alias would be in support of the Fanuc “standard”
+(vs. “calculator”) input, where a value without a decimal is
+processed with leading zeros omitted (e.g., X1 = 0.001 mm), but a
+value with a decimal is processed in the normal fashion (e.g., X1<strong>.</strong> = 1.0 mm).
+To support this, first define a new X axis register without a decimal and with leading zeros omitted,
+then create an alias of the REG_AXIS_X identifier, selecting the new X axis register in place of the old.</p>
+<p></p>
+</li>
+<li><p>A new custom data identifier can be created by selecting the
+“<strong>New</strong>” button at the top of the table. This will create a new
+data entry with a default name (e.g., REG_CUSTOM_1) that you can
+change at any time to whatever is appropriate, provided it does not
+conflict with a built-in data identifier name. You then use the
+Register Properties dialog to define the data identifier, as you
+would for any other built-in data identifier.</p>
+<p>If the custom data identifier has been created simply to catch and
+ignore registers that have no effect on simulation, then choose
+<strong>REG_IGNORE</strong> for the custom data identifier name. If desired, you
+can use a more meaningful data identifier name, but you must then
+clear the “Process” checkbox so that the register will be ignored
+when read.</p>
+<p>If a custom data identifier does have an effect on simulation, then
+the “Process” checkbox must remain set and a Data Macro or Code Macro
+will have to be written to process this data identifier when it is
+encountered in the MCD. The data identifier name is how the data is
+later referenced during macro processing.</p>
+<p></p>
+</li>
+<li><p>Lastly, an undefined built-in data identifier can be used by first
+selecting “<strong>Show All Registers</strong>” and then enabling the
+appropriate undefined entry. By default there will be no register
+associated with the newly enabled data identifier since there is no
+information in the questionnaire section about that data
+identifier. You must modify the data identifier to define its
+register properties as appropriate.</p>
+<p>Because built-in processing functions often rely on additional data
+from the questionnaire, which will not be available in this case,
+the use of undefined data identifier is not recommended.</p>
+</li>
+</ul>
+</section>
+<section id="deleting-custom-data-identifiers">
+<h3>Deleting Custom Data Identifiers<a class="headerlink" href="#deleting-custom-data-identifiers" title="Link to this heading"></a></h3>
+<p>Aliases and new custom data identifiers can be deleted, by selecting
+one or more customized entries in the Data Customization table and
+either pressing the Delete key or selecting the Delete button at the
+top of the table.</p>
+<p>Built-in data identifiers cannot be deleted. To disable processing of
+a built-in data identifier, simply clear the “Enable” checkbox
+associated with the identifier.</p>
+</section>
+</section>
+<section id="tape-editor">
+<span id="id3"></span><h2>Tape Editor<a class="headerlink" href="#tape-editor" title="Link to this heading"></a></h2>
+<p>The tape editor performs simple editing of the MCD as each block is
+read by CERUN. Editing of the tape file is the <strong>first</strong> function
+performed before the MCD is processed in any other way.</p>
+<p>Tape editing is done through a set of character string replacement
+functions, as shown in the image below. You can perform simple character for
+character substitution or you may define the search strings in term
+of regular expressions (RE’s), as defined in the $FEDIT function
+(see <a class="reference internal" href="../functions/charseqfunc.html#character-and-sequence-functions"><span class="std std-ref">here</span></a>).</p>
+<figure class="align-center" id="id13">
+<span id="figure-tape-editor"></span><a class="reference internal image-reference" href="../../_images/quest_tedit.png"><img alt="../../_images/quest_tedit.png" src="../../_images/quest_tedit.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Tape Editor Facility</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Press the <strong>Add</strong> button to enter a new find/replace string pair. The
+“find” string is what CERUN will look for in the MCD. The “replace”
+string is what CERUN will replace it with. An empty replacement
+string has the effect of deleting the “find” string where it occurs
+in the MCD. Only the first occurrence of the “find” string is
+replaced (or deleted). There is no facility to define a global or
+repetitive replacement.</p>
+<p>New find/replace string pairs are added to the list below the last
+selected pair. Use the <strong>up-arrow</strong> and <strong>down-arrow</strong> buttons to
+reorder the string pairs (you can also reorder them with the mouse
+using drag-and-drop). The order can be important, since CERUN applies
+the find/replace strings once only per block of MCD, in the order
+that they are listed.</p>
+<p>Select a string pair and press the <strong>Modify</strong> button to change one or
+both strings. Select a string pair and press the <strong>Delete</strong> button to
+remove it.</p>
+<p>Individual find/replace strings can be <strong>enabled</strong> or <strong>disabled</strong>.
+They are enabled by default when added. Clear the check box to the
+left of a string pair to disable it. A disabled string pair will not
+be executed by the control emulator. Individual find/replace string
+pairs can also be dynamically enabled and disabled during
+processing using the $EDTSTA(<em>n</em>) macro variable (see <a class="reference internal" href="../variables/macrovar.html#macro-variables"><span class="std std-ref">“Macro Variables”</span></a>),
+where <em>n</em> is the find/replace string pair identifier as listed beside the check box.</p>
+<p>You can enter sample MCD to test out the tape editor. The final
+result will be shown, as will the result after applying each of the
+find/replace string pairs in turn.</p>
+<p>The Finder utility includes a “Tape Editor” option to include tape
+editor definitions when searching through a control emulator for
+matching text. The Diffs utility also checks for differences in tape
+editor definitions when comparing control emulators.</p>
+<p>The following table lists some tape editor Find/Replace substitutions
+you might find helpful:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Find</p></th>
+<th class="head"><p>Replace</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">;.*</span></code></p></td>
+<td></td>
+<td><p>Delete tape comment starting at ; character</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">(.*)</span></code></p></td>
+<td></td>
+<td><p>Remove type 2 “(…)” instruction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">^/\([^0-9]\)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/1\1</span></code></p></td>
+<td><p>Replace “/” with “/1” at start of block</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="startup-shutdown-macros">
+<span id="id4"></span><h2>Startup/Shutdown Macros<a class="headerlink" href="#startup-shutdown-macros" title="Link to this heading"></a></h2>
+<p>Startup and Shutdown macros enable customization of CERUN processing at the start and end of certain key events.
+Customization is done using the ICAM Macro language (see <a class="reference internal" href="../macros/language/index.html#macro-language"><span class="std std-ref">“The Macro Language”</span></a>).
+Generally speaking, macros can extend or replace built-in Icam Post functionality.
+The following startup/shutdown macros are available:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Macro Type</p></th>
+<th class="head"><p>When Executed</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#declar-macro"><span class="std std-ref">Declaration</span></a></p></td>
+<td><p>Start of macro processing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#start-end-machine"><span class="std std-ref">Machine startup/shutdown</span></a></p></td>
+<td><p>Start and end of multi-kernel processing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#start-end-program"><span class="std std-ref">Program startup/shutdown</span></a></p></td>
+<td><p>Start and end of main program processing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#start-end-subprogram"><span class="std std-ref">Subprogram startup/shutdown</span></a></p></td>
+<td><p>Start and end of subprogram processing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#start-end-preproc"><span class="std std-ref">Pre-processor startup/shutdown</span></a></p></td>
+<td><p>Just before and after pre-processing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#start-end-block"><span class="std std-ref">Block startup/shutdown</span></a></p></td>
+<td><p>Start and end of MCD block processing</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Double-click on the “Startup/Shutdown Macro” heading in the
+Navigator to open the Startup/ Shutdown Macro view in the
+working window as shown below.</p>
+<figure class="align-center" id="id14">
+<span id="figure-startup-shutdown"></span><a class="reference internal image-reference" href="../../_images/quest_startup_macro.png"><img alt="../../_images/quest_startup_macro.png" src="../../_images/quest_startup_macro.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Startup/Shutdown Macros Facility</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Select a macro name and press the Modify button to create or edit it.
+Macros can also be opened for editing by double-clicking on the macro name in the
+Navigator window. To ignore a macro during CERUN processing, either
+uncheck the Enable box to disable it, or select the macro name and
+press the Delete button to remove it. The “Strong Declaration” setting
+is used in concert with the <a class="reference internal" href="#declar-macro"><span class="std std-ref">Declaration Macro</span></a>.</p>
+<p>Some startup/shutdown macros are passed information about the event
+that has just happened.
+For example, a block startup macro will include the actual block of MCD that was read.
+These are called <strong>$P</strong> arguments, named after the variable type that is used within
+the macro to access the data.
+Some $P arguments can also be set inside the macro to change the outcome of the event.
+Tables listing the $P arguments for each of the different macro types can be found
+below in the description of the individual macro types.
+The available $P arguments are also listed in the lower right Help window when you edit a macro.</p>
+<section id="startup-shutdown-macro-types">
+<h3>Startup/Shutdown Macro Types<a class="headerlink" href="#startup-shutdown-macro-types" title="Link to this heading"></a></h3>
+<section id="declaration-macro">
+<span id="declar-macro"></span><h4>Declaration Macro<a class="headerlink" href="#declaration-macro" title="Link to this heading"></a></h4>
+<p>The declaration macro is executed at the start of macro processing.
+The sole purpose of a declaration macro is to provide a standard
+place where GLOBAL, OBJECT and FUNCTION variables can be declared and
+optionally assigned an initial value. No other commands are permitted
+in a declaration macro.</p>
+<p>Multi-kernel processing has some important effects on the declaration
+macro:</p>
+<ul>
+<li><p>For merging lathes, the same declaration macro will be run three
+times; once at the start of processing before the machine startup
+macro is run, and once each for the main and side turrets before the
+program startup macro is run. This is necessary because there are
+three separate kernels running for a merging lathe; the master kernel
+(#0) that handles synchronization, and one kernel each for the upper
+(#1) and lower (#2) turrets. All must have their macro environment
+initialized. The $VMCHN system variable can be used (e.g., in a CASE
+or IF block) if it is necessary to define different variables
+depending on the channel number</p>
+<p></p>
+</li>
+<li><p>For composite control emulators with multiple channels, the composite
+master declaration macro must be used to define global variables
+that are to be shared between the individual component control
+emulators. Global variables defined in component control emulator
+declaration macros will be treated as object scope variables.</p></li>
+</ul>
+<p>The declaration macro is used in combination with the “Strong Declaration”
+macro setting that appears at the bottom of the macro editor.
+There are 3 settings that control how strict the macro
+processor is concerning where and when variables are declared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">OFF<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variables can be declared when and wherever desired. The
+Declaration macro can be used, but it is not mandatory.</p>
+</dd>
+<dt class="field-even">PARTIAL<span class="colon">:</span></dt>
+<dd class="field-even"><p>GLOBAL, OBJECT and FUNCTION variables can only be
+declared in the Declaration Macro. LOCAL variables do not have to be
+declared before being used.</p>
+</dd>
+<dt class="field-odd">FULL<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Same as PARTIAL, but LOCAL variables must be declared in a
+macro before being used.</p>
+</dd>
+</dl>
+<p>The strong declaration setting can be changed during control emulation
+(see <a class="reference internal" href="../cevm/uirmenus/tools.html#tools-preferences"><span class="std std-ref">“Tools»Preferences…”</span></a>).
+A run-time setting is also available to warn when variables are referenced
+before being set (which can be a potential source of error).</p>
+<p>The declaration macro and strong data typing features are designed to
+help developers create more stable macro code and catch misspellings
+and improper use of variables in QUEST instead of at run-time (if at
+all).</p>
+<p>There are no $P variables associated with a declaration macro.</p>
+</section>
+<section id="machine-startup-shutdown-macros">
+<span id="start-end-machine"></span><h4>Machine Startup/Shutdown Macros<a class="headerlink" href="#machine-startup-shutdown-macros" title="Link to this heading"></a></h4>
+<p>Merging lathes and composite control emulators (CE) with two or more
+channels have multiple instances of the CE kernel running; one kernel
+for each channel. The kernels in a multi-channel CE all run in
+parallel, and are synchronized by codes in the MCD as defined in the
+Questionnaire. These control emulators will have machine startup and
+shutdown macros (not to be confused with program startup and shutdown
+macros).</p>
+<p>The machine startup macro is responsible for setting multi-kernel
+system variables that will affect subsequent processing
+(see <a class="reference internal" href="../variables/multikernelvar.html#multikernel-ce-variables"><span class="std std-ref">“Multi-Kernel Control Emulator Variables”</span></a>).
+For example, the machine startup macro can assign the MCD file or file starting point
+to use for each kernel.</p>
+<p>The machine shutdown macro is run after all kernels have completed
+processing.</p>
+<p>There are no $P variables associated with a machine startup and shutdown macro.</p>
+</section>
+<section id="program-startup-shutdown-macros">
+<span id="start-end-program"></span><h4>Program Startup/Shutdown Macros<a class="headerlink" href="#program-startup-shutdown-macros" title="Link to this heading"></a></h4>
+<p>The program startup and shutdown macros are executed at the beginning
+and end of main program processing respectively.</p>
+<p>The program startup macro is useful for performing initialization
+type operations. For example, the activation of a dialog for user
+input, or the processing of other data files necessary for a proper
+simulation.</p>
+<p>The program shutdown macro is equally useful for performing any
+operations you might want to have executed at the end of the program.
+For example, this might include the output of a diagnostic if a
+condition did or did not occur during processing.</p>
+<p>Multi-kernel processing has some important effects on these macro:</p>
+<ul>
+<li><p>For merging lathes, the same program startup macro will be run two
+times; once each for the main and side turrets after the machine
+startup macro is run. The $VMCHN system variable can be used (e.g.,
+in a CASE or IF block) if it is necessary to perform different
+initialization actions depending on the channel number. The same is
+true for the program shutdown macro at the end of processing.</p>
+<p></p>
+</li>
+<li><p>For composite control emulators with multiple channels, the composite
+master does not have program startup and shutdown macros (only the
+machine startup/shutdown described above). However, the composite
+component CE’s can have a program startup macro that is run once when
+the component kernel is started, and can have a shutdown macro that
+is run once when the component kernel has completed processing.</p></li>
+</ul>
+<p>Finally, it is possible to define a composite control emulator that
+has multiple component CE’s that all share the same channel. In this
+case, the component startup macro is run each time the component is
+activated (i.e., with the $FAPPLY function), and the component
+shutdown macro is run just before processing switches to another
+component.</p>
+<p>There are no $P variables associated with program startup and
+shutdown macros.</p>
+</section>
+<section id="subprogram-startup-shutdown-macros">
+<span id="start-end-subprogram"></span><h4>Subprogram Startup/Shutdown Macros<a class="headerlink" href="#subprogram-startup-shutdown-macros" title="Link to this heading"></a></h4>
+<p>The subprogram startup is executed just before each subprogram is
+called; the subprogram shutdown macro is executed just following the
+subprogram return.</p>
+<p>The subprogram startup macro is useful for performing machine
+initialization type operations that might automatically occur when a
+subprogram is started. In cases where you must support controller
+resident subprograms, the subprogram startup macro can be used to
+identify the source file and offset of the controller resident
+subprogram either on disk or in the internal File Storage area. The
+$CESBST macro system variable can be set $FALSE to inhibit processing
+of the subprogram startup macro. By default subprogram startup macro
+processing is enabled if a macro is defined.</p>
+<p>The subprogram shutdown macro is useful for performing any operations
+you might want to have executed at the end of the subprogram. For
+example, this might include the restoration of controller settings
+that were saved on subprogram entry. The $CESBSH macro system
+variable can be set $FALSE to inhibit processing of the subprogram shutdown macro. By
+default subprogram shut-down macro processing is enabled if a macro
+is defined.</p>
+<p>The following $P variables are available with subprogram
+startup and shutdown macros:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>On entry:</p>
+<p>  Type of subprogram (1:Range, 2:External)</p>
+<p>On exit:</p>
+<p>  Leave as-is to process the subprogram</p>
+<p>  Set to 0 to ignore the subprogram call</p>
+<p>  Set to –1 to diagnose a missing subprogram</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Subprogram ID string (for $P1=2)</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Starting sequence number (for $P1=1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P4</p></td>
+<td><p>Ending sequence number (for $P1=1)</p></td>
+</tr>
+<tr class="row-even"><td><p>$P5</p></td>
+<td><p>Repeat count. Zero “0” means no repeat.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P6</p></td>
+<td><p>Contents of calling MCD block</p></td>
+</tr>
+<tr class="row-even"><td><p>$P7</p></td>
+<td><p>Current nesting level</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P8</p></td>
+<td><p>Current repeat count. Zero “0” if not repeating.</p></td>
+</tr>
+<tr class="row-even"><td><p>$P9</p></td>
+<td><p>Filename containing subprogram (for $P1=2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P10</p></td>
+<td><p>Line offset to start of subprogram (for $P1=2)</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>For external subprograms (i.e., $P1=2) the $P9 variable can be
+changed in the macro to identify the relative or absolute path and
+name of a file containing the subprogram. Similarly, the $P10
+variable can be changed to define the line number offset to the start
+of the subprogram in the file identified by $P9. CERUN will attempt
+to locate the subprogram file based on the responses to the CALSUB
+section of the Questionnaire, as follows:</p>
+<ul>
+<li><p>Subprograms attached to the main program: The subprogram will be
+searched for in the main program file. $P9 will identify to the main
+program file (e.g., “test.tap”).
+$P10 will contain the line number offset to the start of the
+subprogram or –1 if the subprogram was not found.</p>
+<p></p>
+</li>
+<li><p>Subprogram all contained in a single file: $P9 will be set to a file
+with the same name as the main program file and with a file type of
+“.tps” (e.g., “test.tps”). $P10 will contain the line number offset
+to the start of the subprogram or –1 if the file or subprogram was
+not found.</p>
+<p></p>
+</li>
+<li><p>Subprograms each contained in a separate file: $P9 will be set to a
+file with the same name as the main program file, with “_” and the
+subprogram ID appended and with a file type of “.tps” (e.g.,
+“test_9001.tps”). $P10 will be 0 if the file was found, or –1 if the
+file was not found.</p>
+<p></p>
+</li>
+<li><p>If the subprogram cannot be found using the above, CERUN will search
+the internal ICAMFS root directory for a file matching the
+REG_DEFSUB_ID subprogram definition register formatted with the
+subprogram ID (e.g., “O9001”).</p></li>
+</ul>
+<p>The following is an example of a subprogram startup macro that uses
+the control emulator internal file storage area (see <a class="reference internal" href="#file-storage"><span class="std std-ref">File Storage</span></a>)
+to hold only those subprograms in the range O9000-O9999:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%L01=$FATOF($P2(2:)) $$ Convert ID string to number
+IF/%L01.GE.9000.AND.%L01.LE.9999
+   $P9=$FSWRIT(&#39;//ICAMFS/O!(\*)&#39;,%L01)
+ENDOF/IF
+</pre></div>
+</div>
+</div></blockquote>
+<p>Pre-processors have additional logic to handle the processing and
+searching of subprograms. Pre-processor documentation can be found
+in the QUEST and CERUN on-line help.</p>
+</section>
+<section id="pre-processor-startup-shutdown-macros">
+<span id="start-end-preproc"></span><h4>Pre-Processor Startup/Shutdown Macros<a class="headerlink" href="#pre-processor-startup-shutdown-macros" title="Link to this heading"></a></h4>
+<p>The pre-processor startup and shutdown macros will only appear if a
+pre-processor is in use. Pre-processors handle special requirements
+of popular CNC’s, such as the use of variables, functions, program
+branching and looping. The pre-processor is defined in the <em>General
+Description / General In</em><em>formation</em> section of the Questionnaire.</p>
+<p>The pre-processor startup macro provides access to the block of MCD
+just prior to it being evaluated by the pre-processor. Use this macro
+to apply changes to the MCD that are necessary for proper
+pre-processor operation or to “hide” MCD from the pre-processor by
+temporarily removing it from the block. The $CEPPST macro system
+variable can be set $FALSE to inhibit processing of the pre-processor
+startup macro. By default pre-processor startup macro processing is
+enabled if a macro is defined.</p>
+<p>The pre-processor shutdown macro provides access to the block of MCD
+just after it was evaluated by the pre-processor. The pre-processor
+performs its work by replacing variables, functions and expressions
+by their values. It also controls the flow of processing to handle
+loops and branching. The resultant MCD after pre-processing has been
+completed should be recognizable by CERUN using normal code and data
+identifier processing. The $CEPPSH macro system variable can be set
+$FALSE to inhibit processing of the pre-processor shutdown macro. By
+default pre-processor shutdown macro processing is enabled if a macro
+is defined.</p>
+<p>The following $P variables are available with pre-processor
+startup and shutdown macros:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>On entry:</p>
+<p>  =1</p>
+<p>On exit:</p>
+<p>  Leave as-is to pre-process the block</p>
+<p>  Set to 0 to skip pre-processing of the block</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Contents of MCD block</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Block number (not the sequence number)</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="block-startup-shutdown-macros">
+<span id="start-end-block"></span><h4>Block Startup/Shutdown Macros<a class="headerlink" href="#block-startup-shutdown-macros" title="Link to this heading"></a></h4>
+<p>The block startup and shutdown macros are executed at the beginning
+and end of processing of each block of MCD. If a pre-processor is
+being used, the block startup macro executes after the pre-processor
+shutdown macro.</p>
+<p>The block startup macro provides access to the block of MCD just
+prior to it being evaluated by CERUN. Use this macro to apply any
+changes to the MCD that are necessary for proper CERUN processing.
+The $CEBKST macro system variable can be set $FALSE to inhibit
+processing of the block startup macro. By default block startup macro
+processing is enabled if a macro is defined.</p>
+<p>The block shutdown macro provides access to the block of MCD after
+all other block processing is complete. Any MCD remaining on the
+block is data that was not recognized by CERUN. Left as-is, CERUN
+will output a diagnostic listing the unrecognized MCD, but you can
+use the block shutdown macro to remove unrecognized MCD (perhaps
+after an analysis) to avoid diagnostics. The $CEBKSH macro system
+variable can be set $FALSE to inhibit processing of the block
+shutdown macro. By default block shutdown macro processing is enabled
+if a macro is defined.</p>
+<p>The following $P variables are available with block startup/shutdown
+macros:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>On entry:</p>
+<p>  =1</p>
+<p>On exit:</p>
+<p>  Leave as-is to process the block</p>
+<p>  Set to 0 to skip processing of the block</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Contents of MCD block</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Block number (not the sequence number)</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The following is an example of a one-line block startup macro that
+removes the = (equal sign) following any register letter:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$P2=$FEDIT($P2,&#39;\([A-Za-z]\)=&#39;,&#39;\1&#39;)
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="create-or-modify-startup-shutdown-macros">
+<h3>Create or Modify Startup/Shutdown Macros<a class="headerlink" href="#create-or-modify-startup-shutdown-macros" title="Link to this heading"></a></h3>
+<p>To create or modify a startup/shutdown macro, double click on the
+macro name in the Navigator. Alternately, you can open the
+Startup/Shutdown Macros section header in the Navigator, select one
+of the startup/shutdown macros listed in the upper right main working
+window (see <a class="reference internal" href="#figure-startup-shutdown"><span class="std std-ref">image above</span></a>) and then press the Modify button at the
+top of the window (or double-click on a listed macro). When a macro
+is created or modified, the macro editor occupies the main work
+space.</p>
+<p>The lines of the macro define the actions to perform when the macro
+is called. These lines can contain any combination of variable
+assignments, logic statements, loops, function calls and control
+emulator commands. The macro processor executes the macro starting
+from the first line and working down line by line, except when the
+flow of processing is changed by loops and conditional or
+unconditional branching. Some control emulator commands and functions
+can cause a macro to “call” (i.e., execute) another macro. There is
+no practical limit on how deeply macros can be nested. Processing of
+the current macro picks up from where it left off after a call. See
+(see <a class="reference internal" href="../macros/language/index.html#macro-language"><span class="std std-ref">“The Macro Language”</span></a>) for more information
+concerning the content of a macro.</p>
+</section>
+<section id="the-macro-editor">
+<span id="macro-editor"></span><h3>The Macro Editor<a class="headerlink" href="#the-macro-editor" title="Link to this heading"></a></h3>
+<p>A common macro editor interface is used for all macro editing
+requirements, whether they be for startup/shutdown macros, event
+macros, code macros, data macros or user function macros. The image
+below shows an example of a code macro being edited (the macro source
+is taken from <a class="reference internal" href="../back/cemacrosample.html#ce-macro-example-2"><span class="std std-ref">“Macro Example #2”</span></a> in the annex).</p>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="../../_images/quest_macro_editor.png"><img alt="../../_images/quest_macro_editor.png" src="../../_images/quest_macro_editor.png" style="width: 6.244in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Macro Editor</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The macro editor colorizes the macro code as you type it, with
+comments in green, macro commands in blue, et cetera. The
+colorization scheme can be changed from the “Macro Editor” tab of the
+<strong>Tools»Preferences</strong> menu-bar selection. The editor also provides
+the following right-mouse button pop-up features:</p>
+<ul>
+<li><p><strong>Expression Evaluator:</strong> Use this feature to create, modify and test
+$FEDIT and $FMATCH macro function calls. Place the input cursor over the
+function name and select this function to edit an existing call. If
+the cursor is not on a $FEDIT or $FMATCH call, a new call will be
+created.</p>
+<p></p>
+</li>
+<li><p><strong>Show</strong> <strong>line numbers:</strong> Enables the display of line numbers to the
+left of each line.</p>
+<p></p>
+</li>
+<li><p><strong>Show</strong> <strong>whitespace markers:</strong> Shows a ‘·’ in place of blanks and
+an arrow in place of tabs.</p>
+<p></p>
+</li>
+<li><p><strong>Enable Word Completion</strong>: Use this feature to have the macro editor
+display a list of possible system variables or function names that
+match the text typed so far. Type any punctuation to accept the
+highlighted name; press the Esc key to ignore the suggestion.</p>
+<p></p>
+</li>
+<li><p><strong>Comment/Uncomment:</strong> Use this function to add comments or remove
+comments from a block of selected macro lines. If all macro lines in
+the selected range have comments,
+then one layer of comments will be removed from the entire block.
+If any or all lines in the selected range are not already commented,
+then a new layer of comments will be added to the entire range.</p>
+<p></p>
+</li>
+<li><p><strong>Show Source:</strong> This gives you the option to preserve the original
+spacing and letter case of your macro code, or to have it formatted
+and auto-indented each time the macro is opened in the editor. There
+are two styles of formatting available: The “Standard” format uses
+uppercase and ANSI standard logical operators (e.g., <span class="mono">IF/X.GT.0.AND.X.LE.10</span>)
+whereas the “C” format uses lowercase and C style
+logical operators (e.g., <span class="mono">if/x&gt;0&amp;&amp;x&lt;=10</span>). The choice of formatting
+style and whether or not to apply it when opening a macro for editing
+can be made from the “Macro Editor” tab of the <strong>Tools»Preferences</strong>
+menu-bar selection.</p></li>
+</ul>
+<p>Pressing the F1 function key while the cursor is placed over a system
+variable or function name will bring up the on-line help with more
+information about the selected item.</p>
+<p>You can select your own editor (called an “external” editor) to use
+instead of the default editor provided by QUEST. This is done from
+the “Macro Editor” tab of the <strong>Tools»Preferences</strong> menu-bar
+selection. You must define the full path and filename of the editor
+executable and include any necessary command line arguments. You must
+also choose the name of a file to be used as a placeholder for macros
+that you will edit. The macro file name must be unique to your own
+personal file space, to avoid interference with anyone else running
+QUEST.</p>
+<section id="compiling-and-saving-macros">
+<h4>Compiling and Saving Macros<a class="headerlink" href="#compiling-and-saving-macros" title="Link to this heading"></a></h4>
+<p>When in the macro editor, you can use the “Compile” button to check
+that your code has been written correctly. Macros are always
+automatically compiled when you press the “OK” button after you have
+finished editing. The “Cancel” button ignores all changes made since
+you entered the macro editor for the current command. The “Reset”
+button ignores all changes, but keeps the macro editor active,
+showing the original macro code.</p>
+<p>If a macro has compilation errors, the error diagnostics will be
+listed in the lower right-hand Build window. A macro must compile
+without errors in order for it to be used by CERUN. You can force
+QUEST to exit a macro that has errors, but in this case the macro
+will be marked as non-executable.
+This means that the macro cannot be used by CERUN but remains available,
+as written, for editing at a later date with QUEST.</p>
+<p>The “<strong>Strong Declaration</strong>” setting defines how strict the macro
+compiler is concerning the timing and location of macro variable
+declarations (see the <a class="reference internal" href="#declar-macro"><span class="std std-ref">Declaration Macro</span></a>).</p>
+</section>
+</section>
+<section id="delete-or-disable-startup-shutdown-macros">
+<h3>Delete or Disable Startup/Shutdown Macros<a class="headerlink" href="#delete-or-disable-startup-shutdown-macros" title="Link to this heading"></a></h3>
+<p>To delete a startup/shutdown macro, open the Startup/Shutdown Macros
+section header in the Navigator, select one of the startup/shutdown
+macros listed in the upper right main working window (see
+<a class="reference internal" href="#figure-startup-shutdown"><span class="std std-ref">image above</span></a>)
+and then press the Delete button at the top of the window (or the Delete key). A
+deleted macro cannot be recovered, so be careful when deleting.</p>
+<p>You can also disable a macro instead of deleting it. A disabled macro
+remains defined in QUEST, but CERUN will not process it by default.
+You can also enable or disable macros at run-time for testing
+purposes using the CERUN debugger.</p>
+</section>
+</section>
+<section id="event-macros">
+<span id="id5"></span><h2>Event Macros<a class="headerlink" href="#event-macros" title="Link to this heading"></a></h2>
+<p>Event macros enable customization of CERUN processing at certain key
+events, as follows:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Macro Type</p></th>
+<th class="head"><p>When Executed</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#motion-event"><span class="std std-ref">Motion event</span></a></p></td>
+<td><p>On any motion</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cycle-event"><span class="std std-ref">Cycle event</span></a></p></td>
+<td><p>On any cycle motion</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cycle-event"><span class="std std-ref">Tool event</span></a></p></td>
+<td><p>At a tool change</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#diag-event"><span class="std std-ref">Diagnostic event</span></a></p></td>
+<td><p>When a diagnostic occurs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cycle-event"><span class="std std-ref">Pre-processor identification</span></a></p></td>
+<td><p>Responds to pre-processor queries</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Double-click on the “Event Macro” heading in the Navigator to open
+the Event Macro view in the working window as shown below.
+Select a macro name and press the Modify button to create or edit it.
+Event macros can also be opened for editing by double-clicking on the
+macro name in the Navigator window. To ignore an event macro during
+CERUN processing, either uncheck the Enable box to disable it, or
+select the macro name and press the Delete button to remove it.</p>
+<figure class="align-center" id="id16">
+<span id="figure-event-macro"></span><a class="reference internal image-reference" href="../../_images/quest_event_macro.png"><img alt="../../_images/quest_event_macro.png" src="../../_images/quest_event_macro.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Event Macros Facility</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>All event macros are passed information about the event that is about
+to happen. This information is passed in the form of <strong>$P</strong>
+arguments, named after the variable type that is used within the
+macro to access the data. Some $P arguments can also be set inside
+the macro to change the outcome of the event. Tables listing the $P
+arguments for each of the different macro types can be found below.
+The available $P arguments are also listed in the lower right Help
+window when you edit a macro.</p>
+<p>Event macros are very similar to the startup/shutdown macros
+described in the preceding section. With Startup/Shutdown macros, the
+startup macro is executed at the start of the event and the shutdown macro
+is executed later after the event has completed. With Event macros,
+a single event macro is executed when the event is about to happen.
+Inside the event macro, the developer can write code to add logic before
+and/or after the event, or even skip the event altogether.
+This is done using the macro OUTPUT command, which you place in a macro
+where the event should happen. For example:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><em>actions before event</em></div>
+<div class="line"><span class="boldmono">OUTPUT</span></div>
+<div class="line"><em>actions after event</em></div>
+</div>
+</div></blockquote>
+<p>The actions before and/or after the OUTPUT command are optional, as
+is the use of the OUTPUT command itself (allowing you to replace
+built-in processing with your own macro logic).</p>
+<p>The designers of Control Emulator chose to use startup and shutdown
+macros for some types of events and event macros for other events.
+For events that are separated by a potentially large gulf in time
+(e.g., program startup and program shutdown), it didn’t seem proper
+to have a “Program Event” macro that would remain active throughout
+the entire program, therefore separate Startup and Shutdown macros
+were implemented. For those events where macro intervention is likely
+to be brief, the designers chose to use Event macros.</p>
+<section id="event-macro-types">
+<h3>Event Macro Types<a class="headerlink" href="#event-macro-types" title="Link to this heading"></a></h3>
+<section id="motion-event-macros">
+<span id="motion-event"></span><h4>Motion Event Macros<a class="headerlink" href="#motion-event-macros" title="Link to this heading"></a></h4>
+<p>The Motion Event macro is executed each time a block of MCD contains
+a motion. A motion event macro can be used to suppress motions under
+certain conditions and to process additional motions if necessary.
+The $MTNMAC macro system variable can be set $FALSE to inhibit
+processing of the motion event macro. By default motion event macro
+processing is enabled if a macro is defined.</p>
+<p>The motion processing of the control emulator occurs when the OUTPUT
+command of the motion event macro is executed. Commands placed in the
+macro prior to the OUTPUT command will be processed before the
+motion; commands placed after the OUTPUT command will be processed
+after the motion has completed.</p>
+<p>The following $P variables are available with a motion event macro:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>Type of motion:</p>
+<p>  1: Circular interpolation (e.g., G2, G3)</p>
+<p>  2: Threading (e.g., G33, G34)</p>
+<p>  4: Rapid positioning (e.g., G0)</p>
+<p>  5: Linear interpolation (e.g., G1)</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>End position</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Circle center (for $P1=1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P4</p></td>
+<td><p>Circle plane vector (for $P1=1)</p></td>
+</tr>
+<tr class="row-even"><td><p>$P5</p></td>
+<td><p>3D circle midpoint (for $P1=1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P6</p></td>
+<td><p>Circle direction (for $P1=1)</p>
+<p>  1: clockwise (e.g., G2)</p>
+<p>  2: counterclockwise (e.g., G3)</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>$P7</p></td>
+<td><p>Circle plane (for $P1=1)</p>
+<p>  0: 3D circle (i.e., through point)</p>
+<p>  1: 2D circle in XYplane</p>
+<p>  2: 2D circle in ZX plane</p>
+<p>  3: 2D circle in YZ plane</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P8</p></td>
+<td><p>Motion flags</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The $P2 end position is defined as a sequence of 6 elements
+representing up to 6 axes of simultaneous motion. The $P8 motion
+flags is also a sequence of 6 elements, indicating with a numeric
+value “1” if a motion was coded on the current block for that axis. A
+value of “0” identifies an axis whose value has not been changed and
+whose $P2 value is the result of a previous motion. The $AXES system
+variable identifies the order and type of axes defined by the $P2
+variable.</p>
+<p>The $P1 variable is set to “1” for circular motions. The $P3, $P4
+and $P5 variables are all sequences of 3 elements defining the
+machine XYZ circle center, vector normal to the circle plane and
+circle midpoint (for 3D arcs). $P6 defines the direction of
+interpolation and $P7 defines the plane of interpolation. These
+variables are all set to $NULL if the motion type is not circular.</p>
+</section>
+<section id="cycle-event-macros">
+<span id="cycle-event"></span><h4>Cycle Event Macros<a class="headerlink" href="#cycle-event-macros" title="Link to this heading"></a></h4>
+<p>The Cycle Event macro is executed each time a block of MCD contains a
+canned cycle instruction. As with a motion event macro, a cycle event
+macro can be used to suppress cycle motions under certain conditions
+and to process additional motions if necessary before and/or after
+the cycle. The $CYCMAC macro system variable can be set $FALSE to inhibit processing
+of the cycle event macro. By default cycle event macro processing is
+enabled if a macro is defined.</p>
+<p>A cycle event macro will be executed before a motion event macro if
+both are defined. The cycle processing of the control emulator occurs
+when the OUTPUT command of the cycle event macro is executed. A
+motion event macro will be executed for every motion that occurs
+within the cycle while the cycle OUTPUT command is being processed.</p>
+<p>The following $P variables are available with a cycle event macro:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>Cycle CODE identifier (e.g., CODE_CYCLE_DRILL)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Reference height (for activator cycles)</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Clearance height at start of cycle</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P4</p></td>
+<td><p>Retract height at end of cycle</p></td>
+</tr>
+<tr class="row-even"><td><p>$P5</p></td>
+<td><p>Depth of cycle</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P6</p></td>
+<td><p>BORE-BACK bottom clearance position</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="tool-event-macros">
+<span id="tool-event"></span><h4>Tool Event Macros<a class="headerlink" href="#tool-event-macros" title="Link to this heading"></a></h4>
+<p>The Tool Event macro is executed each time a block of MCD
+contains a tool preselection or tool change instruction. The
+tool event macro is also called for exchangeable head unit
+preselection and change operations. A tool event macro can be
+used, for example, to duplicate the workpiece-to-home and
+home-to-workpiece positioning sequences of the machine.</p>
+<p>The following $P variables are available with a tool event macro:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>Event type:</p>
+<p>  1: Pre-selection</p>
+<p>  2: Load</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Device type:</p>
+<p>  0: Tool</p>
+<p>  1: Head</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Tool or Head ID</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="diagnostic-event-macro">
+<span id="diag-event"></span><h4>Diagnostic Event Macro<a class="headerlink" href="#diagnostic-event-macro" title="Link to this heading"></a></h4>
+<p>A diagnostic macro is executed whenever a diagnostic (message, warning, error, fatal) is processed.
+The macro will be called even if the diagnostic is disabled,
+however it will not be called if all diagnostic processing is disabled via the $ERRMSG system variable.
+The macro is called before the diagnostic is output and counted in the statistics.
+The diagnostic message can be modified, deleted or additional diagnostics inserted using the diagnostic macro feature.</p>
+<p>Diagnostic macros have the following $P variables:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>Flag (0:Disabled/Delete, 1:Enabled/Output)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Diagnostic number</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Severity number</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P4</p></td>
+<td><p>Diagnostic occurrence</p></td>
+</tr>
+<tr class="row-even"><td><p>$P5</p></td>
+<td><p>Diagnostic message</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>$P1 controls the diagnostic macro.
+On entry, $P1 represent the enabled status of the diagnostic number.
+When the macro terminates, the value of $P1 is checked by the control emulator to determine if the diagnostic should actually be output.
+Setting $P1 to zero will cause the diagnostic to be discarded.
+Setting $P1 to any other value will cause the diagnostic to be output to the UI, listing and also counted in the statistics.</p>
+<p>$P2 is a real number representing the diagnostic number as defined in the cer260.err file (see <a class="reference internal" href="../diag/errorfile.html#error-file"><span class="std std-ref">“Error File”</span></a>).
+$P2 is can be modified in order to output other diagnostics.</p>
+<p>$P3 is the diagnostic severity number as defined in the cer260.err file.
+The severity can be changed by modifying the value of $P3.
+This is the equivalent of calling the $FERSEV function.</p>
+<p>$P4 is a real number representing the number of times the diagnostic identified by $P2 has been generated.
+The first occurrence of a specific diagnostic will have $P4 set to 1 on entering the macro.
+Subsequent occurrences will increment $P4. This variable is read-only.</p>
+<p>$P5 is a string containing the formatted diagnostic message text.
+This variable can be altered in order to customize the message that will be output.</p>
+<p>You can generate additional diagnostic messages by coding an OUTPUT command.
+This command causes the diagnostic message, as identified by the $P variables, to be output.
+The $P variables can then be changed, and OUTPUT called again.</p>
+<p>Diagnostic macros can modify user global and object variables as well as macro system variables.
+Diagnostic macros can also use any macro commands excluding those that process MCD.</p>
+<p>The diagnostic macro can be toggled on or off by use of the $DIAGMAC macro system variable ($TRUE or $FALSE).</p>
+</section>
+<section id="pre-processor-identification-macros">
+<span id="preproc-id"></span><h4>Pre-Processor Identification Macros<a class="headerlink" href="#pre-processor-identification-macros" title="Link to this heading"></a></h4>
+<p>The pre-processor identification macros will only appear if a
+pre-processor is in use. Pre-processors handle special requirements
+of popular CNC’s, such as the use of variables, functions, program
+branching and looping. The pre-processor is defined in the <em>General
+Description / General Information</em> section of the Questionnaire.</p>
+<p>The pre-processor identification macro is called by the pre-processor
+whenever it cannot recognize a function or variable in the current
+MCD block. The $CEPPID macro system variable can be set</p>
+<p>$FALSE to inhibit processing of the pre-processor identification
+macro (which means of course that unrecognized functions and
+variables will be diagnosed). By default pre-processor
+identification macro processing is enabled if a macro is defined.</p>
+<p>The following $P variables are available with pre-processor
+identification macro:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>On entry:</p>
+<p>  =0</p>
+<p>On exit:</p>
+<p>  -1: quietly ignore the unrecognized MCD</p>
+<p>   0: diagnose and ignore the unrecognized MCD</p>
+<p>   1: re-evaluate the modified MCD in $P2</p>
+<p>   2: accept unrecognized MCD and continue</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Unrecognized function or variable</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Value being assigned to $P2 if on left side of assignment.
+$NULL otherwise.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The default action of the preprocessor identification macro is to
+discard the unrecognized MCD and signal an error. Set $P1 to –1 to
+quietly discard the unrecognized MCD. If the unrecognized function or
+variable is part of an expression, it will be replaced by the value 0
+(zero) instead of discarding it. This is also how unrecognized
+functions and variables are handled when a pre-processor
+identification macro is not being used.</p>
+<p>If the pre-processor macro is able to identify the unrecognized
+function or variable, then $P2 must be set to the as-evaluated
+result and, most importantly, $P1 must be set to 1 (one) to tell the
+pre-processor to use the new $P2 value in replacement for whatever
+it was that was not recognized in the first place. For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CASE/$P2
+   WHEN/&#39;#5001&#39;
+      $P2=$XM
+   WHEN/&#39;#5002&#39;
+      $P2=$YM
+      …
+WHEN/OTHERS
+   TERMAC
+ENDOF/CASE
+$P1=1
+</pre></div>
+</div>
+</div></blockquote>
+<p>An error will be diagnosed if $P1 is set to 1 but $P2 is left
+unchanged.</p>
+<p>If the text in $P2 is normally part of a larger construct (e.g., the
+“TR” enumerated type on a Siemens controller), then $P1 can be set
+to 2 to tell the pre-processor to continue evaluating the expression
+using the unrecognized text as-is.</p>
+<p>Finally, if $P2 represents an unknown variable that appears on the
+left hand side of an assignment, then $P3 will contain the value of
+the expression on the right hand side of the assignment. $P3 will be
+$NULL if the unrecognized variable or function is not being assigned
+a value.</p>
+</section>
+</section>
+<section id="create-or-modify-event-macros">
+<h3>Create or Modify Event Macros<a class="headerlink" href="#create-or-modify-event-macros" title="Link to this heading"></a></h3>
+<p>To create or modify an event macro, double click on the macro name in
+the Navigator. Alternately, you can open the Event Macros section
+header in the Navigator, select one of the event macros listed in the
+upper right main working window (see <a class="reference internal" href="#figure-event-macro"><span class="std std-ref">image above</span></a>) and then press the Modify button at
+the top of the window (or double-click on a listed macro). When a
+macro is created or modified, the macro editor occupies the main work
+space.</p>
+<p>The lines of the macro define the actions to perform when the macro
+is called. These lines can contain any combination of variable
+assignments, logic statements, loops, function calls and control
+emulator commands. The macro processor executes the macro starting
+from the first line and working down line by line, except when the
+flow of processing is changed by loops and conditional or
+unconditional branching. Some control emulator commands and functions
+can cause a macro to “call” (i.e., execute) another macro. There is
+no practical limit on how deeply macros can be nested. Processing of
+the current macro picks up from where it left off after a call. See
+see <a class="reference internal" href="../macros/language/index.html#macro-language"><span class="std std-ref">“The Macro Language”</span></a> for more information
+concerning the content of a macro.</p>
+</section>
+<section id="the-event-macro-editor">
+<h3>The Event Macro Editor<a class="headerlink" href="#the-event-macro-editor" title="Link to this heading"></a></h3>
+<p>The Event Macro editor is identical to the Startup/Shutdown Macro
+editor described earlier (see <a class="reference internal" href="#macro-editor"><span class="std std-ref">“The Macro Editor”</span></a>).</p>
+</section>
+<section id="delete-or-disable-event-macros">
+<h3>Delete or Disable Event Macros<a class="headerlink" href="#delete-or-disable-event-macros" title="Link to this heading"></a></h3>
+<p>To delete an event macro, open the Event Macros section header in the
+Navigator, select one of the event macros listed in the upper right
+main working window (see <a class="reference internal" href="#figure-event-macro"><span class="std std-ref">image above</span></a>) and then press the Delete button at the top of
+the window (or the Delete key). A deleted macro cannot be recovered,
+so be careful when deleting.</p>
+<p>You can also disable an event macro instead of deleting it. A
+disabled macro remains defined in QUEST, but CERUN will not process
+it by default. You can also enable or disable macros at run-time for
+testing purposes using the CERUN debugger.</p>
+</section>
+</section>
+<section id="code-macros">
+<span id="id6"></span><h2>Code Macros<a class="headerlink" href="#code-macros" title="Link to this heading"></a></h2>
+<p>This section provides the capability to define processing associated
+with custom CNC codes (i.e., codes that are not supported by Control
+Emulator), or to replace or modify built-in processing of codes that
+are known to Control Emulator. This is done by creating macros that
+will “match” codes read from the MCD. These macros can in turn do
+whatever processing is necessary for the matched code.</p>
+<p>Double-click on the “Code Macros” heading in the Navigator to open
+the Code Macros view in the working window. This view shows all code
+macros defined for the control emulator. An image of the Code
+Macros main view is shown below.</p>
+<figure class="align-center" id="id17">
+<span id="figure-code-macro"></span><a class="reference internal image-reference" href="../../_images/quest_code_macro.png"><img alt="../../_images/quest_code_macro.png" src="../../_images/quest_code_macro.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Code Macros Facility</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Navigator also lists all code macros that have been defined for
+the control emulator. Code macros are listed by their descriptive
+name, which you can enter when creating the macro or by modifying the
+“matching information” of a macro (described in the Create Code
+Macros section below). The default name of a macro is constructed
+from the list of code identifiers that the code macro matches. You
+can open a macro for editing by double-clicking on the macro
+definition in the Navigator or in the working window, or by first
+selecting a macro in the working window and then pressing the
+“Modify” button.</p>
+<section id="create-code-macros">
+<h3>Create Code Macros<a class="headerlink" href="#create-code-macros" title="Link to this heading"></a></h3>
+<p>Press the Add button to create a new code macro. A Code Macro
+Properties dialog window will appear, which is used to define the
+conditions that will cause the code macro to be matched by CERUN when
+processing the MCD. An image of the Code Macro Properties dialog
+is shown below (the code matching conditions are taken from
+<a class="reference internal" href="../back/cemacrosample.html#ce-macro-example-2"><span class="std std-ref">“Macro Example #2”</span></a> in the annex).</p>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="../../_images/quest_code_macro_prop.png"><img alt="../../_images/quest_code_macro_prop.png" src="../../_images/quest_code_macro_prop.png" style="width: 4.549in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Code Macro Properties Dialog</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The first step when adding a code macro is to define the code or
+codes that must be present on the MCD block in order to execute the
+macro. You do this by first selecting “<strong>Code Identifier</strong>” in
+the upper left window of the dialog to see a list of all known code
+identifiers, then selecting one or more code identifier that this
+macro is being written to match and finally by pressing the <strong>upper
+Add</strong> button to add the code identifiers to the list of codes used to
+match the macro. You can add to the list of matching codes by
+repeatedly selecting code identifiers and pressing the Add button.
+You remove a code identifier from the list of matching codes by
+selecting it and pressing the Delete key (on the keyboard). If
+multiple matching codes are defined, the default condition is to
+execute the code macro if any one of the matching codes is present on
+the block. If multiple matching codes are present on the block, then
+the code macro will be executed for each matching code in turn in
+their order of execution (i.e., as defined by the code “order”
+setting, or left to right on the MCD block for codes with the same
+order setting).</p>
+<p>You can optionally define other code identifiers and/or data
+identifiers that either must be present on the block of MCD or that
+must not be present on the block of MCD, in order to execute the
+macro. You do this by first selecting “<strong>Code Identifier</strong>” or
+“<strong>Data Identifier</strong>” in the upper left window of the dialog to
+see a list of all known code or data identifiers, then selecting one
+or more code or data identifiers from the list and finally by
+pressing the <strong>lower Add</strong> button to add the identifiers to the list
+of conditional identifiers. Use the checkbox to the left of each
+conditional code or data identifier to toggle between “<strong>must be
+present</strong>” and “<strong>must not be present</strong>” conditions. If
+multiple conditional code/data identifiers are defined, the default
+condition is to execute the code macro only if all conditions are
+true. This means that all code/data identifiers marked “must be
+present” are in fact present on the block of MCD and no code/data
+identifiers marked “must not be present” are present on the block of
+MCD.</p>
+<p>If the default matching conditions are not suitable, then the
+“<strong>Advanced</strong>” radio button can be selected and the matching
+condition can be entered by hand. The matching condition is entered
+as a Boolean macro expression consisting solely of code and data
+identifier names, the .AND. and .OR. logical operators (or C style &amp;&amp;
+and || operators) and parentheses if it is necessary to override
+the default operator precedence of AND before OR.</p>
+<p>When a new code macro is added, the macro editor occupies the main
+work space. By default, a new code macro consists of a single
+<strong>OUTPUT</strong> macro command. The OUTPUT macro command tells CERUN to
+perform the built-in processing associated with whatever code it was
+that matched the macro. Macro code placed in the lines before the
+OUTPUT command will be executed by CERUN before built-in processing.
+Macro commands placed after the OUTPUT command will be executed by
+CERUN after built-in processing. You can omit the OUTPUT command to
+replace any built-in processing by your own macro code. An empty
+macro is one that will “do nothing” when the matching code/data
+identifier conditions are found on a block of MCD. It is more
+efficient though to clear the Process state of a code in the <a class="reference internal" href="#code-customization"><span class="std std-ref">Code Customization</span></a>
+section than it is to add an empty matching code macro.</p>
+<p>A code macro can contain <strong>EXEC</strong> commands that cause additional
+codes to be executed or MCD to be evaluated by CERUN. This is the
+primary form of customization used by CERUN. Codes and/ or MCD that
+is processed by an EXEC command is subject to code macro matching in
+the same way that as the original MCD. This means that code macros
+containing EXEC commands can cause other code macros to be “called”.
+There is no practical limit on how deeply code macros can be nested,
+but no code macro that is already active can be a candidate for
+further code macro matching. This means that it is not possible to
+write recursive code macros.</p>
+<p>The following $P variables are available with code macros:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>Code identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Code value</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The $P1 variable initially contains the matching code identifier.
+This is the code that will “fire” when an OUTPUT command is coded.
+The $P1 variable can be changed in the macro to any valid code
+identifier before calling OUTPUT. A code macro can execute multiple
+codes by repeatedly setting $P1 to a code value and then calling
+OUTPUT.</p>
+<p>The $P2 variable contains either the corresponding code identifier
+numeric value if it can be determined, or the text of the code
+itself. The numeric code value is calculated using the formula:
+$P2=(<em>code</em><strong>*n</strong>)<strong>+n</strong>, where the “*n” and “+n” values are
+defined in the Code Customization table.</p>
+<section id="the-code-macro-editor">
+<h4>The Code Macro Editor<a class="headerlink" href="#the-code-macro-editor" title="Link to this heading"></a></h4>
+<p>The Code Macro editor is identical to the Startup/Shutdown Macro
+editor described earlier (see <a class="reference internal" href="#macro-editor"><span class="std std-ref">“The Macro Editor”</span></a>).</p>
+</section>
+<section id="code-macros-match-order">
+<h4>Code Macros Match Order<a class="headerlink" href="#code-macros-match-order" title="Link to this heading"></a></h4>
+<p>You can have more than one code macro with the same matching
+conditions. When this is the case, CERUN will try to find a match
+starting with the first one in the list. The order is not important
+when each code macro has completely different matching conditions,
+but it becomes much more important when this is not the case.</p>
+<p>To change the order of a macro within the list (see <a class="reference internal" href="#figure-code-macro"><span class="std std-ref">this image</span></a>),
+select the macro and then use the up-arrow and down-arrow
+buttons to move it. You can also use the mouse to change the order by
+first selecting the macro and using drag-and-drop.</p>
+<p>When multiple code macros can be matched from the current MCD, the
+first matching code macro in the list <em>that is not already active</em> is
+executed. Once a code macro has been matched and is being executed,
+it is no longer a candidate for subsequent matching. Once the code
+macro has completed, then it again becomes available for matching. An
+OUTPUT command in a code macro will cause the next matching code
+macro in the list to be executed and so on until no other matching
+macros exist. A code that is not matched by a code macro is then
+processed using built-in logic if any, or diagnosed if the code is
+not recognized.</p>
+</section>
+<section id="modify-code-macro-matching-conditions">
+<h4>Modify Code Macro Matching Conditions<a class="headerlink" href="#modify-code-macro-matching-conditions" title="Link to this heading"></a></h4>
+<p>To modify a code macro, open the Code Macros section header in the
+Navigator, select one of the code macros listed in the upper right
+main working window and then press the Modify button at the top of
+the window. There are two forms of modification:</p>
+<ul class="simple">
+<li><p><strong>Modify matching info</strong>: This opens the Code Macro Properties dialog
+to allow editing of the matching condition and/or the descriptive
+name of the code macro.</p></li>
+<li><p><strong>Modify macro</strong>: This opens the macro editor to allow editing of the
+code macro contents</p></li>
+</ul>
+</section>
+<section id="delete-or-disable-code-macros">
+<h4>Delete or Disable Code Macros<a class="headerlink" href="#delete-or-disable-code-macros" title="Link to this heading"></a></h4>
+<p>To delete a code macro, open the Code Macros section header in the
+Navigator, select one of the code macros listed in the upper right
+main working window and then press the Delete button at the top of
+the window (or the Delete key). A deleted macro cannot be recovered,
+so be careful when deleting.</p>
+<p>You can also disable a code macro instead of deleting it. A disabled
+code macro remains defined in QUEST, but CERUN will not process it by
+default. You can also enable or disable macros at run-time for
+testing purposes using the CERUN debugger.</p>
+</section>
+</section>
+</section>
+<section id="data-macros">
+<span id="id7"></span><h2>Data Macros<a class="headerlink" href="#data-macros" title="Link to this heading"></a></h2>
+<p>A Data identifier defines the input register format for a
+corresponding Code identifier. For example, a REG_SPINDLE_RPM
+identifier defines the speed of spindle rotation to use when a
+CODE_SPINDL_CLW code identifier is being processed. Data Macros can
+be written to customize the processing of Data identifiers in much
+the same way that <a class="reference internal" href="#code-macros"><span class="std std-ref">Code macros</span></a> can be written to customize the
+processing of Code identifiers. A Code macro defines how the code
+is processed; a Data macro defines how the value of the data identifier is calculated.</p>
+<p>Double-click on the “Data Macros” heading in the Navigator to open
+the Data Macros view in the working window. This view shows all data
+macros defined for the control emulator. An image of the Data
+Macros main view is shown below.</p>
+<figure class="align-center" id="id19">
+<span id="figure-data-macro"></span><a class="reference internal image-reference" href="../../_images/quest_data_macro.png"><img alt="../../_images/quest_data_macro.png" src="../../_images/quest_data_macro.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Data Macros Facility</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Navigator also lists all data macros that have been defined for
+the control emulator. Data macros are listed by their descriptive
+name, which you can enter when creating the macro or by modifying the
+“matching information” of a macro (described in the Create Data
+Macros section below). The default name of a macro is constructed
+from the list of data identifiers that the data macro matches. You
+can open a macro for editing by double-clicking on the macro
+definition in the Navigator or in the working window, or by first
+selecting a macro in the working window and then pressing the
+“Modify” button.</p>
+<section id="create-data-macros">
+<h3>Create Data Macros<a class="headerlink" href="#create-data-macros" title="Link to this heading"></a></h3>
+<p>Press the Add button to create a new data macro. A Data Macro
+Properties dialog window will appear, which is used to define the
+data identifiers that will cause the data macro to be matched by
+CERUN. An image of the Data Macro Properties dialog is shown
+below.</p>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="../../_images/quest_data_macro_prop.png"><img alt="../../_images/quest_data_macro_prop.png" src="../../_images/quest_data_macro_prop.png" style="width: 4.549in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Data Macro Properties Dialog</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The first step when adding a data macro is to define the
+data identifiers that will match the macro. You do this by first
+selecting one or more identifiers from the list of all known data
+identifiers and then by pressing the <strong>Add</strong> button to add them to
+the list of data identifiers that match the macro. You can add to the
+list of matching data identifiers by repeatedly selecting data
+identifiers and pressing the Add button. You remove a data
+identifier from the list of matching identifiers by selecting it and
+pressing the Delete key. If multiple data identifiers are defined,
+then the macro will be used when processing any of the listed data
+identifiers.</p>
+<p>When a new data macro is added, the macro editor occupies the main
+work space. By default, an empty data macro is created. The main
+purpose of a data macro is to modify the calculated data identifier
+value, which is done by changing the value of the $P2 variable (see
+table below). A data macro can contain <strong>EXEC</strong> commands that cause
+additional codes to be executed or MCD to be evaluated by CERUN.
+Careful consideration must be taken to ensure that the EXEC command
+does not interfere with the current code processing that resulted in
+the data macro being called. Generally speaking, EXEC commands should
+not be used in a data macro. The OUTPUT command must not be used in a
+data macro since the purpose of a data macro is to return data to a
+calling function and not to generate output.</p>
+<p>The following $P variables are available with data macros:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>$P</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$P1</p></td>
+<td><p>On entry:</p>
+<p>  =1</p>
+<p>On exit:</p>
+<p>  Leave as-is to return $P2 value</p>
+<p>  Set to 0 to not return a value</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>$P2</p></td>
+<td><p>Data value</p></td>
+</tr>
+<tr class="row-even"><td><p>$P3</p></td>
+<td><p>Data identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>$P4</p></td>
+<td><p>Value type:</p>
+<p>  1: Absolute</p>
+<p>  2: Incremental</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>$P5</p></td>
+<td><p>Register “order” number, or zero (0) if not a register</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The $P1 variable can be set to zero on return to tell CERUN that
+there has been an error trying to evaluate the data identifier. CERUN
+will then typically output a diagnostic saying that information is
+missing for whatever code function was being processed.</p>
+<p>The $P2 variable contains the value of the data identifier, which is
+calculated using the formula:
+$P2=(<em>register</em><strong>*n</strong>)<strong>+n</strong>, where the “*n” and “+n” values
+are defined in the Data Customization table.</p>
+<p>The $P3 variable contains the matching data identifier, which can be
+useful when a data macro has multiple matching data identifiers.</p>
+<p>The $P4 variable indicates for machine axes values whether the $P2
+value will be processed as an absolute one ($P4=1), or as an
+incremental one ($P4=2). $P4 will be set on input to the expected
+type based on the axis letter address for controllers that use
+different letter addresses for absolute and incremental data (e.g.,
+XYZ vs. UVW), or based on the current CODE_POSITION_ABSOLUTE or
+CODE_POSITION_INCREMENTAL settings (e.g., G90 vs. G91). The
+$P4 variable can be changed on return to override how CERUN
+evaluates the value.</p>
+<p>The $P5 variable will contain the register “order” number if the
+data identifier is associated with a register. Otherwise, $P5 will
+be zero (0).</p>
+<section id="the-data-macro-editor">
+<h4>The Data Macro Editor<a class="headerlink" href="#the-data-macro-editor" title="Link to this heading"></a></h4>
+<p>The Data Macro editor is identical to the Startup/Shutdown Macro
+editor described earlier (see <a class="reference internal" href="#macro-editor"><span class="std std-ref">“The Macro Editor”</span></a>).</p>
+</section>
+<section id="data-macros-match-order">
+<h4>Data Macros Match Order<a class="headerlink" href="#data-macros-match-order" title="Link to this heading"></a></h4>
+<p>You can have more than one data macro with the same matching
+identifier. When this is the case, CERUN will execute each matching
+data macro in the order listed. The order is not important when each
+data macro has different matching identifiers, but it becomes much
+more important when this is not the case.</p>
+<p>To change the order of a macro within the list (see <a class="reference internal" href="#figure-data-macro"><span class="std std-ref">image above</span></a>), select the
+macro and then use the up-arrow and down-arrow buttons to move it.
+You can also use the mouse to change the order by first selecting the
+macro and using drag-and-drop.</p>
+</section>
+<section id="modify-data-macro-matching-conditions">
+<h4>Modify Data Macro Matching Conditions<a class="headerlink" href="#modify-data-macro-matching-conditions" title="Link to this heading"></a></h4>
+<p>To modify a data macro, open the Data Macros section header in the
+Navigator, select one of the data macros listed in the upper right
+main working window and then press the Modify button at the top of
+the window. There are two forms of modification:</p>
+<ul class="simple">
+<li><p><strong>Modify matching info</strong>: This opens the Data Macro Properties dialog
+to allow editing of the matching data identifiers or the descriptive
+name of the data macro.</p></li>
+<li><p><strong>Modify macro</strong>: This opens the macro editor to allow editing of the
+data macro contents</p></li>
+</ul>
+</section>
+<section id="delete-or-disable-data-macros">
+<h4>Delete or Disable Data Macros<a class="headerlink" href="#delete-or-disable-data-macros" title="Link to this heading"></a></h4>
+<p>To delete a data macro, open the Data Macros section header in the
+Navigator, select one of the data macros listed in the upper right
+main working window and then press the Delete button at the top of
+the window (or the Delete key). A deleted macro cannot be recovered,
+so be careful when deleting. You can also disable a data macro
+instead of deleting it. A disabled data macro remains defined in QUEST,
+but CERUN will not process it by default. You can also enable or disable
+macros at run-time for testing purposes using the CERUN debugger.</p>
+</section>
+</section>
+</section>
+<section id="user-function-macros">
+<span id="id8"></span><h2>User Function Macros<a class="headerlink" href="#user-function-macros" title="Link to this heading"></a></h2>
+<p>This section allows you to define your own macro functions, which can be
+called by other macros in the control emulator. To do this, create macros that
+specify a function name, its parameters, and optionally a return type.
+Functions defined here are automatically available to other macros and functions
+in the control emulator — no separate declaration is needed.
+This section does not cover the macro language itself; see :ref:“The Macro Language”&lt;macro_language&gt;
+for details on how to write macros.</p>
+<p>Double-click on the “User Function Macros” selection in the Navigator
+to open the main macro view in the working window. This view shows
+all user function macros. An image of the User Function Macros
+main view is shown below.</p>
+<figure class="align-center" id="id21">
+<span id="figure-user-func"></span><a class="reference internal image-reference" href="../../_images/quest_userfunc.png"><img alt="../../_images/quest_userfunc.png" src="../../_images/quest_userfunc.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The User Function Macros Facility</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The navigator lists function macros alphabetically by name. You can
+open a function macro for editing by double-clicking on the macro
+definition in the navigator or in the working window. You can also
+edit a function macro by selecting it in the working window and then
+pressing the <strong>Modify</strong> button. Only a single function macro can be
+edited at a time.</p>
+<section id="create-user-function-macro">
+<h3>Create User Function Macro<a class="headerlink" href="#create-user-function-macro" title="Link to this heading"></a></h3>
+<p>Press the <strong>Add</strong> button to add a new function macro. You will be asked
+to enter a function name, which must start with an alphabetic
+character and consist of only letters, digits and the underscore
+character. The name cannot be longer than 32 characters. It also
+cannot be the same as any function name that is already defined.</p>
+<p>When a new function macro is added, the macro editor occupies the
+main work space. The first line of the macro will contain the string
+“MACRO/” followed by the function macro name and open and closing
+parentheses ( ). This first line of the macro is called a Syntax
+Definition Line, or just SDL for short. The SDL defines the name of
+the function, its parameters and optionally the function return value
+type. More details of function macro SDLs can be found in
+<a class="reference internal" href="../macros/language/functioncall.html#user-function-macros-1"><span class="std std-ref">“User Function Macros”</span></a>.</p>
+<p>The remaining lines of the macro (i.e., the body) define the actions
+to perform when the function macro is called. The macro processor
+first copies the variables and/or constants used by the caller into
+the parameter values of the function macro. It then processes the
+body of the function macro. When the macro completes, either by
+processing a TERMAC or ENDMAC command, the function macro then
+returns a value to the caller. This value must be set in the body of
+the function macro before returning, by setting a variable having the
+same name as the function macro name.</p>
+<p>User function macros are ordered alphabetically, with no duplicates allowed,
+so there is no concept of ordering macros to affect how they are
+matched, as is done for code and data macros
+(i.e., the up and down arrow controls are disabled in the macro editor view).</p>
+</section>
+<section id="the-user-function-macro-editor">
+<h3>The User Function Macro Editor<a class="headerlink" href="#the-user-function-macro-editor" title="Link to this heading"></a></h3>
+<p>The User Function Macro editor is identical to the Startup/Shutdown
+Macro editor described earlier (see <a class="reference internal" href="#macro-editor"><span class="std std-ref">“The Macro Editor”</span></a>).
+Only a single user function macro can be edited at a time.</p>
+<p>Macro function names can be changed (i.e., renamed) simply by editing
+the macro function, modifying the function name in the SDL, and
+compiling and/or exiting.</p>
+</section>
+<section id="delete-or-disable-user-function-macros">
+<h3>Delete or Disable User Function Macros<a class="headerlink" href="#delete-or-disable-user-function-macros" title="Link to this heading"></a></h3>
+<p>To delete a user function macro, open the User Function Macros
+section header in the Navigator, select one of the user function
+macros listed in the upper right main working window and then press
+the Delete button at the top of the window (or the Delete key). A
+deleted macro cannot be recovered, so be careful when deleting.</p>
+<p>User function macros cannot be disabled.</p>
+</section>
+<section id="export-user-function-macros">
+<h3>Export User Function Macros<a class="headerlink" href="#export-user-function-macros" title="Link to this heading"></a></h3>
+<p>Press the Export button to select the function macros to be written
+in ASCII format to the selected file. Each macro is followed by an
+ENDMAC command in the generated file.</p>
+<p>There is no corresponding Import function.</p>
+</section>
+</section>
+<section id="the-dialog-editor">
+<span id="dialog-editor"></span><h2>The Dialog Editor<a class="headerlink" href="#the-dialog-editor" title="Link to this heading"></a></h2>
+<p>The Dialog editor is used to build dialog boxes, which are then used
+in CERUN to query the user for any information that is necessary during control emulation.
+You can create many different dialogs, each
+with a unique name, which are then activated using the
+<a class="reference internal" href="../functions/otherfunc.html#func-fdialog"><span class="std std-ref">$FDIALOG macro function</span></a> call.</p>
+<figure class="align-center" id="id22">
+<a class="reference internal image-reference" href="../../_images/quest_dlgmain.png"><img alt="../../_images/quest_dlgmain.png" src="../../_images/quest_dlgmain.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Dialog Editor Facility</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Press the <strong>Add</strong> button to create a new dialog. You will be prompted
+for the dialog’s name, which is how the dialog will be identified in
+the $FDIALOG function call. Spacing and letter-case are not
+significant in dialog names. Dialogs are listed alphabetically by
+name. For each dialog, the listing includes its name, the caption
+title that will appear at the top of the dialog window and a list of
+all macro variables referenced by the dialog (dialogs operate by
+getting and setting macro variables). Note that a single dialog
+containing all user input requirements is generally preferable to the
+user (if properly constructed) than a series of smaller dialogs.</p>
+<p>Select an existing dialog from the list and press the <strong>Modify</strong>
+button (or double click on a list entry) to make changes to an
+existing dialog. Select one or more dialogs and press the <strong>Delete</strong>
+button to remove them from the control emulator. This function cannot
+be undone.</p>
+<p>There are also <strong>Load</strong> and <strong>Dump</strong> buttons that can be used to read
+and write dialog definitions from/ to external files. Use this
+feature to copy dialogs from one control emulator to another, or to
+create “external” dialogs that can be accessed by any control emulator. We
+recommend that you do not edit dialog definitions by hand.</p>
+<p>The Finder utility includes a “Dialogs” option to include dialog
+definitions when searching through a control emulator for matching
+text. The Diffs utility also checks for differences in dialogs when
+comparing control emulators. Dialogs are listed in XML format in the
+Finder and Diffs windows.</p>
+<section id="the-dialog-template-editor">
+<h3>The Dialog Template Editor<a class="headerlink" href="#the-dialog-template-editor" title="Link to this heading"></a></h3>
+<p>When a dialog is first created it consists of a single window frame
+and two buttons: OK and Cancel. The image below
+shows an example of the dialog template editor.</p>
+<figure class="align-center" id="id23">
+<span id="figure-dialog-template"></span><a class="reference internal image-reference" href="../../_images/quest_dlgedit.png"><img alt="../../_images/quest_dlgedit.png" src="../../_images/quest_dlgedit.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The Dialog Template Editor</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The window frame can be resized by selecting it and then dragging
+(with the left-mouse button held down) one of the three resize points
+on the exterior of the window. You can also double-click on the
+window to edit the windows “Properties”, which include: its caption
+title, name, size in screen pixels and margin (like the margins of a
+printed page). Similarly, the OK or Cancel button can be selected and
+resized using the mouse, or double-clicked on to edit its button
+properties. This behavior is true for all dialog “controls”.</p>
+<p>Dialogs can contain a number of different types of window controls,
+which can be selected from the Controls toolbar or from the
+<strong>Dialog»Controls</strong> menu. To create a new control, select the control
+type and then interactively place it on the window frame. After
+placing the control, you will be prompted for the control’s
+properties. The following control types are available:</p>
+<ul>
+<li><p><strong>Text:</strong> Use this control to add text to your dialog. Properties
+include the position and the text itself. You can use line breaks in
+the text input field to show multi-line text in the dialog. The text
+control is automatically sized to the required text width and height.</p>
+<p></p>
+</li>
+<li><p><strong>Frame:</strong> Use this control to visually group related dialog
+controls. Properties include the text label that appears at the
+top-left corner of the frame and the position and size of the frame.</p>
+<p></p>
+</li>
+<li><p><strong>Button:</strong> Use this control to create buttons, such as the OK and
+Cancel buttons. Properties include the text label that appears inside
+the button, the type of button and the position and size of the
+button. Buttons with an “<strong>OK</strong>” type cause the dialog to close
+when they are pressed, returning the button label text (e.g., “OK”)
+as the return value to the $FDIALOG function and all dialog macro
+variables set as shown in the dialog. Buttons with a “<strong>Cancel</strong>”
+type cause the dialog to close, returning the button label text
+(e.g., “Cancel”) and leaving all dialog macro variables unchanged
+(but initialized if necessary). Buttons with a “<strong>Reset</strong>” type
+don’t close the dialog; instead, they reset all controls to their
+initial state. Buttons with a “<strong>Call Dialog</strong>” type activate the
+specified dialog when pressed. A dialog called in this manner must
+reside in the same control emulator or external file as its caller.
+You can choose to display (and return) any text you want for a
+button.</p>
+<p></p>
+</li>
+<li><p><strong>Edit box:</strong> Use this control to create a field that will optionally
+accept user-typed input. Properties include the default value for the
+field, its associated macro variable, the position and size of the
+edit box field, an “editable” flag indicating if the field can be
+changed by the user and a “numeric only” flag with optional
+minimum/maximum range limits to force user input to be numeric. When
+the $FDIALOG function is called, the edit box field will initially be
+set to the macro variable value. The edit box field will instead
+initially be set to the default value if the macro variable does not
+exist, or is $NULL, or is an empty string. The macro variable will be set to the
+contents of the edit box field when an OK type button is pressed.</p>
+<p></p>
+</li>
+<li><p><strong>Check box:</strong> Use this control to accept logical True/False type
+input from the user. Properties include an optional text label that
+will appear to the right of the check box, the default set/clear state
+for the check box, its associated macro variable and the position of
+the check box control. When the $FDIALOG function is called, the
+check box field will initially be set if: the variable is logical and
+is true; or the variable is numeric and non-zero; or the variable is
+text and is $TRUE. The check box field will initially be cleared if:
+the variable is logical and is false; or the variable is numeric and
+zero; or the variable is text and is $FALSE. The check box field will
+instead initially be set to the default value if the macro variable
+does not match any of the preceding, or does not exist, or is $NULL.
+The macro variable will be set to one of the true/false conditions,
+based on the macro variable type, when an OK type button is pressed.</p>
+<p></p>
+</li>
+<li><p><strong>Radio button:</strong> Use this control to present the user with a series
+of exclusive choices. Properties include an optional text label that
+will appear to the right of the radio-button, an optional alternate
+return value, an initial state setting, its associated macro variable
+and the position of the radio-button control. When a radio button is
+selected, the macro variable will be set by default to the label
+text. You can choose to return something different for the variable
+by specifying an alternate return value (e.g., a number). You must
+have two or more radio button controls sharing the same macro
+variable. You can choose which one is the default state (setting the
+default state in one control clears this flag in the others). When the
+$FDIALOG function is called, the radio-button that first matches the
+current macro variable is the one  that will be shown selected.
+The default radio button will be shown selected if no match was found.
+When an OK button is pressed, the macro variable will be set to the label
+text or alternate return value text of the selected radio button.</p>
+<p></p>
+</li>
+<li><p><strong>Combo box:</strong> Use this control to present the user with a number of
+listed choices, available in a drop-down menu. Properties include the
+list of valid choices and/or a macro variable that will define the
+acceptable choices, the default value for the combo box, its
+associated macro variable and the position and size of the combo box
+field. If you choose to use a variable to define the list of choices,
+this variable must either be declared as an array or created as a
+sequence. It must be initialized before calling the
+$FDIALOG function. The default value will be used if the macro
+variable does not match any of the choices. The macro variable will
+be set to the selected choice type when an OK button is pressed.</p>
+<p></p>
+</li>
+<li><p><strong>List box:</strong> This control is similar to the combo box control,
+except that the choices are visible in a scrolling list.</p>
+<p></p>
+</li>
+<li><p><strong>Picture:</strong> Use this control to display an image in the dialog.
+Supported image formats include bmp, gif, jpg and png.</p></li>
+</ul>
+<p>All dialog controls (except for Picture) include a “Logical state
+expression” property, which can be used to enable or disable the
+control. The logical state expression can be any valid macro logical
+expression that evaluates to $TRUE or $FALSE. If an expression is
+present and it evaluates to false, the control will be disabled
+(i.e., not available for selection or modification), otherwise the
+control will be enabled.</p>
+<p>All dialog controls accepting input include a “Help tip text”
+property, which can be used to provide helpful information to the
+user in the form of a tool-tip that will appear when the mouse
+pointer hovers over the control.</p>
+<p>Controls are initially placed inside the dialog using the mouse. Once
+created, they can be repositioned, aligned and sized relative to
+other controls using the arrow keys and the functions available from
+the Utilities toolbar, or from the <strong>Dialog»Utilities</strong> menu. Hold
+the Ctrl key when resizing a control to retain its current aspect
+ratio. To reposition two or more controls, select each in turn with
+the left-mouse button while holding the Ctrl key, then use the arrow
+keys or press and hold the left-mouse button to reposition the
+selected controls.</p>
+<p>The <strong>Dialog»Tab Order</strong> menu function specifies the order in which
+controls are visited when you press the tab key. The <strong>Dialog»Test</strong>
+menu function can be used to try out how dialogs will behave when
+they are used
+in CERUN.</p>
+</section>
+</section>
+<section id="file-storage">
+<span id="id9"></span><h2>File Storage<a class="headerlink" href="#file-storage" title="Link to this heading"></a></h2>
+<p>The File Storage section can be used to store information in a file
+format that might be needed by CERUN during macro
+processing, such as controller resident subprograms.
+Although CERUN can access files that reside on an external file
+system, placing these files inside the control emulator itself
+eliminates any dependencies the control emulator might have on
+external data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Files stored in the file storage section are read-only.
+This means that these files can be read or executed during CERUN
+macro processing, but they cannot be written to, replaced or deleted.
+If a control emulator must access files for both read and write, then
+those files must reside in the regular “external” file system.</p>
+</div>
+<p>Double click on the File Storage entry in the Navigator to activate
+the File Storage facility. An image of the File Storage facility
+is shown below.</p>
+<figure class="align-center" id="id24">
+<span id="figure-file-storage"></span><a class="reference internal image-reference" href="../../_images/quest_icamfs.png"><img alt="../../_images/quest_icamfs.png" src="../../_images/quest_icamfs.png" style="width: 5.681in;" /></a>
+<figcaption>
+<p><span class="caption-text">The File Storage Facility</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The file storage section is organized with a directory browser on the
+left hand side of the main working window and a detailed file listing
+on the right hand side. Selecting a directory in the left hand window
+will display the contents of that directory in the right hand window.
+Use the right-mouse context sensitive pop-up window to add, rename
+or delete directories and files. You can drag and drop directories
+and files from an external file system into the file storage view.
+You can also drag and drop files and directories within the file
+storage facility to move or copy files. Standard Windows conventions
+apply for all drag and drop operations. Any operations performed in the
+File Storage facility will have no effect on the original files that
+reside in the external file system.</p>
+<p>The <strong>OK</strong> button saves changes and exits the File Storage facility.
+The <strong>Cancel</strong> button exits the File Storage facility ignoring any
+changes that may have been made. The <strong>Reset</strong> button also undoes any
+changes that may have been made, but keeps the File Storage facility
+active.</p>
+<p id="index-0">The File Storage section can be used as follows:</p>
+<ul>
+<li><p>A macro <strong>OPEN command</strong> (see <a class="reference internal" href="../macros/language/textio.html#opening-text-file"><span class="std std-ref">“Opening a Text File (OPEN)”</span></a>
+can reference a file in the internal File Storage for read-only purposes. Specify an absolute
+file path for the filename using an “//ICAMFS/” universal file descriptor (e.g., “//ICAMFS/toolno.dat”).</p>
+<p></p>
+</li>
+<li><p>A macro <strong>DECLAR/EXTERN,FUNCTN command</strong> (see <a class="reference internal" href="../macros/language/functioncall.html#external-functions"><span class="std std-ref">“External Functions”</span></a>)
+can reference a DLL or Python file in the internal File Storage that contains the user function code to execute. Specify an absolute file path for the filename using an
+“//ICAMFS/” universal file descriptor (e.g., “//ICAMFS/mycode.dll” or “//ICAMFS/mycode.py”).</p>
+<p></p>
+</li>
+<li><p>A macro <strong>SYSTEM command</strong> (see <a class="reference internal" href="../macros/language/others.html#calling-other-programs"><span class="std std-ref">“Calling other programs (SYSTEM)”</span></a>)
+can reference an EXE file in the internal File Storage that contains the program to execute.
+Specify an absolute file path for the filename using an “//ICAMFS/ ” universal file descriptor
+(e.g., “//ICAMFS/myprogram.exe”).</p>
+<p></p>
+</li>
+<li><p>A <a class="reference internal" href="#start-end-subprogram"><span class="std std-ref">subprogram startup macro</span></a> can reference a
+subprogram definition file in the internal File Storage by setting the <strong>$P9
+macro variable</strong> to the absolute path of the subprogram as shown above
+for the OPEN macro command.</p></li>
+</ul>
+<p>The File Storage facility initially stores all of its data in memory
+while you are editing a control emulator. The data is later stored in
+the database in a compressed format when Saving or Generating. CERUN
+uncompresses the <em>entire</em> File Storage section into memory when the
+control emulator is later run.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="icamdb.html" class="btn btn-neutral float-left" title="The ICAM Database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ceprocessing.html" class="btn btn-neutral float-right" title="Control Emulator Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
