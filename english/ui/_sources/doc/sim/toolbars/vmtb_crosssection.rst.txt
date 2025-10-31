@@ -1,0 +1,85 @@
+VM Cross Section Toolbar
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+|image1|
+
+The Cross Section toolbar can be used to obtain a cross section view of
+the in-process stock, which is only available when the Material Removal
+Simulation (MRS) license option is enabled.
+
++-----------+---------------------------------------------------------+
+| |image20| | **Simulation»Show»Cross Section»XY Plane**: Selections  |
+|           | cause the stock to be sectioned along the XY stock      |
+|           | mount point plane.                                      |
++-----------+---------------------------------------------------------+
+| |image21| | **Simulation»Show»Cross Section»YZ Plane**: Selections  |
+|           | cause the stock to be sectioned along the YZ stock      |
+|           | mount point plane.                                      |
++-----------+---------------------------------------------------------+
+| |image22| | **Simulation»Show»Cross Section»ZX Plane**: Selections  |
+|           | cause the stock to be sectioned along the ZX stock      |
+|           | mount point plane.                                      |
++-----------+---------------------------------------------------------+
+| |image23| | **Simulation»Show»Cross Section»Custom Plane**:         |
+|           | Selection can be used to define a cross section plane   |
+|           | using the Simulation»Measure picking functions. For     |
+|           | example, a cross section plane can be defined by        |
+|           | picking a face, or by picking 3 points that lie on the  |
+|           | plane, etc.                                             |
++-----------+---------------------------------------------------------+
+| |image24| | **Simulation»Show»Cross Section»Invert Plane**: This    |
+|           | button toggles between showing the in-process stock on  |
+|           | one side of the cross section plane or the other.       |
++-----------+---------------------------------------------------------+
+| |image25| | **Simulation»Show»Cross Section»Show Grid**: This       |
+|           | button enables or disables the display of a grid on the |
+|           | cross section plane. Grid settings are the same as for  |
+|           | the Simulation Grid feature.                            |
++-----------+---------------------------------------------------------+
+| |image26| | **Simulation»Show»Cross Section»Push Plane**: This      |
+|           | buttons offset the cross section plane by a fixed       |
+|           | amount as defined in the Simulation»Options dialog Misc |
+|           | tab.                                                    |
++-----------+---------------------------------------------------------+
+| |image27| | **Simulation»Show»Cross Section»Pull Plane**: This      |
+|           | buttons offset the cross section plane by a fixed       |
+|           | amount as defined in the Simulation»Options dialog Misc |
+|           | tab.                                                    |
++-----------+---------------------------------------------------------+
+| |image28| | **Plane Offset**: This input field in the toolbar shows |
+|           | the current cross section plane offset resulting from   |
+|           | the Push or Pull Plane functions. A value can also be   |
+|           | entered into this field to define the required offset.  |
++-----------+---------------------------------------------------------+
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/bd82ffa60fe135f487326a8675a08056a788acb0.bmp
+.. |image2| image:: ./media/f64b778948b22b4b76c5d84120e8e57d0386706e.bmp
+.. |image3| image:: ./media/e46a23e8d4f8899040b716235a49a6cc07351857.bmp
+.. |image4| image:: ./media/b31def1fc40714c9e7649a73d4ce650ca63b59bb.bmp
+.. |image5| image:: ./media/13aa0f9ee5b242bedaf8a8b2821324cfb9bd5dee.bmp
+.. |image6| image:: ./media/ff632e9f5cf0a9cd70cdab3f82f937b7f4abcd22.bmp
+.. |image7| image:: ./media/d6f8287f8497ee4ce9ee3a9bd38080895d5d1269.bmp
+.. |image8| image:: ./media/471a266bf68c606a828c258e130656f6326091cd.bmp
+.. |image9| image:: ./media/be481eb7ad490f72ee17969898023a46c4d18d70.bmp
+.. |image10| image:: ./media/cbab3bbe8c226fd76beb7a74c6615a749f5ecae9.bmp
+.. |image11| image:: ./media/f64b778948b22b4b76c5d84120e8e57d0386706e.bmp
+.. |image12| image:: ./media/e46a23e8d4f8899040b716235a49a6cc07351857.bmp
+.. |image13| image:: ./media/b31def1fc40714c9e7649a73d4ce650ca63b59bb.bmp
+.. |image14| image:: ./media/13aa0f9ee5b242bedaf8a8b2821324cfb9bd5dee.bmp
+.. |image15| image:: ./media/ff632e9f5cf0a9cd70cdab3f82f937b7f4abcd22.bmp
+.. |image16| image:: ./media/d6f8287f8497ee4ce9ee3a9bd38080895d5d1269.bmp
+.. |image17| image:: ./media/471a266bf68c606a828c258e130656f6326091cd.bmp
+.. |image18| image:: ./media/be481eb7ad490f72ee17969898023a46c4d18d70.bmp
+.. |image19| image:: ./media/cbab3bbe8c226fd76beb7a74c6615a749f5ecae9.bmp
+.. |image20| image:: ./media/f64b778948b22b4b76c5d84120e8e57d0386706e.bmp
+.. |image21| image:: ./media/e46a23e8d4f8899040b716235a49a6cc07351857.bmp
+.. |image22| image:: ./media/b31def1fc40714c9e7649a73d4ce650ca63b59bb.bmp
+.. |image23| image:: ./media/13aa0f9ee5b242bedaf8a8b2821324cfb9bd5dee.bmp
+.. |image24| image:: ./media/ff632e9f5cf0a9cd70cdab3f82f937b7f4abcd22.bmp
+.. |image25| image:: ./media/d6f8287f8497ee4ce9ee3a9bd38080895d5d1269.bmp
+.. |image26| image:: ./media/471a266bf68c606a828c258e130656f6326091cd.bmp
+.. |image27| image:: ./media/be481eb7ad490f72ee17969898023a46c4d18d70.bmp
+.. |image28| image:: ./media/cbab3bbe8c226fd76beb7a74c6615a749f5ecae9.bmp
+
