@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>SDRC/CAMAX Camand Interface Kit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../Creo/readme.htm">Creo</a>
+                <a href="../FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../Fusion360/readme.htm">Fusion 360</a>
+                <a href="../Mastercam/readme.htm">Mastercam</a>
+                <a href="../NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../Cadds5/readme.htm">Cadds5</a>
+                <a href="../Cadra/readme.htm">Cadra</a>
+                <a href="">Camand</a>
+                <a href="../CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../Cimatron/readme.htm">Cimatron</a>
+                <a href="../Em_Machine/readme.htm">Em Machine</a>
+                <a href="../Generic/readme.htm">Generic</a>
+                <a href="../GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../ICAM/readme.htm">ICAM</a>
+                <a href="../IDEAS/readme.htm">IDEAS</a>
+                <a href="../Intercim/readme.htm">Intercim</a>
+                <a href="../Intergraph/readme.htm">Intergraph</a>
+                <a href="../NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../NICAM/readme.htm">NICAM</a>
+                <a href="../NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../index.htm"><i class="fa fa-home">Kit</i></a>
+            <h1>Camand</h1>
+            <hr />
+            <h2>SDRC/CAMAX Camand TO CAM-POST INTERFACE DOCUMENTATION</h2>
+            <h3>Overview</h3>
+            <p>
+                The SDRC/CAMAX Camand Interface Kit is designed to accommodate differences in
+                syntax between SDRC's and ICAM's postprocessing languages. SDRC Camand APT
+                commands in an ASCII CLDATA format file are input to CAD-APT and CAM-POST.
+                The syntax for these statements are found in the SDRC Camand manual. See
+                CAM-POST chapter "Post-processor Vocabulary" for more information on CAM-POST
+                supported syntax.
+            </p>
+            <p>
+                Two forms of conversion take place: Camand APT file text substitutions, and
+                CAM-POST macro processing conversions.
+            </p>
+            <h3>APT Text Substitutions</h3>
+            <p>
+                The CAMAND.INS file causes the following substitutions:
+            </p>
+            <ol>
+                <li>DEEPCL and DEEPBK keywords are converted to DEEP and BRKCHP</li>
+                <li> All PPFUN/CAMAX commands are commented (i.e. not processed)</li>
+                <li>
+                    A continued comment warning message is disabled. These messages may
+                    appear if a PARTNO command is omitted from the program. They are
+                    of no importance.
+                </li>
+            </ol>
+            <h3>CAM-POST Macro Processing</h3>
+                <ol>
+                    <li> A zero (or near zero) UNITS scale factor is ignored.</li>
+                    <li>TOOLNO commands are replaced by LOADTL commands.</li>
+                    <li>
+                        CLDIST and SET commands that control wire guide positioning for 5-axis
+                        Wire EDM's are converted to PIVOTZ commands required by CAM-POST,
+                    </li>
+                    <li>LOAD/WIRE and UNLOAD/WIRE are converted to LOADTL commands.</li>
+                    <li>SYNCTR commands are converted to HEAD commands.</li>
+                </ol>
+            <!--a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a-->
+        </div>
+    </div>
+</body>
+</html>
+
