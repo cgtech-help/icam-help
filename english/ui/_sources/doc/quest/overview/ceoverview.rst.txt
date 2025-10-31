@@ -1,0 +1,72 @@
+Control Emulator Overview
+=========================
+
+**Introduction**
+
+The ICAM Control Emulator (CE) is used to read MCD data from the same
+input file format that a real numerical control would read it. Its goal
+is to read motions and output actions to the simulation engine to
+visually see the part being made. This is the perfect verification
+solution to avoid unwanted result and collision.
+
+The CE is a great asset to use in conjunction with GENER as it can read
+GENER’s output file and simulate the result.
+
+**Making a CE with QUEST**
+
+The CE is defined by a list of CODE and DATA registers which represent
+all the registers the CERUN (CE runtime) will understand and be able to
+process.
+
+Those CODE and DATA basically comes from the questionnaire. Making a CE
+works like making a post meaning that different section of questions
+will ask you about the definition of your machine and control
+capabilities. Now the difference between GENER and the CE is that GENER
+works with those question answers directly while the CE compiles them
+into two list of registers:
+
+-  **CODE** registers: The codes are the words that will actually
+   perform an action. For example, G01 is a code firing a linear
+   interpolation action and is represented by the CODE_LINEAR
+   identifier. Words not defined as registers can also be a code like
+   TRAORI which is the code for RTCP enable on a 840D control and have
+   the CODE_RTCP_ON identifier.
+
+   Every question asking for a G, M or alternate register/text will add
+   a CODE entry in the list. The list of currently defined codes can
+   then be viewed in the `CODE
+   customization <../usersguides/maininterface/workspaces/codecustomview.html>`__
+   section. That section can then be used to add, disable or modify any
+   CODE in order to tweak the CE without having to modify the
+   questionnaire data. This could be important since the CE can use an
+   external post-processor being in the same database for its
+   questionnaire data. This is what is making the CE and PP integrates
+   together.
+
+-  **DATA** registers: The data register list is also filled from the
+   questionnaire by each question asking for a register without asking
+   for the value. The data register do not perform any action by
+   themselves but they will be used by the CODE actions.
+
+   For example, the linear interpolation action fired by the CODE_LINEAR
+   identifier will check the MCD block for any axis present. It will
+   check for REG_AXIS_X, REG_AXIS_Y, and so on for the 15 standard axes.
+   Those REG\_\* identifiers are the DATA registers.
+
+   The DATA register defined by the questionnaire can be viewed in the
+   `DATA
+   customization <../usersguides/maininterface/workspaces/datacustomview.html>`__
+   section. Just like the CODE section, this section can be used to add,
+   disable and modify DATA registers without affecting the questionnaire
+   answers.
+
+The CE also provides ways of customizing even further. Each CODE coming
+from the questionnaire has its own default action which will be fired
+when the code is encountered on the block. However, there is a
+possibility to make a macro on a CODE and perform different actions than
+the default ones.
+
+There is also DATA macros that are used to alter the DATA value before
+it is returned to the actions using it.
+
+
