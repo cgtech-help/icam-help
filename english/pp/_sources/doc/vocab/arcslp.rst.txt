@@ -1,0 +1,34 @@
+.. _command_arcslp:
+
+The ARCSLP Command :kbd:`[MLEPC]`
+=================================
+
+The ARCSLP command is used to control the type of output resulting
+from a circular motion command.
+
+2D Arc Control
+--------------
+
+   :math:`\textbf{ARCSLP /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+The basic ARCSLP command controls the output of 2D circles, which are
+arcs that lie on one of the major planes (XY, YZ, ZX) of the machine.
+This command is ignored if 2D planar arcs are not supported by the
+machine. ON will cause all 2D planar circular motions to be output
+using circular interpolation (this is the default). OFF will cause
+all 2D planar circular motions to be approximated using linear
+interpolation (i.e., point to point motions).
+
+3D Arc Control
+--------------
+
+   :math:`\textbf{ ARCSLP / XYZ}, \begin{pmatrix} \begin{array}{l} \textbf{ALL} \\ \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+The ARCSLP/XYZ command controls the output of 3D circles, which are
+arcs that *do not* lie on one of the major planes (XY, YZ, ZX) of the
+machine. This command is ignored if 3D arcs are not supported by the
+machine. ALL will cause any circular motion, 2D or 3D, to be output
+using the 3D arc format. ON will cause 3D arcs to be output using the
+3D arc format (this is the default). OFF disables the output of 3D
+arc interpolation, in which case 3D arcs will be approximated using
+linear interpolation (i.e., point to point motions).
