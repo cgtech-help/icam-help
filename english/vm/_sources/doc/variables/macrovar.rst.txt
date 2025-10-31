@@ -1,0 +1,74 @@
+.. _macro_variables:
+
+Model Macro Variables
+=====================
+
+.. _var_vmfedmac:
+.. index:: Variables; $VMFEDMAC
+
++---------------------+------------------------------------------------+
+| **$VMFEDMAC**       | Whether the model Feed Event macro is          |
+|                     | activated                                      |
+|                     |                                                |
+|                     | Type: Logical, Read-write                      |
++---------------------+------------------------------------------------+
+
+   The model Feed Event macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE at the start of processing.
+   If it is set to $FALSE, the model feed event macro will not be executed.
+
+.. _var_vmmtnmac:
+.. index:: Variables; $VMMTNMAC
+
++---------------------+------------------------------------------------+
+| **$VMFEDMAC**       | Whether the model Motion Event macro is        |
+|                     | activated                                      |
+|                     |                                                |
+|                     | Type: Logical, Read-write                      |
++---------------------+------------------------------------------------+
+
+   The model Motion Event macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE at the start of processing.
+   If it is set to $FALSE, the model motion event macro will not be executed.
+
+.. _var_vmrapmac:
+.. index:: Variables; $VMRAPMAC
+
++---------------------+------------------------------------------------+
+| **$VMRAPMAC**       | Whether the model Rapid Event macro is         |
+|                     | activated                                      |
+|                     |                                                |
+|                     | Type: Logical, Read-write                      |
++---------------------+------------------------------------------------+
+
+   The model Rapid Event macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE at the start of processing.
+   If it is set to $FALSE, the model rapid event macro will not be executed.
+
+.. _var_vmtapmac:
+.. index:: Variables; $VMTAPMAC
+
++---------------------+------------------------------------------------+
+| **$VMTAPMAC**       | Whether the model Tape Event macro is          |
+|                     | activated                                      |
+|                     |                                                |
+|                     | Type: Logical, Read-write                      |
++---------------------+------------------------------------------------+
+
+   The model Tape Event macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE at the start of processing.
+   If it is set to $FALSE, the model tape event macro will not be executed.
+
+.. _var_vmtcmac:
+.. index:: Variables; $VMTCMAC
+
++---------------------+------------------------------------------------+
+| **$VMTCMAC**        | Whether the model Tool Event macro is          |
+|                     | activated                                      |
+|                     |                                                |
+|                     | Type: Logical, Read-write                      |
++---------------------+------------------------------------------------+
+
+   The model Tool Event macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE at the start of processing.
+   If it is set to $FALSE, the model tool event macro will not be executed.
