@@ -1,0 +1,16 @@
+Help»Package Job
+----------------
+
+Saves the current GENER processing state and all associated files into a
+compressed archive file (i.e., ZIP), suitable for e-mailing to ICAM
+Technical Support. The Package Job function can be run at any time
+during GENER processing. The compressed archive will include the
+post-processor and model, interface kit, input CL file(s), simulation
+data, and all tape, listing and log files generated to that point. A
+*job_info.html* is also included listing: system information; ICAM
+environment variables; ICAM licensing; and GENER command line options.
+
+A packaged job can be run by first extracting the contents of the
+compressed archive to a folder and then running the extracted *job.cpj*
+file.
+
