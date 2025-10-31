@@ -1,0 +1,30 @@
+.. _command_select:
+
+The SELECT Command :kbd:`[MLP]`
+===============================
+
+The SELECT command is used to control the preselection of tools and
+heads loaded by an automatic tool or head changer. This command is
+only valid for machines that require preselection of tooling.
+
+   :math:`\textbf{SELECT / TOOL}, \mathit{tool\_id} \; \big[,\mathtt{<\!tool\_information\!>}\,\big]`
+
+   :math:`\textbf{SELECT / HEAD}, \mathit{head\_id} \; \big[,\mathtt{<\!head\_information\!>}\,\big]`
+
+Specify a positive, non-zero, *tool_id* or *head_id* of the tool or
+head to be preselected (i.e., made
+ready for loading). Specify a value of zero (0) to preselect the
+dummy tool or dummy head.
+
+Other tool or head options can be specified following the *tool_id*
+and *head_id* parameters. See :ref:`the TOOLNO command<command_toolno>`
+for a complete list of allowable tool and head options. Any such options
+specified are stored in an internal tooling table and will be used on
+subsequent load and unload commands. Tool and head options are modal and
+need only be specified once, ideally on a TOOLNO command.
+
+The SELECT command itself is normally optional. GENER has the
+capability to scan ahead in the CL file and preselect tools
+immediately before they are required and/or immediately following the
+previous LOAD/TOOL command. The ability to automatically preselect
+tools is controlled in QUEST.
