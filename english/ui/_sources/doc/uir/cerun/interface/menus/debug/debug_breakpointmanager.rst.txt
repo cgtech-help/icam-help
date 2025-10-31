@@ -1,0 +1,38 @@
+Debug»Breakpoint Manager
+------------------------
+
+The Breakpoint Manager dialog is used to define places in the program
+where processing should pause. Breakpoints can be set, removed or
+temporarily disabled. Breakpoints can also be saved and restored from a
+file using the “File Open” and “File Save” buttons on the dialog.
+Breakpoints can be remembered from one run of CERUN to the next by
+selecting the “Remember breakpoints” checkbox at the bottom of the
+dialog.
+
+When CERUN encounters a breakpoint, it outputs a message that identifies
+the breakpoint (since there can be many) and gives you the option to
+either pauses the control emulator or to continue to the next breakpoint
+or end of program. If you choose to pause processing, select
+**Run»Play** or **Run»Fast** to continue processing when you are ready.
+Breakpoints can be set for the following:
+
+-  On a macro line, to break before executing the macro command.
+-  On a block of MCD identified by its block or sequence (e.g., N
+   register) number.
+-  After a selected macro variable is assigned a new value.
+-  When a selected code or data identifier is processed.
+
+It is easier to set macro line and MCD block breakpoints using the
+Source window. First select the MCD or macro using the drop down list in
+the upper right corner of the Source window. Then click with the mouse
+in the left-hand border beside the MCD block or macro line where a
+breakpoint is desired. A solid red circle will appear to show that a
+breakpoint has been set. Hollow red circle symbols indicate breakpoints
+that are disabled. Click on the circle icon to delete an existing
+breakpoint.
+
+When debugging a composite control emulator with multiple independent
+kernels, macros from different kernels can be differentiated from each
+other by the control emulator name, which will appear in parentheses
+beside the macro name.
+
