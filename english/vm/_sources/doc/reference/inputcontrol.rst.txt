@@ -1,0 +1,606 @@
+Input Controls
+**************
+
+Standard Keyboard Mapping
+==========================
+
+.. raw:: html
+
+   <table class="docutils allow-wrap-middle">
+     <thead>
+       <tr>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Ctrl</small></th>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Alt</small></th>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Shift</small></th>
+         <th style="text-align: center;">Key</th>
+         <th>Description</th>
+         <th>Menu</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="3">B</td>
+         <td>Hide selected objects</td>
+         <td>Sim»Hide Selection</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Invert hidden state for all objects</td>
+         <td>Sim»Invert Hide State</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Show all or re-hide hidden objects</td>
+         <td>Sim»Show All/Rehide</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">C</td>
+         <td>Open Chip and Split dialog</td>
+         <td>Sim»Chip and Split</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="3">D</td>
+         <td>Cycle heads-up display in normal order</td>
+         <td>Sim»Show»Next</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Cycle heads-up display in reverse order</td>
+         <td>Sim»Show»Previous</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Open Display dialog</td>
+         <td>Sim»Display</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">G</td>
+         <td>Open Grid dialog</td>
+         <td>Sim»Grid</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">L</td>
+         <td>Open Lights dialog</td>
+         <td>Sim»Lights</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">M</td>
+         <td>Open Materials dialog</td>
+         <td>Sim»Material</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">O</td>
+         <td>Open Options dialog</td>
+         <td>Sim»Options</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">P</td>
+         <td>Set camera pivot to selected object</td>
+         <td>Sim»Camera»Pivot</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Open Parts/Fixtures dialog</td>
+         <td>Sim»Parts</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">Q</td>
+         <td>Toggle on-screen measurement tracking</td>
+         <td>Sim»Compare…</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Open Compare dialog</td>
+         <td>Sim»Compare</td>
+       </tr>
+         <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="3">T</td>
+         <td>Toggle tool path trace</td>
+         <td>Sim»Show»Tool Path</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Toggle tool path overlay trace</td>
+         <td>Sim»Show»Tool Path as</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Open Tool/Holder/Head dialog</td>
+         <td>Sim»Tools</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">W</td>
+         <td>Toggle workpiece coordinate display</td>
+         <td>Sim»Show»Workpiece</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">0-9</td>
+         <td>user-defined viewpoints</td>
+         <td>Sim»Camera»Load</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Switch to one of 10 viewpoints</td>
+         <td>Sim»Camera»Save</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2"><small><i>space</i></small></td>
+         <td>Fit selected object in view</td>
+         <td>Sim»Camera»Fit</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Center camera on selected object</td>
+         <td>Sim»Camera»Center</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">+</td>
+         <td>Increase default camera motion step size</td>
+         <td>Sim»Camera»Speed ↑</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Increase camera view angle</td>
+         <td>Sim»Camera»View ↑</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">&ndash;</td>
+         <td>Decrease default camera motion step size</td>
+         <td>Sim»Camera»Speed ↓</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Decrease camera view angle</td>
+         <td>Sim»Camera»View ↓</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">↑</td>
+         <td>Pan camera forward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly pan camera forward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">↓</td>
+         <td>Pan camera backward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly pan camera backward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="4">←</td>
+         <td>Pan camera left</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Slowly pan camera left</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td>Roll camera cclw to nearest 90°</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Roll camera cclw 1°</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="4">→</td>
+         <td>Pan camera right</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Slowly pan camera right</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td>Roll camera clw to nearest 90°</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Roll camera clw 1°</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"><small>Page<br>Up</small></td>
+         <td>Pan camera upward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Slowly pan camera upward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"><small>Page<br>Down</small></td>
+         <td>Pan camera downward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Slowly pan camera downward</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"><small>Esc</small></td>
+         <td>Cancel measurement or selection</td>
+         <td></td>
+       </tr>
+         <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td>Selection: toggle replace/add selection<br>
+             Construction: toggle snap-to-grid<br>
+             Panning: switch to minimum speed<br>
+             Rotation: toggle look/turn around</td>
+         <td></td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td>Selection: toggle Camera mode<br>
+             Measurement: toggle Camera mode<br>
+             Construction: toggle Camera mode<br>
+             Camera: toggle Selection mode</td>
+         <td></td>
+       </tr>
+     </tbody>
+   </table>
+
+Construction Keyboard Mapping
+==============================
+
+.. raw:: html
+
+   <table class="docutils allow-wrap-middle">
+     <thead>
+       <tr>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Ctrl</small></th>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Alt</small></th>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Shift</small></th>
+         <th style="text-align: center;">Key</th>
+         <th>Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">0-9 .</td>
+         <td>Enter numeric value for current input field</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"><small>Back-<br>space</small></td>
+         <td>Remove last character entered into current input field</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">&ndash;</td>
+         <td>Toggle sign of current numeric input field</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"><small>Enter</small></td>
+         <td>Remove last character entered into current input field</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2"><small>Tab</small></td>
+         <td>Advance to next field</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Return to previous field</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"><small>Esc</small></td>
+         <td>Cancel construction</td>
+       </tr>
+     </tbody>
+   </table>
+
+Mouse Mapping
+=============
+
+.. raw:: html
+
+   <table class="docutils allow-wrap-middle">
+     <thead>
+       <tr>
+         <th style="text-align: center;">Mouse Button</th>
+         <th>Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td style="text-align: center;"><small>Left</small></td>
+         <td>Selection: select/unselect object under cursor<br>
+             Measurement: select object under cursor<br>
+             Construction: set input field value(s) using mouse position<br>
+             Camera: rotate camera
+         </td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"><small>Middle</small></td>
+         <td>Pan left, right, upward and downward</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"><small>Right</small></td>
+         <td>Pop-up context menu</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"><small>Wheel</small></td>
+         <td>Pan forward and backward</td>
+       </tr>
+     </tbody>
+   </table>
+
+Time Line Keyboard Mapping
+==========================
+
+.. raw:: html
+
+   <table class="docutils allow-wrap-middle">
+     <thead>
+       <tr>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Ctrl</small></th>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Alt</small></th>
+         <th style="text-align: center; padding: 8px 0px 8px 0px; width: 42px;"><small>Shift</small></th>
+         <th style="text-align: center;">Key</th>
+         <th>Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">Y</td>
+         <td>Redo Time Line scale adjustment</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">Z</td>
+         <td>Undo Time Line scale adjustment</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">F3</td>
+         <td>Move Time Line forward to next event or end</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Move Time Line backward to previous event or start</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2"><small><i>space</i></small></td>
+         <td>Fit entire process in Time Line</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td>Center Time Line at current selected time</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">↑</td>
+         <td>Zoom in to Time Line (i.e., narrow view)</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly zoom in to Time Line</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">↓</td>
+         <td>Zoom out of Time Line (i.e., widen view)</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly zoom out of Time Line</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">←</td>
+         <td>Pan Time Line left</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly pan Time Line left</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2">→</td>
+         <td>Pan Time Line right</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly pan Time Line right</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"><small>Home</small></td>
+         <td>Pan Time Line to start</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;">■</td>
+         <td style="text-align: center;"><small>End</small></td>
+         <td>Pan Time Line to end</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2"><small>Middle<br>mouse</small></td>
+         <td>Zoom in/out of Time Line</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Slowly zoom in/out of Time Line</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;" rowspan="2"></td>
+         <td style="text-align: center;"></td>
+         <td style="text-align: center;" rowspan="2"><small>Left<br>mouse</small></td>
+         <td>Move simulation to selected time</td>
+       </tr>
+       <tr>
+         <td style="text-align: center;">■</td>
+         <td>Select region of interest in Time Line</td>
+       </tr>
+     </tbody>
+   </table>
