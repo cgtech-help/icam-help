@@ -1,0 +1,179 @@
+Vector Functions
+================
+
+All vector functions work with sequences of length 2 or 3 that
+typically define the *XY* or *XYZ* components (commonly referred to
+as the *IJK* components) of a vector. With the exception of the angle
+and cross product functions, vector functions can take vectors of any
+length. For those functions that take 2 input vectors, both vectors
+should have the same length. Vector functions that return a vector do
+so by returning a sequence with the same length as that of the
+shortest input vector.
+
+Vectors can be constructed using the $FSEQ function or the { }
+sequence operators. For example, the following are equivalent:
+
+   ::
+
+     V1=$FSEQ(0,0,1)
+     V1={0,0,1}
+
+It is important to note that vectors are sequences and not arrays.
+Vector functions do not work with arrays.
+
+.. _func_fvadd:
+.. index:: Functions; $FVADD
+
++------------------------------------------------+------------------------------------------+
+| **$FVADD(**\ *v1,v2*\ **)**                    | Vector addition                          |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function adds two arbitrarily long vector sequences *v1* and
+   *v2*, then returns the result as a vector sequence.
+
+.. _func_fvang:
+.. index:: Functions; $FVANG
+
++------------------------------------------------+------------------------------------------+
+| **$FVANG(**\ *v1,v2*\ **)**                    | Angle (degrees) between two vectors      |
+|                                                |                                          |
+|                                                | Returns: Numeric or $NULL                |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the angle in degrees between two vector
+   sequences *v1* and *v2*. The input vectors *v1* and *v2* must be
+   sequences of length 2 or 3 only (a diagnostic is output and a value
+   of $NULL is returned if the input vectors have less than 2 or more
+   than 3 elements). They should also have a non-zero length to return a
+   meaningful result.
+
+   For 3D vectors (i.e., vectors with 3 elements), the return angle
+   ranges from 0 through 180.
+
+   For 2D vectors, a signed angle is returned in the range
+   –180<*angle*\ <=180. Positive angles are measured in a
+   counterclockwise direction from vector *v1.*
+
+.. _func_fvcross:
+.. index:: Functions; $FVCROSS
+
++------------------------------------------------+------------------------------------------+
+| **$FVCROSS(**\ *v1,v2*\ **)**                  | Vector cross product                     |
+|                                                |                                          |
+|                                                | Returns: Sequence or $NULL               |
++------------------------------------------------+------------------------------------------+
+
+   This function computes the cross product of two vector sequences *v1*
+   and *v2*, then returns the result as a vector sequence. The input
+   vectors *v1* and *v2* must be sequences of length 2 or 3 only (a
+   diagnostic is output and a value of $NULL is returned if the input
+   vectors have less than 2 or more than 3 elements). They should also
+   have a non-zero length to return a meaningful result. The length of
+   the returned vector equals the sine of the angle between the vectors.
+
+.. _func_fvdot:
+.. index:: Functions; $FVDOT
+
++------------------------------------------------+------------------------------------------+
+| **$FVDOT(**\ *v1,v2*\ **)**                    | Vector dot product                       |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function computes the dot product of two arbitrarily long vector
+   sequences *v1* and *v2*, then returns the result as number (i.e., the
+   cosine of the angle between the vectors). The input vectors *v1* and
+   *v2* should have a non-zero length to return a meaningful result.
+
+.. _func_fvlen:
+.. index:: Functions; $FVLEN
+
++------------------------------------------------+------------------------------------------+
+| **$FVLEN(**\ *v*\ **)**                        | Vector length                            |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the length of an arbitrarily long vector
+   sequence *v*.
+
+.. _func_fvmult:
+.. index:: Functions; $FVMULT
+
++------------------------------------------------+------------------------------------------+
+| **$FVMULT(**\ *v,n*\ **)**                     | Vector multiplication                    |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function multiplies an arbitrarily long vector sequence *v* by
+   the number *n*, then returns the result as a vector sequence.
+
+.. _func_fvnorm:
+.. index:: Functions; $FVNORM
+
++------------------------------------------------+------------------------------------------+
+| **$FVNORM(**\ *v*\ **)**                       | Vector normalization                     |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function normalizes the arbitrarily long vector sequence *v*,
+   then returns the result as a vector sequence. If the input vector *v*
+   has a length of zero, then a zero length vector will be returned.
+
+.. _func_fvrotn:
+.. index:: Functions; $FVROTN
+
++------------------------------------------------+------------------------------------------+
+| **$FVROTN(**\ *v1,v2,n*\ **)**                 | Normalized vector rotation               |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function computes a vector at a normalized angular distance
+   between two vectors *v1* and *v2*. When *n*\ =0, vector *v1* is
+   returned; and when \|\ *n*\ \|=1, vector *v2* is returned. For other
+   values of *n*, the cross product of *v1* and *v2* defines the plane
+   of rotation and *n* defines the normalized rotation distance
+   calculated as the “desired rotation angle divided by the angle
+   between vectors”.
+
+   The results are undefined if *v1* and *v2* are opposite each other.
+
+.. _func_fvrotv:
+.. index:: Functions; $FVROTV
+
++------------------------------------------------+------------------------------------------+
+| **$FVROTV(**\ *angle,v1,v2*\ [*,toler*]\ **)** | Rotation of a vector about an axis       |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function returns a vector resulting from the *angle* degrees
+   CCLW rotation of vector *v1* about an axis defined by vector *v2*.
+   The CCLW rotation direction is defined by the orientation of the *v2*
+   vector, which must have a non-zero length.
+
+   When *v1* and *v2* are parallel the returned vector is equal to *v1*.
+   The *toler* parameter defines the tolerance utilized to test if the
+   *v1* and *v2* vectors are parallel. The default tolerance is 0.0001
+   degrees.
+
+   The input vectors do not have to be normalized. The length of the
+   returned vector is the same as the length of *v1*.
+
+.. _func_fvsub:
+.. index:: Functions; $FVSUB
+
++------------------------------------------------+------------------------------------------+
+| **$FVSUB(**\ *v1,v2*\ **)**                    | Vector subtraction                       |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function subtracts one arbitrarily long vector sequence from
+   another (i.e., *v1*–*v2*) and returns the result as a vector
+   sequence.
