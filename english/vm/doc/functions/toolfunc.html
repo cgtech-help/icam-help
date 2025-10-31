@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tool and Holder Functions &mdash; Virtual Machine V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"tex": {"macros": {"icamrange": ["{\\scriptsize \\raise#1em\\hbox{#2:n}}\\!", 2]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Other Functions" href="otherfunc.html" />
+    <link rel="prev" title="Probe and Collision Test Functions" href="probefunc.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Virtual Machine V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../section_quest.html">QUEST: Model Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#importing-models">Importing Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/questinterface.html">QUEST User Interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/questinterface.html#interface-differences-between-developer-and-run-time-environments">Interface differences between Developer and Run-time Environments</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/modelreq.html">Basic Model Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/createvm.html">Creating a Virtual Machine Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#general-information">General Information</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#comments">Comments</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#d-modelsmachines">3D Models»Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/addkinematic.html">Adding Kinematics to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/addphysicalentities.html">Adding Physical Entities to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/collisiontest.html">Collision Testing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/collisiontest.html#collision-groups">Collision Groups</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/collisiontest.html#collision-exclusion-groups">Collision Exclusion Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/selectiongroup.html">Selection Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/customizingmodel.html">Customizing the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/testing.html">Testing the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#model-file-name-conventions">Model File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#models">Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/customization.html">Model Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/dialogeditor.html">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/dialogeditor.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization/startshutmacro.html">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-declaration-macro">The Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-model-startup-macro">The Model Startup Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-model-shutdown-macro">The Model Shutdown Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization/eventmacro.html">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-tape-event-macro-gener-only">The Tape Event Macro <span class="smalltext">(GENER only)</span></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-motion-event-macro">The Motion Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-rapid-event-macro">The Rapid Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-feed-event-macro">The Feed Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-tool-event-macro">The Tool Event Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/userfuncmacro.html">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../macros/index.html">Virtual Machine Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#outputting-the-event-output">Outputting the Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#virtual-machine-variables">Virtual Machine Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#model-macro-variables">Model Macro Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#model-definition-variables">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/vmvar.html">Virtual Machine Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Model Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Macro Functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="axesfunc.html">Axes Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channelfunc.html">Channel Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compensationfunc.html">Compensation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="componentfunc.html">Component Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coordinatefunc.html">Coordinate System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="displayfunc.html">Display Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workpiecefunc.html">Fixture, Part and Stock Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="probefunc.html">Probe and Collision Test Functions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Tool and Holder Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../runtime/index.html">Using VM with GENER and CERUN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/selectvm.html">Selecting a Virtual Machine Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/selectvm.html#selecting-a-model-from-the-launch-panel">Selecting a Model from the Launch Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/selectvm.html#selecting-a-model-from-the-command-prompt">Selecting a Model from the Command Prompt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/controllingvm.html">Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-simulation">Enable/Disable Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-collision-overtravel-detection-and-avoidance">Enable/Disable Collision/Overtravel Detection and Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-positioning-collision-avoidance">Enable/Disable Positioning Collision Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-flute-length-optimization">Enable/Disable Flute Length Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#camera-positioning-under-program-control">Camera Positioning under Program Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#load-predefined-setup">Load Predefined Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#adjust-model-axes-travel-limits">Adjust Model Axes Travel Limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#adjust-model-axes-travel-limits-for-smartpath">Adjust Model Axes Travel Limits for SmartPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#optimize-positioning-with-smartpath">Optimize Positioning with SmartPATH™</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#positioning-clearance">Positioning Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#positioning-velocity">Positioning Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#reference-home-positioning">Reference Home Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#optimize-air-cutting-with-smartcut">Optimize Air-Cutting with SmartCUT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#air-cut-clearance">Air-cut Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#air-cut-velocity">Air-cut Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#air-cut-and-smartpath">Air-cut and SmartPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#optimize-cutting-feed-with-smartfeed">Optimize Cutting Feed with SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/actsimwindow.html">Activating the Simulation Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/adjustlight.html">Adjusting Lighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/addpartfixstock.html">Adding Parts, Fixtures and Stock to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addpartfixstock.html#differences-between-part-stock-and-fixture-components">Differences between Part, Stock and Fixture Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addpartfixstock.html#creating-part-stock-and-fixture-components">Creating Part, Stock and Fixture Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/setfixcomp.html">Setting Fixture Compensation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/addtooldef.html">Adding Tooling Definitions to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#lathe-tool-definition">Lathe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#milling-tool-definition">Milling Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#probe-tool-definition">Probe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#additive-tool-definition">Additive Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#holder-definition">Holder Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/settoolcomp.html">Setting Tool Compensation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/settoolcomp.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/settoolcomp.html#diameter-compensation">Diameter Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/monvmres.html">Monitoring Virtual Machine’s Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#animation-control">Animation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#head-up-display">Head-Up Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#tool-path-display">Tool Path Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#controller-time-line">Controller Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/monvmres.html#part-stock-comparison">Part / Stock Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/monvmres.html#measurement">Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Virtual Machine Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/inputcontrol.html">Input Controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#standard-keyboard-mapping">Standard Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#construction-keyboard-mapping">Construction Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#mouse-mapping">Mouse Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#time-line-keyboard-mapping">Time Line Keyboard Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/toolbar.html">Toolbars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#view-cerun-gener-only">View <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-construct-quest-only">VM Construct <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-mode-cerun-gener-only">VM Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-grid">VM Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-view">VM View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-view-filter-cerun-gener-only">VM View Filter <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-measure">VM Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-animation-cerun-gener-only">VM Animation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-tool-path-cerun-gener-only">VM Tool Path <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-cross-section-cerun-gener-only">VM Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-annotation-cerun-gener-only">VM Annotation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/menubar/index.html">Menu Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/main.html">Simulation»Virtual Machine <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/controller.html">Simulation»Controller <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/mode.html">Simulation»Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T) <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#tools">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#lathe-tool-type">Lathe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#mill-tool-type">Mill Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#probe-tool-type">Probe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#additive-tool-type">Additive Tool Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#holders">Holders</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#profile-holder-type">Profile Holder Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#generic-holder-type">Generic Holder Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/constructentity.html">Simulation»Construct Entity <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycube">Simulation»Construct Entity»Cube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycylinder">Simulation»Construct Entity»Cylinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycone">Simulation»Construct Entity»Cone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitysphere">Simulation»Construct Entity»Sphere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entityrevolved">Simulation»Construct Entity»Revolved</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entityextruded">Simulation»Construct Entity»Extruded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitymesh">Simulation»Construct Entity»Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitypicture">Simulation»Construct Entity»Picture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/constructaxis.html">Simulation»Construct Axis <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axislinear-axis">Simulation»Construct Axis»Linear Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisrotary-axis">Simulation»Construct Axis»Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axiscurve-axis">Simulation»Construct Axis»Curve Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axistool-axis">Simulation»Construct Axis»Tool Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisstock-axis">Simulation»Construct Axis»Stock Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axishead-axis">Simulation»Construct Axis»Head Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisreference-axis">Simulation»Construct Axis»Reference Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/show.html">Simulation»Show</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-path-ctrl-t-cerun-gener-only">Simulation»Show»Tool Path (Ctrl T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-vector-cerun-gener-only">Simulation»Show»Tool Vector <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t-cerun-gener-only">Simulation»Show»Tool Path as Overlay (Ctrl Shift T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowfilters-cerun-gener-only">Simulation»Show»Filters <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowcross-section-cerun-gener-only">Simulation»Show»Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowworkpiece-coords-ctrl-w-cerun-gener-only">Simulation»Show»Workpiece Coords (Ctrl W) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshownext-display-ctrl-d-cerun-gener-only">Simulation»Show»Next Display (Ctrl D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowprevious-display-ctrl-shift-d-cerun-gener-only">Simulation»Show»Previous Display (Ctrl Shift D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/wcs.html">Simulation»Use World CS <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/group.html">Simulation»Group Selection <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationhide-selection-ctrl-b-quest">Simulation»Hide Selection (Ctrl B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionhide-in-view-ctrl-b-gener-and-cerun">Simulation»Selection»Hide in View (Ctrl B) <span class="smalltext">(GENER and CERUN)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionhide-in-all-views-gener-and-cerun-only">Simulation»Selection»Hide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationshow-all-rehide-ctrl-alt-b-quest">Simulation»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b-gener-and-cerun-only">Simulation»Selection»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionshow-all-rehide-in-all-views-gener-and-cerun-only">Simulation»Selection»Show All/Rehide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationinvert-hide-state-ctrl-shift-b-quest">Simulation»Invert Hide State (Ctrl Shift B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b-gener-and-cerun-only">Simulation»Selection»Invert Hide State (Ctrl Shift B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/setup.html">Simulation»Open Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/setup.html#simulationsave-setup-gener-and-cerun-only">Simulation»Save Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Virtual Machine V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../section_quest.html">QUEST: Model Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Macro Functions</a></li>
+      <li class="breadcrumb-item active">Tool and Holder Functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tool-and-holder-functions">
+<h1>Tool and Holder Functions<a class="headerlink" href="#tool-and-holder-functions" title="Link to this heading"></a></h1>
+<p>Tool and holder functions provide control over the management and configuration of tools and their holders within the simulation.
+These functions support dynamic tool/holder creation, tool change sequences, color settings, and gouge testing.</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmsaddtool"><span class="std std-ref">$FMSADDTOOL</span></a></p></td>
+<td><p>Manage additional active tools</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmsbtc"><span class="std std-ref">$FMSBTC</span></a></p></td>
+<td><p>Indicates the start of a tool change sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmscolr"><span class="std std-ref">$FMSCOLR</span></a></p></td>
+<td><p>Color definition for dynamic tools and holders</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmsetc"><span class="std std-ref">$FMSETC</span></a></p></td>
+<td><p>Indicates the end of a tool change sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmsgoug"><span class="std std-ref">$FMSGOUG</span></a></p></td>
+<td><p>Manage gouge testing status</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmshld"><span class="std std-ref">$FMSHLD</span></a></p></td>
+<td><p>Dynamic holder creation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmspck"><span class="std std-ref">$FMSPCK</span></a></p></td>
+<td><p>Get pocket number associated with the tool</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmstool"><span class="std std-ref">$FMSTOOL</span></a></p></td>
+<td><p>Dynamic tool creation</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<span id="func-fmsaddtool"></span><table class="docutils align-default" id="index-0">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSADDTOOL(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Manage additional active tools</p>
+<p>Returns: Numeric</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSADDTOOL}\boldsymbol{(}\, toolaxis\_id\, \big[,pocket\_id\,\big]
+\begin{pmatrix} ,\! \begin{array}{l} part\_id \\ \mathbf{OFF} \end{array}\end{pmatrix} \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function identifies an additional cutting tool that operates in conjunction with the primary tool, using the same machine axes.
+It is typically used in machines with multiple spindles that machine duplicate parts simultaneously.
+The <em>toolaxis_id</em> or <em>toolaxis_id/pocket_id</em> pair specifies the additional tool to be activated or deactivated.</p>
+<p>To activate a tool, provide a <em>part_id</em> indicating the part on which the tool’s movements should be applied.
+To deactivate a previously activated tool, specify OFF or use a value of 0 in place of the <em>part_id</em>.</p>
+</div></blockquote>
+<span id="func-fmsbtc"></span><table class="docutils align-default" id="index-1">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSBTC( )</strong></p></td>
+<td><p>Beginning tool change</p>
+<p>Returns: Numeric (always returns 1)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSBTC}\boldsymbol{(} \; \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function is used to indicate the beginning of a tool change. When
+in continuous animation mode and the “Motion step during Tool Change”
+setting is active, the animation mode will switch to the Motion Step format.
+The animation mode will switch back to continuous when the <a class="reference internal" href="#func-fmsetc"><span class="std std-ref">$FMSETC function</span></a>
+is later called to indicate the end of the tool change.</p>
+</div></blockquote>
+<span id="func-fmscolr"></span><table class="docutils align-default" id="index-2">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSCOLR(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Define the material properties</p>
+<p>Returns: Numeric (always returns 1)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\begin{array}{l}
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{START}, name \,\boldsymbol{)} \\
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, property, value\_list \,\boldsymbol{)} \\
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{END} \,\boldsymbol{)}
+\end{array}\)</span></p>
+</div></blockquote>
+<p>This function provides the ability to define the material properties of
+dynamically created tools, holders, parts and fixtures, using same
+functionality as can be found in the Simulation»Material dialog.</p>
+<p>To define a color, first call $FMSCOLR(START,<em>name</em>) where <em>name</em> is a
+string constant or variable defining the name of the custom color. This
+name can subsequently be used in $FMSTOOL, $FMSHLD, $FMSPART and
+$FMSFIXTURE properties that take a color name.</p>
+<p>Next, call $FMSCOLR(<em>property</em>,<em>value_list</em>) once for each color property
+to be defined, where the <em>property</em> name is specified using a string
+constant or variable containing the name of the property. Available
+properties and their parameter values are:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{'AMBIENT\,'}, red, blue, green \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>The color of the environment. The <em>red</em>, <em>green</em> and <em>blue</em> parameters
+are values in the range 0-255. The default ambient color is black
+(0,0,0).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{'DIFFUSE\,'}, red, blue, green \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>The color of the object. Default is black.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{'SPECULAR\,'}, red, blue, green \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>The color shown in reflections. Default is black.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{'SHININESS\,'}, value \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>The degree of shininess in the range 0-100. Default is 0 (not shiny).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSCOLR}\boldsymbol{(}\, \mathbf{'TRANSPARENCY\,'}, value \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>The degree of transparency in the range 0-100. Default is 0 (opaque).</p>
+</div></blockquote>
+</div></blockquote>
+<p>Lastly, call $FMSCOLR(END) to complete the color definition.</p>
+</div></blockquote>
+<span id="func-fmsetc"></span><table class="docutils align-default" id="index-3">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSETC( )</strong></p></td>
+<td><p>End of a tool change</p>
+<p>Returns: (always returns 1)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSETC}\boldsymbol{(} \; \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function is used to indicate the end of a tool change. When
+in continuous animation mode, and the “Motion step during Tool Change”
+setting is active, the animation mode will switch to the Motion Step
+format when the <a class="reference internal" href="#func-fmsbtc"><span class="std std-ref">$FMSBTC function</span></a> is called.
+The animation mode will switch back to continuous when the $FMSETC function
+is later called to indicate the end of the tool change.</p>
+</div></blockquote>
+<span id="func-fmsgoug"></span><table class="docutils align-default" id="index-4">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSGOUG(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Returns the current gouge testing status</p>
+<p>Returns: Numeric</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSGOUGE}\boldsymbol{(} \big[\, n \,\big] \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns the current gouge testing status between the cutting portion
+of the tool and the part. A return value of 0 (zero) means gouge testing is disabled;
+a return value of 1 (one) means it is enabled.</p>
+<p>Optionally, you can change the gouge testing status by specifying <em>n</em>: use 0 to disable testing,
+or 1 to enable it.</p>
+</div></blockquote>
+<span id="func-fmshld"></span><table class="docutils align-default" id="index-5">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSHLD(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Holder properties</p>
+<p>Returns: Numeric, String or Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>There are three forms of the $FMSHLD function. The first clears all
+holder definitions from the holder table. The second obtains holder
+information. The third creates new holder definitions.</p>
+<p><strong>Clear holder table</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{CLEAR},\mathbf{ALL} \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function removes all holder definitions from the holder table.
+It always returns the value 1.</p>
+<p><strong>Get holder properties</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{RETURN},\, 'holder\,',\,
+'property \big[,property,...\big]\,' \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns requested properties of a holder where <em>holder</em> is
+a string constant or variable defining the name of the holder and
+<em>properties</em> is a string constant or variable defining a comma separated
+case insensitive list of properties to be returned. Returned holder
+properties can be either numeric values or strings. Multiple property
+values are returned as a sequence. Linear properties are returned in the
+current machine units.</p>
+<p>The following holder properties can be queried:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><em>property</em></p></td>
+<td><p><strong>Common holder properties</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TYPE</span></p></td>
+<td><p>1:profile, 2:generic</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">PARENT</span></p></td>
+<td><p>Parent holder name string, blank if none</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">UNITS</span></p></td>
+<td><p>Units of holder definition (informational) 1:inch, 25.4:mm</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><strong>Profile holder properties</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">PT0</span></p></td>
+<td><p>Spindle contact distance along holder axis</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">PT1</span></p></td>
+<td><p>Tool contact distance along holder axis</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><strong>Generic holder properties</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">ACTASAHEAD</span></p></td>
+<td><p>Holder acts as a head for tool comp. purposes 0:no, 1:yes</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SPINDLE</span></p></td>
+<td><p>Sequence of <em>xyz</em> spindle contact distances from holder origin</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">SPINDLE.X</span></p></td>
+<td><p>Spindle contact x-axis distance from holder origin</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SPINDLE.Y</span></p></td>
+<td><p>Spindle contact y-axis distance from holder origin</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">SPINDLE.Z</span></p></td>
+<td><p>Spindle contact z-axis distance from holder origin</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TOOL</span></p></td>
+<td><p>Sequence of <em>xyz</em> tool contact distances from holder origin</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TOOL.X</span></p></td>
+<td><p>Tool contact x-axis distance from holder origin</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TOOL.Y</span></p></td>
+<td><p>Tool contact y-axis distance from holder origin</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TOOL.Z</span></p></td>
+<td><p>Tool contact z-axis distance from holder origin</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TOOL.A</span></p></td>
+<td><p>Tool rotation around x-axis relative to the holder tool contact point</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TOOL.B</span></p></td>
+<td><p>Tool rotation around y-axis relative to the holder tool contact point</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TOOL.C</span></p></td>
+<td><p>Tool rotation around z-axis relative to the holder tool contact point</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><strong>Create new holder</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\begin{array}{l}
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{START}, name \,\boldsymbol{)} \\
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, property, value\_list \,\boldsymbol{)} \\
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{END} \,\boldsymbol{)}
+\end{array}\)</span></p>
+</div></blockquote>
+<p>This function provides the ability to create a new holder. To create a
+holder, first call $FMSHLD(START,<em>name</em>) where <em>name</em> is a string
+constant or variable defining the name of the holder. This name can
+subsequently be used in the $FMSTOOL 'HOLDER' property.</p>
+<p>Next, call $FMSHLD(<em>property</em>,<em>value_list</em>) once for each holder property
+to be defined, where the <em>property</em> name is specified using a string
+constant or variable containing the name of the property. Available
+properties and their parameter values are:</p>
+<p><em>For profile holders:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'REVOLVED\,'}, \mathit{profile} \,\big[,\! \mathit{crprofile} \,\big] \boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a “Profile” holder type. The <em>profile</em> is a sequence
+containing the <em>xz</em> values of the profile to be swept around a {0,0,1}
+axis. The optional <em>crprofile</em> is a sequence of corner radius values to
+apply to the corresponding vertices of the profile (trailing zero values
+can be omitted).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'PT0\,'}, distance \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the spindle contact point <em>distance</em> along the {0,0,1} holder
+axis. This is where the holder is attached to its parent. Default is
+zero.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'PT1\,'}, distance \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact point <em>distance</em> along the {0,0,1} holder
+axis. This is where the tool (or child holder) is attached to the
+holder. Default is zero.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>For generic holders:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'MATRIX\,'}, matrix \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the position and orientation of the holder geometry (mesh or
+extruded) using a 12 element <em>matrix</em> sequence. The matrix must be
+defined before the STLs to which it applies.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'STL\,'}, \mathit{filename} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a “Generic” mesh holder type. The <em>filename</em> is a string
+constant or variable specifying the ASCII STL file containing the mesh
+geometry of the holder.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\begin{array}{l}
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'PROFILE\,'}, \mathit{profile} \,\big[,\! \mathit{crprofile} \,\big] \boldsymbol{)} \\
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'EXTRUDED\,'}, distance \,\boldsymbol{)}
+\end{array}\)</span></p>
+<blockquote>
+<div><p>Specifies a “Generic” extruded holder type. The <em>profile</em> is a sequence
+containing the xy values of the holder profile to be extruded for the
+specified <em>distance</em> along the {0,0,1} holder axis. The optional
+<em>crprofile</em> is a sequence of corner radius values to apply to the
+corresponding vertices of the profile (trailing zero values can be
+omitted).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'MATRIX\,'}, matrix \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the position and orientation of the holder geometry (mesh or
+extruded) using a 12 element <em>matrix</em> sequence.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'SPINDLE\,'}, x, y, z \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the spindle contact <em>xyz</em> offset from the holder origin. This
+is where the holder is attached to its parent. Default is (0,0,0).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'TOOL\,'}, x, y, z, a, b, c \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact <em>xyz</em> offset from the holder origin and the
+tool <em>abc</em> orientation in degrees (<em>a</em> is rotation around the x-axis,
+<em>b</em> around the y-axis and <em>c</em> around the z-axis). This is where the tool
+(or child holder) is attached to the holder. Default is (0,0,0,0,0,0).</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>Common properties for all holders:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'UNITS\,'}, value \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the units of measure for the holder (1:inch, 25.4:mm). Default
+units are current machine units.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'COLOR\,'}, colorname \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the color of the holder, which must have previously been
+defined using the <a class="reference internal" href="#func-fmscolr"><span class="std std-ref">$FMSCOLR function</span></a>.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSHLD}\boldsymbol{(}\, \mathbf{'PARENT\,'}, holdername \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the name of another holder to which the current one is mated.</p>
+</div></blockquote>
+</div></blockquote>
+<p>Lastly, call $FMSHLD(END) to complete the holder definition.</p>
+<p>When creating holders, all three forms of the $FMSHLD function (START, property, and END) always return the value 1.</p>
+</div></blockquote>
+<span id="func-fmspck"></span><table class="docutils align-default" id="index-6">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSPCK(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>returns the component ID of the pocket associated
+with tool number</p>
+<p>Returns: Numeric</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSPCK}\boldsymbol{(}\, n \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns the numeric component ID of the pocket associated with
+tool number <em>n</em>, or zero if there is no associated pocket.</p>
+</div></blockquote>
+<span id="func-fmstool"></span><table class="docutils align-default" id="index-7">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSTOOL(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Tools properties</p>
+<p>Returns: Numeric, String or Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>There are four forms of the $FMSTOOL function. CLEAR clears all tool
+definitions from the tool table. RETURN obtains tool information.
+START-END creates new tool definitions. COPY creates a copy of an
+existing tool with a new id.</p>
+<p><strong>Clear tool table</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{CLEAR},\mathbf{ALL} \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function removes all tool definitions from the tool table.
+It always returns the value 1.</p>
+<p><strong>Get tool properties</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{RETURN},\, 'tool\,',\,
+'property \big[,property,...\big]\,' \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns requested properties of a tool where <em>tool</em> is the
+tool number as defined in Virtual Machine and <em>properties</em> is a string
+constant or variable defining a comma separated case insensitive list of
+properties to be returned. Returned tool properties can be either
+numeric values or strings. Multiple property values are returned as a
+sequence. Linear properties are returned in the current machine units.</p>
+<p>The following tool properties can be queried:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><em>property</em></p></td>
+<td><p><strong>Common tool properties</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">NAME</span></p></td>
+<td><p>Tool name string, blank if none</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TYPE</span></p></td>
+<td><p>1:mill, 2:lathe, 3:probe, 4:additive</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SUBTYPE</span></p></td>
+<td><p>Value varies depending on TYPE</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">GL</span></p></td>
+<td><p>Sequence of <em>xyz</em> gage lengths</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">GL.X</span></p></td>
+<td><p>X axis gage length</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">GL.Y</span></p></td>
+<td><p>Y axis gage length</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">GL.Z</span></p></td>
+<td><p>Z axis gage length</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">HOLDER</span></p></td>
+<td><p>Holder name string, blank if none</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TCD</span></p></td>
+<td><p>Sequence of zero or more Diameter compensation offsets</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TCF</span></p></td>
+<td><p>Sequence of zero or more Fixture compensation offsets</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TCL</span></p></td>
+<td><p>Sequence of zero or more Length compensation offsets</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">UNITS</span></p></td>
+<td><p>Units of holder definition (informational) 1:inch, 25.4:mm</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><strong>Mill tool properties</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">SUBTYPE</span></p></td>
+<td><p>1:end-mill, 2:ball, 3:bull, 4:drill, 5:apt, 6:profile, 7:generic</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">D</span></p></td>
+<td><p>Tool diameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">R</span></p></td>
+<td><p>Tool radius (D/2)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">L</span></p></td>
+<td><p>Tool length</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">FL</span></p></td>
+<td><p>Flute length</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">CR</span></p></td>
+<td><p>Corner radius</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">BA</span></p></td>
+<td><p>Bottom angle (degrees)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SA</span></p></td>
+<td><p>Side angle (degrees)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">BO</span></p></td>
+<td><p>Body offset</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">N</span></p></td>
+<td><p>Number of flutes or teeth</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">SL</span></p></td>
+<td><p>Shank length</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SD</span></p></td>
+<td><p>Shank diameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">LEFT</span></p></td>
+<td><p>1:left-hand, 0:unknown, -1:right-hand</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">RIGHT</span></p></td>
+<td><p>1:right-hand, 0:unknown, -1:left-hand</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">USAGE</span></p></td>
+<td><p>1:finishing, 2:semi-finishing, 3:roughing</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><strong>Lathe tool properties</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">SUBTYPE</span></p></td>
+<td><p>1:round, 2:trigon, 3:diamond, 4:symmetric, 5:thread, 6:groove, 7:profile, 8:generic</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">R</span></p></td>
+<td><p>Inscribed circle radius</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">D</span></p></td>
+<td><p>Inscribed circle diameter (R*2)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">J</span></p></td>
+<td><p>Joint radius</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">H</span></p></td>
+<td><p>Insert height</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SA</span></p></td>
+<td><p>Clearance (side) angle (degrees)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">N</span></p></td>
+<td><p>Number of sides</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">CR</span></p></td>
+<td><p>Corner radius</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">A</span></p></td>
+<td><p>Internal angle (degrees)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TW</span></p></td>
+<td><p>Tooth width</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TH</span></p></td>
+<td><p>Tooth height</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">TO</span></p></td>
+<td><p>Tooth offset</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">TC</span></p></td>
+<td><p>Tooth clearance</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">LEFT</span></p></td>
+<td><p>1:left-hand, 0:unknown, -1:right-hand</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">RIGHT</span></p></td>
+<td><p>1:right-hand, 0:unknown, -1:left-hand</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">USAGE</span></p></td>
+<td><p>1:finishing, 2:semi-finishing, 3:roughing</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><strong>Probe tool properties</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SUBTYPE</span></p></td>
+<td><p>1:straight, 2:star, 3:generic</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">R</span></p></td>
+<td><p>Probe tip radius</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">D</span></p></td>
+<td><p>Probe tip diameter (R*2)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">SL</span></p></td>
+<td><p>Stylus length</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SD</span></p></td>
+<td><p>Stylus diameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">H</span></p></td>
+<td><p>Height of star component</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">W</span></p></td>
+<td><p>Width of star component</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><strong>Additive tool properties</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">SUBTYPE</span></p></td>
+<td><p>1:profile, 2:generic</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><strong>Create new tool</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\begin{array}{l}
+\vphantom{\Big[} \mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{START}, tool \,\Big[,pocket \,\big[,toolaxis\,\big]\Big] \boldsymbol{)} \\
+\vphantom{\Big[} \mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, property, value\_list \,\boldsymbol{)} \\
+\vphantom{\Big[} \mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{END} \,\boldsymbol{)}
+\end{array}\)</span></p>
+</div></blockquote>
+<p>This function provides the ability to create a new tool. To create a
+tool, first call $FMSTOOL(START,<em>tool,pocket</em>) where <em>tool</em> is a
+numeric constant or variable defining the tool number and pocket is a
+numeric constant or variable defining the default pocket number on the
+machine. On machines having multiple tool holding devices, specify the
+optional <em>toolaxis</em> parameter to identify the tool-axis property of the
+pocket.</p>
+<p>Next, call $FMSTOOL(<em>property</em>,<em>value_list</em>) once for each tool
+property to be defined, where the <em>property</em> name is specified using a
+string constant or variable containing the name of the property.
+Available properties and their parameter values are:</p>
+<a class="reference internal image-reference" href="../../_images/fmstool.png"><img alt="../../_images/fmstool.png" class="align-right" src="../../_images/fmstool.png" style="width: 2.521in;" /></a>
+<p><em>For milling tools:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'MILL\,'}, t \,\Big[, d, r \,\big[,e, f, a, b \,\big], h \,\Big] \boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a parametrically defined milling tool, where <em>t</em> is an integer
+constant or variable that defines the type of tool. The number of
+required APT cutter parameters shown in the image is dependent upon the
+tool type, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>End mill, requires 3 or 7 cutter parameters.</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ball nose, requires 3 or 7 cutter parameters.</p>
+</dd>
+<dt class="field-odd">3<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Bull nose, requires 3 or 7 cutter parameters.</p>
+</dd>
+<dt class="field-even">4<span class="colon">:</span></dt>
+<dd class="field-even"><p>Drill, requires 7 cutter parameters.</p>
+</dd>
+<dt class="field-odd">5<span class="colon">:</span></dt>
+<dd class="field-odd"><p>APT, requires 7 cutter parameters.</p>
+</dd>
+<dt class="field-even">6<span class="colon">:</span></dt>
+<dd class="field-even"><p>Profile, no cutter parameters. Requires a PROFILE (see below).</p>
+</dd>
+<dt class="field-odd">7<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Generic, no cutter parameters. Requires an STL or INSERT (see below).</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p><em>Milling tool types 1 to 5 accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'FLUTE\,'}, length \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the flute length of the tool, measured from the tool tip to the tool top.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'BODYOFF\,'}, radius \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the relief to apply between the tool body and the tool diameter.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'COLORBODY\,'}, colorname \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the color of the body portion of the tool, which must have
+previously been defined using the <a class="reference internal" href="#func-fmscolr"><span class="std std-ref">$FMSCOLR function</span></a>.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'SHANK\,'}, length, diameter \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the length and diameter of the shank portion of the tool. The
+length of the shank is measured with respect to the holder or spindle
+mount point.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'COLORSHANK\,'}, colorname \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the color of the shank portion of the tool, which must have
+previously been defined using the <a class="reference internal" href="#func-fmscolr"><span class="std std-ref">$FMSCOLR function</span></a>.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>Profile milling tools (type 6) accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'REVOLVED\,'}, \mathit{profile} \,\big[,\! \mathit{crprofile} \,\big] \boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a profile to use. The <em>profile</em> is a sequence containing the
+<em>xy</em> values of the profile to be swept around a {0,0,1} axis. The
+optional <em>crprofile</em> is a sequence of corner radius values to apply to
+the corresponding vertices of the profile (trailing zero values can be
+omitted). By default the profile is cutting.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'CUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent profiles define the cutting edge of the
+revolved tool.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'NONCUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent profiles define the non-cutting edge of the
+revolved tool.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>Generic milling tools (type 7) accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'STL\,'}, \mathit{filename} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a mesh to use. The <em>filename</em> is a string constant or variable
+specifying the STL file containing the mesh geometry.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'INSERT\,'}, id \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a mesh to use. The <em>id</em> is an integer representing an existing
+lathe insert tool id.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'DUPLICATE\,'}, count, angle \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a mesh repetitive instances around the tool axis of
+revolution. The <em>count</em> is an integer representing the number of
+instances of the mesh repeated around the tool. The <em>angle</em> is the
+offset angle of the first mesh instance.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'MATRIX\,'}, matrix \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the position and orientation of the insert geometry using a 12
+element <em>matrix</em> sequence. The matrix must be defined before the STL.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'OFFSET\,'}, x, y, z \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact <em>xyz</em> offset from the mesh origin. This is
+the tool control point. Default is (0,0,0).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'CUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent meshes define the cutting mesh of the generic tool.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'NONCUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent meshes define the non-cutting mesh of the generic tool.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>For lathe inserts:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'TURN\,'}, type \big[,ic, j, h, a, n, cr, t, tw, th, to, tc \,\big] \boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a parametrically defined lathe tool insert, where <em>type</em> is an
+integer constant or variable that defines the type of insert. The number
+of required parameters is dependent upon the insert type, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Round, requires <em>ic</em>, <em>j</em>, <em>h</em> and <em>a</em>.</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trigon, requires <em>ic</em>, <em>j</em>, <em>h</em>, <em>a</em>, <em>cr</em> and <em>t</em>. <em>n</em> is ignored (always 3).</p>
+</dd>
+<dt class="field-odd">3<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Diamond, requires <em>ic</em>, <em>j</em>, <em>h</em>, <em>a</em>, <em>cr</em> and <em>t</em>. <em>n</em> is ignored (always 4).</p>
+</dd>
+<dt class="field-even">4<span class="colon">:</span></dt>
+<dd class="field-even"><p>Symmetrical, requires <em>ic</em>, <em>j</em>, <em>h</em>, <em>a</em>, <em>n</em> and <em>cr</em>.</p>
+</dd>
+<dt class="field-odd">5<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Thread, requires all parameters.</p>
+</dd>
+<dt class="field-even">6<span class="colon">:</span></dt>
+<dd class="field-even"><p>Groove, requires all parameters.</p>
+</dd>
+<dt class="field-odd">7<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Profile, no parameters. Requires a PROFILE (see below)</p>
+</dd>
+<dt class="field-even">8<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generic, no parameters. Requires an STL (see below).</p>
+</dd>
+</dl>
+<p>The parameter names match those that can be found in the lathe tool
+builder dialog:</p>
+<dl class="field-list simple">
+<dt class="field-odd"><em>ic</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Inscribed circle radius (<em>i</em>: Length for Groove insert)</p>
+</dd>
+<dt class="field-even"><em>j</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Joint radius</p>
+</dd>
+<dt class="field-odd"><em>h</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Height</p>
+</dd>
+<dt class="field-even"><em>a</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Clearance angle</p>
+</dd>
+<dt class="field-odd"><em>n</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of sides</p>
+</dd>
+<dt class="field-even"><em>cr</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Corner radius</p>
+</dd>
+<dt class="field-odd"><em>t</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Internal angle</p>
+</dd>
+<dt class="field-even"><em>tw</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Tooth width</p>
+</dd>
+<dt class="field-odd"><em>th</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tooth height</p>
+</dd>
+<dt class="field-even"><em>to</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Tooth offset</p>
+</dd>
+<dt class="field-odd"><em>tc</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tooth clearance</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p><em>Profile lathe inserts (type 7) accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\begin{array}{l}
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'PROFILE\,'}, \mathit{profile} \,\big[,\! \mathit{crprofile} \,\big] \boldsymbol{)} \\
+\rule{0pt}{2.5ex} \mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'EXTRUDED\,'}, height, angle \,\boldsymbol{)}
+\end{array}\)</span></p>
+<blockquote>
+<div><p>Specifies a profile to use. The <em>profile</em> is a sequence containing the
+xy values of the insert profile to be extruded for the specified
+<em>height</em>. The optional <em>crprofile</em> is a sequence of corner radius values
+to apply to the corresponding vertices of the profile (trailing zero
+values can be omitted). The <em>angle</em> is the clearance angle along the
+side of the insert.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'OFFSET\,'}, x, y, z \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact <em>xyz</em> offset from the profile origin. This is
+where the insert is attached to the holder. Default is (0,0,0).</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>Generic lathe inserts (type 8) accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'STL\,'}, \mathit{filename} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a mesh to use. The <em>filename</em> is a string constant or variable
+specifying the STL file containing the mesh geometry of the insert.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'MATRIX\,'}, matrix \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the position and orientation of the insert geometry using a 12
+element <em>matrix</em> sequence. The matrix must be defined before the STL.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'OFFSET\,'}, x, y, z \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact <em>xyz</em> offset from the mesh origin. This is
+where the insert is attached to the holder. Default is (0,0,0).</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>For probe tools:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'PROBE\,'}, type, sl, sd \,\big[,h, w \,\big], r \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a probe tool, where <em>type</em> is an integer constant or variable
+that defines the type of probe. The number of required parameters is
+dependent upon the probe type, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Straight, requires <em>sl</em>, <em>sd</em>, and <em>r</em>.</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>Star, requires <em>sl</em>, <em>sd</em>, <em>h</em>, <em>w</em> and <em>r</em>.</p>
+</dd>
+</dl>
+<p>The parameter names match those that can be found in the probe tool
+builder dialog:</p>
+<dl class="field-list simple">
+<dt class="field-odd"><em>sl</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Stylus length</p>
+</dd>
+<dt class="field-even"><em>sd</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Stylus diameter</p>
+</dd>
+<dt class="field-odd"><em>h</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Height</p>
+</dd>
+<dt class="field-even"><em>w</em><span class="colon">:</span></dt>
+<dd class="field-even"><p>Width</p>
+</dd>
+<dt class="field-odd"><em>r</em><span class="colon">:</span></dt>
+<dd class="field-odd"><p>Probe ball radius</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'COLORBODY\,'}, colorname \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the color of the body portion of the probe, which must have
+previously been defined using the <a class="reference internal" href="#func-fmscolr"><span class="std std-ref">$FMSCOLR function</span></a>.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>For additive tools:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'ADDITIVE\,'}, type \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies an additive tool, where <em>type</em> is an integer constant or
+variable that defines the type of additive tool, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Profile. Requires a PROFILE (see below)</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generic. Requires an STL (see below).</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p><em>Profile additive (type 1) accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'REVOLVED\,'}, \mathit{profile} \big[,\! \mathit{crprofile} \,\big] \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a profile to use. The <em>profile</em> is a sequence containing the
+<em>xy</em> values of the profile to be swept around a {0,0,1} axis. The
+optional <em>crprofile</em> is a sequence of corner radius values to apply to
+the corresponding vertices of the profile (trailing zero values can be
+omitted). By default the profile is additive.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'OFFSET\,'}, x, y, z \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact <em>xyz</em> offset from the profile origin. This is
+the tool control point relative to the holder. Y is ignored for profile
+tool. Default is (0,0,0).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'CUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent profiles define the additive edge of the
+revolved tool. Only one additive profile is supported.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'NONCUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent profiles define the non-additive edge of the
+revolved tool.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>Generic additive (type 2) accept the following:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'STL\,'}, \mathit{filename} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specified a mesh to use. The <em>filename</em> is a string constant or variable
+specifying the STL file containing the mesh geometry.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'MATRIX\,'}, matrix \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the position and orientation of the STL geometry using a 12
+element <em>matrix</em> sequence. The matrix must be defined before the STL.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'OFFSET\,'}, x, y, z \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the tool contact <em>xyz</em> offset from the mesh origin. This is
+the tool control point. Default is (0,0,0).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'CUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent meshes define the additive mesh of the
+revolved tool. Only one additive mesh is supported.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'NONCUTTING\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies that subsequent meshes define the non-additive mesh of the
+revolved tool.</p>
+</div></blockquote>
+</div></blockquote>
+<p><em>Common properties for all tools:</em></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'NAME\,'}, toolname \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the name of the tool.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'UNITS\,'}, value \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the units of measure for the tool (1:inch, 25.4:mm). Default
+units are current machine units.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'LEFT\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a left hand cutting tool or insert (ignored with probe tools).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'RIGHT\,'} \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies a right hand cutting tool or insert (ignored with probe tools).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'USAGE\,'}, value \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the intended use of the tool, which can be one of the
+following values: 0 for finishing (the default); 1 for semi-finishing;
+and 2 for roughing (ignored with probe tools).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'COLORCUTTER\,'}, colorname \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the color of the cutting portion of the tool, insert or probe
+tip, which must have previously been defined using the <a class="reference internal" href="#func-fmscolr"><span class="std std-ref">$FMSCOLR function</span></a>
+(ignored with probe tools).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'COLORCUT\,'}, red, blue, green \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the color to show on the in-process stock for cuts created
+with this tool. The <em>red</em>, <em>green</em> and <em>blue</em> parameters are values in
+the range 0-255. If a color is not defined, then VM will automatically
+assign one (ignored with probe tools).</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{'HOLDER\,'}, holdername \,\boldsymbol{)}\)</span></p>
+<blockquote>
+<div><p>Specifies the name of the holder to which the tool, insert or probe is mated.</p>
+</div></blockquote>
+<p>Lastly, call $FMSTOOL(END) to complete the tool definition.</p>
+<p>When creating tools, all three forms of the $FMSTOOL function (START, property, and END) always return the value 1.</p>
+</div></blockquote>
+<p><strong>Copy tool</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSTOOL}\boldsymbol{(}\, \mathbf{COPY}, tool, copy \,\Big[,pocket \,\big[,toolaxis \,\big]\Big] \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function provides the ability to create a new tool by copying an
+existing tool, where <em>tool</em> is a numeric constant or variable
+referencing an existing tool id, <em>copy</em> is a numeric constant or
+variable defining the new tool id, and <em>pocket</em> is a numeric constant or
+variable defining the default pocket number on the machine. On machines
+having multiple tool holding devices, specify the optional <em>toolaxis</em>
+parameter to identify the tool-axis property of the pocket.</p>
+<p>The COPY form of the $FMSTOOL function always returns the value 1.</p>
+</div></blockquote>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="probefunc.html" class="btn btn-neutral float-left" title="Probe and Collision Test Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="otherfunc.html" class="btn btn-neutral float-right" title="Other Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
