@@ -1,0 +1,139 @@
+General Information
+===================
+
+GENER will detect problems caused by invalid post-processor commands,
+inappropriate control of the NC machine and incompatibilities due to
+invalid QUEST responses. In all cases, processing of the
+CL file will continue until the FINI record is read.
+
+Diagnostic messages identify the problem (or event), the severity of
+the problem and where possible, any corrective action taken. Also
+listed are statistical and positional information. For example:
+
+   .. code-block:: text
+
+      Warning: CUTCOM Option "LENGTH" is not supported by this
+               machine and cannot be simulated. Option ignored.
+               SEVERITY(04) ISN(35) CLREC(41) ERRNUM(01524001) TOOL(43)
+
+Diagnostic messages are composed of three items: the type, message
+text and a status line. If the diagnostic occurred from within a
+macro, there may also be a message indicating the position of the
+diagnostic within the macro. An additional line may also be output
+indicating that the macro was terminated due to a serious error.
+
+There are four types of diagnostic messages: Message, Warning, Error
+and Fatal. Messages are informational and do not indicate a problem.
+Warnings are generated when an unexpected event occurs that
+the post-processor can correct for. Error and Fatal diagnostics are
+generated when the post-processor detects an error that it cannot
+correct for or make an assumption about.
+
+The diagnostic message text will identify the post-processor command
+if applicable, followed by a description of the diagnostic and any
+corrective action taken. For example, suppose the user coded the
+command LOAD/TOOL,1,OSETNO,3. During post-processing, the following
+message was output:
+
+   .. code-block:: text
+
+      Warning: CUTCOM [Called by LOAD] Option "LENGTH" is not supported
+               by this machine and cannot be simulated. Option ignored.
+               SEVERITY(04) ISN(35) CLREC(41) ERRNUM(01524001) TOOL(43) *NEXT*
+
+The OSETNO option on the LOAD/TOOL command invoked a call to the
+CUTCOM command, which handles cutter length compensation. However,
+the CUTCOM logic detected that cutter length compensation was not
+supported and it output the appropriate diagnostic message. This
+particular example is one of a diagnostic generated on an indirect
+call. GENER tracks all indirect calls and places them at the
+beginning of the diagnostic message text.
+
+The status line is output after the text portion of the diagnostic:
+
+-  **SEVERITY** indicates the severity level of the message and may have
+   any value between 0 and 99. By tradition, a severity between 0 and 3
+   is considered informational (i.e., a message); a severity between 4
+   and 7 is considered a warning; a severity between 8 and 15 is
+   considered an error; and finally, a severity between 16 and 99 is
+   considered a fatal error.
+   GENER uses the severity level to determine if NC program output should be aborted.
+   GENER provides a facility to inhibit the output of diagnostics below a defined
+   severity level (see :ref:`“Modifying Diagnostic Messages”<modifying_diagnostics>`).
+   Lastly, when processing has completed, GENER returns the value of the highest
+   severity encountered in a program to the operating system.
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 1
+         :class: wrap-last
+
+         *  -  Type
+            -  Severity
+            -  Meaning
+         *  -  MESSAGE
+            -  0 thru 3
+            -  This is the lowest severity.
+               It indicates that something noteworthy has occurred but will have no impact on the
+               final output.
+               This type of warning may be ignored if desired.
+         *  -  WARNING
+            -  4 thru 7
+            -  This message indicates that a problem has been detected that may or may not adversely affect the
+               final output.
+         *  -  ERROR
+            -  8 thru 15
+            -  This message indicates that a major problem has been encountered.
+               Final output is affected and may force an editing of the tape output file or a rerun of the APT job.
+         *  -  FATAL
+            -  16 thru 99
+            -  This is the highest severity.
+               Final output
+               has been affected to the point of rendering it useless. Processing of the
+               program will continue and the listing file will still be created as usual.
+
+-  **ISN** identifies the original APT source statement that caused the
+   diagnostic. This number can be used with the GENER debugger to set a
+   breakpoint on the source statement in question.
+
+   \
+
+-  **CLREC** is the internal binary CL record number of the record that
+   was being processed when the diagnostic occurred. This number can be
+   used with the GENER debugger to set a breakpoint on the CL record in
+   question.
+
+   \
+
+-  **ERRNUM** identifies the diagnostic number. This number can be used with the
+   PPFUN/ 15 command or
+   $FERSTA macro function to control the output of the specific diagnostic
+   (see :ref:`“Modifying Diagnostic Messages”<modifying_diagnostics>`).
+   The diagnostic message text, severity and state can also be modified by editing the
+   diagnostic in the pos260.err file (see :ref:`“Error File”<error_file>`).
+
+   \
+
+-  **TOOL** identifies the currently loaded tool; 0 (zero) or the dummy
+   tool if none.
+
+   \
+
+-  **OPNAME** identifies the operation name. It is only present if an
+   OPNAME command has been coded with a non-blank operation name string.
+
+   \
+
+-  **NEXT** is a hyperlink to the next diagnostic in the file. It is
+   only present when using the HTML form of listing output. The choice
+   of HTML or normal listing format is a Configuration option (see
+   :ref:`“The ICAM Configuration Utility”<configuration_utility>`).
+
+If the diagnostic occurs while processing a macro line, the macro is
+identified and the macro line causing the diagnostic is listed. If a
+diagnostic has a severity of 8 or higher, a TERMAC statement will be
+generated to exit the macro and the following message output:
+
+   .. code-block:: text
+
+      Message: TERMAC generated due to error(s).
