@@ -1,0 +1,131 @@
+.. _command_defsub:
+
+The DEFSUB Command :kbd:`[MLEPC]`
+=================================
+
+The DEFSUB command can be used to define a subprogram that will later
+be called using the CALSUB command, or to define when subprograms
+should be output to the NC program, or to define the behavior of
+INDEX and COPY commands that are passed to the post-processor from
+the CAM system.
+
+-  :ref:`“Subprogram Definition”<defsub_definition>`
+-  :ref:`“Subprogram Output”<defsub_output>`
+-  :ref:`“Index and Copy Behavior”<defsub_index_copy>`
+
+.. _defsub_definition:
+
+Subprogram Definition
+---------------------
+
+The DEFSUB command is used to identify the beginning of the
+definition of a subprogram. A subprogram consists of: a DEFSUB
+command naming the subprogram; one or more part program instructions
+defining the body of the subprogram; and a terminating ENDSUB
+command. A subprogram is called by coding a CALSUB command with a
+matching subprogram identifier. This command is valid for all machine
+types.
+
+   :math:`\textbf{DEFSUB / ID},
+   \, \begin{pmatrix}\begin{array}{l} a \\ \mathtt{'}\mathit{name}\,\mathtt{'} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\textbf{TYPE}, \begin{pmatrix}\begin{array}{l} \textbf{CNC} \\ \textbf{RANGE} \\ \textbf{INCLUD} \\ \textbf{CLDATA} \\ \textbf{SYSTEM} \end{array}\end{pmatrix} \end{bmatrix}
+   \Big[ \big[ ,\textbf{OPTION} \,\big] ,b \, \Big]`
+
+The subprogram ID\ [#]_ can be identified by either a whole
+number value *a*, or by a quoted subprogram *name*.
+
+Various subprogram types are supported:
+
+-  CNC specifies a subprogram defined in a separate program element than
+   the caller. The post-processor will output a subprogram containing
+   the code generated from the DEFSUB-ENSUB block either immediately, or
+   when called, or at the end of processing, depending on how the
+   post-processor is configured. For each call, the post-processor will
+   update the processing status based on the subprogram contents, and
+   then will generate a call instruction to the subprogram.
+
+   \
+
+-  RANGE specifies a subprogram defined as repeat range in the same
+   program element as the caller. The post-processor will process the
+   DEFSUB-ENDSUB contents at the first call, bounded by labels or
+   sequence numbers. For each subsequent call, the post-processor will
+   update the processing status based on the subprogram contents, and
+   then will generate a call instruction to repeat the bounded code.
+
+   \
+
+-  INCLUD specifies an emulated subprogram. The post-processor will save
+   the contents of the subprogram, and then will post-process the saved
+   CLDATA contents at each call.
+
+   \
+
+-  CLDATA specifies to use preferably a CNC subprogram if supported, but
+   if not then a RANGE repeat if supported, otherwise to emulate the
+   subprogram (i.e., INCLUD).
+
+   \
+
+-  SYSTEM specifies a controller resident subprogram. For each call, the
+   post-processor will update the processing status based on the
+   subprogram contents, and generate a call instruction to the
+   controller resident subprogram. The subprogram itself is not output.
+
+The couplet OPTION,\ *b* (keyword,string) specifies optional
+subprogram definition parameters, to be included on the subprogram
+definition NC block. This qualifier might not be valid for a specific
+NC controller and cannot be used when emulating subprograms.
+
+A maximum of 500 subprograms can be defined in a program.
+
+.. [#] For compatibility purposes, the ID and TYPE keywords can be omitted.
+
+.. _defsub_output:
+
+Subprogram Output
+-----------------
+
+The following DEFSUB command forces immediate output of deferred
+subprogram definitions to the tape file (non deferred subprograms are
+not affected by this command).
+
+   :math:`\textbf{DEFSUB / NOW}`
+
+Normally, deferred subprograms are output at the end of the program.
+This command can be used to fine tune the placement of subprograms.
+Once the **NOW** keyword is coded, subsequent subprogram definitions
+will cause an error.
+
+.. _defsub_index_copy:
+
+Index and Copy Behavior
+-----------------------
+
+The following DEFSUB command defines the behavior of INDEX and COPY
+commands that are passed to the post-processor from the CAM system.
+
+   :math:`\textbf{DEFSUB / INDEX}
+   \begin{bmatrix} ,\textbf{TYPE}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{CNC} \\ \textbf{RANGE} \\ \textbf{INCLUD} \\ \textbf{CLDATA} \\ \textbf{SYSTEM} \end{array}\end{pmatrix} \end{bmatrix}
+   \begin{bmatrix} ,\textbf{TRFORM}, \begin{pmatrix}\begin{array}{l} \textbf{OFF} \\ \textbf{INCR} \\ \textbf{LCS} \end{array}\end{pmatrix} \end{bmatrix}`
+
+TYPE,OFF inhibits INDEX and COPY processing in the post-processor. ON
+uses whatever choice was selected by the post-processor author in the
+CALSUB section questions. The remaining choices select how the copy
+will be generated: CNC causes the INDEX block to be saved and output
+as a subprogram, which is called once at the INDEX/NOMORE and again
+for each COPY. RANGE causes the INDEX block to be output bounded by
+labels or sequence numbers, which are called at each COPY. INCLUD
+expands the INDEX and COPY commands as they normally are done by the
+CAM system. CLDATA processes INDEX and COPY using the CNC or RANGE
+methods if available, otherwise expands them using the INCLUD method.
+SYSTEM is the same as CNC, except that the subprograms are not output
+to the NC code.
+
+TRFORM,INCR outputs the INDEX block code in incremental so that COPY
+transformations can be done by prepositioning prior to each
+subprogram call; LCS outputs the INDEX block as-is, but outputs an
+LCS (local coordinate system) instruction prior to each subprogram
+call; and OFF (the default) outputs all codes “as-is” and assumes
+that the post-processor author or NC programmer have handled the
+transformation requirements.
