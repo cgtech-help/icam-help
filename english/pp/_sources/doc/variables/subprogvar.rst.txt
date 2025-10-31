@@ -1,0 +1,121 @@
+
+Subprogram Variables
+====================
+
+.. _var_labinc:
+.. index:: Variables; $LABINC
+
++------------------+-----------------------------------------------+
+| **$LABINC**      | Label increment amount                        |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable holds the label number increment. This increment is
+   added to the current label number after a label is output, in
+   preparation for the next label to be output.
+
+.. _var_labno:
+.. index:: Variables; $LABNO
+
++------------------+-----------------------------------------------+
+| **$LABNO**       | Current label number                          |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable contains the current label number to use if a label is
+   required to be output. $LABNO is incremented by $LABINC immediately
+   following the output of a label at the start or end of a repeat
+   range. Care must be exercised when changing $LABNO to ensure that
+   duplicate labels are not generated, since this condition is not
+   diagnosed by the post-processor.
+
+.. _var_subext:
+.. index:: Variables; $SUBEXT
+
++------------------+-----------------------------------------------+
+| **$SUBEXT**      | Subprogram tape file extension                |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the subprogram tape file extension to use for
+   subsequent subprogram files. The default file extension for
+   subprograms is *tps*.
+
+.. _var_sublvl:
+.. index:: Variables; $SUBLVL
+
++------------------+-----------------------------------------------+
+| **$SUBLVL**      | Current sub-level in subprogram               |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the subprogram nest level. A value of 0 means
+   that there is no subprogram active. A value of 1 is for the first
+   call.
+
+.. _var_submod:
+.. index:: Variables; $SUBMOD
+
++------------------+-----------------------------------------------+
+| **$SUBMOD**      | Processing mode of the subprogram (0-5)       |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the current subprogram processing mode, as
+   follows:
+
+   :0: if no subprogram active
+   :1: if scanning subprogram and storing it in memory.
+   :2: if the subprogram is being output to the tape.
+   :3: if scanning the subprogram during call for status and time.
+   :4: if the subprogram is being emulated.
+   :5: if the repeat range subprogram is being emulated.
+
+.. _var_subnam:
+.. index:: Variables; $SUBNAM
+
++------------------+-----------------------------------------------+
+| **$SUBNAM**      | Current subprogram name                       |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the current subprogram name or subprogram
+   number in string format. It will be blank if a subprogram is not
+   active.
+
+.. _var_subno:
+.. index:: Variables; $SUBNO
+
++------------------+-----------------------------------------------+
+| **$SUBNO**       | Current subprogram number ($NULL:NA)          |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the current subprogram number.
+   It will be $NULL if a subprogram is not active.
+
+.. _var_subtyp:
+.. index:: Variables; $SUBTYP
+
++------------------+-----------------------------------------------+
+| **$SUBTYP**      | Type of subprogram (0-4)                      |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the type of subprogram, as follows\ [#]_:
+
+   :0: if no subprogram active
+   :1: this is a repeat range subprogram (type RANGE)
+   :2: this is a user subprogram (type CNC)
+   :3: this is a predefined NC control subprogram (type SYSTEM)
+   :4: this is an emulated subprogram (type INCLUD)
+
+.. [#] Set $SUB200=$TRUE to obtain pre-V21 values for $SUBTYP
