@@ -1,0 +1,27 @@
+.. _command_opstop:
+
+The OPSTOP Command :kbd:`[MLEPC]`
+=================================
+
+The OPSTOP command is used to conditionally stop all machine movement
+when coded in the part program, typically using an M01 code. This
+command is valid for all machine types but may not be available on
+specific machines.
+
+   :math:`\textbf{OPSTOP}`
+
+Some machines allow an optional or conditional stop. If the machine
+tool operator sets the “OPTIONAL-STOP” toggle switch on the control
+panel, the machine will stop when an OPSTOP code is encountered on
+the tape. It will ignore OPSTOP codes if the switch is not set.
+
+For punches, if the OPSTOP code turns punching off, GENER may
+optionally turn it back on when the machine is restarted. For other
+types of machines GENER might also output codes to stop the spindle
+and/or the coolant flow if this is not done automatically by the
+control. This action will be determined by the responses to QUEST.
+Codes might also be output to restart the spindle and/or the coolant
+flow following the OPSTOP (M) code.
+
+If the OPSTOP command is not available for a specific machine, GENER
+can output a STOP code if it has been requested in QUEST.
