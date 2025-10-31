@@ -1,0 +1,336 @@
+Function Summary
+================
+
+.. list-table:: Mathematical Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FACOS<func_facos>`
+      -  Arc cosine (degrees)
+   *  -  :ref:`$FASIN<func_fasin>`
+      -  Arc sine (degrees)
+   *  -  :ref:`$FATAN<func_fatan>`
+      -  Arc tangent (degrees)
+   *  -  :ref:`$FATAN2<func_fatan2>`
+      -  Arc tangent (degrees) given 2 arguments
+   *  -  :ref:`$FCOS<func_fcos>`
+      -  Cosine (degrees)
+   *  -  :ref:`$FEXP<func_fexp>`
+      -  Exponential
+   *  -  :ref:`$FLN<func_fln>`
+      -  Natural logarithm
+   *  -  :ref:`$FLOG<func_flog>`
+      -  Common logarithm
+   *  -  :ref:`$FSIN<func_fsin>`
+      -  Sine (degrees)
+   *  -  :ref:`$FSQRT<func_fsqrt>`
+      -  Square root
+   *  -  :ref:`$FTAN<func_ftan>`
+      -  Tangent (degrees)
+
+.. list-table:: Numeric Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FABS<func_fabs>`
+      -  Absolute value
+   *  -  :ref:`$FCEIL<func_fceil>`
+      -  Round up to whole number
+   *  -  :ref:`$FFLOOR<func_ffloor>`
+      -  Round down to whole number
+   *  -  :ref:`$FFRAC<func_ffrac>`
+      -  Fractional portion
+   *  -  :ref:`$FINT<func_fint>`
+      -  Truncation to whole number
+   *  -  :ref:`$FMAX<func_fmax>`
+      -  Largest value
+   *  -  :ref:`$FMIN<func_fmin>`
+      -  Smallest value
+   *  -  :ref:`$FMOD<func_fmod>`
+      -  Remainder
+   *  -  :ref:`$FNINT<func_fnint>`
+      -  Nearest whole number
+   *  -  :ref:`$FSIGN<func_fsign>`
+      -  Sign
+
+.. list-table:: Geometric Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FGCYPT3<func_fgcypt3>`
+      -  Create cylinder from 3 points
+   *  -  :ref:`$FGLNXPL<func_fglnxpl>`
+      -  Intersection point of line and plane
+   *  -  :ref:`$FGLSXCY<func_fglsxcy>`
+      -  Intersection point(s) of line segment and cylinder
+   *  -  :ref:`$FGLSXSP<func_fglsxsp>`
+      -  Intersection point(s) of line segment and sphere
+   *  -  :ref:`$FGPLPT3<func_fgplpt3>`
+      -  Plane constructed from 3 points
+   *  -  :ref:`$FGPLPTN<func_fgplptn>`
+      -  Plane constructed from point and normal vector
+   *  -  :ref:`$FGPTRPL<func_fgptrpl>`
+      -  Projection of point onto plane
+
+.. list-table:: Vector Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FVADD<func_fvadd>`
+      -  Vector addition
+   *  -  :ref:`$FVANG<func_fvang>`
+      -  Angle (degrees) between two vectors
+   *  -  :ref:`$FVCROSS<func_fvcross>`
+      -  Vector cross product
+   *  -  :ref:`$FVDOT<func_fvdot>`
+      -  Vector dot product
+   *  -  :ref:`$FVLEN<func_fvlen>`
+      -  Vector length
+   *  -  :ref:`$FVMULT<func_fvmult>`
+      -  Vector multiplication
+   *  -  :ref:`$FVNORM<func_fvnorm>`
+      -  Vector normalization
+   *  -  :ref:`$FVROTN<func_fvrotn>`
+      -  Normalized vector rotation
+   *  -  :ref:`$FVROTV<func_fvrotv>`
+      -  Rotation of a vector about an axis
+   *  -  :ref:`$FVSUB<func_fvsub>`
+      -  Vector subtraction
+
+.. list-table:: Matrix Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMX<func_fmx>`
+      -  Matrix creation
+   *  -  :ref:`$FMXINV<func_fmxinv>`
+      -  Matrix inversion
+   *  -  :ref:`$FMXMULT<func_fmxmult>`
+      -  Matrix multiplication
+   *  -  :ref:`$FMXTRFP<func_fmxtrfp>`
+      -  Point transformation by matrix
+   *  -  :ref:`$FMXTRFV<func_fmxtrfv>`
+      -  Vector transformation by matrix
+   *  -  :ref:`$FMXTRSP<func_fmxtrsp>`
+      -  Matrix transposition
+   *  -  :ref:`$FMXTYPE<func_fmxtype>`
+      -  Matrix type
+
+.. list-table:: Conditional Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FCHOOSE<func_fchoose>`
+      -  Selects and returns a value from a list of arguments
+   *  -  :ref:`$FIF<func_fif>`
+      -  Returns argument based on logical expression
+   *  -  :ref:`$FISNUM<func_fisnum>`
+      -  Test if numeric
+   *  -  :ref:`$FISSEQ<func_fisseq>`
+      -  Test if sequence
+   *  -  :ref:`$FISSTR<func_fisstr>`
+      -  Test if string
+   *  -  :ref:`$FISWRD<func_fiswrd>`
+      -  Test if keyword
+   *  -  :ref:`$FSWITCH<func_fswitch>`
+      -  Returns argument of first true logical expression
+
+.. list-table:: Conversion Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FATOF<func_fatof>`
+      -  Conversion string to real
+   *  -  :ref:`$FCVINT<func_fcvint>`
+      -  Conversion to whole number
+   *  -  :ref:`$FCVREAL<func_fcvreal>`
+      -  Conversion to number
+   *  -  :ref:`$FMAJOR<func_fmajor>`
+      -  Conversion to major word (record)
+   *  -  :ref:`$FMINOR<func_fminor>`
+      -  Conversion to minor word
+
+.. list-table:: Character and Sequence Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FCHAR<func_fchar>`
+      -  Conversion to character
+   *  -  :ref:`$FDATE<func_fdate>`
+      -  Formatted date
+   *  -  :ref:`$FEDIT<func_fedit>`
+      -  Edit string
+   *  -  :ref:`$FELEM<func_felem>`
+      -  Element of sequence
+   *  -  :ref:`$FFIND<func_ffind>`
+      -  Index of a value in an array or sequence
+   *  -  :ref:`$FICHAR<func_fichar>`
+      -  Conversion from character
+   *  -  :ref:`$FINDEX<func_findex>`
+      -  Index of a substring
+   *  -  :ref:`$FLEN<func_flen>`
+      -  Length of string or sequence
+   *  -  :ref:`$FMATCH<func_fmatch>`
+      -  Match string
+   *  -  :ref:`$FSEQ<func_fseq>`
+      -  Create a sequence
+   *  -  :ref:`$FSPLIT<func_fsplit>`
+      -  Split a string by a regular expression
+   *  -  :ref:`$FSUBSQ<func_fsubsq>`
+      -  Extract subsequence
+   *  -  :ref:`$FSUBST<func_fsubst>`
+      -  Extract substring
+   *  -  :ref:`$FSWRIT<func_fswrit>`
+      -  String formatting
+   *  -  :ref:`$FTOLOWR<func_ftolowr>`
+      -  String conversion to lower case
+   *  -  :ref:`$FTOUPER<func_ftouper>`
+      -  String conversion to upper case
+   *  -  :ref:`$FTRIM<func_ftrim>`
+      -  Trim white space from both sides of a string
+   *  -  :ref:`$FTRIML<func_ftriml>`
+      -  Trim white space from the left side (front) of a string
+   *  -  :ref:`$FTRIMR<func_ftrimr>`
+      -  Trim white space from the right side (end) of a string
+
+.. list-table:: Command Line Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FARGC<func_fargc>`
+      -  Return count of arguments
+   *  -  :ref:`$FARGV<func_fargv>`
+      -  Return argument value
+   *  -  :ref:`$FPNAME<func_fpname>`
+      -  Return name portion of command line qualifier
+   *  -  :ref:`$FPVALUE<func_fpvalue>`
+      -  Return value portion of command line qualifier
+
+.. list-table:: File and Directory Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FACCESS<func_faccess>`
+      -  Get file access information
+   *  -  :ref:`$FBASNAM<func_fbasnam>`
+      -  Return file name portion of path string
+   *  -  :ref:`$FCTIME<func_fctime>`
+      -  Convert numeric value to date and time string
+   *  -  :ref:`$FDIRNAM<func_fdirnam>`
+      -  Return directory portion of path string
+   *  -  :ref:`$FEOF<func_feof>`
+      -  Test for end-of-file
+   *  -  :ref:`$FGETCWD<func_fgetcwd>`
+      -  Return current working directory
+   *  -  :ref:`$FSETCWD<func_fsetcwd>`
+      -  Set current working directory
+   *  -  :ref:`$FSTAT<func_fstat>`
+      -  Get file status information
+   *  -  :ref:`$FTMPFILE<func_ftmpfile>`
+      -  Create temporary file
+
+.. list-table:: Control Emulator Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`FCEADD<func_fceadd>`
+      -  Add CODE and/or DATA to the block
+   *  -  :ref:`FCEDAC<func_fcedac>`
+      -  Associate a DATA identifier with a CODE group number
+   *  -  :ref:`FCEGAC<func_fcegac>`
+      -  Get active CODE from a code group
+   *  -  :ref:`FCEGET<func_fceget>`
+      -  Get and remove CODE and/or DATA from the block
+   *  -  :ref:`FCEGNCV<func_fcegncv>`
+      -  Get value of a CNC variable from the pre-processor
+   *  -  :ref:`FCEPP<func_fcepp>`
+      -  General pre-processor interface
+   *  -  :ref:`FCERST<func_fcerst>`
+      -  Selects the next NC program file for processing
+   *  -  :ref:`FCESAC<func_fcesac>`
+      -  Set active CODE of a code group
+   *  -  :ref:`FCESEEK<func_fceseek>`
+      -  Get CODE and/or DATA from the block
+   *  -  :ref:`FCESNCV<func_fcesncv>`
+      -  Set value of a CNC variable in the pre-processor
+   *  -  :ref:`FEOF<func_feof_ce>`
+      -  Test for end of MCD file
+   *  -  :ref:`FGET<func_fget>`
+      -  Scan forward in MCD for matching string
+   *  -  :ref:`FGETR<func_fgetr>`
+      -  Scan backward in MCD for matching string
+
+.. list-table:: DELMIA Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`FMSCHUCK<func_fmschuck>`
+      -  Clamp or unclamp a chuck device
+   *  -  :ref:`FMSID<func_fmsid>`
+      -  Get the component ID of a DELMIA axis
+   *  -  :ref:`FMSIDN<func_fmsidn>`
+      -  Get the name of a component, given its ID
+   *  -  :ref:`FMSIDT<func_fmsidt>`
+      -  Get the type of a component, given its ID
+   *  -  :ref:`FMSMOVE<func_fmsmove>`
+      -  Move a model axis
+
+.. list-table:: Other Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FAPPLY<func_fapply>`
+      -  Activate composite control emulator component
+   *  -  :ref:`$FDIALOG<func_fdialog>`
+      -  Activate a dialog
+   *  -  :ref:`$FDIST<func_fdist>`
+      -  Distance between points
+   *  -  :ref:`$FDK<func_fdk>`
+      -  Convert machine coordinates to workpiece coordinates
+   *  -  :ref:`$FDOC<func_fdoc>`
+      -  Generate custom documentation
+   *  -  :ref:`$FERSEV<func_fersev>`
+      -  Severity of error number
+   *  -  :ref:`$FERSTA<func_fersta>`
+      -  Status of error number
+   *  -  :ref:`$FERTXT<func_fertxt>`
+      -  Text of error number
+   *  -  :ref:`$FGETDEF<func_fgetdef>`
+      -  Get DEF file variable definition
+   *  -  :ref:`$FGETENV<func_fgetenv>`
+      -  Get environment variable definition
+   *  -  :ref:`$FIK<func_fik>`
+      -  Convert workpiece coordinates to machine coordinates
+   *  -  :ref:`$FKINCFG<func_fkincfg>`
+      -  Modify position and orientation of a rotary axis or tool axis
+   *  -  :ref:`$FKINROT<func_fkinrot>`
+      -  Specify rotary axes used in RTCP IK calculations
+   *  -  :ref:`$FMACID<func_fmacid>`
+      -  Find matching macro id
+   *  -  :ref:`$FMACSTA<func_fmacsta>`
+      -  Set or query enabled/disabled status of macro(s)
+   *  -  :ref:`$FMRU…<func_fmru>`
+      -  Save or restore MRU (most recently used) information
+   *  -  :ref:`$FPAUSE<func_fpause>`
+      -  Pause processing with optional message
+   *  -  :ref:`$FREGFMT<func_fregfmt>`
+      -  Get $FSWRIT compatible format for register
+   *  -  :ref:`$FREGPOS<func_fregpos>`
+      -  Return a register index given a register descriptor
+   *  -  :ref:`$FSORT<func_fsort>`
+      -  Sort records from file or elements of sequence
+   *  -  :ref:`$FUNWIND<func_funwind>`
+      -  Reset rotary axis to modulo-360 value
