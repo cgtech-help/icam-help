@@ -1,0 +1,23 @@
+Purge
+-----
+
+|image1|
+
+This dialog appears during a Purge operation on the database. A purge
+removes older revisions of a post processor from the database, keeping
+only the latest revision at each version level (version 14.0, revision
+*nn*).
+
+**Yes:** Will reset the revision number to 1 for all selected post
+processors.
+
+**No:** Will not reset the revision number. For example, if there are
+three revisions of the post ABC01, as in ABC01;1, ABC01;2 and ABC01;3,
+then following the purge, only ABC01;3 will remain. Answering Yes
+(instead of No) would cause  ABC01;3 to be renamed to ABC01;1 after the
+other files were removed.
+
+**Cancel:** Cancel the operation without purging files.
+
+.. |image1| image:: ./media/1dafa355b27e2629ddd45e21dcacc8eab2c5d475.gif
+
