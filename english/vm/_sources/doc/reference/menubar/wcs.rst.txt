@@ -1,0 +1,25 @@
+.. _sim_use_wcs:
+
+Simulation»Use World CS :small:`(QUEST only)`
+---------------------------------------------
+
+The Use World CS function toggles between two possible representations
+of component coordinates. When selected, component coordinates are
+listed in world coordinates, originating from the center of the grids.
+When unselected, a component’s coordinates are listed relative to its
+parent (i.e., in local coordinates). The Use World CS function can also
+be toggled from the VM Construct toolbar.
+
+The Use World CS setting also affects the placement of objects copied
+from one place to another in the model navigator. When world coordinates
+are selected, the object retains its position in space despite being
+moved or copied from one place to another in the navigator hierarchy.
+When local coordinates are selected, a copied or moved object is always
+placed relative to its new parent at the same offset it was originally
+at relative to its old parent.
+
+It is also important to note that when world coordinates are selected,
+objects are attached to the model based on the current model axes
+settings. You might get unexpected results if the axes are not at their
+default locations. You should select the *Reset All Axes* button in the
+QUEST Axes window before creating, copying or moving objects.
