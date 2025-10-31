@@ -1,0 +1,49 @@
+.. _command_seqno:
+
+The SEQNO Command :kbd:`[MLEPC]`
+================================
+
+The SEQNO command is used to number the command blocks in the
+tape file. This is typically an N register followed by an
+integer value that steadily increases throughout the program. This
+command is valid for all machine types but may not be available on
+specific machines.
+
+   :math:`\textbf{SEQNO /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+   :math:`\textbf{SEQNO / AUTO}`
+
+   :math:`\textbf{SEQNO / } \big[\,\textbf{CONST},\big] \; \mathit{value}`
+
+   :math:`\textbf{SEQNO / } \big[\,\mathit{start},\big] \; \textbf{INCR},\mathit{increment} \; \big[,\mathit{count}\,\big]`
+
+The first format, ON/OFF, can be used to start and stop the
+outputting of sequence numbers on subsequent blocks of tape. Coding
+SEQNO/ON will resume sequence numbering. Coding SEQNO/ OFF will
+disable sequence numbering. A SEQNO/ON command is not necessary at
+the start of the program as GENER will default to what is best for
+the machine. A SEQNO/OFF command will be ignored if the machine
+requires a sequence number on every block.
+
+The SEQNO/AUTO command causes the following command blocks to be
+numbered using the cutter location (CL) record number belonging to
+the record that created the block. If multiple tape blocks are
+generated as a result of a single CL record, then the same sequence
+number will be repeated.
+
+The SEQNO/CONST,\ *value* command will set the sequence number of one
+or more tape blocks to the indicated value. If the CONST minor word
+is coded, then all subsequent blocks will be numbered the same until
+another SEQNO command is coded. If the CONST minor word is omitted,
+then only the next block will have the specified sequence number,
+thereafter regular sequence numbering will resume.
+
+The last format provides a means of specifying a starting sequence
+value, the amount by which to increment the sequence register each
+time it is output and a value requesting output of sequence numbers
+every *count* blocks. If the starting value is omitted, the next
+sequence number will be the last one output plus the specified
+increment. If the count value is omitted, then the last specified (or
+default) count value will be used. Normally sequence numbers are
+output on every block. *count* values greater than 1 will be ignored
+if the machine requires a sequence number on every block.
