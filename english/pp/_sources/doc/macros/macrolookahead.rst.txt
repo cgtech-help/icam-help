@@ -1,0 +1,1534 @@
+.. _macro_lookahead:
+
+Macro Look-Ahead Processing
+===========================
+
+There are times when GENER needs to know information about a CL
+record that is after the current position in the CL file. We call
+this kind of search a “look-ahead” search. User-defined post-processor
+macros are invoked during look-ahead searches. In addition
+some kinds of startup and shutdown macros may also be invoked,
+depending on the type of search.
+
+Standard Look-Ahead Searches
+----------------------------
+
+A look-ahead search is performed for the first PARTNO record. This is
+done at the very start of GENER processing for every kind of
+post-processor. A look-ahead search is performed for 4-axis lathes
+and EDMs in merging mode to find the HEAD record that starts the
+second HEAD section to be merged. Look-ahead is invoked during tool
+changes under several conditions. If the machine requires the next
+tool on the tool change block or if automatic preselection of tools
+is requested, then look-ahead is invoked to retrieve the next tool
+information. If the AUTO keyword is specified with the SELECT/TOOL
+command, then look-ahead is invoked to retrieve the next pocket
+number. When in wire EDM merge mode, look-ahead is performed to
+gather statistics on the upper and lower wire guide motions within a
+merge block before processing of the block occurs.
+
+We call the look-ahead searches described above “standard” look-ahead
+searches.
+
+Look-Ahead Variables
+--------------------
+
+Look-ahead variables can be used within a macro to obtain information
+about the “next” CL record of a particular type. There is a $NT
+look-ahead variable to provide the tool number of the next tool
+change. There are also look-ahead variables that provide information
+about the next motion: ($N{XYZUVWEN}M, $N{ABC[TH]}M and $N{XYZIJK}C).
+See :ref:`“Macro System Variables”<macro_system_variables>`
+for a description of the meaning of each of
+these variables. Each look-ahead variable name is formed by putting
+an “N” in front of the letters of the corresponding “current value”
+macro system variable. For example, $NT is the “next tool” macro
+system variable while $T is the “current tool” macro system variable.
+
+The motion look-ahead variables cannot be used easily in 4-axis lathe
+posts, because they return values for the next motion that occurs,
+irrespective of which head makes the move.
+
+The search for a “next” value skips the rest of the current macro. A
+$NT used in a macro will refer to the next tool found after the CL
+record that invoked that macro. Similarly, a next motion variable
+used in a macro will refer to the next motion found after the CL
+record that invoked that macro. If the look-ahead variable is
+referenced in a startup macro, the corresponding shutdown macro is
+also skipped during the search. For example, $NT in a tool change
+startup macro refers to the next tool after the one that invoked the
+tool change startup macro. The CL record found by the look-ahead
+search could come either from the CL file or a macro, since macros
+are invoked during the search in the normal way.
+
+A look-ahead variable will return a value of $NULL in some cases, as
+described in the next section.
+
+Variable Look-Ahead Mechanism
+-----------------------------
+
+There are several possible results when a look-ahead variable is
+referenced. A look-ahead search is not necessarily made and a $NULL
+value may be returned.
+
+If a look-ahead variable already has a value other than $NULL, that
+value is returned when the variable is referenced (i.e., another
+look-ahead search does not take place). A look-ahead variable is set
+to something other than $NULL after a look-ahead search for that
+class of variable has completed. There are two classes of look-ahead
+variables: the tooling variables; and the next motion look-ahead
+variables. All motion look-ahead variables are set when a motion
+look-ahead search is completed. Look-ahead variables are set to $NULL
+when a macro is entered or exited. A look-ahead variable therefore
+will already have a value (other than $NULL) if a look-ahead for that
+class of variable was performed earlier within the same macro,
+provided no other macros have been entered since.
+
+If a look-ahead variable with $NULL value is referenced, a check is
+made to see whether a search should be performed. A $NULL valued
+look-ahead variable does not generate a search if a look-ahead
+search is already in effect, but instead returns its $NULL value. For
+example, look-ahead for
+$NXM will not occur if a look-ahead for $NT is already in progress.
+
+There are two possible results of the look-ahead search: the CL
+record may be found or not found. If a tool change command is not
+found during $NT look-ahead, the “dummy tool number” given in the
+QUEST “Machine Description / Tool Change” section is returned. If a
+motion record is not found in motion variable look-ahead, the value
+returned is from the “current” motion. In other words, $NXM would
+have the value $XM; $NYM would have the value $YM and so on. Note
+that all motion look-ahead variables are set according to the result
+of the next motion search, not only the variable that caused the
+search.
+
+The following steps summarize the look-ahead mechanism:
+
+1. If the variable has a value other than $NULL, use that value and go
+   to step 8.
+
+2. If look-ahead processing is in progress, return $NULL and go to step
+   8.
+
+3. Save the current state of GENER (including all macro variable
+   values).
+
+4. Exit the current macro.
+
+5. Search forward through macros and the CL file until the appropriate
+   kind of CL record is found or FINI is reached.
+
+6. Restore the pre-search state of GENER and return to the macro line
+   that initiated the look-ahead search.
+
+7. Set the value of the look-ahead variable(s) according to the CL
+   record found by the search, or to default values if FINI was reached.
+
+8. Continue execution.
+
+The user is allowed to set look-ahead variables. This will only
+affect the value of the variable within that macro. The value will be
+lost if the macro calls another macro or if the macro is exited. It
+is not typically useful.
+
+Limitations of Look-Ahead Processing
+------------------------------------
+
+During MACHIN look-ahead, which is invoked to scan the CL file for
+the post-processor name, macro expansion does not occur. The reason
+for this is simple. All macros are stored in the post-processor
+data file. Prior to the MACHIN look-ahead the
+post-processor name is unknown and thus the post-processor data is
+not yet in memory. Without this data, macros cannot be executed.
+
+During PARTNO and HEAD look-ahead, the tool change and motion startup
+and shutdown macros are not executed. No processing besides macro
+expansion is performed on any CL records. Macro assignments to
+global, object and macro system variables are ignored.
+
+Tooling look-ahead does not invoke motion startup and shutdown
+macros. Macro expansion is performed on all CL records. Macro
+assignments to global, object and macro system variables are
+processed. In addition, there is limited processing of the following
+post-processor commands: HEAD, TOOLNO, SELCTL, SELECT, UNLOAD and
+MODE. The 6000 class CUTTER record is also processed. The above refers both
+to standard tooling look-ahead and to the look-ahead generated by the
+$NT macro system variable.
+
+Motion variable look-ahead allows all types of macros to be invoked.
+Global, object and macro system variable assignments from macros are
+processed. In addition there is limited processing of the following
+post-processor commands: PIVOTZ, SELECT, SELCTL, TOOLNO, LOAD,
+LOADTL, TURRET, UNLOAD, GOHOME, CLAMP, ROTABL, TRANS, MODE, ORIGIN,
+CUTCOM, STOP. 5000 class (GOTO, FROM), 6000 class (CUTTER, INTOL,
+OUTTOL, TOL-ER) and 9000 class (MULTAX, UNITS) records are also processed.
+If the next motion is a circular motion, the next motion variables will
+return information about the end point for that circular move.
+
+All look-aheads in a Composite post-processor, with the exception of
+$FLOOK, are limited to the current composite post-processor
+component. Look-aheads will end when an APPLY command is encountered
+that switches processing to a different component post-processor.
+
+Testing for Look-Ahead Mode
+---------------------------
+
+A logical variable $LOOKAH is provided, which indicates whether or
+not look-ahead mode is currently in effect. There are different types
+of look-ahead (e.g., looking for tools, looking for motions,
+etcetera), which can be determined by testing logical look-ahead
+system variables. See :ref:`“Look-Ahead Variables”<lookahead_variables>` for a list of look-ahead variables.
+
+These variables can be used if it is necessary or desirable to skip
+over sections of macro code that should not be executed in look-ahead
+mode. For example, it is generally desirable during look-ahead to
+skip any macro processing that writes data to an external file,
+otherwise the data would end up being written multiple times (i.e.,
+once during look-ahead and again later during normal processing).
+
+For example:
+
+   ::
+
+      $$ Write machining time
+      IF/.NOT.$LOOKAH
+        OPEN/21,REAR,'C:\TMP\RUNTIME.LOG'
+        WRITE/21,'!(A):!(*)',$TAPNAM,$FEDTIM
+        CLOSE/21
+      ENDOF/IF
+
+Another example is macro code that depends on values of variables not
+being updated in look-ahead mode. This code can be skipped over in
+look-ahead mode by using an IF block to test one or more of the
+look-ahead variables.
+
+Forcing a Particular Look-Ahead Result
+--------------------------------------
+
+If the variable look-ahead search reaches a FINI, the search fails
+and default values are set, as described previously.
+
+If you are not satisfied with these defaults, you can explicitly
+define the record that should be returned by using the following code
+in the machine shutdown macro:
+
+   ::
+
+      $$ Define 99 as value of $NT to be returned if no tool
+      $$ is found. If this code is removed, the "dummy" tool
+      $$ would be returned.
+      IF/$TLOOK
+        LOAD/TOOL,99
+      ENDOF/IF
+      $$
+      $$ Define machine coordinates (99,99,99) as the next
+      $$ motion if none is found in variable look-ahead. If
+      $$ this code is removed, the current position would be
+      $$ returned
+      IF/$MLOOK
+        GOTO/99,99,99
+      ENDOF/IF
+
+The following motion startup macro illustrates how variable
+look-ahead can be coded in a macro. The example assumes that the
+machine shutdown macro coded in the previous example is defined.
+
+   ::
+
+      $$ Motion startup macro to PPRINT the current position,
+      $$ the motion matched by the macro and the "next"
+      $$ motion after it.
+      $$ All values are in machine coordinates.
+      $$
+      IF/$NXM.EQ.$NULL
+        TERMAC
+      ENDOF/IF
+      PPRINT/'current pos : (!(s2.4s),!(s2.4s),!(s2.4s))',$
+        $XM,$YM,$ZM
+      PPRINT/'macro motion: (!(s2.4s),!(s2.4s),!(s2.4s))',$
+        $P2(1),$P2(2),$P2(3)
+      IF/$NXM.EQ.99.AND.$NYM.EQ.99.AND.$NZM.EQ.99
+        PPRINT/'There is no "next" motion'
+      ELSE
+        PPRINT/'"next" motion:(!(s2.4s),!(s2.4s),!(s2.4s))',$
+          $NXM,$NYM,$NZM
+      ENDOF/IF
+
+.. _flook_generic_lookahead:
+
+$FLOOK Generic Look-ahead
+-------------------------
+
+The $FLOOK() function is used to invoke a look-ahead operation. It is
+callable from all macros
+
+*excluding the declaration, register and tape macros*. The call
+format is as follows:
+
+   :math:`\mathit{number}\,\mathtt{=}\,\textbf{\$FLOOK(} \,\mathit{context} \,\big[,\mathit{optional}\,\mathit{arguments}\,\big] \,\textbf{)}`
+
+The **context** argument identifies one look-ahead operation from
+another, in case there is more than one generic look-ahead required
+in a post-processor. The context variable is needed when signaling
+that the look-ahead has completed. Context numbers can range from 1
+through 5 (for up to five different generic look-ahead functions
+active at any one time).
+
+Unlike other forms of look-ahead, the $FLOOK function does not jump
+to the end of the current macro, nor does it selectively process CL
+file records. Instead, everything about the current state of
+processing is remembered, flags are set to inhibit tape and listing
+output, then the $FLOOK function returns a status of zero. After
+that, processing continues as though nothing special had just
+happened.
+
+As a special case, calling $FLOOK with a zero as the context number
+will return the context number of the currently active generic
+look-ahead, or will return zero if no generic look-ahead is active.
+In this case, a look-ahead is not started.
+
+The look-ahead ends when one of the following events occurs:
+
+1. Setting a special $LOOK macro variable;
+2. Calling $FLOOK again with the same context number; or
+3. Encountering a FINI.
+
+When the look-ahead ends, the original processing state is reinstated
+as though nothing had happened. Tape file and listing file processing
+are resumed. The CL file pointer and macro call stack are reset.
+Finally, all local, object, global and macro system variables are
+reset to their original values, with the exception of any variables
+that were listed as **optional arguments** on the $FLOOK function call.
+Any variable (other than a read-only macro system variable) so listed
+will retain its “future” value after the look-ahead has ended. To
+retain the future value of all or a portion of an array, specify the
+first and last array elements in the range, separated by the keyword
+THRU. For example:
+
+   ::
+
+     myarr(1),THRU,myarr(12)
+
+Ending a Look-ahead using the $LOOK Macro System Variable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Setting the $LOOK macro system variable for a specific look-ahead
+context has the effect of ending the look-ahead and jumping back to
+the original point where the $FLOOK function was called, with one
+difference. This time, the $FLOOK function will return the value
+$LOOK was set to, instead of zero. The $LOOK macro system variable
+must be specified with the appropriate context number, as follows:
+
+      :math:`\mathbf{\$LOOK(}\mathit{context}\,\textbf{)}\,\mathtt{=}\,\mathit{number}`
+
+Setting $LOOK for a context that is not active has no adverse
+effects.
+
+The $LOOK variable can also be used on the right hand side of an “=”
+sign (as an R-value). In this case, it will return a value of one if
+a look-ahead is active for the specified context number, or a value
+of zero if a look-ahead is not active.
+
+$LOOK can be set in a tape macro to end a look-ahead. However, for
+software architectural reasons, macro processing will continue to the
+point just before the next record is read before resetting back to
+the original point. This additional processing will in no way affect
+the returned result of the look-ahead or the saved results of
+variables specified on the $FLOOK function call. In fact, this
+additional processing is only noticeable if debugging and tracing
+GENER with $FLOOK debugging enabled.
+
+Effect of Duplicate and Nested $FLOOK Functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Another way of ending a look-ahead is to call $FLOOK again with a
+context number that matches the current generic look-ahead context
+number. In this case, a value of –1 (minus one) is returned by the
+original $FLOOK function call, once the environment has been reset
+back.
+
+Nesting of $FLOOK calls is possible and automatic, but great care
+should be taken to ensure that the results are meaningful. A nested
+look-ahead causes the original look-ahead to be suspended while the
+new look-ahead obtains its result. Once that has happened, the
+original look-ahead can proceed. Nested look-aheads are maintained in
+a stack (like books piled on a table). The top most look-ahead in the
+stack (the current active one) must be completed and removed before
+the one underneath it (the previously active one) can be continued.
+It might happen that a $FLOOK call is made for a context that is in
+the stack, but not on top. In this case, a new look-ahead is not
+started, rather, the $FLOOK call will return zero (as though it had
+started). This action protects against multiple same nested
+look-aheads. Similarly, any $LOOK variable set for a context other
+than the top most one in the stack will be ignored.
+
+It is possible to ignore one type of look-ahead while a different
+type is active. The following example only begins a context “2”
+look-ahead, provided a context “1” look-ahead is not active:
+
+   ::
+
+     IF/$LOOK(1).EQ.0
+       %L01=$FLOOK(2)
+       …
+
+Effect of FINI on $FLOOK
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The third and final way of ending a look-ahead is when a FINI is
+encountered. In this case, a value of –2 (minus two) is returned by
+the original $FLOOK function call, once the environment has been
+reset back.
+
+This situation can be avoided by adding code to the machine shutdown
+macro to handle the different types of look-aheads that might be
+active in the post-processor. For each such case, $LOOK should be set
+to a value that is appropriate for the look-ahead context. Remember,
+setting $LOOK will have no adverse effect if a look-ahead is not
+active.
+
+Examples
+~~~~~~~~
+
+The following macro code will output the total cutting time for the
+upcoming operation at the start of the operation. This sort of
+information might be needed for a tool life management system. In
+this sample, the time is output in a message to the operator. The
+DISPLY command in the tool change startup macro begins a context “1”
+look-ahead. This look-ahead continues until the next
+tool is loaded or the program ends, at which time $LOOK(1) is set to
+the current machine cutting time. The part program is reset back to
+the start of the look-ahead, then $FLOOK(1) returns the cutting time
+value $LOOK(1) was set to.
+
+Tool change startup macro:
+
+   ::
+
+     $LOOK(1)=$FEDTIM $$ Return feed time at end of operation
+     DISPLY/’Cutting time: !(*)’,$FLOOK(1)-$FEDTIM
+
+Machine shutdown macro:
+
+   ::
+
+     $LOOK(1)=$FEDTIM $$ Return feed time at end of program
+
+This next example will break the tape before a tool is loaded, if
+there is insufficient length remaining to hold the entire operation.
+The look-ahead is skipped if the current tool is the first one loaded
+in the program (i.e., $FT is zero). The $FLOOK(1) call starts a
+look-ahead that will end if a break occurs, or when a new tool is
+loaded and $FLOOK(1) is called again, or when a FINI is encountered.
+Only the break shutdown macro will cause $FLOOK(1) to return a value
+of 1 (the other cases return –1 and –2 respectively). When this
+happens, a BREAK/NOW command forces a tape break before the tool
+change.
+
+Tool change startup macro:
+
+   ::
+
+     IF/$FT.NE.0 $$ Check for break if this is not the first tool
+       IF/$FLOOK(1).EQ.1 $$ Was the BREAK macro activated?
+         BREAK/NOW
+       ENDOF/IF
+     ENDOF/IF
+
+Break shutdown (or startup) macro:
+
+   ::
+
+     $LOOK(1)=1 $$ Signal that a tape break is needed
+
+.. _operation_lookahead:
+
+$FINFO Operation Look-ahead
+---------------------------
+
+The $FINFO() function performs a look-ahead of the next operation and
+returns information about that operation via $INFO.\* system
+variables. The $FINFO function returns a wide variety of information,
+such as operation starting and ending positions, feed and speed,
+compensations, flags indicating positioning and interpolation modes
+encountered, as well as custom data for user-defined purposes. It is
+callable from all macros *excluding the declaration, register and
+tape macros*. The call format is as follows:
+
+   :math:`\mathit{cln}\,\mathtt{=}\,\textbf{\$FINFO(}\,
+   \Big[\,\big[\,\mathit{start},\big]\,\mathit{end}\,\Big]
+   \,\textbf{)}`
+
+When called without parameters, the $FINFO function scans forward in
+look-ahead mode, starting from the current record and ending at the
+next operation boundary, as defined by a tool change or OPTYPE
+command, or by a transition from feed to positioning velocity (i.e.,
+RAPID or positioning feed as defined by the FEDRAT/RAPID command).
+The $FINFO function returns the CL record number at the point the
+scan was terminated. Information obtained during the look-ahead is
+available in a series of $INFO.\* system variables.
+
+An optional **start** CL record number can be specified, where 0
+(zero) means to start from the current CL position (the default). An
+optional **end** CL record number can also be specified, where 0
+(zero) means to the end of the CL file, to force the scan to consider
+multiple operations. Care must be exercised when specifying a start
+CL position, to be sure that the referenced CLDATA position is for
+the same tool as is currently loaded, since $FINFO will simply
+position to the indicated record without interpreting the intervening
+records.
+
+When $FINFO is called, it sets the $ILOOK system variable true,
+enters look-ahead processing and immediately returns a value of 0
+(zero). The developer can test for a zero return value to know that
+$FINFO look-ahead has just been activated. If $FINFO is called while
+another instance of $FINFO is still active, then the new function
+call is ignored and a value of –1 is returned. If a FINI is
+encountered during look-ahead a value of –2 is returned. A $FINFO
+look-ahead can be terminated early by setting the $ILOOK system
+variable to false (the current CL record number is returned).
+
+When the look-ahead ends, the original processing state is reinstated
+as though nothing had happened. Tape file and listing file processing
+are resumed. The CL file pointer and macro call stack are reset.
+Finally all local, object, global and system variables are restored
+to their original values, with the exception of the $INFO.\* system
+variables, which contain the information gathered during the $FINFO
+look-ahead. Look-ahead information is grouped into the following
+categories:
+
+-  The status of the post-processor at the start of the first cutting
+   motion.
+
+-  Flags indicating various types of processing encountered during the
+   entire operation.
+
+-  Motion data identifying the first positioning motion, the first
+   cutting motion, the last cutting motion and the last positioning
+   motion.
+
+-  User defined look-ahead information.
+
+Operation status at start of cut
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The status at the start of the cut is made available via the
+following look-ahead variables whose names have been chosen to match
+their normal system variable counterparts. The start of the cut is
+the first motion at a programmed feed velocity less than the high
+feed threshold specified by the
+FEDRAT/RAPID command. Any of these $INFO.\* variables can be set
+within macros during look-ahead to override the default setting.
+GENER will quietly ignore any attempts to set these (or any other
+$INFO.\*) variables while $FINFO look-ahead is not active.
+
+.. _var_info_axes:
+.. index:: Variables; $INFO.AXES
+.. _var_info_axesc2p:
+.. index:: Variables; $INFO.AXESC2P
+.. _var_info_c2papt:
+.. index:: Variables; $INFO.C2PAPT
+.. _var_info_c2pmch:
+.. index:: Variables; $INFO.C2PMCH
+.. _var_info_hsm:
+.. index:: Variables; $INFO.HSM
+.. _var_info_lcs:
+.. index:: Variables; $INFO.LCS
+.. _var_info_opargs:
+.. index:: Variables; $INFO.OPARGS
+.. _var_info_optype:
+.. index:: Variables; $INFO.OPTYPE
+.. _var_info_origin:
+.. index:: Variables; $INFO.ORIGIN
+.. _var_info_originl:
+.. index:: Variables; $INFO.ORIGINL
+.. _var_info_plmode:
+.. index:: Variables; $INFO.PLMODE
+.. _var_info_pnmode:
+.. index:: Variables; $INFO.PNMODE
+.. _var_info_polract:
+.. index:: Variables; $INFO.POLRACT
+.. _var_info_polrapt:
+.. index:: Variables; $INFO.POLRAPT
+.. _var_info_tcp:
+.. index:: Variables; $INFO.TCP
+.. _var_info_tcpfmt:
+.. index:: Variables; $INFO.TCPFMT
+.. _var_info_tcpset:
+.. index:: Variables; $INFO.TCPSET
+
+..
+
+   Motion related variables:
+
+      $INFO.AXES, $INFO.AXESC2P, $INFO.C2PAPT, $INFO.C2PMCH,
+      $INFO.HSM, $INFO.LCS, $INFO.OPARGS, $INFO.OPTYPE,
+      $INFO.ORIGIN, $INFO.ORIGINL, $INFO.PLMODE, $INFO.PNMODE,
+      $INFO.POLRACT, $INFO.POLRAPT, $INFO.TCP, $INFO.TCPFMT,
+      $INFO.TCPSET
+
+.. _var_ilook:
+.. index:: Variables; $ILOOK
+
+..
+
+   Look-ahead variables:
+
+      $ILOOK (set during $FINFO look-ahead)
+
+.. index:: Variables; $INFO.COOLNT
+.. _var_info_cooltyp:
+.. index:: Variables; $INFO.COOLTYP
+.. _var_info_f:
+.. index:: Variables; $INFO.F
+.. _var_info_fmode:
+.. index:: Variables; $INFO.FMODE
+.. _var_info_maxrpm:
+.. index:: Variables; $INFO.MAXRPM
+.. _var_info_s:
+.. index:: Variables; $INFO.S
+.. _var_info_sdir:
+.. index:: Variables; $INFO.SDIR
+.. _var_info_smode:
+.. index:: Variables; $INFO.SMODE
+.. _var_info_sr:
+.. index:: Variables; $INFO.SR
+.. _var_info_srange:
+.. index:: Variables; $INFO.SRANGE
+.. _var_info_ss:
+.. index:: Variables; $INFO.SS
+
+..
+
+   Coolant,  feed rate and spindle variables:
+
+      $INFO.COOLNT, $INFO.COOLTYP, $INFO.F, $INFO.FMODE,
+      $INFO.MAXRPM, $INFO.S, $INFO.SDIR, $INFO.SMODE,
+      $INFO.SR, $INFO.SRANGE, $INFO.SS
+
+.. _var_info_dcomp:
+.. index:: Variables; $INFO.DCOMP
+.. _var_info_tcd:
+.. index:: Variables; $INFO.TCD
+.. _var_info_tcf:
+.. index:: Variables; $INFO.TCF
+.. _var_info_tcfx:
+.. index:: Variables; $INFO.TCFX
+.. _var_info_tcfy:
+.. index:: Variables; $INFO.TCFY
+.. _var_info_tcfz:
+.. index:: Variables; $INFO.TCFZ
+.. _var_info_tcl:
+.. index:: Variables; $INFO.TCL
+.. _var_info_tcldir:
+.. index:: Variables; $INFO.TCLDIR
+.. _var_info_tclset:
+.. index:: Variables; $INFO.TCLSET
+
+..
+
+   Cutter compensation variables:
+
+      $INFO.DCOMP, $INFO.TCD, $INFO.TCF, $INFO.TCF{XYZ},
+      $INFO.TCL, $INFO.TCLDIR, $INFO.TCLSET
+
+.. _var_info_h:
+.. index:: Variables; $INFO.H
+.. _var_info_hp:
+.. index:: Variables; $INFO.HP
+.. _var_info_t:
+.. index:: Variables; $INFO.T
+.. _var_info_tlmax:
+.. index:: Variables; $INFO.TLMAX
+.. _var_info_tlmin:
+.. index:: Variables; $INFO.TLMIN
+.. _var_info_tlsum:
+.. index:: Variables; $INFO.TLSUM
+.. _var_info_tp:
+.. index:: Variables; $INFO.TP
+
+..
+
+   Tooling variables:
+
+      $INFO.H, $INFO.HP, $INFO.T, $INFO.TLMAX\ [#f1]_,
+      $INFO.TLMIN\ [#f1]_, $INFO.TLSUM\ [#f1]_, $INFO.TP
+
+.. index:: Variables; $INFO.E
+.. _var_info_ev:
+.. index:: Variables; $INFO.EV
+.. _var_info_head:
+.. index:: Variables; $INFO.HEAD
+.. _var_info_lthmod:
+.. index:: Variables; $INFO.LTHMOD
+.. _var_info_multrd:
+.. index:: Variables; $INFO.MULTRD
+.. _var_info_pitch:
+.. index:: Variables; $INFO.PITCH
+.. _var_info_pitchv:
+.. index:: Variables; $INFO.PITCHV
+.. _var_info_shead:
+.. index:: Variables; $INFO.SHEAD
+.. _var_info_spindle:
+.. index:: Variables; $INFO.SPINDLE
+.. _var_info_xdiam:
+.. index:: Variables; $INFO.XDIAM
+
+..
+
+   Lathe variables:
+
+      $INFO.E, $INFO.EV, $INFO.HEAD, $INFO.LTHMOD,
+      $INFO.MULTRD, $INFO.PITCH, $INFO.PITCHV, $INFO.SHEAD,
+      $INFO.SPINDLE, $INFO.XDIAM
+
+.. _var_info_crmode:
+.. index:: Variables; $INFO.CRMODE
+.. _var_info_cyclrp:
+.. index:: Variables; $INFO.CYCLRP
+.. _var_info_cydir:
+.. index:: Variables; $INFO.CYDIR
+.. _var_info_cydpth:
+.. index:: Variables; $INFO.CYDPTH
+.. _var_info_cydwel:
+.. index:: Variables; $INFO.CYDWEL
+.. _var_info_cyfedt:
+.. index:: Variables; $INFO.CYFEDT
+.. _var_info_cyfedv:
+.. index:: Variables; $INFO.CYFEDV
+.. _var_info_cymultrd:
+.. index:: Variables; $INFO.CYMULTRD
+.. _var_info_cyratio:
+.. index:: Variables; $INFO.CYRATIO
+.. _var_info_cyretn:
+.. index:: Variables; $INFO.CYRETN
+.. _var_info_cyrigid:
+.. index:: Variables; $INFO.CYRIGID
+.. _var_info_cyrpto:
+.. index:: Variables; $INFO.CYRPTO
+.. _var_info_cytype:
+.. index:: Variables; $INFO.CYTYPE
+.. _var_info_thtype:
+.. index:: Variables; $INFO.THTYPE
+
+..
+
+   Cycle variables:
+
+      $INFO.CRMODE, $INFO.CYCLRP, $INFO.CYDIR, $INFO.CYDPTH,
+      $INFO.CYDWEL, $INFO.CYFEDT, $INFO.CYFEDV, $INFO.CYMULTRD,
+      $INFO.CYRATIO, $INFO.CYRETN, $INFO.CYRIGID, $INFO.CYRPTO,
+      $INFO.CYTYPE, $INFO.THTYPE
+
+.. [#f1] $INFO.TLMAX, $INFO.TLMIN and $INFO.TLSUM contain a single row only (i.e., single dimension).
+
+.. _var_info_istxaz:
+.. index:: Variables; $INFO.ISTXAZ
+.. _var_info_istxaw:
+.. index:: Variables; $INFO.ISTXAW
+.. _var_info_istxpz:
+.. index:: Variables; $INFO.ISTXPZ
+.. _var_info_istxpw:
+.. index:: Variables; $INFO.ISTXPW
+.. _var_info_issxaz:
+.. index:: Variables; $INFO.ISSXAZ
+.. _var_info_issxaw:
+.. index:: Variables; $INFO.ISSXAW
+.. _var_info_issxpz:
+.. index:: Variables; $INFO.ISSXPZ
+.. _var_info_issxpw:
+.. index:: Variables; $INFO.ISSXPW
+.. _var_info_ispr:
+.. index:: Variables; $INFO.ISPR
+.. _var_info_ispl:
+.. index:: Variables; $INFO.ISPL
+.. _var_info_ispp:
+.. index:: Variables; $INFO.ISPP
+.. _var_info_ispa:
+.. index:: Variables; $INFO.ISPA
+.. _var_info_iscr:
+.. index:: Variables; $INFO.ISCR
+.. _var_info_iscl:
+.. index:: Variables; $INFO.ISCL
+.. _var_info_iscp:
+.. index:: Variables; $INFO.ISCP
+.. _var_info_isca:
+.. index:: Variables; $INFO.ISCA
+.. _var_info_iscy:
+.. index:: Variables; $INFO.ISCY
+.. _var_info_iscya:
+.. index:: Variables; $INFO.ISCYA
+.. _var_info_iscym:
+.. index:: Variables; $INFO.ISCYM
+.. _var_info_isip:
+.. index:: Variables; $INFO.ISIP
+.. _var_info_isil:
+.. index:: Variables; $INFO.ISIL
+.. _var_info_isic:
+.. index:: Variables; $INFO.ISIC
+.. _var_info_isic3:
+.. index:: Variables; $INFO.ISIC3
+.. _var_info_isih:
+.. index:: Variables; $INFO.ISIH
+.. _var_info_isit:
+.. index:: Variables; $INFO.ISIT
+.. _var_info_isis:
+.. index:: Variables; $INFO.ISIS
+.. _var_info_ismsr:
+.. index:: Variables; $INFO.ISMSR
+
+Operation processing conditions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following $INFO.IS\* flags contain various processing conditions
+detected over the entire span of the look-ahead. Any of these
+$INFO.IS\* variables can be set within macros during look-ahead to
+override their default setting.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  $INFO.ISTXAZ
+         -  True if the tool axis was ever at an angle to the machine Z axis
+      *  -  $INFO.ISTXAW
+         -  True if the tool axis was ever at an angle to the LCS Z axis
+      *  -  $INFO.ISTXPZ
+         -  True if the tool axis was ever parallel to the machine Z axis
+      *  -  $INFO.ISTXPW
+         -  True if the tool axis was ever parallel to the LCS Z axis
+      *  -  $INFO.ISSXAZ
+         -  True if the stock axis was ever at an angle to the machine Z axis
+      *  -  $INFO.ISSXAW
+         -  True if the stock axis was ever at an angle to the LCS Z axis
+      *  -  $INFO.ISSXPZ
+         -  True if the stock axis was ever parallel to the machine Z axis
+      *  -  $INFO.ISSXPW
+         -  True if the stock axis was ever parallel to the LCS Z axis
+      *  -  $INFO.ISPR
+         -  True if there was positioning rotary motion
+      *  -  $INFO.ISPL
+         -  True if there was positioning linear motion (ZX or ZY)
+      *  -  $INFO.ISPP
+         -  True if there was positioning planar motion (XY)
+      *  -  $INFO.ISPA
+         -  True if there was positioning axial motion (Z)
+      *  -  $INFO.ISCR
+         -  True if there was continuous rotary motion
+      *  -  $INFO.ISCL
+         -  True if there was continuous linear motion
+      *  -  $INFO.ISCP
+         -  True if there was continuous planar motion
+      *  -  $INFO.ISCA
+         -  True if there was continuous axial motion
+      *  -  $INFO.ISCY
+         -  True if there was any CYCLE motion
+      *  -  $INFO.ISCYA
+         -  True if there was automatic canned CYCLE motion
+      *  -  $INFO.ISCYM
+         -  True if there was manually simulated CYCLE motion
+      *  -  $INFO.ISIP
+         -  True if there was any rapid positioning motion
+      *  -  $INFO.ISIL
+         -  True if there was any linear interpolation
+      *  -  $INFO.ISIC
+         -  True if there was any 2D circular interpolation
+      *  -  $INFO.ISIC3
+         -  True if there was any 3D circular interpolation
+      *  -  $INFO.ISIH
+         -  True if there was any helical interpolation
+      *  -  $INFO.ISIT
+         -  True if there was any threading interpolation
+      *  -  $INFO.ISIS
+         -  True if there was any spline or NURBS interpolation
+      *  -  $INFO.ISMSR
+         -  True if multiple operations have different starting rotary positions
+
+.. _var_info_opcnt:
+.. index:: Variables; $INFO.OPCNT
+
+The following variable is read-only.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  $INFO.OPCNT
+         -  Number of operations (transitions from positioning to cutting)
+
+Operation key motion data
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The $INFO.P{1234}\* variables contain key motions data gathered
+during the $FINFO look-ahead. Four positions are recorded by
+look-ahead processing, as follows:
+
+.. _var_info_p1:
+.. index:: Variables; $INFO.P1
+
+..
+
+   $INFO.P1.\*
+
+      This is the first motion encountered following the $FINFO look-ahead
+      activation, which should generally be the RAPID start-up position,
+      but could be any command that causes axis motion. In case of a CYCLE
+      without rapid positioning motions, this is the R plane position of
+      the first cycle point.
+
+.. _var_info_p2:
+.. index:: Variables; $INFO.P2
+
+..
+
+   $INFO.P2.\*
+
+      This is the start of the first cutting motion encountered following
+      the $FINFO look-ahead activation. A cutting motion is defined as one
+      whose programmed velocity is less than the high feed threshold
+      defined by the FEDRAT/RAPID command. In case of a CYCLE, this is the
+      R plane position of the first cycle point
+
+.. _var_info_p3:
+.. index:: Variables; $INFO.P3
+
+..
+
+   $INFO.P3.\*
+
+      This is the end point of the last cutting motion encountered before
+      $FINFO look-ahead termination.
+
+.. _var_info_p4:
+.. index:: Variables; $INFO.P4
+
+..
+
+   $INFO.P4.\*
+
+      This is the end point of the last rapid or high-feed positioning
+      motion encountered before $FINFO look-ahead termination.
+      The same information is gathered for each of these positions, as
+      follows:
+
+.. _var_info_p1_cln:
+.. index:: Variables; $INFO.P1.CLN
+.. _var_info_p2_cln:
+.. index:: Variables; $INFO.P2.CLN
+.. _var_info_p3_cln:
+.. index:: Variables; $INFO.P3.CLN
+.. _var_info_p4_cln:
+.. index:: Variables; $INFO.P4.CLN
+
+..
+
+   $INFO.P\*.CLN
+
+      CL record number of the motion; 0 (zero) if no information available.
+
+.. _var_info_p1_axes:
+.. index:: Variables; $INFO.P1.AXES
+.. _var_info_p2_axes:
+.. index:: Variables; $INFO.P2.AXES
+.. _var_info_p3_axes:
+.. index:: Variables; $INFO.P3.AXES
+.. _var_info_p4_axes:
+.. index:: Variables; $INFO.P4.AXES
+
+..
+
+   $INFO.P\*.AXES
+
+      Value of the $AXES system variable string at that position.
+
+.. _var_info_p1_c:
+.. index:: Variables; $INFO.P1.C
+.. _var_info_p2_c:
+.. index:: Variables; $INFO.P2.C
+.. _var_info_p3_c:
+.. index:: Variables; $INFO.P3.C
+.. _var_info_p4_c:
+.. index:: Variables; $INFO.P4.C
+
+..
+
+   $INFO.P\*.C
+
+      CL coordinates of the motion. This is a sequence of 6 elements
+      corresponding to the “xyzijk” position of the motion, as would be
+      found in the $P2 variable of a motion startup macro.
+
+.. _var_info_p1_w:
+.. index:: Variables; $INFO.P1.W
+.. _var_info_p2_w:
+.. index:: Variables; $INFO.P2.W
+.. _var_info_p3_w:
+.. index:: Variables; $INFO.P3.W
+.. _var_info_p4_w:
+.. index:: Variables; $INFO.P4.W
+
+..
+
+   $INFO.P\*.W
+
+      Local machine coordinates of the motion. This is a sequence of 6
+      elements corresponding to the machine position of the active axes
+      as defined by the $AXES system variable, as would be found in the $P3
+      variable of a motion startup macro. If an LCS (local coordinate
+      system) is active, the “xyz” components of the sequence are expressed
+      in local coordinates.
+
+.. _var_info_p1_w2:
+.. index:: Variables; $INFO.P1.W2
+.. _var_info_p2_w2:
+.. index:: Variables; $INFO.P2.W2
+.. _var_info_p3_w2:
+.. index:: Variables; $INFO.P3.W2
+.. _var_info_p4_w2:
+.. index:: Variables; $INFO.P4.W2
+
+..
+
+   $INFO.P\*.W2
+
+      Alternate local machine coordinates of the motion, provided that
+      there is an alternate rotary solution, as would be found in the $P7
+      variable of a motion startup macro; otherwise $NULL.
+
+.. _var_info_p1_m:
+.. index:: Variables; $INFO.P1.M
+.. _var_info_p2_m:
+.. index:: Variables; $INFO.P2.M
+.. _var_info_p3_m:
+.. index:: Variables; $INFO.P3.M
+.. _var_info_p4_m:
+
+..
+
+   $INFO.P\*.M
+
+      Machine coordinates of the motion. This is a sequence of 6 elements
+      corresponding to the machine position of the active axes as defined
+      by the $AXES system variable.
+
+.. _var_info_p1_m2:
+.. index:: Variables; $INFO.P1.M2
+.. _var_info_p2_m2:
+.. index:: Variables; $INFO.P2.M2
+.. _var_info_p3_m2:
+.. index:: Variables; $INFO.P3.M2
+.. _var_info_p4_m2:
+.. index:: Variables; $INFO.P4.M2
+
+..
+
+   $INFO.P\*.M2
+
+      Alternate machine coordinates of the motion, provided that there is
+      an alternate rotary solution; otherwise $NULL.
+
+.. _var_info_v1-99:
+.. index:: Variables; $INFO.V1-99
+
+Operation user-defined variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Finally, a series of 99 $FINFO user-defined variables, from $INFO.V1
+through $INFO.V99, are available for whatever purposes the developer
+desires. These variables are set to $NULL at the start of $FINFO
+look-ahead and can be assigned any value, including a sequence, by
+macro processing while the $FINFO look-ahead is active. Once
+look-ahead completes, these variables (all $INFO variables in fact)
+become read-only.
+
+Ending a $FINFO look-ahead
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A $FINFO look-ahead will exit under the following conditions, always
+returning the CL record number of the last record read.
+
+   An *end* CL position **is not** specified with $FINFO
+
+   -  A RAPID motion is processed after the start of cutting
+
+   -  An OPTYPE command is processed
+
+   -  A tool change command (i.e., LOAD, LOADTL, TURRET, UNLOAD) is
+      processed
+
+   -  The end of program is reached
+
+   -  $ILOOK is set false within a macro
+
+   An *end* CL position **is** specified with $FINFO
+
+   -  A record beyond the end CL position is read
+
+   -  The end of program is reached
+
+   -  $ILOOK is set false within a macro
+
+Unlike the $FLOOK function, calling $FINFO while already in a $FINFO
+look-ahead will not end the look-ahead. Instead, a value of –1 will
+be returned and the $FINFO look-ahead will continue.
+
+.. _op_event_lookahead:
+
+Operation Event Look-ahead
+--------------------------
+
+Developers are encouraged to use the Operation Event (OE) macro,
+instead of a motion macro or tool change shutdown macro, to setup the
+appropriate conditions at the start of a cut. This might include, for
+example, workpiece compensation, length compensation, TCP and/or LCS,
+as well as safe positioning.
+
+When an OPTYPE command is processed, it sets the $OELOOK system
+variable true and enters look-ahead processing to determine
+information about the upcoming operation. Look-ahead processing
+continues to the start of the cutting motion, or to the next OPTYPE
+command, or to a macro instruction turning $OELOOK false, whichever
+comes first. A cutting motion is defined as one whose programmed
+velocity is less than the high feed threshold defined by the
+FEDRAT/RAPID command.
+
+When the look-ahead ends, the original processing state is reinstated
+as though nothing had happened. Tape file and listing file processing
+are resumed. The CL file pointer and macro call stack are reset. All
+local, object, global and system variables are restored to their
+original values, with the exception of $OE.\* and $INFO.\* system
+variables, which contain the information gathered during the
+look-ahead. Finally, the Operation Event (OE) macro is activated with
+the following $P variables:
+
+   | $P1: The operation type. Also available as $OE.OPTYPE
+   | $P2: The OPTYPE command arguments. Also available as $OE.OPARGS
+   | $P3: CL record number of the OPTYPE command
+   | $P4: CL record number at the start of the first cutting motion
+   | $P5: Number of positioning start-up points
+
+$P1 identifies the operation type using a numeric value (not a
+keyword), as follows: 1=TOOL, 2=MILL, 3=TURN and 4=AXIAL. Note that
+an OPTYPE/AUTO will be resolved to one of the 4 types listed. $P1
+will be set to –2 if a FINI is encountered before a feed motion or to
+–1 if another OPTYPE command is encountered before a motion. $P2 is a
+sequence containing the OPTYPE command arguments. $P2(1) is the
+operation type keyword as specified in the OPTYPE command.
+
+Look-ahead information is returned in the $OE.\* system variables.
+This information is grouped into the following categories:
+
+-  The status at the start of the first cutting motion.
+
+-  Key motion data identifying 1) the first positioning motion and 2)
+   the position at the start of the first cutting motion.
+
+Operation status at start of cut
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The status at the start of the first cutting motion is made available
+via the following look-ahead variables whose names have been chosen
+to match their normal system variable counterparts. The variable
+values are those recorded at the start of the cutting motion, which
+is the first motion at a programmed feed velocity less than the high
+feed threshold specified by the FEDRAT/RAPID command. Any of these
+$OE.\* variables can be set within macros during look-ahead to
+override the default setting. GENER will quietly ignore any attempts
+to set these (or any other $OE.\*) variables while OPTYPE look-ahead
+is not active.
+
+.. _var_oe_axes:
+.. index:: Variables; $OE.AXES
+.. _var_oe_axesc2p:
+.. index:: Variables; $OE.AXESC2P
+.. _var_oe_c2papt:
+.. index:: Variables; $OE.C2PAPT
+.. _var_oe_c2pmch:
+.. index:: Variables; $OE.C2PMCH
+.. _var_oe_hsm:
+.. index:: Variables; $OE.HSM
+.. _var_oe_lcs:
+.. index:: Variables; $OE.LCS
+.. _var_oe_opargs:
+.. index:: Variables; $OE.OPARGS
+.. _var_oe_optype:
+.. index:: Variables; $OE.OPTYPE
+.. _var_oe_origin:
+.. index:: Variables; $OE.ORIGIN
+.. _var_oe_originl:
+.. index:: Variables; $OE.ORIGINL
+.. _var_oe_plmode:
+.. index:: Variables; $OE.PLMODE
+.. _var_oe_pnmode:
+.. index:: Variables; $OE.PNMODE
+.. _var_oe_polract:
+.. index:: Variables; $OE.POLRACT
+.. _var_oe_polrapt:
+.. index:: Variables; $OE.POLRAPT
+.. _var_oe_tcp:
+.. index:: Variables; $OE.TCP
+.. _var_oe_tcpfmt:
+.. index:: Variables; $OE.TCPFMT
+.. _var_oe_tcpset:
+.. index:: Variables; $OE.TCPSET
+
+..
+
+   Motion related variables:
+
+      $OE.AXES, $OE.AXESC2P, $OE.C2PAPT, $OE.C2PMCH,
+      $OE.HSM, $OE.LCS, $OE.OPARGS, $OE.OPTYPE,
+      $OE.ORIGIN, $OE.ORIGINL, $OE.PLMODE, $OE.PNMODE,
+      $OE.POLRACT, $OE.POLRAPT, $OE.TCP, $OE.TCPFMT,
+      $OE.TCPSET
+
+.. _var_oelook:
+.. index:: Variables; $OELOOK
+
+..
+
+   Look-ahead variables:
+
+      $OELOOK (set during OPTYPE look-ahead)
+
+.. _var_oe_coolnt:
+.. index:: Variables; $OE.COOLNT
+.. _var_oe_cooltyp:
+.. index:: Variables; $OE.COOLTYP
+.. _var_oe_f:
+.. index:: Variables; $OE.F
+.. _var_oe_fmode:
+.. index:: Variables; $OE.FMODE
+.. _var_oe_maxrpm:
+.. index:: Variables; $OE.MAXRPM
+.. _var_oe_s:
+.. index:: Variables; $OE.S
+.. _var_oe_sdir:
+.. index:: Variables; $OE.SDIR
+.. _var_oe_smode:
+.. index:: Variables; $OE.SMODE
+.. _var_oe_sr:
+.. index:: Variables; $OE.SR
+.. _var_oe_srange:
+.. index:: Variables; $OE.SRANGE
+.. _var_oe_ss:
+.. index:: Variables; $OE.SS
+
+..
+
+   Coolant, feed rate and spindle variables:
+
+      $OE.COOLNT, $OE.COOLTYP, $OE.F, $OE.FMODE,
+      $OE.MAXRPM, $OE.S, $OE.SDIR, $OE.SMODE,
+      $OE.SR, $OE.SRANGE, $OE.SS
+
+.. _var_oe_dcomp:
+.. index:: Variables; $OE.DCOMP
+.. _var_oe_tcd:
+.. index:: Variables; $OE.TCD
+.. _var_oe_tcf:
+.. index:: Variables; $OE.TCF
+.. _var_oe_tcfx:
+.. index:: Variables; $OE.TCFX
+.. _var_oe_tcfy:
+.. index:: Variables; $OE.TCFY
+.. _var_oe_tcfz:
+.. index:: Variables; $OE.TCFZ
+.. _var_oe_tcl:
+.. index:: Variables; $OE.TCL
+.. _var_oe_tcldir:
+.. index:: Variables; $OE.TCLDIR
+.. _var_oe_tclset:
+.. index:: Variables; $OE.TCLSET
+
+..
+
+   Cutter compensation variables:
+
+      $OE.DCOMP, $OE.TCD, $OE.TCF, $OE.TCF{XYZ}
+      $OE.TCL, $OE.TCLDIR, $OE.TCLSET
+
+.. _var_oe_h:
+.. index:: Variables; $OE.H
+.. _var_oe_hp:
+.. index:: Variables; $OE.HP
+.. _var_oe_t:
+.. index:: Variables; $OE.T
+.. _var_oe_tp:
+.. index:: Variables; $OE.TP
+
+..
+
+   Tooling variables:
+
+      $OE.H, $OE.HP, $OE.T, $OE.TP
+
+.. _var_oe_e:
+.. index:: Variables; $OE.E
+.. _var_oe_ev:
+.. index:: Variables; $OE.EV
+.. _var_oe_head:
+.. index:: Variables; $OE.HEAD
+.. _var_oe_lthmod:
+.. index:: Variables; $OE.LTHMOD
+.. _var_oe_multrd:
+.. index:: Variables; $OE.MULTRD
+.. _var_oe_pitch:
+.. index:: Variables; $OE.PITCH
+.. _var_oe_pitchv:
+.. index:: Variables; $OE.PITCHV
+.. _var_oe_shead:
+.. index:: Variables; $OE.SHEAD
+.. _var_oe_spindle:
+.. index:: Variables; $OE.SPINDLE
+.. _var_oe_xdiam:
+.. index:: Variables; $OE.XDIAM
+
+..
+
+   Lathe variables:
+
+      $OE.E, $OE.EV, $OE.HEAD, $OE.LTHMOD,
+      $OE.MULTRD, $OE.PITCH, $OE.PITCHV, $OE.SHEAD,
+      $OE.SPINDLE, $OE.XDIAM
+
+.. _var_oe_crmode:
+.. index:: Variables; $OE.CRMODE
+.. _var_oe_cyclrp:
+.. index:: Variables; $OE.CYCLRP
+.. _var_oe_cydir:
+.. index:: Variables; $OE.CYDIR
+.. _var_oe_cydpth:
+.. index:: Variables; $OE.CYDPTH
+.. _var_oe_cydwel:
+.. index:: Variables; $OE.CYDWEL
+.. _var_oe_cyfedt:
+.. index:: Variables; $OE.CYFEDT
+.. _var_oe_cyfedv:
+.. index:: Variables; $OE.CYFEDV
+.. _var_oe_cymultrd:
+.. index:: Variables; $OE.CYMULTRD
+.. _var_oe_cyratio:
+.. index:: Variables; $OE.CYRATIO
+.. _var_oe_cyretn:
+.. index:: Variables; $OE.CYRETN
+.. _var_oe_cyrigid:
+.. index:: Variables; $OE.CYRIGID
+.. _var_oe_cyrpto:
+.. index:: Variables; $OE.CYRPTO
+.. _var_oe_cytype:
+.. index:: Variables; $OE.CYTYPE
+.. _var_oe_thtype:
+.. index:: Variables; $OE.THTYPE
+
+..
+
+   Cycle variables:
+
+      $OE.CRMODE, $OE.CYCLRP, $OE.CYDIR, $OE.CYDPTH,
+      $OE.CYDWEL, $OE.CYFEDT, $OE.CYFEDV, $OE.CYMULTRD,
+      $OE.CYRATIO, $OE.CYRETN, $OE.CYRIGID, $OE.CYRPTO,
+      $OE.CYTYPE, $OE.THTYPE
+
+.. _operation-key-motion-data-1:
+
+Operation key motion data
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The $OE.P{12}\* variables contain key motions data gathered during
+the OPTYPE look-ahead. Two positions are recorded by look-ahead
+processing, as follows:
+
+.. _var_oe_p1:
+.. index:: Variables; $OE.P1
+
+..
+
+   $OE.P1.\*
+
+       This is the first motion encountered following the OPTYPE look-ahead
+       activation, which should generally be the RAPID start-up position,
+       but could be any command that causes axis motion. In case of a CYCLE
+       without rapid positioning motions, this is the R plane position of
+       the first cycle point.
+
+.. _var_oe_p2:
+.. index:: Variables; $OE.P2
+
+..
+
+   $OE.P2.\*
+
+       This is the start of the first cutting motion encountered following
+       the OPTYPE look-ahead activation. A cutting motion is defined as one
+       whose programmed velocity is
+       less than the high feed threshold defined by the FEDRAT/RAPID
+       command. In case of a CYCLE, this is the R plane position of the
+       first cycle point.
+
+The same information is gathered for each of these positions, as follows:
+
+.. _var_oe_p1_cln:
+.. index:: Variables; $OE.P1.CLN
+.. _var_oe_p2_cln:
+.. index:: Variables; $OE.P2.CLN
+
+..
+
+   $OE.P\*.CLN
+
+        CL record number of the motion; 0 (zero) if no information available.
+
+.. _var_oe_p1_axes:
+.. index:: Variables; $OE.P1.AXES
+.. _var_oe_p2_axes:
+.. index:: Variables; $OE.P2.AXES
+
+..
+
+   $OE.P\*.AXES
+
+        Value of the $AXES system variable string at that position.
+
+.. _var_oe_p1_c:
+.. index:: Variables; $OE.P1.C
+.. _var_oe_p2_c:
+.. index:: Variables; $OE.P2.C
+
+..
+
+   $OE.P\*.C
+
+        CL coordinates of the motion. This is a sequence of 6 elements
+        corresponding to the “xyzijk” position of the motion, as would be
+        found in the $P2 variable of a motion startup macro.
+
+.. _var_oe_p1_w:
+.. index:: Variables; $OE.P1.W
+.. _var_oe_p2_w:
+.. index:: Variables; $OE.P2.W
+
+..
+
+   $OE.P\*.W
+
+        Local machine coordinates of the motion. This is a sequence of 6
+        elements corresponding to the machine position of the active axes
+        as defined by the $AXES system variable, as would be found in the $P3
+        variable of a motion startup macro. If an LCS (local coordinate
+        system) is active, the “xyz” components of the sequence are expressed
+        in local coordinates.
+
+.. _var_oe_p1_w2:
+.. index:: Variables; $OE.P1.W2
+.. _var_oe_p2_w2:
+.. index:: Variables; $OE.P2.W2
+
+..
+
+   $OE.P\*.W2
+
+        Alternate local machine coordinates of the motion, provided that
+        there is an alternate rotary solution, as would be found in the $P7
+        variable of a motion startup macro; otherwise $NULL.
+
+.. _var_oe_p1_m:
+.. index:: Variables; $OE.P1.M
+.. _var_oe_p2_m:
+.. index:: Variables; $OE.P2.M
+
+..
+
+   $OE.P\*.M
+
+        Machine coordinates of the motion. This is a sequence of 6 elements
+        corresponding to the machine position of the active axes as defined
+        by the $AXES system variable.
+
+.. _var_oe_p1_m2:
+.. index:: Variables; $OE.P1.M2
+.. _var_oe_p2_m2:
+.. index:: Variables; $OE.P2.M2
+
+..
+
+   $OE.P\*.M2
+
+        Alternate machine coordinates of the motion, provided that there is
+        an alternate rotary solution; otherwise $NULL.
+
+Operation event macro processing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Note that there is no requirement for the OE macro to output
+anything. An OE macro may choose to output some, all, or none of the
+information provided to it via the look-ahead.
+
+Consideration must be given to avoid duplication of codes caused by
+output of post-processor commands and motions in the OE macro based
+on look-ahead information, and output of the same due to normal
+processing when the OE macro exits. Normal GENER processing is to
+output post-processor command information, whether it is redundant
+(i.e., same as the current state) or not, and to ignore duplicate
+motions except during safe startups ($PNMODE=–1).
+
+To guard against duplicate post-processor command output, GENER will
+not output redundant command information after the OE macro exits and
+while processing CLDATA records leading up to the start of the cut as
+defined by the $P3 and $P4 variables. This redundancy guard range can
+be disabled, adjusted or extended by setting $P3 and/or $P4 in the OE
+macro. For example, setting
+$P4=0 will disable the redundancy guard, which is recommended if the
+OE macro does not output
+post-processor commands; setting $P4 to a large value can extend the
+guard range into the cutting portion of the operation.
+
+The $P3 and $P4 variables can also be used in the OE macro with the
+$FGET function and TAPEWT command to find and process specific
+post-processor commands (e.g., SPINDL, COOLNT…) in a desired order
+and to handle the case where expected commands are missing. Provided
+the redundancy guard is left in place, a TAPEOP/DELETE command is not
+needed to disable any CL records output in advance via TAPEWT.
+
+For example:
+
+   ::
+
+     %L01=$FGET({SPINDL,COOLNT},$P3,$P4)
+     WHILE/%L01.GT.0
+        TAPEWT
+        %L01=$FGET({SPINDL,COOLNT},%L01+1,$P4)
+     ENDOF/WHILE
+
+If an OE macro includes motion processing, then ideally it should be
+limited to the first positioning motion as defined by the $OE.P1
+macro variables. GENER does not output redundant motions, so there
+should be no duplication of output when this first positioning motion
+is again processed after exiting the OE macro. If the OE macro
+outputs additional motions, then the TAPEOP/DELETE command can be
+used to disable problematic records (e.g., $OE.P1.CLN), or the SEARCH
+command can be used to advance the CL input to the start of the
+cutting motions. Care must be exercised when using SEARCH to ensure
+that no important commands and/or motions are skipped.
+
+Operation Event processing can be inhibited by setting the $OEMAC
+system variable false.
+
+Ending an operation event look-ahead
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A operation event look-ahead will exit under the following
+conditions, invoking the OE macro when done.
+
+-  A cutting motion below the high feed threshold is encountered
+
+-  An OPTYPE command is processed
+
+-  A tool change command (i.e., LOAD, LOADTL, TURRET, UNLOAD) is
+   processed
+
+-  The end of program is reached
+
+-  $OELOOK is set false within a macro
