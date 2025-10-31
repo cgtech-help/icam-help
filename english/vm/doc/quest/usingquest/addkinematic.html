@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding Kinematics to the Model &mdash; Virtual Machine V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Adding Physical Entities to the Model" href="addphysicalentities.html" />
+    <link rel="prev" title="Creating a Virtual Machine Model" href="createvm.html" />
+    <link href="../../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Virtual Machine V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../section_quest.html">QUEST: Model Development</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">QUEST</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../startquest.html#importing-models">Importing Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="../usingquest.html">Using QUEST</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="questinterface.html">QUEST User Interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="questinterface.html#interface-differences-between-developer-and-run-time-environments">Interface differences between Developer and Run-time Environments</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="modelreq.html">Basic Model Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="createvm.html">Creating a Virtual Machine Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="createvm.html#general-information">General Information</a></li>
+<li class="toctree-l5"><a class="reference internal" href="createvm.html#comments">Comments</a></li>
+<li class="toctree-l5"><a class="reference internal" href="createvm.html#d-modelsmachines">3D Models»Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Adding Kinematics to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="addphysicalentities.html">Adding Physical Entities to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="collisiontest.html">Collision Testing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="collisiontest.html#collision-groups">Collision Groups</a></li>
+<li class="toctree-l5"><a class="reference internal" href="collisiontest.html#collision-exclusion-groups">Collision Exclusion Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="selectiongroup.html">Selection Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="customizingmodel.html">Customizing the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html">Testing the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../icamdb.html#model-file-name-conventions">Model File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../icamdb.html#models">Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../customization.html">Model Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../dialogeditor.html">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../dialogeditor.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../customization/startshutmacro.html">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../customization/startshutmacro.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../customization/startshutmacro.html#the-declaration-macro">The Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../customization/startshutmacro.html#the-model-startup-macro">The Model Startup Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../customization/startshutmacro.html#the-model-shutdown-macro">The Model Shutdown Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../customization/startshutmacro.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../customization/startshutmacro.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../customization/startshutmacro.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../customization/startshutmacro.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../customization/eventmacro.html">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../customization/eventmacro.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../customization/eventmacro.html#the-tape-event-macro-gener-only">The Tape Event Macro <span class="smalltext">(GENER only)</span></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../customization/eventmacro.html#the-motion-event-macro">The Motion Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../customization/eventmacro.html#the-rapid-event-macro">The Rapid Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../customization/eventmacro.html#the-feed-event-macro">The Feed Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../customization/eventmacro.html#the-tool-event-macro">The Tool Event Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../customization/eventmacro.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../customization/eventmacro.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../customization/eventmacro.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../userfuncmacro.html">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../userfuncmacro.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../userfuncmacro.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../userfuncmacro.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../userfuncmacro.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../macros/index.html">Virtual Machine Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#outputting-the-event-output">Outputting the Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#virtual-machine-variables">Virtual Machine Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#model-macro-variables">Model Macro Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#model-definition-variables">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/vmvar.html">Virtual Machine Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/macrovar.html">Model Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/defvar.html">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/axesfunc.html">Axes Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/channelfunc.html">Channel Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/compensationfunc.html">Compensation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/componentfunc.html">Component Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/coordinatefunc.html">Coordinate System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/displayfunc.html">Display Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/workpiecefunc.html">Fixture, Part and Stock Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/probefunc.html">Probe and Collision Test Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/toolfunc.html">Tool and Holder Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../runtime/index.html">Using VM with GENER and CERUN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/selectvm.html">Selecting a Virtual Machine Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/selectvm.html#selecting-a-model-from-the-launch-panel">Selecting a Model from the Launch Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/selectvm.html#selecting-a-model-from-the-command-prompt">Selecting a Model from the Command Prompt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/controllingvm.html">Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-simulation">Enable/Disable Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-collision-overtravel-detection-and-avoidance">Enable/Disable Collision/Overtravel Detection and Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-positioning-collision-avoidance">Enable/Disable Positioning Collision Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-flute-length-optimization">Enable/Disable Flute Length Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#camera-positioning-under-program-control">Camera Positioning under Program Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#load-predefined-setup">Load Predefined Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#adjust-model-axes-travel-limits">Adjust Model Axes Travel Limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#adjust-model-axes-travel-limits-for-smartpath">Adjust Model Axes Travel Limits for SmartPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#optimize-positioning-with-smartpath">Optimize Positioning with SmartPATH™</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#positioning-clearance">Positioning Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#positioning-velocity">Positioning Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#reference-home-positioning">Reference Home Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#optimize-air-cutting-with-smartcut">Optimize Air-Cutting with SmartCUT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#air-cut-clearance">Air-cut Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#air-cut-velocity">Air-cut Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#air-cut-and-smartpath">Air-cut and SmartPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#optimize-cutting-feed-with-smartfeed">Optimize Cutting Feed with SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/actsimwindow.html">Activating the Simulation Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/adjustlight.html">Adjusting Lighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/addpartfixstock.html">Adding Parts, Fixtures and Stock to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addpartfixstock.html#differences-between-part-stock-and-fixture-components">Differences between Part, Stock and Fixture Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addpartfixstock.html#creating-part-stock-and-fixture-components">Creating Part, Stock and Fixture Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/setfixcomp.html">Setting Fixture Compensation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/addtooldef.html">Adding Tooling Definitions to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#lathe-tool-definition">Lathe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#milling-tool-definition">Milling Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#probe-tool-definition">Probe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#additive-tool-definition">Additive Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#holder-definition">Holder Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/settoolcomp.html">Setting Tool Compensation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/settoolcomp.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/settoolcomp.html#diameter-compensation">Diameter Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/monvmres.html">Monitoring Virtual Machine’s Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#animation-control">Animation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#head-up-display">Head-Up Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#tool-path-display">Tool Path Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#controller-time-line">Controller Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/monvmres.html#part-stock-comparison">Part / Stock Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/monvmres.html#measurement">Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Virtual Machine Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/inputcontrol.html">Input Controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#standard-keyboard-mapping">Standard Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#construction-keyboard-mapping">Construction Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#mouse-mapping">Mouse Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#time-line-keyboard-mapping">Time Line Keyboard Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/toolbar.html">Toolbars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#view-cerun-gener-only">View <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-construct-quest-only">VM Construct <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-mode-cerun-gener-only">VM Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-grid">VM Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-view">VM View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-view-filter-cerun-gener-only">VM View Filter <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-measure">VM Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-animation-cerun-gener-only">VM Animation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-tool-path-cerun-gener-only">VM Tool Path <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-cross-section-cerun-gener-only">VM Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-annotation-cerun-gener-only">VM Annotation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/menubar/index.html">Menu Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/main.html">Simulation»Virtual Machine <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/controller.html">Simulation»Controller <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/mode.html">Simulation»Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T) <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#tools">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#lathe-tool-type">Lathe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#mill-tool-type">Mill Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#probe-tool-type">Probe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#additive-tool-type">Additive Tool Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#holders">Holders</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#profile-holder-type">Profile Holder Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#generic-holder-type">Generic Holder Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/constructentity.html">Simulation»Construct Entity <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitycube">Simulation»Construct Entity»Cube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitycylinder">Simulation»Construct Entity»Cylinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitycone">Simulation»Construct Entity»Cone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitysphere">Simulation»Construct Entity»Sphere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entityrevolved">Simulation»Construct Entity»Revolved</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entityextruded">Simulation»Construct Entity»Extruded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitymesh">Simulation»Construct Entity»Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitypicture">Simulation»Construct Entity»Picture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/constructaxis.html">Simulation»Construct Axis <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axislinear-axis">Simulation»Construct Axis»Linear Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axisrotary-axis">Simulation»Construct Axis»Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axiscurve-axis">Simulation»Construct Axis»Curve Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axistool-axis">Simulation»Construct Axis»Tool Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axisstock-axis">Simulation»Construct Axis»Stock Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axishead-axis">Simulation»Construct Axis»Head Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axisreference-axis">Simulation»Construct Axis»Reference Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/show.html">Simulation»Show</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-path-ctrl-t-cerun-gener-only">Simulation»Show»Tool Path (Ctrl T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-vector-cerun-gener-only">Simulation»Show»Tool Vector <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t-cerun-gener-only">Simulation»Show»Tool Path as Overlay (Ctrl Shift T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowfilters-cerun-gener-only">Simulation»Show»Filters <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowcross-section-cerun-gener-only">Simulation»Show»Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowworkpiece-coords-ctrl-w-cerun-gener-only">Simulation»Show»Workpiece Coords (Ctrl W) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshownext-display-ctrl-d-cerun-gener-only">Simulation»Show»Next Display (Ctrl D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowprevious-display-ctrl-shift-d-cerun-gener-only">Simulation»Show»Previous Display (Ctrl Shift D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/wcs.html">Simulation»Use World CS <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/group.html">Simulation»Group Selection <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationhide-selection-ctrl-b-quest">Simulation»Hide Selection (Ctrl B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionhide-in-view-ctrl-b-gener-and-cerun">Simulation»Selection»Hide in View (Ctrl B) <span class="smalltext">(GENER and CERUN)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionhide-in-all-views-gener-and-cerun-only">Simulation»Selection»Hide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationshow-all-rehide-ctrl-alt-b-quest">Simulation»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b-gener-and-cerun-only">Simulation»Selection»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionshow-all-rehide-in-all-views-gener-and-cerun-only">Simulation»Selection»Show All/Rehide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationinvert-hide-state-ctrl-shift-b-quest">Simulation»Invert Hide State (Ctrl Shift B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b-gener-and-cerun-only">Simulation»Selection»Invert Hide State (Ctrl Shift B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/setup.html">Simulation»Open Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/setup.html#simulationsave-setup-gener-and-cerun-only">Simulation»Save Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Virtual Machine V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../section_quest.html">QUEST: Model Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">QUEST</a></li>
+          <li class="breadcrumb-item"><a href="../usingquest.html">Using QUEST</a></li>
+      <li class="breadcrumb-item active">Adding Kinematics to the Model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-kinematics-to-the-model">
+<h1>Adding Kinematics to the Model<a class="headerlink" href="#adding-kinematics-to-the-model" title="Link to this heading"></a></h1>
+<p>The machine kinematics must be constructed one axis at a time. Adding
+the kinematics framework first and then attaching the physical
+components to this framework afterwards is one suggested methodology. It
+is also possible to do the reverse, or to build the components and
+kinematics together.</p>
+<a class="reference internal image-reference" href="../../../_images/quest_nav_machine.png"><img alt="../../../_images/quest_nav_machine.png" class="align-right" src="../../../_images/quest_nav_machine.png" style="width: 2.308in;" /></a>
+<p>The placement of axes in the model navigator is very
+important. For example, connecting a Y-axis onto an X-axis produces a
+very different result from the reverse. When Y is connected to X, the
+Y-axis (and its zero point) move as the X-axis is moved, but moving Y
+has no effect on X. This configuration would be used for most gantry
+mills, or for a Y table on X table type machine. The reverse, connecting
+X on to Y would cause the X-axis origin to be moved when moving the
+Y-axis. A second example could be a dual C-axis/A-axis rotary head. The
+A-axis must be connected on to the C-axis to get the correct effect of a
+change in C causing the A-axis orientation to change.</p>
+<p>Unless the model was created from a post or CE, the model axes will not
+be automatically associated to their corresponding axes in GENER and
+CERUN. You must make the association using the Axis Mapping tab of the
+machine’s Properties dialog (e.g., Machine01) in the Model Navigator
+(the properties dialog is described later in this section).</p>
+<p>To summarize: Axes are connected in chains, each one having
+an effect on all subsequent axes farther (lower) down in the chain, and
+having no effect on any axes closer (higher) up in the chain. At the
+highest point is the machine origin. There are usually multiple chains
+of axes branching out from the machine origin. One chain ends at the
+tool axis on the spindle face; the other ends at the stock axis (or work
+piece origin) on the table. The terminology “lower” and “higher” refers
+to how the axes and components are listed in the Model Navigator.</p>
+<p>Before proceeding, you should open the sample models that are included
+with the software and examine the order in which the axes were defined
+and the effect this has on machine motion.</p>
+<a class="reference internal image-reference" href="../../../_images/quest_hermle.png"><img alt="../../../_images/quest_hermle.png" class="align-center" src="../../../_images/quest_hermle.png" style="width: 5.681in;" /></a>
+<p></p>
+<p>The MHERML50 model shown above, for example, defines a machine with a C-axis
+rotary table, mounted on an A-axis trunnion table, mounted on the
+machine base. The Z-axis column is mounted on an X-axis rail, in turn
+mounted on a Y-axis gantry. For the head assembly, the Y-axis is
+connected closest to the machine origin. Moving the Y-axis causes the X
+and Z axes to move, along with the tool. Moving the Z-axis leaves the X
+and Y axes unchanged. This machine model also defines a number of other
+axes, which do interesting things like control the doors and position
+the operator’s pendant. These additional axes follow the same rules.</p>
+<a class="image-lowered reference internal image-reference" href="../../../_images/quest_vm_construct_axes.png"><img alt="../../../_images/quest_vm_construct_axes.png" class="image-lowered" src="../../../_images/quest_vm_construct_axes.png" style="height: 0.583in;" /></a>
+<p>The following axes types can be created using the
+Simulation»Construct Axis menu bar selection (and also from the buttons
+on the VM Construct toolbar shown circled above):</p>
+<ul class="simple">
+<li><p><strong>Linear</strong> defines X, Y and Z axes slides</p></li>
+<li><p><strong>Rotary</strong> defines A, B and C axes tables and heads</p></li>
+<li><p><strong>Curve</strong> defines axes which move along a profile</p></li>
+<li><p><strong>Tool</strong> defines where tools are mounted</p></li>
+<li><p><strong>Stock</strong> defines where fixtures and parts are mounted</p></li>
+<li><p><strong>Head</strong> defines where removable head attachments are mounted</p></li>
+<li><p>A <strong>Reference</strong> axis doesn’t control motion; it is used to group
+related components</p></li>
+</ul>
+<a class="reference internal image-reference" href="../../../_images/quest_x_axis.png"><img alt="../../../_images/quest_x_axis.png" class="align-right" src="../../../_images/quest_x_axis.png" style="width: 2.942in;" /></a>
+<p>All axes share some common parameters (a description of all
+axes parameters can be found <a class="reference internal" href="../../reference/menubar/constructaxis.html#sim-construct-axis-common"><span class="std std-ref">here</span></a>).</p>
+<p>An axis <strong>Name</strong> should be a short meaningful string. The name is used
+in the lower right “Axes” window and in the Model Navigator to identify
+the axis.</p>
+<p>The <strong>Unit</strong> selection by default will match the model units. This
+defined the units of measure for position and range information.</p>
+<p>The <strong>Position</strong> of an axis defines where its origin is, in respect to
+the object to which the axis is attached. Axes attached to the base
+machine are defined in relation to the grid origin. The <strong>Direction</strong> of
+an axis can be along one of the major axes. Typically, axes that move
+the part have a reversed sign and those that move the tool have a normal
+sign. You can enter a “Custom” orientation, by giving the axis’ XYZ
+components of positive motion. The <strong>Range</strong> of an axis defines the
+limits of its motion. The Default position specifies the axis setting
+when the model is opened.</p>
+<p>You can <strong>Slave</strong> one axis to another by selecting a parent axis in the
+drop-down choice list. When an axis is slaved, its position is
+controlled by the parent axis’ position, multiplied by the signed
+<strong>Scaling</strong> factor. A slaved axis will not have its own slider control
+in the lower right “Axes” window; a slaved axis can only be moved by
+moving its parent axis.</p>
+<p>Axes can be oriented by selecting the <strong>Rotate</strong> button. This causes a
+rotation of the XYZ reference axes for the current axis and all objects
+that are attached to it. Linear and Rotary axes should not need to be
+rotated; use the Custom direction selection to define a non-standard
+orientation.</p>
+<p>When you add a new axis, it will appear in the Model Navigator attached
+as a child (i.e., below) the object that was selected in the Navigator
+when the axis was created. You can move the axis to a new position in
+the Navigator by first selecting it with the mouse, then, while holding
+the left-mouse button down, dragging it to a new attachment point before
+releasing the mouse button. You can change the order of objects listed
+at any given level by holding the Ctrl key down while pressing the up
+and down arrow keys.</p>
+<p>The axis name will also appear in the lower right “Axes” window. Move
+the axis slider to see its full range of motion (sliders for rotary axes
+with unlimited travel sliders are limited to ±405ºdegrees). Press the
+right-mouse button on the slider to reset the axis to its default
+position. Press the Reset All Axes button to reset all of the axes to
+their default positions.</p>
+<a class="reference internal image-reference" href="../../../_images/quest_rmb_move.png"><img alt="../../../_images/quest_rmb_move.png" class="align-right" src="../../../_images/quest_rmb_move.png" style="width: 1.992in;" /></a>
+<p>Axes are listed in the Axes window in the same order that
+they appear (top down) in the model navigator view. The default ordering
+of an axis can be changed by selecting the axis in the Axes window and
+then using the right-mouse context menu Move Axis Up (Alt Up) and Move
+Axis Down (Alt Down) selections (multiple axes can be moved at a time).</p>
+<p>Axes can be hidden using the Hide Axis selection. You might do this, for
+example, to hide the axes of a tool change mechanism. Hidden axes can be
+made visible again by first selecting the Show Hidden Axes selection and
+then toggling the Hide Axis setting of the previously hidden axis.</p>
+<a class="reference internal image-reference" href="../../../_images/quest_rmb_axis.png"><img alt="../../../_images/quest_rmb_axis.png" class="align-right" src="../../../_images/quest_rmb_axis.png" style="width: 1.933in;" /></a>
+<p>On machines with many axes, those having a UHF device for example, it
+can be helpful to group axes together under different tabs
+in the Axes window. This can be done by first using the right-mouse
+context menu New Axis Tab selection to create one or more additional
+tabs, then selecting the axes to be moved, and finally using the Move to
+Tab selection to move the selected axes to the tab. Axes tabs can be
+renamed, reordered, hidden, unhidden and deleted. Axes of a deleted tab
+will reappear in the Main tab.</p>
+<p>The View menu on the top menu-bar also has various selections and
+associated shortcut keys that control the layout of axes in the Axes
+window.</p>
+<p>Axes tab customization is stored with the model. Hidden axes and tabs
+can be unhidden at run-time unless the model is Dedicated.</p>
+<p>Do the following to add a C-axis table rotary mounted on an
+X-axis table:</p>
+<a class="reference internal image-reference" href="../../../_images/quest_nav_x.png"><img alt="../../../_images/quest_nav_x.png" class="align-right" src="../../../_images/quest_nav_x.png" style="width: 2.333in;" /></a>
+<p><strong>Step 1: Create the X-axis</strong></p>
+<ol class="arabic simple">
+<li><p>Select <em>Simulation»Construct Axis»Linear Axis</em>.</p></li>
+<li><p>Press the Tab key three times to accept a default position of (0,0,0)
+for the X-axis origin. The Linear Axis properties dialog will appear.</p></li>
+<li><p>Select “-X Axis” for the axis direction.</p></li>
+<li><p>Choose –1500 and 1500 for the Min and Max axis range values.</p></li>
+<li><p>Press OK.</p></li>
+</ol>
+<p>Enable the kinematics and axes marker displays in the VM Grid toolbar
+(also controllable from the Simulation»Show menu). Select the
+lower-right “Axes” window and experiment by moving the X-axis slider.
+You should see the X-axis origin coordinate frame moving along its range
+of travel (shown as a narrow blue band) with respect to the grid origin.
+Expand the model navigator (left hand window) to see the current model
+tree, which should look like the image above.</p>
+<a class="reference internal image-reference" href="../../../_images/quest_nav_c.png"><img alt="../../../_images/quest_nav_c.png" class="align-right" src="../../../_images/quest_nav_c.png" style="width: 2.333in;" /></a>
+<p><strong>Step 2: Create the C-axis.</strong></p>
+<ol class="arabic simple">
+<li><p>Make sure that the “X-axis” entity is selected in the Model Navigator
+view.</p></li>
+<li><p>Select <em>Simulation»Construct Axis»Rotary Axis</em>.</p></li>
+<li><p>Press the Tab key three times to accept a default position of (0,0,0)
+for the C axis origin. The Rotary Axis properties dialog will appear.</p></li>
+<li><p>Select “–Z Axis” for rotation axis.</p></li>
+<li><p>Clear the Use range validation checkbox to have unlimited rotation
+(no travel limitation) for this axis.</p></li>
+<li><p>Press OK.</p></li>
+</ol>
+<p>Two axes will now be listed in the lower-right “Axes” window. Move the
+X-axis and C-axis sliders to see the effect on the C-axis coordinate
+frame. The model navigator should appear as shown above.</p>
+<p>If non-zero values are used for the axes positions, objects attached to
+them will be in relation to the offset position. The choice to use zero
+values (as done here) or to define axes at some position (e.g., at the
+table face) depends on how the physical components of the model will be
+defined (discussed in the next section).</p>
+<p><strong>Step 3: Associate axes with CERUN/GENER</strong></p>
+<p>Creating the X-axis and C-axis defines them in the model,
+but if you ran a post-processor or control emulator with this model,
+neither of these axes would move. You must manually define the
+association between model axes and the list of possible axes that GENER
+and CERUN can control. You do this by selecting the Properties dialog of
+the top-level machine object (typically “Machine01” unless renamed).</p>
+<a class="reference internal image-reference" href="../../../_images/quest_map.png"><img alt="../../../_images/quest_map.png" class="align-right" src="../../../_images/quest_map.png" style="width: 3.569in;" /></a>
+<ol class="arabic simple">
+<li><p>Right-mouse on the “Machine­01” entry and select Property.</p></li>
+<li><p>Select the Axis Mapping tab.</p></li>
+<li><p>Double-click in the Model Axis column in the X Axis row and then
+choose “X Axis” (the model axis name).</p></li>
+<li><p>Do the same for the C Table axis, choosing “C Table Axis” in the
+Model Axis drop-down.</p></li>
+<li><p>Press OK.</p></li>
+</ol>
+<p>Manually associating model axes to their GENER and CERUN counterparts
+provides flexibility both in axis naming and in the orientation of
+standard axes. For example, a horizontal machine model might use an
+X-axis to control the Z-axis column; in which case the Z-axis control
+axis would map to the X-axis model axis.</p>
+<p>On machines with multiple controller channels, there can be multiple
+axes of the same type. For example, on a 4-axis merging lathe there will
+be two X axes and two Z axes. In this case, you must create a second
+channel and assign the model’s secondary turret X and Z axes to the
+channel 2 X and Z controllable axes.</p>
+<p>Lastly, if there are multiple spindles defined in the model, then they
+must be assigned as milling or turning spindles for the appropriate
+channel. A milling spindle must also be assigned for VM to correctly
+simulate boring bars and other 3D tool shapes.</p>
+<p><strong>Step 4: Define Reference Home Position</strong></p>
+<a class="reference internal image-reference" href="../../../_images/quest_ref.png"><img alt="../../../_images/quest_ref.png" class="align-right" src="../../../_images/quest_ref.png" style="width: 3.569in;" /></a>
+<p>Many controllers provide G28 or similar reference home
+codes, which take the machine to preset positions for safety or tool
+change purposes. Reference positions can be optionally defined in the
+model for any model axes that have been associated to their GENER and
+CERUN counterparts. These reference axes positions are then used when
+GENER or CERUN process home position or tool change codes.</p>
+<p>You define reference home positions by selecting the Properties dialog
+of the top-level machine object (typically “Machine01” unless renamed).</p>
+<ol class="arabic simple">
+<li><p>Right-mouse on the “Machine01” entry and select Property.</p></li>
+<li><p>Select the Reference Positions tab.</p></li>
+<li><p>Select the “Add Reference” button to add a new reference to the list.</p></li>
+<li><p>Edit the newly added reference to define a name, type and reference
+position.</p></li>
+</ol>
+<p>The reference <strong>ID</strong> is automatically assigned, but can be edited if
+required. The lowest reference ID is used by default during built-in
+GENER and CERUN reference home processing, but this can be modified via
+macro processing.</p>
+<p>The reference <strong>Name</strong> is informational to help you keep track of the
+difference reference positions, should there be more than one.</p>
+<p>The reference <strong>Type</strong> can be one of Home, Tool or Other. The <strong>Home
+position</strong> reference with the lowest ID number will be used by default
+when GENER or CERUN processes a GOHOME reference home code. The <strong>Tool
+change</strong> reference with the lowest ID number will be used by default
+when GENER or CERUN processes a “special” tool change reference home
+code. <strong>Other</strong> reference positions can be used via macro processing.</p>
+<p>All model axes associated with GENER or CERUN are listed with each
+reference position. The current model axes settings are used by default
+when the reference position is added. The reference position can be
+edited to any value. If a reference position is not applicable for one
+or more axes, simply delete the value; “--” will be shown to indicate
+this.</p>
+<p>On machines with multiple controller channels, the reference positions
+for each channel are defined separately.</p>
+<p>The Machine Properties dialog also has a <strong>Safety values</strong> tab that
+lists collision enabled objects and their safety amounts.
+See “<a class="reference internal" href="collisiontest.html#collisontesting"><span class="std std-ref">Collision Testing</span></a>” for more details.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="createvm.html" class="btn btn-neutral float-left" title="Creating a Virtual Machine Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="addphysicalentities.html" class="btn btn-neutral float-right" title="Adding Physical Entities to the Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
