@@ -1,0 +1,258 @@
+.. _macro_variables:
+
+Macro Variables
+===============
+
+.. _var_brkmac:
+.. index:: Variables; $BRKMAC
+
++------------------+-----------------------------------------+
+| **$BRKMAC**      | Whether break macros are activated      |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   Break startup and shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, break startup and shutdown macros will not be executed.
+
+.. _var_cycmac:
+.. index:: Variables; $CYCMAC
+
++------------------+-------------------------------------------+
+| **$CYCMAC**      | Whether cycle macros are activated        |
+|                  |                                           |
+|                  | Type: Logical, Read/Write                 |
++------------------+-------------------------------------------+
+
+   Cycle startup and shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, cycle startup and shutdown macros will not be executed.
+
+.. _var_diagmac:
+.. index:: Variables; $DIAGMAC
+
++------------------+-------------------------------------------+
+| **$DIAGMAC**     | Whether diagnostic macros are activated   |
+|                  |                                           |
+|                  | Type: Logical, Read/Write                 |
++------------------+-------------------------------------------+
+
+   Diagnostic macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, diagnostic macros will not be executed.
+
+.. _var_edtmax:
+.. index:: Variables; $EDTMAX
+
++------------------+-------------------------------------------+
+| **$EDTMAX**      | Number of Tape Editor expressions defined |
+|                  |                                           |
+|                  | Type: Numeric, Read-only                  |
++------------------+-------------------------------------------+
+
+   This variable indicates how many Tape Editor expression are defined in QUEST.
+   It defines the upper limit of the $EDTSTA array described below.
+
+.. _var_edtsta:
+.. index:: Variables; $EDTSTA
+
++------------------+-----------------------------------------------+
+| **$EDTSTA**      | Whether Tape Editor expressions are activated |
+|                  |                                               |
+|                  | Type: Logical, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is an array of length $EDTMAX, with each element in the
+   array defining the active/inactive state of the corresponding
+   numbered Tape Editor expression as defined in QUEST.
+   All tape editor expressions are enabled by default at the start of
+   GENER processing.
+
+.. _var_lcsmac:
+.. index:: Variables; $LCSMAC
+
++------------------+-----------------------------------------+
+| **$LCSMAC**      | Whether LCS macros are activated        |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   LCS startup and shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, LCS startup and shutdown macros will not be executed.
+
+.. _var_mnest:
+.. index:: Variables; $MNEST
+
++------------------+-----------------------------------------+
+| **$MNEST**       | Macro nest level                        |
+|                  |                                         |
+|                  | Type: Numeric, Read-only                |
++------------------+-----------------------------------------+
+
+   This variable indicates how many macros are active. If the variable
+   is equal to one, the current macro is the only active macro. A value
+   greater than one indicates that the current macro has been called by
+   another macro. (e.g., If the $MNEST value is 3 this indicates that
+   there are 3 active macros: the current macro; the one that called the
+   current macro; and the one that called the one that called the
+   current macro!).
+
+.. _var_mtnlpp:
+.. index:: Variables; $MTNLPP
+
++------------------+------------------------------------------------------------+
+| **$MTNLPP**      | Automatic Motion Macros activation for LPP-RTA-AP sequence |
+|                  |                                                            |
+|                  | Type: Logical, Read/Write                                  |
++------------------+------------------------------------------------------------+
+
+   When utilizing Motion Startup-Shutdown macros for LPP-RTA-AP programming
+   activating these macros for all motion in the program would create a
+   performance-costly solution. One way around that issue is to activate the
+   Startup-Shutdown motion macros only when respective optimization motion
+   list is created. This is not always possible. For example, RTA can be
+   generated at any feed (cutting) move, as needed. Since we do not know
+   at which motion RTA will be generated the only solution (apart of costly
+   by itself $FLOOK) with the use of $MTNMAC would be, in fact, to keep the
+   macros always active.
+
+   $MTNLPP helps to automatically activate the Startup-Shutdown macro
+   processing when LPP-RTA-AP list is generated. In other words, it is
+   strongly recommended to put the following sequence in the Machine Startup
+   macro:
+
+      ::
+
+         $MTNMAC=$FALSE
+         $MTNLPP=$TRUE
+
+   Later on, GENER will automatically activate motion Startup and Shutdown
+   macros each time when the respective motion list is generated and will
+   deactivate these macros as soon as the motion list is fully processed.
+   Any use of $MTNMAC will “remove” effects of last automatic macro activation.
+   When both, motion Startup and Shutdown macros are active when $MTNLPP is
+   set to TRUE then setting $MTNLPP has no effect on processing.
+
+.. _var_mtnmac:
+.. index:: Variables; $MTNMAC
+
++------------------+-------------------------------------------+
+| **$MTNMAC**      | Whether motion macros are activated       |
+|                  |                                           |
+|                  | Type: Logical, Read/Write                 |
++------------------+-------------------------------------------+
+
+   Motion startup and shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, motion startup and shutdown macros will not be executed.
+
+.. _var_oemac:
+.. index:: Variables; $OEMAC
+
++------------------+-----------------------------------------------------+
+| **$OEMAC**       | Whether the Operation Event (OE) macro is activated |
+|                  |                                                     |
+|                  | Type: Logical, Read/Write                           |
++------------------+-----------------------------------------------------+
+
+   The Operation Event (OE) macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, then an OPTYPE command will not result in an OE look-ahead
+   and the OE macro will not be executed.
+
+.. _var_p0:
+.. index:: Variables; $P0
+
++------------------+-----------------------------------------------+
+| **$P0**          | Number of arguments in post-processor command |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable (the last character is a zero, not the letter O) gives
+   the number of arguments in the post-processor command that matched
+   the user-defined post-processor macro. It has the value zero in
+   startup and shutdown macros.
+
+.. _var_regmac:
+.. index:: Variables; $REGMAC
+
++------------------+-----------------------------------------+
+| **$REGMAC**      | Whether the Register macro is activated |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   The Register macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, register macros will not be executed.
+
+.. _var_regmatch:
+.. index:: Variables; $REGMATCH
+
++------------------+-----------------------------------------+
+| **$REGMATCH**    | List of registers to match              |
+|                  |                                         |
+|                  | Type: Sequence, Read/Write              |
++------------------+-----------------------------------------+
+
+   This sequence variable defines the registers that are candidates for
+   matching with the Register macro. If empty or $NULL, all registers
+   are candidates for matching. The $REGMATCH sequence can contain zero
+   or more register index numbers and zero or more text strings matching
+   one or more characters of a register’s descriptor.
+
+.. _var_seqalloc:
+.. index:: Variables; $SEQALLOC
+
++------------------+-----------------------------------------+
+| **$SEQALLOC**    | Sequence allocation size/strategy       |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable defines how internal memory should be allocated when
+   sequence variables are created and when they grow in size. This
+   increase in size occurs when the += operator is used to append to an
+   existing sequence, or when a sequence variable is overwritten by a
+   larger sequence, as in A={A,B} or even A={B}. Note that internal
+   allocation size is not the same as the actual size of a sequence as
+   determined using $FLEN().
+
+   :–n: Reserve at least \|n\|, double size when extending
+   : 0: Reserve as required, double size when extending
+   :+n: Reserve at least n, increase size in multiples of n when extending
+
+   Setting $SEQALLOC=0 (the default) will generally result in faster
+   macro processing of sequences at the expense of greater memory usage,
+   whereas setting $SEQALLOC=1 will maintain the same memory allocation
+   and speed as for V20 and earlier releases.
+
+.. _var_tapmac:
+.. index:: Variables; $TAPMAC
+
++------------------+-----------------------------------------+
+| **$TAPMAC**      | Whether the tape macro is activated     |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   The tape macro is invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, tape macros will not be executed.
+
+.. _var_tcmac:
+.. index:: Variables; $TCMAC
+
++------------------+------------------------------------------+
+| **$TCMAC**       | Whether tool change macros are activated |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   Tool change and first-tool change startup and shutdown macros are
+   invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by GENER at the start of post-processing.
+   If it is set to $FALSE, tool change and first-tool change macros will not be executed.
