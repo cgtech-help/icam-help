@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>CATIA/3DEXPERIENCE Integration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../../../kit/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../../../kit/3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../../../kit/Creo/readme.htm">Creo</a>
+                <a href="../../../kit/FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../../../kit/Fusion360/readme.htm">Fusion 360</a>
+                <a href="../../../kit/Mastercam/readme.htm">Mastercam</a>
+                <a href="../../../kit/NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../../../kit/NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../../../kit/PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../../../kit/Cadds5/readme.htm">Cadds5</a>
+                <a href="../../../kit/Cadra/readme.htm">Cadra</a>
+                <a href="../../../kit/Camand/readme.htm">Camand</a>
+                <a href="../../../kit/CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../../../kit/Cimatron/readme.htm">Cimatron</a>
+                <a href="../../../kit/Em_Machine/readme.htm">Em Machine</a>
+                <a href="../../../kit/Generic/readme.htm">Generic</a>
+                <a href="../../../kit/GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../../../kit/hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../../../kit/ICAM/readme.htm">ICAM</a>
+                <a href="../../../kit/IDEAS/readme.htm">IDEAS</a>
+                <a href="../../../kit/Intercim/readme.htm">Intercim</a>
+                <a href="../../../kit/Intergraph/readme.htm">Intergraph</a>
+                <a href="../../../kit/NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../../../kit/NICAM/readme.htm">NICAM</a>
+                <a href="../../../kit/NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../../../kit/Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../../../kit/SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../../../kit/TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../../../kit/index.htm"><i class="fa fa-home">Kit</i></a>
+            <a href="../../../kit/3DEXPERIENCE/readme.htm"><i class="fa fa-mail-reply">Return to previous</i></a>
+            <h1><img align="right" src="../../../images/camlogo_CA.png" width="256" height="78"" />ICAM to CATIA/<b>3D</b>EXPERIENCE Integration</h1>
+            <hr />
+            <br />
+            <img src="../../../images/camscrsh_3DX.jpg" width="240" height="130">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: CATIA/<b>3D</b>EXPERIENCE</li>
+                <li>Company: Dassault Syst&egravemes</li>
+                <li>Website: <a href="https://www.3ds.com/">www.3ds.com</a></li>
+                <li>Release: 22.0-1702</li>
+            </ul>
+            <br />
+            <hr />
+            <!-- Content -->
+            <h2>CAM-POST to 3DEXPERIENCE Integration</h2>
+            <h3>Overview</h3>
+            <p>Thanks for choosing CAM-POST, the NC post processing Product from ICAM Technologies Corporation.</p>
+            <p>
+                CAM-POST is a post processor generator embedded within the CATIA/<b>3D</b>EXPERIENCE architecture to generate NC Data output.
+                It can accommodate a wide variety of machine types having multiple axis path control.
+            </p>
+            <p>
+                This integration document is addressed to CATIA/<b>3D</b>EXPERIENCE end-users to help organize post processor usage through CATIA/<b>3D</b>EXPERIENCE settings and PPTables;
+                describes the steps to install, upgrade and configure CAM-POST to run in an integrated CATIA/<b>3D</b>EXPERIENCE environment.
+            </p>
+            <h3>ICAM to CATIA/<b>3D</b>EXPERIENCE Integration Setup Utility</h3>
+            <p>
+                The integration setup utility can be found in the <b>Tools</b> section of the Portal<br />
+            </p>
+            <img src="Images/portal_tools.jpg" ><br />
+            <h3>Choose 3DEXPERIENCE system(s) to setup</h3>
+            <img src="Images/setup_catia1.jpg"></br>
+            <p>
+                Select CAM system by checking the check-box or double-mouse-click on the already checked CAM system. Check the latest CAM-POST revision if multiple instances exists.
+            </p>
+            <h4>CATIA Setup Page</h4>
+            <b>Note:</b> You may need admin priviledges.<br>
+            <img src="Images/setup_catia2.jpg"><br />
+            <p>
+                Several integration options are available.
+                <ul>
+                    <!--Common-->
+                    <li><b>GENER UI</b> &amp; <b>CERUN UI</b> affect how the sofware is launched. 'Full' will launch the complete runtime interface.</li>
+                    <li><b>Setup for current user.</b> is used to setup the installation folder for this user only. <u>(Recommended)</u></li>
+                    <li><b>Setup for any user of this machine.</b> is used to setup the installation folder for all users. Admin rights are required.</li>
+                    <li><b>Update ICAM-PAR DLLs</b> is used to update the ICAM-PAR DLL when integrating with CATIA/<b>3D</b>EXPERIENCE. Use the path above to specify the path to the CATIA/<b>3D</b>EXPERIENCE application.</li>
+                    <li><b>Interface kit</b> should be selected based on your CAM system, except if you have a custom kit. <b>3DEXPERIENCE is recommended.</b></li>
+                    <li><b>Add default database to the list</b> will add the default database when launching ICAM within the CAM software. The default database depends on the answer for the setup. If unchecked, you can select your own
+                        database location.</li>
+                    <!--CAM Specific-->
+                    <li><b>Include demonstration PP and CE delivered with CATIA/<b>3D</b>EXPERIENCE</b> is a special box to remove or include the demonstration post. (Unchecked is recommended)</li>
+                </ul>
+                Press <b>OK</b> to save the settings.<br>
+            </p>
+            <h3>ICAM PPTables for CATIA/<b>3D</b>EXPERIENCE</h3>
+            <p>
+                There are two ICAM PPTable files in the default CATIA/<b>3D</b>EXPERIENCE PPTables director:<br />
+                <ul>
+                    <li><b>ICAM_INCH.pptable</b>(imperial units)</li>
+                    <li><b>ICAM_MM.pptable</b>(metric units)</li>
+                </ul>
+            </p>
+            <p>
+                The default installation directory for the CATIA/<b>3D</b>EXPERIENCE PPTables is typically:<br />
+                <b>  C:\Program Files\Dassault Systemes\BXX\win_b64\startup\Manufacturing\PPTables</b>
+            </p>
+            <h3><b>3D</b>EXPERIENCE Part Operation Setup</h3>
+            <p>Set manufacture preference output as ICAM</p>
+            <img src="Images/partoper_3d1.jpg"><br />
+            <img src="Images/partoper_3d2.jpg" width="718" height="501"><br />
+            <p>
+                In the Resource Configuration View, edit the NC resource of the machine to select your custom post processor and corresponding ICAM post-processor words table.
+                You can also immediately set the NC data type to ISO.
+            </p>
+            <p>
+                Select NC data format as Point (X,Y,Z) for 3 Axis output or Axis (X,Y,Z,I,J,K) for Multi-Axis output.
+                Set all other options as shown in the window on the right.
+                If you have NURBS licensed post-processor, check "3D Nurbs interpolation" option if you want to use NURBS output.
+            </p>
+            <img src="Images/partoper_3d3.jpg"><br />
+            <h3>Post Processing Options and Information</h3>
+            <p>The NC data output from <b>3D</b>EXPERIENCE through the ICAM post-processor can be executed either in silent mode or in a graphical display mode.</p>
+            <img src="Images/image026.jpg"><br />
+            <h3>CATIA NC Manufacturing Default Settings</h3>
+            <p>
+                CATIA option menu: <i>Tools > Options > Machining > Output</i> <br />
+                Set the post processor option to <b>ICAM</b>
+            </p>
+            <img src="Images/icampar.jpg"><br />
+            <h3>CATIA V5 Part Operation Setup</h3>
+            <p>In the CATIA PPR Tree, double click the Part Operation. In the dialog-window, click the Machine icon.</p>
+            <img src="Images/partoper1.jpg"><br />
+            <p>
+                In the Machine Editor window, select the machine type, your custom post processor and the corresponding ICAM post processor words table.
+                You can also immediately set the NC data type to ISO.
+            </p>
+            <img src="Images/partoper2.jpg"><br />
+            <p>
+                Select NC data format as Point (X,Y,Z) for 3 Axis output or Axis (X,Y,Z,I,J,K) for Multi-Axis output.
+                Set all other options as shown in the window on the right.
+                If you have NURBS licensed post-processor, check "3D Nurbs interpolation" option if you want to use NURBS output.
+            </p>
+            <img src="Images/partoper3.jpg"><br />
+            <h3>Post Processing Options and Information</h3>
+            <p>The NC data output from CATIA through the ICAM post-processor can be executed either in silent mode or in a graphical display mode.</p>
+            <img src="Images/image027.jpg"><br />
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
+
