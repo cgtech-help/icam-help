@@ -1,0 +1,145 @@
+.. _command_lcs:
+
+The LCS Command :kbd:`[MLEPC]`
+==============================
+
+The LCS (local coordinate system) transformation command is used to
+set up an alternate coordinate system on the machine. This command is
+valid for all machine types, but some functions may not be available
+on specific machines.
+The following LCS command functions are available:
+
+-  :ref:`“Fixed LCS Formats”<lcs_fixed>`
+-  :ref:`“Automatic LCS Formats”<lcs_auto>`
+-  :ref:`“LCS Activation/Deactivation”<lcs_activation>`
+
+The LCS feature is most useful when the tool axis is not parallel to
+the machine’s Z axis. The LCS definition tells the controller how the
+tool is oriented with respect to the machine’s axes. With this
+information, most LCS capable controllers can perform length
+compensation, diameter compensation, canned cycles and circular
+interpolation, all in the local coordinate frame. Without LCS, the NC
+programmer must often specify the exact tool diameter and length,
+requiring the post-processor to perform these functions substituting
+linear and rapid interpolation codes.
+
+   :math:`\textbf{LCS / } \big[\,\textbf{TRFORM},\big] \; \ldots`
+
+The TRFORM keyword can optionally be added at the start of any LCS command.
+It has no effect on the LCS command, but is included for consistency with
+other transformation commands such as LIMIT and PLOT.
+
+.. _lcs_fixed:
+
+Fixed LCS Formats
+-----------------
+
+   :math:`\textbf{LCS / } \mathtt{<\!matrix\!>}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array}\,\end{bmatrix}`
+
+The <matrix> defines the location and orientation of the new local
+coordinate system in part coordinates. The matrix can be specified
+using the standard post-processor transformation syntax (see :ref:`“The
+ORIGIN Command”<command_origin>`).
+The optional NOW and NEXT keywords following the matrix definition
+specify whether the new coordinate frame should be established
+immediately (NOW) or deferred to the next motion (NEXT). The default
+if neither is specified is determined by the post-processor author.
+
+   :math:`\textbf{LCS /}
+   \begin{pmatrix}\begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array}\end{pmatrix}`
+
+The NOW and NEXT formats, without a matrix definition, establish the
+LCS based on the current or next tool axis orientation. A tool axis
+by itself provides only enough information to define the Z component
+of the new LCS. GENER uses built-in rules to define the orientation
+of the LCS X and Y axes. By default, the X axis component of the LCS
+will lie in the machine ZX plane and point in the positive machine X
+axis direction. When the LCS Z axis is already parallel to the
+machine X axis, GENER instead aligns the LCS Y axis in the machine YZ
+plane with a positive Y component. This default can be changed with
+the $LCAUTO macro variable (see :ref:`“Motion-Related Variables”<motion_related_variables>`).
+
+.. _lcs_auto:
+
+Automatic LCS Formats
+----------------------
+
+   :math:`\textbf{LCS / AUTO}\; \big[,\mathit{type}\,\big] \ldots`
+
+GENER has the ability to automatically establish or cancel LCS. The
+behavior is defined by the optional *type* value, as follows:
+
+   :math:`\textbf{LCS / AUTO }
+   \big[,\textbf{0}\,\big]\;
+   \big[,\textbf{ON},a \,\big]\;
+   \big[,\textbf{OFF},b \,\big]`
+
+Type 0 is the default form of LCS for V23 and later generated posts.
+The optional ON,\ *a* and OFF,\ *b* couplets define how LCS is to be
+automatically activated and deactivated during the sequence of
+positioning motions that link the cutting motions of the NC program.
+
+The ON,\ *a* couplet defines how LCS is to activated (if at all)
+during the positioning motion(s) that precede cutting motions. The
+following activation options are available:
+
+:0: do not activate LCS
+:1: at the end of the positioning sequence
+:2: after the last positioning motion that includes a rotary axis (default)
+:3: same as 2, or before the last positioning motion, whichever occurs last
+
+The OFF,\ *b* couplet defines how LCS is to deactivated (if at all)
+during the positioning motion(s) that follow cutting motions. The
+following deactivation options are available:
+
+:0: do not deactivate LCS
+:1: at the start of the positioning sequence
+:2: before the first positioning motion that includes a rotary axis (default)
+:3: same as 2, or after the first positioning motion, whichever occurs first
+
+\
+
+   :math:`\textbf{LCS / AUTO},\mathbf{1-4}`
+
+Types 1 through 4 provide the following automatic LCS functionality:
+
+:1: Create a new LCS on each positioning motion with a changed tool axis.
+    This is the default when running with a V14 generated post.
+:2: Create a new LCS just before the feed motion that follows a positioning
+    motion with a changed tool axis.
+    Cancel LCS on a positioning motion following the last feed move.
+    This is default mode for V15 through V22 generated posts.
+:3: Create a new LCS each time an MSYS command is encountered,
+    using the matrix defined on the MSYS command.
+:4: Create a new LCS each time an MSYS command is encountered,
+    using the inverse of the matrix defined on the MSYS command.
+
+The default behavior of the LCS/AUTO command can be changed with the
+$LCAMOD, $LCAON and $LCAOFF macro variables. With types 0 through 2
+of the AUTO format, the $LCAUTO macro variable can be used to control
+the alignment of the X or Y local coordinate system axes (see :ref:`here<var_lcamod>`).
+
+   :math:`\textbf{LCS / AUTO},
+   \textbf{FEED},
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+By default, automatic LCS changes with types 0 through 2 only occur
+on RAPID motions. Specify the modal FEED,ON couplet to also enable
+automatic LCS changes to occur with feed motions at or above the high
+feed threshold defined by the FEDRAT/RAPID command. Specify FEED,OFF
+to return GENER to the default RAPID-only behavior.
+
+.. _lcs_activation:
+
+LCS Activation/Deactivation
+---------------------------
+
+   :math:`\textbf{LCS /}
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The ON and OFF keywords enable or disable the LCS feature. OFF
+returns to the standard machine coordinate frame and cancels the
+modal AUTO format if enabled. ON re-establishes the LCS feature,
+either by reactivation the AUTO mode or by outputting the last local
+coordinate frame that was in effect.
