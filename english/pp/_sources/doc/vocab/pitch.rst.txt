@@ -1,0 +1,36 @@
+.. _command_pitch:
+
+The PITCH Command :kbd:`[L]`
+============================
+
+The PITCH command is used to specify the number of threads per CL
+unit for the next (and subsequent) COUPLE and THREAD commands. This
+command is only valid for lathes with threading capabilities. The
+syntax is as follows:
+
+   :math:`\textbf{PITCH /}
+   \begin{bmatrix}\,\begin{array}{l} \textbf{IPR} \\ \textbf{MMPR} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array} \;, \end{bmatrix}
+   \,\mathit{pitch} \;
+   \big[,\textbf{MULTRD},\mathit{starts}\,\big]
+   \begin{bmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{INCR} \\ \textbf{DECR} \end{array}\end{pmatrix} ,\mathit{value}\, \end{bmatrix}`
+
+If unqualified by a feed modifier, *pitch* is the number of threads
+per CL unit. If the CL units are inches then a *pitch* of 10
+indicates 10 threads per inch. The pitch can also be specified as a
+distance per revolution, or as the number of threads per inch (TPI).
+
+The MULTRD option specifies multiple start threading. The default, if
+not specified, is 1. The number of starts is coded immediately
+following the MULTRD keyword. The *starts* value must be a non-zero,
+positive integer.
+
+PITCH must be coded before using the COUPLE or THREAD commands. Once
+coded, the specified pitch and number of starts will be used for all
+threading operations until a new PITCH command is specified.
+
+The INCR and DECR *value* option is used to indicate a variable lead
+thread. It specifies the change of the lead for each spindle
+revolution. For example, if the pitch at the start is **0.125** and
+the last pitch is **0.100**, the resulting value would be **0.025**
+(assuming the change in pitch is for 1 revolution). Omit INCR or
+DECR, or specify a value of zero to indicate a constant lead thread.
