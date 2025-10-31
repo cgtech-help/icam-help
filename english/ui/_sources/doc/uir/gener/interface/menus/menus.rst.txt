@@ -1,0 +1,28 @@
+Menus
+=====
+
+`File <file/file.html>`__
+
+`Run <run/run.html>`__
+
+`View <view/view.html>`__
+
+`Debug <debug/debug.html>`__
+
+`Tools <tools/tools.html>`__
+
+`Windows <windows/windows.html>`__
+
+`Help <help/help.html>`__
+
+.. toctree::
+   :hidden:
+   
+   debug/debug
+   file/file
+   help/help
+   run/run
+   tools/tools
+   view/view
+   windows/windows
+
