@@ -1,0 +1,33 @@
+.. _macro_language:
+
+The Macro Language
+==================
+
+The ICAM macro language is used for the customization of
+post-processors, as well as for the customization of control
+emulators and Virtual Machine models. When a post-processor is
+running in tandem with a Virtual Machine model, the post-processor
+macro environment is shared with the model macro environment. Care
+must be taken to avoid conflicts in variable usage between macros of
+these different components. CERUN does not run within the same
+environment as GENER, so conflicts between control emulator and
+post-processor macros are not an issue.
+
+Macros allow the post-processor to manipulate the records from an
+input CL file to alter the sequence of CL records that are processed.
+Macros can construct new CL records for processing, or suppress or
+modify CL records found in the input CL file. Macro features also
+exist to reposition the input CL file record pointer and to read and
+write to external files (and much more).
+
+.. toctree::
+   :hidden:
+
+   fundamentals
+   functioncall
+   flowcontrol
+   invocation
+   clrecords
+   clfileio
+   textio
+   others
