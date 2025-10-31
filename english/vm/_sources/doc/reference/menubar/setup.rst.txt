@@ -1,0 +1,21 @@
+.. _sim_setup:
+.. _sim_open_setup:
+
+Simulation»Open Setup :small:`(GENER and CERUN only)`
+-----------------------------------------------------
+
+Activates a standard file dialog to select the name of the Verification
+Setup (.vsw) file to use for simulation. The setup file contains
+settings for lighting, grid, camera, viewpoints, etc. The setup file
+also contains a reference to a similarly named 3D Model (.m3d) file,
+which contains the part, stock and fixture definitions. Typically, each
+NC program input file will have an associated setup and 3D model file.
+
+.. _sim_save_setup:
+
+Simulation»Save Setup :small:`(GENER and CERUN only)`
+-----------------------------------------------------
+
+Activates a standard file dialog to save the current simulation
+settings. Simulation settings are saved in the Verification Setup (.vsw)
+and 3D Model (.m3d) files.
