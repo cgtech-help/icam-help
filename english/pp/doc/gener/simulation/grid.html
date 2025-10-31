@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulation»Grid (Ctrl Alt G) &mdash; Icam Post V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Simulation»Lights (Ctrl Alt L)" href="lights.html" />
+    <link rel="prev" title="Simulation»Selection" href="selection.html" />
+    <link href="../../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Icam Post V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../section_intro.html">Icam Post: Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../general/index.html">General Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../general/aboutpp.html">About Icam Post</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../general/aboutpp.html#types-of-machines-supported">Types of Machines Supported</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../general/postprocessing.html">About Post-Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../general/questgener.html">About QUEST and GENER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../general/portal.html">About the ICAM Portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../install/index.html">Installation and Upgrade</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../install/license.html">Licensing Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../install/license.html#icam-key-server-connection-file">icam.key server connection file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/license.html#icamls-key-server-license-file">icamls.key server license file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../install/server.html">License Server Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#new-license-server-installation">New license server installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#uninstall-the-license-server">Uninstall the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#repair-the-license-server">Repair the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/server.html#upgrade-the-license-server">Upgrade the license server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../install/install.html">Icam Post Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#new-icam-post-installation">New Icam Post installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#uninstall-icam-post">Uninstall Icam Post</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#modify-or-repair-icam-post">Modify or Repair Icam Post</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../install/install.html#upgrade-icam-post-installation">Upgrade Icam Post Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../install/dbupgrade.html">Database Upgrade Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/index.html">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../config/configutil.html">The ICAM Configuration Utility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../config/configutil.html#configuration-storage-and-application-data">Configuration Storage and Application Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/configutil.html#starting-config-from-the-desktop">Starting CONFIG from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/configutil.html#starting-config-from-a-command-prompt">Starting CONFIG from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/configutil.html#starting-config-from-quest-and-gener">Starting CONFIG from QUEST and GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/configutil.html#using-the-configuration-utility">Using the Configuration Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../config/content.html">Installation Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../config/content.html#installation-directory">Installation directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../config/content.html#application-data-directory">Application Data Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../config/envvar.html">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config/deffile.html">The ICAM.DEF File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../section_quest.html">QUEST: Post-Processor Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#pre-compiling-macros-for-gener">Pre-Compiling Macros for GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#importing-post-processors">Importing Post-Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/questinout.html">QUEST Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/questinout.html#the-icam-database">The ICAM Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/questinout.html#exported-imported-post-processor">Exported/Imported Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/questinout.html#dedicated-post-processors">Dedicated Post-Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/questinout.html#basic-post-processors">Basic Post-Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/questinout.html#the-quest-listing">The QUEST Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/questinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/questinout.html#standard-listing-format">Standard Listing Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#the-quest-interface">The QUEST Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#creating-a-new-post-processor">Creating a New Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#questionnaire-defaults">Questionnaire Defaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#questionnaire-chapters-and-sections">Questionnaire Chapters and Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#saving-and-generating-your-work">Saving and Generating your work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#testing-your-post-processor">Testing your Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#modifying-an-existing-post-processor">Modifying an Existing Post-Processor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest.html#wrapping-up">Wrapping Up</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/icamdb.html#post-processor-file-name-conventions">Post-Processor File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/icamdb.html#post-processors">Post-Processors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/customization.html">Post-Processor Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization.html#startup-shutdown-procedures">Startup/Shutdown Procedures</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#break-startup-shutdown-macros">Break Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#tool-change-startup-shutdown-macros">Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#first-tool-change-startup-shutdown-macros">First Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#cycle-startup-shutdown-macros">CYCLE Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#motion-startup-shutdown-macros">Motion Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#lcs-startup-shutdown-macros">LCS Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#operation-event-macro">Operation Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#register-macro">Register Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#tape-macro">Tape Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization.html#diagnostic-macro">Diagnostic Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#the-rmd-facility">The RMD Facility</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization.html#tape-editor">Tape Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization.html#the-dialog-editor">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization.html#user-defined-syntax-macros">User Defined Syntax Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#adding-macros">Adding Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#loading-and-exporting-macros">Loading and Exporting macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#macro-editor">Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#ordering-macros">Ordering Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#modifying-and-deleting-macros">Modifying and Deleting Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization.html#file-storage">File Storage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../macros/index.html">Post-Processor Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#outputting-the-identifier-or-event-output">Outputting the Identifier or Event (OUTPUT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#invoking-startup-shutdown-procedures">Invoking Startup/Shutdown Procedures</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#break-startup-shutdown-macros">Break Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#first-tool-change-startup-shutdown-macros">First Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#tool-change-startup-shutdown-macros">Tool Change Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#cycle-startup-shutdown-macros">Cycle Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#motion-startup-shutdown-macros">Motion Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#lcs-startup-shutdown-macros">LCS Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#operation-event-macro">Operation Event Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#register-macro">Register Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#tape-macro">Tape Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#diagnostic-macro">Diagnostic Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/invocation.html#invoking-user-defined-macros">Invoking User Defined Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/invocation.html#sdl-class-subclass">SDL Class:Subclass</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/invocation.html#sdl-arguments">SDL Arguments</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/invocation.html#required-sdl-arguments">Required SDL Arguments</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../macros/language/invocation.html#optional-sdl-arguments">Optional SDL Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/clrecords.html">Generating CL Records in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clrecords.html#post-processor-commands-in-a-macro">Post-Processor Commands in a Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clrecords.html#suppressing-post-processor-commands">Suppressing Post-Processor Commands</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clrecords.html#outputting-the-matched-record-output">Outputting the Matched Record (OUTPUT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clrecords.html#generating-other-cl-record-types">Generating Other CL Record Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clrecords.html#motion-cl-records">Motion CL Records</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clrecords.html#environment-control-cl-records">Environment Control CL Records</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/clfileio.html">CL File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#repositioning-the-cl-file-search">Repositioning the CL File (SEARCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#reading-a-cl-record-taperd">Reading a CL Record (TAPERD)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#functions-to-examine-the-last-cl-record">Functions to Examine the Last CL Record</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#modifying-the-last-cl-record-clput">Modifying the Last CL Record (CLPUT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#processing-the-last-cl-record-tapewt">Processing the Last CL Record (TAPEWT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#deleting-cl-file-records-tapeop">Deleting CL File Records (TAPEOP)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/clfileio.html#cl-file-processing-examples">CL File Processing Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../macros/ppfuncommand.html">The PPFUN Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#set-error-message-minimum-severity"><kbd class="kbd docutils literal notranslate">1</kbd> Set Error Message Minimum Severity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#set-tape-punching-minimum-severity"><kbd class="kbd docutils literal notranslate">2</kbd> Set Tape Punching Minimum Severity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#creating-custom-error-messages"><kbd class="kbd docutils literal notranslate">3</kbd> Creating Custom Error Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#modifying-time-summaries"><kbd class="kbd docutils literal notranslate">4</kbd> Modifying Time Summaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#assigning-values-to-registers"><kbd class="kbd docutils literal notranslate">7</kbd> Assigning Values to Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#modify-registers"><kbd class="kbd docutils literal notranslate">8</kbd> Modify Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#replace-or-disable-g-and-m-codes"><kbd class="kbd docutils literal notranslate">9</kbd> Replace or Disable G and M Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#disable-block-purging"><kbd class="kbd docutils literal notranslate">10</kbd> Disable Block Purging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#force-block-purging"><kbd class="kbd docutils literal notranslate">11</kbd> Force Block Purging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#linear-and-rotary-axes-frequency"><kbd class="kbd docutils literal notranslate">12</kbd> Linear and Rotary Axes Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#outputting-standard-error-messages"><kbd class="kbd docutils literal notranslate">14</kbd> Outputting Standard Error Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#command-ppfun-15"><kbd class="kbd docutils literal notranslate">15</kbd> Modifying Error Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#ordering-multiple-g-and-m-codes"><kbd class="kbd docutils literal notranslate">16</kbd> Ordering Multiple G and M Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#string-formatting"><kbd class="kbd docutils literal notranslate">17</kbd> String Formatting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#g-and-m-code-substitution"><kbd class="kbd docutils literal notranslate">18</kbd> G and M Code Substitution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#g-and-m-code-block-purge"><kbd class="kbd docutils literal notranslate">19</kbd> G and M Code Block Purge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#enabling-radial-distance-registers"><kbd class="kbd docutils literal notranslate">20</kbd> Enabling Radial Distance Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#macro-i-o-error-handling"><kbd class="kbd docutils literal notranslate">21</kbd> Macro I/O Error Handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#tape-file-functions"><kbd class="kbd docutils literal notranslate">22</kbd> Tape File Functions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/ppfuncommand.html#tape-file-wrap-up">Tape File Wrap-up</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/ppfuncommand.html#tape-file-production-status">Tape File Production Status</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/ppfuncommand.html#multiple-tape-files">Multiple Tape Files</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#reset-travel-and-timing-data"><kbd class="kbd docutils literal notranslate">23</kbd> Reset Travel and Timing Data</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/ppfuncommand.html#general-recording-of-travel-and-timing">General recording of Travel and Timing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/ppfuncommand.html#recording-of-tool-travel-and-timing">Recording of Tool Travel and Timing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/ppfuncommand.html#recording-of-operation-travel-and-timing">Recording of Operation Travel and Timing</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#set-high-feed-threshold"><kbd class="kbd docutils literal notranslate">24</kbd> Set High Feed Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/ppfuncommand.html#load-tool-and-head-tables"><kbd class="kbd docutils literal notranslate">25</kbd> Load Tool and Head Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../macros/macrolookahead.html">Macro Look-Ahead Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#standard-look-ahead-searches">Standard Look-Ahead Searches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#look-ahead-variables">Look-Ahead Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#variable-look-ahead-mechanism">Variable Look-Ahead Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#limitations-of-look-ahead-processing">Limitations of Look-Ahead Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#testing-for-look-ahead-mode">Testing for Look-Ahead Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#forcing-a-particular-look-ahead-result">Forcing a Particular Look-Ahead Result</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#flook-generic-look-ahead">$FLOOK Generic Look-ahead</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#ending-a-look-ahead-using-the-look-macro-system-variable">Ending a Look-ahead using the $LOOK Macro System Variable</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#effect-of-duplicate-and-nested-flook-functions">Effect of Duplicate and Nested $FLOOK Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#effect-of-fini-on-flook">Effect of FINI on $FLOOK</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#finfo-operation-look-ahead">$FINFO Operation Look-ahead</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#operation-status-at-start-of-cut">Operation status at start of cut</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#operation-processing-conditions">Operation processing conditions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#operation-key-motion-data">Operation key motion data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#operation-user-defined-variables">Operation user-defined variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#ending-a-finfo-look-ahead">Ending a $FINFO look-ahead</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/macrolookahead.html#operation-event-look-ahead">Operation Event Look-ahead</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#id4">Operation status at start of cut</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#operation-key-motion-data-1">Operation key motion data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#operation-event-macro-processing">Operation event macro processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/macrolookahead.html#ending-an-operation-event-look-ahead">Ending an operation event look-ahead</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#register-index-output-formats">Register Index Output Formats</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#predefined-register-output-format">Predefined Register Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#current-predefined-register-value">Current Predefined Register Value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#back-plot-file-variables">Back-plot file variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#canned-cycle-variables">Canned cycle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#composite-post-processor-variables">Composite post-processor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#constants">Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#contouring-variables">Contouring variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#conversion-factor-variables">Conversion factor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#coolant-feed-rate-and-spindle-variables">Coolant feed rate and spindle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#cutter-compensation-variables">Cutter compensation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#error-message-variables">Error message variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#lathe-variables">Lathe variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#look-ahead-variables">Look-ahead variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#licensed-option-variables">Licensed option variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#machine-and-workpiece-coordinate-variables">Machine and Workpiece coordinate variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#machining-time-variables">Machining time variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#macro-variables">Macro variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#mcd-tape-variables">MCD/Tape variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#miscellaneous-variables">Miscellaneous variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#motion-related-variables">Motion related variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#operation-variables">Operation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#post-processor-variables">Post-processor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#post-processor-verification-listing-variables">Post-processor verification listing variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#subprogram-variables">Subprogram variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#tooling-variables">Tooling variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/constantvar.html">Variables Defining Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/coordinatevar.html">Machine, CL &amp; Workpiece Coordinate Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/motionvar.html">Motion-Related Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/macrovar.html">Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/lookaheadvar.html">Look-Ahead Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/conversionvar.html">Conversion Factor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/coolfedspinvar.html">Coolant, Feed Rate and Spindle Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/cuttercompvar.html">Cutter Compensation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/opvar.html">Operation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/toolvar.html">Tooling Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/lathevar.html">Lathe Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/contourvar.html">Contouring Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/cyclevar.html">Automated Canned Cycle Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/cyclevar.html#drill-cycle-variables">Drill Cycle Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/cyclevar.html#thread-cycle-variables">Thread Cycle Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/tapevar.html">MCD/Tape Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/backplotvar.html">Backplot File Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/machtimevar.html">Machining Time Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/defvar.html">Post-Processor Definition Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/listingvar.html">Verification Listing Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/errorvar.html">Error Message Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/compositevar.html">Composite Post-Processor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/subprogvar.html">Subprogram Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/licensevar.html">Licensed Option Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/licensevar.html#arc-and-spline-fitting-variables">Arc and Spline Fitting Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/licensevar.html#high-speed-machining-variables">High Speed Machining Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/licensevar.html#smartpath-variables">SmartPATH Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/licensevar.html#smartcut-variables">SmartCUT Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/licensevar.html#smartfeed-variables">SmartFEED Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/miscvar.html">Miscellaneous Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/mathfunc.html">Mathematical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/numericfunc.html">Numeric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/geometricfunc.html">Geometric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/vectorfunc.html">Vector Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/matrixfunc.html">Matrix Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/conditionalfunc.html">Conditional Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/conversionfunc.html">Conversion Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/charseqfunc.html">Character and Sequence Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/commandlinefunc.html">Command Line Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/filedirecfunc.html">File and Directory Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/cldatafunc.html">CL Data Parsing Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../section_gener.html">GENER: The Post-Processor</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">GENER</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../startgener.html">Starting GENER</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../startgener.html#starting-gener-from-an-extractor">Starting GENER from an Extractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startgener.html#starting-gener-from-the-desktop">Starting GENER from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startgener.html#starting-gener-from-a-command-prompt">Starting GENER from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startgener.html#starting-pse-from-a-command-prompt">Starting PSE from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startgener.html#gener-return-codes">GENER Return Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../startgener.html#the-launch-panel">The Launch Panel</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#gener-tab">GENER Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#vm-tab">VM Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#preferences-tab">Preferences Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#options-dialog">Options Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#cam-dialog">CAM Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#db-manager">DB Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../startgener.html#job-button">JOB Button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../generinout.html">GENER Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generinout.html#input-cl-file">Input CL File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generinout.html#output-nc-program-file">Output NC Program File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generinout.html#output-verification-listing">Output Verification Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../generinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../generinout.html#standard-listing-format">Standard Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../generinout.html#identification-page">Identification Page</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../generinout.html#the-nc-control-tape-listing">The NC Control Tape Listing</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#title-block">Title Block</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#display-data">Display Data</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../generinout.html#summary-data">Summary Data</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#section-summary">Section Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#page-summary">Page Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#tooling-summary">Tooling Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#tool-flute-length-summary">Tool Flute Length Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#tool-travel-summary">Tool Travel Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#machining-time-summary">Machining Time Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../generinout.html#diagnostic-summary">Diagnostic Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../generinout.html#output-log-file">Output Log File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generinout.html#output-review-file">Output Review File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generinout.html#output-backplot-file">Output Backplot File</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="../usinggener.html">Using GENER</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../usinggener.html#diagnostics">Diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../usinggener.html#tracing">Tracing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../usinggener.html#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../usinggener.html#debugging">Debugging</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../usinggener.html#menus">Menus</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/file.html">File Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/run.html">Run Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/view.html">View Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/debug.html">Debug Menu</a></li>
+<li class="toctree-l5 current"><a class="reference internal" href="../uirmenus/simulation.html">Simulation Menu</a><ul class="current">
+<li class="toctree-l6"><a class="reference internal" href="main.html">Simulation»Virtual Machine</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l7"><a class="reference internal" href="main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l7"><a class="reference internal" href="main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l7"><a class="reference internal" href="main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l7"><a class="reference internal" href="main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="controller.html">Simulation»Controller</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l7"><a class="reference internal" href="controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+<li class="toctree-l7"><a class="reference internal" href="controller.html#simulationcontroller-code-groups">Simulation»Controller: Code Groups</a></li>
+<li class="toctree-l7"><a class="reference internal" href="controller.html#simulationcontroller-ppfun">Simulation»Controller: PPFUN</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="manager.html">Simulation»Manager</a></li>
+<li class="toctree-l6"><a class="reference internal" href="mode.html">Simulation»Mode</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l7"><a class="reference internal" href="mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l7"><a class="reference internal" href="mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l7"><a class="reference internal" href="mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="toolholderhead.html#tools">Tools</a></li>
+<li class="toctree-l7"><a class="reference internal" href="toolholderhead.html#holders">Holders</a></li>
+<li class="toctree-l7"><a class="reference internal" href="toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="show.html">Simulation»Show</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowtool-path-ctrl-t">Simulation»Show»Tool Path (Ctrl T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowtool-vector">Simulation»Show»Tool Vector</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowtool-path-as-overlay-ctrl-shift-t">Simulation»Show»Tool Path as Overlay (Ctrl Shift T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowfilters">Simulation»Show»Filters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowcross-section">Simulation»Show»Cross Section</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowworkpiece-coords-ctrl-w">Simulation»Show»Workpiece Coords (Ctrl W)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshownext-display-ctrl-d">Simulation»Show»Next Display (Ctrl D)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="show.html#simulationshowprevious-display-ctrl-shift-d">Simulation»Show»Previous Display (Ctrl Shift D)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="measure.html">Simulation»Measure</a></li>
+<li class="toctree-l6"><a class="reference internal" href="annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="selection.html#simulationselectionhide-in-view-ctrl-b">Simulation»Selection»Hide in View (Ctrl B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="selection.html#simulationselectionhide-in-all-views">Simulation»Selection»Hide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="selection.html#simulationselectionshow-all-rehide-ctrl-alt-b">Simulation»Selection»Show All/Rehide (Ctrl Alt B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="selection.html#simulationselectionshow-all-rehide-in-all-views">Simulation»Selection»Show All/Rehide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="selection.html#simulationselectioninvert-hide-state-ctrl-shift-b">Simulation»Selection»Invert Hide State (Ctrl Shift B)</a></li>
+</ul>
+</li>
+<li class="toctree-l6 current"><a class="current reference internal" href="#">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="setup.html">Simulation»Open Setup</a></li>
+<li class="toctree-l6"><a class="reference internal" href="setup.html#simulationsave-setup">Simulation»Save Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/tools.html">Tools Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/window.html">Window Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../uirmenus/help.html">Help Menu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../vocab/index.html">Post-Processor Vocabulary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/air.html">The AIR Command <kbd class="kbd docutils literal notranslate">[MLPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/am.html">The AM Command <kbd class="kbd docutils literal notranslate">[MLC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/apply.html">The APPLY Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/apply.html#milling-vs-turning-for-c-axis-lathes">Milling vs. Turning for C Axis Lathes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/apply.html#punching-vs-contouring">Punching vs. Contouring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/apply.html#composite-machines">Composite Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/arcslp.html">The ARCSLP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/arcslp.html#d-arc-control">2D Arc Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/arcslp.html#id1">3D Arc Control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/assist.html">The ASSIST Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/auxfun.html">The AUXFUN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/break.html">The BREAK Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/calsub.html">The CALSUB Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/channl.html">The CHANNL Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/clamp.html">The CLAMP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/clamp.html#parametric-clamp-format">Parametric CLAMP Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/clamp.html#axis-specific-clamp-format">Axis-Specific CLAMP Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/clamp.html#table-clamping-for-punch-presses">Table Clamping for Punch Presses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/clamp.html#linear-positioning-with-rotary-axes">Linear Positioning with Rotary Axes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/clearp.html">The CLEARP Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/clrsrf.html">The CLRSRF Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/coolnt.html">The COOLNT Command <kbd class="kbd docutils literal notranslate">[MLE]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/coolnt.html#primary-coolant">Primary Coolant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/coolnt.html#coolant-pressure">Coolant Pressure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/coolnt.html#auxiliary-coolant">Auxiliary Coolant</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/couple.html">The COUPLE Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/cutcom.html">The CUTCOM Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#diameter-compensation">Diameter Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#diameter-compensation-cornering">Diameter Compensation Cornering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#diameter-compensation-offset">Diameter Compensation Offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#diameter-compensation-filleting">Diameter Compensation Filleting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#d-tool-compensation">3D Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#fixture-compensation">Fixture Compensation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cutcom.html#per-axis-fixture-compensation">Per-Axis Fixture Compensation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cutcom.html#all-axes-fixture-compensation">All-Axes Fixture Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cutcom.html#rotary-table-dynamic-fixture-compensation">Rotary Table Dynamic Fixture Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/cycle.html">The CYCLE Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-cycle-on-command">The CYCLE/ON Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-cycle-off-command">The CYCLE/OFF Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-cycle-auto-command">The CYCLE/AUTO Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-cycle-return-command">The CYCLE/RETURN Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#common-cycle-parameters">Common Cycle Parameters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#depth-of-operation">Depth of Operation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#cutting-feed">Cutting Feed</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#clearance-height">Clearance Height</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#common-cycle-options">Common Cycle Options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#return-height">Return Height</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#additional-rapid-plunge">Additional Rapid Plunge</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#dwell">Dwell</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-drill-cycle">The DRILL Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-face-cycle">The FACE Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-tap-cycle">The TAP Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-bore-cycle">The BORE Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-bore-back-cycle">The BORE-BACK Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-ream-cycle">The REAM Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-drill-deep-cycle">The DRILL-DEEP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#absolute-step-format">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#incremental-step-format">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-tap-deep-cycle">The TAP-DEEP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id1">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id2">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id3">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-drill-brkchp-cycle">The DRILL-BRKCHP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id4">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id5">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id6">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-tap-brkchp-cycle">The TAP-BRKCHP Cycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id7">Absolute Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id8">Incremental Step Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cycle.html#id9">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-thru-cycle">The THRU Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-csink-cycle">The CSINK Cycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cycle.html#the-manual-cycle">The MANUAL Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/defsub.html">The DEFSUB Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/defsub.html#subprogram-definition">Subprogram Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/defsub.html#subprogram-output">Subprogram Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/defsub.html#index-and-copy-behavior">Index and Copy Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/delay.html">The DELAY Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/disply.html">The DISPLY Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/end.html">The END Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/endsub.html">The ENDSUB Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/fedrat.html">The FEDRAT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#feed-rate-value-and-mode">Feed Rate Value and Mode</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/fedrat.html#general-syntax">General Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/fedrat.html#wire-edm-syntax">Wire EDM Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/fedrat.html#punch-press-syntax">Punch Press Syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#inverse-time-selection">Inverse Time Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#set-high-feed-threshold">Set High Feed Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#feed-rate-limiting">Feed Rate Limiting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#feed-rate-coverage-control">Feed Rate Coverage Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#feed-scaling">Feed Scaling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/fedrat.html#feed-adjustment">Feed Adjustment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/gohome.html">The GOHOME Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/head.html">The HEAD Command <kbd class="kbd docutils literal notranslate">[LEC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/head.html#merging-lathes">Merging Lathes</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/head.html#the-non-merge-mode">The Non-Merge Mode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/head.html#the-merge-mode">The Merge Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/head.html#axis-wire-edm-machines">4-Axis Wire EDM Machines</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/head.html#id2">The Non-Merge Mode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/head.html#id3">The Merge Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/head.html#contouring-heads">Contouring Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/homept.html">The HOMEPT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/homept.html#reference-home-position-definition">Reference Home Position Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/homept.html#machine-home-position-definition">Machine Home Position Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/homept.html#reset-home-position">Reset Home Position</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/indpos.html">The INDPOS Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/insert.html">The INSERT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/lcs.html">The LCS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lcs.html#fixed-lcs-formats">Fixed LCS Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lcs.html#automatic-lcs-formats">Automatic LCS Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lcs.html#lcs-activation-deactivation">LCS Activation/Deactivation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/leader.html">The LEADER Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/limit.html">The LIMIT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#travel-limit-checking">Travel Limit Checking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#travel-limit-tool-compensation">Travel Limit Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#travel-limit-fixture-compensation">Travel Limit Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#travel-limit-frame-transformation">Travel Limit Frame Transformation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#preferred-rotary-solution-modulo-360-range">Preferred Rotary Solution – Modulo-360 Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#preferred-rotary-solution-physical-range">Preferred Rotary Solution – Physical Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#limit-based-cartesian-polar-switching">Limit Based Cartesian-Polar Switching</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/limit.html#polar-interpolation-switching">Polar Interpolation Switching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/limit.html#polar-emulation-switching">Polar Emulation Switching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/limit.html#polar-switching-activation">Polar Switching Activation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/limit.html#limit-based-singular-positioning">Limit Based Singular Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/lintol.html">The LINTOL Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-activation">Linearization Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-tool-tip-tolerance">Linearization Tool-Tip Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-tool-length-adjustment">Linearization Tool Length Adjustment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-angular-tolerance">Linearization Angular Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-stepping-control">Linearization Stepping Control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#singularity-push-thru">Singularity Push-Thru</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#tool-tip-only-linearization">Tool-Tip-Only Linearization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-with-rtcp">Linearization with RTCP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-spline-fitting">Linearization Spline Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#rotary-turn-around">Rotary Turn-Around</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#linearization-path-planning">Linearization Path Planning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#forced-path-planning-scan">Forced Path-Planning Scan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#singular-pre-positioning">Singular Pre-Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/lintol.html#rotary-winding">Rotary Winding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/load.html">The LOAD Command <kbd class="kbd docutils literal notranslate">[MLEP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/load.html#wire-edm-machines">Wire EDM machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/load.html#punch-press-machines">Punch Press machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/load.html#mill-and-lathe-machines">Mill and Lathe machines:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/loadtl.html">The LOADTL Command <kbd class="kbd docutils literal notranslate">[MLEP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/loadtl.html#wire-edm-machines">Wire EDM machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/loadtl.html#punch-press-machines">Punch Press machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/loadtl.html#mill-and-lathe-machines">Mill and Lathe machines:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/locate.html">The LOCATE Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/locate.html#parametric-format">Parametric Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/locate.html#axis-specific-format">Axis-Specific Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/locate.html#applying-and-removing-last-preset-positioning-offset">Applying and Removing Last Preset Positioning Offset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/lprint.html">The LPRINT Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/machin.html">The MACHIN Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/mchtol.html">The MCHTOL Command <kbd class="kbd docutils literal notranslate">[MLPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mchtol.html#exact-stop-machining-tolerance">Exact-Stop Machining Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mchtol.html#high-speed-machining-tolerance">High Speed Machining Tolerance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/mode.html">The MODE Command <kbd class="kbd docutils literal notranslate">[MLEPCS]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#absolute-vs-incremental-positioning">Absolute vs. Incremental Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#diameter-vs-radius-positioning">Diameter vs. Radius Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#polar-interpolation">Polar Interpolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#polar-emulation">Polar Emulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#rotating-tool-center-point">Rotating Tool Center Point</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#axis-post-processing-functions">6-Axis Post-Processing Functions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/mode.html#cancel-6-axis-processing">Cancel 6-Axis Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/mode.html#shared-linear-axes">Shared Linear Axes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/mode.html#tri-rotary-interpolation">Tri-Rotary Interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#skip-code">Skip Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#arc-and-helix-fitting">Arc and Helix Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#spline-fitting">Spline Fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#turning-curve-fitting-off">Turning Curve Fitting Off</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/mode.html#pattern-fitting">Pattern Fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/moveto.html">The MOVETO Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/msys.html">The MSYS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/ofstno.html">The OFSTNO Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/opname.html">The OPNAME Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/opskip.html">The OPSKIP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/opstop.html">The OPSTOP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/optype.html">The OPTYPE Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/origin.html">The ORIGIN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/partno.html">The PARTNO Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/pendwn.html">The PENDWN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/penup.html">The PENUP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/pitch.html">The PITCH Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/pivotz.html">The PIVOTZ Command <kbd class="kbd docutils literal notranslate">[EP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/pivotz.html#punch-presses">Punch Presses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/pivotz.html#wire-edm-machines">Wire EDM Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/plot.html">The PLOT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/plot.html#plot-activation">PLOT Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/plot.html#plot-transformation">PLOT Transformation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/power.html">The POWER Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/pprint.html">The PPRINT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/prefun.html">The PREFUN Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/rapid.html">The RAPID Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/retrct.html">The RETRCT Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/rewind.html">The REWIND Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/rotabl.html">The ROTABL Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/rotabl.html#position-rotary-axis">Position Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/rotabl.html#unwind-rotary-axis">Unwind Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/rotabl.html#preferred-singular-rotary-axis">Preferred Singular Rotary Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/safety.html">The SAFETY Command <kbd class="kbd docutils literal notranslate">[MLC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safety.html#modal-safety-setting">Modal Safety Setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safety.html#safe-positioning-motion-squaring">Safe Positioning Motion Squaring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safety.html#safe-positioning-motion-splitting">Safe Positioning Motion Splitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safety.html#safe-positioning-path-selection">Safe Positioning Path Selection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/safpos.html">The SAFPOS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safpos.html#reference-tool-head-change-position">Reference Tool/Head Change Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safpos.html#machine-tool-head-change-position">Machine Tool/Head Change Position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/safpos.html#reset-tool-head-change-position">Reset Tool/Head Change Position</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/selctl.html">The SELCTL Command <kbd class="kbd docutils literal notranslate">[MLP]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/select.html">The SELECT Command <kbd class="kbd docutils literal notranslate">[MLP]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/seqno.html">The SEQNO Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/shuttr.html">The SHUTTR Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/smartp.html">The SMARTP Command <kbd class="kbd docutils literal notranslate">[M]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/smartp.html#smartpath">SmartPATH</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/smartp.html#positioning-clearance">Positioning Clearance:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/smartp.html#positioning-velocity">Positioning Velocity:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/smartp.html#reference-home-positioning">Reference Home Positioning:</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/smartp.html#smartcut">SmartCUT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/smartp.html#air-cut-clearance">Air-cut Clearance:</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/smartp.html#air-cut-velocity">Air-cut Velocity:</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/smartp.html#smartfeed">SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/spindl.html">The SPINDL Command <kbd class="kbd docutils literal notranslate">[MLEP]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/spindl.html#wire-edm-machines">Wire EDM Machines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/spindl.html#punch-presses">Punch Presses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/spindl.html#mills-and-lathes">Mills and Lathes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/stop.html">The STOP Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/synctr.html">The SYNCTR Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/thread.html">The THREAD Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#single-pass-thread">Single Pass Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#multi-pass-thread">Multi-Pass Thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#specifying-the-thread-depth">Specifying the Thread Depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#specifying-the-thread-entry">Specifying the Thread Entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#specifying-the-thread-chamfer-and-exit">Specifying the Thread Chamfer and Exit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#specifying-the-thread-size">Specifying the Thread Size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/thread.html#specifying-the-thread-contour">Specifying the Thread Contour</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/tlmark.html">The TMARK Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/tlname.html">The TLNAME Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/toolno.html">The TOOLNO Command <kbd class="kbd docutils literal notranslate">[ML]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/toolno.html#tool-parameters">Tool Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/toolno.html#head-parameters">Head Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/torch.html">The TORCH Command <kbd class="kbd docutils literal notranslate">[PC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/tprint.html">The TPRINT Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/trans.html">The TRANS Command <kbd class="kbd docutils literal notranslate">[MLEPC]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/trans.html#parametric-trans-format">Parametric TRANS Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/trans.html#axis-specific-trans-format">Axis-Specific TRANS Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/trans.html#applying-and-removing-last-translation-values">Applying and Removing Last Translation Values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/turret.html">The TURRET Command <kbd class="kbd docutils literal notranslate">[L]</kbd></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/unload.html">The UNLOAD Command <kbd class="kbd docutils literal notranslate">[MLE]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/unload.html#wire-edm-machines">Wire EDM machines:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/unload.html#mill-and-lathe-machines">Mill and Lathe machines:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/vtlaxs.html">The VTLAXS Command <kbd class="kbd docutils literal notranslate">[M]</kbd></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/vtlaxs.html#rotary-axis-tolerance">Rotary Axis Tolerance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/vtlaxs.html#tool-vector-tolerance">Tool Vector Tolerance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../vocab/cldata.html">Other CL File Commands Affecting Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-isn-command">The ISN Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-tracut-command">The TRACUT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-index-command">The INDEX Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-copy-command">The COPY Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-block-command">The BLOCK Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-defcopy-and-copy-commands">The DEFCOPY and COPY Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-from-command">The FROM Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-godlta-command">The GODLTA Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-goto-command">The GOTO Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-cont-command">The CONT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-move-command">The MOVE Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-movarc-command">The MOVARC Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-dntcut-and-cut-commands">The DNTCUT and CUT Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-toler-intol-and-outtol-commands">The TOLER, INTOL and OUTTOL Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-cutter-command">The CUTTER Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-multax-command">The MULTAX Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-units-command">The UNITS Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-tlaxis-command">The TLAXIS Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-fini-command">The FINI Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-contrl-command">The CONTRL Command</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#input-card-length">Input Card Length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#output-listing-control">Output Listing Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#setting-internal-epsilon">Setting Internal Epsilon</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#diagnostic-message-control">Diagnostic Message Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#circular-interpolation-direction-control">Circular Interpolation Direction Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#circle-record-type-control">Circle Record Type Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#circle-quadrant-segmentation">Circle Quadrant Segmentation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#multi-point-motion-control">Multi-point Motion Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#tracut-command-processing">TRACUT Command Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#index-and-copy-command-processing">INDEX and COPY Command Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#block-defcopy-and-copy-command-processing">BLOCK, DEFCOPY and COPY Command Processing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../vocab/cldata.html#nested-copy-matrix-multiplication">Nested COPY Matrix Multiplication</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-includ-command">The INCLUD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-ppword-command">The PPWORD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-syn-command">The SYN Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../vocab/cldata.html#the-synex-command">The SYNEX Command</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../diag/index.html">Diagnostic Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../diag/geninfo.html">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../diag/modify.html">Modifying Diagnostic Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../diag/errorfile.html">Error File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../back/annex.html">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../back/characterset.html">Character Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back/majorword.html">Post-Processor Major Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back/minorword.html">Post-Processor Minor Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back/reservedwords.html">Reserved Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../back/userdefquest.html">User-Defined Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../back/userdefquest.html#question-tags">Question Tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#s-user-defined-section">/S User-defined section</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#q-number-type">/Q number type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#p-prompt-text-or-short-description-text">/P prompt text, or short description text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#t-question-text">/T question text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#d-default-answer">/D default answer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#l-response-location">/L response location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#o-options">/O options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#comment-character">! comment character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#case">CASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#cchar">CCHAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#cvalue">CVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#ivalue">IVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#wvalue">WVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/userdefquest.html#yesno">YESNO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../back/userdefquest.html#macro-system-variables">Macro System Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../back/userdefquest.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../back/cadcaminterface.html">CAD/CAM System Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../back/cadcaminterface.html#cam-interface-kits">CAM Interface Kits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../back/cadcaminterface.html#selecting-a-cam-interface">Selecting a CAM Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/cadcaminterface.html#typical-interface-kit-files">Typical Interface Kit Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/cadcaminterface.html#creating-or-modifying-interface-kits">Creating or Modifying Interface Kits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../back/cadcaminterface.html#cam-integration-setup">CAM Integration Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../back/cadcaminterface.html#cam-selection">CAM Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../back/cadcaminterface.html#cam-integration">CAM Integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../back/ppmacrosample.html">Post-Processor Macro Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../back/ppmacrosample.html#macro-example-1">Macro Example #1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../back/ppmacrosample.html#macro-example-2">Macro Example #2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../back/ppmacrosample.html#macro-example-3">Macro Example #3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Icam Post V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../section_gener.html">GENER: The Post-Processor</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">GENER</a></li>
+          <li class="breadcrumb-item"><a href="../usinggener.html">Using GENER</a></li>
+          <li class="breadcrumb-item"><a href="../uirmenus/simulation.html">Simulation Menu</a></li>
+      <li class="breadcrumb-item active">Simulation»Grid (Ctrl Alt G)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="simulationgrid-ctrl-alt-g">
+<span id="sim-grid"></span><h1>Simulation»Grid (Ctrl Alt G)<a class="headerlink" href="#simulationgrid-ctrl-alt-g" title="Link to this heading"></a></h1>
+<p>Activates the Grid dialog, which defines the boundaries and appearance
+of the world. The Reset button resets the grid appearance and size to
+reasonable values.</p>
+<p><em>Grid Units</em> can be set to any convenient value and need not match the
+units used when the model was created. For optimal display and control,
+the <em>Min/Max grid value</em> dimensions should exceed the dimensions of
+the model itself. The <em>Grid subdivision size</em> defines the spacing of the
+grid for visual clarity only (excessively small spacing can greatly
+increase the CPU requirements during scene rendering). The
+<em>Snap to grid</em> checkbox and associated input field define a rounding
+factor that can optionally be used when interactively constructing
+objects using the mouse pointer.</p>
+<p>Select <em>Grid color</em> to set the color of the grid lines (the background
+color is set in the Simulation»Options dialog Misc tab).</p>
+<p>The main axis (model origin), grid contour boundary and grid subdivision
+lines can all be toggled visible or invisible using the <em>Display Show</em>
+checkboxes.</p>
+<p>The coordinate frame marker size, color and style can also be controlled
+from the Grid dialog. Three horizontal sliders control the size of the
+arrow. Colors for each axis of the marker can be set in the <em>Colors</em> area.
+The arrow style can be set using the <em>Arrow type</em> selection.</p>
+<a class="reference internal image-reference" href="../../../_images/sim_grid.png"><img alt="../../../_images/sim_grid.png" class="align-center" src="../../../_images/sim_grid.png" style="width: 5.058in;" /></a>
+<p></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="selection.html" class="btn btn-neutral float-left" title="Simulation»Selection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lights.html" class="btn btn-neutral float-right" title="Simulation»Lights (Ctrl Alt L)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
