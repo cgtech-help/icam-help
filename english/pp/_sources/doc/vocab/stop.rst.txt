@@ -1,0 +1,22 @@
+.. _command_stop:
+
+The STOP Command :kbd:`[MLEPC]`
+===============================
+
+The STOP command is used to stop all machine movement when coded in
+the part program, typically using an M00 code. This command is valid
+for all machine types.
+
+   :math:`\textbf{STOP}`
+
+GENER will output a code to stop all movement of the machine. For
+punches, if the STOP code turns punching off, GENER may optionally
+turn it back on when the machine is restarted. For other machine
+types, GENER may also output codes to stop the spindle and/or the
+coolant flow if this is not done automatically by the control. This
+action will be determined by the responses to QUEST. Codes might also
+be output to restart the spindle and/or the coolant flow following
+the STOP (M) code.
+
+A TMARK block will also be output if the AUTO option has been
+programmed on a TMARK command.
