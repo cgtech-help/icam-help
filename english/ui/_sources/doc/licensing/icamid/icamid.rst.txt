@@ -1,0 +1,56 @@
+ICAMID Utility
+**************
+
+An ICAM Identification (ICAMID) utility is available to get the hostid,
+test connectivity with the license server, find servers on the local LAN, and more.
+
+The ICAMID utility may be started either from the Start menu or from the
+ICAM Portal.
+
+-  To start the license manager utility from a **client** computer Start
+   menu, first locate the “ICAM V26.x x64” Start menu and then select
+   “ICAMID Utility”. To start the utility from the ICAM
+   portal, select the Tools pane and click on the “ICAMID Utility” tile or icon.
+
+
+   You will see a window that looks similar to the one shown below.
+
+|image15|
+
+ICAM System ID
+==============
+
+The "Generate ICAM System ID Data" button will generate and open a text file containing
+all the required information for ICAM to issue a license for the computer this is generated on. Only the data between the **BEGIN** and **END** lines have to be sent to ICAM.
+   
+To access the license server connectivity tools, click the "**↓More...**"
+You will see the extended window shown below.
+   
+|image16|
+
+Network Test
+============
+
+The network test features allow you to provide the license server address and port in order to test the connectivity.
+
+*  **Ping**: This will just ping the address and the server computer will respond as long as ICMPv4 is allowed and enabled.
+*  **Hop-Count**:  Return the number of hops from the client (computer running ICAMID utility) to the license server host computer. It represents the total intermediate devices (such as routers) that data must pass through on its way from the source to the destination. ICMPv4 must be allowed and enabled for the hop count to work.
+*  **Server?**: This feature will send a request to the server computer to see if there is a ICAM license server software running.
+
+|image17|
+
+The **Test** feature will perform many test from client to server and server back to client to see if communication is working correctly. If some of those test fail, it usually mean there are some blocked port or firewall in between, preventing communication to pass through.
+
+
+Server Test
+===========
+
+The server test controls can broadcast a message on the local area network (LAN)
+and will list the servers that have responded. However, the license server port needs
+to be known and specified.
+
+.. |image15| image:: ../media/icamid1.png
+.. |image16| image:: ../media/icamid2.png
+.. |image17| image:: ../media/icamid_test.png
+
+
