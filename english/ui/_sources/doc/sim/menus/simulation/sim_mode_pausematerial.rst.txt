@@ -1,0 +1,17 @@
+Simulation»Mode»Pause Material Removal
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When the "Pause Material Removal" selection is active, the in-process
+stock and machinable fixtures will not be affected by the cutting action
+of the tool. This function temporarily disables material removal
+simulation (MRS). This MRS setting can also be toggled by selecting
+button in the VM Mode toolbar.
+
+Temporarily inhibiting MRS can be useful to ignore further invalid
+cutting actions of a tool, during the early simulation phase of a
+manufacturing program. Also, when used with Run»Restart (Shift F5) a
+program can be quickly run once without MRS, and if necessary a second
+time with MRS following the restart, without having to change the
+"Enable Material Removal Simulation" setting in the launch panel VM
+pane.
+
