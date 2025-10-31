@@ -1,0 +1,9 @@
+Debug»Step Over (F10)
+---------------------
+
+Step to the next MCD block/macro line on the current stack level.
+
+Used during debugging to process the next MCD block or macro, pausing
+after the record has been processed, even if the record matches other
+macros. Compare this with `Step Into <debug_stepinto.html>`__.
+
