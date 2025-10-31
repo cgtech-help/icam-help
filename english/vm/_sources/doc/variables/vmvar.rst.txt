@@ -1,0 +1,256 @@
+Virtual Machine Variables
+=========================
+
+.. _var_kineng:
+.. index:: Variables; $KINENG
+
++---------------------+------------------------------------------------+
+| **$KINENG**         | Kinematics engine                              |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable defines the kinematics engine used by Virtual Machine
+   during MCD based simulation. It is set in the questionnaire *General
+   Description / General Information* section question #6.5 “VM kinematics
+   engine”. Normally a value of 1 (one) is used, which makes Virtual
+   Machine responsible to compensate for pivot-point offsets and perform
+   tool-tip linearization (i.e., RTCP) in the same manner as modern CNC
+   controllers. A value of 0 (zero) can be used to retain compatibility
+   with earlier releases, which relies on the post-processor to perform
+   these calculations for VM. Other kinematic engines are available for
+   special purposes.
+
+.. _var_part:
+.. index:: Variables; $PART
+
++---------------------+------------------------------------------------+
+| **$PART**           | Current active part                            |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable indicates from which stock axis subsequent tool axis
+   traces should be attached (the tool path trace moves as the indicated
+   stock axis moves). The part identification is a numeric value matching
+   the “part ID” specified with a stock axis.
+
+.. _var_refhp:
+.. index:: Variables; $REFHP
+
++---------------------+------------------------------------------------+
+| **$REFHP**          | Home position reference ID                     |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable specifies the model reference position ID to use by
+   default when GENER or CERUN processes a reference home motion. It is
+   initialized at the start of processing to the lowest “home position”
+   reference ID defined in the model. It can be changed under macro
+   processing to affect the position of the next reference home action. A
+   value of -1 indicates that no reference home position is defined.
+
+.. _var_reftc:
+.. index:: Variables; $REFTC
+
++---------------------+------------------------------------------------+
+| **$REFTC**          | Tool change position reference ID              |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable specifies the model reference position ID to use by
+   default when GENER or CERUN processes a tool change motion to a
+   “special” reference position. It is initialized at the start of
+   processing to the lowest “tool change” reference ID defined in the
+   model. It can be changed under macro processing to affect the position
+   of the next tool change action. A value of -1 indicates that no special
+   tool change reference position is defined.
+
+.. _var_vmacttool:
+.. index:: Variables; $VMACTTOOL
+
++---------------------+------------------------------------------------+
+| **$VMACTTOOL**      | Enable MRS tool cutting                        |
+|                     |                                                |
+|                     | Type: Logical, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable when set true enables material removal cutting even though
+   the tool might not be spinning. This can be used to simulate ultrasonic
+   tools, EDM wire cutting, punch press and other forms of non-rotating
+   cutting tools.
+
+.. _var_vmchn:
+.. index:: Variables; $VMCHN
+
++---------------------+------------------------------------------------+
+| **$VMCHN**          | Current active channel                         |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable sets the current active channel number. By default, a
+   merging lathe side head is controlled by channel 2; the main head (and
+   all other machine types) by channel 1. This default channel assignment
+   can be changed by setting $VMCHN.
+
+.. _var_vmdraw:
+.. index:: Variables; $VMDRAW
+
++---------------------+------------------------------------------------+
+| **$VMDRAW**         | Simulation window update state                 |
+|                     |                                                |
+|                     | Type: Logical, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable controls the Simulation window redraw functionality. It is
+   normally $TRUE, causing the simulation window to be updated as normal.
+   Setting $VMDRAW=$FALSE will stop further updates to the Simulation
+   window, except when processing is paused. A macro that makes many $FMS
+   function calls in succession may run considerably faster when processed
+   with $VMDRAW set false. Be sure to reset $VMDRAW=$TRUE before exiting
+   the macro.
+
+.. _var_vmplxm:
+.. index:: Variables; $VMPLXM
+.. _var_vmplym:
+.. index:: Variables; $VMPLYM
+.. _var_vmplzm:
+.. index:: Variables; $VMPLZM
+.. _var_vmpxm:
+.. index:: Variables; $VMPXM
+.. _var_vmpym:
+.. index:: Variables; $VMPYM
+.. _var_vmpzm:
+.. index:: Variables; $VMPZM
+
++---------------------+------------------------------------------------+
+| **$VMP[L]{XYZ}M**   | Current and last X, Y, and Z probe axes        |
+|                     | position                                       |
+|                     |                                                |
+|                     | Type: Numeric, Read-only                       |
++---------------------+------------------------------------------------+
+
+   These variables contain the machine X, Y and Z axes values at the start
+   and end of a probing motion (i.e. when $FMSPROB is active and
+   $VMPRCOD>0). $VMPXM, $VMPYM and $VMPZM refer to the linear machine axes
+   positions when the probe was triggered. $VMPLXM, $VMPLYM and $VMPLZM
+   refer to the linear machine axes positions at the start of the probe
+   motion.
+
+.. _var_vmplxw:
+.. index:: Variables; $VMPLXW
+.. _var_vmplyw:
+.. index:: Variables; $VMPLYW
+.. _var_vmplzw:
+.. index:: Variables; $VMPLZW
+.. _var_vmpxw:
+.. index:: Variables; $VMPXW
+.. _var_vmpyw:
+.. index:: Variables; $VMPYW
+.. _var_vmpzw:
+.. index:: Variables; $VMPZW
+
++---------------------+------------------------------------------------+
+| **$VMP[L]{XYZ}W**   | Current and last LCS X, Y, and Z probe axes    |
+|                     | position                                       |
+|                     |                                                |
+|                     | Type: Numeric, Read-only                       |
++---------------------+------------------------------------------------+
+
+   These variables contain the local coordinate system (LCS) X, Y and Z
+   axes values at the start and end of a probing motion (i.e. when $FMSPROB
+   is active and $VMPRCOD>0). If a local coordinate frame is not active
+   then these variables return the probe start and end machine linear axes
+   instead (e.g., $VMPZW returns $VMPZM when a local coordinate frame is
+   not active). $VMPXW, $VMPYW and $VMPZW refer to the linear LCS axes
+   positions when the probe was triggered. $VMPLXW, $VMPLYW and $VMPLZW
+   refer to the linear LCS axes positions at the start of the probe motion.
+
+.. _var_vmprcod:
+.. index:: Variables; $VMPRCOD
+
++---------------------+------------------------------------------------+
+| **$VMPRCOD**        | Probe cycle return code                        |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   When probing is active (set using the $FMSPROB function) the $VMPRCOD
+   variable will be updated at the end of each model motion to indicate the
+   status of the probe device (set using the $FMSPRID function). The
+   following states are defined:
+
+   :-1:  The probe device was already in a triggered state (i.e., already
+         colliding) at the start of the motion. No probing data has been
+         returned.
+   : 0:  The probe device was not triggered (i.e., did not collide)
+         during the last motion. No probing data has been returned.
+   : 1:  The probe device was triggered (i.e., collided) during the last
+         motion. $VMXFER contains collision status information.
+   : 2:  Same as #1 except that the probe device was triggered against
+         two or more objects simultaneously.
+
+.. _var_vmtime:
+.. index:: Variables; $VMTIME
+
++---------------------+------------------------------------------------+
+| **$VMTIME**         | Current simulation time                        |
+|                     |                                                |
+|                     | Type: Numeric, Read-only                       |
++---------------------+------------------------------------------------+
+
+   This variable contains the current simulation time measured in seconds
+   from the start.
+
+.. _var_vmtoler:
+.. index:: Variables; $VMTOLER
+
++---------------------+------------------------------------------------+
+| **$VMTOLER**        | Simulation tolerances                          |
+|                     |                                                |
+|                     | Type: Numeric, Read-only                       |
++---------------------+------------------------------------------------+
+
+   This read-only array of length 4 contains the current Gouge, Collision,
+   Faceting and Tool path tolerances.
+
+.. _var_vmxfer:
+.. index:: Variables; $VMXFER
+
++---------------------+------------------------------------------------+
+| **$VMXFER**         | Collision/over-travel return code              |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   This variable contains collision and over-travel event information
+   resulting from the last model motion, including collision information
+   resulting from a probe trigger event. $VMXFER is a sequence of length 7
+   as follows:
+
+   :1:   The number of separate collision and/or over-travel events that
+         occurred on the last motion. Zero if there were no collisions or
+         over-travel events.
+   :2:   The time at the start of the motion.
+   :3:   The time at the end of the motion.
+   :4:   The time at which the first collision or over-travel event
+         occurred during the current motion. If $VMXFER(1)=0, then
+         $VMXFER(4)=$VMXFER(3).
+   :5:   The current feed rate in model units per minute or units per
+         revolution. Zero if the motion was at rapid.
+   :6:   The collision event number of a probe trigger, otherwise -1.
+   :7:   The collision pair number of a probe trigger, otherwise -1.
+
+   \
+
+   When probing is active (set using the $FMSPROB function), and the probe
+   was triggered (i.e., $VMPRCOD>0), then information about the object that
+   was touched by the probe can be obtained by calling:
+
+      ::
+
+         $FMSPDAT($VMXFER(6),$VMXFER(7))
+
