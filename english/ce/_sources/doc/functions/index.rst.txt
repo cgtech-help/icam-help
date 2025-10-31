@@ -1,0 +1,29 @@
+.. _macro_functions:
+
+Macro Functions
+***************
+
+This chapter lists all macro functions available for use in CERUN macros. It should be noted that
+functions can be used to retrieve a value only. Functions cannot be used on the left-hand side of an
+assignment statement.
+
+The first section summarizes the various functions by category.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   summaryfunc
+   mathfunc
+   numericfunc
+   geometricfunc
+   vectorfunc
+   matrixfunc
+   conditionalfunc
+   conversionfunc
+   charseqfunc
+   commandlinefunc
+   filedirecfunc
+   cefunc
+   delmiafunc
+   otherfunc
