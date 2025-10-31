@@ -1,0 +1,496 @@
+Variable Summary
+================
+
+Back-plot file variables
+------------------------
+
+:ref:`$BKPDTA<var_bkpdta>`,
+:ref:`$BKPINT<var_bkpint>`,
+:ref:`$BKPON<var_bkpon>`,
+:ref:`$BKPOUT<var_bkpout>`,
+:ref:`$BKPROT<var_bkprot>`,
+:ref:`$BKPTYP<var_bkptyp>`
+
+Canned cycle variables
+----------------------
+
+:drill: :ref:`$CRMODE<var_crmode>`,
+   :ref:`$TCLDIR<var_tcldir>`,
+   :ref:`$CYAPT<var_cyapt>`,
+   :ref:`$CYCAFL<var_cycafl>`,
+   :ref:`$CYCLRC<var_cyclrc>`,
+   :ref:`$CYCLRO<var_cyclro>`,
+   :ref:`$CYCLRP<var_cyclrp>`,
+   :ref:`$CYCLRS<var_cyclrs>`,
+   :ref:`$CYCLR{XYZ}<var_cyclrx>`,
+   :ref:`$CYDECR<var_cydecr>`,
+   :ref:`$CYDIR<var_cydir>`,
+   :ref:`$CYDPTH<var_cydpth>`,
+   :ref:`$CYDWEL<var_cydwel>`,
+   :ref:`$CYDWL{ST}<var_cydwls>`,
+   :ref:`$CYEND<var_cyend>`,
+   :ref:`$CYFEDT<var_cyfedt>`,
+   :ref:`$CYFEDV<var_cyfedv>`,
+   :ref:`$CYINCR<var_cyincr>`,
+   :ref:`$CYINVR<var_cyinvr>`,
+   :ref:`$CYMCH<var_cymch>`,
+   :ref:`$CYMIN<var_cymin>`,
+   :ref:`$CYMULTRD<var_cymultrd>`,
+   :ref:`$CYORNT<var_cyornt>`,
+   :ref:`$CYRATIO<var_cyratio>`,
+   :ref:`$CYRETN<var_cyretn>`,
+   :ref:`$CYRIGID<var_cyrigid>`,
+   :ref:`$CYRPTO<var_cyrpto>`,
+   :ref:`$CYTIME<var_cytime>`,
+   :ref:`$CYTYPE<var_cytype>`
+
+:thread: :ref:`$THCHFA<var_thchfa>`,
+   :ref:`$THCHFL<var_thchfl>`,
+   :ref:`$THCHFT<var_thchft>`,
+   :ref:`$THCUTS<var_thcuts>`,
+   :ref:`$THDPTH<var_thdpth>`,
+   :ref:`$THFINA<var_thfina>`,
+   :ref:`$THFINC<var_thfinc>`,
+   :ref:`$THMIN<var_thmin>`,
+   :ref:`$THMODE<var_thmode>`,
+   :ref:`$THNOSE<var_thnose>`,
+   :ref:`$THSTEP<var_thstep>`,
+   :ref:`$THTYPE<var_thtype>`
+
+\
+
+Composite post-processor variables
+---------------------------------------
+
+:ref:`$CPPADS<var_cppads>`,
+:ref:`$CPPANM<var_cppanm>`,
+:ref:`$CPPCNT<var_cppcnt>`,
+:ref:`$CPPDES<var_cppdes>`,
+:ref:`$CPPFIL<var_cppfil>`,
+:ref:`$CPPNAM<var_cppnam>`,
+:ref:`$CPPPDS<var_cpppds>`,
+:ref:`$CPPPFL<var_cpppfl>`,
+:ref:`$CPPPNM<var_cpppnm>`,
+:ref:`$CPPTNP<var_cpptnp>`,
+:ref:`$CPPTNS<var_cpptns>`
+
+Constants
+---------
+
+:ref:`$FALSE<var_false>`,
+:ref:`$NULL<var_null>`,
+:ref:`$PI<var_pi>`,
+:ref:`$TRUE<var_true>`
+
+Contouring variables
+--------------------
+
+:ref:`$ASSIST<var_assist>`,
+:ref:`$CONHED<var_conhed>`,
+:ref:`$LASMOD<var_lasmod>`,
+:ref:`$PCHMOD<var_pchmod>`,
+:ref:`$PFREQ<var_pfreq>`,
+:ref:`$POWER<var_power>`,
+:ref:`$PWIDTH<var_pwidth>`,
+:ref:`$SHUTTR<var_shuttr>`,
+:ref:`$TORCH<var_torch>`,
+:ref:`$WATTS<var_watts>`
+
+Conversion factor variables
+---------------------------
+
+:ref:`$CONFAC<var_confac>`,
+:ref:`$PCONFC<var_pconfc>`,
+:ref:`$UNIBEG<var_unibeg>`,
+:ref:`$UNIDEF<var_unidef>`,
+:ref:`$UNIMCH<var_unimch>`,
+:ref:`$UNIPRI<var_unipri>`,
+:ref:`$UNISEC<var_unisec>`,
+:ref:`$UNITS<var_units>`
+
+Coolant feed rate and spindle variables
+----------------------------------------
+
+:ref:`$COOLDEV<var_cooldev>`,
+:ref:`$COOLNT<var_coolnt>`,
+:ref:`$COOLTYP<var_cooltyp>`,
+:ref:`$F<var_f>`,
+:ref:`$FMODE<var_fmode>`,
+:ref:`$HPCOOL<var_hpcool>`,
+:ref:`$MAXPRSSUR<var_maxprssur>`,
+:ref:`$MAXRPM<var_maxrpm>`,
+:ref:`$PRSSUR<var_prssur>`,
+:ref:`$S<var_s>`,
+:ref:`$SDIR<var_sdir>`,
+:ref:`$SGMAX<var_sgmax>`,
+:ref:`$SGMIN<var_sgmin>`,
+:ref:`$SMODE<var_smode>`,
+:ref:`$SR<var_sr>`,
+:ref:`$SRANGE<var_srange>`,
+:ref:`$SS<var_ss>`
+
+Cutter compensation variables
+-----------------------------
+
+:ref:`$DCOMP<var_dcomp>`,
+:ref:`$DCOMPM<var_dcompm>`,
+:ref:`$DCORNER<var_dcorner>`,
+:ref:`$DYNFIX<var_dynfix>`,
+:ref:`$LIMADJ<var_limadj>`,
+:ref:`$LIMLEN<var_limlen>`,
+:ref:`$TCD<var_tcd>`,
+:ref:`$TCDM<var_tcdm>`,
+:ref:`$TCF<var_tcf>`,
+:ref:`$TCFM<var_tcfm>`,
+:ref:`$TCF{XYZ}<var_tcfx>`,
+:ref:`$TCL<var_tcl>`,
+:ref:`$TCLDIR<var_tcldir>`,
+:ref:`$TCLM<var_tclm>`,
+:ref:`$TCLSET<var_tclset>`
+
+Error message variables
+-----------------------
+
+:ref:`$DBGLVL<var_dbglvl>`,
+:ref:`$DIAGLIST<var_diaglist>`,
+:ref:`$ERRMSG<var_errmsg>`,
+:ref:`$ERRNO<var_errno>`,
+:ref:`$ERR08<var_err08>`,
+:ref:`$FTL16<var_ftl16>`,
+:ref:`$MSG00<var_msg00>`,
+:ref:`$WRN04<var_wrn04>`
+
+Lathe variables
+---------------
+
+:ref:`$E<var_e>`,
+:ref:`$EV<var_ev>`,
+:ref:`$HEAD<var_head>`,
+:ref:`$LTHMOD<var_lthmod>`,
+:ref:`$MERGE<var_merge>`,
+:ref:`$MULTRD<var_multrd>`,
+:ref:`$PITCH<var_pitch>`,
+:ref:`$PITCHV<var_pitchv>`,
+:ref:`$SHEAD<var_shead>`,
+:ref:`$SMID<var_smid>`,
+:ref:`$SPINDLE<var_spindle>`,
+:ref:`$STID<var_stid>`,
+:ref:`$SYNCOD<var_syncod>`,
+:ref:`$SYNINC<var_syninc>`,
+:ref:`$XDIAM<var_xdiam>`
+
+Look-ahead variables
+--------------------
+
+:ref:`$ANYLOOK<var_anylook>`,
+:ref:`$CLOOK<var_clook>`,
+:ref:`$HDLOOK<var_hdlook>`,
+:ref:`$HOLOOK<var_holook>`,
+:ref:`$ILOOK<var_ilook>`,
+:ref:`$INFO.*<var_info>`,
+:ref:`$LCSLOOK<var_lcslook>`,
+:ref:`$LOOK<var_look>`,
+:ref:`$LOOKAH<var_lookah>`,
+:ref:`$MLOOK<var_mlook>`,
+:ref:`$OE.*<var_oe>`,
+:ref:`$OELOOK<var_oelook>`,
+:ref:`$PLOOK<var_plook>`,
+:ref:`$PPLOOK<var_pplook>`,
+:ref:`$SCLOOK<var_sclook>`,
+:ref:`$SCTLOOK<var_sctlook>`,
+:ref:`$TLOOK<var_tlook>`,
+:ref:`$ULKHED<var_ulkhed>`
+
+Licensed option variables
+-------------------------
+
+:sct: :ref:`$AIRCUT<var_aircut>`,
+   :ref:`$SCSTRV<var_scstrv>`,
+   :ref:`$SCTLRNG<var_sctlrng>`
+
+:sfd: :ref:`$FEDOPT<var_fedopt>`,
+   :ref:`$SCTLRNG<var_sctlrng>`
+
+:sph: :ref:`$AP<var_ap>`,
+   :ref:`$APID<var_apid>`,
+   :ref:`$APIDN<var_apidn>`,
+   :ref:`$APIDS<var_apids>`
+
+:xaf: :ref:`$ACUTYP<var_acutyp>`,
+   :ref:`$ARCFIT<var_arcfit>`,
+   :ref:`$ARCPTS<var_arcpts>`,
+   :ref:`$ATOLER<var_atoler>`,
+   :ref:`$FITMAXPTS<var_fitmaxpts>`,
+   :ref:`$SPLFIT<var_splfit>`,
+   :ref:`$SPLPTS<var_splpts>`,
+   :ref:`$SPLRAT<var_splrat>`,
+   :ref:`$SPLSEG<var_splseg>`,
+   :ref:`$SPLTLR<var_spltlr>`
+
+:xhs: :ref:`$HSM<var_hsm>`,
+   :ref:`$HSMOVE<var_hsmove>`,
+   :ref:`$HSMTLR<var_hsmtlr>`
+
+\
+
+Machine and Workpiece coordinate variables
+------------------------------------------
+
+:ref:`${ABC[TH]}SHFT<var_ashft>`,
+:ref:`${ND}SHFT<var_nshft>`,
+:ref:`$H{ABC[TH]}H<var_hah>`,
+:ref:`$H{ND}H<var_hnh>`,
+:ref:`$H{ABC[TH]}M<var_ham>`,
+:ref:`$H{ND}M<var_hnm>`,
+:ref:`$H{XYZUVWE}H<var_hxh>`,
+:ref:`$H{XYZUVWE}M<var_hxm>`,
+:ref:`$[NL]{ABC[TH]}J<var_aj>`,
+:ref:`$[NL]{ND}J<var_nj>`,
+:ref:`$[NL]{ABC[TH]}M<var_am>`,
+:ref:`$[NL]{ND}M<var_nm>`,
+:ref:`$[NL]{IJK}M<var_im>`,
+:ref:`$[NL]{XYZIJK}C<var_xc>`,
+:ref:`$[NL]{XYZUVWE}J<var_xj>`,
+:ref:`$[NL]{XYZUVWE}M<var_xm>`,
+:ref:`$[NL]{XYZIJK}W<var_xw>`,
+:ref:`$T{ABC[TH]}H<var_tah>`,
+:ref:`$T{ND}H<var_tnh>`,
+:ref:`$T{XYZUVWE}H<var_txh>`,
+:ref:`$CLAMPM<var_clampm>`,
+:ref:`$CLAMPM{XYZUVWE}<var_clampmx>`,
+:ref:`$CLAMPM{ABC[TH]}<var_clampma>`,
+:ref:`$CLAMPM{ND}<var_clampmn>`
+
+Machining time variables
+------------------------
+
+:ref:`$FEDTIM<var_fedtim>`,
+:ref:`$IDLTIM<var_idltim>`,
+:ref:`$MISTIM<var_mistim>`,
+:ref:`$RAPTIM<var_raptim>`
+
+Macro variables
+---------------
+
+:ref:`$BRKMAC<var_brkmac>`,
+:ref:`$CYCMAC<var_cycmac>`,
+:ref:`$DIAGMAC<var_diagmac>`,
+:ref:`$EDTMAX<var_edtmax>`,
+:ref:`$EDTSTA<var_edtsta>`,
+:ref:`$LCSMAC<var_lcsmac>`,
+:ref:`$MNEST<var_mnest>`,
+:ref:`$MTNLPP<var_mtnlpp>`,
+:ref:`$MTNMAC<var_mtnmac>`,
+:ref:`$OEMAC<var_oemac>`,
+:ref:`$P0<var_p0>`,
+:ref:`$REGMAC<var_regmac>`,
+:ref:`$REGMATCH<var_regmatch>`,
+:ref:`$SEQALLOC<var_seqalloc>`,
+:ref:`$TAPMAC<var_tapmac>`,
+:ref:`$TCMAC<var_tcmac>`
+
+MCD/Tape variables
+------------------
+
+:ref:`$DISPLY<var_disply>`,
+:ref:`$LMCD<var_lmcd>`,
+:ref:`$MCD<var_mcd>`,
+:ref:`$OPSKIP<var_opskip>`,
+:ref:`$OPSKIPL<var_opskipl>`,
+:ref:`$REEL<var_reel>`,
+:ref:`$SEQCNT<var_seqcnt>`,
+:ref:`$SEQINC<var_seqinc>`,
+:ref:`$SEQNO<var_seqno>`,
+:ref:`$SEQSTA<var_seqsta>`,
+:ref:`$SPACE<var_space>`,
+:ref:`$TAPACT<var_tapact>`,
+:ref:`$TAPEB<var_tapeb>`,
+:ref:`$TAPEBS<var_tapebs>`,
+:ref:`$TAPEB2<var_tapeb2>`,
+:ref:`$TAPECH<var_tapech>`,
+:ref:`$TAPECS<var_tapecs>`,
+:ref:`$TAPEC2<var_tapec2>`,
+:ref:`$TAPEDT<var_tapedt>`,
+:ref:`$TAPELN<var_tapeln>`,
+:ref:`$TAPELS<var_tapels>`,
+:ref:`$TAPEL2<var_tapel2>`,
+:ref:`$TAPEN<var_tapen>`,
+:ref:`$TAPEN2<var_tapen2>`,
+:ref:`$TAPENS<var_tapens>`,
+:ref:`$TPRINT<var_tprint>`
+
+Miscellaneous variables
+-----------------------
+
+:ref:`$BACK<var_back>`,
+:ref:`$CLNAME<var_clname>`,
+:ref:`$DATE<var_date>`,
+:ref:`$I_<var_i_>`,
+:ref:`$ISN<var_isn>`,
+:ref:`$KIT<var_kit>`,
+:ref:`$OPPATHI<var_oppathi>`,
+:ref:`$OPT250<var_opt250>`,
+:ref:`$PARAM<var_param>`,
+:ref:`$PARTNO<var_partno>`,
+:ref:`$PID<var_pid>`,
+:ref:`$PSE<var_pse>`,
+:ref:`$UPARAM<var_uparam>`,
+:ref:`$V_<var_v_>`
+
+Motion related variables
+------------------------
+
+:ref:`$AXES<var_axes>`,
+:ref:`$AXESC2P<var_axesc2p>`,
+:ref:`$AXESMCD<var_axesmcd>`,
+:ref:`$C2PAPT<var_c2papt>`,
+:ref:`$C2PMCH<var_c2pmch>`,
+:ref:`$CHSIZ<var_chsiz>`,
+:ref:`$CI<var_ci>`,
+:ref:`$CLRMOD<var_clrmod>`,
+:ref:`$CLRSRF<var_clrsrf>`,
+:ref:`$DUPPNT<var_duppnt>`,
+:ref:`$GOTOCLN<var_gotocln>`,
+:ref:`$LCAMOD<var_lcamod>`,
+:ref:`$LCAOFF<var_lcaoff>`,
+:ref:`$LCAON<var_lcaon>`,
+:ref:`$LCAUTO<var_lcauto>`,
+:ref:`$LCAUTOT<var_lcautot>`,
+:ref:`$LCPREFROT<var_lcprefrot>`,
+:ref:`$LCS<var_lcs>`,
+:ref:`$LCSAFT<var_lcsaft>`,
+:ref:`$LCSANG<var_lcsang>`,
+:ref:`$LCSAUT<var_lcsaut>`,
+:ref:`$LCSBEF<var_lcsbef>`,
+:ref:`$LCSCEN<var_lcscen>`,
+:ref:`$LCSID<var_lcsid>`,
+:ref:`$LCSM<var_lcsm>`,
+:ref:`$LCSMIR<var_lcsmir>`,
+:ref:`$LCSMTN<var_lcsmtn>`,
+:ref:`$LCSMX<var_lcsmx>`,
+:ref:`$LCSORD<var_lcsord>`,
+:ref:`$LCSPND<var_lcspnd>`,
+:ref:`$LCSROT<var_lcsrot>`,
+:ref:`$LCSSCA<var_lcssca>`,
+:ref:`$LCSTRA<var_lcstra>`,
+:ref:`$LINTOL<var_lintol>`,
+:ref:`$MRGCIR<var_mrgcir>`,
+:ref:`$MULSIZ<var_mulsiz>`,
+:ref:`$MULTAX<var_multax>`,
+:ref:`$ORIGIN<var_origin>`,
+:ref:`$ORIGINL<var_originl>`,
+:ref:`$PLMODE<var_plmode>`,
+:ref:`$PNMODE<var_pnmode>`,
+:ref:`$POLRACT<var_polract>`,
+:ref:`$POLRAPT<var_polrapt>`,
+:ref:`$RAPID<var_rapid>`,
+:ref:`$RAPLIN<var_raplin>`,
+:ref:`$RDNTLR<var_rdntlr>`,
+:ref:`$ROBCFGM<var_robcfgm>`,
+:ref:`$ROBCFGN<var_robcfgn>`,
+:ref:`$ROTSPL<var_rotspl>`,
+:ref:`$RTAID<var_rtaid>`,
+:ref:`$RTAIDL<var_rtaidl>`,
+:ref:`$SAFID<var_safid>`,
+:ref:`$SAFIDN<var_safidn>`,
+:ref:`$SCANID<var_scanid>`,
+:ref:`$SCANIDL<var_scanidl>`,
+:ref:`$SCANMTN<var_scanmtn>`,
+:ref:`$SKIPCOD<var_skipcod>`,
+:ref:`$SKIPERR<var_skiperr>`,
+:ref:`$SNGPOLE<var_sngpole>`,
+:ref:`$TCP<var_tcp>`,
+:ref:`$TCPFMT<var_tcpfmt>`,
+:ref:`$TCPFMTOPT<var_tcpfmtopt>`,
+:ref:`$TCPSET<var_tcpset>`,
+:ref:`$TCPSIM<var_tcpsim>`,
+:ref:`$TCPSIMR<var_tcpsimr>`,
+:ref:`$TLMODE<var_tlmode>`,
+:ref:`$TRACK<var_track>`,
+:ref:`$TRANS<var_trans>`,
+:ref:`$UGMODE<var_ugmode>`,
+:ref:`$WINDPRT<var_windprt>`,
+
+Operation variables
+-------------------
+
+:ref:`$FOI<var_foi>`,
+:ref:`$OI<var_oi>`,
+:ref:`$OPARGS<var_opargs>`,
+:ref:`$OPMAX<var_opmax>`,
+:ref:`$OPMERGE<var_opmerge>`,
+:ref:`$OPMIN<var_opmin>`,
+:ref:`$OPNAME<var_opname>`,
+:ref:`$OPSIZ<var_opsiz>`,
+:ref:`$OPSUM<var_opsum>`,
+:ref:`$OPTAB<var_optab>`,
+:ref:`$OPTYPE<var_optype>`
+
+Post-processor variables
+------------------------
+
+:ref:`$AUTHOR<var_author>`,
+:ref:`$DBFILE<var_dbfile>`,
+:ref:`$MACHIN<var_machin>`,
+:ref:`$MCHDSC<var_mchdsc>`,
+:ref:`$MCHNUM<var_mchnum>`,
+:ref:`$PLEV<var_plev>`,
+:ref:`$PPDATE<var_ppdate>`,
+:ref:`$PPFILE<var_ppfile>`,
+:ref:`$PVER<var_pver>`
+
+Post-processor verification listing variables
+---------------------------------------------
+
+:ref:`$COLCRD<var_colcrd>`,
+:ref:`$COLDAT<var_coldat>`,
+:ref:`$COLFMT<var_colfmt>`,
+:ref:`$COLINCR<var_colincr>`,
+:ref:`$COLTXT<var_coltxt>`,
+:ref:`$HDLINE<var_hdline>`,
+:ref:`$PPRINT<var_pprint>`,
+:ref:`$TRLINE<var_trline>`
+
+Subprogram variables
+--------------------
+
+:ref:`$LABINC<var_labinc>`,
+:ref:`$LABNO<var_labno>`,
+:ref:`$SUBEXT<var_subext>`,
+:ref:`$SUBLVL<var_sublvl>`,
+:ref:`$SUBMOD<var_submod>`,
+:ref:`$SUBNAM<var_subnam>`,
+:ref:`$SUBNO<var_subno>`,
+:ref:`$SUBTYP<var_subtyp>`
+
+Tooling variables
+-----------------
+
+:ref:`$CUTTER<var_cutter>`,
+:ref:`$FH<var_fh>`,
+:ref:`$FT<var_ft>`,
+:ref:`$H<var_h>`,
+:ref:`$HI<var_hi>`,
+:ref:`$HP<var_hp>`,
+:ref:`$HLDSIZ<var_hldsiz>`,
+:ref:`$HLDTAB<var_hldtab>`,
+:ref:`$HS<var_hs>`,
+:ref:`$LH<var_lh>`,
+:ref:`$LT<var_lt>`,
+:ref:`$NH<var_nh>`,
+:ref:`$NT<var_nt>`,
+:ref:`$STOOL{XYZ}<var_stoolx>`,
+:ref:`$T<var_t>`,
+:ref:`$TD<var_td>`,
+:ref:`$TI<var_ti>`,
+:ref:`$TLMAX<var_tlmax>`,
+:ref:`$TLMERGE<var_tlmerge>`,
+:ref:`$TLMIN<var_tlmin>`,
+:ref:`$TLNAME<var_tlname>`,
+:ref:`$TLSIZ<var_tlsiz>`,
+:ref:`$TLSORT<var_tlsort>`,
+:ref:`$TLSUM<var_tlsum>`,
+:ref:`$TLTAB<var_tltab>`,
+:ref:`$TOZ<var_toz>`,
+:ref:`$TP<var_tp>`,
+:ref:`$TS<var_ts>`
