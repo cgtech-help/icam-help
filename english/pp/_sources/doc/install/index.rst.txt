@@ -1,0 +1,36 @@
+.. _install_upgrade:
+
+Installation and Upgrade
+************************
+
+This chapter describes the Icam Post installation and upgrade procedures.
+Be sure to read the :ref:`Database Upgrade Procedure<database_upgrade>`)
+if you have post-processors from a previous version of
+the software and plan on modifying the post-processors using the new release.
+
+.. toctree::
+   :hidden:
+
+   license
+   server
+   install
+   dbupgrade
+
+-  :ref:`“Licensing Overview”<license_overview>` describes the various types of licensing
+   available from ICAM.
+
+   \
+
+-  :ref:`“License Server Installation”<license_server>` describes the steps needed to install
+   the ICAM License Server when using floating licenses. Skip this section if using nodelocked
+   or cloud licenses.
+
+   \
+
+-  :ref:`“Icam Post Installation”<installation>` describes the steps needed to install Icam Post V26
+   and other ICAM Productivity Tools.
+
+   \
+
+-  :ref:`“Database Upgrade Procedure”<database_upgrade>` describes the steps needed to
+   upgrade V25.1 and earlier post-processors to the new V26 release.
