@@ -1,0 +1,43 @@
+.. _quest:
+
+QUEST
+*****
+
+ICAM’s Control Emulator questionnaire **QUEST** enables the developer to quickly and easily create 
+control emulators by answering questions that define the functionality of a specific machine and controller combination.
+QUEST also provides the developer with various customization features to fine-tune control emulators.
+
+This section provides details about QUEST and its interface.
+
+.. toctree::
+   :hidden:
+
+   startquest
+   questinout
+   usingquest
+   icamdb
+   customization
+   ceprocessing
+
+-  “:ref:`start_quest`” explains how to start QUEST from the desktop as well as from the Windows command prompt.
+
+   \
+
+-  “:ref:`quest_inout`” describes the various files that can be imported (input), maintained and exported (output) by QUEST.
+
+   \
+
+-  “:ref:`using_quest`” describes the QUEST interface and other details necessary to effectively create and maintain control emulators.
+
+   \
+
+-  “:ref:`icamdb`” describes control emulator file naming conventions as well as important functions of the Database Navigator window.
+
+   \
+
+-  “:ref:`quest_customization`” describes the customization aspects (e.g., macros) of Control Emulator in detail.
+
+   \
+
+-  “:ref:`cerun_processing`” describes the flow of processing of CERUN.
+   It shows how the various customization features of the control emulator are used at run-time.
