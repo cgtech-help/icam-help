@@ -1,0 +1,27 @@
+Output
+======
+
+|image1|
+
+The Output tab setup is used by QUEST, GENER amd CERUN to set file
+extensions for files that they output.
+
+Listing files output by QUEST and GENER can use the standard format
+(ASCII only) or the more modern HTML format. Using the HTML output
+format will help you analyze your listing file by providing you with an
+index file and internal link to important sections. CERUN only supports
+the standard format.
+
+**Standard Extension:** Specifies which file extension should be used
+when creating output files using the standard format.
+
+**HTML Extension:** Specifies which file extension should be used when
+creating HTML output files (listing files only).
+
+**Use HTML:** Check these boxes if you want HTML listing output.
+
+**Reset:** Use this button to reset file extensions to their default
+values.
+
+.. |image1| image:: ./media/95d2751d08f3779d47ebdecf2ce0e9915154451f.png
+
