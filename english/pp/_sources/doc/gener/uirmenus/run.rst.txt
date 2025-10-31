@@ -1,0 +1,48 @@
+.. _run_menu:
+
+Run Menu
+~~~~~~~~
+
+**Run»Restart** (Shift F5)
+
+   Stops post-processing and rewinds the CL
+   file to the start. Debugging breakpoints are remembered if the
+   “Remember breakpoints between sessions” checkbox is selected in
+   the Breakpoint Manager. Changes made to Execute and Trace states
+   of macros in the Macro Manager are not remembered.
+
+**Run»Play** (F5)
+
+   Continues processing after it has been paused.
+
+**Run»Pause** (F6)
+
+   Pauses processing.
+
+**Run»Step** (F7)
+
+   Pauses processing after the next line of trace output is written
+   to the trace window that currently has focus. Clicking with the
+   left-mouse button in a trace window is a shortcut for the Step
+   feature.
+
+**Run»Fast** (F8)
+
+   Continues processing after it has been paused, hiding the full
+   display window and showing instead the smaller progress window. The
+   progress window requires much less CPU to update than the full
+   display window. Use the Fast-forward function to more quickly advance
+   through the
+   CL
+   file from one point of interest to another.
+   Break-point checking remains enabled when the progress window is
+   active. The “More Details” button on the progress window can be
+   pressed to restore the full display window.
+
+**Run»Details**
+
+   This toggle affects the stepping and display of NC program data in
+   the Output window. When Details are not activated, a Step in the
+   Output window completes when a new block of NC program code is
+   output. When Details are activated, a Step in the Output window
+   completes each time register data is written to the tape buffer.
