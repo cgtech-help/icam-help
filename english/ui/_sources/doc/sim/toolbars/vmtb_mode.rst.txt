@@ -1,0 +1,76 @@
+VM Mode Toolbar
+~~~~~~~~~~~~~~~
+
+|image1|
+
++-----------+---------------------------------------------------------+
+| |image16| | **Simulation»Mode»Camera**: Selects “camera” mode,      |
+|           | which is equivalent to selecting the “Default to camera |
+|           | mode” check box in the Simulation»Options (Ctrl Alt O)  |
+|           | Misc settings. The left-mouse button will subsequently  |
+|           | control the orientation of the camera. The mouse        |
+|           | pointer will appear as a four-way arrow. Hold the Ctrl  |
+|           | key down to temporarily (while the key is held) switch  |
+|           | to “selection” mode.                                    |
++-----------+---------------------------------------------------------+
+| |image17| | **Simulation»Mode»Selection**: Selects “selection”      |
+|           | mode, which is equivalent to clearing the “Default to   |
+|           | camera mode” check box in the Simulation»Options (Ctrl  |
+|           | Alt O) Misc settings. The left-mouse button will        |
+|           | subsequently select objects. The mouse pointer will     |
+|           | appear as an arrow. Hold the Ctrl key down to           |
+|           | temporarily (while the key is held) switch to “camera”  |
+|           | mode.                                                   |
++-----------+---------------------------------------------------------+
+| |image18| | **Simulation»Mode»Measurement**: Selects “measurement”  |
+|           | mode. The left-mouse button will subsequently select    |
+|           | objects for measurement purposes. The mouse pointer     |
+|           | will appear as caliper/square combination. Hold the     |
+|           | Ctrl key down to temporarily (while the key is held)    |
+|           | switch to “camera” mode.                                |
++-----------+---------------------------------------------------------+
+| |image19| | **Simulation»Show»Wireframe**: Activates or deactivates |
+|           | wire-frame rendering of the simulation window.          |
++-----------+---------------------------------------------------------+
+| |image20| | **Simulation»Show»Display**: Activates or deactivates   |
+|           | the heads-up status display that floats above the       |
+|           | simulation window. The HUD is not available with QUEST. |
++-----------+---------------------------------------------------------+
+| |image21| | **Simulation»Show»Tool Path** (Ctrl T): Activates or    |
+|           | deactivates the display of the tool path trace in the   |
+|           | simulation window. Trace data is always recorded,       |
+|           | regardless of the display setting. Tool path trace      |
+|           | functions are not available with QUEST.                 |
++-----------+---------------------------------------------------------+
+| |image22| | **Simulation»Show»Tool Path as Overlay** (Ctrl Shift    |
+|           | T): When selected, the tool path trace is always        |
+|           | visible, even when the tool path is behind objects that |
+|           | would normally obscure the trace. Tool path trace       |
+|           | functions are not available with QUEST.                 |
++-----------+---------------------------------------------------------+
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/c0f054c23fb270884c9e0cd73f49ce7a56a900d9.bmp
+.. |image2| image:: ./media/1008c648743c84b454397b7de00cd84c446ef38e.bmp
+.. |image3| image:: ./media/0705152931424aed878954bf693708b5ecfbd572.bmp
+.. |image4| image:: ./media/a66b9dde510424584c253bafb64f62b5b3e37783.bmp
+.. |image5| image:: ./media/a9de6da9746d1de5c88a148819faa15c260abd5c.bmp
+.. |image6| image:: ./media/6a1ae65e71dc5a110beb1523b6d75ba4fd75cf85.bmp
+.. |image7| image:: ./media/1095bd06d76d1ba5dc1ed378d27dbd686563c7f3.bmp
+.. |image8| image:: ./media/d56c421e2d22860db7745a2d1534108e4458ece9.bmp
+.. |image9| image:: ./media/1008c648743c84b454397b7de00cd84c446ef38e.bmp
+.. |image10| image:: ./media/0705152931424aed878954bf693708b5ecfbd572.bmp
+.. |image11| image:: ./media/a66b9dde510424584c253bafb64f62b5b3e37783.bmp
+.. |image12| image:: ./media/a9de6da9746d1de5c88a148819faa15c260abd5c.bmp
+.. |image13| image:: ./media/6a1ae65e71dc5a110beb1523b6d75ba4fd75cf85.bmp
+.. |image14| image:: ./media/1095bd06d76d1ba5dc1ed378d27dbd686563c7f3.bmp
+.. |image15| image:: ./media/d56c421e2d22860db7745a2d1534108e4458ece9.bmp
+.. |image16| image:: ./media/1008c648743c84b454397b7de00cd84c446ef38e.bmp
+.. |image17| image:: ./media/0705152931424aed878954bf693708b5ecfbd572.bmp
+.. |image18| image:: ./media/a66b9dde510424584c253bafb64f62b5b3e37783.bmp
+.. |image19| image:: ./media/a9de6da9746d1de5c88a148819faa15c260abd5c.bmp
+.. |image20| image:: ./media/6a1ae65e71dc5a110beb1523b6d75ba4fd75cf85.bmp
+.. |image21| image:: ./media/1095bd06d76d1ba5dc1ed378d27dbd686563c7f3.bmp
+.. |image22| image:: ./media/d56c421e2d22860db7745a2d1534108e4458ece9.bmp
+
