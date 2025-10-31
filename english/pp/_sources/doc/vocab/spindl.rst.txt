@@ -1,0 +1,188 @@
+.. _command_spindl:
+
+The SPINDL Command :kbd:`[MLEP]`
+================================
+
+The SPINDL command is used to control the rotation of the spindle for
+mills and lathes, typically using M03, M04 and M05 codes. For EDMs,
+the SPINDL command controls the wire power supply. For punches, the
+SPINDL command is used to control the orientation of the punching
+tool.
+
+Wire EDM Machines
+-----------------
+
+   :math:`\textbf{SPINDL /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+ON activates the power supply for a wire EDM. OFF deactivates the
+power.
+
+Punch Presses
+-------------
+
+   :math:`\textbf{SPINDL / ORIENT}, \mathit{angle}`
+
+Specifies the orientation of the punching tool.
+
+Mills and Lathes
+----------------
+
+   :math:`\textbf{SPINDL / } \big[\,\mathit{speed}\,\big]
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{RPM} \\ \textbf{SFM} \\ \textbf{SMM} \end{array}\end{bmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{CLW} \\ \textbf{CCLW} \end{array}\end{bmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{FRONT} \\ \textbf{REAR} \end{array}\end{bmatrix}
+   \begin{bmatrix} , \textbf{MAXRPM}, \begin{pmatrix}\begin{array}{l} \mathit{max} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix} \; \ldots`
+
+      :math:`\hspace{.98cm} \ldots \;
+      \big[,\textbf{STEP},\mathit{incr}\,\big]
+      \begin{bmatrix},\textbf{RANGE}, \begin{pmatrix}\,\begin{array}{l} \mathit{gear} \\ \textbf{HIGH} \\ \textbf{MEDIUM} \\ \textbf{LOW} \\ \textbf{AUTO} \end{array}\end{pmatrix}\end{bmatrix}`
+
+   :math:`\textbf{SPINDL /} \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{LOCK} \\ \textbf{NEUTRL} \\ \textbf{ORIENT} \big[,\mathit{angle}\,\big] \end{array}\,\end{pmatrix}`
+
+The first SPINDL command format is used to specify the rotation mode,
+speed, direction, gear range and upper RPM limit. The second format
+is used to perform special functions.
+
+   :math:`\big[\,\mathit{speed}\,\big]
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{RPM} \\ \textbf{SFM} \\ \textbf{SMM} \end{array}\end{bmatrix}`
+
+The spindle mode can be specified in one of two ways; in revolutions
+per minute, or as a function of the tool contact point velocity. The
+first type is called RPM. The *speed* value indicates how many
+revolutions the spindle should make per minute. The second type is
+called SFM or SMM (surface units per minute). The *speed* value
+specifies the “tool to surface” velocity as a function of feet per
+minute or meters per minute.
+
+When using a 4-axis lathe in the merge mode, it is more meaningful to
+have one spindle speed during the whole merge mode. If the spindle
+RPM value is different for the two heads, the SPINDL command that was
+most recently processed during the merging process will control the
+spindle speed. If there is a SPINDL command using SFM or SMM for a head,
+then the X-coordinate of this head is controlling the spindle RPM.
+This SFM value may not give a proper cutting speed for the other head.
+Unless both heads are cutting at the same diametrical distance,
+it is better to give an RPM value rather than an SFM value.
+
+The spindle mode is modal. Once coded it need not be repeated on
+every spindle command. On machines that support both modes of
+operation, each occurrence of a mode keyword will cause the
+appropriate preparatory or auxiliary code to be generated. To avoid
+redundant tape codes, only mention the mode when it changes.
+
+   :math:`\begin{bmatrix} ,\! \begin{array}{l} \textbf{CLW} \\ \textbf{CCLW} \end{array}\end{bmatrix}`
+
+The spindle direction can be controlled using the CLW or CCLW
+keywords. If a machine does not support the specified direction, an
+error message will be output and processing will continue.
+
+The spindle direction is modal. Once coded it need not be repeated on
+every spindle command unless the direction changes. Each occurrence
+of a direction code will cause the appropriate code to be generated
+if a machine supports both directions. On machines that can change
+speed without this code, avoid redundant tape information by only
+mentioning the direction when it changes.
+
+   :math:`\begin{bmatrix} ,\! \begin{array}{l} \textbf{FRONT} \\ \textbf{REAR} \end{array}\end{bmatrix}`
+
+The main or sub-spindle on a mill-turn lathe can be selected using
+the FRONT (for main spindle) and REAR (for sub-spindle) keywords. If
+a machine does not support the specified spindle type, an error
+message will be output and processing will continue.
+
+The spindle type selection is modal. Once coded it need not be
+repeated on every spindle command unless the selection changes.
+
+The spindle type can also be controlled using the $SPINDLE macro
+variable (see :ref:`“Lathe Variables”<lathe_variables>`)
+
+   :math:`\begin{bmatrix} , \textbf{MAXRPM}, \begin{pmatrix}\begin{array}{l} \mathit{max} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix}`
+
+When in SFM or SMM mode, the spindle RPM is a function of the cutter
+distance to the center line for lathes or the tool diameter for
+mills. As this value becomes smaller, the RPM will increase
+exponentially. To limit the RPM to a specific value, code
+MAXRPM,\ *max* where *max* is the upper limit. Coding MAXRPM,OFF or
+specifying zero for *max* will cancel the limiting feature.
+
+   :math:`\begin{bmatrix},\textbf{INCR}, \begin{pmatrix}\begin{array}{l} \mathit{rpm} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix}`
+
+If a machine does not support SFM or SMM, GENER will output an RPM
+value that approximates the SFM at the time the SPINDL command is
+coded. Constant surface speed emulation can optionally be enabled
+using either the INCR option or the STEP option (see below). When the
+calculated spindle RPM deviates from the current spindle speed by the
+specified *rpm* value or more, a spindle code is output to correct
+the spindle speed so that the desired SFM/SMM will be maintained.
+Coding INCR,OFF or specifying zero for *rpm* will cancel constant surface
+speed emulation.
+
+   :math:`\begin{bmatrix},\textbf{STEP} , \begin{pmatrix}\begin{array}{l} \mathit{incr} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix}`
+
+This is an alternative to the INCR option (see above) to optionally
+enable constant surface speed emulation. The value of *incr*
+indicates the number of RPM increments for the current gear range.
+This is equivalent to using the INCR option with an RPM value
+calculated as the total range of the current gear divided by *incr*.
+Coding STEP,OFF or specifying zero for *incr* will cancel constant
+surface speed emulation.
+
+As an example, if the current gear range is from 100 to 500 RPM and
+“STEP,8” is programmed, the spindle speed will be adjusted when the
+calculated spindle RPM deviates from the current spindle speed by 50
+RPM ((500–100) / 8 = 50) or more.
+
+   :math:`\begin{bmatrix},\textbf{RANGE}, \begin{pmatrix}\,\begin{array}{l} \mathit{gear} \\ \textbf{HIGH} \\ \textbf{MEDIUM} \\ \textbf{LOW} \\ \textbf{AUTO} \end{array}\end{pmatrix}\end{bmatrix}`
+
+The spindle gear range can be controlled using the HIGH, MEDIUM, LOW
+and AUTO keywords. HIGH and LOW gears are equated to the fastest and
+slowest spindle speed ranges respectively. MEDIUM will select the
+mid-range gear if there is one. Do not request a MEDIUM gear if the
+machine has an even number of gear ranges.
+
+The user can also specify AUTO. If an auto M code is defined in
+QUEST, this code will be output and all M codes to change gears will
+be suppressed. If an auto M code is not supported, then GENER will
+automatically output the gear change codes based on the specified
+spindle speed. If AUTO is not available and a gear cannot be
+specified using HIGH, MEDIUM or LOW, then the RANGE,\ *gear* format
+must be used, where *gear* is the gear number. Gear number 1 is the
+LOW gear. Higher gear numbers represent higher machine gears. If the
+RPM coded along with a gear range is not within the specified limits,
+the gear range will be corrected and a message will be output.
+
+   :math:`\textbf{SPINDL /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The spindle is stopped by using the OFF option. If the machine is in
+a units per revolution feed rate mode, stopping the spindle may cause
+unpredictable results on the machine and will cause errors to be
+generated in the listing.
+
+To reinstate the last spindle condition, the ON keyword can be coded
+instead of the full command specification. If ON is used on the very
+first spindle command, the system defaults will be used. They are:
+minimum RPM for the default gear range set in QUEST; clockwise
+rotation; default gear range set in QUEST; and highest available
+speed for MAXRPM.
+
+   :math:`\textbf{SPINDL /} \begin{pmatrix}\begin{array}{l} \textbf{LOCK} \\ \textbf{NEUTRL} \\ \textbf{ORIENT} \big[,\mathit{angle}\,\big] \end{array}\,\end{pmatrix}`
+
+There are three special functions in addition to the standard spindle
+control; they are LOCK, NEUTRL and ORIENT. The spindle is considered
+OFF when any of these are specified. A spindle ON command should be
+coded to restart the spindle.
+
+The LOCK function is used to stop the spindle and lock it so it
+cannot be rotated.
+
+The NEUTRL function stops the spindle and disengages the spindle
+motor to allow the tool to be freely turned.
+
+The ORIENT function is used to stop and lock the spindle at a known
+angular position, generally using an M19 code. The angle of
+orientation is measured in degrees off the positive X-axis in a
+counter-clockwise rotation direction. This angle indicates in which
+direction a known point on the spindle will point. If the angle is
+omitted, the previous orientation angle will be used. If the angle is
+omitted on the first use of the ORIENT function, a warning message
+will be output and the minimum angle will be used.
