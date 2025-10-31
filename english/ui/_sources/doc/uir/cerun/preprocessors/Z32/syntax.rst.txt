@@ -1,0 +1,358 @@
+Z32 Syntax
+==========
+
+.. container::
+
+   .. rubric:: Z32 PreProcessor brief documentation
+      :name: z32-preprocessor-brief-documentation
+
+   This document list the specific Z32 syntax supported by the
+   pre-processor.
+
+   *Version 1.0*
+
+.. container::
+
+   .. rubric:: Index
+      :name: index
+
+.. container::
+
+   .. rubric:: 1. Special markers
+      :name: special-markers
+
+   +----------------+-------------------------+-------------------------+
+   | Syntax         | Description             | Example                 |
+   +================+=========================+=========================+
+   | ( *comments* ) | Comments. Text enclosed | (this is a comment)     |
+   |                | between ( ) will be     |                         |
+   |                | displayed to CE         |                         |
+   |                | console.                |                         |
+   +----------------+-------------------------+-------------------------+
+   | :[0-9]+        | Marks the beginning of  | :1                      |
+   |                | a section. Preprocessor |                         |
+   |                | simply ignores it.      |                         |
+   +----------------+-------------------------+-------------------------+
+   | ;              | The ";" marks the end   | N12 G0 Z120.5 ;some     |
+   |                | of a block. Everything  | text                    |
+   |                | after it is ignored.    |                         |
+   +----------------+-------------------------+-------------------------+
+   | !              | The "!" marks the start | !X=0!                   |
+   |                | and the end of an       |                         |
+   |                | Advanced Line.          |                         |
+   +----------------+-------------------------+-------------------------+
+
+.. container::
+
+   .. rubric:: 2. Advanced Lines
+      :name: advanced-lines
+
+   | Advanced lines allow to handle most of the logic-parametric
+     programming, like conditional branching and jump statements.
+   | An advanced line starts and ends with the “!” character. Inside an
+     advanced line more than one instruction may be
+   | contained, each separated from the others by “;” or “!” character.
+   | In advanced lines it is NOT possible to program machine movements,
+     but it's possible to store machine coordinates and
+   | parameters, to perform conditional jumps, sub program calls, etc.
+   | The syntax inside advanced line is slightly different then the one
+     outside advanced line. Read next chapter for further
+   | informations.
+
+.. container::
+
+   .. rubric:: 3. Operators
+      :name: operators
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | < *expr* >            | Expression. Is used   | HA&ltX+Y>             |
+   |                       | to assign a value     |                       |
+   |                       | that must be          |                       |
+   |                       | evaluated first.      |                       |
+   |                       | The nesting limit is  |                       |
+   |                       | 20.                   |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | ( *expr* )            | Priority inside       | HA&ltX+Y*(2+X)>       |
+   |                       | expression. The       |                       |
+   |                       | nesting limit is 10.  |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | -                     | Subtraction           | HA&ltX-Y>             |
+   +-----------------------+-----------------------+-----------------------+
+   | +                     | Addiction             | HA&ltX+Y>             |
+   +-----------------------+-----------------------+-----------------------+
+   | \*                    | Multiplication        | HA&ltX*Y>             |
+   +-----------------------+-----------------------+-----------------------+
+   | /                     | Division.             | HA&ltX/Y>             |
+   |                       | If denominator is 0,  |                       |
+   |                       | an error is thrown.   |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | =                     | Equal operator, if    | !X=Y! ;assignment     |
+   |                       | it's inside a IF      | !IF X=Y ; GOP1!       |
+   |                       | condition, otherwise  | ;equal operator       |
+   |                       | is Assignment         |                       |
+   |                       | operator              |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | <>                    | Is Not equal          | !IF X<&gtY ; X=X+1!   |
+   +-----------------------+-----------------------+-----------------------+
+   | <=                    | Less Equal Than       | !IF X<=Y ; X=X+1!     |
+   +-----------------------+-----------------------+-----------------------+
+   | <                     | Less Than             | !IF X&ltY ; X=X+1!    |
+   +-----------------------+-----------------------+-----------------------+
+   | >=                    | Greater Equal Than    | !IF X>=Y ; X=X+1!     |
+   +-----------------------+-----------------------+-----------------------+
+   | >                     | Greater Than          | !IF X&gtY ; X=X+1!    |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 4. Arithmetic functions
+      :name: arithmetic-functions
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | SN(*x*)               | Sin                   | HA&ltSN(X)>           |
+   +-----------------------+-----------------------+-----------------------+
+   | CS(*x*)               | Cosine                | HA&ltCS(X)>           |
+   +-----------------------+-----------------------+-----------------------+
+   | TAN(*x*)              | Tangent               | HA&ltTAN(X)>          |
+   +-----------------------+-----------------------+-----------------------+
+   | AT(*x*)               | ArcTangent            | HA&ltAT(X)>           |
+   +-----------------------+-----------------------+-----------------------+
+   | ABS(*x*)              | Absolute value        | HA&ltABS(X)>          |
+   +-----------------------+-----------------------+-----------------------+
+   | INT(*x*)              | Truncation to integer | HA&ltINT(X)>          |
+   +-----------------------+-----------------------+-----------------------+
+   | NEI(*x*)              | Round value           | HA&ltNEI(X)>          |
+   +-----------------------+-----------------------+-----------------------+
+   | CP                    | Cartesian to Polar    | !HX=1;HY=1;CP!        |
+   |                       | conversion.           |                       |
+   |                       | The input arguments   |                       |
+   |                       | are HX and HY         |                       |
+   |                       | parameters, the       |                       |
+   |                       | output arguments are  |                       |
+   |                       | stored into HR and HT |                       |
+   |                       | parameters            |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | PC                    | Polar to Cartesian    | !HR=1;HT=45;PC!       |
+   |                       | conversion.           |                       |
+   |                       | The input arguments   |                       |
+   |                       | are HR and HT         |                       |
+   |                       | parameters, the       |                       |
+   |                       | output arguments are  |                       |
+   |                       | stored into HX and HY |                       |
+   |                       | parameters            |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | PI                    | Pi constant           | HA&ltPI>              |
+   |                       | (3.14159...)          |                       |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 5. Goto
+      :name: goto
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | !GON\ *n*!            | Jump to a sequence    | !GON150!              |
+   |                       | number *n* in the     | ...                   |
+   |                       | MCD.                  | N150 ; continue from  |
+   |                       | Note that a sequence  | here                  |
+   |                       | number can be a       |                       |
+   |                       | floating number.      |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | !GON\ *n*-N\ *m*!     | Jump to a sequence    | !GON150-N200!         |
+   |                       | number *n* in the     | N151 ; 3.             |
+   |                       | MCD. When sequence    | ...                   |
+   |                       | number *m* is         | N150 ; 1.continue     |
+   |                       | reached, return to    | until 2. ...          |
+   |                       | the next block        | ...                   |
+   |                       |                       | N200 ; 2.return to 3. |
+   |                       |                       | ...                   |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 6. Conditional Branching
+      :name: conditional-branching
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | !IF *condition* ;     | If *condition* is     | !IF HA>10; HA=1; EB!  |
+   | *op1* ; EB ! *op2* !  | true, perform         | HA=0!                 |
+   |                       | operation *op1* and   | !IF HA>10; GON20!     |
+   |                       | than stop Advanced    | !IF                   |
+   |                       | Line evaluation (EB), | (HA+HB)*PAR[10]>=HC;  |
+   |                       | else perform          | GON20!                |
+   |                       | operation *op2*.      | !IF HA&gt10; IF       |
+   |                       | EB breaks advanced    | HB&lt5; GON30!        |
+   |                       | line evaluation, but  |                       |
+   |                       | if *op1* is a Goto    |                       |
+   |                       | statement or a Calsub |                       |
+   |                       | statement, EB is not  |                       |
+   |                       | mandatory.            |                       |
+   |                       | Note that if *op1* is |                       |
+   |                       | another IF statement, |                       |
+   |                       | you can simulate      |                       |
+   |                       | nesting IF syntax.    |                       |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 7. Variables
+      :name: variables
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | PAL[*i*]              | Vector of 513         | PAL[10+PAL[6]]&lt1+2> |
+   |                       | parameters, from 0 to | PAL[&lt2*PAL[1]>]5    |
+   |                       | 512. These parameters |                       |
+   |                       | contain only INTEGER  |                       |
+   |                       | numbers. The values   |                       |
+   |                       | from PAL[256] to      |                       |
+   |                       | PAL[512] are read     |                       |
+   |                       | only. The values from |                       |
+   |                       | PAL[0] to PAL[255]    |                       |
+   |                       | may be written by the |                       |
+   |                       | part-program. The     |                       |
+   |                       | index inside [] may   |                       |
+   |                       | be an expression      |                       |
+   |                       | result. When the      |                       |
+   |                       | index is out of       |                       |
+   |                       | bounds, an error is   |                       |
+   |                       | thrown. When a non    |                       |
+   |                       | integer number is     |                       |
+   |                       | assigned to a PAL[…]  |                       |
+   |                       | parameter, the number |                       |
+   |                       | is rounded to the     |                       |
+   |                       | nearest integer       |                       |
+   |                       | value.                |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | PAR[*i*]              | Same as PAL, but      | PAR[300]10            |
+   |                       | these parameters      |                       |
+   |                       | stores REAL numbers   |                       |
+   |                       | and there's no        |                       |
+   |                       | read-only policy on   |                       |
+   |                       | 256-512 range.        |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | *[A-Z][A-Z]?*         | Literal parameters.   | X&ltY> ; axis used as |
+   |                       | They are composed by  | parameter F&ltF+100>  |
+   |                       | a combination of one  | ;system parameter     |
+   |                       | or two alphabetic     | X&ltHA+1> ;user       |
+   |                       | characters.           | parameter             |
+   |                       | There are three type  |                       |
+   |                       | of literal            |                       |
+   |                       | parameters:           |                       |
+   |                       | 1. Axis parameters    |                       |
+   |                       | (X,Y,..)              |                       |
+   |                       | 2. System reserved    |                       |
+   |                       | parameters (F,S,..)   |                       |
+   |                       | 3. User parameters    |                       |
+   |                       | (HA,..)               |                       |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 8. Sub programs
+      :name: sub-programs
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | !GOP\ *n*!            | Call CMOS program     | !GOP1!                |
+   |                       | *n*.                  | !GOP&ltHA+1>!         |
+   |                       | *n* can also be the   |                       |
+   |                       | result of an          |                       |
+   |                       | expression.           |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | !GOS\ *n*!            | Call CMOS temp        | !GOS1!                |
+   |                       | program *n*.          | !GOS&ltHA+1>!         |
+   |                       | *n* can also be the   |                       |
+   |                       | result of an          |                       |
+   |                       | expression.           |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | !:L254-*file_path*!   | Call sub program from | !:L254-FOLDER\\FILE!  |
+   |                       | *file_path*           |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | G26                   | End of subprogram.    | G26                   |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 9. $FECPP() functions
+      :name: fecpp-functions
+
+   +----------------------+----------------------+---------------------------+
+   | Syntax               | Description          | Example                   |
+   +======================+======================+===========================+
+   | $FCEPP('SET_F        | Set file root for    | A                         |
+   | ILEROOT','MYPATH',0) | subprogram calls     | DD_VAR=$FCEPP('SET_F      |
+   |                      | (default is          | ILEROOT','C:\\TEST')      |
+   |                      | '//ICAMFS/').        |                           |
+   +----------------------+----------------------+---------------------------+
+   | $                    | Add variable         | ADD_VAR=$                 |
+   | FCEPP('ADD_VAR_SYST  | specification to     | FCEPP('ADD_VAR_SYST_SPEC' |
+   | _SPEC','MYVARNAME',0)| system specification | ,'MYVARNAME',0)           |
+   |                      | variable list.       |                           |
+   |                      | *'MYVARNAME'* is the |                           |
+   |                      | system parameter     |                           |
+   |                      | name to add. Last    |                           |
+   |                      | input argument is    |                           |
+   |                      | its default value    |                           |
+   +----------------------+----------------------+---------------------------+
+   | $FC                  | Initialize all       | INIT_VAR=$FC              |
+   | EPP('INIT_VAR_SYST') | system variables at  | EPP('INIT_VAR_SYST')      |
+   |                      | their default values |                           |
+   +----------------------+----------------------+---------------------------+
+
+.. container::
+
+   .. rubric:: 10. Dynamic axes alias
+      :name: dynamic-axes-alias
+
+   +-----------------------+-----------------------+-----------------------+
+   | Syntax                | Description           | Example               |
+   +=======================+=======================+=======================+
+   | G25XYZ                | Each occurrence of AA | G25XYZ                |
+   |                       | will be replaced by   | AA1 ; equivalent to   |
+   |                       | X.                    | X1                    |
+   |                       | Each occurrence of AB | AB2 ; equivalent to   |
+   |                       | will be replaced by   | Y2                    |
+   |                       | Y.                    | AC3 ; equivalent to   |
+   |                       | Each occurrence of AC | Z3                    |
+   |                       | will be replaced by   |                       |
+   |                       | Z.                    |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | G25YZX                | Each occurrence of AA | G25YZX                |
+   |                       | will be replaced by   | AA1 ; equivalent to   |
+   |                       | Y.                    | Y1                    |
+   |                       | Each occurrence of AB | AB2 ; equivalent to   |
+   |                       | will be replaced by   | Z2                    |
+   |                       | Z.                    | AC3 ; equivalent to   |
+   |                       | Each occurrence of AC | X3                    |
+   |                       | will be replaced by   |                       |
+   |                       | X.                    |                       |
+   +-----------------------+-----------------------+-----------------------+
+   | G25ZXY                | Each occurrence of AA | G25ZXY                |
+   |                       | will be replaced by   | AA1 ; equivalent to   |
+   |                       | Z.                    | Z1                    |
+   |                       | Each occurrence of AB | AB2 ; equivalent to   |
+   |                       | will be replaced by   | X2                    |
+   |                       | X.                    | AC3 ; equivalent to   |
+   |                       | Each occurrence of AC | Y3                    |
+   |                       | will be replaced by   |                       |
+   |                       | Y.                    |                       |
+   +-----------------------+-----------------------+-----------------------+
+
+.. container::
+
+   .. rubric:: 11. Features not yet supported
+      :name: features-not-yet-supported
+
+   | The following features are not yet supported by current release:
+
