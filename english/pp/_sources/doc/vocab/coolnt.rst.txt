@@ -1,0 +1,92 @@
+.. _command_coolnt:
+
+The COOLNT Command :kbd:`[MLE]`
+===============================
+
+The COOLNT command is used to control the coolant type on the
+machine, typically using M07, M08 and M09 codes. This command is
+valid for mills, lathes and EDMs, but some or all features may not be
+available on a specific machine.
+The following COOLNT command functions are available:
+
+-  :ref:`“Primary Coolant”<coolant_primary>`
+-  :ref:`“Coolant Pressure”<coolant_pressure>`
+-  :ref:`“Auxiliary Coolant”<coolant_auxiliary>`
+
+.. _coolant_primary:
+
+Primary Coolant
+---------------
+
+   :math:`\textbf{COOLNT /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{FLOOD} \\ \textbf{MIST} \\ \textbf{TAPKUL} \\ \textbf{THRU} \\ \mathit{custom\_type} \,\end{array}\end{pmatrix}
+   \big[ ,\textbf{NOW} \,\big]`
+
+   :math:`\textbf{COOLNT / OFF } \big[ ,\textbf{ALL} \,\big]`
+
+This command activates or deactivates primary coolant for the
+machine. ON starts dielectric fluid for EDMs and restarts primary
+coolant for other machine types. If COOLNT/ON is coded at the start
+of a program before a specific type is established, the QUEST
+specified default type will be used. OFF stops dielectric fluid for
+EDMs and stops the primary coolant for other machine types. The
+OFF,ALL keyword combination stops all active primary and auxiliary
+coolant types.
+
+The remaining options are valid for mills and lathes, but not EDMs.
+
+FLOOD coolant is generally used when removing large amounts of
+material. MIST coolant is used for finishing operations. TAPKUL is
+used to specify a special oil compound for threading and tapping.
+THRU coolant is generally used with tools that pipe the coolant at
+high pressure through the tool. The post-processor may support other
+QUEST defined custom coolant types. Custom types are identified by a
+single keyword or a keyword pair.
+
+NOW forces the activation code out immediately, overriding any QUEST
+specified default action of the post-processor that might delay the
+coolant activation to the next feed or plunge motion. Delayed
+application of coolant is only available for the primary coolant; it
+is not available for auxiliary coolant or coolant pressure settings.
+
+.. _coolant_pressure:
+
+Coolant Pressure
+----------------
+
+   :math:`\textbf{COOLNT / PRSSUR}, \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \\ \textbf{HIGH} \\ \textbf{LOW} \\ \\ \begin{bmatrix}\,\begin{array}{l} \textbf{BAR} \\ \textbf{PA} \\ \textbf{PSI} \\ \textbf{TORR} \end{array} \, , \, \end{bmatrix} \mathit{value} \end{array} \end{pmatrix}`
+
+This command, available for mills and lathes, sets the coolant
+pressure at the machine if available. The ON and OFF keywords
+activate or deactivate the high pressure coolant pump.
+
+HIGH and LOW output the maximum and minimum supported pressure codes.
+A pressure *value* can be specified in bars, Pascals, pounds per
+square inch or torrs. The pressure unit keyword can be specified
+after the *value* if desired. If omitted, the QUEST defined pressure
+units are assumed. The PRSSUR keyword can be omitted except when
+specifying ON or OFF.
+
+.. _coolant_auxiliary:
+
+Auxiliary Coolant
+-----------------
+
+   :math:`\textbf{COOLNT / } \mathit{custom\_type} \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \, \end{bmatrix}`
+
+This command, available for mills and lathes, activates and
+deactivates auxiliary coolant devices on the machine. Auxiliary
+coolant devices are those that can be activated independent of the
+primary coolant (e.g., coolant on a steady-rest). Auxiliary coolant
+devices, if available, are unique to each post-processor. They are
+identified by a single keyword or a keyword pair. ON activates the
+auxiliary coolant (the default). OFF deactivates the auxiliary
+coolant.
+
+Primary coolant, auxiliary coolant and coolant pressure settings can
+all be combined on the same post-processor command. For example:
+
+   .. code-block:: text
+
+      COOLNT/FLOOD,STDYRS,PRSSUR,HIGH
+
+..
