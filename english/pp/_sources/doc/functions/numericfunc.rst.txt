@@ -1,0 +1,125 @@
+Numeric Functions
+=================
+
+All numeric functions return a numeric result and only accept numeric
+arguments.
+
+.. _func_fabs:
+.. index:: Functions; $FABS
+
++---------------------------+------------------------------------------+
+| **$FABS(**\ *n*\ **)**    | Absolute value                           |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the absolute value of the argument *n*.
+
+.. _func_fceil:
+.. index:: Functions; $FCEIL
+
++---------------------------+------------------------------------------+
+| **$FCEIL(**\ *n*\ **)**   | Round up to whole number                 |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the smallest whole number that is greater than
+   or equal to *n*.
+
+.. _func_ffloor:
+.. index:: Functions; $FFLOOR
+
++---------------------------+------------------------------------------+
+| **$FFLOOR(**\ *n*\ **)**  | Round down to whole number               |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the largest whole number that is less than or
+   equal to *n*.
+
+.. _func_ffrac:
+.. index:: Functions; $FFRAC
+
++---------------------------+------------------------------------------+
+| **$FFRAC(**\ *n*\ **)**   | Fractional portion                       |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the fractional portion of the argument *n*.
+
+.. _func_fint:
+.. index:: Functions; $FINT
+
++---------------------------+------------------------------------------+
+| **$FINT(**\ *n*\ **)**    | Truncation to whole number               |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the integer portion (i.e., whole number) of the
+   argument *n*.
+
+.. _func_fmax:
+.. index:: Functions; $FMAX
+
++-------------------------------------------------------+------------------------------------------+
+| **$FMAX(**\ *n1*\ **[**\ *,n2*\ **[**\ *,…*\ **]])**  | Largest value                            |
+|                                                       |                                          |
+|                                                       | Returns: Numeric                         |
++-------------------------------------------------------+------------------------------------------+
+
+   This function returns the argument having the largest value from the
+   list of numeric arguments specified. At least two arguments should be
+   specified.
+
+.. _func_fmin:
+.. index:: Functions; $FMIN
+
++------------------------------------------------------+------------------------------------------+
+| **$FMIN(**\ *n1*\ **[**\ *,n2*\ **[**\ *,…*\ **]])** | Smallest value                           |
+|                                                      |                                          |
+|                                                      | Returns: Numeric                         |
++------------------------------------------------------+------------------------------------------+
+
+   This function returns the argument having the smallest value from the
+   list of numeric arguments specified. At least two arguments should be
+   specified.
+
+.. _func_fmod:
+.. index:: Functions; $FMOD
+
++----------------------------+------------------------------------------+
+| **$FMOD(**\ *n1,n2*\ **)** | Remainder                                |
+|                            |                                          |
+|                            | Returns: Numeric                         |
++----------------------------+------------------------------------------+
+
+   This function returns the remainder of the quotient *n1/n2*. $FMOD
+   generates an error if *n2* is zero.
+
+.. _func_fnint:
+.. index:: Functions; $FNINT
+
++---------------------------+------------------------------------------+
+| **$FNINT(**\ *n*\ **)**   | Nearest whole number                     |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the nearest whole number of the argument as
+   $FINT(*n*\ +.5*$FSIGN(*n*)).
+
+.. _func_fsign:
+.. index:: Functions; $FSIGN
+
++---------------------------+------------------------------------------+
+| **$FSIGN(**\ *n*\ **)**   | Sign                                     |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns –1 if *n* is negative, 0 (zero) if *n* is zero
+   and +1 if *n* is positive.
