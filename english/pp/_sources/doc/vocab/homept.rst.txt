@@ -1,0 +1,135 @@
+.. _command_homept:
+
+The HOMEPT Command :kbd:`[MLEPC]`
+=================================
+
+The HOMEPT command allows the part programmer to change and restore
+the home position. This command is valid for all machine types, but
+some functions may not be available on specific machines.
+
+The following HOMEPT command functions are available:
+
+-  :ref:`“Reference Home Position Definition”<homept_reference>`
+-  :ref:`“Machine Home Position Definition”<homept_machine>`
+-  :ref:`“Reset Home Position”<homept_reset>`
+
+The home position is defined by QUEST, but it can
+be modified at any time with the HOMEPT command. GENER recognizes
+three different types of machines when it comes to home point
+processing:
+
+-  A “\ **fixed home**\ ” machine is one that has a fixed “lights-on”
+   position that is always used for the home position. The HOMEPT
+   command has no effect on fixed home machines.
+
+   \
+
+-  A “\ **reference home**\ ” machine is one that has a machine tool
+   builder defined coordinate system that is different from that of the
+   workpiece coordinate system. This includes both the G28 style fixed
+   reference position and the G53 style reference coordinate system
+   types.
+
+   \
+
+-  A “\ **no home**\ ” machine is one that has a single workpiece
+   coordinate system.
+
+GENER uses the home position to estimate motion position timing and
+to obtain a sense of direction following any motion to home. The
+GOHOME command positions the tool at rapid to the home position.
+
+.. _homept_reference:
+
+Reference Home Position Definition
+----------------------------------
+
+The reference home position defines the initial position of the
+machine at the start of post-processing and whenever the machine is
+moved to a home position. The home position definition in QUEST can
+be changed by coding the following:
+
+   :math:`\textbf{HOMEPT /} \!
+   \icamrange{15}{1}\! \begin{pmatrix},
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \\ \\ \textbf{NEXT} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \mathit{value} \\ \textbf{MINPOS} \\ \textbf{MAXPOS} \\ \textbf{UNKPOS} \end{array}\,\end{bmatrix}
+   \end{pmatrix}`
+
+Home point positions can be defined either in absolute machine
+coordinates, or as symbolic coordinates that define the relative
+position of the reference home position with respect to the machine
+envelope. Symbolic coordinates are only valid for reference home
+machines.
+
+-  Select **MINPOS** if the reference position for the specified axis
+   moves the machine to the extremity of the axis travel in the negative
+   direction.
+
+-  Select **MAXPOS** for the reverse.
+
+-  Select **UNKPOS** if the reference position is at neither extremity.
+
+-  Enter a coordinate **value** if the home position is known.
+
+GENER uses the reference home point settings to establish a sense of
+direction for safe positioning motion analysis on a
+return-from-reference motion. The string “?.???” will be shown in the
+verification listing file axis column display for any axis that is at
+a symbolic position. The same string “?.???” will also be shown in
+the travel summaries for any axis that has remained at a symbolic
+position for the entire program. Symbolic positions are not included
+in travel calculations.
+
+Only those axes referenced in the HOMEPT command will be taken to the
+home position. See :ref:`here<axis_names>`
+for a table correlating axes name keywords with machine axes. The
+NEXT keyword can be specified break the motion to the home point into
+a series of steps. For example, the following command will first
+retract the Z axis to the home point and then move X and Y axes:
+
+   .. code-block::
+
+      HOMEPT/ZAXIS,MAXPOS,NEXT,XAXIS,UNKPOS,YAXIS,UNKPOS
+      GOHOME
+
+      G91 G28 Z0
+      G28 X0 Y0
+
+.. _homept_machine:
+
+Machine Home Position Definition
+--------------------------------
+
+Reference home machines using a G53 style reference coordinate system
+must output a coordinate value for each axis taken to the home
+position. These reference coordinate values are defined in QUEST and
+can be changed by coding the following:
+
+   :math:`\textbf{HOMEPT / ABSOL} \!
+   \icamrange{15}{1}\! \begin{pmatrix},
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \\ \\ \textbf{NEXT} \end{array}\end{pmatrix}
+   ,\mathit{value}
+   \end{pmatrix}`
+
+The machine reference coordinate axes values do not have any effect
+on travel checking and motion analysis. Only those axes that are
+moved to the home position will be output. To continue the example
+above:
+
+   .. code-block::
+
+      HOMEPT/ABSOL,ZAXIS,400,NEXT,XAXIS,0,YAXIS,0
+      GOHOME
+
+      G90 G53 Z400
+      G53 X0 Y0
+
+.. _homept_reset:
+
+Reset Home Position
+-------------------
+
+The following command removes any program defined home position
+information and reverts home positioning to QUEST defaults.
+
+   :math:`\textbf{HOMEPT / NOMORE}`
