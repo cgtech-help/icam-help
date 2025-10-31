@@ -1,0 +1,15 @@
+Load
+----
+
+|image1|
+
+This dialog lists the results of running QUEST in a "batch" mode.
+
+Batch processing occurs when QUEST is executed with a list of one or
+more file names. Each file is processed based on its contents, and the
+results are written to this dialog. Before/After macros are compiled,
+TRN files are saved to the database (ungenerated), DMP files are loaded
+as-is, and DP files are saved to the database (generated).
+
+.. |image1| image:: ./media/d404e13bfa40c3ae3d1a8f8f3e93e9ad8acedcb1.gif
+
