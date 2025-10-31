@@ -1,0 +1,50 @@
+Database
+--------
+
+**New Database...:** Create a new empty database and add it to the list
+of databases kept by the `database
+navigator <../maininterface/navigator.html#Database%20Navigator>`__.
+
+**Open Database...:** Open an existing database and add it to the list
+of databases kept by the `database
+navigator <../maininterface/navigator.html#Database%20Navigator>`__.
+
+**Close Database...:** Close the selected database and remove it from
+the list of databases kept by the `database
+navigator <../maininterface/navigator.html#Database%20Navigator>`__. The
+database is not modified in any way.
+
+**Recent Databases...:** Keep a list of the 5 last database opened,
+allowing for a fast reopening without browsing.
+
+**Purge..:** Purge older revisions of post processors from the selected
+database or post processor. (See `Purge <../dialogs/purge.html>`__
+dialog)
+
+**Password:** Set password protection for selected database. (See
+`Password <../dialogs/password.html>`__ dialog)
+
+**Lock:** Lock/unlock selected database. To lock a database you must
+first set it’s password using the password menu entry.
+
+**AutoRefresh:** Set the auto refresh interval. (See `Auto
+Refresh <../dialogs/dbautorefresh.html>`__ dialog)
+
+**Hide:** Used to hide a document so the runtime application will not
+list it as being in the database.
+
+**Upgrade:** Upgrade an old database to the current version of the
+database used by your version of CAMPOST
+
+**Copy to database:** Copy selected post to an other database.
+
+**Export:** Export the latest revision of all posts from the selected
+database or post processor, or export the post processor that is in the
+foreground. Post processors can be exported in a number of ways,
+depending on licensing.
+
+   | *As Dedicated*: Export in DP format
+   | *As Binary Dump File*: Export in DMP format
+
+**Import...:** Import a file to the selected database.
+
