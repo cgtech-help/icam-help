@@ -1,0 +1,38 @@
+Tape Editor View
+----------------
+
+|image1|
+
+The Tape Editor View is used to create regular expression substitution
+strings, which can be used to perform rudimentary editing of tape files.
+The *Find* column lists regular expression strings. The *Replace* column
+lists the corresponding substitution string, if any. The *Test* column
+shows the result of applying each Find/Replace operation on a sample
+test string (entered in the Test string field).
+
+To add a Find/Replace action, optionally select where in the list the
+new action should follow, then click on the *Add* button. A 
+`Replacement String <../../dialogs/replacementstring.html>`__ dialog will
+appear. To modify one of the actions in the list, select it and then
+click *Modify* (the same `Replacement
+String <../../dialogs/replacementstring.html>`__ dialog will appear). To
+delete an action, first select it, then click *Delete*. To reorder an
+action (actions are listed in the order they are applied), either select
+it and use the arrow buttons, or select and hold the mouse button down
+to drag and drop the action to its new position. To disable an action,
+uncheck the box left of the action name.
+
+Infinite level Do and Undo is available while you are in the tape
+editor. Once you exit the section, however, you can not undo individual
+changes.
+
+**Reset:** This button resets the section to an initial "never answered"
+state (this action can be undone).
+
+**Cancel:** This button closes the Tape Editor View, discarding any
+changes that were made (this action **can not** be undone).
+
+**OK:** This button closes the Tape Editor View saving all changes.
+
+.. |image1| image:: ./media/e43756f924c9a548832abc13cd68993fc9abf0c8.gif
+
