@@ -1,0 +1,32 @@
+Code Table View
+---------------
+
+The Code Table summarises the CODE type data responses in the
+questionnaire and it's associated DATA type data. Codes are *actions*
+which are processed by the runtime module (e.g., G4 is a "dwell"
+action code). Datas used by the Code are displayed as subsets of the
+Code.
+
+A CODE is basically a register or text that will be matched on the block
+and that will fire actions. Like G01 is a register used as a CODE to
+fire the linear interpolation action.
+
+It is important to distinguish a CODE from a `DATA
+register <datacustomview.html>`__. Both are identified from the block
+text, then the CODES are executing actions and those actions are using
+the DATA registers as their parameters. For example, the CODE_LINEAR
+code is using all the axis REG_AXIS_X, REG_AXIS_Y, ... as its values.
+
+|image1|
+
+**Column Description**
+
+**Double Mouse Click**: Double Click on record to tracing back to where
+it was defined in questionaire
+
+**Mouse Click**: Click or Key Down to select and show detailed
+information in questionaire
+
+.. |image1| image:: ./media/4c18401fef1a989ff57f98381baaa85c36456329.gif
+
+
