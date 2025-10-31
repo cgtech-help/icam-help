@@ -1,0 +1,21 @@
+Virtual Machine
+~~~~~~~~~~~~~~~
+
+|image1|
+
+Enables the display of the individual Virtual Machine simulation windows
+if hidden or minimized, or hides them if already active. When **Lock
+View Properties** is set, changes to one window are applied to all;
+otherwise properties of each window can be individually controlled. The
+visibility of the simulation windows can be toggled from the View
+toolbar.
+
+See `Navigating the Simulation Window <../other/vmcamera.html>`__ for
+details on how to manipulate your viewpoint in the simulation windows.
+
+It is important to note that collision and overtravel detection (CERUN
+and GENER) and collision avoidance (GENER) are not affected in any way
+by the state of the simulation window.
+
+.. |image1| image:: ./media/718676a01d2a3243c6650711d6ad77d9614ab418.bmp
+
