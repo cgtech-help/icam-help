@@ -1,0 +1,53 @@
+.. _command_optype:
+
+The OPTYPE Command :kbd:`[MLEPC]`
+=================================
+
+The OPTYPE command is used to define the type of operation that
+follows. Ideally, the CAM system (perhaps via the interface kit)
+should define the operation type data, but the OPTYPE command also
+has an option to provide for automatic detection of the operation
+type.
+
+If the post-processor has an Operation Event (OE) macro defined (see
+:ref:`“Operation Event Look-ahead”<op_event_lookahead>`), then GENER will invoke a look-ahead to
+determine information about the upcoming operation. This information
+is available to the post-processor developer via a series of $OE.\*
+system variables, as well as the $P variables of the OE macro.
+
+The command syntax is as follows:
+
+   :math:`\textbf{OPTYPE /} \begin{pmatrix}\begin{array}{l} \textbf{TOOL} \\ \textbf{MILL} \\ \textbf{TURN} \\ \textbf{AXIAL} \\ \textbf{AUTO} \end{array}\end{pmatrix}
+   \icamrange{0.8}{0}\,\big[,\mathit{arguments}\,\big]`
+
+A TOOL operation type should be called at the start of a tool change.
+Only tooling related look-ahead information is available with this
+operation type. The purpose of a TOOL event is to allow the developer
+to localize all special motion logic in an OE macro. For example, the
+TOOL event could be used by the developer to take the tool home.
+
+The MILL, TURN and AXIAL operation types invoke a look-ahead to
+determine the first positioning motion, start of cut position, feed,
+speed, coolant and compensation settings. The new operation type is
+available to the OE macro as a $OE.OPTYPE system variable. The last
+operation type is available as a $OPTYPE system variable.
+
+The AUTO operation type invokes a look-ahead to determine if the
+operation is a tool change, milling, turning or axial, setting
+$OE.OPTYPE accordingly. The primary purpose of OPTYPE/ AUTO is to
+cause the OE macro to be executed with information about the upcoming
+operation for CAM systems that do not have a method of outputting
+this information in the aptsource.
+
+The optional *arguments* are additional parameters that can help the
+developer in deciding between different machining strategies (e.g.,
+TCP, LCS). The syntax is undefined, allowing the developer to use
+these arguments for any purpose desired. The arguments are available
+as-is to the OE macro as a $OE.OPARGS system variable. The last
+operation arguments are available as a $OPARGS system variable.
+
+Operation information is stored internally in $OPTAB and related
+tables (see :ref:`“Operation Variables”<operation_variables>`). There is a
+built-in limit of 999 operations that can be recorded, after which
+processing will occur as normal but further operation information
+will not be updated to the operation variables.
