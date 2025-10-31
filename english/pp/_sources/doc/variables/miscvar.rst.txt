@@ -1,0 +1,226 @@
+Miscellaneous Variables
+=======================
+
+.. _var_back:
+.. index:: Variables; $BACK
+
++------------------+-----------------------------------------------+
+| **$BACK**        | Background processing flag ($TRUE or $FALSE)  |
+|                  |                                               |
+|                  | Type: Logical, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable will be set $TRUE if the /back command line qualifier
+   is specified when starting GENER. The purpose of this variable is to
+   *advise* macros that the post-processor is running in a state where
+   user interaction is not possible (e.g., as a background process). It
+   is the responsibility of the post-processor writer to test this
+   variable before calling the $FDIALOG function or performing I/O to
+   the STDIN and STDOUT devices.
+
+   For example:
+
+      ::
+
+         $$ Set default processing options
+         …
+         IF/.NOT.$BACK
+           $$ Ask user for processing options
+           %L01=$FDIALOG('STARTUP')
+         ENDOF/IF
+
+.. _var_clname:
+.. index:: Variables; $CLNAME
+
++------------------+-----------------------------------------------+
+| **$CLNAME**      | Input file name                               |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the input file name. Several input file types
+   are supported including the binary CL file, apt and ISO ASCII.
+
+.. _var_date:
+.. index:: Variables; $DATE
+
++------------------+-----------------------------------------------+
+| **$DATE**        | Current date and time                         |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the current date and time. The character
+   string given is formatted as “dd-mmm-yyyy hh:mm:ss.ss”.
+
+.. _var_i_:
+.. index:: Variables; $I_
+
++------------------+-----------------------------------------------+
+| **$I\_**         | $FDOC range operator value                    |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the current range operator value when
+   processing a $FDOC tag macro containing a “\*”, “\ *m*::*n*\ ” or
+   “:::” range operator. Range operators are replaced by “$I\_” when the
+   $FDOC function compiles the tag macros in a Word template. When $FDOC
+   subsequently executes the tag macro, once for each instance of the
+   range (e.g., row of a table), it sets the $I\_ variable to the
+   appropriate range value for each row.
+
+.. _var_isn:
+.. index:: Variables; $ISN
+
++------------------+-----------------------------------------------+
+| **$ISN**         | Current source statement number               |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable holds the current Internal Statement Number (ISN). The
+   ISN number identifies the original APT program statement number that
+   produced the CL record currently being processed.
+
+.. _var_kit:
+.. index:: Variables; $KIT
+
++------------------+-----------------------------------------------+
+| **$KIT**         | Current CAM interface kit name                |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable holds the name of the CAM interface kit being used to
+   process the input CL file. The variable will be blank if an interface
+   kit is not being used.
+
+.. _var_oppathi:
+.. index:: Variables; $OPPATHI
+
++------------------+-------------------------------------------------------------------------+
+| **$OPPATHI**     | Index number of the next motion from optimization list to be processed. |
+|                  |                                                                         |
+|                  | Type: Numeric, Read-only.                                               |
++------------------+-------------------------------------------------------------------------+
+
+   The motions on the optimization list are numbered: 1,2,3,…
+   The $OPPATHI variable provides the number of the next motion to
+   be processed. Its value will change between Startup and Shutdown macro.
+   In the Shutdown macro the variable point already to the next motion.
+   The variable will be equal 0 if there are not motion on the list to
+   process (all already have been output) or simply there is no motion on
+   the list.
+
+.. _var_opt250:
+.. index:: Variables; $OPT250
+
++------------------+--------------------------------------------------------------------------------------+
+| **$OPT250**      | Programming mode for optimization motions.                                           |
+|                  |                                                                                      |
+|                  | Type: Numeric, Read-only in the entire program, Write-only in Machine Startup macro. |
++------------------+--------------------------------------------------------------------------------------+
+
+   When the variable is equal $FALSE the old way of programming is applied.
+   Entire optimization list generated by RTA, LPP or AP (SmartPATH) is
+   processed internally. None of these generated motions is available in
+   Motion Startup or Shutdown macros. The $FOPPATH() macro function will
+   return $NULL when new programming mode is not available.
+
+   When the variable is equal $TRUE the each of the motions on RTA, LPP,
+   AP list is exposed to macro processing.
+   Note that the access to optimized motions with $FOPPATH() function
+   is possible only during normal process. The access to individual LPP,
+   RTA, AP motions is not possible during any look-ahead.
+
+   The variable remains, by default, equal $FALSE even in V25. This is in
+   order to make sure that old post processors are still working.
+   Only when new post processor is being developed, the variable may be
+   changed to $TRUE. To limit the chance of misbehavior the variable value
+   can be modified only within Machine Startup macro.
+
+.. _var_param:
+.. index:: Variables; $PARAM
+
++------------------+-----------------------------------------------+
+| **$PARAM**       | GENER command line parameters                 |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the command line that initiated GENER. It will
+   list all of the run time options selected by the user for GENER
+   processing. See $UPARAM for information concerning user defined
+   parameters.
+
+.. _var_partno:
+.. index:: Variables; $PARTNO
+
++------------------+-----------------------------------------------+
+| **$PARTNO**      | Part number from PARTNO statement             |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the string found on the PARTNO statement.
+   Changes to $PARTNO will appear in the post-processor listing starting
+   on the next page header.
+
+.. _var_pid:
+.. index:: Variables; $PID
+
++------------------+-----------------------------------------------+
+| **$PID**         | Post-processor part identification            |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the post-processor part identification. The
+   value will either be the default value or the value entered on the
+   command line.
+
+.. _var_pse:
+.. index:: Variables; $PSE
+
++------------------+-----------------------------------------------+
+| **$PSE**         | PSE processing flag ($TRUE or $FALSE)         |
+|                  |                                               |
+|                  | Type: Logical, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable will be set $TRUE if GENER is running in parallel with
+   CERUN (the ICAM Control Emulator).
+   See :ref:`“Starting PSE from the Command Prompt”<starting_pse>`.
+
+.. _var_uparam:
+.. index:: Variables; $UPARAM
+
++------------------+-----------------------------------------------+
+| **$UPARAM**      | User defined GENER command line parameters.   |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   The $UPARAM macro system variable is similar to the $PARAM macro
+   system variable.
+   $UPARAM is a string containing the user defined parameters from the
+   GENER command line following the /u option. The $PARAM string on the
+   other hand lists all command line parameters, including the user
+   defined ones. See the $FARGC and $FARGV functions for information on
+   how to extract general and user defined parameters.
+
+.. _var_v_:
+.. index:: Variables; $V_
+
++------------------+-----------------------------------------------+
+| **$V\_**         | $FDOC tag macro value                         |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable defines the value to be substituted by $FDOC for the
+   placeholder text in the content control. The $FDOC function prefixes
+   “$V\_=” to single-line tag macros in a Word template when it compiles
+   them. When $FDOC subsequently executes the tag macro, it replaces the
+   content control placeholder text with the $V\_ result.
