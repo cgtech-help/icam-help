@@ -1,0 +1,74 @@
+.. _var_confac:
+.. index:: Variables; $CONFAC
+
+Conversion Factor Variables
+===========================
+
+.. _var_pconfc:
+.. index:: Variables; $PCONFC
+
++------------------+-----------------------------------------------+
+| **$PCONFC**      | Primary to secondary machine units conversion |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is used to indicate whether primary or secondary
+   machine units are in effect. If primary units are in effect $PCONFC
+   will be 1 (one). Any other value indicates that secondary units are
+   in effect and the secondary dimensional register formats will be
+   used. The $PCONFC for secondary units is defined as the number of
+   secondary units per primary unit. For example, if the primary units
+   were inches and the secondary units were millimeters then the $PCONFC
+   for the secondary units would be 25.4.
+
+   Note that the $PCONFC can be defined to override the secondary units
+   specified in the general information section of the questionnaire.
+
+.. _var_unibeg:
+.. index:: Variables; $UNIBEG
+.. _var_unidef:
+.. index:: Variables; $UNIDEF
+.. _var_unimch:
+.. index:: Variables; $UNIMCH
+.. _var_unipri:
+.. index:: Variables; $UNIPRI
+.. _var_unisec:
+.. index:: Variables; $UNISEC
+.. _var_units:
+.. index:: Variables; $UNITS
+
++------------------+------------------------------------------+
+| **$UNIMCH**      | Current machine units                    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+| **$UNIPRI**      | Primary machine units                    |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+| **$UNISEC**      | Secondary machine units                  |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+| **$UNITS**       | Current machine units                    |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   These unit variables simplify coding of macros with control emulators
+   that deal with both imperial and metric units. The units are
+   expressed in units-per-inch, meaning that a value of 1 represents
+   inches and a value of 25.4 represents millimeters.
+
+   The $UNIPRI variable defines the primary measurement units used in
+   QUEST for all control emulator dimensional values.
+   The $UNISEC variable defines the secondary unit system supported by
+   the control emulator if there is one, or will have the same value as the
+   primary units if the control emulator supports a single units system only.
+   The $UNITS variable indicates the current units of dimensional values
+   read from the
+   MCD.
+
+   $UNIMCH can be set at any time to change the input units (i.e., those
+   of the MCD).
