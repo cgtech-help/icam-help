@@ -1,0 +1,31 @@
+.. _modifying_diagnostics:
+
+Modifying Diagnostic Messages
+=============================
+
+Several methods are available to modify diagnostic message behavior and output.
+
+-  The :ref:`ERROR macro command<macro_command_error>` can be used to output a diagnostic message
+   given a particular diagnostic number.
+
+
+   \
+
+-  The :ref:`$ERRMSG macro system variable<var_errmsg>` can be used to completely disable
+   diagnostic messages.
+
+   \
+
+-  The :ref:`$FERSEV macro function<func_fersev>` can be used to get or set the diagnostic
+   severity associated with a particular diagnostic number.
+
+   \
+
+-  The :ref:`$FERSTA macro function<func_fersta>` can be used to get or set the diagnostic
+   enabled/disabled state associated with a particular diagnostic number.
+
+The above facilities are run-time options to alter diagnostic message
+handling for a particular job. The cer260.err file provided with the
+Control Emulator installation can be used as a starting point (see :ref:`next section<error_file>`)
+to permanently alter standard diagnostic message severity
+and/or text, or add new diagnostic messages.
