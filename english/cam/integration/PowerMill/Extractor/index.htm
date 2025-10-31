@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>PowerMill Extractor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../../../kit/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../../../kit/3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../../../kit/Creo/readme.htm">Creo</a>
+                <a href="../../../kit/FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../../../kit/Fusion360/readme.htm">Fusion 360</a>
+                <a href="../../../kit/Mastercam/readme.htm">Mastercam</a>
+                <a href="../../../kit/NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../../../kit/NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../../../kit/PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../../../kit/Cadds5/readme.htm">Cadds5</a>
+                <a href="../../../kit/Cadra/readme.htm">Cadra</a>
+                <a href="../../../kit/Camand/readme.htm">Camand</a>
+                <a href="../../../kit/CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../../../kit/Cimatron/readme.htm">Cimatron</a>
+                <a href="../../../kit/Em_Machine/readme.htm">Em Machine</a>
+                <a href="../../../kit/Generic/readme.htm">Generic</a>
+                <a href="../../../kit/GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../../../kit/hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../../../kit/ICAM/readme.htm">ICAM</a>
+                <a href="../../../kit/IDEAS/readme.htm">IDEAS</a>
+                <a href="../../../kit/Intercim/readme.htm">Intercim</a>
+                <a href="../../../kit/Intergraph/readme.htm">Intergraph</a>
+                <a href="../../../kit/NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../../../kit/NICAM/readme.htm">NICAM</a>
+                <a href="../../../kit/NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../../../kit/Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../../../kit/SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../../../kit/TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../../../kit/index.htm"><i class="fa fa-home">Kit</i></a>
+            <a href="../../../kit/PowerMill/readme.htm"><i class="fa fa-mail-reply">Return to previous</i></a>
+            <h1><img align="right" src="../../../images/camlogo_pwm.jpg "  />ICAM MFGExtractor for PowerMill</h1>
+            <hr />
+            <br />
+            <img src="../../../images/camscrsh_pwm.jpg" width="227" height="136">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: PowerMill 2015/2016/2017</li>
+                <li>Company: Autodesk, Inc</li>
+                <li>Website:<a href="https://www.autodesk.com/">www.autodesk.com</a></li>
+                <li>Release: 22.0-1712</li>
+            </ul>
+            <br />
+            <!-- Content -->
+            <hr />
+            <h2>ICAM MFGExtractor for PowerMill</h2>
+            <h3>Overview</h3>
+            <p>Thanks for choosing CAM-POST, the NC post processing Product from ICAM Technologies Corporation.</p>
+            <p>
+                ICAM unified manufacture extractor, automatically retrieves all necessary information
+                (include tool path, process, machine setup, tools, product geometries etc.) from PowerMill to run the Adaptive Post-Processing,
+                Simulation and Optimization sequence.
+            </p>
+            <h3>Start Extractor</h3>
+            <p>To start Mfg-Extractor correctly, PowerMill must be installed and loaded correctly.</p>
+            <ol>
+                <li>
+                    Start Extractor by choosing the correct version of Extractor<br />
+                    <img src="Images/StartExtractor.jpg">
+                </li>
+                <li>
+                    Select product release to use if there's more than one ICAM product were set for this CAM.<br />
+                    If there's more than one ICAM product release were set for this PowerMill version, user can choose which release to use.<br />
+                    <img src="../../../images/products.jpg"><br />
+                </li>
+            </ol>
+            <h3>ICAM Manufacture Extractor</h3>
+            <img src="../../../images/extractor_main.jpg"><br />
+            <h4>Manufacturing Settings</h4>
+            <p>
+                This section is the main section of the Extractor. It allows you to control some of the manufacturing settings for the simulation.
+            </p>
+            <p>
+                At the top, you have the ICAM specific settings used to define your post processor, control emulator, and virtual machine. If there are multiple products, you can right-click 
+                the category and select one from the list. <br>
+                You can also change the CL file or the NC file.
+            </p>
+            <p>The following section contains all the extracted information from your CAM system such as your part, stock, fixture, and tools.</p>
+            <p>
+                Each manufacturing process is considered one program, each with their associated elements.<br><br>
+                The coordinate system axis is used to position your stock, part and fixture inside ICAM's virtal machine. It is known as the <b>stock axis</b>. If you require an additional offset,
+                you can edit the values between the parenthesis.
+                <h5>Product Root</h5>
+                Below the stock axis, you can find the product root consisting of all extracted geometry. The exactror organizes them between 3 groups: <b>part</b>, <b>stock</b>, and <b>fixture</b>.<br/>
+                You can right-click on each node to assign them to the different types.
+                Note that the extractor can automatically recognize preset geometry.<br>
+                A special <b>None</b> type can be used to ignore certain geometries when extracting the information to Virtual Machine.
+            </p>
+            <p>
+                Below the product root, you can find all the tools extracted from your ICAM system. Only the used tools will show a checkmark. The unused tools can be found hidden under an expandable
+                button.<br><br>
+                Finally, there's information about all the work offset available. The values shown in the bracket are relative to the stock axis value, any additional offset, and the settings from the 
+                machine attributes.
+            </p>
+            <h4>Machine Attributes</h4>
+            <p>This section is used to set the tolerances. The tolerance settings are an important part for proper simulation. 
+                The tolerance settings can be separated into 2 distinct categories: VM tolerances and STL tolerances.
+                The values are based off the unit system shown at the bottom right corner of the extractor.
+            </p>
+            <ul>
+                <li>The <b>gouge</b> tolerance represents the amount of collision authorized between the tools and finished part.</li>
+                <li>The <b>collision</b> tolerance is related to the collisions with the environment elements such as your fixtures. By default, this value can be relatively large,
+                understanding that the machine elements usually have safety zones defined.</li>
+                <li>The <b>facet</b> tolerance defines the tessallation used in revolution solids calculation such as a rotating spindle. It is also used for the tool shape tolerance 
+                    relative to the analytical definition.</li>
+                <li>The <b>resolution</b> tolerance controls the tool path resolution.</li>
+                <li>The <b>part</b>, <b>stock</b>, and <b>fixture</b> tolerance defines the tessallation for each of the different geometries.</li>
+            </ul>
+            <p>Finally, you can use the button to <b>set as default</b> values if you have made changes.</p>
+            <p>The <b>Machine base offset</b> and <b>Base offset as #Base</b> are used by the software to calculate the work offset value when importing the CAM elements inside 
+            virtual machine.</p>
+            <ul>
+                <li>Case 1: <b>If none of the boxes are checked</b>, then the value of the virtual machine work offset will not take account the diffence between the tool axis and stock axis.
+                This will <b>not</b> affect the intertal work offset value.<br> <b>Fixture compensation = CAM fixture compensation</b></li>
+                <li>Case 2: <b>If Machine base offset is checked alone</b>, then the value of the virtual machine work offset will take account the difference between the tool and stock axis.
+                This will affect the internal work offset value.<br> <b>Fixture compensation = CAM fixture compensation + base offset</b></li>
+                <li>Case 3: <b>If Machine base offset and Base offset as #Base is checked </b>, then the value of the virtual machine work offset will take account the difference between the tool and stock axis.
+                This will <b>not</b> affect the internal work offset value. It will add the difference to a #Base offset instead. <br><b>
+                Fixture compensation = CAM fixture compensation<br> Simulation fixture compensation #BASE = base offset</b></li>
+            </ul>
+            <h4>Working Folder</h4>
+            <p>At the bottom, you can choose a folder to save all the extracted elements and information.</p>
+            <h4>Output Settings</h4>
+            <p>Under the machine attributes, there are more settings that controls the output settings.</p>
+            <ul>
+                <li><b>Copy CL source</b> will set the extractor to copy over the CL or NC source file to your working folder.</li>
+                <li><b>Simulat by Program</b> is used when multiple manufacturing operations exists within the same process. You can split them into their own
+                simulation to simulate them individually or simulate them sequentially.</li>
+                <li><b>Use CAM Folder</b> forces the working folder to be the same as the CL File location.</li>
+                <li><b>Regenerate STL</b> is used to regenerate the STL files of the generated geometries.</li>
+            </ul>
+            <h4>Mode</h4>
+            <p>Under the Mode tab, you have the option to run the different ICAM products with or without simulation. Similarly, you can choose to enable material removal (MRS) or not.</p>
+            <ul>
+                <li><b>GENER</b> is for post processing.</li>
+                <li><b>CERUN</b> is for G-code processing.</li>
+                <li><b>PSE</b> is for both post and G-code processing.</li>
+            </ul>
+            
+            <h4>Preference options</h4>
+            <p>
+                More options are available under the preference options window. To access this window, you must right-click the extractor top bar, using the selection window, go to 
+                <b>preference options</b>.
+            </p>
+            <img src="../../../images/extractor_prefopt.jpg"><br />
+            <p>This window provide additional options which are either generic or specific to a CAM system, shown in bracket.</p>
+            <h5>General Settings</h5>
+            <ul>
+                <li><b>Using default tool library</b> is used when an external tool library use is preferred. This library have tools that differ from the exported tools from the CAM
+                system.</li>
+                <li><b>Run GENER/CERUN with launch panel</b> is used when you want to have the ICAM launch UI appear. This will allow you to make some final changes to post processing
+                or G-code emulation.</li>
+                <li><b>Save/Restore last settings</b> is used to save all your Extractor setting for the current job. Such that, if you close the Extractor, you will be able to reopen
+                it with all the same changes you have made.</li>
+                <li><b>Extract unused tools</b> is used to extract any tools that are not used, but were created in the CAM system.</li>
+                <li><b>Include hidden geometries</b> is used to extract any geometries that are hidden in the CAM.</li>
+                <li><b>Backup simulation job</b> is used to create an additional job file as backup.</li>
+                <li><b>Simplify tool profile</b> is used to recalculate the tool profile to keep the minimum number of line segments based on the current facet tolerance.</li>
+                <li><b>Using turning tool setup angle</b> is used to set the default turning tool angle based on the tooling information.</li>
+                <li><b>Force length comp values to be 0s for VM tools</b> is used to force a value of 0 for any length compensation value inside Virtual Machine.</li>
+                <li><b>Force diameter com values to be 0s for VM tools</b> is used to force a value of 0 for any diameter compensation value inside Virtual Machine.</li>
+                <li><b>Force offset number to be 1 for VM tools</b> is used when you need to have your length and diameter offset numbers to be 1.</li>
+                <li><b>Enable frame retrieving</b> is used to retrieve the coordinate system embeded in the product, and to set it as a FRAME (coordinate system) in Virtual Machine.
+                It's name must containt the <b>Frame filter</b> string.</li>
+                <li><b>Minimum tool body offset:</b> is used to offset the body of a parametric tool. A <b>positive</b> offset reduces the diameter of the tool body.</li>
+                <li><b>Geometry output format</b> is used to change the file format of the extracted geometry. An additional option allows you to merge non-machinable fixtures to be
+                 a single object.</li>
+                <li><b>Default CL source extension:</b> is used to tell the extractor what is the default CL or NC source extension.</li>
+            </ul>
+            <!--CAM Specific Settings-->
+            <h5>PowerMill Specific Settings</h5>
+            <ul>
+                <li><b>Use curve tool holder</b> is used to</li>
+            </ul>
+            <!--
+            <h3>Manufacture multiple set-up (simulation)</h3>
+            <h3>Manufacture set-up pre-settings (simulation)</h3>
+            -->
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
+
