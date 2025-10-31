@@ -1,0 +1,354 @@
+.. _annex_user_defined_questions:
+
+User-Defined Questions
+**********************
+
+The user-defined question section of QUEST is defined by the
+post-processor developer. The definition resides in an external text
+file on disk. It appears as the last sub-section in the General
+Information section. The user-defined questions give developers the
+ability to add their own questions to the questionnaire. The
+responses to these custom questions can be examined in GENER or CERUN
+macros using a standard set of macro system variables.
+
+The following steps are necessary to create user-defined questions:
+
+1. Create an empty text file in your icam_appdata directory and give the
+   new file a unique name. (e.g., C:\\ProgramData\\ICAM\\260\\quest.txt).
+
+2. Edit the new file and add user-defined questions as described in the
+   “Question Tags” section below.
+
+3. Run the Configuration utility (see :ref:`“The ICAM Configuration Utility”<configuration_utility>`);
+   select the QUEST tab; then
+   edit the “User defined questions” field and enter the new user-defined
+   questions file name (e.g., quest.txt).
+
+Changes made to the user-defined questions file will be seen the next
+time QUEST is run.
+
+Question Tags
+=============
+
+The question definition file uses a set of tags to define questions.
+A tag must begin in column 1. The following lists the various tags.
+
+/S User-defined section
+-----------------------
+
+The /S is a tag that defines the section name. It is not associated
+with any particular question and must appear as the first line in the
+file. The section name given is what appears as the menu title in
+QUEST.
+
+   .. code-block:: text
+
+      /S UUser-defined section
+
+The first letter in the string is the selection character in the
+menu. The repetition of the letter U in the title above indicates
+that U is the letter that selects the sub menu named “User-defined
+section”. Make sure the selector letter does not conflict with
+existing letters for other sections in the General Information menu.
+
+/Q number type
+--------------
+
+The /Q tag is the main separator between questions. All other tags
+may follow in any order. The number value specifies the question
+number in an !(s32) format. The type specifier indicates the question
+type (e.g., CASE, IVALUE). For example, a CASE type question number
+2.5 would be identified as:
+
+   .. code-block:: text
+
+      /Q 250 case
+
+Also note that the question numbers must be specified in ascending
+order and all information must be correct or the user-defined
+questions will not be utilized.
+
+/P prompt text, or short description text
+-----------------------------------------
+
+This tag defines the prompt for the question. Prompts must always end
+with a colon character.
+
+   .. code-block:: text
+
+      /P What is the answer:
+
+/T question text
+----------------
+
+This tag defines the long text for the question in HTML format.
+
+   .. code-block:: text
+
+      /T This is the first paragraph in the long text message that will
+      appear in the help (or IL1) window.
+      <p>This is the second paragraph, as evidenced by the HTML paragraph code.
+
+/D default answer
+-----------------
+
+This tag defines the default answer for the question. For example, to
+select the second choice in the CASE list as the default:
+
+   .. code-block:: text
+
+      /D 2
+
+/L response location
+--------------------
+
+This tag defines the response location for the question. The location
+is an array index for one of the
+*x*\ UDQ variables discussed later in this section. To select the
+first array position:
+
+   .. code-block:: text
+
+      /L 1
+
+/O options
+----------
+
+The options are different for the different question types.
+
+The **CASE** question type needs a comma separated list of choices.
+For example, a choice between the keywords Yes, No and Maybe would be
+coded as:
+
+   .. code-block:: text
+
+      /O Yes,No,Maybe
+
+The **CCHAR** question type needs to know if NA is a valid response
+for a question asking for a single character. An option value of –1
+permits NA as a response; a value of 0 doesn’t. The following would
+permit the use of NA for a CCHAR question:
+
+   .. code-block:: text
+
+      /O -1
+
+The **CVALUE** question type needs the know the minimum and maximum
+size of the character string. The following would permit a string
+having from 2 through 10 characters:
+
+   .. code-block:: text
+
+      /O 2 10
+
+The **IVALUE** question type needs the low value flag, the low value
+limit, the high value flag, the high value limit and a rounding
+factor, in that order. The flag values are described in more detail
+later. For example, to prompt for [# >= 1 & < 20]:
+
+   .. code-block:: text
+
+      /O 1 1 2 20 0
+
+The **WVALUE** question type also needs the low value flag, the low
+value limit, the high value flag, the high value limit and a rounding
+factor. To prompt for the same range as a real number:
+
+   .. code-block:: text
+
+      /O 1 1.0 2 20.0 0.0
+
+The **YESNO** question type does not need /O
+
+! comment character
+-------------------
+
+An ! character appearing in column 1 indicates that the line is a
+comment.
+
+CASE
+----
+
+The CASE question type gives the user a choice of several selections.
+For example “mill,lathe,edm,punch” would be a valid selection list.
+This question type requires a comma separated list of elements to
+select from as the /O tag. The /D tag specifies an integer number
+representing which element in the list is considered the default. The
+list items begin at one, from left to right. In the above example,
+mill is 1, edm is 3. This question type returns an integer number in
+the $IUDQ array representing the selected item in the list.
+
+CCHAR
+-----
+
+The CCHAR question type requests a single character or its ASCII code
+representation. The /O tag is a flag indicating if NA is a valid
+option. Specify –1 to allow NA as an answer; specify 0 if NA is not a
+valid response. The /D tag specifies the default answer represented
+by its integer ASCII code.
+
+This question returns an integer code in the $IUDQ array representing
+the ASCII value of the answer. –1 is returned if NA was selected.
+
+CVALUE
+------
+
+The CVALUE question type requests a character string. The /D tag
+specifies the default response as a character string. The /O tag
+specifies the minimum and maximum size of the character string. This
+function returns a character string contained in the $TUDQ array.
+
+IVALUE
+------
+
+The IVALUE question type requests an integer number. The /D tag
+specifies the default response as an integer value. The /O tag
+specifies the valid answer range and resolution,
+using a series of 5 values as follows:
+
+   |  1) Integer low flag:
+   |     0: no low range check
+   |     1: response >= low value
+   |     2: response > low value
+   |  2) Integer low value.
+   |  3) Integer high flag:
+   |     0: no high range check
+   |     1: response <= high value
+   |     2: response < high value
+   |  4) Integer high value.
+   |  5) Integer round value, used to round the response.
+   |     0 indicates no rounding
+
+This question type returns an integer number in the $IUDQ array.
+
+WVALUE
+------
+
+The WVALUE question type requests a real number. The /D tag specifies
+the default response as a real value. The /O tag specifies the valid
+answer range and resolution,
+using a series of 5 values as follows:
+
+   |  1) Integer low flag:
+   |     0: no low range check
+   |     1: response >= low value
+   |     2: response > low value
+   |  2) Real low value.
+   |  3) Integer high flag:
+   |     0: no high range check
+   |     1: response <= high value
+   |     2: response < high value
+   |  4) Real high value.
+   |  5) Real round value, used to round the response.
+   |     0.0 indicates no rounding
+
+This question type returns a real number in the $WUDQ array.
+
+YESNO
+-----
+
+The YESNO question type requests a simple yes or no. The /D tag
+specifies the default response as an integer value. The integer
+representation of yes is 1 and no is 0.
+
+This question type returns an integer number in the $IUDQ array.
+
+Macro System Variables
+======================
+
+The user-defined question answers are stored in a special set of
+macro system variables. Text data is stored in $TUDQ, integer data in
+$IUDQ and real data in $WUDQ. Each of these macro system variables is
+actually an array.
+
+-  The character data has 10 elements (80 characters each). They are
+   named $TUDQ(1) through $TUDQ(10).
+
+-  The integer data has 100 elements, $IUDQ(1) through $IUDQ(100).
+
+-  The real data has 50 elements, $WUDQ(1) through $WUDQ(50).
+
+Example
+=======
+
+The following lists a sample definition of a user-defined question
+section. Lines beginning with an **!** (exclamation) are comments and are included as documentation.
+
+   .. code-block::
+      :emphasize-lines: 5,20,29,40,51,64
+
+      ! user-defined questions sample
+      /S SSpecial questions
+
+      ! Question number 1.00 is a CASE question.
+      /Q 100 case
+      ! This is the short prompt. Must always end with a colon
+      /P Machine identifier:
+      ! This is the long description. A <br> causes a line
+      ! break, a <p> causes QUEST to skip a line.
+      /T Each machine has an identifier.<p>Select
+      one of the identifiers in the list below.
+      ! The default response is element 1; ingersoll.
+      /D 1
+      ! The answer will be stored in $IUDQ(1).
+      /L 1
+      ! These are the possible answers.
+      /O ingersoll,fanuc,mazak,omni
+
+      ! Question number 2.00 is a YESNO question.
+      /Q 200 yesno
+      /P Automatic documentation:
+      /T Do you want to generate automatic documentation?
+      ! The default response is 1 (Yes).
+      /D 1
+      ! The answer will be stored in $IUDQ(2).
+      /L 2
+
+      ! Question number 3.00 is a CCHAR question.
+      /Q 300 cchar
+      /P Machine class:
+      /T Enter a letter indicating the machine class
+      ! Ascii code 57 is the default.
+      /D 57
+      ! The answer will be stored in $IUDQ(3).
+      /L 3
+      ! NA is a valid option.
+      /O -1
+
+      ! Question number 4.00 is a CVALUE question.
+      /Q 400 cvalue
+      /P Comments:
+      /T Are there any comments concerning this post-processor?
+      ! No comment is the default answer.
+      /D No comment
+      ! The answer will be stored in $TUDQ(1).
+      /L 1
+      ! The string size is 1 to 20 characters.
+      /O 1 20
+
+      ! Question number 5.00 is a IVALUE question.
+      /Q 500 ivalue
+      /P Site number:
+      /T What is your site number?
+      ! The default answer is 10
+      /D 10
+      ! The answer will be stored in $IUDQ(4).
+      /L 4
+      ! The answer must be >= 20 and <= 200, the resolution is
+      ! 10 which means the answer will be rounded to the nearest
+      ! multiple of 10.
+      /O 1 20 1 200 10
+
+      ! Question number 6.01 is a WVALUE question.
+      /Q 601 wvalue
+      /P Integration factor:
+      /T Specify the integration factor for this post-processor.
+      ! The default answer is 0.
+      /D 0
+      ! The answer will be stored in $WUDQ(1)
+      /L 1
+      ! No range checking or resolution
+      /O 0 0 0 0 0
+
+The responses to these questions are accessible from macros in GENER
+and CERUN. Their usage is entirely up to the user.
