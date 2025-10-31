@@ -1,0 +1,41 @@
+.. _command_retrct:
+
+The RETRCT Command :kbd:`[ML]`
+==============================
+
+This command is used to retract the tool away from the part, along
+the current tool axis to the clearance surface. The clearance surface
+must have been defined earlier using :ref:`the CLEARP<command_clearp>`
+or :ref:`CLRSRF<command_clrsrf>` commands. This command is valid for
+lathes and 3-axis+ mills.
+
+   :math:`\textbf{RETRCT}`
+
+The clearance surface defined most recently remains in effect. If a
+clearance plane has not been defined, the command is ignored.
+
+If a **plane** is the current clearance surface, the tool withdraws
+along the current tool axis direction until the tool tip rests on the
+clearance plane. If such a position cannot be found or if the
+retraction feeds into the part being machined, an error message is
+issued and the command is ignored.
+
+If a **cylinder** is defined as the clearance surface, the cylinder
+axis and the current tool axis must be at right angles to each other.
+The tool is again retracted along the tool axis until the tool tip
+rests on the cylindrical surface and away from the part surface. If
+such a retraction point cannot be found, an error message is issued
+as above.
+
+If a **point** is defined for the clearance, an imaginary plane is
+constructed that passes through the point and that is perpendicular
+to the current tool axis. This will be the retraction plane.
+
+If the retraction point is outside of the machine limits, then
+retraction proceeds along the tool axis to the specified plane and
+GENER outputs an error message. For lathes in TURN mode, the
+retraction is in a positive direction along the machine’s Z axis.
+
+The speed of retraction is based on QUEST responses and can either be
+at rapid, or at the current feed rate or at a post-processor defined
+rate.
