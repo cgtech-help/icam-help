@@ -1,0 +1,93 @@
+Code Properties Dialog (Control Emulator only)
+----------------------------------------------
+
+|image1|
+
+This dialog comes up when modifying one or more entries within the CODE
+customization section. It allow you to change the value of anyone of the
+customizable fields. Here is the description of those fields:
+
+-  **Name**: Show the read-only identifier that is being modified. That
+   field will be blank if modifying multiple entries at a time.
+-  **CODE_IGNORE**: If the dialog was called by adding a new CODE, the
+   name field will be a drop list instead of a non-editable text box. If
+   the CODE_IGNORE choice is selected, then the behavior of the CODE
+   will be to automatically ignore the matching pattern. Those codes are
+   gonna be ignored at the order where they are supposed to be executed.
+-  **Enable code**: A code being enabled will be recognized by the CE
+   processing engine. Disable if you want to ignore a specific code,
+   even if it was added by the questionnaire data.
+-  **Process code**: Having this option enabled means that the code will
+   be processed normally. If unchecked, the code will be recognized by
+   the CE but will be ignored and discarded. This is a way to prevent
+   specific actions for firing without outputting errors and warnings
+   related to the code being unmatched.
+-  **Processing order**: This number is the processing priority order of
+   the codes being in the list. Lower numbers will be processed first.
+   If two or more codes have the same order number and appear on the
+   same block, then they will be processed by a standard left-to-right
+   rule.
+-  **Modality group**: The code grouping ID is used to identify which
+   codes are in the same group. The groups are mainly used to manage the
+   modality of the codes. Within each group, there can be only one
+   active modal/persistent code. (see next point below)
+-  **Modality**: This field identify the modality type of the code. The
+   types are:
+
+   -  **Non-Modal**: Codes being non-modal will only fire an action on
+      the blocks where they are physically coded.
+   -  **Modal**: Modal codes will fire action on blocks where they
+      physically appear and will stay has the active code in their
+      group. If a non-modal code of the same group is fired, the next
+      block where no more code of the same group are present, the active
+      modal code will re-fire its action.
+   -  **Persistent**: Persistent codes work like modal ones has they
+      also become the active code of the group when they are fired. But
+      also they keep firing the corresponding action on each subsequent
+      blocks until another code from the same group take over. Usually,
+      these are all the motion and cycle codes.
+
+-  **N/A**: A CODE of type N/A do not match any register or text. It
+   should only be used manually like being pushed on the current block
+   by a $FCEADD() macro function and then caught using a CODE macro.
+-  **ALT String**: If the CODE is not using a register, it can use any
+   string to be matched on the block. This is the use of the ALT string.
+   Use this means there wont be any values attached to it. Whenever the
+   string to match can have a value, it should be using a register and
+   not an ALT string.
+-  **Register**: This field identify the register that is in use by the
+   code (if a register is used). Select the **[Add...]** button to
+   define a new custom register if the required register format does not
+   exist in the register drop-down list. Custom registers are identified
+   by the string “(Custom)” in the drop-down list. Select the
+   **[Edit...]** button to modify or delete the selected custom
+   register. Take care to not delete a custom register being used for
+   other purposes.
+-  **Register as data**: Sometimes, a CODE need to use its own value as
+   data to perform its action. For example, a tool preselect
+   CODE_TOOL_SELECT will need to specify REG_TOOL as its own data usage.
+   This means the code will fire the tool preselect action but the value
+   of the code will be preserved for the action to get it just like it
+   would have with another data register on the block.
+-  **Min**: Used with a register to specify the minimum value or single
+   value if the code do not have a range of values.
+-  **Max**: Used with a register to specify the maximum value if the
+   code is using a range of values. If two or more codes have
+   conflicting value/range, the code with the lower order number will
+   always be the one matched.
+-  **\*n**: This is a factor that will be multiplied to the code value
+   after being matched.
+-  **+n**: This is a number that will be added to the code value after
+   being matched. Again, if used with the G54-59 range has a “-53”
+   value. Then the value of the matched code that would be passed
+   internally to the code macro for example would be 1-6.
+
+**Cancel:** This button closes the Code Properties dialog without
+applying the changes to the item in the code customization list.
+
+**OK:** This button closes the Code Properties dialog and apply the
+changes.
+
+.. |image1| image:: ./media/e07969233061f1cce7bc5508c8e1317011b05dd5.gif
+
+
