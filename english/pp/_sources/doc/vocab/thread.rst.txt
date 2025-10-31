@@ -1,0 +1,308 @@
+.. _command_thread:
+
+The THREAD Command :kbd:`[L]`
+=============================
+
+The THREAD command is used to turn threads on lathes. There are two
+different formats for the thread command.
+
+Single Pass Thread
+------------------
+
+   :math:`\textnormal{GOTO / } \mathit{start\_of\_thread}`
+
+   :math:`\textbf{THREAD /} \begin{pmatrix}\,\begin{array}{l} \textbf{FACE} \\ \textbf{TAPER} \\ \textbf{TURN} \end{array}\end{pmatrix}`
+
+   :math:`\textnormal{GOTO / } \mathit{end\_of\_thread}`
+
+This format is equivalent to the following:
+
+   | GOTO/\ *start_of_thread*
+   | **COUPLE/ON**
+   | GOTO/\ *end_of_thread*
+   | **COUPLE/OFF**
+
+The minor words FACE, TAPER or TURN will be ignored by GENER, however
+one of the minor words must be included to indicate that this format
+is to be used. See :ref:`“The COUPLE Command”<command_couple>` for more information on this format.
+
+Multi-Pass Thread
+-----------------
+
+   :math:`\hspace{.3cm}\textnormal{GOTO / } \mathit{initial\_point}`
+
+   :math:`\hspace{.3cm}\textbf{THREAD / ON}, \mathit{parameters}`
+
+   :math:`\begin{array}{l}
+   \rule{0pt}{2.5ex} \hspace{.3cm}\textnormal{GOTO / } \mathit{start\_of\_thread} \\
+   \rule{0pt}{2.5ex} \hspace{.3cm}\textnormal{GOTO / } \mathit{end\_of\_thread} \\
+   \rule{0pt}{2.5ex} \big[ \; \textnormal{GOTO / } \mathit{end\_of\_chamfer} \; \big]
+   \end{array}`
+
+   :math:`\hspace{.3cm}\textbf{THREAD / OFF}`
+
+The THREAD/ON command indicates the start of a motion sequence that
+determines the thread contour. The THREAD/OFF command indicates the
+end of the thread contour. The first two motions following THREAD/ON
+define the outer surface of the thread, from which the thread depth
+will be measured. An optional third motion defines the pull-out for a
+thread chamfer, however the chamfer can also be defined using
+parameters on the THREAD/ON command (but not both).
+
+The parameters that can be included with the THREAD/ON command are
+listed below, organized by topic. The parameters can be specified in
+any order, with the exception that the ON keyword must be the first
+parameter.
+
+Specifying the Thread Depth
+---------------------------
+
+The thread depth can be defined using combinations of DEPTH, CUTS and
+STEP parameters.
+
+   :math:`\big[,\textbf{DEPTH},\mathit{depth}\,\big]`
+
+This parameter specifies the total depth of the thread. The *depth*
+must be a positive number. The depth is the perpendicular distance
+measured from a line passing through the thread start and end points,
+in the direction of CUTANG. The depth must be specified if the CUTS
+specification does not give stepping values and is greater than 1. If
+a value is specified and neither CUTS or STEP is specified, then a
+single pass will be performed. If a value is specified and the CUTS
+specification is also specified with stepping values then the depth
+will be used as a verification of the stepping values.
+
+   :math:`\bigg[,\textbf{CUTS},n \,\Big[,\mathit{step} \;\icamrange{0.8}{0}\, \big[,n,\mathit{step}\,\big]\,\Big]\,\bigg]`
+
+The cutting specification has a number of formats. The keyword CUTS
+is followed by the number of passes to cut the thread. The
+post-processor will determine the optimum amount of material to
+remove per pass based on the *depth* of the thread. If desired, a
+*n,step* couplet can be coded. This tells the post-processor to make
+a certain *number* of cuts at the *step* depth. Multiple pairs of
+*n,step* can be coded to specify the exact cutting sequence. A total
+of 200 cuts may be programmed per thread cycle.
+
+   :math:`\big[,\textbf{STEP},\mathit{dist}\,\big]`
+
+An alternate way of specifying the in-feed amount for each pass. The
+STEP distance is the in-feed for the first pass. Either
+DEPTH,\ *dist* or CUTS,\ *n* must be specified when STEP is used.
+
+   :math:`\Big[,\textbf{FINCUT}, \mathit{count} \,\big[,\mathit{dist}\,\big]\,\Big]`
+
+The *dist* is the amount of stock remaining before making *count*
+finish cuts. The DEPTH,\ *depth* value includes the finish pass
+allowance. Non finishing cuts go to a depth of *depth-dist*. Finish
+passes all occur at the full thread depth. Specifying a finishing
+allowance with zero cuts (e.g., FINCUT,0,\ *dist*) will cut the
+thread to *depth-dist*.
+
+The CUTS, STEP and DEPTH when used together can define conflicting
+requirements. The following combinations are permitted.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+
+      *  -  [**DEPTH**,\ *d*,] **CUTS**,\ *c*,\ **STEP**,\ *s*
+
+            [**DEPTH**,\ *d*,] **CUTS**,\ *c*,\ *s*
+         -  Constant step depth, *c* cuts at *s* in-feed per cut.
+
+            DEPTH if specified must match ``c*s+finish``
+      *  -  **DEPTH**,\ *d*,\ **CUTS**,\ *c*
+         -  In-feed determined by OPTION value.
+
+            *c* cuts over total depth *d* less the finish allowance.
+      *  -  **DEPTH**,\ *d*,\ **STEP**,\ *s*
+         -  In-feed determined by OPTION value. First step is *s*.
+      *  -  **DEPTH**,\ *d*
+         -  Single pass at full depth.
+      *  -  **CUTS**,1
+         -  Single pass at thread contour.
+
+Specifying the Thread Entry
+---------------------------
+
+   :math:`\big[,\textbf{CUTANG},\mathit{angle}\,\big]`
+
+This parameter specifies the plunge line of the tool at the start of
+the threading. The angle is measured from the positive X-axis from a
+CL file point of view. A value between –360 and 360 degrees may be
+specified. The angle specified must be greater than 10 degrees offset
+from a line through the thread start and end points, or the thread
+cycle will abort. If the CUTANG parameter is omitted, a default entry
+angle will be computed from the initial position moving along the X
+or Z axis towards the thread contour. The in-feed will be along the X
+axis if the thread contour defines a turn or tapered turn thread; the
+in-feed will be along the Z axis if the thread contour defines a face
+or tapered face thread.
+
+.. note::
+
+   For machines supporting CNC threading cycles, the CUTANG
+   value must define an entry angle along the X or Z axis (i.e., be
+   evenly divisible by 90 degrees) to allow the CNC cycle to be used.
+   Use the TLANGL and OPTION parameters to obtain an angled entry.
+
+..
+
+   :math:`\big[,\textbf{TLANGL},\mathit{angle}\,\big]`
+
+This parameter specifies the tool nose *angle*. The angle is used for
+in-feed options 1 – 4 to determine the angle of entry relative to the
+CUTANG and to determine the alternating edge offset amount. The
+default tool nose angle is 60 degrees or the fixed machine default,
+if applicable.
+
+   :math:`\big[,\textbf{OPTION},n \,\big]`
+
+Specifies the in-feed pattern. Supported patterns are:
+
+:0: constant amount, along CUTANG (default)
+:1: constant amount, single edge
+:2: constant amount, alternating edges
+:3: constant depth, single edge
+:4: constant depth, alternating edges
+
+Option **0** is the default for any post-processor that does not
+support CNC threading cycles. With option zero, the in-feed direction
+is along the CUTANG angle. Provided that individual steps were not
+specified with the extended CUTS syntax, then each step depth will be
+decremented by a constant amount as the thread cycle progresses.
+
+Options **1** and **2** specify a constant cross section in-feed
+step. When the CUTANG angle is parallel to a major datum, the in-feed
+angle can be along one edge (option 1) or can alternate between edges
+(option 2). Option **3** and **4** specify a constant depth in-feed
+step.When the CUTANG angle is parallel to a major datum, the in-feed
+angle can be along one edge (option 3) or can alternate between edges
+(option 4).
+
+With options 1–4, the in-feed angle is 1/2 the tool nose angle,
+defined with the TLANGL keyword. The single edge in-feed method
+offsets the tool by an amount equal to ``TAN(angle/2)+depth``. The
+alternating edge method only offsets the tool on even numbered cuts.
+
+Specifying the Thread Chamfer and Exit
+--------------------------------------
+
+The chamfer can be defined by including a third GOTO motion in the
+series of motions between THREAD/ON and THREAD/OFF, or it can be
+defined using either the ATANGL or CHAMFR options. Only one method is
+permitted.
+
+   :math:`\begin{array}{l}
+   \rule{0pt}{2.5ex} \hspace{.3cm}\textnormal{GOTO / } \mathit{start\_of\_thread} \\
+   \rule{0pt}{2.5ex} \hspace{.3cm}\textnormal{GOTO / } \mathit{end\_of\_thread} \\
+   \rule{0pt}{2.5ex} \big[ \; \textbf{GOTO / } {\small \boldsymbol{end\_of\_chamfer}} \; \big]
+   \end{array}`
+
+The above portion of the thread block is used to determine the path
+and direction of cut that the tool will take when cutting the thread.
+The delta motion between the thread end point and the end of chamfer
+point, is applied at the end of each cut, which is expected to be the
+thread chamfer.
+
+   :math:`\Big[,\textbf{ATANGL}, \mathit{angle} \,\big[, \mathit{height}\,\big]\,\Big]`
+
+The ATANGL option specifies the pullout *angle* and *height* at the
+end of the thread. On turning threads and turn taper threads, the
+angle is measured off the machine X axis. On face and face taper
+threads, the angle is measured off the machine Z axis. Angles between
+–80 and 80 degrees are allowed, where zero will cause a straight
+pull-out along the axis. The *height* is the perpendicular distance
+measured from the thread end point in the opposite direction of
+CUTANG. If the height is not given then it will be calculated as
+``pitch/(2*TAN(30))`` which generates a retract of the full depth of a
+thread using a 60 degree thread cutter. Specify ATANGL,0 or
+ATANGL,0,0 to use a default pull-out.
+
+   :math:`\Big[,\textbf{CHAMFR}, \mathit{length} \,\big[, \mathit{angle}\,\big]\,\Big]`
+
+The CHAMFR option specifies the thread chamfer *length* and *angle*.
+Angles between 10 and 80 degrees are allowed. The *length* is the
+additional chamfer distance measured from the thread end point along
+the thread axis. A length of zero indicates that no chamfer is
+required. A negative length will start the chamfer the specified
+distance before the thread end point. The angle defaults to 45
+degrees if omitted. Specify CHAMFR,0 or CHAMFR,0,0 to turn off
+chamfering.
+
+   :math:`\Big[,\textbf{RETURN} \,\big[, \mathit{height}\,\big]\,\Big]`
+
+This option specifies the retract *height* above the thread end point
+between each cut. If the height is omitted, then the tool will
+retract to the initial point X axis value for turning and turn taper
+threads, or to the initial point Z axis value for face and face taper
+threads. If both the RETURN option and thread chamfer are omitted, a
+default return height will be calculated as ``pitch/(2*TAN(30))`` which
+generates a retract of the full depth of a thread using a 60 degree
+thread cutter.
+
+When emulating threads using linear and thread interpolation,
+chamfers outside the range of 30 to 60 degrees will be cut using
+linear instead of thread interpolation.
+
+Specifying the Thread Size
+--------------------------
+
+The following options override those that may have been specified on
+a preceding PITCH command.
+
+   :math:`\begin{bmatrix} , \begin{pmatrix}\,\begin{array}{l} \textbf{IPR} \\ \textbf{MMPR} \\ \textbf{PERREV} \\ \textbf{TPI} \end{array}\end{pmatrix}, \mathit{pitch} \,\end{bmatrix}`
+
+The thread *pitch* can be specified as the number of threads per inch
+(TPI), or as a distance per spindle revolution where the distance is
+measured in inches (IPR), mm (MMPR) or CLDATA units (PERREV).
+
+   :math:`\big[, \textbf{MULTRD}, \mathit{starts} \,\big]`
+
+The MULTRD option specifies multiple start threading. The *starts*
+value must be a non-zero, positive integer. For multi-start threads
+the first pass is completed for the first thread start then the same
+process is repeated for the second thread start, offset by the pitch
+value. This process is repeated for the 2nd pass, 3rd pass, etc., for
+each of the thread starts.
+
+   :math:`\begin{bmatrix} , \begin{pmatrix}\,\begin{array}{l} \textbf{INCR} \\ \textbf{DECR} \end{array}\,\end{pmatrix} , \mathit{value} \,\end{bmatrix}`
+
+The INCR and DECR *value* option is used to indicate a variable lead
+thread. It specifies the change of the lead for each spindle
+revolution. For example, if the pitch at the start is **0.125** and
+the last pitch is **0.100**, the resulting value would be **0.025**
+(assuming the change in pitch is for 1 revolution). Specify a value
+of zero to indicate a constant lead thread.
+
+Specifying the Thread Contour
+-----------------------------
+
+.. code-block::
+
+     GOTO / initial_point
+   [ RAPID ]
+     THREAD / ON,...
+     GOTO / start_of_thread
+     GOTO / end_of_thread
+   [ GOTO / end_of_chamfer ]
+     THREAD / OFF
+
+In cutting a thread, the threading tool starts from the initial point
+(i.e., where it was before THREAD/ ON was programmed) and feeds or
+rapids (depending on which is in effect) to the thread start point.
+The tool then feeds or rapids to the first step depth along the
+specified or calculated CUTANG. It then moves at synchronous speed
+(i.e., thread interpolation) for a delta distance calculated from the
+thread start to thread end points. If a chamfer is defined, it
+continues thread interpolation for the delta motion defined from the
+thread end point to the end of chamfer point. If RETURN is specified,
+the tool rapids clear of the thread. The tool then rapids back
+parallel to the thread until it is at a perpendicular point above the
+start point.
+
+If multiple starts are defined, the cut is repeated for each start by
+either advancing the tool slightly or using a phase offset register.
+
+The entire process is then repeated for each cut, until the full
+depth is reached.
