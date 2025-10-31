@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+    <div class="pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list">
+            <li id="menu-item-home" class="pure-menu-item pure-menu-selected">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.HOME.name)">Home</div>
+            </li>
+            <li id="menu-item-pos" class="pure-menu-item">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.POS.name)">Icam Post</div>
+            </li>
+            <li id="menu-item-sim" class="pure-menu-item">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.SIM.name)">Virtual Machine</div>
+            </li>
+            <li id="menu-item-rpp" class="pure-menu-item">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.RPP.name)">Control Emulator</div>
+            </li>
+            <li id="menu-item-cam" class="pure-menu-item">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.CAM.name)">CAM Interfaces</div>
+            </li>
+            <li id="menu-item-ui" class="pure-menu-item">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.UI.name)">User Interface</div>
+            </li>
+            <li id="menu-item-release" class="pure-menu-item">
+                <div class="pure-menu-link" onclick="switchContentDocument(SECTIONS.RELEASE.name)">Release Notes</div>
+            </li>
+        </ul>
+    </div>
+</header>
+<body onload="setFrameDocument()">
+    <div id="main-container">
+        <div id="navigator">
+            <div id="brand-area">
+                <image id="icam-logo" src="cam\images\icamlogo.png"></image>
+                <image id="cgtech-logo" src="cgtech.png"></image>
+                <div class="title">Product Documentation</div>
+            </div>
+            <div class="navigation-row">
+                <div class="documentation-entry">
+                    <div class="title" onclick="switchContentDocument(SECTIONS.POS.name)"><h1>Icam Post</h1></div>
+                    <hr/>
+                    <p class="description">
+                        This documentation covers Icam Post. It describes the use of QUEST to develop post-processors as well as
+                        the post-processor itself, named GENER. It includes instructions on how to run GENER, detail on
+                        the post-processor vocabulary and detail about the extensive macro language available for
+                        advanced post development.
+                    </p>
+                </div>
+                <div class="documentation-entry">
+                    <div class="title" onclick="switchContentDocument(SECTIONS.SIM.name)"><h1>Virtual Machine</h1></div>
+                    <hr/>
+                    <p class="description">
+                        This documentation covers the ICAM Virtual Machine (VM) module. It explains the command Interface
+                        used with GENER and CERUN. It also describes how to use the views to manipulate the scene, how to create and load
+                        tooling, fixture, part and stock. A developer section for QUEST provide detail about
+                        creating the machine kinematic, importing and creating components, setting up the collision groups and using other features
+                        is explained.
+                    </p>
+                </div>
+                <div class="documentation-entry">
+                    <div class="title" onclick="switchContentDocument(SECTIONS.RPP.name)"><h1>Control Emulator</h1></div>
+                    <hr/>
+                    <p class="description">
+                        This documentation covers the ICAM Control Emulator. This includes instructions on how
+                        to use CERUN with Virtual Machine and Dassault Systèmes 3DEXPERIENCE/DELMIA. A QUEST section
+                        describes how to create a CE through the questionnaire and macro system. A detailed macro reference
+                        is available.
+                    </p>
+                </div>
+            </div>
+            <div class="navigation-row">
+                <div class="documentation-entry">
+                    <div class="title" onclick="switchContentDocument(SECTIONS.CAM.name)"><h1>CAM Interfaces</h1></div>
+                    <hr/>
+                    <p class="description">
+                        This documentation provide guidelines and instructions on how to set-up the interface between
+                        Icam Post GENER and Control Emulator CERUN with the supported CAM systems. Information about the CAM extractors used
+                        to transfer tooling, part, stock and CL file into ICAM modules is also provided.
+                    </p>
+                </div>
+                <div class="documentation-entry">
+                    <div class="title" onclick="switchContentDocument(SECTIONS.UI.name)"><h1>User Interface</h1></div>
+                    <hr/>
+                    <p class="description">
+                        This documentation is a collection of specific information covering all ICAM module user interfaces. It includes
+                        help on dialog, view, menu, shortcut and so on. This section is mostly accessed via the context help "F1" key
+                        when using ICAM software user interfaces.
+                    </p>
+                </div>
+                <div class="documentation-entry">
+                    <div class="title" onclick="switchContentDocument(SECTIONS.RELEASE.name)"><h1>Release Notes</h1></div>
+                    <hr/>
+                    <p class="description">
+                        This section of the documentation list the official release notes as provided at release date of several
+                        specific major release of the ICAM suite of product.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="iframe-container"></div>
+    </div>
+</body>
+<footer></footer>
+</html>
