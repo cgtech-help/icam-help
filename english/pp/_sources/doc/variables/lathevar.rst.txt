@@ -1,0 +1,213 @@
+.. _lathe_variables:
+
+Lathe Variables
+===============
+
+.. _var_e:
+.. index:: Variables; $E
+
++------------------+------------------------------------------+
+| **$E**           | Thread lead (<=0:?)                      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the thread lead in units per revolution
+   (uPR) as defined on the last PITCH or THREAD command.
+   If the value is less than or equal to zero (0) then no thread lead has been defined.
+   The thread lead is calculated as the thread pitch ($PITCH)
+   multiplied by the number of thread starts ($MULTRD).
+
+.. _var_ev:
+.. index:: Variables; $EV
+
++------------------+-------------------------------------------------+
+| **$EV**          | Thread variable lead (–ve:DECR, 0:no, +ve:INCR) |
+|                  |                                                 |
+|                  | Type: Numeric, Read/Write                       |
++------------------+-------------------------------------------------+
+
+   This variable contains the thread variable lead in units per revolution
+   (uPR) as defined using the INCR or DECR option on the last PITCH or THREAD command.
+   A negative value indicates a decreasing lead thread.
+   A positive value indicates an increasing thread lead.
+   A value of zero (0) indicates a constant lead thread.
+   The thread variable lead is calculated as the thread variable pitch ($PITCHV)
+   multiplied by the number of thread starts ($MULTRD).
+
+.. _var_head:
+.. index:: Variables; $HEAD
+
++------------------+------------------------------------------+
+| **$HEAD**        | Current lathe head (MAIN or SIDE)        |
+|                  |                                          |
+|                  | Type: Keyword, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable indicates which lathe head is currently in effect. It
+   has a value of MAIN if the main head is active and SIDE if the side
+   head is active. Note that the value of this variable is a minor word,
+   not a string value.
+
+.. _var_lthmod:
+.. index:: Variables; $LTHMOD
+
++------------------+------------------------------------------+
+| **$LTHMOD**      | Lathe machining mode (0:TURN,1:MILL)     |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is valid for C-axis lathes. It indicates the machining
+   mode currently in effect.
+
+.. _var_merge:
+.. index:: Variables; $MERGE
+
++------------------+------------------------------------------+
+| **$MERGE**       | True if in head merging mode             |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is applicable to four axis lathes and EDMs with merging
+   capability. It has a value of $TRUE if the machine is in head merging
+   mode and a value of $FALSE otherwise.
+
+.. _var_multrd:
+.. index:: Variables; $MULTRD
+
++------------------+------------------------------------------+
+| **$MULTRD**      | Number of thread starts                  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of thread
+   starts defined using the MULTRD option on the last PITCH or THREAD command.
+
+.. _var_pitch:
+.. index:: Variables; $PITCH
+
++------------------+------------------------------------------+
+| **$PITCH**       | Thread pitch                             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the thread pitch in units per revolution
+   (uPR) as defined on the last PITCH or THREAD command.
+   If the value is less than or equal to zero (0) then no thread pitch has been defined.
+
+.. _var_pitchv:
+.. index:: Variables; $PITCHV
+
++------------------+------------------------------------------+
+| **$PITCHV**      | Thread variable pitch                    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the thread variable pitch in units per revolution
+   (uPR) as defined using the INCR or DECR option on the last PITCH or THREAD command.
+   A negative value indicates a decreasing pitch thread.
+   A positive value indicates an increasing pitch thread.
+   A value of zero (0) indicates a constant pitch thread.
+
+.. _var_shead:
+.. index:: Variables; $SHEAD
+
++------------------+----------------------------------------------------------+
+| **$SHEAD**       | Merging lathe spindle controlled by (<1:? 1:MAIN 2:SIDE) |
+|                  |                                                          |
+|                  | Type: Numeric, Read/Write                                |
++------------------+----------------------------------------------------------+
+
+   This variable indicates which lathe head is currently controlling the
+   spindle for constant surface speed purposes. The value 1 represents
+   the MAIN (upper) head and 2 represents the SIDE (lower) head.
+   It can be set using the “SPINDL,\ *n*\ ” option on a HEAD command within a
+   HEAD/BOTH merging lathe block. If the controlling spindle is not defined or
+   is defined as zero (0), then GENER will set the controlling spindle to the head
+   that first processes a SPINDL command.
+
+.. _var_smid:
+.. index:: Variables; $SMID
+
++------------------+----------------------------------------------------------+
+| **$SMID**        | Lathe milling spindle ID                                 |
+|                  |                                                          |
+|                  | Type: Numeric, Read/only                                 |
++------------------+----------------------------------------------------------+
+
+This variable contains the current lathe milling spindle ID.
+The ID number of the various available spindles are defined in the
+QUEST *Machine Description / Spindle* section “Spindle ID” questions.
+
+.. _var_spindle:
+.. index:: Variables; $SPINDLE
+
++------------------+------------------------------------------+
+| **$SPINDLE**     | Current lathe spindle active             |
+|                  |                                          |
+|                  | Type: Keyword, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable defines the current active lathe spindle. It has a
+   value of FRONT if the main spindle is being controlled. It has a
+   value of REAR if the sub-spindle is being controlled.
+
+.. _var_stid:
+.. index:: Variables; $STID
+
++------------------+----------------------------------------------------------+
+| **$STID**        | Lathe turning spindle ID                                 |
+|                  |                                                          |
+|                  | Type: Numeric, Read/only                                 |
++------------------+----------------------------------------------------------+
+
+This variable contains the current lathe turning spindle ID.
+The ID number of the various available spindles are defined in the
+QUEST *Machine Description / Spindle* section “Spindle ID” questions.
+
+.. _var_syncod:
+.. index:: Variables; $SYNCOD
+
++------------------+------------------------------------------+
+| **$SYNCOD**      | Merging lathe synchronization code       |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the value of the next synchronization code to
+   be output.
+
+.. _var_syninc:
+.. index:: Variables; $SYNINC
+
++------------------+----------------------------------------------+
+| **$SYNINC**      | Merging lathe synchronization code increment |
+|                  |                                              |
+|                  | Type: Numeric, Read/Write                    |
++------------------+----------------------------------------------+
+
+   This variable holds the synchronization code number increment. This
+   increment is added to the last synchronization code to generate a new
+   code. If the increment is zero, synchronization numbering is constant
+   (i.e., the same number is output until $SYNINC is changed).
+
+.. _var_xdiam:
+.. index:: Variables; $XDIAM
+
++------------------+----------------------------------------------+
+| **$XDIAM**       | True if the X axis is in diameter mode       |
+|                  |                                              |
+|                  | Type: Logical, Read/Write                    |
++------------------+----------------------------------------------+
+
+   This variable tracks the radius vs. diameter state of the X axis.
+   The default state is as defined in QUEST.
+   The current state can be changed by setting the $XDIAM system variable
+   to $FALSE for radius output and $TRUE for diameter output, but when doing
+   so the X axis diameter/radius NC codes (if any) will not be output.
+   The state can also be changed via the MODE/DIAMET command.
