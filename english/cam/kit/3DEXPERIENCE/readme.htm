@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>3DEXPERIENCE Interface Kit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href=""><b>3D</b>EXPERIENCE</a>
+                <a href="../Creo/readme.htm">Creo</a>
+                <a href="../FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../Fusion360/readme.htm">Fusion 360</a>
+                <a href="../Mastercam/readme.htm">Mastercam</a>
+                <a href="../NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../Cadds5/readme.htm">Cadds5</a>
+                <a href="../Cadra/readme.htm">Cadra</a>
+                <a href="../Camand/readme.htm">Camand</a>
+                <a href="../CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../Cimatron/readme.htm">Cimatron</a>
+                <a href="../Em_Machine/readme.htm">Em Machine</a>
+                <a href="../Generic/readme.htm">Generic</a>
+                <a href="../GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../ICAM/readme.htm">ICAM</a>
+                <a href="../IDEAS/readme.htm">IDEAS</a>
+                <a href="../Intercim/readme.htm">Intercim</a>
+                <a href="../Intergraph/readme.htm">Intergraph</a>
+                <a href="../NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../NICAM/readme.htm">NICAM</a>
+                <a href="../NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../index.htm"><i class="fa fa-home">Kit</i></a>
+            <h1><img align="right" src="../../images/camlogo_CA.png" width="256" height="78"/><b>3D</b>EXPERIENCE</h1>
+            <hr />
+            <br />
+            <img src="../../images/camscrsh_3DX.jpg"  width="240" height="130">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: <b>3D</b>EXPERIENCE</li>
+                <li>Company: Dassault Syst&egrave;mes</li>
+                <li>Website: <a href="https://www.3ds.com/">www.3ds.com</a></li>
+            </ul>
+            <br />
+            <div class="table">
+                <div class="card">
+                    <a href="BestPractices/index_v6.htm"><img src="../../images/brain.png" /><b>3D</b>EXPERIENCE Best Practices</a>
+                </div>
+                <div class="card">
+                    <a href="BestPractices/index.htm"><img src="../../images/brain.png" />CATIA V5 Best Practices</a>
+                </div>
+                </div>
+                <div class="table">
+                <div class="card">
+                    <a href="../../integration/CATIA/Integration/index.htm"><img src="../../images/integration.png" /><b>3D</b>EXPERIENCE Integration</a>
+                </div>
+                <div class="card">
+                    <a href="../../integration/CATIA/Extractor/index.htm"><img src="../../images/mfg.png" />ICAM MFG Extractor for CATIA V5</a>
+                </div>
+                <div class="card">
+                    <a href="../../integration/CATIA/Extractor/index_v6.htm"><img src="../../images/mfg.png" />ICAM MFG Extractor for <b>3D</b>EXPERIENCE</a>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <h2><b>3D</b>EXPERIENCE TO CAM-POST INTERFACE DOCUMENTATION</h2>
+            <h3>Overview</h3>
+            <p>
+                The <b>3D</b>EXPERIENCE Interface Kit is designed to accommodate differences in syntax between Dassault Syst&egrave;mes and ICAM's post processing languages.
+                Dassault Syst&egrave;mes APT commands in a cutter location source (".aptsource") file are input to CAD-APT and CAM-POST.
+                See CAM-POST chapter "Post processor Vocabulary" for more information on CAM-POST supported syntax.
+            </p>
+            <p>
+                The <b>3D</b>EXPERIENCE Interface Kit sets the input format to "<b>3D</b>EXPERIENCE", sets the input card length to 72 characters, and tells GENER to ignore null parameters
+                (i.e., two commas in succession) in the input aptsource file.
+            </p>
+            <h3><b>3D</b>EXPERIENCE PPTable</h3>
+            <p>
+                Two PPTable files containing ICAM compatible post processor command syntax are included with the <b>3D</b>EXPERIENCE interface kit.
+                These files (or similar ones) can also be found in the <b>3D</b>EXPERIENCE Startup\Manufacturing\PPTables directory, which is where <b>3D</b>EXPERIENCE expects to find them.
+                If you make changes to a PPTable file, you should be sure to:
+            </p>
+            <ol style="list-style:lower-alpha">
+                <li>Save your changes using a unique file name;</li>
+                <li>Copy the new PPTable file to <b>3D</b>EXPERIENCE's Startup\Manufacturing\PPTables directory.</li>
+            </ol>
+            <p>
+                These PPTable files are provided as a starting point only. In practice, each post processor may require its own PPTable file.
+            </p>
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
+
