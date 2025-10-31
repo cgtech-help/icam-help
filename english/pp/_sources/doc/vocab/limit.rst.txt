@@ -1,0 +1,515 @@
+.. _command_limit:
+
+The LIMIT Command :kbd:`[MLEPC]`
+================================
+
+The LIMIT command is used: to activate and deactivate travel limit
+checking; to shift or transform the coordinate data for travel limit
+purposes; to define a preferred rotary alignment of the machine where
+feasible; to avoid linear overtravel conditions through the
+application of polar interpolation; and to automatically orient
+singular rotary axes to position the workpiece so as to avoid linear
+overtravel conditions. This command is available for all machine
+types.
+
+-  :ref:`“Travel Limit Checking”<travel_limit>`
+-  :ref:`“Travel Limit Tool Compensation”<travel_limit_tool_compensation>`
+-  :ref:`“Travel Limit Fixture Compensation”<travel_limit_fixture_compensation>`
+-  :ref:`“Travel Limit Frame Transformation”<travel_limit_frame_transformation>`
+-  :ref:`“Preferred Rotary Solution – Modulo-360 Range”<preferred_rotary_solution>`
+-  :ref:`“Preferred Rotary Solution – Physical Range”<preferred_rotary_solution_physical>`
+-  :ref:`“Limit Based Cartesian-Polar Switching”<cartesian_polar_switching>`
+-  :ref:`“Limit Based Singular Positioning”<singular_positioning>`
+
+.. _travel_limit:
+
+Travel Limit Checking
+---------------------
+
+The following command is used to define, activate and deactivate up
+to 10 different travel limit checking zones:
+
+   :math:`\textbf{LIMIT /}
+   \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \;, \end{bmatrix}
+   \begin{bmatrix}\,\begin{array}{l} \textbf{IN} \\ \textbf{OUT} \end{array} \;, \end{bmatrix} \,
+   \big[\,\mathit{zone},\big] \!
+   \icamrange{13}{1}\! \begin{pmatrix},
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array}\end{pmatrix}
+   , \begin{pmatrix} \begin{array}{l} \big[\,\textbf{ON},\big] \begin{pmatrix} \begin{array}{l} \mathit{low,high} \\ \mathit{total} \end{array} \end{pmatrix} \\ \textbf{OFF} \end{array}  \end{pmatrix} \end{pmatrix}`
+
+The initial ON or OFF indicates whether the travel limit checking
+should be enabled or disabled respectively for a zone. If omitted, ON
+is assumed (i.e., travel limit checking is enabled).
+
+IN and OUT describe two types of range checking zones. IN zones
+define a specific area where the axes are permitted to travel. The
+axes must remain inside of the limits specified. OUT zones define a
+specific area where the tool axes are not permitted to travel. The
+axes must remain outside of the limits specified. If this parameter
+is omitted, IN is assumed.
+
+If only one value is given for a particular axis, limit checking for
+that axis will be based on total travel rather than on a travel
+range. Total travel limit checking is only valid for IN zones.
+
+The *zone* parameter is a scalar value identifying the travel limit
+zone. There are 10 zones available: zone one (1) represents the
+travel limits predefined by the post-processor creator; zones 2
+through 10 can be defined by the NC programmer. If the zone number is
+not specified, one (1) is assumed (in other words, predefined
+limits).
+
+See :ref:`here<axis_names>` for a table correlating axes name
+keywords with machine axes.
+
+The *low* and *high* parameters specify the minimum and maximum
+limits in machine coordinates for the named axis. The *total*
+parameter specifies a total travel limit in machine coordinates for
+the named axis. In either case the ON keyword is optional. The OFF
+keyword can be specified to turn off travel limit checking for the
+named axis. For example, the following program segment turns off any
+travel limit checking predefined by the post-processor creator, moves
+the machine and then turns the predefined travel limit checking back
+on.
+
+   .. code-block::
+
+      LIMIT/OFF
+      GOTO/0,0,0
+      GOTO/0,0,4
+      LIMIT/ON
+
+This next example defines two new travel zones that are used
+depending on the circumstances. Initially zone 1 is enabled and zone
+2 is disabled.
+
+   .. code-block::
+
+      LIMIT/ON,IN,1,XAXIS,-10,40,ZAXIS,5,15
+      LIMIT/OFF,IN,2,XAXIS,-3,47,ZAXIS,2,13
+
+The following commands are needed to turn zone 1 checking off and
+turn zone 2 checking on:
+
+   .. code-block::
+
+      LIMIT/OFF,1
+      LIMIT/ON,2
+
+Any or all of the ten available zones may be active at one time. The
+machine axes will be permitted to travel in the intersection of the
+active zones.
+
+For total travel limits, axis travel is accumulated starting from the
+time that the limit is activated. If a total travel limit is turned
+off and then turned on again later, GENER will stop keeping track of
+total travel while the limit is inactive and will then resume when
+the limit is re-activated.
+
+.. _travel_limit_tool_compensation:
+
+Travel Limit Tool Compensation
+------------------------------
+
+The following command offsets the linear axes, for travel limit
+calculation purposes only, in order to account for controller tool
+compensation using expected gauge lengths or offsets.
+
+   :math:`\textbf{LIMIT / LENGTH}, \big[\,x,y,\big] z`
+
+The LIMIT/LENGTH command is similar to the TOOLNO/LENGTH option in
+terms of where the post-processor calculates the final linear axes
+positions. With TOOLNO/LENGTH, the post-processor adjusts the axes
+positions to account for the tool length. With LIMIT/LENGTH, this
+adjustment is done for travel limit purposes only; the NC code is not
+affected. Code a length offset of 0 (zero) to cancel this feature.
+
+In the following example, the LIMIT/LENGTH,4 command causes the
+calculated machine axes positions to be offset, for travel limit
+checking purposes only, along the tool axis by 4 CL units. This
+limits the Z axis CL input to the range –4 through 6.
+
+   .. code-block::
+
+      LIMIT/ON,2,IN,ZAXIS,0,10
+      LIMIT/LENGTH,4
+      GOTO/0,0,6    $$ ok
+      GOTO/0,0,-4   $$ ok
+      GOTO/0,0,-5   $$ exceeds minimum
+      GOTO/0,0,7    $$ exceeds maximum
+
+   :math:`\textbf{LIMIT / SETOOL}, x,y,z`
+
+Likewise, the LIMIT/SETOOL command is similar to the TOOLNO/SETOOL
+option. The *xyz* adjustment is made relative to the spindle control
+point and will be affected by the rotation of rotary heads. Code an
+offset of 0,0,0 (all zeroes) to cancel this feature.
+
+In the following example, a LIMIT/SETOOL,0,0,–4 command adjusts the
+calculated machine axes positions by the inverse of the specified
+*xyz* amounts for travel limit checking purposes only. The inverse is
+used because the SETOOL parameter specifies the relative distance
+between spindle control point and tool tip. As with the first
+example, this limits the Z axis CL input to the range –4 through 6.
+
+   .. code-block::
+
+      LIMIT/ON,2,IN,ZAXIS,0,10
+      LIMIT/SETOOL,0,0,-4
+      GOTO/0,0,6    $$ ok
+      GOTO/0,0,-4   $$ ok
+      GOTO/0,0,-5   $$ exceeds minimum
+      GOTO/0,0,7    $$ exceeds maximum
+
+.. _travel_limit_fixture_compensation:
+
+Travel Limit Fixture Compensation
+---------------------------------
+
+The following command offsets the linear axes, for travel limit
+calculation purposes only, in order to account for controller fixture
+(i.e. workpiece) compensation amounts.
+
+   :math:`\textbf{LIMIT / ADJUST}, x,y,z`
+
+The LIMIT/ADJUST option is similar to the LIMIT/SETOOL command
+described earlier. It applies *xyz* fixture compensation offset
+amounts to the linear axes positions for travel limit calculation
+purposes; NC code is not affected, with one exception (see below).
+Code an offset of 0,0,0 (all zeroes) to cancel this feature.
+
+The LIMIT/POLAR command (see :ref:`“Limit Based Cartesian-Polar Switching”<cartesian_polar_switching>`)
+takes the fixture compensation offset amounts into account when computing
+Cartesian vs. polar interpolation optimizations, since optimization
+is highly dependent upon the actual placement of the part on the
+rotary table.
+
+.. _travel_limit_frame_transformation:
+
+Travel Limit Frame Transformation
+---------------------------------
+
+The LIMIT/TRFORM command transforms machine linear axes travel
+information by the specified matrix before testing for limitations
+and recording minimum and maximum data. This command can be used to
+properly manage travel limit processing when outputting machine
+coordinates that have been transformed in some fashion outside of
+GENER’s normal control.
+
+.. note::
+
+   The LIMIT/TRFORM command should not be used at the same
+   time as the LCS local coordinate transformation command. LCS already
+   manages travel limit transformations.
+
+The syntax is:
+
+   :math:`\textbf{LIMIT / TRFORM} \,\big[,\textbf{LAST}\,\big]
+   \begin{pmatrix} \!,\! \begin{array}{l} \mathtt{<\!matrix\!>} \\ \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+Two separate transformations can be applied and removed individually.
+LIMIT/TRFORM defines the primary transformation, LIMIT/TRFORM,LAST
+defines a second transformation.
+
+The <matrix> defines the location and orientation of the resultant
+after-transformation coordinates on the machine, with respect to the
+normal coordinates. The matrix can be specified using the standard
+post-processor transformation syntax (see :ref:`“The ORIGIN Command”<command_origin>`).
+
+When LIMIT transformation is active, the linear axes column displays
+and travel summaries show coordinate data in the “as transformed”
+state.
+
+The ON and OFF keywords enable or disable travel limit
+transformations. OFF ignores the effect of the matrix. ON
+re-establishes the previously specified matrix.
+
+.. _preferred_rotary_solution:
+
+Preferred Rotary Solution – Modulo-360 Range
+--------------------------------------------
+
+The following command is used to define, for a specific rotary axis,
+a preferred modulo-360 range of rotary travel (typically within 180
+degrees) to be used on 5-axis positioning motions, so as to influence
+the choice of rotary solution (or pose) from the two possible
+solutions normally available for any given tool axis vector.
+
+   :math:`\textbf{LIMIT / ORIENT}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{IN} \\ \textbf{OUT} \end{array} \end{bmatrix}
+   \begin{pmatrix} \!,\! \begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array} \end{pmatrix}
+   ,\mathit{low} \big[,\mathit{high}\,\big]`
+
+   :math:`\textbf{LIMIT / ORIENT},\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+Rotary solution choices are only available on non-linearized (i.e.,
+LINTOL/OFF) and rapid positioning moves, since once the tool is
+moving at feed it cannot switch from one solution to another without
+leaving a dwell mark (caused by disengage, rotate and re-engage
+motions of the
+rotary-turn-around feature). When there is a choice of rotary
+solutions, GENER normally selects the one that results in the least
+amount of motion, with an emphasis on reducing rotary travel before
+linear travel. The LIMIT/ORIENT command can be used to change this
+default behavior, by specifying a preferred range of positioning for
+a specific rotary axis. See :ref:`here<axis_names>` for a table
+correlating axes name keywords with machine rotary axes.
+
+The *low* and *high* parameters define the lower and upper machine
+coordinate limits of the preferred positioning range for the named
+axis. The *high* parameter defaults to *low+180* if omitted. All
+angles are treated as modulo-360. (Use the physical range command
+described below to instead define an absolute range of preferred
+travel.)
+
+GENER will choose the solution that respects the following condition
+for the named axis, where all angles are modulo-360:
+
+   *low* ≤ angle < *high*
+
+IN and OUT can be used to define an inclusive or exclusive preferred
+positioning range. IN is the default and defines an inclusive range
+as shown above. OUT can be used to define an exclusive range, where
+the preferred solution avoids the defined range.
+
+Once a preferred rotary solution has been specified, ON and OFF can
+be coded without an axis value to enable or disable preferred rotary
+solution positioning.
+
+.. _preferred_rotary_solution_physical:
+
+Preferred Rotary Solution – Physical Range
+------------------------------------------
+
+The following command is used to define, for one or more rotary axis,
+a preferred physical range of rotary travel to be used on 5-axis
+positioning motions, so as to influence the positioning of the rotary
+axes, especially in cases where the rotary range is finite but
+exceeds 360 degrees.
+
+   :math:`\textbf{LIMIT / RANGE}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{IN} \\ \textbf{OUT} \end{array} \end{bmatrix}
+   \begin{pmatrix} \!,\! \begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array} \end{pmatrix}
+   \begin{pmatrix} \!,\! \begin{array}{l} \mathit{low} \big[,\mathit{high}\,\big] \\ \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+   :math:`\textbf{LIMIT / RANGE},\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+Rotary range choices are only available on non-linearized (i.e.,
+LINTOL/OFF) and rapid positioning moves, since once the tool is
+moving at feed it cannot switch from one solution to another without
+leaving a dwell mark (caused by disengage, rotate and re-engage
+motions of the rotary-turn-around feature). When there is a choice of
+rotary solutions, GENER normally selects the one that results in the
+least amount of motion, with an emphasis on reducing rotary travel
+before linear travel. The LIMIT/RANGE command can be used to change
+this default behavior, by specifying a preferred range of travel for
+one or more rotary axis. See :ref:`here<axis_names>` for a
+table correlating axes name keywords with machine rotary axes.
+
+The *low* and *high* parameters define the lower and upper machine
+coordinate limits of the preferred positioning range for the named
+axis. All angles are treated as absolute angles. (Use the modulo-360
+range command described above to instead define a modulo-360 based
+preferred solution.)
+
+GENER will choose the solution that respects the following condition
+for the named axis, where all angles are absolute:
+
+   *low* ≤ angle < *high*
+
+IN and OUT can be used to define an inclusive or exclusive preferred
+positioning range. IN is the default and defines an inclusive range
+as shown above. OUT can be used to define an exclusive range, where
+the preferred solution avoids the defined range.
+
+Preferred positioning ranges can be specified for each rotary axis.
+Once a preferred range specification has been given for a rotary
+axis, preferred range selection for that specific axis can
+subsequently be enabled or disabled by coding ON or OFF in place of
+the range specification.
+
+Once a preferred range has been specified for any rotary axis, ON and
+OFF can be coded without an axis name to enable or disable preferred
+range positioning for all axes.
+
+.. _cartesian_polar_switching:
+
+Limit Based Cartesian-Polar Switching
+-------------------------------------
+
+When the tool axis is parallel to one of the rotary axes, this rotary
+axis is called “singular”. In the case of a rotary table, it then
+becomes possible to use this singular rotary axis in place of one or
+more linear axes when positioning or interpolating from one position
+to the next in the program. The use of a singular rotary axis in
+place of a linear axis is called “Polar” interpolation (as distinct
+from normal Cartesian interpolation), which can be controlled using
+the MODE/POLAR command (see :ref:`“Polar Interpolation”<polar_interpolation>`).
+
+The LIMIT/POLAR command defines a conditional Polar interpolation,
+which will only be used to avoid overtravel conditions that would
+otherwise occur with Cartesian interpolation. For example, if the X
+axis on a mill-turn lathe is restricted to positive values only, the
+post-processor can switch to polar interpolation during face milling
+to avoid moving the X axis below the center line. The LIMIT/ADJUST
+command (see :ref:`“Travel Limit Fixture Compensation”<travel_limit_fixture_compensation>`) fixture compensation
+offset amounts are taken into account when computing travel
+limitations for Cartesian versus polar interpolation purposes.
+
+The basic syntax is as follows:
+
+      :math:`\textbf{LIMIT / POLAR}, \begin{pmatrix}\begin{array}{l} \textbf{CNC} \\ *\textbf{AXIS}\ldots \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+Polar Interpolation Switching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{LIMIT / POLAR}, \textbf{CNC}`
+
+The CNC keyword specifies that machine polar interpolation should be
+used if necessary to avoid overtravel conditions. This requires GENER
+to perform a path-planning look-ahead each time it encounters a RAPID
+or high feed positioning motion. This look-ahead will analyze all of
+the cutting motions that immediately follow, to determine if polar
+interpolation is necessary so as to avoid an overtravel condition.
+
+At the completion of the look-ahead, GENER will do one of the
+following:
+
+-  Activate machine polar interpolation for the positioning motion(s)
+   and all of the following cutting motions.
+
+-  Deactivate polar interpolation if active and optionally pre-position
+   the singular axis if necessary to avoid overtravel for the
+   positioning motion(s) and all of the following cutting motions.
+
+Polar Emulation Switching
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{LIMIT / POLAR}
+   \begin{bmatrix} ,\! \begin{array}{l}
+   \textbf{AXIS},\textbf{AUTO} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS}
+   \end{array}\,\end{bmatrix} \!
+   \icamrange{4.6}{1}\! \begin{pmatrix} \!,\! \begin{array}{l} \begin{pmatrix}
+   \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \end{pmatrix} \,\big[,\mathit{value}\,\big] \begin{bmatrix} ,\! \begin{array}{l} \textbf{LARGE} \\ \textbf{SMALL} \end{array}\,\end{bmatrix} \\ \\
+   \textbf{XYZ}, x,y,z,\textbf{NORMAL},i,j,k
+   \end{array}\,\end{pmatrix} \;\ldots`
+
+   :math:`\hspace{3.12cm} \ldots \;
+   \begin{bmatrix} ,\textbf{SCAN}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix}`
+
+The AAXIS, BAXIS and CAXIS keywords restrict the automatic use of
+polar interpolation to the named rotary table axis only. The
+AXIS,AUTO couplet specifies that any singular rotary table axis can
+be a candidate for automatic polar emulation. This is the default if
+a rotary axis is not specified.
+
+The XAXIS, YAXIS and ZAXIS keyword, the optional *value* and the
+LARGE-SMALL couplet, all combine to define a “guard plane” and zone
+of travel where Cartesian positioning is valid. The post-processor
+will use polar emulation (i.e., rotate the singular axis) to avoid
+moving the named axis to the opposite side of the guard plane. The
+current axis position is used if an axis *value* is not specified.
+LARGE is assumed if neither LARGE or SMALL is specified. For example,
+“XAXIS, –0.5,LARGE” specifies that: the machine X-axis valid travel
+range is –0.5 and larger; and that the post-processor should use
+polar emulation if an attempt is made to move the X-axis below –0.5.
+
+The guard plane and zone of travel can also be specified given an
+(*x,y,z*) point on the plane and an (*i,j,k*) vector normal to the
+surface of the plane. Point and vector data must be specified in part
+(i.e., CL) coordinates. The range of valid travel is defined by the
+positive sense of the vector. For example, assuming the part and
+machine origins coincide, “XYZ,–0.5,0,0,NORMAL,1,0,0” defines the
+same guard plane and valid range of travel as does “XAXIS,–0.5,LARGE”
+described above.
+
+A maximum of four guard planes can be defined. These planes do not
+have to be orthogonal (i.e., are not required to be parallel or
+perpendicular to each other).
+
+The SCAN,ON couplet activates a proactive form of limit based
+Cartesian-Polar switching. When active, GENER will perform path
+planning (i.e., will scan forward in the CL file) when it encounters
+RAPID or high feed positioning motions in an attempt to determine an
+optimum orientation of the singular rotary axis, so as to maximize
+the span of Cartesian motions. SCAN,OFF (the default) performs
+reactive limit based Cartesian-Polar switching, at the point where an
+attempt is made to move past the guard plane.
+
+When entire path cannot be optimized in one step, having defined RTA
+sequence allows the motion to be broken just before the overtravel
+and to apply additional rotation at the safe RTA sequence. The process
+will be then automatically repeated as many times as needed.
+
+Starting from V25, the Cartesian-Polar travel optimization can
+be also applied to the sequence of CYCLE points. Set $PLR230=$FALSE to enable this.
+
+Polar Switching Activation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{LIMIT / POLAR},\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+OFF disables limit based Cartesian-Polar switching. ON re-enables the
+last specified Cartesian-Polar switching selection (i.e.,
+interpolation or emulation).
+
+The LIMIT/POLAR and MODE/POLAR commands are mutually exclusive.
+MODE/POLAR unconditionally selects Polar interpolation for subsequent
+motions, whereas LIMIT/POLAR conditionally selects Polar
+interpolation to avoid overtravel conditions during Cartesian
+interpolation.
+
+.. _singular_positioning:
+
+Limit Based Singular Positioning
+--------------------------------
+
+When the tool axis is parallel to one of the rotary axes, this rotary
+axis is called “singular”. In the case of a rotary table, it then
+becomes possible to use this singular rotary axis in place of one or
+more linear axes when positioning from one location to the next in
+the program. The use of a singular rotary axis to position the
+workpiece is called “Polar” positioning (as distinct from normal
+Cartesian positioning).
+
+The LIMIT/ROTREF command defines a series of rotary offsets or
+positions that the post-processor can use to reposition the
+workpiece, in an attempt to eliminate a linear axis overtravel. For
+example, if the X-axis on a mill-turn lathe is restricted to positive
+values only, the post-processor can rotate the C-axis (i.e.,
+workpiece) so that the end-point of the positioning move is always
+above the center-line (e.g., when face drilling a bolt hole
+pattern).
+
+The syntax is as follows:
+
+   :math:`\textbf{LIMIT / ROTREF} \begin{bmatrix} ,\! \begin{array}{l}
+   \textbf{INCR},\mathit{delta_1} \,\Big[,\mathit{delta_2} \,\big[,\ldots \,\big]\Big] \\
+   \textbf{ABSOL},\mathit{value_1} \,\Big[,\mathit{value_2} \,\big[,\ldots \,\big]\Big]
+   \end{array}\,\end{bmatrix}
+   \begin{bmatrix} ,\textbf{SCAN}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix}`
+
+   :math:`\textbf{LIMIT / ROTREF},\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+The “INCR,\ *delta*\ :sub:`1`\ ,\ *delta*\ :sub:`2`\ ,…” sequence defines rotary
+offsets that the post-processor should try in an attempt to eliminate
+an overtravel on a RAPID or high feed positioning motion. The post-
+processor will test rotate the rotary table from its current position
+by multiples of the ±\ *delta*\ :sub:`1` amount, to a maximum of ±360
+degrees, in an attempt to find a position that satisfies travel
+limits. If unsuccessful, the process is repeated, this time using the
+*delta*\ :sub:`2` amount and so on, until a valid orientation is found. If
+an orientation cannot be found that corrects the linear overtravel
+condition, then the rotary table axis is not rotated and a travel
+limit diagnostic is output as usual.
+
+The “ABSOL,\ *value*\ :sub:`1`\ ,\ *value*\ :sub:`2`\ ,…” sequence is similar to INCR,
+except that the trial offset values are measured from the rotary zero
+position instead of from the current rotary table axis position.
+
+The SCAN,ON couplet tells the post-processor to scan forward in the
+CL file in an attempt to choose a rotation that satisfies the largest
+span of upcoming positioning motions. SCAN,OFF (the default)
+positions the workpiece correct overtravel for the current position
+only. When using SCAN,ON it is recommended to use a \ *delta*\ :sub:`2` or
+\ *value*\ :sub:`2` that is much smaller than \ *delta*\ :sub:`1` or \ *value*\ :sub:`1`\ .
