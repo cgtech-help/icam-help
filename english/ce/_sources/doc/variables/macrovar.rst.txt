@@ -1,0 +1,254 @@
+.. _macro_variables:
+
+Macro Variables
+===============
+
+.. _var_cebksh:
+.. index:: Variables; $CEBKSH
+
++-------------+---------------------------------------------+
+| **$CEBKSH** | Whether Block Shutdown macros are activated |
+|             |                                             |
+|             | Type: Logical, Read/Write                   |
++-------------+---------------------------------------------+
+
+   Block Shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, block shutdown macros will not be executed.
+
+.. _var_cebkst:
+.. index:: Variables; $CEBKST
+
++-------------+--------------------------------------------+
+| **$CEBKST** | Whether Block Startup macros are activated |
+|             |                                            |
+|             | Type: Logical, Read/Write                  |
++-------------+--------------------------------------------+
+
+   Block Startup macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, block startup macros will not be executed.
+
+.. _var_ceppid:
+.. index:: Variables; $CEPPID
+
++-------------+-----------------------------------------------------------+
+| **$CEPPID** | Whether Pre-processor Identification macros are activated |
+|             |                                                           |
+|             | Type: Logical, Read/Write                                 |
++-------------+-----------------------------------------------------------+
+
+   Pre-processor Identification macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, pre-processor identification macros will not be executed.
+
+.. _var_ceppsh:
+.. index:: Variables; $CEPPSH
+
++-------------+-----------------------------------------------------+
+| **$CEPPSH** | Whether Pre-processor Shutdown macros are activated |
+|             |                                                     |
+|             | Type: Logical, Read/Write                           |
++-------------+-----------------------------------------------------+
+
+   Pre-processor Shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, pre-processor shutdown macros will not be executed.
+
+.. _var_ceppst:
+.. index:: Variables; $CEPPST
+
++-------------+----------------------------------------------------+
+| **$CEPPST** | Whether Pre-processor Startup macros are activated |
+|             |                                                    |
+|             | Type: Logical, Read/Write                          |
++-------------+----------------------------------------------------+
+
+   Pre-processor Startup macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, pre-processor startup macros will not be executed.
+
+.. _var_cesbsh:
+.. index:: Variables; $CESBSH
+
++-------------+--------------------------------------------------+
+| **$CESBSH** | Whether Subprogram Shutdown macros are activated |
+|             |                                                  |
+|             | Type: Logical, Read/Write                        |
++-------------+--------------------------------------------------+
+
+   Subprogram Shutdown macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, subprogram shutdown macros will not be executed.
+
+.. _var_cesbst:
+.. index:: Variables; $CESBST
+
++-------------+-------------------------------------------------+
+| **$CESBST** | Whether Subprogram Startup macros are activated |
+|             |                                                 |
+|             | Type: Logical, Read/Write                       |
++-------------+-------------------------------------------------+
+
+   Subprogram Sartup macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, subprogram startup macros will not be executed.
+
+.. _var_cycmac:
+.. index:: Variables; $CYCMAC
+
++------------------+-------------------------------------------+
+| **$CYCMAC**      | Whether cycle event macros are activated  |
+|                  |                                           |
+|                  | Type: Logical, Read/Write                 |
++------------------+-------------------------------------------+
+
+   Cycle event macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, cycle event macros will not be executed.
+
+.. _var_diagmac:
+.. index:: Variables; $DIAGMAC
+
++------------------+-------------------------------------------+
+| **$DIAGMAC**     | Whether diagnostic macros are activated   |
+|                  |                                           |
+|                  | Type: Logical, Read/Write                 |
++------------------+-------------------------------------------+
+
+   Diagnostic macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, diagnostic macros will not be executed.
+
+.. _var_edtmax:
+.. index:: Variables; $EDTMAX
+
++------------------+-------------------------------------------+
+| **$EDTMAX**      | Number of Tape Editor expressions defined |
+|                  |                                           |
+|                  | Type: Numeric, Read-only                  |
++------------------+-------------------------------------------+
+
+   This variable indicates how many Tape Editor expression are defined in QUEST.
+   It defines the upper limit of the $EDTSTA array described below.
+
+.. _var_edtsta:
+.. index:: Variables; $EDTSTA
+
++------------------+-----------------------------------------------+
+| **$EDTSTA**      | Whether Tape Editor expressions are activated |
+|                  |                                               |
+|                  | Type: Logical, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is an array of length $EDTMAX, with each element in the
+   array defining the active/inactive state of the corresponding
+   numbered Tape Editor expression as defined in QUEST.
+   All tape editor expressions are enabled by default at the start of
+   CERUN processing.
+
+.. _var_embmac:
+.. index:: Variables; $EMBMAC
+
++------------------+-----------------------------------------+
+| **$EMBMAC**      | MCD embedded macro delimiters           |
+|                  |                                         |
+|                  | Type: String array, Read/Write          |
++------------------+-----------------------------------------+
+
+   This array variable indicates the string delimiters that identify the
+   start and end of macro code embedded in the MCD. The macro code
+   between the start and end delimiters is compiled and executed when
+   the block is read. The embedded macro and delimiters are then removed
+   from the block and replaced by the return value of the macro (if
+   any). The following embedded macro delimiters are defined in the
+   $EMBMAC array. They can be changed if necessary should the prefix
+   strings conflict with valid MCD for the controller.
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  (1)
+            -  Embedded macro prefix for use with a pre-processor (default '#{')
+         *  -  (2)
+            -  Embedded macro prefix for use with regular processing (default '!{')
+         *  -  (3)
+            -  Embedded macro suffix (default '}')
+
+   A #{*macro*} pre-processor embedded macro is compiled and executed
+   after the Tape Editor, but before the Pre-Processor Startup macro (if
+   using a pre-processor) or Block Startup macro (if not using a
+   pre-processor). A !{*macro*} regular embedded macro is compiled and
+   executed after the Tape Editor and pre-processor have completed, but
+   before the Block Startup macro.
+
+.. _var_mnest:
+.. index:: Variables; $MNEST
+
++------------------+-----------------------------------------+
+| **$MNEST**       | Macro nest level                        |
+|                  |                                         |
+|                  | Type: Numeric, Read-only                |
++------------------+-----------------------------------------+
+
+   This variable indicates how many macros are active. If the variable
+   is equal to one, the current macro is the only active macro. A value
+   greater than one indicates that the current macro has been called by
+   another macro. (e.g., If the $MNEST value is 3 this indicates that
+   there are 3 active macros: the current macro; the one that called the
+   current macro; and the one that called the one that called the
+   current macro!).
+
+.. _var_mtnmac:
+.. index:: Variables; $MTNMAC
+
++------------------+-------------------------------------------+
+| **$MTNMAC**      | Whether motion event macros are activated |
+|                  |                                           |
+|                  | Type: Logical, Read/Write                 |
++------------------+-------------------------------------------+
+
+   Motion event macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, motion event macros will not be executed.
+
+.. _var_seqalloc:
+.. index:: Variables; $SEQALLOC
+
++------------------+-----------------------------------------+
+| **$SEQALLOC**    | Sequence allocation size/strategy       |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable defines how internal memory should be allocated when
+   sequence variables are created and when they grow in size. This
+   increase in size occurs when the += operator is used to append to an
+   existing sequence, or when a sequence variable is overwritten by a
+   larger sequence, as in A={A,B} or even A={B}. Note that internal
+   allocation size is not the same as the actual size of a sequence as
+   determined using $FLEN().
+
+   :–n: Reserve at least \|n\|, double size when extending
+   : 0: Reserve as required, double size when extending
+   :+n: Reserve at least n, increase size in multiples of n when extending
+
+   Setting $SEQALLOC=0 (the default) will generally result in faster
+   macro processing of sequences at the expense of greater memory usage,
+   whereas setting $SEQALLOC=1 will maintain the same memory allocation
+   and speed as for V20 and earlier releases.
+
+.. _var_tcmac:
+.. index:: Variables; $TCMAC
+
++------------------+-----------------------------------------+
+| **$TCMAC**       | Whether tool event macros are activated |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   Tool event macros are invoked only if this variable is set to $TRUE.
+   It is initialized to $TRUE by CERUN at the start of program processing.
+   If it is set to $FALSE, tool event macros will not be executed.
