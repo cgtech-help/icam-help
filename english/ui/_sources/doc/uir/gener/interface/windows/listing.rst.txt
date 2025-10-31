@@ -1,0 +1,49 @@
+Source
+------
+
+The Source window is somewhat similar to the macro trace window, except
+that the entire macro source is shown, with a marker identifying the
+line about to be processed. The source window also shows the CL file
+source, both in its original APT format (if applicable) as well as its
+transformed binary format. Any macro can be examined in the window,
+regardless if active or not. Four buttons in the Source window
+single-step through the macro or CL file in various ways.
+
+-  **Step into**: Processes the current record (either macro or CL),
+   stopping at the very next record (again, either macro or CL). If the
+   current record matches a macro, then Step-in will stop at the first
+   executable line of the matched macro. If the current record does not
+   match a macro, then Step-in acts the same as Step-over.
+-  **Step over**: Processes the current record (either macro or CL),
+   stopping at the next record of the same macro or CL file. Unlike
+   Step-in, if the current record matches a macro, then Step-over will
+   not stop in the matched macro.
+-  **Step out**: This is applicable when stepping inside a macro.
+   Step-out continues processing past the last record of the current
+   macro. After Step-out, processing will be paused at the next record
+   to processed by the caller (either a macro or CL).
+-  **Run to cursor**: Continues processing to the selected macro line or
+   CLDATA record. Select the macro line or CLDATA record first, before
+   selecting the “Run to cursor” feature.
+-  **Go to line**: Use the edit box to enter a line number you want to
+   go at and then press the Goto button next to it.
+-  **A drop down list** showing all sources that can be look at. This
+   includes the CL source file as well as any macros defined inside the
+   post-processor.
+
+When looking at the CL source, the popup context menu (right mouse
+button click) will give you the choice to look at the ASCII version
+(only if the CL source is one of the ASCII source accepted by GENER) or
+at the internal binary version of the CL file.
+
+You can set or remove a break point by clicking in the margin next to
+the line where you want to set or remove a break point. You can also use
+the context popup menu to set/remove or toggle breakpoints. The number
+of lines visible inside the Source window can be set from the tool setup
+options dialog. Leaving your mouse over a variable name will bring up a
+tooltip window listing the current value of that variable.
+
+|image1|
+
+.. |image1| image:: ./media/1ac789ef1e66e6db3c4628cbbe82d27b6cdb686c.gif
+
