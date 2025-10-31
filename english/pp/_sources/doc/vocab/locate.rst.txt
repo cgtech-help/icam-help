@@ -1,0 +1,146 @@
+.. _command_locate:
+
+The LOCATE Command :kbd:`[MLEPC]`
+=================================
+
+The LOCATE\ [#]_ command is used to preset the axis positions on
+the NC machine. This command is valid for all machine types but may
+not be available on specific machines.
+The following LOCATE functions are available:
+
+-  :ref:`“Parametric Format”<locate_parametric_format>`
+-  :ref:`“Axis Format”<locate_axis_format>`
+-  :ref:`“Applying and Removing Last Preset Positioning Offset”<locate_on_off>`
+
+The LOCATE command presets the coordinate registers by *renaming* the
+location at which the machine is currently positioned, to the
+coordinate values specified. The coordinate registers are reset to
+these values that are then output along with the appropriate code.
+Other post-processor *constants*, such as travel limits and rotary
+device center positions are adjusted accordingly. Processing then
+continues normally. The difference between the old and the new
+coordinates is stored for cancellation at a later point in the
+program. The LOCATE command may or may not have a cumulative effect
+depending on responses to QUEST.
+
+The first format is the axis specific LOCATE command. The second
+format is called the parametric form LOCATE command. The third format
+is used to quickly remove and reinstate LOCATE shifts and will be
+discussed last. In all formats, specifying MANUAL will suppress the
+output of NC control tape. This can be used to preset axes to desired
+locations without causing codes to appear in the tape file. GENER
+will continue processing in exactly the same manner whether MANUAL is
+coded or not.
+
+.. [#] The POSTN command was used in V18 and earlier releases to perform
+   preset positioning.
+
+.. _locate_parametric_format:
+
+Parametric Format
+-----------------
+
+This command format affects only linear axes and requires the values
+to be entered in a set order.
+
+   :math:`\textbf{LOCATE / } \big[ \textbf{ MANUAL}, \big]
+   \begin{bmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \; , \, \end{bmatrix} \;
+   a,b \big[,c \big]`
+
+The initial ON or OFF indicates whether the axis positions are being
+set to specific values or are being reset to their original values.
+If omitted, ON is assumed (i.e., axes are being set).
+
+The *a*, *b* and *c* scalar values specify in machine coordinates the
+new axis coordinate values to use. Values must be coded when setting
+the axes; values must not be coded when resetting the axes (i.e., OFF
+coded). The machine axes represented by the three scalars are
+dependent on the type of machine and the machining mode.
+
+  .. list-table::
+      :widths: auto
+      :header-rows: 1
+
+      *  -  Machine
+         -  a
+         -  b
+         -  c
+      *  -  Horizontal lathe in turn mode
+         -  Z
+         -  X
+         -  na
+      *  -  Vertical lathe in turn mode
+         -  X
+         -  Z
+         -  na
+      *  -  Any lathe in mill mode
+         -  X
+         -  Y
+         -  Z
+      *  -  2 axis mill or punch press
+         -  X/U
+         -  Y/V
+         -  na
+      *  -  Other mills
+         -  X/U
+         -  Y/V
+         -  Z/W
+
+The most common application of LOCATE is to preset the linear axes to
+some default position at the start of the program. For example the
+following command on a mill would cause the X and Y axes readouts to
+show zero (0) and the Z axis readout to show 12:
+
+   .. code-block::
+
+    LOCATE/0,0,12
+
+The specified positions are in machine coordinates, not CL
+coordinates. Note that coding MANUAL would cause GENER to internally
+reset the machine position to the specified location but no reset
+record would be output. A typical NC control block for this LOCATE
+command might be:
+
+   .. code-block::
+
+    N123 G92 X0. Y0. Z12. $
+
+.. _locate_axis_format:
+
+Axis-Specific Format
+--------------------
+
+This command format allows one or more axes to be set or reset
+individually by name.
+
+   :math:`\textbf{LOCATE / } \big[ \textbf{ MANUAL}, \big]
+   \begin{bmatrix} \, \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \; , \, \end{bmatrix} \!
+   \icamrange{13}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[ ,n \, \big] \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \, \end{bmatrix} \big[ ,\mathit{value} \, \big] \end{pmatrix}`
+
+The initial ON or OFF indicates whether the axes are being set or
+reset respectively. If omitted, ON is assumed. This can be overridden
+for any specific axis by explicitly coding an ON or OFF following the
+axis name. See :ref:`here<axis_names>` for a table correlating
+axes name keywords with machine axes.
+
+The scalar *value* must be coded if the axis is being set; it must
+not be coded if the axis is being reset (i.e., OFF coded). The value
+specifies in machine coordinates the axis coordinate value at the
+current location of the axis.
+
+.. _locate_on_off:
+
+Applying and Removing Last Preset Positioning Offset
+----------------------------------------------------
+
+This command format may be used to quickly remove, or reinstate
+LOCATE shifts to a number of axes at one time.
+
+   :math:`\textbf{LOCATE / } \big[ \textbf{ MANUAL}, \big]
+   \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \, \end{pmatrix}`
+
+If LOCATE/OFF is coded, the preset positioning shifts currently
+applied to all axes will be removed. After having removed LOCATE
+shifts using a LOCATE/OFF or LOCATE/OFF,XAXIS,YAXIS… command, all
+shifts removed may be reinstated automatically if LOCATE/ON is coded.
