@@ -1,0 +1,340 @@
+body {
+    margin:0;
+    padding:0;
+    font-family:Roboto;
+    background-color:#e5e5e5;
+
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #444444;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #e5e5e5;
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.page {
+    display: block;
+    max-width: 1100px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header{
+    display:table;
+    width:100%;
+    border:0px;
+    clear:both;
+    position:fixed;
+    z-index:99;
+}
+
+html {
+    --top-spacing: 135px;
+    scroll-padding-top: var(--top-spacing);
+}
+
+.sidebar {
+    height: 90%;
+    width: 30%;
+    top: 131px;
+    overflow: auto;
+    background-color: #444444;
+    position: fixed;
+}
+
+.navbar {
+    display: inline-block;
+    padding: 5px 10px;
+    overflow:auto;
+}
+
+.navbar:nth-child(2) {
+    height: auto;
+    margin-bottom:10px;
+}
+
+
+.navbar{
+    color:#ffffff;
+}
+
+.navbar a {
+    float: left;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #444444;
+    padding: 10px 10px;
+    border: 5px solid #444444;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover{
+    background-color:#c41e1e;
+}
+
+@media screen and (min-width:1100px){
+    .sidebar{
+        width:330px;
+    }
+}
+
+.content {
+    position: relative;
+    top: 131px;
+    margin-left: 30%;
+    width: auto;
+    overflow: hidden;
+    text-overflow: clip;
+    text-align: justify;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #444444;
+    font-weight: 500;
+    background-color: white;
+}
+
+.PPTable {
+    position: relative;
+    top: 131px;
+    width: auto;
+    overflow: hidden;
+    color: #444444;
+    font-weight: 500;
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.PPTable h1 {
+    text-align: left;
+    color: #c41e1e;
+}
+
+.content h1{
+    text-align:left;
+    color:#c41e1e;
+}
+
+.content h2{
+    text-align:left;
+}
+
+.table {
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+
+.divtable {
+    display: table;
+    padding: 10px;
+}
+
+.divtablerow {
+    display: table-row;
+    
+}
+
+.divtablecell {
+    display: table-cell;
+    padding-right:10px;
+    padding-bottom:5px;
+}
+
+.cell {
+    text-align: left;
+    text-wrap: normal;
+    padding: 15px 15px;
+    margin: 5px 5px;
+    max-width: 330px;
+}
+
+.style9{
+    font-size:smaller;
+}
+
+.card {
+    max-width: 128px;
+    border-radius: 10px;
+    border: 1px solid #444444;
+    word-break: normal;
+    font-size: 12px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.card:hover {
+    transition:.3s;
+    -webkit-box-shadow: 0px 6px 58px -26px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 6px 58px -26px rgba(0,0,0,0.75);
+    box-shadow: 0px 6px 58px -26px rgba(0,0,0,0.75);
+}
+
+.card a {
+    text-decoration: none;
+}
+
+.card img{
+    margin-bottom:10px;
+}
+
+hr {
+    border: 3px solid #444444;
+    max-width: 100px;
+    margin-left:0;
+    border-radius: 3px;
+}
+
+.content img{
+    margin-bottom:10px;
+}
+
+.style52{
+    font-size:12px;
+}
+
+.lidb {
+    list-style-image: url('../integration/Images/e_db.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.ligg {
+    list-style-image: url('../integration/Images/e_gg.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lires {
+    list-style-image: url('../integration/Images/e_res.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lipost {
+    list-style-image: url('../integration/Images/e_post.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.livm {
+    list-style-image: url('../integration/Images/e_vm.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lice {
+    list-style-image: url('../integration/Images/e_ce.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.licl {
+    list-style-image: url('../integration/Images/e_cl.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lirg {
+    list-style-image: url('../integration/Images/e_rg.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lisa {
+    list-style-image: url('../integration/Images/e_sa.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.limr {
+    list-style-image: url('../integration/Images/e_mr.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lipr {
+    list-style-image: url('../integration/Images/e_pr.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lipart {
+    list-style-image: url('../integration/Images/e_part.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.listock {
+    list-style-image: url('../integration/Images/e_stock.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lifix {
+    list-style-image: url('../integration/Images/e_fix.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.liunass {
+    list-style-image: url('../integration/Images/e_unass.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.litp {
+    list-style-image: url('../integration/Images/e_tp.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.liop {
+    list-style-image: url('../integration/Images/e_op.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.litoax {
+    list-style-image: url('../integration/Images/e_toax.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.litool {
+    list-style-image: url('../integration/Images/e_tool.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lifixgrp {
+    list-style-image: url('../integration/Images/e_fixgrp.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.lifixoff {
+    list-style-image: url('../integration/Images/e_fixoff.png');
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.ol,ul {
+    list-style-type: disc;
+}
