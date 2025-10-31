@@ -1,0 +1,240 @@
+.. _cl_file_macro_io:
+
+CL File I/O from a Macro
+------------------------
+
+The macro language provides the ability to reposition the input CL
+file pointer, read CL records from the input CL file, modify the last
+CL record read and process the last CL record read. The “last CL
+record read” is updated each time a macro TAPERD command is executed
+and each time that a CL record is read in the normal course of
+processing the input CL file.
+
+.. _macro_command_search:
+
+Repositioning the CL File (SEARCH)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The SEARCH macro command requires a single numeric expression
+specifying a record number as its argument. It repositions the input
+CL file so that the next CL record read will be at the given
+position.
+
+   :math:`\textbf{SEARCH / } \mathit{record\_number}`
+
+The SEARCH macro command is frequently used in conjunction with the
+$FCLREC() function, as illustrated in the following example:
+
+   ::
+
+      $$ save the next CL record position in a local variable
+      %L01=$FCLREC()+1
+      $$ do some processing using TAPERD, SEARCH or TAPEWT
+      …
+      …
+      $$ reset the CL file record pointer when finished
+      SEARCH/%L01
+
+.. _macro_command_taperd:
+
+Reading a CL Record (TAPERD)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The TAPERD macro command is used to read the next CL record from the
+input CL file.
+
+   :math:`\textbf{TAPERD}`
+
+The TAPERD command takes no arguments.
+
+Functions to Examine the Last CL Record
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following functions provide information about the last CL record
+read:
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+      :class: wrap-last
+
+      *  -  Function
+         -  Value
+      *  -  $FEOF( )
+         -  $TRUE if CL record is FINI
+      *  -  $FCLREC( )
+         -  record number of CL record
+      *  -  $FCLASS( )
+         -  numeric class of CL record
+      *  -  $FSUBCL( )
+         -  numeric subclass of CL record
+      *  -  $FSIZE( )
+         -  number of arguments in CL record
+      *  -  $FCL(*i*)
+         -  *i*\ th argument of CL record
+      *  -  $FCLS(*i,j*)
+         -  sequence of arguments *i* through *j* of CL record
+
+The expression $FEOF() has the same value as “$FCLASS().EQ.14000”.
+Note that the $FEOF function serves a dual purpose in that it can
+also be used to determine the end-of-file status of a file opened
+with the OPEN macro command.
+
+The $FCLASS and $FSUBCL functions can be particularly useful when
+dealing with wildcard macros. They can indicate the original input
+record class and subclass of the record that matched the wildcard
+macro.
+
+More detailed descriptions of these functions can be found in
+:ref:`“CL Data Parsing Functions”<cldata_parsing_functions>`.
+
+.. _macro_command_clput:
+
+Modifying the Last CL Record (CLPUT)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CLPUT macro command is used to modify one or more elements of the
+last CL record read, although the modifications are not acted upon
+until a TAPEWT command is coded. The first CLPUT argument specifies
+the index of the first element of the input CL record to be modified,
+followed by one or more argument values to be put starting at that
+location. An index value of –1 refers to the ISO W2 (class) position.
+An index value of “0” refers to the ISO W3 (subclass) position. Index
+values of “1” or greater refer to ISO positions W4 and onwards. For
+example, if the last CL record read was SPINDL/300,IPM, the command:
+
+   ::
+
+      CLPUT/1,200
+
+would change the record to SPINDL/200,IPM the command:
+
+   ::
+
+      CLPUT/1,200,RPM
+
+would change the record to SPINDL/200,RPM.
+
+A $NULL value can be used to delete CL elements from the given
+location onwards. This can only be done from element 1 (W4) onwards.
+For example, if the major word code of AIR is 1011 and the current CL
+record is SPINDL/300,RPM, the command:
+
+   ::
+
+      CLPUT/-1,2000,1011,ON,$NULL
+
+would change the record to AIR/ON. Note that the above command is
+equivalent to the following four commands given in any order:
+
+   ::
+
+      CLPUT/-1,2000
+      CLPUT/0,1011
+      CLPUT/1,ON
+      CLPUT/2,$NULL
+
+.. _macro_command_tapewt:
+
+Processing the Last CL Record (TAPEWT)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The TAPEWT macro command is used to process the last CL record read
+from the input CL file, as modified by CLPUT commands if any.
+
+   :math:`\textbf{TAPEWT}`
+
+The TAPEWT command takes no arguments. If macro matching is not
+disabled, the processor will try to match the record against a
+user-defined macro.
+
+.. _macro_command_tapeop:
+
+Deleting CL File Records (TAPEOP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The TAPEOP command allows the user to delete single records and
+ranges of records from the CL File. The syntax is as follows:
+
+   :math:`\textbf{TAPEOP / DELETE }
+   \,\icamrange{1.6}{1}\! \begin{pmatrix},\mathit{cln}
+   \begin{bmatrix},\textbf{THRU}, \begin{pmatrix}\begin{array}{l}\mathit{cln} \\ \textbf{ALL} \end{array}\end{pmatrix}\end{bmatrix}\end{pmatrix}`
+
+One or more individual records can be deleted by specifying the CL
+record number *cln*. A range of records can be deleted by coding
+*cln*,THRU,\ *cln*. The keyword ALL can be specified instead of the
+ending CL record number to delete all records to the end of the CL
+file.
+
+This command is useful if you have already read ahead in the CL file
+to get a specific record and have processed it using the TAPEWT
+function. The use of the TAPEOP command will prevent the “gotten”
+record from being reprocessed the next time it is read. The following
+example reads ahead in the CL file, gets the next spindle command,
+outputs it and then deletes it from the CL file so that it will not
+be processed again the next time it is read:
+
+   ::
+
+      %L01=$FGET(SPINDL)
+      TAPEWT
+      TAPEOP/DELETE,%L01
+
+Another available format of the TAPEOP command is:
+
+      :math:`\textbf{TAPEOP / DELETE},\textbf{CLEAR}`
+
+The CLEAR option clears the deletion table. This may be necessary if
+a large number of TAPEOP/ DELETE commands are issued. The record
+numbers are stored in a buffer area. The CLEAR option can be used to
+remove any previous record numbers from that buffer area.
+
+CL File Processing Examples
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following macro positions the CL file to the end-of-file.
+
+   ::
+
+       WHILE/.NOT.$FEOF()
+         TAPERD
+       ENDOF/WHILE
+
+The following macro code counts the number of post-processor commands
+in the input CL file. The CL file pointer is reset at the end:
+
+   ::
+
+      K=$FCLREC()
+      SEARCH/1
+      TAPERD
+      I=0
+      WHILE/.NOT.$FEOF()
+        IF/$FCLASS().EQ.2000
+          I=I+1
+        ENDOF/IF
+        TAPERD
+      ENDOF/WHILE
+      PPRINT/'!(s9) pp commands found ',I
+      SEARCH/K+1
+
+The following macro code stores in %L23 the value coded after the
+minor word RANGE in the current CL record. If there is no RANGE minor
+word, %L23 will have $NULL value after the loop:
+
+   ::
+
+     %L23=$NULL
+     DO/%L00=1,$FSIZE()
+       IF/$FCL(%L00).EQ.RANGE
+         %L23=$FCL(%L00+1)
+         EXIT/1
+       ENDOF/IF
+     ENDOF/DO
+
+The exact same results could be achieved using the $FGETARG function,
+as follows:
+
+   ::
+
+     %L23=$FGETARG(RANGE)
