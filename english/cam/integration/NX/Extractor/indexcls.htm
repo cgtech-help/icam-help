@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>ICAM extractor for Siemens NX</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../../../kit/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2> Post Processor with Optional Simulation </h2>
+                <a href="../../../kit/3DEXPERIENCE/readme.htm">3DEXPERIENCE</a>
+                <a href="../../../kit/Creo/readme.htm">Creo</a>
+                <a href="../../../kit/FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../../../kit/Fusion360/readme.htm">Fusion 360</a>
+                <a href="../../../kit/Mastercam/readme.htm">Mastercam</a>
+                <a href="../../../kit/NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../../../kit/NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../../../kit/PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2> Post Processor Only</h2>
+                <a href="../../../kit/Cadds5/readme.htm">Cadds5</a>
+                <a href="../../../kit/Cadra/readme.htm">Cadra</a>
+                <a href="../../../kit/Camand/readme.htm">Camand</a>
+                <a href="../../../kit/CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../../../kit/Cimatron/readme.htm">Cimatron</a>
+                <a href="../../../kit/Em_Machine/readme.htm">Em Machine</a>
+                <a href="../../../kit/Generic/readme.htm">Generic</a>
+                <a href="../../../kit/GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../../../kit/hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../../../kit/ICAM/readme.htm">ICAM</a>
+                <a href="../../../kit/IDEAS/readme.htm">IDEAS</a>
+                <a href="../../../kit/Intercim/readme.htm">Intercim</a>
+                <a href="../../../kit/Intergraph/readme.htm">Intergraph</a>
+                <a href="../../../kit/NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../../../kit/NICAM/readme.htm">NICAM</a>
+                <a href="../../../kit/NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../../../kit/Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../../../kit/SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../../../kit/TopSolid/readme.htm">TopSolid</a>
+			</div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../../../kit/index.htm"><i class="fa fa-home">Kit</i></a>
+            <a href="../../../kit/NX_CLS/readme.htm"><i class="fa fa-mail-reply">Return to previous</i></a>
+            <h1><img align="right" src="../../../images/camlogo_nx.png" width="225" height="100" />ICAM MFGExtractor for NX</h1>
+            <hr />
+            <br />
+            <img src="../../../images/camscrsh_nx.jpg">
+            <br />
+
+            <ul style="list-style:none">
+                <li>CAM System: NX 6+</li>
+                <li>Company: Siemens</li>
+                <li>
+                    Website:<a href="https://www.plm.automation.siemens.com/global/en/products/nx/">www.plm.automation.siemens.com/global/en/products/nx</a>
+                </li>
+                <li>Release: CAM-POST 22.0+</li>
+            </ul>
+            <br />
+            <hr />
+            <!-- Content -->
+            <h2>ICAM Manufacture extractor for NX documentation</h2>
+            <h3>Overview</h3>
+            <p>Thanks for choosing CAM-POST, the NC post processing Product from ICAM Technologies Corporation.</p>
+            <p>
+                ICAM unified manufacture extractor, automatically retrieves all necessary information (include tool path, process, machine setup, tools, product geometries etc.)
+                from NX to run the Adaptive Post-Processing, Simulation and Optimization sequence.
+            </p>
+            <h3>Prequisite</h3>
+            <ul>
+                <li>NX must already be installed on the computer before running the Extractor</li>
+                <li>NX integration must have already been set</li>
+                <li>NX must be running in manufacturing mode</li>
+            </ul>
+            <h3>Start ICAM MFG-Extractor</h3>
+            <p>
+                The extractor files can be found in the installation folder under<br/> 
+                <b>C:\Program Files\ICAM V2X\integration\NX_CLS\Win64</b>.
+            </p>
+            <ul>
+                <li>
+                    Short-Cut "Ctrl+U" to execute external user function(NXOpen application: the ICAM MFG Extractor)<br />
+                    <img src="Images/load_01.jpg">
+                </li>
+                <li>
+                    Execute NX-Open program from NX system's file menu<br />
+                    <img src="Images/load_02.jpg">
+                </li>
+            </ul>
+            <h3>ICAM Manufacture Extractor</h3>
+            <img src="../../../images/extractor_main.jpg"><br />
+            <h4>Extractor Tree Nodes</h4>
+			<ul>
+				<li class="lidb"><b>Simulation Setup Root:</b> Shows the full path and filename of the ICAM database selected during the extractor setup.
+                    <ul>
+                        <li class="ligg"><b>Machine Setup Group:</b> Same as the program tree node in NX which is the parent to all subsequent manufacturing data (e.g., NC_PROGRAM or name of the program).</li>
+                        <li class="lires"><b>ICAM Resources Group:</b> 
+                            <ul>
+                                <li class="lipost">Post-processor</li>
+                                <li class="livm">Virtual Machine Model</li>
+                                <li class="lice">Control Emulator</li>
+                            </ul>
+                        </li>
+                        <li class="licl"><b>Cutter Location Source File:</b> The default path and filename used by NX when generating CL data.</li>
+                        <li class="ligg"><b>Simulation Job:</b> The name of the simulation job to be launched.</li>
+                        <li class="lirg"><b>Program Group:</b> A repository for parts, stocks, fixtures, tool paths, and tools.
+                        <ul>
+                            <li class="lisa"><b>VM Stock Axis:</b> The name of the Stock Axis defined in the VM model.
+                            <ul>
+                                <li class="limr"><b>Mounting Reference:</b> The coordinate system associated with the Machine Setup Group (right-click to select an alternate system).</li>
+                                <ul>
+                                    <li class="lipr"><b>Product Root:</b> 
+                                    <ul>
+                                        <li class="lipart"><b>Part:</b> The name of the reference design model.</li>
+                                        <li class="listock"><b>Stock:</b> The name of the stock model or assembly.</li>
+                                        <li class="lifix"><b>Fixture Assembly:</b> The name the fixture used in the setup group.</li>
+                                        <li class="liunass"><b>Unassigned Objects:</b> Undesignated components.</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                            </ul>
+                            </li>
+                            <li class="litp"><b>Toolpath Group:</b> Lists the operations from the program.
+                            <ul>
+                                <li class="liop">Operation 1</li>
+                                <li class="liop">Operation 2</li>
+                            </ul>
+                            </li>
+                            <li class="litoax"><b>VM Tool Axis:</b> The name of the Tool Axis defined in the VM model. Lists the tools used 
+                                in the program.
+                            <ul>
+                                <li class="litool">Tool 1</li>
+                                <li class="litool">Tool 2</li>
+                                <li class="lifixgrp"><b>FixtureGroup:</b> Lists the fixture offset, VM stock axis, and mounting reference as children.
+                                <ul>
+                                    <li class="lifixoff">Fixture Offset
+                                    <ul>
+                                        <li class="lisa">Stock Axis</li>
+                                        <li class="limr">Mounting Reference</li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                            </ul>
+                            </li>
+                        </ul>
+                        
+                        </li>
+                    </ul>
+                </li>
+			</ul>
+			<!--End of Extractor Tree Nodes-->	
+			<h4>Using the Extractor</h4>
+            <p>Typical interaction with the ICAM Extractor UI window includes:
+            <ol>
+                <li>Verifying the simulation resource tree components. If any changes are required, right-click to reassign:
+                <ul>
+                    <li><b>Simulation Setup:</b> Select another CAM-POST database.</li>
+                    <li><b>ICAM Resources:</b> Select another PP, VM or CE contained in the same database.</li>
+                    <li><b>Cutter Location Source File:</b> Select another CL file or NC program.</li>
+                    <li><b>Mounting Reference:</b> Select a different coordinate system defined in NX.</li>
+                    <li><b>Product Geometry Group components:</b> Reassign elements as Part, Stock, Fixture or None.</li>
+                    <li><b>The VM Tool Axis:</b> Select a different axis if multiple tool axes are defined in VM.</li>
+                </ul>
+                </li>
+                <li>Verifying the <b>Working Directory</b> at the bottom of the UI (select a different folder if required)</br>
+                    <img src="../../../images/e_workdir.png">
+                </li>
+                <li>Verifying the <b>Tolerance</b> settings in the upper-right area of the UI:</br>
+                    <img src="../../../images/e_tolerance.png">
+                    <ul>
+                        <li><b>VM tolerances</b> (Gouge, Collision, Facet, Tool path).</li>
+                        <li><b>STL tolerances</b> (Part, Stock, Fixture)</li>
+                    </ul>
+                </li>
+                <li>Selecting the checkboxes for fixture and tool offset calculation
+                    <ul>
+                        <li><b>Machine base offset</b> include the offset between stock axis and tool axis in VM model while calculating the fixture offset. 
+                            This fixture offset is listed in the <b>Base & Fixture Compensation</b> table.
+                        </li>
+                        <li><b>Base offset as #Base</b> list the above offset as a separate base offset and not in the programmed fixture offset. 
+                            The base offset and fixture offset are listed separately in the <b>Base & Fixture Compensation</b> table.
+                        </li>
+                        <li><b>Use tool# as Offset#</b> use the tool number as the tool length compensation number for VM’s tool compensation table.</br>
+                            <img src="../../../images/e_offset.png">
+                        </li>
+                    </ul>
+                </li>
+                <li>Selecting miscellaneous options:</br>
+                    <img src="../../../images/e_misc.png">
+                    <ul>
+                        <li><b>Copy CL source</b> cope the CL file/ NC tape to the simulation folder.</li>
+                        <li><b>Simulate By Program</b> changes how the Program Group is organized in the extractor tree and how simulation job files are created (one per program).</li>
+                        <li><b>Use Cam Folder</b> changes the path of simulation folder to be the same as CAM part file folder.</li>
+                        <li><b>Regenerate STL</b> re-outputs STL files when the extractor runs the job again, even if STL files are already present.</li>
+                    </ul>
+                </li>
+            </ol>
+
+
+            </p>
+			<!--End of Using the Extractor-->
+            <h4>VM Tolerance Selection</h4>
+            <img src="../../../images/e_tolerance.png">
+            <p><b>VM tolerances</b> are used to calculate material removal during simulation.
+                <ul>
+                    <li><b>Gouge Tolerance:</b> amount of collision authorized between tools and the finished part. This is also the cutting tolerance for computing the in-process stock.</li>
+                    <li><b>Collision Tolerance:</b> motion sampling rate along the tool path, used to detect potential collisions (can be relatively large).</li>
+                    <li><b>Facet Tolerance:</b> tessellation used for calculating revolution solids (milling / drilling tools, turning stock and fixtures). 
+                        Value should be about 5 times smaller than the <b>Gouge Tolerance</b>.
+                    </li>
+                    <li><b>Tool Path Resolution:</b> tolerance for approximating curved motions by short straight segments.</li>
+                </ul>
+            </p>
+            <p><b>STL tolerances</b> are used to output STL files from NX.
+                <ul>
+                    <li><b>Part Tolerance:</b> use the same value as the <b>Facet Tolerance</b> entered in the VM Tolerances section 
+                        (about 5 times smaller than the <b>Gouge Tolerance</b>).
+                    </li>
+                    <li><b>Stock Tolerance:</b> set to a larger value than the <b>Part Tolerance</b>.</li>
+                    <li><b>Fixture Tolerance:</b> set to a loose value, as safety zones are already defined in the VM model.</li>
+                </ul>
+                Several sets of tolerance values can be saved for different VM models by pressing <q>Save as</q>.
+            </p>
+			<!--End of VM Tolerance Selection-->
+            <h4>Launching the Simulation Job</h4>
+            <img src="../../../images/e_launch.png">
+            <p>
+                Three ICAM simulation options are available to launch from the Extractor UI:
+                <ul>
+                    <li><b>PSE:</b> Launch GENER and CERUN simultaneously. 
+                        Both the post-processor and the control emulator will use the same Virtual Machine model and will run either in parallel or one after the other. </li>
+                    <li><b>GENER:</b> Launch the selected post-processor along with the associated Virtual Machine model. </li>
+                    <li><b>CERUN:</b> Launch the selected control emulator along with the associated Virtual Machine model.</li>
+                </ul>
+                The launch options will depend on the selected modes in the box above. 
+                <ul>
+                    <li><b>SIM:</b> Check to enable machine simulation.</li>
+                    <li><b>MRS:</b> Check to enable material removal during simulation.</li>
+                </ul>
+                The remaining buttons are:
+                <ul>
+                    <li><b>Refresh:</b> To retrieve or re-retrieve the CAM data. </li>
+                    <li><b>Extract:</b> To output generated simulation resource.</li>
+                </ul>
+            </p>
+            <!--End of Launching the Simulation Job-->
+            <h4>Preference Options</h4>
+            <p>More options are available under the preference options window. 
+                To access this window, right-click the top bar of the extractor and select <b>Preference Option</b>. </br>
+                <img src="../../../images/e_prefopt.png"></br>
+                This window provides additional options which are either generic or specific to a CAM system, as shown in parentheses.
+            </p>
+            <h5>General Settings</h5>
+            <ul>
+                <li><b>Using default tool library</b> is used when an external tool library use is preferred. This library can have tools that differ from the exported tools from the CAM system.</li>
+                <li><b>Run GENER/CERUN with launch panel</b> is used when you want the ICAM launch window to appear when you click PSE/GENER/CERUN buttons. This will allow you to make some final changes to setting up post processing or G-code emulation.</li>
+                <li><b>Use common machine tolerance and offset settings</b> is used if you would like to use the same tolerance and offset settings for all VM models.</li>
+                <li><b>Save/Restore last settings</b> is used to save all the extractor settings for the current job so that, if you close the Extractor, you will be able to reopen it with all the same settings restored.</li>
+                <li><b>Extract unused tools</b> is used to extract any tools that are not used, but were created in the CAM system.</li>
+                <li><b>Include hidden geometries</b> is used to extract any geometries that are hidden in the CAM system.</li>
+                <li><b>Backup simulation job</b> is used to save the old simulation job file as backup when you choose to create a new simulation job by clicking Extract.</li>
+                <li><b>Simplify tool profile</b> is used to recalculate the tool profile to keep the minimum number of line segments based on the current facet tolerance.</li>
+                <li><b>Using turning tool setup angle</b> is used to set the default turning tool angle based on the tooling information.</li>
+                <li><b>Force length comp values to be 0s for VM tools</b> is used to force a value of 0 for any length compensation values inside Virtual Machine. For this case, the program needs to compensate for tool length offsets.</li>
+                <li><b>Force diameter com values to be 0s for VM tools</b> is used to force a value of 0 for any diameter compensation values inside Virtual Machine.</li>
+                <li><b>Force offset number to be 1 for VM tools</b> is used when you need your length and diameter offset numbers to be 1.</li>
+                <li><b>Enable frame retrieving</b> is used to retrieve the coordinate system embedded in the product, and to set it as a FRAME (coordinate system) in Virtual Machine. Its name must contain the Frame filter string.</li>
+                <li><b>Minimum tool body</b> is used to offset the body of a parametric tool. A positive offset reduces the diameter of the tool body. This can be used to eliminate tool shank collision errors when the shank diameter is the same as the tool diameter.</li>
+                <li><b>Geometry output format</b> is used to change the file format of the extracted geometry. An additional option allows you to merge non-machinable fixtures into a single object.</li>
+                <li><b>Default CL source extension</b> is used to inform the extractor about the default CL or NC file extension.</li>
+            </ul>
+            <h5>NX-Specific Settings</h5>
+            <ul>
+                <li><b>Product workpiece filter for all occurrences</b> is used to apply a common filter to all Product nodes in the extractor.</br>
+                    For example, if you have five programs that are loaded in the extractor and you would like to use the same part and fixture geometries for all five program branches, 
+                    this setting allows you to apply the same part / stock / fixture filter for all five branches so that you do not have to select them manually for each branch.
+                </li>
+                <li><b>Join Geometry surfaces</b> is used to heal surfaces of STL bodies exported from NX.</li>
+                <li><b>Show CLS Generate Option</b> shows a checkbox on the extractor which can be selected to force the extractor to generate the CLS file. 
+                    To prevent unexpected results, ICAM recommends that you should not use this option and instead, you should generate the CLS file separately and select it in the extractor.
+                </li>
+            </ul>
+            <!--End of Preference Options-->
+            <h3>About Solid Milling Tools</h3>
+            <h4>CASE 1: Solid tool components are fully defined using solid library tool</h4>
+            <img src="Images/solid_tool_01.jpg">
+            <h4>CASE 2: Solid tool compenents partially defined using solid library tool</h4>
+            <p>Missing cutting and spin portion.</p>
+            <p>Use machine tool navigator to define missing components, or simply rename the cutting component; append a string "TOOL_CUTTING".</p>
+            <img src="Images/solid_tool_02.jpg">
+            <h4>CASE 3: Probing tool using solid library tool</h4>
+            <img src="Images/solid_tool_03.jpg">
+            <h4>CASE 4: Solid tool color using solid library tool</h4>
+            <p>Assembly colour is the color of the first component.</p>
+            <p> Change the first selected component to change the tool assembly's color.</p>
+            <img src="Images/solid_tool_04.jpg"><br />
+            <!--Top Arrow-->
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
