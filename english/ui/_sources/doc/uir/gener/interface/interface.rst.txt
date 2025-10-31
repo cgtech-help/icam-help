@@ -1,0 +1,73 @@
+CAM-POST GENER Interface
+========================
+
+The following menus are available:
+
+-  `Files <menus/file/file.html>`__
+-  `Run <menus/run/run.html>`__
+-  `View <menus/view/view.html>`__
+-  `Debug <menus/debug/debug.html>`__
+-  `Help <menus/help/help.html>`__
+-  `Tools <menus/tools/tools.html>`__
+-  `Other operation (Synchronize) <other/synchronize.html>`__
+
+A comprehensive tracing and debugging feature can be activated by
+selecting the “full-mode” (or verbose) display. This display enables the
+post-processor writer to better understand the relationship between CL
+data, macro processor and resultant NC program data. It does this both
+by tracing the processing of various types of data, and also by
+providing the capabilities of a fully functional debugger.
+
+   **Note**: The Windows interface currently provides more features than
+   the UNIX one. Where differences occur, they are noted in the
+   descriptions that follow.
+
+When GENER is run in this mode, post-processing starts in a paused
+state. The **Run»Play** menu selection or toolbar button can be pressed
+to start post-processing.
+
+There are four trace windows that trace (or list) various types of input
+and output records. GENER provides **Run»Step** and **Run»Pause**
+commands to pause processing whenever something is written to one of
+these windows. The trace windows are:
+
+A Synchronize function is available for the trace windows, using the
+right-mouse context sensitive pop-up menu. Synchronizing on a line of
+output in one trace window, causes all other trace windows to identify
+the corresponding point they were at when the selected line was output.
+On Windows systems, the up and down arrows can be used to change the
+line of output being synchronized.
+
+Diagnostic messages are listed to the Console trace window, and also
+to...
+
+On Windows systems, there are four debugging windows that can be used to
+perform more advanced Visual debugging and testing of a post-processor.
+GENER provides **Debug»Step Over, Debug»Step Into, Debug»Step Out and
+Debug»Run to Cursor** menu commands (and keyboard shortcuts) to debug CL
+and macro records, one command at a time. GENER also provides a
+**Debug»Breakpoint Manager** to identify stopping points in your CL file
+or post-processor where closer inspection is required, and **Debug»Macro
+Manager** to individually enable or disable macros for testing purposes.
+The debugging windows are:
+
+On UNIX systems, the debugger is command line based. The debugger must
+be activated from the UNIX command line or from the Options panel of the
+GENER launch facility. Debug commands are typed into a Debug input
+window, and the results are shown in the Console window.
+
+Many of the features and functions listed in the drop down menus are
+also available using the toolbar menus. On Windows systems, select the
+Tools»Toolbar... menu selection to select the toolbar menus you want
+displayed; the toolbars are fixed on UNIX systems.
+
+.. toctree::
+   :hidden:
+   
+   dialogs/dialogs
+   menus/menus
+   toolbars/toolbars
+   windows/windows
+   other/synchronize
+
+
