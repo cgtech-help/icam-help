@@ -1,0 +1,15 @@
+Simulation»Camera
+~~~~~~~~~~~~~~~~~
+Simulation»Camera»Load (Ctrl+(0-9))
+Simulation»Camera»Save (Ctrl+Alt+(0-9))
+
+The Camera Save menu selection (Ctrl Alt 0 through Ctrl Alt 9 shortcuts)
+records the current camera viewpoint, position and orientation in one of
+10 standard user-defined viewpoints. The Camera Load menu selection
+(Ctrl 0 through Ctrl 9 shortcuts) resets the camera to a previously
+saved position. The camera can directly switch to the new position, or
+it can smoothly interpolate to the new position, if both the old and new
+positions share the same underlying viewpoint (i.e., both are
+perspective views, or both are front views). The Camera animation mode
+can be set from the Simulation»Options “use camera animation” check box.
+
