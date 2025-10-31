@@ -1,0 +1,221 @@
+.. _ce_macro_commands:
+
+Control Emulator Macro Commands
+===============================
+
+The macro language is shared by Icam Post post-processors, Virtual
+Machine models and of course by Control Emulator. Each of these
+products has its own extensions to the macro language. This section
+details commands and/or command syntax that are unique to Control
+Emulator:
+
+-  :ref:`EXEC<macro_command_exec>`
+-  :ref:`LPRINT<command_lprint>`
+-  :ref:`PPRINT<command_pprint>`
+-  :ref:`TAPERD<macro_command_taperd>`
+-  :ref:`TAPEWT<macro_command_tapewt>`
+-  :ref:`SEARCH<macro_command_search>`
+-  :ref:`RSTMODAL<macro_command_rstmodal>`
+-  :ref:`SAVMODAL<macro_command_savmodal>`
+
+.. _macro_command_exec:
+
+The EXEC Command
+----------------
+
+The EXEC command is the primary method of macro customization with
+Control Emulator. The EXEC command is used to either interrupt
+processing and immediately execute one or more blocks of MCD, or to
+queue up one or more blocks of MCD to be executed after the current
+block processing has completed. The EXEC command syntax is as
+follows:
+
+   :math:`\textbf{EXEC /}
+   \begin{bmatrix}\,\begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array} \;, \end{bmatrix}
+   \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \; \icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+   :math:`\textbf{EXEC /}
+   \begin{bmatrix}\,\begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \end{array} \;, \end{bmatrix}
+   \, \icamrange{2.6}{1}\! \begin{pmatrix}\,\begin{array}{l} \mathit{code\_id} \\ \\ \mathit{data\_id,value} \end{array} \;, \end{pmatrix}
+   \icamrange{2.6}{1} \begin{bmatrix},\begin{array}{l} \mathit{code\_id} \\ \\ \mathit{data\_id,value} \end{array} \;, \end{bmatrix}`
+
+The character *string* will be processed in the same way as the input
+MCD. The optional *value(s)* can be formatted into the MCD string,
+before processing, using the format specifications described in :ref:`“String Formatting”<string_formatting>`.
+For example:
+
+   ::
+
+      EXEC/'G91G28Z0.'
+
+Alternately, code and data identifiers can be specified using their
+identifier names. Data identifiers must be followed by the data
+identifier value. The code identifiers are listed in the :ref:`Code Identifiers<annex_code_ident>` annex
+and the data identifiers are listed in :ref:`Data Identifiers<annex_data_ident>` annex.
+For example:
+
+   ::
+
+      EXEC/CODE_POSITION_RELATIVE,CODE_GOHOME,REG_AXIS_Z,0
+
+The NEXT keyword (the default) indicates that the command must be
+executed after the current block processing has ended. All EXEC/NEXT
+commands are added to a list that will be executed in the same way as
+regular MCD input after the current block has completed processing.
+
+The NOW keyword can be used to interrupt processing of the current
+block while the EXEC command is processed. The EXEC/NOW command
+should be used in macros when it is necessary to perform custom
+processing before continuing with whatever action it was that caused
+the current macro to execute.
+
+.. _command_lprint:
+
+The LPRINT Command
+------------------
+
+The LPRINT command is used to control output to the verification
+listing (.lce) file created by CERUN. The command syntax is as
+follows:
+
+   :math:`\textbf{LPRINT / } \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \mathit{lines} \end{array}\,\end{pmatrix}`
+
+If OFF is coded, output to the verification listing is disabled. The
+ON keyword enables output to the verification listing. A number can
+be coded to skip a given number of lines. The line skip is terminated
+when the next page is reached. A value of 0 advances output to the
+next page, providing that pagination is active.
+
+.. _command_pprint:
+
+The PPRINT Command
+------------------
+
+The PPRINT command is used to output messages to the verification
+listing (.lce) file created by CERUN. The command syntax is as
+follows:
+
+   :math:`\textbf{PPRINT / } \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+The character string will be written to the verification listing. The
+optional values can be formatted into the string using the format
+specifications described in :ref:`“String Formatting”<string_formatting>`.
+
+.. _macro_command_taperd:
+
+The TAPERD Command
+------------------
+
+The TAPERD macro command is used to read the next block of MCD,
+without processing it. The contents of the block is stored in the
+$MCDRD system variable and the record number (i.e., count of blocks
+from the start of file) is stored in the $MCDNO system variable.
+
+   :math:`\textbf{TAPERD}`
+
+The TAPERD command takes no arguments.
+
+The TAPERD command advances the MCD input point to the next record.
+To read forward in the MCD, you must save the current record number
+before calling TAPERD and restore the MCD input position using the
+:ref:`SEARCH command<macro_command_search>`.
+
+To avoid error diagnostics during CERUN processing, use the $FEOF()
+macro function to test for an end-of-file condition on the input MCD
+file *before* calling TAPERD.
+
+.. _macro_command_tapewt:
+
+The TAPEWT Command
+------------------
+
+The TAPEWT macro command is used to process the last block of MCD
+read, either by a TAPERD command, or by the $FGET or $FGETR
+functions. The TAPEWT command is the same as coding EXEC/NOW,$MCDRD.
+
+   :math:`\textbf{TAPEWT}`
+
+The TAPEWT command takes no arguments.
+
+.. _macro_command_search:
+
+The SEARCH Command
+------------------
+
+The SEARCH macro command is used to reposition the MCD input point so
+that the next block of MCD read, either by a TAPERD command or by
+normal processing, will be from the specified record number. The
+command syntax is as follows:
+
+   :math:`\textbf{SEARCH / } \mathit{record\_number}`
+
+The SEARCH command takes a single numeric value specifying the record
+number of the next MCD block to be read. The record number is the
+count of blocks from the start of the current input file – not the N
+block number. The $MCDNO system variable can be used to obtain the
+record number of the last block read.
+
+The SEARCH command is commonly used in conjunction with the TAPERD
+command, to provide a means of looking forward in the MCD. For
+example:
+
+   ::
+
+      %L01=$MCDNO
+      WHILE/.NOT.$FEOF()
+         TAPERD
+         …
+      ENDOF/WHILE
+      SEARCH/%L01
+
+The SEARCH command is not required following a call to the $FGET or
+$FGETR, since these functions do not affect the input MCD position.
+
+.. _macro_command_rstmodal:
+
+The RSTMODAL Command
+--------------------
+
+The RSTMODAL command resets the modality status of all code groups to
+the modal state they were at when the last corresponding SAVMODAL
+command was coded. The RSTMODAL command takes no parameters and is
+therefore coded simply as follows:
+
+   :math:`\textbf{RSTMODAL}`
+
+The use of RSTMODAL is discussed below.
+
+.. _macro_command_savmodal:
+
+The SAVMODAL Command
+--------------------
+
+The SAVMODAL command saves the current modality status of all code
+groups. This command must be paired with a corresponding RSTMODAL
+command that will later restore the modal code group states to their
+saved values. The SAVMODAL command takes no parameters and is
+therefore coded simply as follows:
+
+   :math:`\textbf{SAVMODAL}`
+
+The SAVMODAL and RSTMODAL commands must be paired. Each SAVMODAL
+command pushes the current modality settings of all code groups onto
+an internal stack. When a RSTMODAL command is later coded, the code
+group modality settings are restored to the values saved at the top
+of the stack and then the stack is “popped” one level.
+
+Attempting to call RSTMODAL more times than there are actual saved
+states will result in a diagnostic.
+
+The purpose of these command is to duplicate the functionality found
+on many controllers that allow “localization” of modal codes in
+subprograms. Code a SAVMODAL at the start of a subprogram (or in a
+macro) to begin the localization of modal changes. You can then issue
+whatever MCD is necessary to perform an action without concern for
+the effect that it may have on later processing. At subprogram or
+macro exit, code a RSTMODAL command to reset the code group modality
+settings back to their original saved values.
+
+The SAVMODAL and RSTMODAL commands can be nested.
