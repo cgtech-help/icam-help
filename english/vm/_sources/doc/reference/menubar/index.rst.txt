@@ -1,0 +1,92 @@
+Menu Bar
+*********
+
+Virtual Machine can be nearly completely controlled from the Simulation
+menu bar selection.
+The Simulation menu is available in QUEST when developing a model.
+It is only available in the GENER and CERUN Full interface if
+material Removal Simulation and/or Virtual Machine Simulation are
+selected in the Simulation launch panel settings.
+
+The following items are available, listed as they appear in the Simulation menu:
+
+   .. toctree::
+      :hidden:
+
+      main
+      controller
+      manager
+      mode
+      partfixture
+      toolholderhead
+      constructentity
+      constructaxis
+      camera
+      show
+      measure
+      annotation
+      wcs
+      group
+      selection
+      grid
+      lights
+      material
+      display
+      chip
+      compare
+      options
+      setup
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`Virtual Machine<sim_vm>`
+         -  Toggles the display of the Virtual Machine simulation windows :small:`(CERUN & GENER only)`
+      *  -  :ref:`Controller<sim_controller>`
+         -  Toggles the display of the Controller window :small:`(CERUN & GENER only)`
+      *  -  :ref:`Manager<sim_manager>`
+         -  Toggles the display of the Simulation Manager window
+      *  -  :ref:`Mode<sim_mode>`
+         -  Sets the primary activity of the mouse, and toggles MRS functions :small:`(CERUN & GENER only)`
+      *  -  :ref:`Parts/Fixtures<sim_partfixture>`
+         -  Provides the ability to add parts and fixtures to the simulation :small:`(CERUN & GENER only)`
+      *  -  :ref:`Tools/Holders/Heads<sim_toolholderhead>`
+         -  Provides the ability to add tools and holders to the simulation, and to select the active head :small:`(CERUN & GENER only)`
+      *  -  :ref:`Construct Entity<sim_construct_entity>`
+         -  Provides the ability to add physical entities to the model :small:`(QUEST only)`
+      *  -  :ref:`Construct Axis<sim_construct_axis>`
+         -  Provides the ability to add axes to the model :small:`(QUEST only)`
+      *  -  :ref:`Camera<sim_camera>`
+         -  Controls various aspects of camera positioning
+      *  -  :ref:`Show<sim_show>`
+         -  Toggles the display of various visual aids
+      *  -  :ref:`Measure<sim_measure>`
+         -  Provides the ability to take measurements between selected objects
+      *  -  :ref:`Annotation<sim_annotation>`
+         -  Provides simulation window markup, snapshot and recording functions
+      *  -  :ref:`Use World CS<sim_use_wcs>`
+         -  Toggles between world and local display/placement of objects :small:`(QUEST only)`
+      *  -  :ref:`Group Selection<sim_group_selection>`
+         -  Toggles between individual and grouped object selection :small:`(QUEST only)`
+      *  -  :ref:`Selection<sim_selection>`
+         -  Provides the ability to show or hide physical entities
+      *  -  :ref:`Grid<sim_grid>`
+         -  Activates the Grid dialog, which defines the boundaries and appearance of the world
+      *  -  :ref:`Lights<sim_lights>`
+         -  Activates the Lights dialog, which controls illumination of the simulation
+      *  -  :ref:`Material<sim_material>`
+         -  Activates the Material dialog, which defines material visual properties
+      *  -  :ref:`Display<sim_display>`
+         -  Activates the Display dialog, which defines HUD “heads-up” display settings
+      *  -  :ref:`Chip and Split<sim_chip>`
+         -  Activates the “Stock splitting management” dialog, which provides functions to segment the in-process stock
+      *  -  :ref:`Compare<sim_compare>`
+         -  Activates the Compare dialog, which defines settings used when comparing in-process stock vs design part
+      *  -  :ref:`Options<sim_options>`
+         -  Activates the Options dialog, which defines various simulation settings
+      *  -  :ref:`Open Setup<sim_open_setup>`
+         -  Selects the Verification Setup (.vsw) file to use for the simulation :small:`(CERUN & GENER only)`
+      *  -  :ref:`Save Setup<sim_save_setup>`
+         -  Saves the current simulation setup :small:`(CERUN & GENER only)`
