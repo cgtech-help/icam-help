@@ -1,0 +1,111 @@
+Conversion Functions
+====================
+
+Conversion functions take arguments of one type and return arguments
+of a different type. String conversion functions are listed in the
+section following this one.
+
+.. _func_fatof:
+.. index:: Functions; $FATOF
+
++------------------------------------------------+------------------------------------------+
+| **$FATOF(**\ *string*\ **)**                   | Convert string argument to number        |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function converts a string to a real number. This can be useful
+   when you wish to convert text in
+   an MCD block
+   to a number that can be used in subsequent calculations.
+
+.. _func_fcvint:
+.. index:: Functions; $FCVINT
+
++------------------------------------------------+------------------------------------------+
+| **$FCVINT(**\ *a*\ **)**                       | Convert argument to whole number         |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function converts an argument *a* of various types to a whole
+   number.
+
+   :*Type*:    *Return value*
+   :REAL:      the equivalent of $FINT(*a*)
+   :LOGICAL:   a value of zero if $FALSE and a value of one if $TRUE
+   :KEYWORD:   the Minor word integer code
+   :RECORD:    the Major word subclass code
+   :STRING:    the equivalent of $FINT($FATOF(*a*))
+   :CODE:      the Control Emulator internal numeric representation of the code type
+   :REG:       the Control Emulator internal numeric representation of the register type
+   :SEQUENCE:  zero if empty, otherwise the value of $FCVINT(*a*\ (1))
+
+.. _func_fcvreal:
+.. index:: Functions; $FCVREAL
+
++------------------------------------------------+------------------------------------------+
+| **$FCVREAL(**\ *a*\ **)**                      | Convert argument to number               |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function converts an argument *a* of various types to a number.
+
+   :*Type*:    *Return value*
+   :REAL:      is returned as-is
+   :LOGICAL:   a value of zero if $FALSE and a value of one if $TRUE
+   :KEYWORD:   the Minor word integer code
+   :RECORD:    the Major word subclass code
+   :STRING:    the equivalent of $FATOF(*a*)
+   :CODE:      the Control Emulator internal numeric representation of the code type
+   :REG:       the Control Emulator internal numeric representation of the register type
+   :SEQUENCE:  zero if empty, otherwise the value of $FCVINT(*a*\ (1))
+
+   For example $FCVREAL(ON) returns 71.
+
+.. _func_fmajor:
+.. index:: Functions; $FMAJOR
+
++------------------------------------------------+------------------------------------------+
+| **$FMAJOR(** [*class,*] *subclass*\ **)**      | Convert numeric arguments to major word  |
+|                                                |                                          |
+|                                                | Returns: Record                          |
++------------------------------------------------+------------------------------------------+
+| **$FMAJOR(**\ *string*\ **)**                  | Convert string argument to major word    |
+|                                                |                                          |
+|                                                | Returns: Record or $NULL                 |
++------------------------------------------------+------------------------------------------+
+
+   The first form of the $FMAJOR function rounds the class and subclass
+   numeric arguments to the nearest whole number and returns an argument
+   of type RECORD. The “class subclass” combination need not exist as a
+   known major word or record type. Class 2000 is assumed (i.e.,
+   post-processor command) if omitted.
+
+   The second form of the $FMAJOR function performs a case insensitive
+   search for the named major word and returns an argument of type
+   RECORD if found. A value of $NULL is returned if the string does not
+   define a known major word or record type.
+
+.. _func_fminor:
+.. index:: Functions; $FMINOR
+
++------------------------------------------------+------------------------------------------+
+| **$FMINOR(**\ *n*\ **)**                       | Convert numeric argument to minor word   |
+|                                                |                                          |
+|                                                | Returns: Keyword                         |
++------------------------------------------------+------------------------------------------+
+| **$FMINOR(**\ *string*\ **)**                  | Convert string argument to minor word    |
+|                                                |                                          |
+|                                                | Returns: Keyword or $NULL                |
++------------------------------------------------+------------------------------------------+
+
+   The first form of the $FMINOR function rounds the numeric argument
+   *n* to the nearest whole number and returns an argument of type
+   KEYWORD. The minor word need not exist as a known keyword.
+
+   The second form of the $FMINOR function performs a case insensitive
+   search for the named minor word and returns an argument of type
+   KEYWORD if found. A value of $NULL is returned if the string does not
+   define a known keyword.
