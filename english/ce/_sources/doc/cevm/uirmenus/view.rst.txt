@@ -1,0 +1,143 @@
+.. _view_menu:
+
+View Menu
+~~~~~~~~~
+
+The amount and types of information traced to the Input, Output,
+Console and Macro windows can be set using the
+Tools»Preferences»Trace menu function as well as from the launch
+panel Output dialog (see :ref:`here<options_dialog>`).
+
+**View»Input**
+
+   This toggle activates or disables the input
+   MCD file trace window. When active, MCD blocks
+   will be listed in the Input window as they are read.
+   Right-mouse in the Input window and select Options to bring up the
+   following Tools»Preferences»Trace settings that affect Input tracing:
+
+   -  **MDI and EXEC commands:** traces blocks of MCD as they are processed
+      via the MDI input. It also traces the content of macro EXEC commands.
+   -  **External subprograms:** traces blocks of MCD read from subprograms.
+   -  **Internal ICAMFS subprograms:** also traces blocks of MCD read from
+      subprograms stored in the internal //icamfs file storage area.
+
+The last 20,000 input trace lines are remembered unless changed via
+the Tools»Preferences»Trace settings. The Output, Console and Macro
+trace windows (described below) are similarly limited.
+
+**View»Output**
+
+   This toggle activates or disables the
+   control emulator processing trace window.
+   When active, control emulator processing data will be listed in the
+   Output window as it is written.
+   Right-mouse in the Output window and select Options to bring up the
+   following Tools»Preferences»Trace settings that affect Output tracing:
+
+   -  **Input blocks:** traces input MCD blocks with a “Block:” prefix
+      aligned so that you can better see the effect of any Edited blocks
+      tracing (see next).
+   -  **Edited blocks:** traces changes to the input block due to tape
+      editor string substitution (identified by a TapEdt header), OPSKIP
+      processing (DelOn and DelOff headers), pre- processor substitution
+      (PrePrc header), embedded macro substitution (EmbMac header) and
+      block startup macro processing (BlkMac header).
+   -  **Word addresses:** traces the recognized words (i.e., registers) on
+      the block and their values, one per line in the order they are
+      recognized left-to-right on the block, using the format
+      “\ *register*:*data*\ ”.
+   -  **CODE and DATA identifiers:** traces the recognized CODE and DATA
+      identifiers as they are processed, in the form code\_\ *name* and
+      reg\_\ *name*. The order of code processing is dependent on the
+      code’s Order property and not the position of the code the block. The
+      order of data processing is a built-in function.
+   -  **Actions:** traces lines prefixed with a \| character showing the
+      data sent to the machine simulation process to emulate the actions of
+      the CNC.
+
+**View»Console**
+
+   This toggle activates or disables the console trace window.
+   When active, operator messages, diagnostic messages and macro processor
+   I/O will be listed in the Console window.
+   Right-mouse in the Console window and select Options to bring up the
+   following Tools»Preferences»Trace settings that affect Console tracing:
+
+   -  **Operator and other** **message:** traces operator
+      messages.
+   -  **Macro IO commands:** traces macro processor file I/O (OPEN, READ,
+      WRITE and CLOSE commands).
+   -  **Diagnostics:** traces diagnostic messages with the specified and
+      higher severity.
+
+**View»Macro**
+
+   This toggle activates or disables the Macro trace window. When active,
+   macro commands will be listed in the Macro window as they are processed.
+   The Macro trace window also identifies when macros are activated and completed.
+   Right-mouse in the Macro window and select Options to bring up the
+   following Tools»Preferences»Trace settings that affect Macro tracing:
+
+   -  **CODE and DATA macros:** traces lines of macro code from CODE and
+      DATA macros as they are processed.
+   -  **Other macros:** traces lines of macro code from startup, shutdown
+      and event macros as they are processed.
+
+**View»Diagnostic**
+
+   This toggle shows or hides the Diagnostic window. This window records
+   all diagnostic messages output since the start of processing,
+   regardless of whether or not the window was visible or not.
+
+   The diagnostic window provides “filter” toggle buttons that can be
+   used to hide/show errors, warnings and informational messages. A
+   right-mouse pop-up window provides access to additional
+   functionality, as follows:
+
+   -  **Synchronize** simulation, trace and source windows to the selected
+      diagnostic.
+   -  **Mark as reviewed** marks individual diagnostics as reviewed, as an
+      aid to a systematic review of the program. Various options permit
+      marking of similar diagnostics. Diagnostics can also be marked
+      reviewed by selecting them and checking the Reviewed box.
+   -  **Hide reviewed** toggle shows or hides all diagnostics marked as
+      reviewed.
+   -  **Clear reviewed** clears the “reviewed” state of all diagnostics.
+      The reviewed state of diagnostics can also be cleared by selecting
+      them and clearing the Reviewed box.
+   -  **Clear sorting** causes diagnostics to be listed in the order they
+      were originally output. Clicking on a diagnostic column header causes
+      diagnostics to be sorted in increasing or decreasing order by that
+      column’s information.
+   -  **Column** settings indicate the type of information to be listed.
+   -  **Copy selection** to the paste buffer.
+
+   Diagnostic window settings are remembered with other user preferences
+   in the Windows Registry.
+
+**View»Loading Sequence**
+
+   This brings back the Loading dialog that normally appears while the
+   software is initializing and that then disappears once processing is
+   ready to start. This dialog lists the various initialization actions
+   and the elapsed time taken for each. Indentation is used to break
+   down multiple steps of an initialization process. The Loading dialog
+   must be closed before continuing processing. The appearance of the
+   Loading dialog at the start of processing can be controlled from the
+   “\ **Loading/ Processing Detail**\ ” selection in the
+   Tools»Preferences»General settings.
+
+| **View»Increase X Margin** (Ctrl Left)
+| **View»Decrease X Margin** (Ctrl Right)
+
+   These change the width of the left hand field that lists axes names
+   in the Controller»Axes tab.
+
+**View»Status bar**
+
+   This toggle enables the display of the status bar. The status bar
+   lists various information about the progress of the control emulator,
+   including: count of diagnostics,
+   sequence and tool numbers, machining time
+   and a progress bar.
