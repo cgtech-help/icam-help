@@ -1,0 +1,845 @@
+.. _string_formatting:
+
+String Formatting
+=================
+
+String formatting is used to read and write variables to external
+files and to write information to the
+GENER listing and tape files.
+Output string formatting converts variables to a text string. Input
+string formatting extracts information from a text string and loads
+it into variables.
+
+.. _output_string_format:
+
+Output String Format
+--------------------
+
+Output string formatting is used to transfer different data types
+into a text format depending upon the control characters in a format
+string. The output format processing described below is used by the
+$FSWRIT function,
+the ERROR and WRITE macro commands, and the DISPLY, INSERT, OPNAME,
+PPRINT, TLNAME, TPRINT and some PPFUN post-processor commands. String
+formatting in post-processor commands can be controlled using the
+PPFUN/17 command (see :ref:`“String Formatting”<string_formatting_ppfun>`).
+
+An output format statement is composed of two parts: the format
+string and an optional list of arguments to be formatted for output.
+The format string contains text to be output as well as special
+format codes that specify how the arguments in the list are to be
+converted to text.
+
+   :math:`\mathtt{'}\mathit{format}\,\mathit{string}\,\mathtt{'} \;
+   \bigg[, \mathit{argument_1} \,\Big[,\mathit{argument_2} \,\big[,\ldots \big]\Big]\bigg]`
+
+There must be as many format codes in the format string as there are
+arguments in the argument list. The exclamation character (!) is used
+to differentiate between the text in the format string to be output
+as-is and the special format codes that identify where and how
+arguments are to be output. If an exclamation character is required
+in the format string, specify two exclamation characters in a row.
+For example, “Error!!”
+
+The following sections describe the output formats that are
+available.
+
+.. _numeric_output_format:
+
+Numeric Output Format
+~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big(\;\begin{matrix}
+   \begin{vmatrix}\,\begin{array}{c} V \\ F \\ X \end{array}\,\end{vmatrix}_{\text{(1)}} &
+   +_{\text{(2)}} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{\text{(3)}} &
+   9_{\text{(4)}} &
+   \begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{\text{(5)}} &
+   9_{\text{(6)}} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{\text{(7)}}
+   \end{matrix}\;\big)`
+
+      | ① Output value as a variable “V” (default), fixed “F”, or extended “X” length string
+      | ② Output plus sign for positive numbers
+      | ③ Suppress leading “s” or excess “e” zeroes to the left of the decimal
+      | ④ Number of whole digits “0-9”
+      | ⑤ Output decimal point always “.” or only for fractional numbers “f”
+      | ⑥ Number of fractional digits “0-9”
+      | ⑦ Suppress trailing “s” or excess “e” zeroes to the right of the decimal
+
+This format is used to place a value into the character string using
+a given “format”. This format requires a numeric argument for each
+occurrence of the format. This value can be any numeric
+value. The macro processor will take this value and format it using
+the specified “format”, which can be as follows:
+
+The “V”, “F” or “X” character provides for variable or fixed length
+output. When using the F and X formats, leading and trailing zeroes
+that are converted to blanks will remain significant. This is useful
+when outputting tables of values that should be aligned. The X format
+reserves an extra space for the sign. With the F format, the sign if
+present occupies one of the digit positions to the left of the
+decimal. The default is variable length output. The V format
+character can be omitted.
+
+The “+” character is used to force a plus sign to be output if the
+value is a positive number. This character is optional and if
+omitted, positive values will not have a plus sign output.
+
+The “s” or “S” character is used to suppress leading and/or trailing
+zeroes from the number to be output. The “e” or “E” character is used
+to ensure that at least one digit will exist on the given side of the
+decimal point. For example, the number “.22” would be represented by
+“0.22”. The suppression character is optional and if omitted all
+leading and/or trailing zeroes will be output. If the decimal point
+is not to be output then it is recommended that either leading or
+trailing zeroes not be suppressed depending on the machine control
+specifications.
+
+The “9” character is used to indicate the number of digits to be
+output before and/or after the decimal point. A maximum of 9 digits
+can be output before and/or after the decimal point giving a maximum
+of 18 digits of precision. This character may be replaced with any
+digit from 0 through 9.
+
+The “f” or “F” character is optional and signifies that only
+fractional numbers will have the decimal character. Whole numbers are
+represented without the decimal character.
+
+The “.” character is used to force the decimal point selected in the
+“Punching Requirements” section of QUEST to be output. This character
+is optional and if omitted, the decimal point will not be output.
+
+For example:
+
+   .. code-block:: text
+
+      S=(12*350)/(2*$PI*1.5)
+      WRITE/22,'Set the spindle to !(s5) RPM',S
+      %L12=$FSWRIT( $
+        'Position the tool to X=!(s3.3) then cycle start',$
+        $P1)
+      WRITE/29,'PI = !(2.9)',$PI
+
+In the WRITE/22,… line, the following string is written to unit 22:
+
+   ::
+
+      Set the spindle to 446 RPM
+
+and in the next line the variable %L12 is set to the string:
+
+   ::
+
+      Position the tool to X=5.456 then cycle start
+
+the last line writes the following string to unit 29:
+
+   ::
+
+      PI = 03.141592654
+
+Time Output Format
+~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big(\;\begin{matrix}
+   \begin{vmatrix}\,\begin{array}{c} V \\ F \\ X \end{array}\,\end{vmatrix}_{(1)} &
+   +_{(2)} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(3)} &
+   9_{(4)} &
+   \begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(5)} &
+   \begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(6)} &
+   \begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{(7)} &
+   9_{(8)} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(9)}
+   \end{matrix}\;\big)`
+
+      | ① Output time as a variable “V” (default), fixed “F”, or extended “X” length string
+      | ② Output plus sign for positive times.
+      | ③ Suppress leading “s” or excess “e” zeroes to the left of the colon
+      | ④ Number of whole digits “0-9”
+      | ⑤ Output colon and 2 digit minutes (optional)
+      | ⑥ Output colon and 2 digit seconds (required)
+      | ⑦ Output decimal point always “.” or only for fractional times “f”
+      | ⑧ Number of fractional digits “0-9”
+      | ⑨ Suppress trailing “s” or excess “e” zeroes to the right of decimal
+
+A time output format is indicated by one or two
+“\ **:**\ [**se**]\ **2**\ ” time format descriptors appearing in the
+numeric output format as described earlier. A single time format
+descriptor will output a value in “\ *minutes*\ **:**\ *seconds*\ ”
+format. Two format descriptors will output a value in
+“\ *hours*\ **:**\ *minutes*\ **:**\ *seconds*\ ” format.
+
+The “:” and the “2” characters are required.
+
+The optional “s” or “S” following the colon suppresses both the
+leading zeros in the time value and the leading colon if there is no
+value to the left to be output. The optional “e” or “E” suppresses
+both the excess zeros in the time value and the leading colon if
+there is no value to the left to be output. If neither is specified,
+the time component is output with a colon followed by two digits.
+
+All other format descriptor characters are as described in :ref:`“Numeric
+Output Format”<numeric_output_format>`.
+
+For example:
+
+   ::
+
+      Statements:
+        PPRINT/'Total cutting time is !(s9:2) m:ss',$FEDTIM
+        PPRINT/'Total positioning time is !(s9:2) m:ss',$RAPTIM
+        PPRINT/'Total job time is !(e3:2:2) h:mm:ss',$FEDTIM+$RAPTIM
+      Produces:
+        Total cutting time is 147:35 m:ss
+        Total positioning time is 2:12 m:ss
+        Total job time is 2:29:47 h:mm:ss
+
+String Output Format
+~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{A}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Output a text string argument
+      | ② Length from 0 through 999
+
+A string format is specified by the character “A” or “a” optionally
+followed by an integer value from 0 to 999. The “a” format will force
+all letters of the string to lower case while “A” will preserve the
+case. The integer value is used to specify the maximum number of
+characters to be output. If no value or 0 is specified, the number of
+characters output is dependent on the size of the string specified as
+the argument for this format. If a size is specified and the string
+is larger than the size, then the remaining characters will be
+truncated. If the string is shorter than the size, blanks will be
+added to extend the string to the size specified. This format
+requires a string argument for each occurrence of the format. This
+value can be any string value of any length.
+
+For example, the following code will truncate the argument string
+since it is longer than the size specified with the “A” format.
+
+   ::
+
+      Statements:
+        %L8='too long'
+        WRITE/21, $
+          'This string is !(A3), so it will be truncated.', $
+          %L8
+      Produce:
+        This string is too, so it will be truncated.
+
+This next example shows the reverse. The following code will pad the
+argument string with trailing blanks since it is shorter than the
+size specified with the “A” format.
+
+   .. code-block:: text
+
+      Statements:
+        %L12='adds'
+        WRITE/22,'This format !(A9) extra blanks.',%L12
+      Produce:
+        This format adds extra blanks.
+
+Specifying !(A) would automatically adjust the format to fit the size
+of the string argument.
+
+Minor Word Output Format
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{M}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Output a minor word argument
+      | ② Length from 0 through 999
+
+A minor word format is specified by the character “M” or “m”
+optionally followed by an integer value from 0 to 999. The “m” format
+will force the minor word name to be presented in lower case. The
+length processing is performed in the same manner as the string
+formats. This format requires
+a minor word argument for each occurrence of the format. A 2000 class
+major word can also be used, provided the subclass code exceeds 1000.
+
+   ::
+
+      Statements:
+        $P1=ON
+        PPRINT/'Coolant is !(M).',$P1
+      Produce:
+        Coolant is ON.
+
+Major Word Output Format
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{R}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Output a macro major word (i.e. record) argument
+      | ② Length from 0 through 999
+
+A major word (or record) format is specified by the character “R” or
+“r” optionally followed by an integer value from 0 to 999. The “r”
+format will force the record name to be presented in lower case. The
+length processing is performed in the same manner as the string
+formats. This format requires a macro variable of type record as an
+argument for each occurrence of the format.
+
+   .. code-block:: text
+
+      Statements:
+        %L3=CUTTER
+        PPRINT/'The current setting of %L3=!(R).',%L3
+      Produce:
+        The current setting of %L3=CUTTER.
+
+Logical Output Format
+~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{L}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Output a macro logical argument
+      | ② Length from 0 through 999
+
+A logical format is specified by the character “L” or “l” optionally
+followed by an integer value from 0 to 999. The “l” format will force
+the logical argument value to be presented in lower case. The length
+processing is performed in the same manner as the string formats. A
+string of “TRUE” or “FALSE” will be output depending upon the value
+of the logical argument. This format requires a logical argument for
+each occurrence of the format.
+
+   ::
+
+      Statements:
+        %L9=$TRUE
+        PPRINT/'The current setting of %L9=!(L).',%L9
+      Produce:
+        The current setting of %L9=TRUE.
+
+Tab Output Format
+~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{T}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Tab to a position
+      | ② Position from 0 through 999
+
+A tab format is specified by the character “T” or “t” followed by an
+integer value from 0 to 999, which specifies the position in the
+output record to advance to. With the “T” format, subsequent output
+will start at the specified position or the current record length,
+whichever is higher. With the “t” format, subsequent output will
+start at the specified position, truncating the record if necessary.
+This format does not take an argument.
+
+   ::
+
+      Statement:
+        PPRINT/'Tool !(S6):!(T14)!(A)',$T,$TLNAME
+      Produces:
+        Tool 12:     10mm drill
+
+Wildcard Output Format
+~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \, \boldsymbol{*} \, \big)`
+
+      | Output an argument using the default formatting rules
+
+A wildcard format is specified by the character “\*”. This format is
+used to output any type of argument in a fixed format. The following
+table shows the equivalent formats that would be used depending upon
+the type of argument specified when “!(\*)” is used as a format
+descriptor.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+
+      *  -  Type of argument
+         -  Format
+      *  -  Numeric
+         -  !(s9f9s)
+      *  -  Minor
+         -  !(M)
+      *  -  Text string
+         -  !(A)
+      *  -  Logical
+         -  !(L)
+
+In addition to the equivalent types shown, two more types can be
+output. If the argument is a $NULL type, the characters “$NULL” will
+be output. If the argument type is a “sequence” type, the characters
+“<sq\ :sub:`1`,sq\ :sub:`2`,…,sqn>” will be output. Where
+“sq\ :sub:`1`\ ” represents the first argument of the sequence and
+“sqn” represents the last. Each argument of the sequence is output
+as though they were specified individually using a wildcard format.
+
+Register Index Output Formats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \;
+   \begin{vmatrix}\,\begin{array}{c} \boldsymbol{@} \\ \boldsymbol{\#} \end{array}\,\end{vmatrix}_{(1)}
+   \enspace n_{(2)}
+   \; \big)`
+
+      | ① Output register *n* word address “@” or value “#”
+      | ② Register index from 1 through 99
+
+This format is specified by the character “@” or “#” followed by an
+integer index value of a register as defined in QUEST (from 1 through
+99). The “@” format outputs a numeric argument as a register word
+address, which includes the register letter “before” and “after”
+characters. The “#” format outputs just the numeric portion of the
+register. This format requires a numeric argument for each occurrence
+of the format.
+
+In the following example, register number “2” as defined in QUEST has
+a descriptor of “Gs2”.
+
+   .. code-block:: text
+
+      Statement:
+        INSERT/'!(@2)',25
+      Produces:
+        G25
+
+Predefined Register Output Format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \;
+   \begin{vmatrix}\,\begin{array}{c} \boldsymbol{@} \\ \boldsymbol{\#} \end{array}\,\end{vmatrix}_{(1)}
+   \enspace t_{(2)}
+   \; \big)`
+
+      | ① Output register type *t* word address “@” or value “#”
+      | ② Register type as defined in the table of :ref:`“Standard register format names”<std_register_format_names>`
+
+This format is specified by the character “@” or “#” followed by an
+single alphabetic character where the character identifies a specific
+type of register as listed in the table below. Note that some
+register types may not be available for specific machines. Also note
+that the single letter codes refer to specific register functions and
+only coincidentally to actual registers starting with the same
+character. The “@” format outputs a numeric argument as a register
+word address, which includes the register letter “before” and “after”
+characters. The “#” format outputs just the numeric portion of the
+register. This format requires a numeric argument for each occurrence
+of the format.
+
+.. _std_register_format_names:
+
+   .. list-table:: Standard register format names
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  A
+         -  Current machine YZ rotation register and/or value
+      *  -  B
+         -  Current machine ZX rotation register and/or value
+      *  -  C
+         -  Current machine XY rotation register and/or value
+      *  -  D
+         -  Current diameter compensation register and/or value
+      *  -  E
+         -  Current thread lead Z-axis register and /or value
+      *  -  F
+         -  Current feed rate register and/or value in $FMODE
+      *  -  H
+         -  Current length compensation register and/or value
+      *  -  N
+         -  Current sequence number register and/or value
+      *  -  S
+         -  Current spindle speed register and/or value in $SMODE
+      *  -  T
+         -  Current tool register and/or value
+      *  -  X
+         -  Current X axis register and/or value
+      *  -  Y
+         -  Current Y axis register and/or value
+      *  -  Z
+         -  Current Z axis register and/or value
+
+In the following example, the format descriptor of the Z axis
+register is “Z34s”.
+
+   .. code-block:: text
+
+      Statement:
+        INSERT/'!(@Z)',2.5
+      Produces:
+        Z0025
+
+Current Predefined Register Value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`! \;
+   \begin{vmatrix}\,\begin{array}{c} \boldsymbol{@} \\ \boldsymbol{\#} \end{array}\,\end{vmatrix}_{(1)}
+   \enspace t_{(2)}`
+
+      | ① Output register type *t* current word address “@” or value “#”
+      | ② Register type as defined in the table of :ref:`“Standard register format names”<std_register_format_names>`
+
+This format is similar to the Predefined Register format, but omits
+the ( ) parentheses. This format will output the current value
+corresponding to the specific type of register as listed in
+the table of :ref:`“Standard register format names”<std_register_format_names>`
+above. This format does not require an argument.
+
+In the following example,
+the next sequence number to output is 112,
+the format descriptor of the Z axis register is “Zs34” and the
+current Z axis position is “7.35”.
+
+   .. code-block:: text
+
+      Statement:
+        INSERT/'O!#N G00 !@Z M02'
+      Produces:
+        O112 G00 Z73500 M02
+
+ASCII Value Output Format
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The circumflex character (**^**) is used as an attention character to
+indicate that an ASCII character is to be output in its place. If a
+circumflex character is required on the output string, specify two
+circumflex characters (**^^**). This control character requires a numeric
+argument and is processed in the same manner as the $FCHAR function.
+
+   .. code-block:: text
+
+      Statement:
+        PPRINT/'ASCII character 67=^',67
+      Produces:
+        ASCII character 67=C
+
+.. _input_string_format:
+
+Input String Format
+-------------------
+
+Input string formatting is used to read text from a string variable
+or an I/O unit, extracting information from the input text and
+storing it in macro variables. The input format processing described
+below is used by the READ command.
+
+An input format statement is composed of two parts: the format string
+and a list of one or more macro variables to receive the input. The
+format string contains spacing characters and the special format
+codes that specify how the input string is to be converted and stored
+into the macro variables in the argument list.
+
+   :math:`\mathtt{'}\mathit{format}\,\mathit{string}\,\mathtt{'} \;
+   \bigg[, \mathit{variable_1} \,\Big[,\mathit{variable_2} \,\big[,\ldots \big]\Big]\bigg]`
+
+There must be as many format codes in the format string as there are
+variables in the argument list. Format codes are identified by an
+exclamation character (!). The following sections describe the input
+format codes that are available to convert text to macro variables of
+various types. The input string formats are similar to the output
+string formats with some exceptions.
+
+Space Input Format Character
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The space character is used to advance the internal pointer on the
+input string to the next character that is neither a space nor a tab.
+This allows you to reposition the internal pointer to the next “word”
+of the input string.
+
+Exclamation Input Format Character
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The exclamation character (**!**) is used as an attention character to
+indicate that the characters to follow are to be validated as formats
+for different input types. The following formats should be placed
+between parentheses. For example, “!(*format*)”. The type of argument
+created depends upon the input format type.
+
+.. _numeric_input_format:
+
+Numeric Input Format
+~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big(\;\begin{matrix}
+   +_{(1)} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(2)} &
+   9_{(3)} &
+   \begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{(4)} &
+   9_{(5)} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(6)}
+   \end{matrix}\;\big)`
+
+      | ① Expect a plus sign for positive numbers
+      | ② All “s” or excess “e” leading zeroes might be suppressed
+      | ③ Number of whole digits “0-9”
+      | ④ Always “.” or optionally “f” expect a decimal point
+      | ⑤ Number of fractional digits “0-9”
+      | ⑥ All “s” or excess “e” trailing zeroes might be suppressed
+
+This format is used to read a numeric value from the character string
+using a given “format”. The main objective is to ensure that the
+input number (in string format) conforms to the given format.
+This is especially useful if the input number has an implied decimal
+place (does not have a decimal point punched). The wildcard format
+can be used if the format of the input number is not important.
+
+The post-processor will read a numeric value from the input string
+using the specified “format”. It is recommended that the same format
+used to write the numeric value be used to read the numeric value.
+The “format” is the same as for output string formatting.
+
+The following example shows how a numeric value is first written into
+a character string (%L02) using the $FSWRIT function. Then, using the
+READ command, converted from character representation back to a
+numeric value (%L03). Due to some loss of precision on the READ
+command and $FSWRIT function, the value read into %L03 will not be
+equal to $PI.
+
+   .. code-block:: text
+
+      %L02=$FSWRIT('!(1.9)',$PI)
+      READ/%L02,'!(1.9)',%L03
+
+Time Input Format
+~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big(\;\begin{matrix}
+   +_{(1)} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(2)} &
+   9_{(3)} &
+   \begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(4)} &
+   \begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(5)} &
+   \begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{(6)} &
+   9_{(7)} &
+   \begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(8)}
+   \end{matrix}\;\big)`
+
+      | ① Expect a plus sign for positive times
+      | ② All “s” or excess “e” leading zeroes might be suppressed
+      | ③ Number of whole digits “0-9”
+      | ④ Minutes input (optional) might have all “s” or excess “e” leading zeros and colon suppressed
+      | ⑤ Seconds input (required) might have all “s” or excess “e” leading zeros and colon suppressed
+      | ⑥ Always “.” or optionally “f” expect a decimal point
+      | ⑦ Number of fractional digits “0-9”
+      | ⑧ All “s” or excess “e” trailing zeroes might be suppressed
+
+A time input format is indicated by one or two
+“\ **:**\ [**se**]\ **2**\ ” time format descriptors appearing in the
+numeric input format as described earlier. A single time format
+descriptor will input a value in “minutes:seconds” format. Two format
+descriptors are required to input a value in “hours:minutes:seconds” format.
+
+The “:” and the “2” characters are required. The optional “s” or “S”,
+“e” or “E” format characters indicate that the colon and leading zero
+digits of the time value can be omitted from the input string. It is
+recommended that the same format used to write the time value be used
+to read the time value.
+
+All other format descriptor characters are as described in
+:ref:`“Numeric Input Format”<numeric_input_format>`. The wildcard
+format can be used if the format of the input time is not important.
+
+String Input Format
+~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{A}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Input a text string argument
+      | ② Length from 0 through 999
+
+A string format is specified by the character “A” or “a” followed by
+an integer value from 0 to 999. This format is used to transfer
+characters from one location to another. The integer length value is
+used to specify the number of characters to be read from the input
+string. Omitting the length value or specifying a length of zero (0)
+reads the remainder of the input. If the length specified exceeds the
+record length, the length of the argument is set to the record
+length. This format creates a string argument for each occurrence of
+the format.
+
+The following example transfers all data from a file opened on unit
+20 to a file opened on unit 21. Input records longer than 100
+characters will be truncated (i.e., the characters after card column
+100 will be ignored).
+
+   .. code-block:: text
+
+      WHILE/.NOT.$FEOF(20)
+        READ/20,'!(A100)',%L01
+        WRITE/21,'!(A)',%L01
+      ENDOF/WHILE
+
+Minor Word Input Format
+~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{M}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Input a minor word argument
+      | ② Length from 0 through 999
+
+A minor word format is specified by the character “M” or “m”
+optionally followed by an integer value from 0 to 999. A value of 0
+results in the same action as if no value was specified. The value
+specified indicates the number of characters on the input string that
+are to be validated as a minor word. Any trailing spaces read from
+the input string will be ignored. A valid minor word can be a maximum
+of 24 alphanumeric characters or have the form #\ *n*, where *n* is
+the minor word integer code. If no size value is specified, then all
+characters up to the next non-alphanumeric will be validated as a
+minor word. This format creates a minor word argument for each
+occurrence of the format. Note that 2000 class major words and other
+record types are not acceptable with this format.
+
+Major Word Input Format
+~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{R}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Input a major word or record argument
+      | ② Length from 0 through 999
+
+A major word (i.e., record) format is specified by the character “R”
+or “r” optionally followed by an integer value from 0 to 999. A value
+of 0 results in the same action as if no value was specified. The
+value specified indicates the number of characters on the input
+string that are to be validated as a major word. Any trailing spaces
+read from the input string will be ignored. A valid major word can be
+a maximum of 24 alphanumeric characters or have the form #\ *m*\ **:**\ *n*,
+where *m* is the record class integer code and
+*n* is the record subclass integer code. If no size value is
+specified, then all characters up to the next non-alphanumeric will
+be validated as a major word. This format creates a record word
+argument for each occurrence of the format.
+
+Logical Input Format
+~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{L}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Input a logical argument
+      | ② Length from 0 through 999
+
+A logical format is specified by the character “L” or “l” optionally
+followed by an integer value from 0 to 999. The length processing is
+performed in the same manner as the minor word formats. The input
+string should match one of “TRUE” or “FALSE”. This format creates a
+logical argument for each occurrence of the format.
+
+Tab Input Format
+~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{T}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Tab to a position
+      | ② Position from 0 through 999
+
+A tab format is specified by the character “T” or “t” followed by an
+integer value from 0 to 999, which specifies the position in the
+input string to advance to. With the “T” format, subsequent input
+will start at the specified position or the current input string
+position, whichever is higher. With the “t” format, subsequent input
+will start at the specified position, reprocessing portions of the
+input string if necessary. This format does not take an argument.
+
+Skip Character Input Format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \; \textbf{X}_{(1)} \enspace n_{(2)} \; \big)`
+
+      | ① Ignore characters
+      | ② Length from 0 through 999
+
+A skip character format is specified by the character “X” or “x”
+optionally followed by an integer value from 0 to 999. A value of 0
+results in the same action as if a value of 1 was specified. This
+format is used to advance the internal pointer on the input string by
+the specified number of characters. No argument is required for this
+format.
+
+In the following example, the first 5 characters of the input string
+are ignored, then a logical format reads TRUE and assigns this value
+to %L01.
+
+   .. code-block:: text
+
+      READ/'%L01=TRUE','!(X5)!(L)',%L01
+
+Wildcard Input Format
+~~~~~~~~~~~~~~~~~~~~~
+
+\
+
+   :math:`!\big( \, \boldsymbol{*} \, \big)`
+
+      | Input an argument using the default formatting rules
+
+A wildcard format is specified by the character “**\***”. This format is
+used to read any type of value in a fixed format. Before the read is
+performed the internal pointer on the input string is advanced to the
+next “word”. This is equivalent to specifying a space character
+before the format. The type of argument created by this format is
+dependent upon the first character of the word:
+
+-  If the first character is a dollar sign ($), the following characters
+   should be one of “NULL”, “TRUE”, or “FALSE”, resulting in a NULL or
+   LOGICAL value.
+
+-  If the first character is a single quote ('), the following
+   characters up to the matching quote are converted to a string value.
+   The starting and ending single quotes will not be part of the resultant
+   string. If quotes are desired in the resultant string, the input
+   string should contain two quotes together.
+
+-  If the first character is a (#), the input string is read as minor
+   (#\ *n*) or major (#\ *class*:*subclass*) word code.
+
+-  If the first character is a letter, the input string is read as a
+   minor or major keyword name.
+
+-  If the first character is a plus sign, minus sign, digit or decimal
+   point, the input string is read as a numeric value.
+
+-  If the first character is a colon (:), or if a colon is encountered
+   when reading a numeric value, then the string is read as a time
+   value.
