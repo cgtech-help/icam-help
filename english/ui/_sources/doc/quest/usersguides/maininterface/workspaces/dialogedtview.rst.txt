@@ -1,0 +1,80 @@
+Dialog Editor View
+------------------
+
+|image1|
+
+The Dialog Editor is used to interactively create or modify a dialog.
+Two toolbars are available to simplify dialog editing.
+
+| **Control Toolbar:** This toolbar contains all of the different types
+  of controls that are available in a dialog.
+
+========= ==================================
+|image2|  Static text control (Not editable)
+|image3|  Static frame control
+|image4|  Button control
+|image5|  Check control
+|image6|  Radio control
+|image7|  Editbox text control
+|image8|  Combobox control (Drop-List only)
+|image9|  Listbox control
+|image10| Picture control
+========= ==================================
+
+A Control Properties dialog will appear when creating a control, or when
+double-clicking on an control in the dialog (with Motif, use the middle
+mouse button to modify a control). Use the Control Properties dialog to
+define the GENER macro variable associated with the control, its initial
+value, et cetera.
+
+**Utilities Toolbar:** This toolbar contains helper gadgets to arrange
+the layout, size, alignment and position of your dialog controls.
+
+========= ================================================
+|image11| Left align two or more controls
+|image12| Right align two or more controls
+|image13| Top align two or more controls
+|image14| Bottom align two or more controls
+|image15| Center control(s) horizontally
+|image16| Center control(s) vertically
+|image17| Horizontally space three or more controls evenly
+|image18| Vertically space three or more controls evenly
+|image19| Make two or more controls the same width
+|image20| Make two or more controls the same height
+|image21| Make two or more controls the same size
+|image22| Test the dialog (popup a real dialog)
+========= ================================================
+
+**Test:** Test the dialog (popup a real dialog).
+
+**Reset:** Used to ignore any changes made since you entered the dialog
+editor
+
+**Cancel:** Exit the editor without saving any changes made to the
+dialog
+
+**OK:** Exit the editor and save all changes made to the dialog
+
+.. |image1| image:: ./media/e13376df968b3291269a009e295b4dd69719a9f3.gif
+.. |image2| image:: ./media/8f95c753a140c9b34acaa857048adb1cea2ef84f.gif
+.. |image3| image:: ./media/f3284f5382518bdcb860d30104ca90fc00c14a2a.gif
+.. |image4| image:: ./media/46529ff247af2b77c7066d0caf62b2ea41066c28.gif
+.. |image5| image:: ./media/0b5327368f450219025c39ff72a56151e2b11441.gif
+.. |image6| image:: ./media/18d834c30d274b782955d71c9be991dce55b885a.gif
+.. |image7| image:: ./media/53056692b34c958d14f0c0c0984c210cd8fe77ae.gif
+.. |image8| image:: ./media/c3b03eb2639fb2ad88ea9f6c911df7c72befd297.gif
+.. |image9| image:: ./media/e96291b0844896afb6265b9dfc3bbe718f081e4d.gif
+.. |image10| image:: ./media/2ae41b83cde29c5b59dd696ce8006e628a8c99d2.png
+.. |image11| image:: ./media/d542f59004c33c76a60b8d96f126e51ef0ed6e77.gif
+.. |image12| image:: ./media/6ee45af03e37a1864c36648721cfd5c93c83a046.gif
+.. |image13| image:: ./media/6e378d99c9df08c4fcf10b31b69208f4248edd90.gif
+.. |image14| image:: ./media/cc314cf59b214c8e86ed4a0ca9c557625f6532f7.gif
+.. |image15| image:: ./media/918df25e2b8d5e4a85ced0e81a3cc79c00c159ad.gif
+.. |image16| image:: ./media/d1790c91111a5fcd51c45bc8fab33c9510526733.gif
+.. |image17| image:: ./media/a4cd00ad212d60ff6c5efe6b0906328059c9900d.gif
+.. |image18| image:: ./media/5880dd7896f7c5c30b201b8d064776632cf34856.gif
+.. |image19| image:: ./media/0a06061bbd8056fe88587f21b694e89dbffddf27.gif
+.. |image20| image:: ./media/11e9e68721456b4c0a3f8dedde8e4f77ab9224ea.gif
+.. |image21| image:: ./media/78939fe4cb2593b9a58088bb3a9bfe409ecfdc9f.gif
+.. |image22| image:: ./media/a0ace9554625d05848f2fea00314430f81ef7f43.gif
+
