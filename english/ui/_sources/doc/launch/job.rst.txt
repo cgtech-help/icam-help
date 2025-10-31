@@ -1,0 +1,40 @@
+JOB Button
+==========
+
+The JOB button can be used to save or recall launch panel settings into
+a “job” file (cpj file extension) or to select the saved results (zrj
+file extension) from a program that has been previously run with “save
+for review” enabled.
+
+Job Files
+~~~~~~~~~
+
+Job files (*cpj* file extension) are ideal if you regularly use launch
+panel settings that are different from the suggested default, or if you
+have specific settings for a special job that you intend to run on a
+regular basis. Manufacturing Extractors use job files to hold all of the
+information that is extracted from the CAM system for a specific NC
+program, using a job file name that matches the NC program name.
+
+When the JOB button is pressed, you will be given a choice to load
+settings from a job file or to save the current settings to a job file.
+The five most recently used job files are listed for quick loading.
+
+You can also load the settings from a job file by dragging and dropping
+the cpj file onto the launch panel window.
+
+Review Files
+~~~~~~~~~~~~
+
+The JOB button can also be used to select the saved results (zrj file
+extension) from a program that has been previously run with “save for
+review” enabled.
+
+When the JOB button is pressed and a review file selected, the
+processing type will be set to REVIEW and the interface will
+automatically be set to Full. Press OK to start GENER to view the
+results of the completed program.
+
+You can also start the review of a previously completed program by
+dragging and dropping the zrj file onto the launch panel window.
+
