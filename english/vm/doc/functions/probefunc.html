@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probe and Collision Test Functions &mdash; Virtual Machine V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"tex": {"macros": {"icamrange": ["{\\scriptsize \\raise#1em\\hbox{#2:n}}\\!", 2]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tool and Holder Functions" href="toolfunc.html" />
+    <link rel="prev" title="Fixture, Part and Stock Functions" href="workpiecefunc.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Virtual Machine V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../section_quest.html">QUEST: Model Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#importing-models">Importing Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/questinterface.html">QUEST User Interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/questinterface.html#interface-differences-between-developer-and-run-time-environments">Interface differences between Developer and Run-time Environments</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/modelreq.html">Basic Model Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/createvm.html">Creating a Virtual Machine Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#general-information">General Information</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#comments">Comments</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#d-modelsmachines">3D Models»Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/addkinematic.html">Adding Kinematics to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/addphysicalentities.html">Adding Physical Entities to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/collisiontest.html">Collision Testing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/collisiontest.html#collision-groups">Collision Groups</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/collisiontest.html#collision-exclusion-groups">Collision Exclusion Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/selectiongroup.html">Selection Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/customizingmodel.html">Customizing the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/testing.html">Testing the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#model-file-name-conventions">Model File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#models">Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/customization.html">Model Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/dialogeditor.html">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/dialogeditor.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization/startshutmacro.html">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-declaration-macro">The Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-model-startup-macro">The Model Startup Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-model-shutdown-macro">The Model Shutdown Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization/eventmacro.html">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-tape-event-macro-gener-only">The Tape Event Macro <span class="smalltext">(GENER only)</span></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-motion-event-macro">The Motion Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-rapid-event-macro">The Rapid Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-feed-event-macro">The Feed Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-tool-event-macro">The Tool Event Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/userfuncmacro.html">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../macros/index.html">Virtual Machine Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#outputting-the-event-output">Outputting the Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#virtual-machine-variables">Virtual Machine Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#model-macro-variables">Model Macro Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#model-definition-variables">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/vmvar.html">Virtual Machine Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Model Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Macro Functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="axesfunc.html">Axes Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channelfunc.html">Channel Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compensationfunc.html">Compensation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="componentfunc.html">Component Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coordinatefunc.html">Coordinate System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="displayfunc.html">Display Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workpiecefunc.html">Fixture, Part and Stock Functions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Probe and Collision Test Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolfunc.html">Tool and Holder Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../runtime/index.html">Using VM with GENER and CERUN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/selectvm.html">Selecting a Virtual Machine Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/selectvm.html#selecting-a-model-from-the-launch-panel">Selecting a Model from the Launch Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/selectvm.html#selecting-a-model-from-the-command-prompt">Selecting a Model from the Command Prompt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/controllingvm.html">Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-simulation">Enable/Disable Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-collision-overtravel-detection-and-avoidance">Enable/Disable Collision/Overtravel Detection and Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-positioning-collision-avoidance">Enable/Disable Positioning Collision Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#enable-disable-flute-length-optimization">Enable/Disable Flute Length Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#camera-positioning-under-program-control">Camera Positioning under Program Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#load-predefined-setup">Load Predefined Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#adjust-model-axes-travel-limits">Adjust Model Axes Travel Limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#adjust-model-axes-travel-limits-for-smartpath">Adjust Model Axes Travel Limits for SmartPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#optimize-positioning-with-smartpath">Optimize Positioning with SmartPATH™</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#positioning-clearance">Positioning Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#positioning-velocity">Positioning Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#reference-home-positioning">Reference Home Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#optimize-air-cutting-with-smartcut">Optimize Air-Cutting with SmartCUT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#air-cut-clearance">Air-cut Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#air-cut-velocity">Air-cut Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../runtime/controllingvm.html#air-cut-and-smartpath">Air-cut and SmartPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/controllingvm.html#optimize-cutting-feed-with-smartfeed">Optimize Cutting Feed with SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/actsimwindow.html">Activating the Simulation Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/adjustlight.html">Adjusting Lighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/addpartfixstock.html">Adding Parts, Fixtures and Stock to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addpartfixstock.html#differences-between-part-stock-and-fixture-components">Differences between Part, Stock and Fixture Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addpartfixstock.html#creating-part-stock-and-fixture-components">Creating Part, Stock and Fixture Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/setfixcomp.html">Setting Fixture Compensation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/addtooldef.html">Adding Tooling Definitions to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#lathe-tool-definition">Lathe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#milling-tool-definition">Milling Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#probe-tool-definition">Probe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#additive-tool-definition">Additive Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/addtooldef.html#holder-definition">Holder Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/settoolcomp.html">Setting Tool Compensation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/settoolcomp.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/settoolcomp.html#diameter-compensation">Diameter Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/monvmres.html">Monitoring Virtual Machine’s Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#animation-control">Animation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#head-up-display">Head-Up Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#tool-path-display">Tool Path Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../runtime/monvmres.html#controller-time-line">Controller Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/monvmres.html#part-stock-comparison">Part / Stock Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime/monvmres.html#measurement">Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Virtual Machine Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/inputcontrol.html">Input Controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#standard-keyboard-mapping">Standard Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#construction-keyboard-mapping">Construction Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#mouse-mapping">Mouse Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#time-line-keyboard-mapping">Time Line Keyboard Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/toolbar.html">Toolbars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#view-cerun-gener-only">View <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-construct-quest-only">VM Construct <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-mode-cerun-gener-only">VM Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-grid">VM Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-view">VM View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-view-filter-cerun-gener-only">VM View Filter <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-measure">VM Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-animation-cerun-gener-only">VM Animation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-tool-path-cerun-gener-only">VM Tool Path <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-cross-section-cerun-gener-only">VM Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-annotation-cerun-gener-only">VM Annotation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/menubar/index.html">Menu Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/main.html">Simulation»Virtual Machine <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/controller.html">Simulation»Controller <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/mode.html">Simulation»Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T) <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#tools">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#lathe-tool-type">Lathe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#mill-tool-type">Mill Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#probe-tool-type">Probe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#additive-tool-type">Additive Tool Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#holders">Holders</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#profile-holder-type">Profile Holder Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#generic-holder-type">Generic Holder Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/constructentity.html">Simulation»Construct Entity <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycube">Simulation»Construct Entity»Cube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycylinder">Simulation»Construct Entity»Cylinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycone">Simulation»Construct Entity»Cone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitysphere">Simulation»Construct Entity»Sphere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entityrevolved">Simulation»Construct Entity»Revolved</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entityextruded">Simulation»Construct Entity»Extruded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitymesh">Simulation»Construct Entity»Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitypicture">Simulation»Construct Entity»Picture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/constructaxis.html">Simulation»Construct Axis <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axislinear-axis">Simulation»Construct Axis»Linear Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisrotary-axis">Simulation»Construct Axis»Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axiscurve-axis">Simulation»Construct Axis»Curve Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axistool-axis">Simulation»Construct Axis»Tool Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisstock-axis">Simulation»Construct Axis»Stock Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axishead-axis">Simulation»Construct Axis»Head Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisreference-axis">Simulation»Construct Axis»Reference Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/show.html">Simulation»Show</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-path-ctrl-t-cerun-gener-only">Simulation»Show»Tool Path (Ctrl T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-vector-cerun-gener-only">Simulation»Show»Tool Vector <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t-cerun-gener-only">Simulation»Show»Tool Path as Overlay (Ctrl Shift T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowfilters-cerun-gener-only">Simulation»Show»Filters <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowcross-section-cerun-gener-only">Simulation»Show»Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowworkpiece-coords-ctrl-w-cerun-gener-only">Simulation»Show»Workpiece Coords (Ctrl W) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshownext-display-ctrl-d-cerun-gener-only">Simulation»Show»Next Display (Ctrl D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowprevious-display-ctrl-shift-d-cerun-gener-only">Simulation»Show»Previous Display (Ctrl Shift D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/wcs.html">Simulation»Use World CS <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/group.html">Simulation»Group Selection <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationhide-selection-ctrl-b-quest">Simulation»Hide Selection (Ctrl B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionhide-in-view-ctrl-b-gener-and-cerun">Simulation»Selection»Hide in View (Ctrl B) <span class="smalltext">(GENER and CERUN)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionhide-in-all-views-gener-and-cerun-only">Simulation»Selection»Hide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationshow-all-rehide-ctrl-alt-b-quest">Simulation»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b-gener-and-cerun-only">Simulation»Selection»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionshow-all-rehide-in-all-views-gener-and-cerun-only">Simulation»Selection»Show All/Rehide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationinvert-hide-state-ctrl-shift-b-quest">Simulation»Invert Hide State (Ctrl Shift B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b-gener-and-cerun-only">Simulation»Selection»Invert Hide State (Ctrl Shift B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/setup.html">Simulation»Open Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/setup.html#simulationsave-setup-gener-and-cerun-only">Simulation»Save Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Virtual Machine V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../section_quest.html">QUEST: Model Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Macro Functions</a></li>
+      <li class="breadcrumb-item active">Probe and Collision Test Functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="probe-and-collision-test-functions">
+<span id="probefunctions"></span><h1>Probe and Collision Test Functions<a class="headerlink" href="#probe-and-collision-test-functions" title="Link to this heading"></a></h1>
+<p>Probe and collision test functions simulate the behavior of touch or laser probes
+and allow you to monitor for collision and over-travel events.
+These functions support probing setup, event reporting, and collision zone management.</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmscez"><span class="std std-ref">$FMSCEZ</span></a></p></td>
+<td><p>Summary of collision/over-travel events</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmslsr"><span class="std std-ref">$FMSLSR</span></a></p></td>
+<td><p>Laser probing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmsnear"><span class="std std-ref">$FMSNEAR</span></a></p></td>
+<td><p>Adjust collision safety zone surrounding components</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmspdat"><span class="std std-ref">$FMSPDAT</span></a></p></td>
+<td><p>Details of probe/collision/over-travel events</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmsppos"><span class="std std-ref">$FMSPPOS</span></a></p></td>
+<td><p>Axes positions at touch</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmsprid"><span class="std std-ref">$FMSPRID</span></a></p></td>
+<td><p>Select the object to be used as a probe</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#func-fmsprob"><span class="std std-ref">$FMSPROB</span></a></p></td>
+<td><p>Activate/deactivate probing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#func-fmsvcl"><span class="std std-ref">$FMSVCL</span></a></p></td>
+<td><p>Enable/disable collision testing on objects</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The following steps are necessary for <strong>touch probing</strong>:</p>
+<ol class="arabic simple">
+<li><p>Call the <a class="reference internal" href="#func-fmsprid"><span class="std std-ref">$FMSPRID</span></a> function to designate an object that will be used for touch probing.</p></li>
+<li><p>Call the <a class="reference internal" href="#func-fmsprob"><span class="std std-ref">$FMSPROB</span></a> function to enable probing (i.e., arm the probe).</p></li>
+<li><p>Move the model via GENER or CERUN motion processing, or via <a class="reference internal" href="axesfunc.html#func-fmsmove"><span class="std std-ref">$FMSMOVE</span></a> calls.</p></li>
+<li><p>Check for probe touch via the <a class="reference internal" href="../variables/vmvar.html#var-vmprcod"><span class="std std-ref">$VMPRCOD</span></a> probe status variable.</p></li>
+<li><p>Retrieve basic touch information via the <a class="reference internal" href="../variables/vmvar.html#var-vmxfer"><span class="std std-ref">$VMXFER</span></a> and <a class="reference internal" href="../variables/vmvar.html#var-vmplxm"><span class="std std-ref">$VMP*</span></a> variables.</p></li>
+<li><p>Retrieve details via calls to the <a class="reference internal" href="#func-fmspdat"><span class="std std-ref">$FMSPDAT</span></a> and <a class="reference internal" href="#func-fmsppos"><span class="std std-ref">$FMSPPOS</span></a> functions.</p></li>
+<li><p>Optionally call <a class="reference internal" href="#func-fmsvcl"><span class="std std-ref">$FMSVCL</span></a> to disable further collision checking touching objects.</p></li>
+<li><p>Call the <a class="reference internal" href="#func-fmsprob"><span class="std std-ref">$FMSPROB</span></a> function again to disable probing.</p></li>
+<li><p>Call the <a class="reference internal" href="#func-fmsprid"><span class="std std-ref">$FMSPRID</span></a> function again to disable the probe object.</p></li>
+</ol>
+<p>The following steps are necessary for <strong>laser probing</strong>:</p>
+<ol class="arabic simple">
+<li><p>Call $FMSGCS to obtain the coordinate frame in which the measurement
+will be taken.</p></li>
+<li><p>Call the <a class="reference internal" href="#func-fmslsr"><span class="std std-ref">$FMSLSR</span></a> function with a point and vector that specifies the
+origin and direction of the light beam, and test the return value for
+measurement information.</p></li>
+</ol>
+<p>The following steps are necessary to <strong>check for collisions and
+over-travels</strong>:</p>
+<ol class="arabic simple">
+<li><p>Optionally call <a class="reference internal" href="#func-fmsvcl"><span class="std std-ref">$FMSVCL</span></a> to enable/disable collision checking on specific objects.</p></li>
+<li><p>Optionally call <a class="reference internal" href="#func-fmsnear"><span class="std std-ref">$FMSNEAR</span></a> to adjust the collision safety zone for specific objects.</p></li>
+<li><p>Move the model via GENER or CERUN motion processing, or via <a class="reference internal" href="axesfunc.html#func-fmsmove"><span class="std std-ref">$FMSMOVE</span></a> calls.</p></li>
+<li><p>Retrieve basic collision/over-travel event information via the <a class="reference internal" href="../variables/vmvar.html#var-vmxfer"><span class="std std-ref">$VMXFER</span></a> variable.</p></li>
+<li><p>Call <a class="reference internal" href="#func-fmscez"><span class="std std-ref">$FMSCEZ</span></a> to obtain summary information concerning each event.</p></li>
+<li><p>Call <a class="reference internal" href="#func-fmspdat"><span class="std std-ref">$FMSPDAT</span></a> to obtain details concerning each event.</p></li>
+</ol>
+<span id="func-fmscez"></span><table class="docutils align-default" id="index-0">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSCEZ(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Returns information about collisions</p>
+<p>Returns: Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSCEZ}\boldsymbol{(}\, n \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns information about the <em>n</em><sup>th</sup> collision or
+over-travel event that occurred on the last motion. A sequence of length
+3 is returned, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time at start of event</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>Time at end of event</p>
+</dd>
+<dt class="field-odd">3<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Count of interference pairs</p>
+</dd>
+</dl>
+<p>The <a class="reference internal" href="../variables/vmvar.html#var-vmxfer"><span class="std std-ref">$VMXFER(1)</span></a> system variable contains the number of collision and/or
+over-travel events that occurred on the last motion. This is the upper
+limit for <em>n</em>.</p>
+<p>The count of interference pairs can be used when calling the <a class="reference internal" href="#func-fmspdat"><span class="std std-ref">$FMSPDAT</span></a>
+function to get details of which axes over-traveled or which component
+pairs collided during the event.</p>
+</div></blockquote>
+<span id="func-fmslsr"></span><table class="docutils align-default" id="index-1">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSLSR(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Probing function various state of Virtual Machine</p>
+<p>Returns: Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSLSR}\boldsymbol{(}\, point, vector \big[,options\,\big] \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function projects a beam from a <em>point</em> in space along a specified
+<em>vector</em>, and returns a sequence of length 15 containing information
+about the first object that the beam intersects, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Status: &lt;0=error, 0=no intersection, 1=intersection found</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>ID number of the intersecting object</p>
+</dd>
+<dt class="field-odd">3<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Name of the intersecting object</p>
+</dd>
+<dt class="field-even">4–6<span class="colon">:</span></dt>
+<dd class="field-even"><p>XYZ coordinates of the light source point</p>
+</dd>
+<dt class="field-odd">7–9<span class="colon">:</span></dt>
+<dd class="field-odd"><p>IJK direction vector of the light beam</p>
+</dd>
+<dt class="field-even">10–12<span class="colon">:</span></dt>
+<dd class="field-even"><p>XYZ coordinates of the intersection point</p>
+</dd>
+<dt class="field-odd">13–15<span class="colon">:</span></dt>
+<dd class="field-odd"><p>IJK surface normal at intersection point</p>
+</dd>
+</dl>
+<p>Various <em>options</em> affect the operation of the $FMSLSR function:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathbf{IN}, id\_sequence\)</span></p>
+<blockquote>
+<div><p>If specified, only those component id's listed in the <em>id_sequence</em>
+variable will be checked for interference with the beam. By default
+all objects are tested.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathbf{OUT}, id\_sequence\)</span></p>
+<blockquote>
+<div><p>If specified, those component id's listed in the <em>id_sequence</em>
+variable will not be checked for interference with the beam. By
+default all objects are tested.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathbf{TRFORM}, lcs\)</span></p>
+<blockquote>
+<div><p>The <em>lcs</em> sequence defines a homogeneous 3x4 matrix specifying the
+transformation between local and World coordinate systems (as can be
+obtained from the <a class="reference internal" href="coordinatefunc.html#func-fmsgcs"><span class="std std-ref">$FMSGCS</span></a> function). The point and vector input data
+and the resulting measurement data are expressed in that coordinate
+frame. By default all data and measurements are in the model World
+coordinate system.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathbf{SIDE},\begin{pmatrix}\begin{array}{l} \mathbf{OUT} \\ \mathbf{IN} \\ \mathbf{ALL} \end{array}\end{pmatrix}\)</span></p>
+<blockquote>
+<div><p>Specifies which sides of a surface are visible for measurement
+purposes. SIDE,OUT is the default and indicates that only outside
+surfaces can be detected. SIDE,IN causes only inside surfaces to be
+detected. SIDE,ALL will detect all surfaces.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathbf{MODIFY},\mathbf{1},\mathbf{RADIUS}, radius, \mathbf{STEP}, count\)</span></p>
+<blockquote>
+<div><p>Provided that the beam contacts an object, fires additional beams at
+that object <em>count</em> times at the specified <em>radius</em> around the
+<em>point</em>. The return coordinates and normals are averaged.</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\mathbf{MODIFY},\mathbf{2},\mathbf{RADIUS}, radius, \mathbf{STEP}, count\)</span></p>
+<blockquote>
+<div><p>Fires additional beams <em>count</em> times at the specified <em>radius</em> around
+the <em>point</em>. Returns the closest object and its surface normal.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<span id="func-fmsnear"></span><table class="docutils align-default" id="index-2">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSNEAR(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Collision safety nearness</p>
+<p>Returns: Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>This function gets and optionally sets the collision safety nearness
+zone around physical components. Nearness information is returned as a
+sequence of {<em>id</em>,<em>value</em>,<em>status</em>} tuples, one for each physical
+component, where <em>id</em> is the component ID, <em>value</em> is a non-negative
+nearness amount and <em>status</em> is either 0 for disabled or 1 for enabled.</p>
+<p>Note that the <a class="reference internal" href="#func-fmsvcl"><span class="std std-ref">$FMSVCL</span></a> function can be used to enable or disable
+collision testing on components. This does not affect the nearness value
+or status of a component, however the nearness value and status will be
+ignored for any component that is not also enabled for collision
+testing.</p>
+<p><strong>Get Nearness for All Components</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \mathbf{ALL} \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>Returns a sequence of {<em>id</em>,<em>value</em>,<em>status</em>} nearness tuples for
+all collision enabled objects in the model and for all run-time
+components (i.e., tools, holders, parts and fixtures).</p>
+<p><strong>Get/Set Nearness for Component ID</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \bm{comp\_id} \, \big[,value\,\big]
+\begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+\big[,\mathbf{ALL}\,\big]
+\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>Returns a sequence of {<em>id</em>,<em>value</em>,<em>status</em>} nearness tuples for
+the component ID indicated by <em>comp_id</em>. If ALL is specified, then
+nearness information for all child components of <em>comp_id</em> is also
+returned. If a <em>value</em> is specified, then the nearness offset for the
+identified component(s) is set to the value specified. If ON or OFF is
+specified, then the nearness status is set for the identified
+component(s).</p>
+<p><strong>Get/Set Nearness for Components in Group</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \mathbf{GROUP}, \bm{group\_id} \, \big[,value\,\big]
+\begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>Returns a sequence of {<em>id</em>,<em>value</em>,<em>status</em>} nearness tuples for
+each of the member components of the group identified by <em>group_id</em>. If
+a <em>value</em> is specified, then the nearness offset for the components in
+the group is set to the value specified. If ON or OFF is specified, then
+the nearness status is set for the components in the group.</p>
+<p><strong>Get/Set Nearness for Current Tool</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \mathbf{TOOL} \, \big[,value\,\big]
+\begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>Returns the nearness tuple sequence{<em>id</em>,<em>value</em>,<em>status</em>} for the
+currently loaded tool. If a <em>value</em> is specified, then the nearness
+offset for the tool is set to the value specified. If ON or OFF is
+specified, then the nearness status is set for the tool. Tool nearness
+is used for RAPID and high feed positioning motions.</p>
+</div></blockquote>
+<span id="func-fmspdat"></span><table class="docutils align-default" id="index-3">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSPDAT(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Information about interference pairs</p>
+<p>Returns: Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSPDAT}\boldsymbol{(}\, n, p \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns information about the <em>p</em><sup>th</sup> interference
+pair of the <em>n</em><sup>th</sup> collision/over-travel event that occurred on
+the last motion. A sequence of length 7 is returned, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Event type. 1=over-travel, 2=collision, 3=measurement</p>
+</dd>
+<dt class="field-even">2<span class="colon">:</span></dt>
+<dd class="field-even"><p>ID number of the first component</p>
+</dd>
+<dt class="field-odd">3<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Name of the first component</p>
+</dd>
+<dt class="field-even">4<span class="colon">:</span></dt>
+<dd class="field-even"><p>ID number of the second component (0 if over-travel event)</p>
+</dd>
+<dt class="field-odd">5<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Name of the second component (blank if over-travel event)</p>
+</dd>
+<dt class="field-even">6<span class="colon">:</span></dt>
+<dd class="field-even"><p>Time at start of event</p>
+</dd>
+<dt class="field-odd">7<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time at end of event (same as start time for measurement event)</p>
+</dd>
+</dl>
+<p>The <a class="reference internal" href="../variables/vmvar.html#var-vmxfer"><span class="std std-ref">$VMXFER(1)</span></a> system variable contains the number of collision and/or
+over-travel events that occurred on the last motion. This is the upper
+limit for <em>n</em>. The <a class="reference internal" href="#func-fmscez"><span class="std std-ref">$FMSCEZ</span></a> function can be called to get the count of
+interference pairs for each collision/over-travel event. This is the
+upper limit for <em>p</em>.</p>
+<p>For example, to list all collisions:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DECLAR/LOCAL,REAL,N,P
+DECLAR/LOCAL,SEQUENCE,CEZ,PDAT
+DO/N=1,$VMXFER(1)
+  CEZ=$FMSCEZ(N)
+  DO/P=1,CEZ(3)
+    PDAT=$FMSPDAT(N,P)
+    IF/PDAT(1).EQ.2
+      ERROR/8,&#39;Collision detected between !(*) and !(*)&#39;,$
+        PDAT(3),PDAT(5)
+    ENDOF/IF
+  ENDOF/DO
+ENDOF/DO
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<span id="func-fmsppos"></span><table class="docutils align-default" id="index-4">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSPPOS(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>returns the axes positions at the last probing
+contact</p>
+<p>Returns: Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSPPOS}\boldsymbol{(} \; \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function returns the axes positions at the last point of probe
+contact for all moving axes. A variable length sequence is returned, as
+follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">1<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of axes moved (0 if none)</p>
+</dd>
+<dt class="field-even">2–4<span class="colon">:</span></dt>
+<dd class="field-even"><p>ID number, name and position of the first axis at the touch point</p>
+</dd>
+<dt class="field-odd">5–7<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ID, name and position of the second axis at the touch point</p>
+</dd>
+<dt class="field-even">...<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>repeats for additional axes</em></p>
+</dd>
+</dl>
+<p>To simplify processing, the <a class="reference internal" href="../variables/vmvar.html#var-vmplxm"><span class="std std-ref">$VMP*</span></a> macro variables can also be used to
+obtain the XYZ linear axes positions at the start and end (i.e., trigger
+point) of the probe motion.</p>
+</div></blockquote>
+<span id="func-fmsprid"></span><table class="docutils align-default" id="index-5">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSPRID(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Sets the touch probe object</p>
+<p>Returns: Numeric</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSPRID}\boldsymbol{(} \big[\, id \,\big] \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function sets the touch probe object to the specified component
+<em>id</em>, which can be any component in the world (excluding in-process
+stock) that has a physical representation. This function returns the
+previously active probe object id. Specify an object id of –1 to
+deactivate the current probe object without specifying another.</p>
+<p>The $FMSPRID function can be called without an argument to obtain the
+current probe component id.</p>
+</div></blockquote>
+<span id="func-fmsprob"></span><table class="docutils align-default" id="index-6">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSPROB(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Activates or deactivates probing</p>
+<p>Returns: Numeric</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSPROB}\boldsymbol{(} \big[\, status \,\big] \boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This function activates or deactivates probing, returning the previous
+probe activation status. The following values for <em>status</em> are
+permitted:</p>
+<dl class="field-list simple">
+<dt class="field-odd">0<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deactivate probing; contact with probe will cause a collision</p>
+</dd>
+<dt class="field-even">1<span class="colon">:</span></dt>
+<dd class="field-even"><p>Activate probing; probe is armed</p>
+</dd>
+<dt class="field-odd">2<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deactivate probing; ignore contact with probe</p>
+</dd>
+</dl>
+<p>The $FMSPROB function can be called without an argument to obtain the
+current probe component id.</p>
+<p>Once the probe is active, any motion that causes contact between the
+probe object (which must first be defined first using <a class="reference internal" href="#func-fmsprid"><span class="std std-ref">$FMSPRID</span></a>) and
+another collision enabled object, will cause a probe event to be
+triggered. The model axes motion will be interrupted at the point of
+probe contact, and the probe status information will be returned in the
+<a class="reference internal" href="../variables/vmvar.html#var-vmprcod"><span class="std std-ref">$VMPRCOD</span></a> system variable.</p>
+<p>The following example will close the chuck jaws so that they come into
+contact with the raw stock or part. This example assumes there is a
+chuck jaw identified as “JAW” and that it can be moved with an axis
+identified as “JAW-AXIS”. This code should be included in the model
+startup macro:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DECLAR/LOCAL,REAL,JAW_ID=$FMSID(&#39;JAW&#39;)
+IF/JAW_ID.GT.0
+  %L01=$FMSPRID(JAW_ID) $$ set jaws as probe
+  %L01=$FMSPROB(1) $$ activate probing
+  %L01=$FMSMOVE($FMSID(&#39;JAW-AXIS&#39;),0,1000) $$ close jaws
+  CASE/$VMPRCOD
+    WHEN/0
+      ERROR/4,&#39;No part in chuck&#39;
+    WHEN/1
+      $$ get touched object and disable collision with jaw
+      DECLAR/LOCAL,SEQUENCE,PDAT
+      PDAT=$FMSPDAT($VMXFER(6),$VMXFER(7))
+      %L01=$FMSVCL(JAW_ID,OFF,PDAT(4))
+    WHEN/OTHERS
+      ERROR/8,&#39;Jaws in contact with part at start&#39;
+  ENDOF/CASE
+  %L01=$FMSPROB(0) $$ deactivate probing
+  %L01=$FMSPRID(-1) $$ deactivate probe
+ENDOF/IF
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<span id="func-fmsvcl"></span><table class="docutils align-default" id="index-7">
+<tbody>
+<tr class="row-odd"><td><p><strong>$FMSVCL(</strong><em>...</em><strong>)</strong></p></td>
+<td><p>Single Component Collision Status</p>
+<p>Returns: Sequence</p>
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p><strong>Single Component Collision Status</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSVCL}\boldsymbol{(}\, id \,
+\begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+\begin{bmatrix} ,\! \begin{array}{l} \mathbf{LOCK} \\ \mathbf{AUTO} \end{array}\end{bmatrix}
+\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This form of the $FMSVCL function activates, deactivates or reports on
+the collision testing property of the specified object <em>id</em>. If neither
+ON nor OFF is specified, then the collision property remains unchanged
+(i.e., the status is reported only). The function returns a sequence of
+two numbers. The first number is equal to the component <em>id</em> of the
+tested object. The second number indicates the status as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">–2<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Not a physical object — collision testing is not applicable</p>
+</dd>
+<dt class="field-even">–1<span class="colon">:</span></dt>
+<dd class="field-even"><p>A physical object, but collision testing is not available</p>
+</dd>
+<dt class="field-odd"> 0<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Collision testing has been deactivated</p>
+</dd>
+<dt class="field-even"> 1<span class="colon">:</span></dt>
+<dd class="field-even"><p>Collision testing is enabled</p>
+</dd>
+</dl>
+<p>This function affects the collision testing status of a single physical
+object. Use the aggregate form of the function (described below) to
+affect the collision status of aggregate (i.e., container) objects such
+as tools, parts and fixtures.</p>
+<p>Specify LOCK to ensure that the collision status setting will not be
+modified during the normal course of processing. For example, spindle
+activation and deactivation changes the collision status of some
+components of a tool. Specify AUTO at some later point to restore normal
+collision status processing.</p>
+<p>The following example disables collision testing of tool “body”
+components attached to tool axis #1:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DECLAR/LOCAL,REAL,N
+DECLAR/LOCAL,SEQUENCE,VCL=$FMSVCL($FMSID(TOOL,1,2),ALL)
+DO/N=1,$FLEN(VCL),2
+  IF/$FMSIDT(TOOL,VCL(N)).EQ.2 $$ is this a body component?
+    %L01=$FMSVCL(VCL(N),OFF,LOCK) $$ disable collision testing
+  ENDOF/IF
+ENDOF/DO
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Aggregate Component Collision Status</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSVCL}\boldsymbol{(} \big[\, id, \big]
+\begin{bmatrix} \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array} , \end{bmatrix}
+\mathbf{ALL}
+\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This form of the $FMSVCL function activates, deactivates or reports on
+the collision testing property of <em>all collision enabled/disabled</em>
+objects mounted at or below the specified component <em>id</em> (all objects in
+the World if <em>id</em> is not specified or is zero). If neither ON nor OFF is
+specified, then the collision property remains unchanged (i.e., the
+status is reported only).</p>
+<p>Collision properties are returned in a variable length sequence
+containing {component ID, status(0|1)} pairs, where the collision status
+value (0=off, 1=on) is reported <em>before</em> making any ON-OFF changes.</p>
+<p>The following macro shows how to save the collision testing state of the
+model and then later restore the original collision status:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$$ Save collision state
+VCL=$FMSVCL(ALL)
+...
+$$ Restore collision state
+DO/N=1,$FLEN(VCL),2
+  %L01=$FMSVCL(VCL(N),$FIF(VLC(N+1).EQ.1,ON,OFF))
+ENDOF/DO
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Component Pair Collision Status</strong></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathit{result} = \mathbf{\$FMSVCL}\boldsymbol{(}\, id_1
+\begin{pmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{pmatrix} ,
+id_2 \,\boldsymbol{)}\)</span></p>
+</div></blockquote>
+<p>This form of the $FMSVCL function activates or deactivates collision
+testing between pairs of components as specified by their component IDs.
+The function returns a sequence of two numbers. The first number is
+equal to the component <span class="math notranslate nohighlight">\(id_1\)</span> of the tested object. The second number
+indicates the status as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">–2<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The first object is not a physical body — collision testing cannot be changed</p>
+</dd>
+<dt class="field-even">–1<span class="colon">:</span></dt>
+<dd class="field-even"><p>Both are physical objects, but collision testing is not available for one or both objects</p>
+</dd>
+<dt class="field-odd"> 0<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Collision testing has been deactivated</p>
+</dd>
+<dt class="field-even"> 1<span class="colon">:</span></dt>
+<dd class="field-even"><p>Collision testing is enabled</p>
+</dd>
+</dl>
+<p>Component <span class="math notranslate nohighlight">\(id_1\)</span> must represent a single physical component. Do not
+specify an aggregate (i.e., container) component such as a tool, part or
+fixture.</p>
+<p>Component <span class="math notranslate nohighlight">\(id_2\)</span> can represent either a physical component or an
+aggregate component.</p>
+</div></blockquote>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workpiecefunc.html" class="btn btn-neutral float-left" title="Fixture, Part and Stock Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="toolfunc.html" class="btn btn-neutral float-right" title="Tool and Holder Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
