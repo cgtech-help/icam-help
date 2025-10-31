@@ -1,0 +1,13 @@
+.. _command_shuttr:
+
+The SHUTTR Command :kbd:`[PC]`
+==============================
+
+The SHUTTR command is used to control the laser beam shutter. It is
+available with punch press machines with contouring attachments and
+contouring machines that are of type “Laser”.
+
+   :math:`\textbf{SHUTTR /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+Specification of either ON or OFF will output the appropriate shutter
+open or close code.
