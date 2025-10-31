@@ -1,0 +1,25 @@
+.. _command_opskip:
+
+The OPSKIP Command :kbd:`[MLEPC]`
+=================================
+
+The OPSKIP command is used to provide a means by which certain blocks
+of data may be ignored or skipped over by the control. This command
+is valid for all machine types but may not be available on a specific
+machine.
+
+   :math:`\textbf{OPSKIP /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}
+   \,\icamrange{0.8}{0}\, \big[,\mathit{level}\,\big]`
+
+If the block DELETE selector switch on the control panel is in the
+DELETE position, a special symbol, inserted at the beginning of
+certain command blocks, causes those blocks to be skipped over by the
+control. The insertion of this special symbol can be controlled by
+the programmer. The OPSKIP/ON command will cause all subsequent
+command blocks to be preceded by this symbol until an OPSKIP/OFF
+command is programmed.
+
+The *level* parameter may only be specified if the machine supports
+multiple levels as specified in the OPSKIP section of QUEST. Up to
+nine levels of OPSKIP may be output on a line at a given time,
+depending on controller limitations.
