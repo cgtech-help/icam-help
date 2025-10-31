@@ -1,0 +1,263 @@
+.. _command_fedrat:
+
+The FEDRAT Command :kbd:`[MLEPC]`
+=================================
+
+The FEDRAT command is used to control the rate at which the tool
+travels. This command is valid for all machine types.
+The following FEDRAT command functions are available:
+
+-  :ref:`“Feed Rate Value and Mode”<fedrat_value_mode>`
+-  :ref:`“Inverse Time Selection”<inverse_time_selection>`
+-  :ref:`“Set High Feed Threshold”<set_high_feed_threshold>`
+-  :ref:`“Feed Rate Limiting”<fedrate_limiting>`
+-  :ref:`“Feed Rate Coverage Control”<fedrat_coverage_control>`
+-  :ref:`“Feed Scaling”<feed_scaling>`
+-  :ref:`“Feed Adjustment”<feed_adjustment>`
+
+.. _fedrat_value_mode:
+
+Feed Rate Value and Mode
+------------------------
+
+General Syntax
+~~~~~~~~~~~~~~~
+
+   :math:`\textbf{FEDRAT / }
+   \big[\,\mathit{value}\,\big]
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array}\,\end{bmatrix}
+   \begin{bmatrix} ,\textbf{RANGE}, \begin{pmatrix}\begin{array}{l} \mathit{gear} \\ \textbf{LOW} \\ \textbf{MEDIUM} \\ \textbf{HIGH} \end{array}\end{pmatrix}\end{bmatrix}`
+
+The feed rate value specifies the tool velocity for all subsequent
+motions. The *value* can represent either a distance to travel per
+minute, or a distance to travel per revolution of the tool (or part
+for lathes). The distance can be expressed in inches, millimeters or
+current CL units. Mode and units can be defined by a mode keyword
+(see below).
+
+Feed rate values are modal. If a value is omitted then the most
+recently specified value is used.
+
+If the machine uses feed rate tables, GENER will use the requested
+feed rate value to determine a feed rate number that results in the
+closest matching velocity.
+
+   :math:`\begin{bmatrix} ,\! \begin{array}{l} \textbf{IPM} \\ \textbf{IPR} \\ \textbf{MMPM} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV}\end{array}\,\end{bmatrix}`
+
+The two most commonly used feed rate modes are units per minute and
+units per revolution. The uPM formats IPM, MMPM and PERMIN all
+indicate that the feed rate *value* is specified as a function of the
+distance to be traveled per minute. The uPR formats IPR, MMPR and
+PERREV all indicate that the feed rate *value* is specified as a
+function of the distance to be traveled per spindle revolution. When
+using the uPR format, the spindle must always be rotating when a move
+is performed. If the spindle is stopped, GENER will output a message
+since it is not be able to determine the tool velocity.
+
+The measurement units of the feed rate are also specified with the
+mode keyword. Inch (IPM and IPR), millimeter (MMPM and MMPR) and
+default (PERMIN and PERREV) units are supported.
+
+If the machine units do not match the specified units, then the value
+is automatically converted to the units of the machine before being
+applied.
+
+Feed rate modes are modal. If the mode word is omitted then the most
+recently specified mode is used. If the mode selected is not
+available then GENER will convert the specified feed rate into a mode
+that is available.
+
+On machines that support both uPM and uPR coding, the preparatory or
+auxiliary code for that mode will be output each time the mode word
+is coded. To avoid redundant feed rate mode codes, only mention the
+mode keyword on a FEDRAT command when it differs from the last mode
+specified.
+
+   :math:`\begin{bmatrix} ,\textbf{RANGE}, \begin{pmatrix}\begin{array}{l} \mathit{gear} \\ \textbf{LOW} \\ \textbf{MEDIUM} \\ \textbf{HIGH} \end{array}\end{pmatrix}\end{bmatrix}`
+
+On machines supporting it, feed rate gearing can be controlled using
+the HIGH, MEDIUM and LOW keywords. HIGH and LOW gears are equated to
+the fastest and slowest feed rate ranges respectively. MEDIUM will
+select the mid-range gear if there is one. Do not request a MEDIUM
+gear if the machine has an even number of gear ranges. If a gear
+cannot be specified using HIGH, MEDIUM or LOW, the “RANGE,\ *gear*\ ”
+format must be used, where *gear* is the gear number. Gear number 1
+is the LOW gear. Higher gear numbers represent higher machine gears.
+
+If feed rates do not fall within the range of the active gear, error
+messages will be output and the appropriate minimum or maximum value
+for the gear in effect will be substituted.
+
+For high speed positioning (i.e., RAPID), the maximum setting for the
+gear currently in effect will be used for the rapid feed rate.
+
+Wire EDM Syntax
+~~~~~~~~~~~~~~~
+
+   :math:`\textbf{FEDRAT / }
+   \big[\,\mathit{value}\,\big]
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\,\end{bmatrix}`
+
+The above format is the only syntax valid for EDMs. The *value*
+represents a user specified estimate of the rate at which the wire is
+cutting through the part and is used solely for the purpose of timing
+calculations. No codes are output as a result of coding a FEDRAT
+command for an EDM.
+
+Punch Press Syntax
+~~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{FEDRAT / } \big[\,\textbf{INCR},\big] \mathit{value}`
+
+   :math:`\textbf{FEDRAT /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The above FEDRAT command syntax is applicable to punch presses and is
+the only valid syntax that may be coded for these machines. The
+*value* parameter of the first format indicates the nibbling step.
+The nibbling step is specified as the distance per hit. If a value of
+0 is given, this is equivalent to the OFF parameter.
+
+The ON/OFF format is used to terminate or reinstate nibbling mode as
+follows. The FEDRAT/OFF command is used to switch to single punch
+mode. If FEDRAT/ON is coded, the last FEDRAT *value* will be
+reinstated.
+
+If the punch press is currently in single punch mode and a FEDRAT
+*value* is coded, the mode will be switched to nibbling and the
+nibble increment will be output to the nibble increment register (if
+it is supported). If nibbling is not supported on the machine, GENER
+will simulate nibble mode by outputting the number of punches (at the
+specified nibble increment) required to make the requested move. The
+INCR parameter is optional and should be coded for purposes of upward
+compatibility.
+
+If the punch press has a contouring attachment, then the FEDRAT
+command is identical to a 2 axis mill while the punch press is in
+contouring mode.
+
+.. _inverse_time_selection:
+
+Inverse Time Selection
+----------------------
+
+   :math:`\textbf{FEDRAT / INVERS},
+   \begin{pmatrix} \begin{array}{l} \textbf{AUTO} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+A feed rate mode called 1/t (inverse time) is typically available on
+machines having rotary axes. In this mode, instead of outputting the
+feed rate as a function of the distance to be traveled, GENER first
+calculates the amount of time it will take the machine to complete
+the required move at the given feed rate. It then outputs the inverse
+of this value. 1/t is recommended for feed motions involving rotary
+axes.
+
+ON causes subsequent motions to be output using 1/t feed rate coding.
+OFF reverts back to either uPM or uPR mode, depending on which was
+last specified. The AUTO option causes GENER to temporarily change to
+1/t mode if necessary for a rotary axis move and then revert back on
+the next non-rotary motion.
+
+.. _set_high_feed_threshold:
+
+Set High Feed Threshold
+-----------------------
+
+   :math:`\textbf{FEDRAT / RAPID}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{MAXIPM} \\ \textbf{MXMMPM} \\ \textbf{MXPERM} \end{array} \end{bmatrix} ,\mathit{feed}`
+
+Path planning optimizations by default look for RAPID motions to
+delimit the start and end of cutting passes. Use this command to set
+a feed rate threshold that defines a feed positioning motion. Path
+planning will treat feed motions as positioning ones, if the
+interpolation rate exceeds or matches the specified *feed* value. The
+maximum feed threshold can be specified in inches per minute
+(MAXIPM), millimeters per minute (MXMMPM) or CL units per minute
+(MXPERM, the default).
+
+   :math:`\textbf{FEDRAT / RAPID},
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+ON reinstates the last specified feed as the threshold to include
+both RAPID and high feed motions as part of the positioning sequence.
+OFF (the default) only recognizes RAPID motions as positioning.
+
+.. _fedrate_limiting:
+
+Feed Rate Limiting
+------------------
+
+   :math:`\textbf{FEDRAT /}
+   \begin{pmatrix} \begin{array}{l} \textbf{MAXIPM} \\ \textbf{MXMMPM} \\ \textbf{MXPERM} \\ \textbf{MAXDPM} \end{array} \end{pmatrix} ,
+   \begin{pmatrix} \begin{array}{l} \mathit{value} \\ \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+This command adjusts the maximum linear and rotary interpolation
+rates. GENER will limit the velocity of the tool to the specified
+*value*, given in inches per minute (MAXIPM), millimeters per minute
+(MXMMPM) or current CL units per minute (MXPERM). GENER can also
+limit the velocity of individual rotary axes to the specified
+*value*, given in degrees per minute (MAXDPM). OFF resets the maximum
+feed to the actual machine axes maximums. ON reapplies an earlier
+specified feed limitation.
+
+.. _fedrat_coverage_control:
+
+Feed Rate Coverage Control
+--------------------------
+
+   :math:`\textbf{FEDRAT / LENGTH}, \mathit{length} \;
+   \big[,\mathit{offset}\,\big]`
+
+   :math:`\textbf{FEDRAT / LENGTH},
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+By default, GENER computes feed rates both at the tool tip and at a
+QUEST defined distance up along the tool axis. The distance traversed
+(for the purpose of feed rate calculations) is the larger of the two.
+Coding *length* changes the default length to the specified value,
+measured in part units. Coding the optional *offset* adjusts the tip
+location up (positive) or down (negative) by the specified amount.
+The default *length* is defined in the questionnaire; the default
+*offset* is always zero.
+
+.. _feed_scaling:
+
+Feed Scaling
+------------
+
+   :math:`\textbf{FEDRAT / SCALE}
+   \icamrange{13}{1}\! \begin{pmatrix} ,
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array}\end{pmatrix}
+   ,\mathit{value}
+   \end{pmatrix}`
+
+   :math:`\textbf{FEDRAT / SCALE},
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+This command is used to apply a scale factor to individual axes for
+feed rate computation purposes. Specify an axis name keyword followed
+by a non-zero positive scale factor for each machine axis that
+requires special feed rate scaling. GENER will use the scaled delta
+axis value for subsequent feed rate calculations. See :ref:`here<axis_names>` for a table correlating axes name keywords
+with machine axes. OFF removes any feed rate scaling in effect. ON
+reapplies previously specified feed rate scaling factors.
+
+.. _feed_adjustment:
+
+Feed Adjustment
+---------------
+
+This command is used to control whether GENER adjusts feed rates to
+respect the physical limitations of the machine. The default setting
+is controlled in QUEST.
+
+   :math:`\textbf{FEDRAT / ADJUST},
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+ON enables feed adjustments. While enabled, the programmed feed value
+will be adjusted if necessary on a block by block basis to take into
+account the maximum feed velocity of all axes that are moving as well
+as the minimum block processing time (if one is defined).
+
+OFF disables feed adjustments. The feed value output will be as
+programmed in the CLDATA, while respecting the controller feed
+register limitations.
