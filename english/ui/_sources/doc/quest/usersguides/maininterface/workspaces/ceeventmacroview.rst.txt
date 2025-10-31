@@ -1,0 +1,22 @@
+Event Macro View (Control Emulator only)
+----------------------------------------
+
+The event macro view is quite a simple interface that shows you the
+macros available to enable. These macros are automatically activated
+when specific events occur in the program.
+
+|image1|
+
+|image2|
+
+To use one of the event macros, first select an event type from the
+list, then click the *Modify* button. A clear icon in front of the event
+type indicates that an RMD macro does not yet exist for this event. A
+solid green icon indicates an active event macro. Event macros can be
+deactivated by clearing the checkbox (the icon changes color).
+
+**Close:** Closes the event macro section.
+
+.. |image1| image:: ./media/a7065b78f25cd66222c7b9ed24132af18e41015f.gif
+.. |image2| image:: ./media/bb40a274f85bec043c1c82a4ca8fb5fdb3ed8d4a.gif
+
