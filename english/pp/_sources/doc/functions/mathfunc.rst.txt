@@ -1,0 +1,144 @@
+Mathematical Functions
+======================
+
+All mathematical functions return a numeric result and only accept
+numeric arguments.
+
+.. _func_facos:
+.. index:: Functions; $FACOS
+
++-------------------------+------------------------------------------+
+| **$FACOS(**\ *n*\ **)** | Arc cosine (degrees)                     |
+|                         |                                          |
+|                         | Returns: Numeric                         |
++-------------------------+------------------------------------------+
+
+   This function returns the arc cosine of the argument *n*. The
+   resulting value is in degrees. The argument to $FACOS must be between
+   –1 and 1 inclusive.
+
+.. _func_fasin:
+.. index:: Functions; $FASIN
+
++-------------------------+------------------------------------------+
+| **$FASIN(**\ *n*\ **)** | Arc sine (degrees)                       |
+|                         |                                          |
+|                         | Returns: Numeric                         |
++-------------------------+------------------------------------------+
+
+   This function returns the arc sine of the argument *n*. The resulting
+   value is in degrees. The argument to $FASIN must be between –1 and 1
+   inclusive.
+
+.. _func_fatan:
+.. index:: Functions; $FATAN
+
++---------------------------+------------------------------------------+
+| **$FATAN(**\ *n*\ **)**   | Arc tangent (degrees)                    |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the arc tangent of the argument *n*. The
+   resulting value is in degrees.
+
+.. _func_fatan2:
+.. index:: Functions; $FATAN2
+
++----------------------------------------+-----------------------------------------+
+| **$FATAN2(**\ *n1*\ **,**\ *n2*\ **)** | Arc tangent (degrees) given 2 arguments |
+|                                        |                                         |
+|                                        | Returns: Numeric                        |
++----------------------------------------+-----------------------------------------+
+
+   This function returns the arc tangent of the expression *n1/n2*. The
+   resulting value will be greater than –180 degrees and less than or
+   equal to 180 degrees. If the value of *n1* is positive, the result is
+   positive. When the value of *n1* is zero, the result will be zero if
+   *n2* is positive and 180 degrees if *n2* is negative. If the value of
+   *n2* is zero, the absolute value of the result will be 90 degrees.
+   Both *n1* and *n2* must not be zero.
+
+.. _func_fcos:
+.. index:: Functions; $FCOS
+
++---------------------------+------------------------------------------+
+| **$FCOS(**\ *n*\ **)**    | Cosine (degrees)                         |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the cosine of the argument *n*. The argument
+   must be given in degrees.
+
+.. _func_fexp:
+.. index:: Functions; $FEXP
+
++---------------------------+------------------------------------------+
+| **$FEXP(**\ *n*\ **)**    | Exponential                              |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the exponential constant *e* raised to the
+   power of the argument *n*.
+
+.. _func_fln:
+.. index:: Functions; $FLN
+
++---------------------------+------------------------------------------+
+| **$FLN(**\ *n*\ **)**     | Natural logarithm                        |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the natural logarithm (base e) of the argument
+   *n*.
+
+.. _func_flog:
+.. index:: Functions; $FLOG
+
++---------------------------+------------------------------------------+
+| **$FLOG(**\ *n*\ **)**    | Common logarithm                         |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the decimal logarithm (base 10) of the argument
+   *n*.
+
+.. _func_fsin:
+.. index:: Functions; $FSIN
+
++---------------------------+------------------------------------------+
+| **$FSIN(**\ *n*\ **)**    | Sine (degrees)                           |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the sine of the argument *n*. The argument must
+   be given in degrees.
+
+.. _func_fsqrt:
+.. index:: Functions; $FSQRT
+
++---------------------------+------------------------------------------+
+| **$FSQRT(**\ *n*\ **)**   | Square root                              |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the square root of *n*. The argument to $FSQRT
+   must be greater than or equal to zero.
+
+.. _func_ftan:
+.. index:: Functions; $FTAN
+
++---------------------------+------------------------------------------+
+| **$FTAN(**\ *n*\ **)**    | Tangent (degrees)                        |
+|                           |                                          |
+|                           | Returns: Numeric                         |
++---------------------------+------------------------------------------+
+
+   This function returns the tangent of the argument *n*. The argument
+   must be given in degrees.
