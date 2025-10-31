@@ -1,0 +1,15 @@
+.. _command_endsub:
+
+The ENDSUB Command :kbd:`[MLEPC]`
+=================================
+
+The ENDSUB command is used to identify the end of a predefined
+subprogram. A predefined subprogram consists of: a DEFSUB command
+naming the subprogram; one or more part program instructions defining
+the body of the subprogram; and a terminating ENDSUB command. A
+subprogram is called by coding a CALSUB command with a matching
+subprogram identifier. This command is valid for all machine types.
+
+   :math:`\textbf{ENDSUB}`
+
+The ENDSUB command is programmed without parameters.
