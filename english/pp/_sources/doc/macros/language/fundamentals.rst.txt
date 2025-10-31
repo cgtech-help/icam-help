@@ -1,0 +1,755 @@
+.. _macro_fundamentals:
+
+Fundamentals of the Macro Language
+----------------------------------
+
+There are a number of different macro types available with the ICAM
+macro language:
+
+-  **Startup and Shutdown macros** are executed at the start and end of
+   “special” events. For example, control emulators, post-processors and
+   models all have declaration, main startup and shutdown macros. The
+   declaration macro is used to initialize global and object scope
+   variables that are shared by all other macros. The startup macro
+   performs actions that are required to be done once at the start of
+   processing. The shutdown macro typically performs any required
+   housekeeping duties at the end of processing. Other startup/shutdown
+   macro types exist in the different products to allow customization at
+   the start and ends of key events.
+   Post-processor startup and shutdown macros were described earlier in
+   :ref:`“Startup/Shutdown Procedures”<startup_shutdown_procedures>`.
+
+   \
+
+-  **Event macros** are similar to Startup/Shutdown macros, with the
+   exception that a single macro is executed to handle customization
+   necessary during the event. A special OUTPUT macro command in the
+   event macro specifies where the built-in action is to occur.
+   GENER supports Operation, Register and Tape event macros,
+   described :ref:`earlier<operation_event_sum>`.
+
+   \
+
+-  **User Defined macros** customize the processing associated with
+   post-processor commands and other record data that are read from the
+   CLDATA. These were described earlier in :ref:`“User Defined
+   Syntax Macros”<user_defined_syntax_macros>`.
+
+   \
+
+-  **User Function macros** provide for the easy definition of custom
+   macro functions, which can be called in the same way as built-in
+   functions during macro processing. These were described earlier in
+   :ref:`“User Function Macros”<user_function_macros>`.
+
+All of these macro types share the same common macro language syntax.
+Many of these macro types get information about the event that they
+are customizing via $P variables (described later).
+
+Basic Macro Syntax
+~~~~~~~~~~~~~~~~~~
+
+Macro statements are APT-like in appearance, similar to the ASCII CL
+file output by many CAM systems. Statements begin on a new line, in
+the form “\ *variable*\ =\ *expression*\ ”, “\ *command*/*parameter-list*\ ”
+or simply “\ *command*\ ”. The maximum length of a macro
+line is 512 characters. Macro statements can be continued from one
+line to the next by ending the previous line with a single dollar
+character ``$``.
+
+Macro comment lines begin with two dollar characters ``$$``. Comment can be
+appended to the end of any statement by coding $$ followed by the comment text.
+A comment can also be specified following the $
+continuation mark, but at least one space must separate the $
+character from the comment text that follows.
+
+Blanks and the case of letters are ignored by the compiler unless
+they appear within a string constant (e.g., ``'Hello World'``) or
+comment.
+
+Macros can be shown in one of two styles (set your preference from
+the “Macro Editor” tab of the **Tools**\ **»Preferences** menu-bar selection):
+
+-  “\ **Standard**\ ” is the traditional format. Macro commands and
+   variables are shown in uppercase and logical operators are shown
+   using the ANSI APT “.XX.” style. For example:
+
+      ::
+
+         IF/I.GT.3.AND.I.LE.6
+
+-  “\ **C**\ ” is a more modern format. Macro commands and variables are
+   shown in lowercase and logical operators are shown using the C style.
+   For example:
+
+      ::
+
+         if/i>3&&i<=6
+
+Examples of macros can be found in the :ref:`“Post-Processor Macro Samples”<annex_macro_samples>` annex.
+
+.. _macro_data_types:
+
+Macro Data Types
+~~~~~~~~~~~~~~~~
+
+There are eight data types in the macro language. REAL, LOGICAL,
+STRING and SEQUENCE are general types. KEYWORD and RECORD are
+typically only used in post-processor macros. CODE and REG are
+typically only used in control emulator macros.
+
+.. _macro_data_type_real:
+
+-  An expression with **REAL** data type is a number. There is no
+   distinction between whole numbers and those with a fractional part.
+   Exponential (or scientific) notation is not supported. The following
+   are examples of valid numeric constants:
+
+      ::
+
+         12
+         .003
+         23.45
+
+.. _macro_data_type_logical:
+
+-  An expression with **LOGICAL** data type is either true or false,
+   represented by the following compiler constants and macro system
+   variables:
+
+      ::
+
+         .TRUE.     $$ compiler constant
+         .FALSE.    $$ compiler constant
+         $TRUE      $$ macro system variable
+         $FALSE     $$ macro system variable
+
+.. _macro_data_type_string:
+
+-  An expression with **STRING** data type is a character string. String
+   constants begin and end with single quotes ('). In order to include
+   the single quote character within a string constant, two single
+   quotes in a row must be specified. The string constant composed only
+   of two single quotes represents a string composed of zero characters,
+   called the “empty string”. The following are examples of valid string
+   constants:
+
+      .. code-block:: text
+
+         'THIS IS A STRING'
+         ' '
+         'This string contains a single quote ('').'
+
+   If a string is too long to fit on one line, it can be broken into
+   pieces using the concatenation operator (//) and the continuation
+   character ($). Operators are discussed further in a later section.
+   For example:
+
+      ::
+
+         %L01='This string could not fit on a single '//$
+         'line so it was broken into pieces in order to '//$
+         'fully specify it.'
+
+.. _macro_data_type_sequence:
+
+-  An expression with **SEQUENCE** data type consists of an ordered set
+   of data elements. The data elements within a sequence can be of any
+   type and do not all have to be the same. The following is an example
+   of a sequence being assigned to a variable:
+
+      ::
+
+         %L01={ON,$TRUE,5}
+
+.. _macro_data_type_keyword:
+
+-  An expression with **KEYWORD** data type is a post-processor Minor
+   word (see the :ref:`“Post-Processor Minor Words”<annex_minor_words>`) annex.
+   If a minor word is not defined for a specific code, then the keyword
+   code constant can be specified in the form “#\ *code*\ ”. The Minor
+   word list (and associated codes) can be modified using the QUEST Words
+   Manager. The following are examples of keyword constants:
+
+      .. code-block:: text
+
+         ON        or     #71
+         RANGE           #145
+
+.. _macro_data_type_record:
+
+-  An expression with **RECORD** data type is a post-processor Major
+   word or Reserved word representing a CLDATA record
+   type (see the
+   :ref:`“Post-Processor Major Words”<annex_major_words>` annex and the
+   :ref:`“Reserved Words”<annex_reserved_words>` annex).
+   If a Major word or Reserved name is not
+   defined for a specific record type, then the record type constant can
+   be specified in the form “#\ *class:subclass*\ ”. The Major word list
+   (and associated codes) can be modified using the QUEST Words Manager.
+   Examples of record constants follow:
+
+      .. code-block:: text
+
+         COOLNT    or     #2000:1030
+         GOTO             #5000:5
+                         #28000:*
+
+   An asterisk (\*) can be used in place of the class or subclass code
+   to represent all classes or all subclasses. In the third example
+   above, the record type constant represents all subclasses of record
+   class 28000. The constant “#\*:\*” represents all record types.
+
+.. _macro_data_type_code:
+
+-  An expression with **CODE** data type is a control emulator code
+   identifier. Code identifiers are constants starting with the letters
+   “CODE\_”. For example:
+
+      ::
+
+         CODE_RAPID
+
+.. _macro_data_type_reg:
+
+-  An expression with **REG** data type is a control emulator register
+   identifier. Register identifiers are constants starting with the
+   letters “REG\_”. For example:
+
+      ::
+
+         REG_AXIS_X
+
+.. _macro_data_type_null:
+
+There is one other special type in the macro language: null.
+
+-  If an expression has a **null** value, it is as if it has no value or
+   an unknown value. The read-only system variable $NULL represents a
+   null value. Note that zero is not equal to $NULL.
+
+The macro language does not require strong data typing. This means
+that the same variable can hold information of different types during
+the course of processing. This provides a great deal of flexibility
+and simplifies coding, at the expense of readability and a greater
+chance of coding errors. For those who prefer a more formal
+arrangement, the DECLAR command can be used to strongly type
+variables. The macro processor can also enforce various levels of
+strong data typing, which are described in the :ref:`“Declaration Macro”<declar_macro>`.
+
+Macro Variables
+~~~~~~~~~~~~~~~
+
+The following table describes the format of the various types of
+variables:
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+      :class: wrap-last
+
+      *  -  Variable Type
+         -  Variable Format
+         -  Examples
+      *  -  User
+         -  A…Z :math:`\icamrange{0.8}{0}\,\big[` A…Z0…9\_ :math:`\big]`
+         -  :mono:`I,ABC2,M4_J`
+      *  -  Predefined Global
+         -  %G00…%G99
+         -  :mono:`%G2,%G02,%G23`
+      *  -  Predefined Local
+         -  %L00…%L99
+         -  :mono:`%L2,%L02,%L23`
+      *  -  $P Argument
+         -  $P01…$P99
+         -  :mono:`$P2,$P2,$P23`
+      *  -  System
+         -  $\ *name*
+         -  :mono:`$XC,$PI,$T`
+
+User variable names must always start with an alphabetic character.
+The remaining characters can be any combination of letter, digit and
+underscore characters. The maximum size of a user variable name is 32
+characters. A % must be prefixed to the user variable name if it
+conflicts with a MAJOR, MINOR or reserved keyword name.
+
+User variables can be global, object or local, depending on how they
+are declared (see :ref:`“Variable Scope<macro_variable_scope>`). Briefly, global variables retain their
+value across all macros and can therefore be used to pass information
+from one macro to another, whereas local variables are used for
+calculations local to a specific macro. By default, user variables
+are local unless a DECLAR command is given declaring the variable
+with global or object scope.
+
+For predefined global variables, predefined local variables and $P
+arguments, the leading zero of the variable number is optional (in
+other words, %G02 is same as %G2, %L02 is same as %L2 and
+$P02 is same as $P2). Predefined global variables (%G00…%G99) must
+not be specified in a DECLAR statement since they are predefined as
+global. The same is true for predefined local variables (%L01…%L99).
+
+There is a predefined set of macro system variables. Some variables
+cannot be assigned values and most that can be assigned can take only
+numeric values. See :ref:`“Macro System Variables”<macro_system_variables>`
+for a list of available macro system variables.
+
+.. _macro_command_declar:
+
+Explicit Type Declaration (DECLAR)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The DECLAR command is used to define the scope of a variable (i.e.,
+global, object or local) and/ or the type of data that the variable
+can represent (i.e., a number, a string…). All variables defined
+using the DECLAR command are automatically initialized to a default
+value. The syntax is as follows:
+
+   :math:`\textbf{DECLAR /}
+   \begin{bmatrix}\,\begin{array}{l} \textbf{GLOBAL} \\ \textbf{OBJECT} \\ \textbf{LOCAL} \end{array}\,\end{bmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{REAL} \\ \textbf{LOGICAL} \\ \textbf{STRING} \\ \textbf{SEQUENCE} \\ \textbf{KEYWORD} \\ \textbf{RECORD} \\ \textbf{CODE} \\ \textbf{REG} \end{array}\,\end{bmatrix}
+   \big[,\textbf{CHANNEL}\,\big] \;
+   \icamrange{1.2}{1} \Big(,\mathit{name}\big[\mathtt{=}\mathit{expression}\,\big]\Big)`
+
+.. _macro_variable_scope:
+
+Variable Scope
+``````````````
+
+If LOCAL is specified (the default) then the variable is local to the
+macro in which it is declared. This means that the variable only
+exists from the moment it is declared and is forgotten once the macro
+in which it was declared has ended. Local variables are often used,
+for example, to hold intermediate results and loop counters.
+
+If OBJECT is specified then the variable can be shared by all macros
+of the current object type. This means for example that if the
+variable is declared in a post-processor macro, then it can be used
+in any other post-processor macro, but it cannot be “seen” in Virtual
+Machine model macros. Object variables should be declared once only
+in a declaration macro. They can be used to pass information between
+macros of the same object type. The macro processor differentiates
+between the following object types:
+
+-  Icam Post post-processor macros
+-  Control Emulator macros
+-  Virtual Machine model macros
+-  Interface Kit macros
+
+If GLOBAL is specified, then the variable being declared is global to
+all macros. Global variables should be declared once only in a
+declaration macro. They can be used to pass information between any
+macro type.
+
+When the macro editor “Strong Declaration” setting is either PARTIAL
+or FULL, then global and object variables can only be defined in the
+declaration macro. When set to OFF, there are no restrictions on
+where global and object variables are declared.
+
+Variable Type
+`````````````
+
+By default, a variable can hold any type of information and the type
+can change at any time without restriction. If a variable is declared
+with a specific type, then the macro processor will issue an error at
+run-time if data of the wrong type is loaded into the variable.
+
+Variable Name
+`````````````
+
+One or more variable names can be defined in a single DECLAR command.
+Names must start with a letter, can consist of letters, digits and
+the underscore character, to a maximum of 32 characters. A % must be
+prefixed to the user variable name if it conflicts with a MAJOR,
+MINOR or reserved keyword name.
+
+.. _macro_variable_array:
+
+Variable Array
+``````````````
+
+Any variable, excluding those of type SEQUENCE, can be defined as an
+array, by specifying the number of array elements within parenthesis
+( ) immediately following the variable name. Arrays can be specified
+with up to 4 dimensions, separated by commas within the parentheses.
+Arrays are organized in memory in row-major order, which is the same
+order as used by the C programming language. There is no limit to the
+size of a dimension, but keep in mind that memory is allocated to
+hold the entire array, whether used or not.
+
+If CHANNEL is specified, then an additional dimension of size $CHMAX
+is added to the variables being defined. $CHMAX is a read-only
+variable that indicates the number of individual channels supported
+by the CNC, which will be 2 for a merging lathe and 1 for all other
+machine types. Due to the hidden additional dimension, channel
+variables can be specified with up to 3 dimensions only.
+
+To refer to a specific element in an array variable, specify the
+element number for each dimension separated by commas within
+parentheses. The element number (also called an array index) can be
+specified either as a numeric constant or by an expression that
+returns a numeric result. The fractional portion is discarded in any
+number or expression used as an array index.
+
+The final array index can be omitted with channel variables, in which
+case $CI is used for the omitted index value. $CI is a read-only
+variable that indicates the current channel being processed. It has a
+value of 2 when processing the side turret of a merging lathe,
+otherwise it has a value of 1. Channel variables simplify macro
+coding for merging lathes, by allowing the channel specific index to
+be omitted where it is convenient to do so.
+
+Variable Assignment
+```````````````````
+
+All variables except arrays can be assigned a value when declared, by
+following the variable name with an = assignment operator followed by
+a value or expression. A channel variable without additional
+dimensions can also be assigned a value when declared.
+
+Variable Default
+````````````````
+
+Variables that are not explicitly defined with a value are assigned a
+default value when they are declared. These defaults are: zero for
+REAL; .FALSE. for LOGICAL; blank string for STRING;
+{ } for SEQUENCE, #0 for KEYWORD; #0:0 for RECORD; CODE_NONE for
+CODE, REG_NONE for REG and $NULL for an untyped variable. An undeclared variable is
+assigned a default value of zero if it is referenced before it is
+assigned a value.
+
+A run time “warn about uninitialized variables” setting can
+optionally be selected to diagnose whenever a macro variable is used
+in an expression before it has been assigned a
+value (see :ref:`“Tools»Preferences…”<tools_preferences>`).
+
+Some examples follow:
+
+   ::
+
+      $$ a local untyped variable named I
+      DECLAR/LOCAL,I
+      $$ 3 post-processor only variables that can only hold real values
+      DECLAR/OBJECT,REAL,X1=0,Y1=0,Z1=0
+      $$ a global logical variable named FLAG holding an array of 10 values
+      DECLAR/GLOBAL,LOGICAL,FLAG(10)
+      DO/I=1,10
+        FLAG(I)=.FALSE.
+      ENDOF/DO
+
+It is illegal to specify a predefined variable name in a DECLAR
+command. These include %L\ *nn* and %G\ *nn* variables as well as
+macro system variables (i.e., those with a leading “$” symbol). Also,
+once a variable is declared it in effect becomes “predefined” and
+must not be declared again. That is why it is recommended that all
+global and object declarations be placed in the declaration macro,
+where they are only declared once.
+
+.. _macro_operators:
+
+Operators
+~~~~~~~~~
+
+Numeric, String and Sequence Operators
+``````````````````````````````````````
+
+The following table summarizes the numeric, string and sequence
+operators available in the macro language in decreasing order of
+precedence. You cannot use numeric operators on strings, nor can you
+use the string operator on numbers.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+      :class: wrap-last
+
+      *  -  Operator
+         -  Function
+         -  Example
+      *  -  :mono:`**`
+         -  Exponentiation
+         -  :mono:`$P3**2`
+      *  -  :mono:`/`
+         -  Division
+         -  :mono:`$PI/2`
+      *  -  :mono:`*`
+         -  Multiplication
+         -  :mono:`3.5*$P1`
+      *  -  :mono:`+`
+         -  Addition
+         -  :mono:`%G00+%L00`
+      *  -  :mono:`-`
+         -  Subtraction
+         -  :mono:`%G00-3`
+      *  -  :mono:`:`
+         -  Sub-string/sequence
+         -  :mono:`$P2(1:3)`
+      *  -  :mono:`//`
+         -  String concatenation
+         -  :mono:`'PART'//%L02`
+      *  -  :mono:`( )`
+         -  Group
+         -  :mono:`%L01/(%L02+4)`
+      *  -  :mono:`{ }`
+         -  Sequence
+         -  :mono:`{$XC,$YC,$ZC}`
+
+A series of **exponentiation** operations are evaluated from right to
+the left. The following are equivalent:
+
+   ::
+
+      a**b**c
+      a**(b**c)
+
+The **multiplication** and **division** operators have the same level
+of precedence. A series of multiplications and/or divisions are
+evaluated from left to right. The following are equivalent:
+
+   ::
+
+      a*b/c
+      (a*b)/c
+
+The **addition** and **subtraction** operators similarly have the
+same level of precedence and are evaluated from left to right. The
+following are equivalent:
+
+   ::
+
+      a+b-c
+      (a+b)-c
+
+Putting the numeric operators together, the following are equivalent:
+
+   ::
+
+      a+b**c/d
+      a+((b**c)/d)
+
+The **substring**/**subsequence** operator is used as follows
+“\ *variable*\ (*start*\ **:**\ *end*)” to return a range of
+characters instead of a single character of the named string
+variable, or to return a range of elements instead of a single
+element in the named sequence variable. It is important to note that
+the sequence operator cannot be used to return a range of elements of
+an array; only those of a sequence. If the *start* position is
+omitted, the returned range starts at the first character or element.
+If the *end* position is omitted, the returned range ends at the last
+character or element.
+
+   ::
+
+      STR(6:)
+      $P3(1:3)
+
+The **concatenation** operator can only be used with string constants
+and variables or functions that have a string type. The **addition**
+operator can also be used when concatenating strings. A series of
+concatenation operators are evaluated from left to right. The
+following are equivalent:
+
+   ::
+
+      '(MSG, '//$PARTNO//')'
+      '(MSG, '+$PARTNO+')'
+
+The **grouping** operator “( )” has a variety of purposes. It can
+used following an array, string or sequence variable name to identify
+the element(s) to return. It can be used following a function name to
+define the input parameters of the function. It can also be used in
+an expression to influence the order of evaluation since expressions
+in parentheses are evaluated first, starting from the deepest nest
+level and working outwards. Use of the grouping operator can be seen
+in nearly all of the examples above.
+
+The **sequence** operator “{ }” is used to construct a sequence of
+zero or more elements. The return value is a sequence expression
+consisting of all the elements contained within the braces.
+
+   .. code-block:: text
+
+      {1,'str',.TRUE.}
+
+.. _macro_operators_assignment:
+
+Assignment Operators
+````````````````````
+
+The following table lists the assignment operators available in the
+macro language.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+      :class: wrap-last
+
+      *  -  Operator
+         -  Function
+         -  Example
+      *  -  :mono:`=`
+         -  Assignment
+         -  :mono:`%L01=$PI`
+      *  -  :mono:`/=`
+         -  Division assignment
+         -  :mono:`%L01/=2`
+      *  -  :mono:`*=`
+         -  Multiplication assignment
+         -  :mono:`%L01*=2`
+      *  -  :mono:`+=`
+         -  Addition assignment
+         -  :mono:`I+=1`
+      *  -  :mono:`-=`
+         -  Subtraction assignment
+         -  :mono:`I-=1`
+
+The **assignment** operator copies the value or expression appearing
+on the right of the = to the variable on the left. If the variable
+being assigned a value (i.e., the L-value) has a declared data type,
+then the value or expression to the right of the = (i.e., the
+R-value) must have the same data type. If the L-value is not strongly
+typed, then it takes on whatever type was last assigned. Examples of
+assignments follow:
+
+   ::
+
+      %L01='abc'
+      CLP={$XC,$YC,$ZC}
+      I=0
+
+The **division assignment** operator divides the L-value by the
+R-value (which must be of type REAL) storing the result back into the
+L-value. The following are equivalent:
+
+   ::
+
+      %L01/=2
+      %L01=%L01/2
+
+The **multiplication assignment** operator multiples the L-value by
+the R-value (which must be of type REAL) storing the result back into
+the L-value. The following are equivalent:
+
+   ::
+
+      %L01*=$PI
+      %L01=%L01*PI
+
+The **addition assignment** operator can accept an R-value of type
+REAL, STRING or SEQUENCE. If REAL, the R-value is added to the
+L-value, storing the result back into the L-value. If STRING or
+SEQUENCE, the R-value is appended to the L-value. The following are
+equivalent:
+
+   .. code-block:: text
+
+      $$ Real                $$ String                $$ Sequence
+      %L01+=1                %L01+='abc'              %L01+={ON}
+      %L01=%L01+1            %L01=%L01//'abc'         %L01={%L01,ON}
+
+The **subtraction assignment** operator subtracts the R-value (which
+must be of type REAL) from the L-value storing the result back into
+the L-value. The following are equivalent:
+
+   ::
+
+      %L01-=1
+      %L01=%L01-1
+
+.. _macro_operators_logical:
+
+Logical Operators
+`````````````````
+
+This next table lists the logical operators available in the macro
+language (two styles are available: APT standard and C) in decreasing order of
+precedence. A logical operator compares two variables or constants,
+returning a value of “.TRUE.” or “.FALSE.”. Both items being compared
+must be of the same type.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+      :class: wrap-last
+
+      *  -  APT
+         -  C
+         -  Function
+         -  Example
+      *  -  :mono:`.EQ.`
+         -  :mono:`==`
+         -  Equality
+         -  :mono:`%L23.EQ.$NULL`
+      *  -  :mono:`.NE.`
+         -  :mono:`!=`
+         -  Non equality
+         -  :mono:`$P0.NE.1`
+      *  -  :mono:`.GT.`
+         -  :mono:`>`
+         -  Greater than
+         -  :mono:`$FLEN(%G00).GT.10`
+      *  -  :mono:`.LT.`
+         -  :mono:`<`
+         -  Less than
+         -  :mono:`1.LT.$XC`
+      *  -  :mono:`.GE.`
+         -  :mono:`>=`
+         -  Greater than or equal
+         -  :mono:`$YM.GE.4`
+      *  -  :mono:`.LE.`
+         -  :mono:`<=`
+         -  Less than or equal
+         -  :mono:`$P9.LE.$P8`
+      *  -  :mono:`.NOT.`
+         -  :mono:`!`
+         -  Logical not
+         -  :mono:`.NOT.$FEOF()`
+      *  -  :mono:`.AND.`
+         -  :mono:`&&`
+         -  Logical and
+         -  :mono:`$T.GE.1.AND.$T.LE.5`
+      *  -  :mono:`.OR.`
+         -  :mono:`||`
+         -  Logical or
+         -  :mono:`$P1.EQ.1.OR.$XM.GT.$YM`
+      *  -  :mono:`.XOR.`
+         -  :mono:`^^`
+         -  Logical exclusive or
+         -  :mono:`$P1.EQ.1.XOR.$P2.EQ.1`
+
+The equality and non-equality operators are used to compare two
+expressions or variables of the same type, returning a logical
+result. These operators are evaluated first, followed by the negation
+operator, then the logical “and” followed lastly by the logical “or”.
+The following are equivalent:
+
+   ::
+
+      A.LT.B.OR..NOT.C.GT.D.AND.E.EQ.F
+      (A.LT.B).OR.((.NOT.(C.GT.D)).AND.(E.EQ.F))
+
+      a<b|\|!c>d&&e==f
+      (a<b)||((!(c>d))&&(e==f))
+
+Detecting Data Type Mismatching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The compiler tries to ensure data type agreement between the argument
+expressions and the operators, functions or macro commands that
+operate on them. Each line is checked independently of any other
+line. Since variables can have any data type, the amount of type
+checking done is limited. For example, the following line of code
+would cause a macro compiler error in QUEST:
+
+   .. code-block:: text
+
+      %L02='abc'+4
+
+The following two lines would not cause a compiler error in QUEST,
+even though they are equivalent to the line above. These lines
+however would cause a processing error at run-time when GENER
+executes the macro.
+
+   .. code-block:: text
+
+      %L03='abc'
+      %L02=%L03+4
