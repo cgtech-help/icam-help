@@ -1,0 +1,32 @@
+Stack
+-----
+
+This window displays the call stack of the control emulator. At the base
+of the call stack you always have the MCD file. When a macro gets
+invoked from the MCD file then the call stack will show that macro
+listed above the current MCD file location. Each macro called from
+another will add one more line to the call stack. When a macro is
+completed and the process goes back to the caller, the macro that is
+exiting will be removed from the call stack. The stack window gets
+refreshed each time processing is put on hold (paused).
+
+When debugging a control emulator that supports multiple independent
+kernels, the Stack window will show only the call nesting order
+associated with the “active” kernel. The active kernel can be set using
+the CERUN»Multi-Kernels menu selection or Multi-Kernels toolbar.
+
+When paused, you can use the stack window to examine where the process
+was paused. The current context is, by default, the top of the call
+stack. The context is what decides which variables are considered local
+variables (See the Variables Watch Window). You can set the context to
+any level of the call stack by clicking in the margin next to the stack
+level you want to examine (or by double clicking on the line). The blue
+arrow in the margin tells you where the current stack context is.
+
+When processing is resumed, CERUN first sets the call stack context back
+to the top of the stack.
+
+|image1|
+
+.. |image1| image:: ./media/5f293715ca481a0c3438aed708fdb6d3354fecdf.gif
+
