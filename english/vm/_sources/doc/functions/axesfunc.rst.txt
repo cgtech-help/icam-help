@@ -1,0 +1,408 @@
+Axes Functions
+==============
+
+Axes functions provide low-level access and control over the moveable joints (axes) of the model.
+These functions support position queries, movement commands, axis mapping, and synchronization tasks.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`$FMSGPOS<func_fmsgpos>`
+         -  Get current axis position
+      *  -  :ref:`$FMSGPOSJ<func_fmsgposj>`
+         -  Get current axes positions
+      *  -  :ref:`$FMSGPOSW<func_fmsgposw>`
+         -  Get current axes positions in WCS frame
+      *  -  :ref:`$FMSLIMIT<func_fmslimit>`
+         -  Query, adjust model axes travel limits
+      *  -  :ref:`$FMSMAX<func_fmsmax>`
+         -  Map a model axis to a GENER or CERUN axis
+      *  -  :ref:`$FMSMOVE<func_fmsmove>`
+         -  Move a model axis
+      *  -  :ref:`$FMSSLAV<func_fmsslav>`
+         -  Slave one axis to another
+      *  -  :ref:`$FMSUNWIND<func_fmsunwind>`
+         -  Reset model rotary axis to modulo-360 value
+      *  -  :ref:`$FMSUPDPOS<func_fmsupdpos>`
+         -  Update GENER or CERUN position from VM model axes
+
+.. _func_fmsgpos:
+.. index:: Functions; $FMSGPOS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGPOS(**\ *...*\ **)**                    | Returns the current position of the model axis    |
+|                                                |                                                   |
+|                                                | Returns: Numeric or $NULL                         |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOS}\boldsymbol{(}\, id \,\boldsymbol{)}`
+
+   This function returns the current position of the model axis identified
+   by *id*. Axis ID's are obtained using the $FMSID function. $NULL will be
+   returned if *id* is not a valid axis.
+
+.. _func_fmsgposj:
+.. index:: Functions; $FMSGPOSJ
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGPOSJ(**\ *...*\ **)**                   | Returns current position of model axes            |
+|                                                |                                                   |
+|                                                | Returns: Sequence or numeric                      |
++------------------------------------------------+---------------------------------------------------+
+
+   This function returns the current position of one or more model axes
+   (the current active GENER or CERUN axes by default). Axes can be
+   identified by *id*, axis numeric *index* in the range 1-16, or axis
+   *keyword*. A value of zero is returned if the axis id is invalid, or if
+   the index or keyword is invalid or specifies a non-controlled model
+   axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSJ}\boldsymbol{(} \big[ \mathbf{ALL} \big] \boldsymbol{)}`
+
+   If no argument is specified, returns a sequence containing the current
+   position of the model axes corresponding to the currently active GENER
+   or CERUN axes (i.e., those listed in the $AXES system variable). If ALL
+   is specified, a sequence of length 16 is returned containing the
+   position of all model axes controlled by GENER or CERUN. A zero is
+   returned for any non-controlled axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSJ}\boldsymbol{(}\, \mathbf{ID}, id \,\boldsymbol{)}`
+
+   Returns the current position of the model axis identified by axis ID
+   *id*. Axis ID's are obtained using the $FMSID function. Zero (0) will be
+   returned if *id* is not a valid axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSJ}\boldsymbol{(}\, \mathbf{ID}, \boldsymbol{\{} id \,\big[,id ... \big] \boldsymbol{\}} \boldsymbol{)}`
+
+   Returns a sequence containing the current position of each of the model
+   axes identified by axis ID *id* in the specified sequence. Axis ID's are
+   obtained using the $FMSID function. Zero (0) will be returned for each
+   *id* that is not a valid axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSJ}\boldsymbol{(} \begin{array}{l} index \\ keyword \end{array} \boldsymbol{)}`
+
+   Returns the current position of the model axis identified either by an
+   axis numeric *index* in the range 1-16 or by an axis *keyword*. A list
+   of index values, keywords and corresponding axes can be found :ref:`here<tableindexnumbersandkeywords>`. 
+   Zero (0) will be returned if *index* or *keyword* is invalid, or if
+   it refers to an axis that does not exist in the model.
+
+.. _func_fmsgposw:
+.. index:: Functions; $FMSGPOSW
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGPOSW(**\ *...*\ **)**                   | returns current WCS position of model axes        |
+|                                                |                                                   |
+|                                                | Returns: Sequence or Numeric                      |
++------------------------------------------------+---------------------------------------------------+
+
+   This function returns the current WCS position of one or more model axes
+   (the current active GENER or CERUN axes by default). Axes can be
+   identified by *id*, axis numeric *index* in the range 1-16, or axis
+   *keyword*. A value of zero is returned if the axis id is invalid, or if
+   the index or keyword is invalid or specifies a non-controlled model
+   axis.
+
+   WCS positions are currently supported for the XYZ axes only. This
+   function will return the same value as $FMSGPOSJ if a local coordinate
+   system (LCS) is not in effect, or for any axis not affected by LCS.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSW}\boldsymbol{(} \big[ \mathbf{ALL} \big] \boldsymbol{)}`
+
+   If no argument is specified, returns a sequence containing the current
+   WCS position of the model axes corresponding to the currently active
+   GENER or CERUN axes (i.e., those listed in the $AXES system variable).
+   If ALL is specified, a sequence of length 16 is returned containing the
+   WCS position of all model axes controlled by GENER or CERUN. A zero is
+   returned for any non-controlled axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSW}\boldsymbol{(}\, \mathbf{ID}, id \,\boldsymbol{)}`
+
+   Returns the current WCS position of the model axis identified by axis ID
+   *id*. Axis ID's are obtained using the $FMSID function. Zero (0) will be
+   returned if *id* is not a valid axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSW}\boldsymbol{(}\, \mathbf{ID}, \boldsymbol{\{} id \,\big[,id ... \big] \boldsymbol{\}} \boldsymbol{)}`
+
+   Returns a sequence containing the current WCS position of each of the
+   model axes identified by axis ID *id* in the specified sequence. Axis
+   ID's are obtained using the $FMSID function. Zero (0) will be returned
+   for each *id* that is not a valid axis.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGPOSW}\boldsymbol{(} \begin{array}{l} index \\ keyword \end{array} \boldsymbol{)}`
+
+   Returns the current WCS position of the model axis identified either by
+   an axis numeric *index* in the range 1-16 or by an axis *keyword*. A
+   list of index values, keywords and corresponding axes can be found :ref:`here<tableindexnumbersandkeywords>`. 
+   Zero (0) will be returned if *index* or *keyword* is invalid,
+   or if it refers to an axis that does not exist in the model.
+
+.. _func_fmslimit:
+.. index:: Functions; $FMSLIMIT
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSLIMIT(**\ *...*\ **)**                   | Query and/or adjust model axes travel limits      |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+   This function is used to query and/or adjust model axes travel limits.
+   Changes to travel limits remain in effect until changed by another call
+   to $FMSLIMIT. The use of the RECALL keyword in the $FMSLIMIT function
+   argument list will restore all axes or just the specified axis,
+   depending on format, to the travel limits defined by the model
+   developer.
+
+   Angular travel limits are in degrees. Linear travel limits are in
+   current machine units, as defined by $UNIMCH, unless one of the CM, MM,
+   INCHES or FEET modifiers is specified as the first argument of the
+   $FMSLIMIT function call.
+
+   Individual axes can be specified using a component ID or by a
+   GENER/CERUN controllable axis keyword name (e.g., XAXIS, YAXIS...). A list
+   of controllable axis keywords can be found :ref:`here<tableindexnumbersandkeywords>`. On a query, the
+   keyword POST signifies all GENER/CERUN controllable axes; the keyword
+   SIMUL signifies all other axes. The modifier CHANEL,\ *ch* can be used
+   to restrict the query/adjustment of axes to just those from the
+   specified channel *ch*.
+
+   All forms of the $FMSLIMIT function return a sequence. The first element
+   is the number of axes being queried or adjusted. This is followed by 7
+   elements for each axis. When axes limits are adjusted, the information
+   returned is the travel limits that were in effect *before* adjustment.
+
+   :1: Number of axes
+   :2: Component ID of the **first** axis
+   :3: Channel number the axis is assigned to
+   :4: GENER/CERUN controllable axis index number (0:NA)
+   :5: Limited travel? 0:unlimited, 1:limited
+   :6: Minimum travel (0:NA)
+   :7: Maximum travel (0:NA)
+   :8: Modified? 0:Model defined limit, 1:$FMSLIMIT adjusted limit
+   :9-15: Component ID, Channel number, ..., Modified of the **second** axis (if any)
+   :16-22: Component ID, Channel number, ..., Modified of the **third** axis (if any)
+   :...: *repeats for additional axes*
+
+   **Query/Restore Model Travel Limits**
+
+      :math:`\mathit{result} = \mathbf{\$FMSLIMIT}\boldsymbol{(}
+      \big[\, units \,\big]
+      \big[,\mathbf{CHANEL}, ch \,\big]
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{POST} \\ \mathbf{SIMUL} \end{array}\end{bmatrix}
+      \big[, \mathbf{RECALL} \,\big]
+      \boldsymbol{)}`
+
+   This function returns a sequence describing the current travel limits
+   for all model axes by default. The CHANEL, POST and SIMUL keywords will
+   restrict the list of axes to just those for the specified channel,
+   and/or just those that are controlled (POST) or not controlled (SIMUL)
+   by GENER or CERUN. Linear travel limits are reported in current machine
+   units unless otherwise specified using one of the keywords CM, MM,
+   INCHES, FEET for *units*. The RECALL keyword will restore the axes to
+   the travel limits defined by the model developer.
+
+   **Query/Set/Restore Axis Component Travel Limits**
+
+      :math:`\mathit{result} = \mathbf{\$FMSLIMIT}\boldsymbol{(}
+      \big[\, units \,\big] \,id
+      \begin{bmatrix} ,\! \begin{array}{l}
+      min,max \\ \\
+      \begin{pmatrix}\begin{array}{l} \mathbf{OFF} \\ \mathbf{ON} \\ \mathbf{RECALL} \end{array}\end{pmatrix} \!
+      \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   This function queries the current travel limits for the axis component
+   specified by component ID *id*. The first element of the returned
+   sequence will be zero (0) if the specified component ID is not an axis,
+   otherwise the first element will be a one (1) and the next 7 elements
+   will describe the current axis travel as defined earlier.
+
+   The minimum (*min*) and maximum (*max*) travel limits for the axis can
+   optionally be set. Linear travel limits are in current machine units
+   unless otherwise specified using one of the keywords CM, MM, INCHES,
+   FEET for *units*. OFF can be specified for rotary axes to remove travel
+   restrictions; ON enables the previously specified rotary limits (if
+   any). RECALL resets the travel limits of the specified axis to those
+   defined by the model developer.
+
+   **Query/Set/Restore Controllable Axis Travel Limits**
+
+      :math:`\mathit{result} = \mathbf{\$FMSLIMIT}\boldsymbol{(}
+      \big[\, units \,\big] \, id \,\big[,\mathbf{CHANEL}, ch \,\big]\, axis
+      \begin{bmatrix} ,\! \begin{array}{l}
+      min,max \\ \\
+      \begin{pmatrix}\begin{array}{l} \mathbf{OFF} \\ \mathbf{ON} \\ \mathbf{RECALL} \end{array}\end{pmatrix} \!
+      \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   This function queries the current travel limits for the GENER or CERUN
+   controllable axis defined by the *axis* keyword (a list of controllable
+   axis keywords can be found :ref:`here<tableindexnumbersandkeywords>`.). The modifier CHANEL,\ *ch* can
+   be used if necessary to identify the controllable axis from the
+   specified channel *ch*. The first element of the returned sequence will
+   be zero (0) if the specified axis is not available or invalid, otherwise
+   the first element will be a one (1) and the next 7 elements will
+   describe the current axis travel as defined earlier.
+
+   The minimum (*min*) and maximum (*max*) travel limits for the axis can
+   optionally be set. Linear travel limits are in current machine units
+   unless otherwise specified using one of the keywords CM, MM, INCHES,
+   FEET for *units*. OFF can be specified for rotary axes to remove travel
+   restrictions; ON enables the previously specified rotary limits (if
+   any). RECALL resets the travel limits of the specified axis to those
+   defined by the model developer.
+
+.. _func_fmsmax:
+.. index:: Functions; $FMSMAX
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSMAX(**\ *...*\ **)**                     | Mapping linear or rotary model axis               |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSMAX}\boldsymbol{(}\, channel,\;
+      n,axis\_id\; \Big[,n_2,axis\_id_2\; \big[,...\big]\Big]\,
+      \boldsymbol{)}`
+
+   This function maps a linear or rotary model axis, specified by its model
+   axis component id, to one of the 15 standard GENER or CERUN axes being
+   controlled by the specified channel. Great care must be taken when
+   overriding the built-in functionality in order to map axes manually
+   using this function.
+
+   Specify 2 for the *channel* argument when mapping the Z and X axes for a
+   merging lathe side turret. Otherwise, the channel should always be 1
+   (one).
+
+   The GENER or CERUN axis identifier *n* is a whole number in the range
+   1-15, as follows:
+
+   :1-3: X-axis, Y-axis, Z-axis
+   :4-6: U-axis, V-axis, W-axis
+   :7-9: A-axis, B-axis, C-axis tables
+   :10-12: A-axis, B-axis, C-axis heads
+   :13: Extending axis (i.e., quill)
+   :14-15: Run-time attachable rotary heads
+
+   The *axis_id* parameter is one of the models linear or rotary axes,
+   identified by its component ID. Component ID's are obtained using the
+   $FMSID function. Use 0 (zero) to unmap an axis.
+
+.. _func_fmsmove:
+.. index:: Functions; $FMSMOVE
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSMOVE(**\ *...*\ **)**                    | Moves model axes                                  |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSMOVE}\boldsymbol{(}\, axis\_id, position, vel
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{CLW} \\ \mathbf{CCLW} \\ \mathbf{SMALL} \end{array}\end{bmatrix}
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{UNITS} \\ \mathbf{INCHES} \\ \mathbf{FEET} \\ \mathbf{MM} \\ \mathbf{CM} \end{array}\end{bmatrix}
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{NEXT} \\ \mathbf{NOW} \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   This function moves the model axis identified by *axis_id* (axis ID's
+   are obtained using the $FMSID function), to the specified *position* in
+   model axis units, at the specified velocity *vel* in model units per
+   minute (degrees per minute for rotary axes).
+
+   The CLW, CCLW and SMALL keywords provide the ability to move a model
+   rotary axis to its nearest modulo-360 position. If CLW is specified, the
+   axis will rotate in a clockwise direction until it reaches the given
+   orientation expressed in modulo 360. If CCLW is specified, the axis will
+   instead rotate counter-clockwise to the given orientation. If SMALL is
+   specified, the axis will rotate in whatever direction results in the
+   smallest delta motion (CLW if equidistant).
+
+   The position can be expressed in other units than the model axis units. The specific 
+   units can be specified using the keywords INCHES, FEET, MM and CM. The
+   keyword UNITS is allowing to specify the position in the current units.
+
+   If NEXT is specified, this axis motion will be deferred and included
+   with the next model motion event. NOW (the default) causes the axis to
+   move immediately. All pending NEXT motions can be processed by calling
+   $FMSMOVE(0,0,0,NOW).
+
+.. _func_fmsslav:
+.. index:: Functions; $FMSSLAV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSSLAV(**\ *...*\ **)**                    | Slaves or associates axes components              |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSLAV}\boldsymbol{(}\,
+      slave\_id, master\_id\, \Big[,\mathit{factor} \,\big[,\mathit{offset} \,\big]\Big]
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{ABSOL} \\ \mathbf{INCR} \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   This function slaves (or associates) the axis component identified by
+   *slave_id* to the axis component identified by *master_id*. Component
+   ID's are obtained using the $FMSID function. Once slaved, any motion of
+   the master axis will automatically cause the slave axis to move by an
+   identical amount. Specify an optional signed multiplication *factor* to
+   adjust the ratio of slave axis motion to master axis motion. Specify an
+   optional signed *offset* to be applied after the factor. Specify INCR to
+   apply the Δ master axis motion relative to the slave axis current
+   position. Specify ABSOL (the default) to apply the Δ master axis motion
+   relative to the slave axis origin.
+
+   Specify 0 (zero) as the *master_id* to sever the relationship with the
+   *slave_id*.
+
+.. _func_fmsunwind:
+.. index:: Functions; $FMSUNWIND
+
++------------------------------------------------+----------------------------------------------------+
+| **$FMSUNWIND(**\ *...*\ **)**                  | Resets model rotary axes to their modulo-360 value |
+|                                                |                                                    |
+|                                                | Returns: Numeric                                   |
++------------------------------------------------+----------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSUNWIND}\boldsymbol{(}
+      \,\icamrange{2.6}{1}\! \begin{pmatrix}
+      axis\_id
+      \begin{bmatrix} , \begin{array}{l} \mathbf{NORMAL} \\ \mathbf{PLUS} \\ \mathbf{MINUS} \end{array}\end{bmatrix}
+      \end{pmatrix}
+      \boldsymbol{)}`
+
+   This function internally resets one or more model rotary axes to their
+   modulo-360 value. No motion is generated. Specify the *axis_id* using
+   the return value from the $FMSID function. An optional modifier keyword
+   can be specified to control the 360-degree range of the final rotary
+   axis position, as follows:
+
+   :NORMAL: Range [-179.9999,180] (the default)
+   :PLUS: Range [0,359.9999] forces a positive result
+   :MINUS: Range [-359.9999,359.9999] respects the current axis sign
+
+   Multiple model rotary axes can be reset by repeating the
+   “\ *axis_id*\ [,\ *modifier*]” specification for each additional axis to be
+   reset. This function returns a value of 1 (one) if successful; otherwise
+   a value of 0 (zero) is returned.
+
+.. _func_fmsupdpos:
+.. index:: Functions; $FMSUPDPOS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSUPDPOS(**\ *...*\ **)**                  | Updates the GENER or CERUN axes positions         |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSUPDPOS}\boldsymbol{(} \big[\, \mathbf{ALL} \,\big] \boldsymbol{)}`
+
+   This function updates the GENER or CERUN axes positions to match the
+   model axes positions of kernel controlled axes. By default, only the
+   current active axes are updated (as identified by the $AXES variable).
+   Specify ALL to update all kernel axes that are associated with the
+   model.
+
+   This function returns a value of 1 (one) if successful; otherwise a
+   value of 0 (zero) is returned.
