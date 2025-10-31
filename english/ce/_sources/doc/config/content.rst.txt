@@ -1,0 +1,93 @@
+.. _installation_content:
+
+Installation Content
+====================
+
+Installation directory
+----------------------
+
+The installation root directory contains a number of small executable
+files:
+
+-  The executable files are simple generically named wrappers (i.e.,
+   **config.exe**, **cerun.exe**, **portal.exe**, **quest.exe**) that in
+   turn execute the appropriate program stored in the **bin**
+   subdirectory tree.
+
+-  An **icamid.exe** utility can be run to get the computer’s ICAM
+   system ID for licensing purposes.
+
+The following subdirectories are located in the installation
+directory:
+
+-  The **basic** subdirectory contains basic control emulators. Basic
+   control emulators are used to simplify QUEST control emulator development
+   by supplying intelligent defaults for the most common machine types
+   and controls. The basic subdirectory is not used by CERUN.
+
+-  The **bin/win32** and **bin/win64** subdirectories contain 32-bit and
+   64-bit system dependent binary, data and executable files. These
+   system dependent subdirectories include a **lang** subdirectory
+   containing files related to the different languages supported by the
+   product.
+
+-  The **cepp** subdirectory contains html help information for each of
+   the pre-processors supported by Control Emulator. Pre-processors have
+   built-in logic to handle special processing requirements (e.g.,
+   variables and program flow) of common CNC controllers.
+
+-  The **documentation** subdirectory contains ICAM product User Guides.
+   This directory can be accessed from the software using the
+   Help»Documentation menu selection.
+
+-  The **images** subdirectory contains images used by QUEST.
+
+-  The **integration** subdirectory contains the software and components
+   necessary to
+   extract CAM system manufacturing data for use within a Virtual
+   Machine simulation.
+
+-  The **kit** subdirectory contains
+   CAM interface information used by post-processing.
+   This is not used by Control Emulator.
+
+.. _application_data_directory:
+
+Application Data Directory
+--------------------------
+
+A portion of the ICAM installation is written to an ICAM\\260
+subdirectory in the user’s roaming application data or common
+ProgramData directory. This ICAM application data directory holds
+various configuration files:
+
+-  An **ICAM.DEF** file contains all configuration settings. This file
+   must be present.
+
+-  A **dwords.dat** file contains default Major and Minor keywords.
+
+-  An **icam.key** file contains licensing server connection information.
+
+The following subdirectories are located in the application data directory:
+
+-  The **cache** subdirectory contains cached files used by Virtual
+   Machine to reduce the time it takes to reload a job. This directory
+   and/or its contents can be deleted at any time.
+
+-  The **kit** subdirectory contains any customized interface
+   kits used by the Icam Post post-processor.
+   Control Emulator does not use interface kits.
+
+-  The **macros** subdirectory contains user macro functions that can be
+   shared by multiple control emulators, post-processors and models.
+
+-  The **samples** subdirectory contains various samples that may be of
+   interest. These include examples of milling, mill-turn and robotic
+   manufacturing processes, an example of automatic generation of shop
+   documentation, a library of Virtual Machine models, and some examples
+   of external macros for developers.
+
+-  The **work** subdirectory contains one or more database files
+   containing control emulators, post-processors and virtual machine
+   models. The icam_dbf environment variable must be used if the
+   database is placed elsewhere or if it has a custom name.
