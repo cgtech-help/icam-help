@@ -1,0 +1,33 @@
+.. _intro_section:
+
+Control Emulator: Getting Started
++++++++++++++++++++++++++++++++++++
+
+This section describes the steps necessary to install, upgrade and configure your system to run this
+latest release of Control Emulator.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   general/index
+   install/index
+   config/index
+
+**Section Overview**
+
+-  :ref:`“General Information”<general_information>` provides a brief overview of Control Emulator
+   and its functionality.
+
+   \
+
+-  :ref:`“Installation and Upgrade”<installation>` describes the steps necessary
+   to install or upgrade the ICAM License Server (if using a floating license), as well as
+   the steps necessary to install or upgrade Control Emulator and other ICAM Productivity Tools.
+
+   \
+
+-  :ref:`“Configuration”<configuration>` describes how to tailor the Control Emulator
+   software to suit the needs of your specific installation, including a description of the
+   layout of the software installation directory, the use of optional environment variables
+   and the ICAM.DEF configuration file.
