@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Tecnomatix EM_Machine Interface Kit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../Creo/readme.htm">Creo</a>
+                <a href="../FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../Fusion360/readme.htm">Fusion 360</a>
+                <a href="../Mastercam/readme.htm">Mastercam</a>
+                <a href="../NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../Cadds5/readme.htm">Cadds5</a>
+                <a href="../Cadra/readme.htm">Cadra</a>
+                <a href="../Camand/readme.htm">Camand</a>
+                <a href="../CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../Cimatron/readme.htm">Cimatron</a>
+                <a href="">Em Machine</a>
+                <a href="../Generic/readme.htm">Generic</a>
+                <a href="../GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../ICAM/readme.htm">ICAM</a>
+                <a href="../IDEAS/readme.htm">IDEAS</a>
+                <a href="../Intercim/readme.htm">Intercim</a>
+                <a href="../Intergraph/readme.htm">Intergraph</a>
+                <a href="../NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../NICAM/readme.htm">NICAM</a>
+                <a href="../NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../index.htm"><i class="fa fa-home">Kit</i></a>
+            <h1>Em_Machine</h1>
+            <hr />
+            <h2>Tecnomatix Em_Machine TO CAM-POST INTERFACE DOCUMENTATION</h2>
+            <h3>Overview</h3>
+            <p>
+                The Em_Machine Interface Kit is designed to accomoate diffeernces in syntax between Tecnomatix and ICAM's prostprocessing languages.
+            </p>
+            <h3>Input Conversion</h3>
+            <p>
+                The following conversions are controlled by commands in the insert.apt file.
+            </p>
+            <ul>
+                <li>Circular arcs follow right-hand rule.</li>
+                <li>Variable assignments in the form "a=b" are converted to "ASSIGN/a,b" commands.</li>
+                <li>The minor word INCH is replaced by the standard INCHES keyword.</li>
+                <li>The minor word DELZ is replaced by the standard DECR keyword.</li>
+                <li>CUTTER comments are converted to CUTTER commands.</li>
+                <li>ORIGIN comments are converted to non-standard ORIGIN/string commands.</li>
+                <li>All PPFUN/PART,... are replaced by PPRINT/... commands. All remaining PPFUN commands are ignored.</li>
+                <li>The first 8 characters of each line contain a sequence field and are discarded.</li>
+            </ul>
+            <h3>Post-Processor Commands Conversion</h3>
+            <p>
+                The following conversions are controlled by the kit.mac file.
+            </p>
+            <ul>
+                <li>Unprocessed ASSIGN commands are ignored.</li>
+                <li>CUTCOM commands convert RADIUS,# to OSETNO,#.</li>
+                <li>CYCLE commands ignore a zero dwell and also any dwell on a TAP cycle.</li>
+                <li>DELAY commands ignore a zero delay.</li>
+                <li>ORIGIN/value... commands process the first parameter as the workpiece offset and ignore all other parameters. Unprocessed ORIGIN/string... commands are ignored.</li>
+                <li>The ROTHED command is converted to ROTABL (CAM-POST uses ROTABL for both heads and tables). The ROTABL and ROTHED syntax are changed slightly to be compatible with CAM-POST. RAPID is selected.</li>
+                <li>TOOLNO commands are converted to LOADTL provided that LOADTL has not already been specified.</li>
+            </ul>
+            <!--a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a-->
+        </div>
+    </div>
+</body>
+</html>
+
