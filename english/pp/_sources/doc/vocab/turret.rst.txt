@@ -1,0 +1,62 @@
+.. _command_turret:
+
+The TURRET Command :kbd:`[L]`
+=============================
+
+The TURRET command is a non-standard\ [#]_ alias for the
+LOAD/TOOL command. This command is used to load and unload tools on
+lathes and mill-turn machines. The syntax of the TURRET command
+follows:
+
+   :math:`\textbf{TURRET / } \mathit{tool\_id} \;
+   \Big[,\mathit{offset} \; \big[\mathit{,x\_shift,y\_shift}\,\big]\Big] \;
+   \big[,\mathtt{<\!tool\_information\!>}\,\big]`
+
+The order of the first four parameters is fixed.
+
+   :math:`\mathit{tool\_id}`
+
+Specifies the tool to be loaded either by the pocket number in the
+tool changer, or by the tool identification number, as defined by the
+machine description responses in QUEST. Specify a *tool_id* of zero
+(0) to unload the tool, if supported by the machine. If the *tool_id*
+matches the tool currently loaded, then a tool change operation will
+not be generated. However, changes in tool length, tool offset and
+orientation will be respected.
+
+   :math:`\big[,\mathit{offset}\,\big]`
+
+The offset parameter represents the cutter length compensation value.
+It is equivalent to the OSETNO option in the standard syntax.
+
+   :math:`\big[\mathit{,x\_shift,y\_shift}\,\big]`
+
+The x and y shift parameters represent offsets from the tool tip to
+the turret control point. They are equivalent to the SETOOL option in
+the standard syntax.
+
+For horizontal lathes, these will be applied to the Z and X machine
+axes respectively if no ORIGIN matrix has been coded. For vertical
+lathes they will be applied to the X and Z-axes respectively (once
+again, assuming no ORIGIN matrix is in effect).
+
+An important consideration with regard to the use of TURRET startup
+macro $P arguments for tool offsets is the following: The $P
+arguments of the TURRET startup refer to X,Y and Z machine axis
+offsets from the turret control point to the tool tip and not the
+other way around. In effect, when x and y shift values are coded,
+they are first applied to the appropriate machine axes and then they
+are negated before being loaded into the $P machine offset locations.
+Note that these $P offset locations are also loaded by
+SETOOL,xt,yt,zt parameter values.
+
+   :math:`\big[,\mathtt{<\!tool\_information\!>}\,\big]`
+
+See :ref:`the TOOLNO command<command_toolno>` for a description of the tool information parameters.
+See :ref:`the LOAD/TOOL command<command_load>` for more information on loading tools.
+
+.. [#] International Standards Organization ISO 4343:1972 defined TURRET
+   as a standard post-processor command, but this was later revised to
+   LOAD/TOOL in the ISO 4343:2000 update.
+
+..
