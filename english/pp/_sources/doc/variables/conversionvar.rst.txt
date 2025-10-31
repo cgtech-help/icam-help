@@ -1,0 +1,127 @@
+
+Conversion Factor Variables
+===========================
+
+.. _var_confac:
+.. index:: Variables; $CONFAC
+
++------------------+------------------------------------------+
+| **$CONFAC**      | CL to POST coordinate conversion factor  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the CL file to Post-processor units conversion
+   factor. Multiply a CL dimension by $CONFAC to obtain the
+   corresponding dimension in primary machine units. When the CL file
+   and Post-processor are in the same units, $CONFAC is set to 1. If the
+   CL file is in units of inches and the machine primary units are MM,
+   then $CONFAC would be set to 25.4.
+
+.. _var_pconfc:
+.. index:: Variables; $PCONFC
+
++------------------+-----------------------------------------------+
+| **$PCONFC**      | Primary to secondary machine units conversion |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is used to indicate whether primary or secondary
+   machine units are in effect. If primary units are in effect $PCONFC
+   will be 1 (one). Any other value indicates that secondary units are
+   in effect and the secondary dimensional register formats will be
+   used. The $PCONFC for secondary units is defined as the number of
+   secondary units per primary unit. For example, if the primary units
+   were inches and the secondary units were millimeters then the $PCONFC
+   for the secondary units would be 25.4.
+
+   Note that the $PCONFC can be defined to override the secondary units
+   specified in the general information section of the questionnaire.
+
+   To convert a value from input CL units to output tape units, multiply
+   the value by ($CONFAC \* $PCONFAC).
+
+.. _var_unibeg:
+.. index:: Variables; $UNIBEG
+.. _var_unidef:
+.. index:: Variables; $UNIDEF
+.. _var_unimch:
+.. index:: Variables; $UNIMCH
+.. _var_unipri:
+.. index:: Variables; $UNIPRI
+.. _var_unisec:
+.. index:: Variables; $UNISEC
+.. _var_units:
+.. index:: Variables; $UNITS
+
++------------------+------------------------------------------+
+| **$UNIBEG**      | CL file units per PARTNO look-ahead,     |
+|                  | or default units if none.                |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+| **$UNIDEF**      | Default units at the start of the CL     |
+|                  | file, from DEF file.                     |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+| **$UNIMCH**      | Current machine units                    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+| **$UNIPRI**      | Primary machine units                    |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+| **$UNISEC**      | Secondary machine units                  |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+| **$UNITS**       | Current CL file units                    |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   These unit variables simplify coding of macros with post-processors
+   that deal with both imperial and metric units. The units are
+   expressed in units-per-inch, meaning that a value of 1 represents
+   inches and a value of 25.4 represents millimeters.
+
+   The $UNIPRI variable defines the primary measurement units used in
+   QUEST for all post-processor dimensional values.
+   The $UNISEC variable defines the secondary unit system supported by
+   the post-processor if there is one, or will have the same value as the
+   primary units if the post-processor supports a single units system only.
+   The $UNITS variable indicates the current units of dimensional values
+   read from the
+   CLDATA.
+
+   Code UNITS/$UNI\ *xxx* to establish any of these for various purposes.
+   For example, in a machine startup macro, code UNITS/$UNIPRI before
+   any commands that include dimensional values in the machine primary
+   units. This ensures that the values are interpreted in
+   primary machine units and not in the current CL file units.
+   UNITS/$UNIBEG should be coded at the start of any logic in the
+   machine startup that includes a $FGET() or TAPERD command, to ensure
+   that dimensional values from commands fetched further along in the CL
+   file are interpreted in the actual units of the CL file and not the
+   default units (per the DEF file). If units are changed in the machine
+   startup, code UNITS/$UNIDEF to restore them back to the initial
+   default.
+
+   In any macro where you need to temporarily change input units, you
+   should save the value of the $UNITS variable in a local variable and
+   reset the units back to the saved value when you are finished.
+
+      ::
+
+         %L01=$UNITS
+         UNITS/*whatever*
+         …
+         UNITS/%L01
+
+   $UNIMCH can be set at any time to change the output units (i.e.,
+   those of the MCD). By default the output units are the QUEST defined
+   primary machine units, unless the first UNITS command found during
+   the startup PARTNO look-ahead specifies the secondary machine units.
