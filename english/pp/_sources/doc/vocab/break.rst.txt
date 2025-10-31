@@ -1,0 +1,41 @@
+.. _command_break:
+
+The BREAK Command :kbd:`[MLEPC]`
+================================
+
+The BREAK command is used to segment large tape files into
+smaller segments or reels to take in account memory limitation of the
+CNC controller. This command is valid for all machine types but may
+not be available for a specific machine.
+
+   :math:`\textbf{BREAK } \big[ \textbf{ / NOW} \,\big]`
+
+NOW will break the tape unconditionally at the moment when the
+post-processor encounters the command.
+
+When the BREAK command with no parameters is encountered, the
+post-processor checks if the minimum tape footage value or program
+storage specified in the questionnaire has been reached or exceeded.
+If the minimum size has not been reached, the BREAK command is
+ignored.
+
+If the no parameter BREAK command has been coded and the minimum size
+has been exceeded, the current tape reel or file is concluded and a
+new one is started. A tape reel is concluded by outputting a length
+of trailer and trailing man readable if required. A DNC file is
+concluded by printing a REWIND/STOP symbol. A program summary is
+generated in the listing file. The new tape reel will start with man
+readable if required and a length of leader. The processing then
+continues as though nothing had happened.
+
+If the maximum size has been reached before a valid BREAK command is
+coded, the default action is to break the tape at the next RAPID
+motion.
+
+The questionnaire may be used to allow tape breaks at feed motions as
+well.
+
+The same minimum/maximum tape length rules apply when breaking in
+feed or RAPID mode. When automatic break is generated under feed mode
+the RETRCT motion will precede the tape break and the return motion
+to the current position will follow.
