@@ -1,0 +1,346 @@
+.. _mcd_tape_variables:
+
+MCD/Tape Variables
+==================
+
+.. _var_disply:
+.. index:: Variables; $DISPLY
+
++------------------+------------------------------------------+
+| **$DISPLY**      | Last operator message string output      |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last operator message string output by the
+   post-processor, either via a DISPLY command or by the redirection of
+   a PPRINT command.
+
+.. _var_lmcd:
+.. index:: Variables; $LMCD
+
++------------------+------------------------------------------+
+| **$LMCD**        | Last MCD block output                    |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last block of MCD output by the
+   post-processor.
+
+.. _var_mcd:
+.. index:: Variables; $MCD
+
++------------------+------------------------------------------+
+| **$MCD**         | Current MCD block under construction     |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the current block of MCD being built by the
+   post-processor.
+
+.. _var_opskip:
+.. index:: Variables; $OPSKIP
+
++------------------+------------------------------------------+
+| **$OPSKIP**      | Current OPSKIP (block delete) level      |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable tracks the current OPSKIP (also called block-delete)
+   level. On machines with a single level of OPSKIP, $OPSKIP will be set
+   to 1 (one) when OPSKIP is enabled and 0 (zero) when OPSKIP is
+   disabled. On machines with multiple OPSKIP levels, $OPSKIP indicates
+   the number of different OPSKIP levels currently active.
+
+.. _var_opskipl:
+.. index:: Variables; $OPSKIPL
+
++------------------+------------------------------------------+
+| **$OPSKIPL**     | OPSKIP (block delete) status             |
+|                  |                                          |
+|                  | Type: Logical array, Read-only           |
++------------------+------------------------------------------+
+
+   This array variable tracks the state of OPSKIP levels 1 through 9.
+   $OPSKIPL(1) will be $TRUE if OPSKIP level 1 is active, otherwise it
+   will be set to $FALSE. Similarly, $OPSKIPL(2) through
+   $OPSKIPL(9) will be set depending on the state of OPSKIP levels 2
+   through 9.
+
+.. _var_reel:
+.. index:: Variables; $REEL
+
++------------------+------------------------------------------+
+| **$REEL**        | Current reel number                      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current number of tape reels or program
+   segments used for the job.
+
+.. _var_seqcnt:
+.. index:: Variables; $SEQCNT
+
++------------------+------------------------------------------+
+| **$SEQCNT**      | Sequence number skip block counter       |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the sequence number count variable. The count
+   variable causes the sequence number to come out on every Nth block,
+   where N is the sequence number count variable.
+
+.. _var_seqinc:
+.. index:: Variables; $SEQINC
+
++------------------+------------------------------------------+
+| **$SEQINC**      | Sequence number increment factor         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the sequence number increment. This increment is
+   added to the last sequence number to generate a new sequence number.
+   If the increment is zero, sequence numbering is constant (i.e., the
+   same sequence number is output until $SEQINC is changed).
+
+.. _var_seqno:
+.. index:: Variables; $SEQNO
+
++------------------+------------------------------------------+
+| **$SEQNO**       | Current sequence number                  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the sequence number (e.g., N register value)
+   of the current block. It may be set by the user. Note: The user
+   should define the SEQNO command as available to properly use the
+   sequence number macro system variables.
+
+.. _var_seqsta:
+.. index:: Variables; $SEQSTA
+
++------------------+------------------------------------------+
+| **$SEQSTA**      | Sequence number status (ON or OFF)       |
+|                  |                                          |
+|                  | Type: Keyword, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current sequence number status. It has a
+   value of ON or OFF and may be set by the user to enable or disable
+   sequence numbering of tape blocks. Note that the value of this
+   variable is a minor word, not a string value.
+
+.. _var_space:
+.. index:: Variables; $SPACE
+
++------------------+------------------------------------------+
+| **$SPACE**       | Register spacing enabled                 |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable controls the output of register spacing. Register
+   spacing is enabled when this variable is set $TRUE provided also that
+   register spacing is supported in the post-processor (QUEST General
+   Description / Output Format question #2.5 “SPACE code”). It is
+   initialized to $TRUE by GENER. If it is set to $FALSE, then spacing
+   will be disabled on subsequent output.
+
+.. _var_tapact:
+.. index:: Variables; $TAPACT
+
++------------------+------------------------------------------+
+| **$TAPACT**      | Tape production status                   |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable can be used to enable or disable output of MCD data to
+   the tape files. By default, this variable is set $TRUE for normal MCD
+   output. When set $FALSE, further output to the tape file or files is
+   stopped, as is output of MCD data to the operator listing file and
+   operation of the tape macro (if any). While disabled, commands such
+   as INSERT, DISPLY and PPFUN/7 all have no effect. However, commands
+   that modally or non-modally change the status of registers and codes
+   continue to be processed and will be applied once tape production is
+   re-enabled.
+
+   The tape production can also be set using the PPFUN/22 command.
+
+.. _var_tapeb:
+.. index:: Variables; $TAPEB
+
++------------------+------------------------------------------+
+| **$TAPEB**       | Number of blocks on the tape             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of NC tape blocks generated.
+
+.. _var_tapebs:
+.. index:: Variables; $TAPEBS
+
++------------------+------------------------------------------+
+| **$TAPEBS**      | Number of blocks on the subprogram tape  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of tape blocks generated on the
+   subprogram tape.
+
+.. _var_tapeb2:
+.. index:: Variables; $TAPEB2
+
++------------------+------------------------------------------+
+| **$TAPEB2**      | Number of blocks on the second tape      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of tape blocks generated on the
+   second channel tape.
+
+.. _var_tapech:
+.. index:: Variables; $TAPECH
+
++------------------+------------------------------------------+
+| **$TAPECH**      | Number of characters in the tape         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of characters generated on the
+   tape.
+
+.. _var_tapecs:
+.. index:: Variables; $TAPECS
+
++------------------+------------------------------------------+
+| **$TAPECS**      | Number of characters on subprogram tape  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of characters generated on the
+   subprogram tape.
+
+.. _var_tapec2:
+.. index:: Variables; $TAPEC2
+
++------------------+------------------------------------------+
+| **$TAPEC2**      | Number of characters on the second tape  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of characters generated on the
+   second channel tape.
+
+.. _var_tapedt:
+.. index:: Variables; $TAPEDT
+
++------------------+------------------------------------------+
+| **$TAPEDT**      | $TRUE if built-in tape processing closed |
+|                  |                                          |
+|                  | Type: Logical, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable is set true when all built-in tape processing has been
+   completed, thereby allowing tape files to be edited via macro
+   processing.
+
+.. _var_tapeln:
+.. index:: Variables; $TAPELN
+
++------------------+---------------------------------------------------+
+| **$TAPELN**      | Tape length of current reel in FEET, METERS or KB |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   This variable contains the length of tape for the current reel or
+   program segment. The units used by $TAPELN depends on answers to
+   questions in QUEST. If the output format is tape, $TAPELN is in feet
+   or meters, depending on the primary output units. If the output
+   format is DNC, $TAPELN is in kilobytes.
+
+.. _var_tapels:
+.. index:: Variables; $TAPELS
+
++------------------+----------------------------------------------------+
+| **$TAPELS**      | Length of the subprogram tape in FEET, METER or KB |
+|                  |                                                    |
+|                  | Type: Numeric, Read/Write                          |
++------------------+----------------------------------------------------+
+
+   This variable contains the length of the subprogram tape of the
+   current or program segment.
+
+.. _var_tapel2:
+.. index:: Variables; $TAPEL2
+
++------------------+---------------------------------------------+
+| **$TAPEL2**      | Length of second tape in FEET, METERS or KB |
+|                  |                                             |
+|                  | Type: Numeric, Read/Write                   |
++------------------+---------------------------------------------+
+
+   This variable contains the length of the second channel tape of the
+   current or program segment. This second tape is generated in the case
+   of a 4-axis lathe with program output.
+
+.. _var_tapen:
+.. index:: Variables; $TAPEN
+
++------------------+------------------------------------------+
+| **$TAPEN**       | Primary tape file name                   |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the primary tape file name as specified (or
+   defaulted) on the GENER command line.
+
+.. _var_tapen2:
+.. index:: Variables; $TAPEN2
+
++------------------+------------------------------------------+
+| **$TAPEN2**      | Secondary tape file name                 |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the secondary tape file name.
+
+.. _var_tapens:
+.. index:: Variables; $TAPENS
+
++------------------+------------------------------------------+
+| **$TAPENS**      | Subprogram tape file name                |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the current subprogram tape file name.
+
+.. _var_tprint:
+.. index:: Variables; $TPRINT
+
++------------------+------------------------------------------+
+| **$TPRINT**      | Last MCD comment string output           |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last MCD comment string output by the
+   post-processor, either via a TPRINT command or by the redirection of
+   a PPRINT command.
