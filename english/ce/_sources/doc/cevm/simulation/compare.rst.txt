@@ -1,0 +1,58 @@
+.. _sim_compare:
+
+Simulation»Compare (Ctrl Alt Q)
+-------------------------------
+
+.. image:: ../../../media/sim_compare.png
+   :width: 2.717in
+   :align: right
+
+Activates the Simulation Compare dialog, which defines
+various settings used when comparing the in-process stock against
+the related part. This function is only available with a Material
+Removal Simulation (MRS) license.
+
+The association between a part and its corresponding in-process stock
+is defined in the :ref:`Simulation»Parts/Fixtures dialog<sim_partfixture>`.
+
+The comparison colorization settings are applied only to gouge and
+excess material, which must first be enabled by selecting one or both
+of the :ref:`Boolean Overcut<sim_filter_boolean_overcut>` and
+:ref:`Boolean Undercut<sim_filter_boolean_undercut>` filters.
+
+The comparison is done by sampling the surface of the gouge and/or
+excess material and computing the shortest distance to the part. The
+distance is then used to assign a fixed or graduated color, as defined
+using the various options of the Compare dialog. If the sample size is
+small, or the part very large, the colorization process may take a long
+time to compute. The comparison can be cancelled at any time, in which
+case the displayed results will be incomplete (but perhaps still
+useful).
+
+The settings of note on the Compare dialog are:
+
+-  **Units**: Specifies the units of measure for all numeric values in
+   the dialog.
+
+-  **Sampling steps**: Specifies the maximum distance along the surface
+   between comparison measurements. Using a small value may greatly
+   increase the computation time and complexity of the resulting
+   colorized object.
+
+-  **Scale style**: Defines how the excess and gouge distances will be
+   colorized. Three excess and three gouge zones are available, at
+   increasing offsets from the part. With the Solid color and Gradient
+   color settings, each zone is represented by a single user definable
+   color (using the color buttons to the right of the scale). With the
+   Gradient zone setting, the inner two zones can individually be color
+   graduated between two colors.
+
+-  **Track measurement…**: If selected, the measured distance between
+   stock and part under the cursor will be shown and dynamically updated
+   as the cursor moves. You can also toggle this feature on and off
+   using Ctrl Q.
+
+Those surfaces on the colorized in-process stock that are neither
+gouged or excess will not be shown, unless the
+:ref:`Simulation»Show»Filters»Transparent Zero filter<sim_filter_transparent_zero>`
+is enabled.
