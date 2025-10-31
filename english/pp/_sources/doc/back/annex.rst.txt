@@ -1,0 +1,55 @@
+.. _appendix:
+
+Appendix
+++++++++
+
+This following annexes list information of possible interest to both users and developers alike.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   characterset
+   majorword
+   minorword
+   reservedwords
+   userdefquest
+   cadcaminterface
+   ppmacrosample
+
+**Section Overview**
+
+-  :ref:`“ASCII Character Set”<annex_character_set>` provides a table listing the ASCII
+   character set and associated integer codes.
+
+   \
+
+-  :ref:`“Post-Processor Major Words”<annex_major_words>` provides a table listing
+   the post-processor Major words and associated integer codes. Major words are those
+   that normally appear to the left of the “/” character in a post-processor command.
+
+   \
+
+-  :ref:`“Post-Processor Minor Words”<annex_minor_words>` provides a table listing
+   the post-processor Minor words and associated integer codes. Minor words are those
+   that can only appear to the right of the “/” character in a post-processor command.
+
+   \
+
+-  :ref:`“Reserved Words”<annex_reserved_words>` lists special words reserved for use
+   by the macro processor.
+
+   \
+
+-  :ref:`“User-Defined Questions”<annex_user_defined_questions>` describes a feature that can
+   be used by control emulator developers to add questions to the questionnaire.
+
+   \
+
+-  :ref:`“CAD/CAM System Interfaces”<annex_cadcamsystem>` describe interface kits
+   needed to run Icam Post V26 with CAM systems that require an interface kit.
+
+   \
+
+-  :ref:`“Post-Processor Macro Samples”<annex_macro_samples>` shows a couple of
+   examples of macro usage.
