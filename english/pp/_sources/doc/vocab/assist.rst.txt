@@ -1,0 +1,19 @@
+.. _command_assist:
+
+The ASSIST Command :kbd:`[PC]`
+==============================
+
+The ASSIST command is used to control gas flow for contouring
+machines and hybrid punch press machines with contouring attachments.
+
+   :math:`\textbf{ ASSIST /} \begin{pmatrix} \begin{array}{l} \textbf{AIR} \\ \textbf{OXYGEN} \\ \textbf{ARGON} \\ \textbf{NITRGN} \end{array} \end{pmatrix}`
+
+   :math:`\textbf{ ASSIST /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+The first form is used to activate one of four types of gas flow for
+the machine. Note that ARGON and NITRGN are only supported for
+machines with laser attachments.
+
+The second form is used to stop and restart assist gases. If
+ASSIST/ON is coded at the start of a program before a specific type
+is established, the QUEST specified default type will be used.
