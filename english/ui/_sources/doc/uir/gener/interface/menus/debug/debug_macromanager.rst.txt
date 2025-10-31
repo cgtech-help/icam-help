@@ -1,0 +1,67 @@
+Debug»Macro Manager
+-------------------
+
+The Macro Manager Dialog provides debugger functionality to enable or
+disable any macro, to enable or disable the tracing of a macro when
+“stepping”, as well as to view or change the settings of system
+variables that enable or disable the processing of startup and shutdown
+macros (these variables are grayed out if their corresponding
+startup/shutdown macros are not defined). Enabling or disabling macros
+and/or changing the macro variable settings may affect the results of
+the post-processor. Changing the trace settings does not affect the
+results of the post-processor.
+
+The Macro Manager also has check-box options to hide or show composite
+post-processor component macros that do not belong to the currently
+active component, external before/after macros, macros belonging to the
+current post-processor, and Virtual Machine macros associated with the
+machine model. Hiding or showing macros does not affect the results of
+the post-processor.
+
+Changes made in the Macro Manager are applicable for the current GENER
+session only. They will be remembered on a **Run»Restart** but not on a
+**File»NewJob**, **File»LoadJob** or following a **File»Exit**.
+
+|image1|
+
+**Enable/Disable Macro Variables**
+
+-  You can disable all cycle startup/shutdown macros by clearing the
+   $CYCMAC check box. This is equivalent to setting the $CYCMAC variable
+   in a macro to $FALSE. When a macro sets $CYCMAC=$TRUE, then this box
+   will appear as checked.
+-  You can disable all motion startup/shutdown macros by clearing the
+   $MTNMAC check box. The $MTNMAC variable can also be set from within a
+   macro.
+-  You can disable the operation event macro by clearing the $OEMAC
+   check box. The $OEMAC variable can also be set from within a macro.
+-  You can disable the register macro by clearing the $REGMAC check box.
+   The $REGMAC variable can also be set from within a macro.
+-  You can disable the tape macro by clearing the $TAPMAC check box. The
+   $TAPMAC variable can also be set from within a macro.
+
+**Show/Hide Macro Filters**
+
+Filters can help to reduce the number of macros listed in the window to
+a particular group. This will help to examine the list in case there is
+a large number of macros active in the session.
+
+**Enable/Disable Macro Execution**
+
+The check box in the ‘Execute’ column is used to disable-enable
+execution of any listed macro.
+
+**Enable/Disable Macro Tracing**
+
+The check box in the ‘Trace’ column is used to disable-enable tracing of
+a given macro in the Macro Listing window. When tracing of a particular
+macro is disabled, it will be not possible to Step-In, ..., and examine
+how the macro executes. Tracing status of a macro does not affect its
+execution flow.
+
+**Close button**
+
+Close the macro list dialog.
+
+.. |image1| image:: ./media/bb42e68fef8c446704678fcd0b4078e9b68f99bd.gif
+
