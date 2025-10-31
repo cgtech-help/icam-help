@@ -1,0 +1,48 @@
+.. _command_loadtl:
+
+The LOADTL Command :kbd:`[MLEP]`
+================================
+
+The LOADTL command is a non-standard\ [#]_ alias for the
+LOAD/WIRE, LOAD/TOOL and LOAD/ HEAD commands. It is used to: thread
+and cut the wire on a wire EDM; select the active punch tools for
+punch presses; and load and unload tools and heads on mills and
+lathes.
+
+Wire EDM machines:
+------------------
+
+   :math:`\textbf{LOADTL / } \mathit{tool\_id}`
+
+Specify a positive non-zero *tool_id* to cause the wire to be
+threaded at the current position; specify a zero (0) tool id to cause
+the wire to be cut (or use the UNLOAD/WIRE command).
+
+Punch Press machines:
+---------------------
+
+   :math:`\textbf{LOADTL / } \mathit{tool\_id}`
+
+Specify a positive non-zero *tool_id* to cause the punch tool to be
+changed.
+
+Mill and Lathe machines:
+------------------------
+
+   :math:`\textbf{LOADTL / }
+   \big[\,\mathtt{<\!tool\_information\!>}\,\big] \;
+   \big[,\textbf{HEAD}, \mathtt{<\!head\_information\!>}\,\big]`
+
+See :ref:`the TOOLNO command<command_toolno>` for
+a description of the tool and head information parameters. See :ref:`the LOAD/TOOL command<command_load>` for more
+information on loading tools and heads.
+
+If the *tool_id* on the LOADTL command matches the tool currently
+loaded, and the tool register contains combined tool and offset
+information, then a tool change operation will not be generated.
+However, changes in tool length, tool offset and orientation will be
+respected. In all other cases a redundant tool change will be output.
+
+.. [#] International Standards Organization ISO 4343:1972 defined LOADTL
+   as a standard post-processor command, but this was later revised to
+   LOAD/TOOL in the ISO 4343:2000 update.
