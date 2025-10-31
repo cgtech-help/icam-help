@@ -1,0 +1,51 @@
+Model Definition Variables
+==========================
+
+.. _var_unisim:
+.. index:: Variables; $UNISIM
+
++------------------+------------------------------------------+
+| **$UNISIM**      | Model units (1:inch, 25.4:mm)            |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the model units as defined in the questionnaire
+   *General Description / General Information* section question #9 “Model
+   units system”. All model linear values are in these units. Rotary values
+   are in degrees.
+
+.. _var_vmdate:
+.. index:: Variables; $VMDATE
+
++------------------+------------------------------------------+
+| **$VMDATE**      | Model creation date                      |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the creation date of the model.
+
+.. _var_vmdbf:
+.. index:: Variables; $VMDBF
+
++------------------+------------------------------------------+
+| **$VMDBF**       | Model database file name                 |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the name of the model database file
+   currently in use.
+
+.. _var_vmfile:
+.. index:: Variables; $VMFILE
+
++------------------+------------------------------------------+
+| **$VMFILE**      | Model file name                          |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the full name of the model being used.
+   This is the file name under which the model is stored in the database.
