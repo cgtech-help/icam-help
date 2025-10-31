@@ -1,0 +1,65 @@
+.. _about_ce:
+
+About Control Emulator
+======================
+
+Control Emulator CERUN is a computer numerical control (CNC) machine
+emulator, used by the computer aided manufacturing (CAM) system
+numerical control (NC) programmer to verify the correctness of
+machine control data (MCD), also known as NC programs or G-Code,
+before running the MCD on the actual CNC machine. Control Emulator is
+a software application that simulates the behavior of the CNC
+machine, by processing the MCD in the same way that the actual CNC
+machine does.
+
+The core objective of Control Emulator is to determine the
+correctness of the MCD, primarily as it relates to the movement of
+machine axes, with the goal being to predict if running the MCD will
+cause damage to the machine, workpiece or tooling. It does this by
+simulating the MCD in a virtual environment, testing for collisions
+between the machine components (e.g., tooling, table, head) and the
+part being manufactured (e.g., fixtures, clamps, workpiece). It also
+performs other validation, such as axis limit checking.
+
+Control Emulator includes a powerful, yet easy to use macro language
+that allows you to completely customize your control emulators to
+support unusual CNC control and machine tool features.
+
+Types of Machines Supported
+---------------------------
+
+.. index:: Machine; types supported
+
+Control Emulator provides built-in support of the following CNC
+machine axis types:
+
+-  Primary linear axes ( X Y Z )
+
+-  Secondary co-linear axes ( U V W )
+
+-  Head rotary axes to orient the tool ( A B C )
+
+-  Table rotary axes to orient the workpiece ( A' B' C' )
+
+-  Any Extending axis or quill ( E )
+
+-  Any exchangeable head including nutating ( N N' )
+
+Control Emulator supports the following machine types:
+
+-  Milling machines and machining centers (5 axes and up — all
+   combinations of linear and rotary axes)
+
+-  Lathes (2 and 4 axes) and merging lathes (4 axes), with optional
+   sub-spindle
+
+-  Mill-Turn centers (XZC), with additional Y axis, rotary heads and/or
+   tables, merging turrets, and optional sub-spindle
+
+-  Lasers, flame cutters and profilers
+
+-  Robots (6 revolute axes)
+
+-  Composite or Hybrid machining centers, which can combine the
+   capabilities of multiple machining technologies and are supported by
+   combining the capabilities of multiple control emulators.
