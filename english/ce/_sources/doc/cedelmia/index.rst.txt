@@ -1,0 +1,38 @@
+.. _cerun_with_delmia:
+
+CERUN with DELMIA
+*****************
+
+ICAM’s control emulator run-time **CERUN** is integrated within the
+Dassault Systèmes CATIA V5 and 3DEXPERIENCE DELMIA machine simulation
+products. CERUN drives the DELMIA model during MCD simulation.
+
+CERUN (and Icam Post, if also post-processing) must be installed on
+the computer or network drive before using them in a production
+environment (see :ref:`“Installation and Upgrade”<installation>`).
+The Dassault Systèmes software installation includes a demonstration copy of
+Icam Post and CERUN, but these are not suitable for production use due to
+limitations in the demonstration versions.
+
+This chapter contains the following sections:
+
+.. toctree::
+   :hidden:
+
+   setupce
+   mcdsimcatv5
+   mcdsim3dx
+
+-  :ref:`“Setup CERUN”<setup_ce>` describes the ICAM setup requirements to
+   ensure that CATIA V5 and 3DEXPERIENCE run with the latest installed version of
+   CERUN.
+
+   \
+
+-  :ref:`“MCD Based Simulation with CATIA V5”<mcdsimcatv5>` describes how to
+   integrate CERUN into CATIA V5, and how to prepare, post-process, and MCD simulate
+   a manufacturing process.
+
+   \
+
+-  :ref:`“MCD Based Simulation with 3DEXPERIENCE”<mcdsim3d>` does the same as above, for 3DEXPERIENCE.
