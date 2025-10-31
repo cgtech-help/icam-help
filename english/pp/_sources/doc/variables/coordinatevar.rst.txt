@@ -1,0 +1,831 @@
+Machine, CL & Workpiece Coordinate Variables
+============================================
+
+The variables in this section are used to access positional data.
+Setting positional data through system variables is supported, but
+not recommended.
+
+The linear axes of the machine are identified using the letters XYZ
+for primary linear axes, UVW for secondary linear axes and E for an
+extending (or quill) axis. The rotary axes of the machine are
+identified using the letters ABC for the main rotary axes, N for the
+first attachable rotary and D for second attachable rotary. The ABC
+letters can optionally be followed by H or T to distinguish a rotary
+head axis from a rotary table axis. Prior to V23, the XYZ axes of the
+SIDE head of a merging lathe were identified as UVW axes; starting
+with V23 either XYZ or UVW axes variables can be used.
+
+A leading L or N character indicates the last or next position of the
+axis. On a merging lathe, the last and next values are based on the
+last and next motions for the current head, which may not necessarily
+be the last and next motions in the CLDATA.
+
+.. _var_ashft:
+.. index:: Variables; $ASHFT
+.. _var_bshft:
+.. index:: Variables; $BSHFT
+.. _var_cshft:
+.. index:: Variables; $CSHFT
+.. _var_nshft:
+.. index:: Variables; $NSHFT
+.. _var_dshft:
+.. index:: Variables; $DSHFT
+.. _var_atshft:
+.. index:: Variables; $ATSHFT
+.. _var_btshft:
+.. index:: Variables; $BTSHFT
+.. _var_ctshft:
+.. index:: Variables; $CTSHFT
+.. _var_ahshft:
+.. index:: Variables; $AHSHFT
+.. _var_bhshft:
+.. index:: Variables; $BHSHFT
+.. _var_chshft:
+.. index:: Variables; $CHSHFT
+
++--------------------+-----------------------------+
+| **${ABC[TH]}SHFT** | A, B and C-axis shift value |
+|                    |                             |
+|                    | Type: Numeric, Read/Write   |
++--------------------+-----------------------------+
+| **${ND}SHFT**      | Nutating axis shift value   |
+|                    |                             |
+|                    | Type: Numeric, Read/Write   |
++--------------------+-----------------------------+
+
+   These variables contain the A, B, C and Nutating N, D axis shift
+   values to be added to the corresponding registers before being
+   punched to tape. This shift information is obtained from the Machine
+   Description section of QUEST and can be changed during GENER
+   processing. If the machine does not have the named axis, the
+   corresponding value will be zero (0) and not settable.
+
+.. _var_hah:
+.. index:: Variables; $HAH
+.. _var_hbh:
+.. index:: Variables; $HBH
+.. _var_hch:
+.. index:: Variables; $HCH
+.. _var_hnh:
+.. index:: Variables; $HNH
+.. _var_hdh:
+.. index:: Variables; $HDH
+.. _var_hath:
+.. index:: Variables; $HATH
+.. _var_hbth:
+.. index:: Variables; $HBTH
+.. _var_hcth:
+.. index:: Variables; $HCTH
+.. _var_hahh:
+.. index:: Variables; $HAHH
+.. _var_hbhh:
+.. index:: Variables; $HBHH
+.. _var_hchh:
+.. index:: Variables; $HCHH
+
++------------------+-----------------------------------------+
+| **$H{ABC[TH]}H** | A, B and C-axis head change location    |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+| **$H{ND}H**      | Nutating N, D axis head change location |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   These variables contain the A, B, C and Nutating N, D axis head
+   change home positions as selected in QUEST. If the machine does not
+   have the named axis, or does not have a head change location, the
+   corresponding value will be zero (0) and not settable.
+
+.. _var_ham:
+.. index:: Variables; $HAM
+.. _var_hbm:
+.. index:: Variables; $HBM
+.. _var_hcm:
+.. index:: Variables; $HCM
+.. _var_hnm:
+.. index:: Variables; $HNM
+.. _var_hdm:
+.. index:: Variables; $HDM
+.. _var_hatm:
+.. index:: Variables; $HATM
+.. _var_hbtm:
+.. index:: Variables; $HBTM
+.. _var_hctm:
+.. index:: Variables; $HCTM
+.. _var_hahm:
+.. index:: Variables; $HAHM
+.. _var_hbhm:
+.. index:: Variables; $HBHM
+.. _var_hchm:
+.. index:: Variables; $HCHM
+
++------------------+--------------------------------------------------+
+| **$H{ABC[TH]}M** | Machine A, B and C-axis home or FROM location    |
+|                  |                                                  |
+|                  | Type: Numeric, Read/Write                        |
++------------------+--------------------------------------------------+
+| **$H{ND}M**      | Machine Nutating N, D axis home or FROM location |
+|                  |                                                  |
+|                  | Type: Numeric, Read/Write                        |
++------------------+--------------------------------------------------+
+
+   These variables contain the machine A, B, C and Nutating N, D home or
+   FROM positions. For the A, B and C-axis variables, the inclusion of a
+   T specifies a table axis and H, a head. If the machine does not have
+   the named axis, the corresponding value will be zero (0) and not
+   settable.
+
+.. _var_hxh:
+.. index:: Variables; $HXH
+.. _var_hyh:
+.. index:: Variables; $HYH
+.. _var_hzh:
+.. index:: Variables; $HZH
+.. _var_huh:
+.. index:: Variables; $HUH
+.. _var_hvh:
+.. index:: Variables; $HVH
+.. _var_hwh:
+.. index:: Variables; $HWH
+.. _var_heh:
+.. index:: Variables; $HEH
+
++------------------+---------------------------------------------------+
+| **$H{XYZUVWE}H** | X, Y, Z, U, V, W and E-axis head change locations |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   These variables contain the X, Y, Z, U, V, W and E-axis head change
+   home positions as selected in QUEST. If the machine does not have the
+   named axis, or if it has no head change location, then the
+   corresponding value will be zero (0) and not settable.
+
+.. _var_hxm:
+.. index:: Variables; $HXM
+.. _var_hym:
+.. index:: Variables; $HYM
+.. _var_hzm:
+.. index:: Variables; $HZM
+.. _var_hum:
+.. index:: Variables; $HUM
+.. _var_hvm:
+.. index:: Variables; $HVM
+.. _var_hwm:
+.. index:: Variables; $HWM
+.. _var_hem:
+.. index:: Variables; $HEM
+
++------------------+---------------------------------------------------------+
+| **$H{XYZUVWE}M** | Machine X, Y, Z, U, V, W and E-axis Home/FROM positions |
+|                  |                                                         |
+|                  | Type: Numeric, Read/Write                               |
++------------------+---------------------------------------------------------+
+
+   These variables contain the X, Y, Z, U, V, W and E-axis home or FROM
+   positions. If the machine does not have the named axis, then the
+   corresponding value will be zero (0) and not settable.
+
+.. _var_aj:
+.. index:: Variables; $AJ
+.. _var_bj:
+.. index:: Variables; $BJ
+.. _var_cj:
+.. index:: Variables; $CJ
+.. _var_nj:
+.. index:: Variables; $NJ
+.. _var_dj:
+.. index:: Variables; $DJ
+.. _var_atj:
+.. index:: Variables; $ATJ
+.. _var_btj:
+.. index:: Variables; $BTJ
+.. _var_ctj:
+.. index:: Variables; $CTJ
+.. _var_ahj:
+.. index:: Variables; $AHJ
+.. _var_bhj:
+.. index:: Variables; $BHJ
+.. _var_chj:
+.. index:: Variables; $CHJ
+.. _var_naj:
+.. index:: Variables; $NAJ
+.. _var_nbj:
+.. index:: Variables; $NBJ
+.. _var_ncj:
+.. index:: Variables; $NCJ
+.. _var_nnj:
+.. index:: Variables; $NNJ
+.. _var_ndj:
+.. index:: Variables; $NDJ
+.. _var_natj:
+.. index:: Variables; $NATJ
+.. _var_nbtj:
+.. index:: Variables; $NBTJ
+.. _var_nctj:
+.. index:: Variables; $NCTJ
+.. _var_nahj:
+.. index:: Variables; $NAHJ
+.. _var_nbhj:
+.. index:: Variables; $NBHJ
+.. _var_nchj:
+.. index:: Variables; $NCHJ
+.. _var_laj:
+.. index:: Variables; $LAJ
+.. _var_lbj:
+.. index:: Variables; $LBJ
+.. _var_lcj:
+.. index:: Variables; $LCJ
+.. _var_lnj:
+.. index:: Variables; $LNJ
+.. _var_ldj:
+.. index:: Variables; $LDJ
+.. _var_latj:
+.. index:: Variables; $LATJ
+.. _var_lbtj:
+.. index:: Variables; $LBTJ
+.. _var_lctj:
+.. index:: Variables; $LCTJ
+.. _var_lahj:
+.. index:: Variables; $LAHJ
+.. _var_lbhj:
+.. index:: Variables; $LBHJ
+.. _var_lchj:
+.. index:: Variables; $LCHJ
+
++---------------------+-----------------------------------+
+| **$[NL]{ABC[TH]}J** | Joint A, B or C-axis rotation     |
+|                     |                                   |
+|                     | Type: Numeric, Read-only          |
++---------------------+-----------------------------------+
+| **$[NL]{ND}J**      | Joint Nutating N, D axis rotation |
+|                     |                                   |
+|                     | Type: Numeric, Read-only          |
++---------------------+-----------------------------------+
+
+   These variables contain machine A, B, C and Nutating N, D rotary axis
+   joint positions, which include the effects of tool length and fixture
+   (workpiece) compensation, as defined by the LIMIT/LENGTH and
+   LIMIT/ADJUST commands (see :ref:`“The LIMIT Command [MLEPC]”<command_limit>`). $AJ, $BJ and
+   $CJ refer to the current A, B and C rotary head or table axis joint
+   positions. $NJ refers to the primary Nutating axis joint position.
+   $DJ refers to the dual Nutating axis joint position.
+
+   If your machine has two axes of the same type (for example, B-axis
+   head and table axes), specific names exist; $ATJ, $BTJ and $CTJ refer
+   to table axes and $AHJ, $BHJ and $CHJ refer to the corresponding head
+   axes.
+
+   Variables beginning with N are next axis position variables. For
+   example, $NAJ refers to the next A-axis joint value and $NBTJ
+   contains the next B-axis table joint value. Variables beginning with
+   an L are last axis position variables. For example, $LCHJ contains
+   the last C-axis head joint value.
+
+   If the machine does not have the named axis, the corresponding value
+   will be zero.
+
+.. _var_am:
+.. index:: Variables; $AM
+.. _var_bm:
+.. index:: Variables; $BM
+.. _var_cm:
+.. index:: Variables; $CM
+.. _var_nm:
+.. index:: Variables; $NM
+.. _var_dm:
+.. index:: Variables; $DM
+.. _var_atm:
+.. index:: Variables; $ATM
+.. _var_btm:
+.. index:: Variables; $BTM
+.. _var_ctm:
+.. index:: Variables; $CTM
+.. _var_ahm:
+.. index:: Variables; $AHM
+.. _var_bhm:
+.. index:: Variables; $BHM
+.. _var_chm:
+.. index:: Variables; $CHM
+.. _var_nam:
+.. index:: Variables; $NAM
+.. _var_nbm:
+.. index:: Variables; $NBM
+.. _var_ncm:
+.. index:: Variables; $NCM
+.. _var_nnm:
+.. index:: Variables; $NNM
+.. _var_ndm:
+.. index:: Variables; $NDM
+.. _var_natm:
+.. index:: Variables; $NATM
+.. _var_nbtm:
+.. index:: Variables; $NBTM
+.. _var_nctm:
+.. index:: Variables; $NCTM
+.. _var_nahm:
+.. index:: Variables; $NAHM
+.. _var_nbhm:
+.. index:: Variables; $NBHM
+.. _var_nchm:
+.. index:: Variables; $NCHM
+.. _var_lam:
+.. index:: Variables; $LAM
+.. _var_lbm:
+.. index:: Variables; $LBM
+.. _var_lcm:
+.. index:: Variables; $LCM
+.. _var_lnm:
+.. index:: Variables; $LNM
+.. _var_ldm:
+.. index:: Variables; $LDM
+.. _var_latm:
+.. index:: Variables; $LATM
+.. _var_lbtm:
+.. index:: Variables; $LBTM
+.. _var_lctm:
+.. index:: Variables; $LCTM
+.. _var_lahm:
+.. index:: Variables; $LAHM
+.. _var_lbhm:
+.. index:: Variables; $LBHM
+.. _var_lchm:
+.. index:: Variables; $LCHM
+
++---------------------+-------------------------------------+
+| **$[NL]{ABC[TH]}M** | Machine A, B or C-axis rotation     |
+|                     |                                     |
+|                     | Type: Numeric, Read-only            |
++---------------------+-------------------------------------+
+| **$[NL]{ND}M**      | Machine Nutating N, D axis rotation |
+|                     |                                     |
+|                     | Type: Numeric, Read-only            |
++---------------------+-------------------------------------+
+
+   These variables contain machine A, B, C and Nutating N, D rotary axis
+   positions. These are similar to the joint axes listed above, but do
+   not include the effects of tool length compensation or fixture
+   (workpiece) compensation. $AM, $BM and $CM refer to the current A, B
+   and C rotary head or table axis positions. $NM refers to the primary
+   Nutating axis position. $DM refers to the dual Nutating axis
+   position.
+
+   If your machine has two axes of the same type (for example, B-axis
+   head and table axes), specific names exist; $ATM, $BTM and $CTM refer
+   to table axes and $AHM, $BHM and $CHM refer to the corresponding head
+   axes. In subsequent sections, table specific names may be identified
+   by the fact that they are composed of the generic variable name plus
+   the letter T. Similarly, head axis specific names contain the letter H.
+
+   Variables beginning with N are next axis position variables. For
+   example, $NAM refers to the next A-axis value and $NBTM contains the
+   next B-axis table value. Variables beginning with an L are last axis
+   position variables. For example, $LCHM contains the last C-axis head
+   value.
+
+   If the machine does not have the named axis, the corresponding value
+   will be zero.
+
+.. _var_aw:
+.. index:: Variables; $AW
+.. _var_bw:
+.. index:: Variables; $BW
+.. _var_cw:
+.. index:: Variables; $CW
+.. _var_law:
+.. index:: Variables; $LAW
+.. _var_lbw:
+.. index:: Variables; $LBW
+.. _var_lcw:
+.. index:: Variables; $LCW
+
++---------------------+---------------------------------------------------+
+| **$[L]{ABC}W**      | Tool orientation relative to current active frame |
+|                     |                                                   |
+|                     | Type: Numeric, Read/Write                         |
++---------------------+---------------------------------------------------+
+
+   These variables represent the tool orientation in the current RTCP output format.
+   The values can indicate a direction vector, the upper point of the “two-points”
+   programming output, coefficients of the virtual axis (RPY, Euler, or custom
+   virtual axis), or standard active rotary axes when RTCP is not active.
+   Names beginning with L refer to the last tool orientation coefficients used in
+   the previous motion.
+
+.. _var_im:
+.. index:: Variables; $IM
+.. _var_jm:
+.. index:: Variables; $JM
+.. _var_km:
+.. index:: Variables; $KM
+.. _var_nim:
+.. index:: Variables; $NIM
+.. _var_njm:
+.. index:: Variables; $NJM
+.. _var_nkm:
+.. index:: Variables; $NKM
+.. _var_lim:
+.. index:: Variables; $LIM
+.. _var_ljm:
+.. index:: Variables; $LJM
+.. _var_lkm:
+.. index:: Variables; $LKM
+
++-----------------+------------------------------------------------+
+| **$[NL]{IJK}M** | Machine tool axis I, J and K-vector components |
+|                 |                                                |
+|                 | Type: Numeric, Read-only                       |
++-----------------+------------------------------------------------+
+
+   These variables contain the machine I, J and K cosine vectors of the
+   tool axis. $IM, $JM and $KM refer to the current vector values. Names
+   beginning with N are next vector components and those beginning with
+   L are last vector components. The default tool axis vector is 0,0,1
+   for cases where the tool orientation has not been changed by the movement
+   of rotary axes, or by a LOAD, LOADTL or TOOLNO statement.
+
+.. _var_xc:
+.. index:: Variables; $XC
+.. _var_yc:
+.. index:: Variables; $YC
+.. _var_zc:
+.. index:: Variables; $ZC
+.. _var_ic:
+.. index:: Variables; $IC
+.. _var_jc:
+.. index:: Variables; $JC
+.. _var_kc:
+.. index:: Variables; $KC
+.. _var_nxc:
+.. index:: Variables; $NXC
+.. _var_nyc:
+.. index:: Variables; $NYC
+.. _var_nzc:
+.. index:: Variables; $NZC
+.. _var_nic:
+.. index:: Variables; $NIC
+.. _var_njc:
+.. index:: Variables; $NJC
+.. _var_nkc:
+.. index:: Variables; $NKC
+.. _var_lxc:
+.. index:: Variables; $LXC
+.. _var_lyc:
+.. index:: Variables; $LYC
+.. _var_lzc:
+.. index:: Variables; $LZC
+.. _var_lic:
+.. index:: Variables; $LIC
+.. _var_ljc:
+.. index:: Variables; $LJC
+.. _var_lkc:
+.. index:: Variables; $LKC
+
++--------------------+--------------------------------------+
+| **$[NL]{XYZIJK}C** | CL file X, Y, Z, I, J, K coordinates |
+|                    |                                      |
+|                    | Type: Numeric, Read-only             |
++--------------------+--------------------------------------+
+
+   These variables contain the CL file X, Y, Z, I, J and K coordinates.
+   $XC, $YC, $ZC, $IC, $JC and
+   $KC refer to the current values. Names beginning with N are next
+   values and those beginning with L are last coordinate values.
+
+.. _var_xj:
+.. index:: Variables; $XJ
+.. _var_yj:
+.. index:: Variables; $YJ
+.. _var_zj:
+.. index:: Variables; $ZJ
+.. _var_uj:
+.. index:: Variables; $UJ
+.. _var_vj:
+.. index:: Variables; $VJ
+.. _var_wj:
+.. index:: Variables; $WJ
+.. _var_ej:
+.. index:: Variables; $EJ
+.. _var_nxj:
+.. index:: Variables; $NXJ
+.. _var_nyj:
+.. index:: Variables; $NYJ
+.. _var_nzj:
+.. index:: Variables; $NZJ
+.. _var_nuj:
+.. index:: Variables; $NUJ
+.. _var_nvj:
+.. index:: Variables; $NVJ
+.. _var_nwj:
+.. index:: Variables; $NWJ
+.. _var_nej:
+.. index:: Variables; $NEJ
+.. _var_lxj:
+.. index:: Variables; $LXJ
+.. _var_lyj:
+.. index:: Variables; $LYJ
+.. _var_lzj:
+.. index:: Variables; $LZJ
+.. _var_luj:
+.. index:: Variables; $LUJ
+.. _var_lvj:
+.. index:: Variables; $LVJ
+.. _var_lwj:
+.. index:: Variables; $LWJ
+.. _var_lej:
+.. index:: Variables; $LEJ
+
++---------------------+---------------------------------------------+
+| **$[NL]{XYZUVWE}J** | Joint X, Y, Z, U, V, W and E-axis positions |
+|                     |                                             |
+|                     | Type: Numeric, Read-only                    |
++---------------------+---------------------------------------------+
+
+   These variables contain the machine X, Y, Z, U, V, W and Extending
+   (E) axis joint positions, which include the effects of tool length
+   and fixture (workpiece) compensation, as defined by the LIMIT/ LENGTH
+   and LIMIT/ADJUST commands (see :ref:`“The LIMIT Command [MLEPC]”<command_limit>`).
+   $XJ, $YJ, $ZJ, $UJ, $VJ, $WJ and $EJ represent current axes positions.
+
+   Variables beginning with an N contain next axes joint positions. For
+   example, $NXJ refers to the next X-axis joint value. Variables
+   beginning with an L are last axes joint position variables. For
+   example, $LUJ contains the last U-axis (or secondary X-axis) joint
+   value.
+
+   If the machine does not have the named axis, the corresponding value
+   will be zero (0).
+
+.. _var_xm:
+.. index:: Variables; $XM
+.. _var_ym:
+.. index:: Variables; $YM
+.. _var_zm:
+.. index:: Variables; $ZM
+.. _var_um:
+.. index:: Variables; $UM
+.. _var_vm:
+.. index:: Variables; $VM
+.. _var_wm:
+.. index:: Variables; $WM
+.. _var_em:
+.. index:: Variables; $EM
+.. _var_nxm:
+.. index:: Variables; $NXM
+.. _var_nym:
+.. index:: Variables; $NYM
+.. _var_nzm:
+.. index:: Variables; $NZM
+.. _var_num:
+.. index:: Variables; $NUM
+.. _var_nvm:
+.. index:: Variables; $NVM
+.. _var_nwm:
+.. index:: Variables; $NWM
+.. _var_nem:
+.. index:: Variables; $NEM
+.. _var_lxm:
+.. index:: Variables; $LXM
+.. _var_lym:
+.. index:: Variables; $LYM
+.. _var_lzm:
+.. index:: Variables; $LZM
+.. _var_lum:
+.. index:: Variables; $LUM
+.. _var_lvm:
+.. index:: Variables; $LVM
+.. _var_lwm:
+.. index:: Variables; $LWM
+.. _var_lem:
+.. index:: Variables; $LEM
+
++---------------------+-----------------------------------------------+
+| **$[NL]{XYZUVWE}M** | Machine X, Y, Z, U, V, W and E-axis positions |
+|                     |                                               |
+|                     | Type: Numeric, Read-only                      |
++---------------------+-----------------------------------------------+
+
+   These variables contain the machine X, Y, Z, U, V, W and Extending
+   (E) axis positions. These are similar to the joint axes listed above,
+   but do not include the effects of tool length compensation or fixture
+   (workpiece) compensation. $XM, $YM, $ZM, $UM, $VM, $WM and $EM
+   represent current axes positions.
+
+   Variables beginning with an N contain next axes positions. For
+   example, $NXM refers to the next X-axis value. Variables beginning
+   with an L are last axes position variables. For example, $LUM
+   contains the last U-axis (or secondary X-axis) value.
+
+   If the machine does not have one of the named axes, the corresponding
+   value will be zero (0).
+
+.. _var_xw:
+.. index:: Variables; $XW
+.. _var_yw:
+.. index:: Variables; $YW
+.. _var_zw:
+.. index:: Variables; $ZW
+.. _var_iw:
+.. index:: Variables; $IW
+.. _var_jw:
+.. index:: Variables; $JW
+.. _var_kw:
+.. index:: Variables; $KW
+.. _var_nxw:
+.. index:: Variables; $NXW
+.. _var_nyw:
+.. index:: Variables; $NYW
+.. _var_nzw:
+.. index:: Variables; $NZW
+.. _var_niw:
+.. index:: Variables; $NIW
+.. _var_njw:
+.. index:: Variables; $NJW
+.. _var_nkw:
+.. index:: Variables; $NKW
+.. _var_lxw:
+.. index:: Variables; $LXW
+.. _var_lyw:
+.. index:: Variables; $LYW
+.. _var_lzw:
+.. index:: Variables; $LZW
+.. _var_liw:
+.. index:: Variables; $LIW
+.. _var_ljw:
+.. index:: Variables; $LJW
+.. _var_lkw:
+.. index:: Variables; $LKW
+
++-----------------+---------------------------+
+| **$[NL]{XYZ}W** | LCS X, Y, Z coordinates   |
+|                 |                           |
+|                 | Type: Numeric, Read/Write |
++-----------------+---------------------------+
+| **$[NL]{IJK}W** | LCS I, J, K coordinates   |
+|                 |                           |
+|                 | Type: Numeric, Read-only  |
++-----------------+---------------------------+
+
+   These variables contain the local coordinate system (LCS) X, Y and Z
+   coordinates of the tool tip and the I, J and K cosine vectors of the
+   tool axis when a local coordinate frame is active. If a local
+   coordinate frame is not active then these variables return machine
+   coordinates instead (e.g., $ZW returns $ZM when a local coordinate
+   frame is not active). $XW, $YW, $ZW, $IW, $JW and $KW refer to the
+   current position. Names beginning with N are next values and those
+   beginning with L are last coordinate values.
+
+.. _var_tah:
+.. index:: Variables; $TAH
+.. _var_tbh:
+.. index:: Variables; $TBH
+.. _var_tch:
+.. index:: Variables; $TCH
+.. _var_tnh:
+.. index:: Variables; $TNH
+.. _var_tdh:
+.. index:: Variables; $TDH
+.. _var_tath:
+.. index:: Variables; $TATH
+.. _var_tbth:
+.. index:: Variables; $TBTH
+.. _var_tcth:
+.. index:: Variables; $TCTH
+.. _var_tahh:
+.. index:: Variables; $TAHH
+.. _var_tbhh:
+.. index:: Variables; $TBHH
+.. _var_tchh:
+.. index:: Variables; $TCHH
+
++------------------+-----------------------------------------+
+| **$T{ABC[TH]}H** | A, B and C-axis tool change location    |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+| **$T{ND}H**      | Nutating N, D axis tool change location |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   These variables contain the A, B, C and Nutating N, D axis tool
+   change home positions as selected in QUEST. If the machine does not
+   have the named axis, or does not have a tool change location, the
+   corresponding value will be zero (0) and not settable.
+
+.. _var_txh:
+.. index:: Variables; $TXH
+.. _var_tyh:
+.. index:: Variables; $TYH
+.. _var_tzh:
+.. index:: Variables; $TZH
+.. _var_tuh:
+.. index:: Variables; $TUH
+.. _var_tvh:
+.. index:: Variables; $TVH
+.. _var_twh:
+.. index:: Variables; $TWH
+.. _var_teh:
+.. index:: Variables; $TEH
+
++------------------+---------------------------------------------------+
+| **$T{XYZUVWE}H** | X, Y, Z, U, V, W and E-axis tool change locations |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   These variables contain the X, Y, Z, U, V, W and E-axis tool home
+   positions as selected in QUEST. If the machine does not have the
+   named axis, or if it has no tool change location, then the
+   corresponding value will be zero (0) and not settable.
+
+.. _var_clampmx:
+.. index:: Variables; $CLAMPMX
+.. _var_clampmy:
+.. index:: Variables; $CLAMPMY
+.. _var_clampmz:
+.. index:: Variables; $CLAMPMZ
+.. _var_clampmu:
+.. index:: Variables; $CLAMPMU
+.. _var_clampmv:
+.. index:: Variables; $CLAMPMV
+.. _var_clampmw:
+.. index:: Variables; $CLAMPMW
+.. _var_clampme:
+.. index:: Variables; $CLAMPME
+.. _var_clampmn:
+.. index:: Variables; $CLAMPMN
+.. _var_clampmd:
+.. index:: Variables; $CLAMPMD
+.. _var_clampma:
+.. index:: Variables; $CLAMPMA
+.. _var_clampmat:
+.. index:: Variables; $CLAMPMAT
+.. _var_clampmah:
+.. index:: Variables; $CLAMPMAH
+.. _var_clampmb:
+.. index:: Variables; $CLAMPMB
+.. _var_clampmbt:
+.. index:: Variables; $CLAMPMBT
+.. _var_clampmbh:
+.. index:: Variables; $CLAMPMBH
+.. _var_clampmc:
+.. index:: Variables; $CLAMPMC
+.. _var_clampmct:
+.. index:: Variables; $CLAMPMCT
+.. _var_clampmch:
+.. index:: Variables; $CLAMPMCH
+.. _var_clampm:
+.. index:: Variables; $CLAMPM
+
++----------------------+-----------------------------------------------------+
+| **$CLAMPM{XYZUVWE}** | X, Y, Z, U, V, W and E-axis hardware clamped status |
+|                      |                                                     |
+|                      | Type: Numeric, Read/Write                           |
++----------------------+-----------------------------------------------------+
+| **$CLAMPM{ABC[TH]}** | A, B and C-axis hardware clamped status             |
+|                      |                                                     |
+|                      | Type: Numeric, Read/Write                           |
++----------------------+-----------------------------------------------------+
+| **$CLAMPM{ND}**      | Nutating N, D axis hardware clamped status          |
+|                      |                                                     |
+|                      | Type: Numeric, Read/Write                           |
++----------------------+-----------------------------------------------------+
+| **$CLAMPM**          | Array of hardware clamped status of axes            |
+|                      |                                                     |
+|                      | Type: Numeric, Read/Write                           |
++----------------------+-----------------------------------------------------+
+
+   These variables contain the status of the axis indicating if axis is clamped or unclamped.
+
+   :0: Axis is unclamped and is available for any movement
+   :1: Axis is clamped and hardware break is applied.
+
+   The $CLAMPMAT, $CLAMPMBT and $CLAMPMCT refer to rotary table axes while
+   $CLAMPMAH, $CLAMPMBH and $CLAMPMCH refer to the corresponding rotary head axes.
+   $CLAMPMA, $CLAMPMB and $CLAMPMC variables refer to either a rotary head or a rotary table
+   depending of which one is available or active in the machine.
+
+   The $CLAMPM(iaxis) macro variable is an array of 15 elements which contain the hardware clamped
+   status of the 15 possible axes, as follows:
+
+      .. list-table::
+         :widths: auto
+         :align: center
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  1, 2, 3
+            -  X, Y and Z linear axes
+         *  -  4, 5, 6
+            -  U, V and W secondary linear axes
+         *  -  7, 8, 9
+            -  A’, B’ and C’ rotary table axes
+         *  -  10, 11, 12
+            -  A, B and C rotary head axes
+         *  -  13
+            -  Extending (quill) axis
+         *  -  14, 15
+            -  N1 and N2 removable rotary head axes
