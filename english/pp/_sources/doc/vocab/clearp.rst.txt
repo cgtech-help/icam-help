@@ -1,0 +1,50 @@
+.. _command_clearp:
+
+The CLEARP Command :kbd:`[ML]`
+==============================
+
+This command is used to define a clearance plane. CLEARP is used with
+the RETRCT command to withdraw the tool tip to the specified plane.
+This retraction plane remains in effect until changed by a new CLEARP
+command, or a CLRSRF command. This command is valid for lathes and
+3-axis+ mills.
+
+There are three possible ways in which CLEARP can be programmed. The
+first format can be used for lathes or mills. The second and third
+formats are only valid for mills.
+
+   :math:`\textbf{CLEARP / } d`
+
+   :math:`\textbf{CLEARP / } a,b,c,d`
+
+   :math:`\textbf{CLEARP /} \begin{pmatrix}\begin{array}{l} \textbf{XYPLAN} \\ \textbf{YZPLAN} \\ \textbf{ZXPLAN} \end{array}\end{pmatrix} ,d`
+
+   :math:`\textbf{CLEARP / NOMORE}`
+
+For the first format, GENER calculates the correct retraction plane
+depending on the *d* value programmed and on the type of lathe
+(whether it is a horizontal or vertical lathe). When this format is
+used on a mill, the *d* value is the distance above (or below) the XY
+plane.
+
+The second format defines the clearance plane using the canonical
+form of a plane *a,b,c,d*. The variables *a,b,c* specify the unit
+vector that is normal to the plane and *d* specifies the distance of
+the clearance plane from the part coordinate origin in the direction
+of the plane normal unit vector. Symbolic planes can generally be
+used by the APT programmer.
+
+The last format uses the minor words XYPLAN, YZPLAN and ZXPLAN. They
+indicate the plane normal to an axis in the part coordinate system
+(for example, YZPLAN is normal to the X axis). The *d* value in this
+format specifies the distance from the origin normal to the indicated
+plane.
+
+Note that the CLEARP command only defines the clearance plane, a
+RETRCT command is needed to position the tool tip on the defined
+plane. See :ref:`“The RETRCT Command”<command_retrct>` for more information on tool
+retraction processing.
+
+NOMORE removes the definition of the clearance surface that was
+defined by CLEARP or CLRSRF commands. It is an error to code RETRCT
+without a defined clearance surface.
