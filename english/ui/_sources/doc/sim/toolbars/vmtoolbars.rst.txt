@@ -1,0 +1,38 @@
+Simulation Toolbars
+===================
+
+Toolbars provide quick and easy access to the most commonly used
+controls. Toolbars can be activated or hidden using the Tools»Toolbar
+menu selection, which opens the Toolbars dialog. With CERUN and GENER,
+toolbars can also be activated or hidden using a right-mouse context
+menu from the application window background. Toolbars are dockable,
+meaning that you can drag a toolbar to any of the four sides of the main
+window. Toolbars can also be undocked by dragging them away from the
+sides (or by holding the Ctrl key). This section describes the Virtual
+Machine toolbars and their associated functions and shortcut keys.
+
+-  `View <vmtb_view.html>`__
+-  `VM Animation <vmtb_animation.html>`__
+-  `VM Annotation <vmtb_annotation.html>`__
+-  `VM Construct <vmtb_construct.html>`__
+-  `VM Grid <vmtb_grid.html>`__
+-  `VM Measure <vmtb_measure.html>`__
+-  `VM Mode <vmtb_mode.html>`__
+-  `VM View <vmtb_vmview.html>`__
+-  `VM View Filter <vmtb_viewfilter.html>`__
+-  `VM Cross Section <vmtb_crosssection.html>`__
+
+.. toctree::
+   :hidden:
+
+   vmtb_animation
+   vmtb_annotation
+   vmtb_construct
+   vmtb_crosssection
+   vmtb_grid
+   vmtb_measure
+   vmtb_mode
+   vmtb_view
+   vmtb_viewfilter
+   vmtb_vmview
+
