@@ -1,0 +1,61 @@
+.. _macro_invocation:
+
+Macro Invocation
+----------------
+
+Macros are automatically invoked (i.e., called) by the macro processor
+when specific events happen.
+There are two types of macros used by Virtual Machine:
+
+-  :ref:`Startup and Shutdown macros<startup_shutdown_macros>`: Executed before and after key events.
+
+   \
+
+-  :ref:`Event macros<event_macros>`: Executed at key events.
+
+.. _macro_command_match:
+
+Enable/Disable Macro Matching (MATCH)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The MATCH macro command can be given within a macro to turn
+macro matching ON or OFF.
+It is not recommended to use this command in a VM model macro, since this
+command affects Icam Post and Control Emulator macro processing.
+
+   :math:`\textbf{MATCH / } \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+MATCH/ON specifies that CLDATA record and Code/Data identifier matching
+should be enabled. This is the initial condition at the start of any
+macro. MATCH/OFF specifies that matching should be disabled.
+
+When macro matching is disabled, no attempt is made to invoke
+User-Defined, Code or Data macros that match those generated in the
+current macro.
+
+Macro matching is always automatically turned back on when the
+current macro is exited.
+
+Startup, shutdown and event macros are always invoked even if macro
+matching is turned OFF.
+
+.. _macro_command_output:
+
+Outputting the Event (OUTPUT)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The OUTPUT command tells the macro processor to perform the actions
+associated with the current event.
+The syntax of the OUTPUT command is simply:
+
+   :math:`\textbf{OUTPUT}`
+
+The OUTPUT command must be coded in Model Event macros only; do not code
+OUTPUT in a startup or shutdown macro. If the OUTPUT command is not
+encountered in an event macro, then the built-in processing for that
+event will not occur. This gives you the opportunity in an event macro
+to insert your own processing before, after, or even in place of the
+built-in processing.
+
+Note that the OUTPUT command is also used with GENER user-defined macros
+and CERUN code macros to indicate where the matched command should be processed.
