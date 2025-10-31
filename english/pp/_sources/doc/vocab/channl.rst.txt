@@ -1,0 +1,31 @@
+.. _command_channl:
+
+The CHANNL Command :kbd:`[L]`
+=============================
+
+The CHANNL command is used to control the selection of channels on
+a 4-axis merging lathe or on a multi-channel mill-turn machine.
+The syntax of the command is as follows:
+
+   :math:`\textbf{CHANNL /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \mathit{channel\_id} \,\end{array}\end{pmatrix}`
+
+The ON and OFF options are used to control the activation of the merging mode.
+While in merge mode, two or more turrets or machining heads move together.
+The CHANNL/ON command must be immediately followed by a CHANNL command identifying a channel number.
+All commands following a CHANNL command with a channel number are associated to the specified channel.
+Commands given after the CHANNL/OFF command are processed in non-merging mode and are associated to the main channel.
+
+The following is a valid sequence of commands used in the merge mode:
+
+   .. code-block:: text
+
+      CHANNL/ON
+      CHANNL/1
+      GOTO/...
+      CHANNL/2
+      GOTO/...
+      CHANNL/3
+      GOTO/...
+      CHANNL/OFF
+
+..
