@@ -1,0 +1,15 @@
+Debug»Enable/Disable Breakpoint (Ctrl+F9)
+-----------------------------------------
+
+Enable/disable the breakpoint on the current line where the text cursor
+is.
+
+Used during debugging to enable or disable a breakpoint on the Listing
+window line that currently has been selected. A disabled breakpoint
+appears as a hollow red circle. CERUN does not pause processing when it
+encounters disabled breakpoints.
+
+|image1|
+
+.. |image1| image:: ./media/3b9346f0113e506e99e70fc345052325c0d19e5b.gif
+
