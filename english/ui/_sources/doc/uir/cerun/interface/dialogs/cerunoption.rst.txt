@@ -1,0 +1,18 @@
+CERUN Option
+------------
+
+The Option dialog Processing tab is used to set the actions of the
+Control Emulator when various special codes are encountered in the
+program. These codes are identified by their post-processor command
+name, if defined in the control emulator, as follows:
+
+You can set the action for each code as follows: “\ **Pause**\ ” will
+stop CERUN processing when the code is encountered. You must then select
+one of the Run menu selections to continue or restart processing.
+“\ **Halt**\ ” will end CERUN processing. Once halted, you can either
+exit or restart processing from the beginning of the program.
+“\ **Ignore**\ ” simply ignores the code, which can be useful to
+continue processing past an END or REWIND code.
+
+The processing options settings are remembered in the Windows Registry.
+
