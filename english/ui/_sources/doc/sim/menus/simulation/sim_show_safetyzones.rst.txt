@@ -1,0 +1,16 @@
+Simulation»Show»Safety Zones
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Show Safety Zones function enables or disables the display of the
+safety zone that surrounds any collision enabled object that also has a
+safety clearance distance defined. The safety zone appears as a
+transparent light blue surface, offset from the original surface by the
+safety distance.
+
+An object’s safety zone is always shown in transparent orange when
+another collision-enabled object touches it, regardless of the Show
+Safety Zones setting. Colliding objects are always shown in transparent
+red. The intersection between colliding objects is shown as a bright
+yellow line, unless this feature is disabled in the Simulation»Options
+dialog (Ctrl+Alt+O shortcut).
+
