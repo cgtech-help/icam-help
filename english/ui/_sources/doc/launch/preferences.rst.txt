@@ -1,0 +1,39 @@
+Preferences Settings
+====================
+
+The Preferences tab provides settings that affect how the launch panel
+and software behaves. These personal preference settings do not affect
+how MCD is generated.
+
+Enable launch panel tooltip help
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enables the display of tooltip help messages when the cursor is placed
+over an input field in the launch panel.
+
+Use common browse directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If selected, all launch panel […] browse functions will start from the
+last directory browsed. When cleared, each launch panel […] browse
+button will remember and start from the last directory browsed for its
+own specific file type.
+
+Detect new/updated files on launch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If selected, the launch panel will notify you when *dmp* or *dp* files
+(exported or dedicated postprocessors, control emulators and models) are
+added to or changed in the last directory used to Import such files into
+the database . The launch panel checks for dmp and dp files more recent
+than the date of the last import.
+
+Save for review
+~~~~~~~~~~~~~~~
+
+If selected, GENER and CERUN will save their results at the end of
+processing into a file having the same name as the listing, but with a
+file type of *zrj*. To review an NC program’s results, drag and drop the
+zrj file onto the launch panel or desktop icon (or open the results
+using the JOB button), then press OK.
+
