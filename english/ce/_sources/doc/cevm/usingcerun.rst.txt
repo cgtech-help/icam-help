@@ -1,0 +1,285 @@
+.. _using_cerun_with_vm:
+
+Using CERUN with Virtual Machine
+**********************************
+
+The Control Emulator run-time module “CERUN” provides the capability
+to emulate the processing of MCD by a CNC machine. When coupled with
+ICAM’s Virtual Machine product, CERUN can also emulate the motions of
+the CNC machine’s axes, while testing for over-travel conditions and
+collisions between the various machine, tool, part and fixture
+components. When coupled with ICAM’s Material Removal Simulation
+product, CERUN can simulate the cutting actions of the tool on the
+stock and also include the in-process stock when testing for
+collisions.
+
+CERUN should be run in a “full interface” mode to take full advantage
+of Virtual Machine and material removal simulation features. The full
+interface contains:
+
+-  A Diagnostic window that lists all diagnostic messages (see :ref:`“Diagnostics”<cerun_diagnostics>`).
+
+-  Tracing windows that show the flow of processing of CERUN by listing
+   events as they occur (see :ref:`“Tracing”<cerun_tracing>`).
+
+-  Simulation windows to view the machine model and material removal
+   simulation, as well as to view or change tool and workpiece
+   compensation amounts (see :ref:`“Simulation”<cerun_simulation>`).
+
+-  Debugging windows that aid the Control Emulator developer to better
+   understand the relationship between MCD data, macro processing and
+   resultant simulation. It does this by tracing the processing of
+   various types of data and also by providing the capabilities of a
+   fully functional debugger (see :ref:`“Debugging”<cerun_debugging>`).
+
+-  Menu bar functions, keyboard shortcuts and associated toolbar buttons
+   to access the many features of CERUN (see :ref:`“Menus”<cerun_menus>`).
+
+When CERUN is run in full interface mode, control emulation starts in
+a paused state. The **Run»Play** or **Run»Fast** menu selections or
+toolbar buttons can be pressed to start control emulation. Once the
+program is started, it will run to completion, unless interrupted by
+a **Run»Pause** menu selection, or a debugging breakpoint, or by
+clicking with the left-mouse in a tracing window, or by a user dialog
+requesting additional information. Choose one of the Run menu
+selections to again continue processing after a pause. Select
+**File»Exit** when you are finished.
+
+The simulation can be viewed from one or more Virtual Machine
+windows, which are activated by a **Simulation»Virtual Machine** menu
+selection. You use a combination of keyboard and mouse functions to
+pan, zoom and rotate about the simulation windows (see :ref:`“Simulation»Virtual Machine”<sim_vm>`).
+A companion Controller window, activated by a **Simulation»Controller** menu selection,
+provides functions to move machine axes, define fixture and tool compensation amounts,
+view CNC modal code states, MDI data to the controller, control optional-skip settings,
+as well as replay the simulation forwards and backwards through time
+(see :ref:`“Simulation»Controller”<sim_controller>`). A Manager window, activated by a
+**Simulation»Manager** menu selection, provides a tree control that
+permits viewing and modification of tooling, parts, fixtures and
+setups (see :ref:`“Simulation»Manager”<sim_manager>`).
+
+.. _cerun_diagnostics:
+
+Diagnostics
+-----------
+
+Diagnostic messages can be reviewed in the Diagnostics Window,
+activated by a **View**\ **»Diagnostic** menu selection. Diagnostics
+are recorded whether the window is activated or not. A Synchronize
+function is available for the Diagnostic window, using the
+right-mouse context sensitive pop-up menu. Synchronizing on a
+diagnostic will cause the simulation, trace and source windows to
+identify the corresponding point they were at when the diagnostic was
+output.
+
+Diagnostic messages are also output to the Console trace window but
+only when activated by a **View»Console** menu selection. Diagnostic
+messages are also written to the listing verification file and as
+well to the log file if one was requested in the launch panel
+“Options” settings. Once the program has completed, you can view a
+summary of diagnostics in the verification listing using the
+**File»View Listing File** menu function.
+
+A count of diagnostics will appear in the Status bar at the bottom of
+the CERUN full interface window. Status bar visibility can be toggled
+using the **View»Status Bar** menu selection.
+
+.. _cerun_tracing:
+
+Tracing
+-------
+
+There are four trace windows that trace (i.e., list) various types of
+input and output records. CERUN provides **Run»Step** and
+**Run»Pause** commands to pause processing whenever something is
+written to one of these windows. The trace windows are:
+
+   | **View»Input** traces NC program data (MCD) as it is read
+   | **View»Output** traces output processing and actions of the control emulator
+   | **View»Console** traces diagnostics, operator messages and other console I/O
+   | **View»Macro** traces macro commands as they are processed
+
+You can single-step the control emulator by clicking with the
+left-mouse button in any trace window. This produces the same effect
+as setting the focus on the trace window and selecting the Run»Step
+menu function. Processing will continue until the next line is output
+to the selected trace window.
+
+For PSE processing, the trace windows will have buttons on the
+title-bar labelled “0:GENER” and “1:CERUN”, that cause traced output
+to be shown only for the selected product. For a multiple channelmachine,
+the trace windows will have buttons on the title bar labeled “0:*name*\ ”, “2:*name*\ ”, etc.,
+that cause traced output to be shown only for the selected channels.
+A right-mouse pop-up menu “Split View” selection toggles between side-by-side vs.
+sequential tracing of information.
+
+A Synchronize function is available for the trace windows, using the
+right-mouse pop-up menu. Synchronizing on a line of output in one
+trace window will cause the other trace windows as well as the source
+and simulation windows to identify the corresponding point they were
+at when the selected line was output. The up and down arrows can be
+used to change the line of output being synchronized.
+
+Tracing windows will continue to record information when minimized,
+which may speed up processing since the screen does not have to be
+updated as frequently. Tracing information will not be recorded to
+any trace window that has been closed, which may significantly speed
+up processing.
+
+The maximum number of lines remembered in each of the trace windows
+can be set from the Tools»Preferences»Trace menu function. When “Save
+for review” is enabled, these limits are ignored on the Input and
+Console windows, so that the complete program can be reviewed.
+
+More information on the View menu selection options can be found in
+:ref:`“View Menu”<view_menu>`.
+
+.. _cerun_simulation:
+
+Simulation
+----------
+
+There are three windows that are used to view and control the Virtual
+Machine model and/or material removal process. These windows will
+only be available if machine simulation and/or material removal
+simulation were selected when CERUN was started (see :ref:`“VM Tab”<vm_tab>`).
+
+The simulation windows are:
+
+   | **Simulation»Virtual Machine** views the model, fixtures and parts
+   | **Simulation»Controller** views/modifies compensation and other controller features
+   | **Simulation»Manager** views/modifies tooling, parts, fixtures and setups
+
+The Virtual Machine window is where you view the actions of the
+machine when running with a Virtual Machine model. Up to four
+independent viewing windows are supported. If material removal
+simulation is active, then the in-process stock will be displayed
+within the machine model environment and collision detection will
+include the in-process stock as one of the components to be checked
+against the tool and any other collision enabled objects that can
+move with respect to the stock.
+
+For PSE processing, a right-mouse pop-up menu can be used in the
+Virtual Machine and Controller» Time Line windows to toggle between
+viewing the GENER and CERUN (the default) representations of the
+simulation.
+
+This same Virtual Machine window is used when running Material
+Removal Simulation without a Virtual Machine model. In this case,
+only the tooling, stock, part and fixture components are drawn (i.e.,
+the machine is not shown). Collision detection checks tool vs. part,
+tool vs. in-process stock and tool vs. fixtures. All motions are
+viewed from the perspective of the part (e.g., a table rotation will
+appear as the tool arcing through space).
+
+All of the physical components of the simulation will be
+automatically setup on entry when running with a Manufacturing
+Extractor (see :ref:`“Starting CERUN from an Extractor”<starting_cerun_from_extractor>`). These include parts
+(design parts and their in-process stock), fixtures, as well as tools
+and their holders. The manufacturing extractors also have the ability
+to set tool compensation amounts to their nominal values and to
+automatically define appropriate offsets for workpiece compensation.
+Some extractors can determine multiple setup requirements as defined
+by supporting CAM systems. All of these settings can be reviewed or
+modified from the Simulation menu as follows:
+
+   | **Simulation»Parts/Fixtures** defines parts (design/stock) and holding fixtures
+   | **Simulation»Tools/Holders/Heads** defines cutting tools and holders; selects active head
+   | **Simulation»Controller** defines tool and fixture compensation amounts
+   | **Simulation»Manager** defines setups; views/modifies all of the above
+
+The parts and fixtures define the various components that are
+attached to the Stock Axis of the model. The tools and their holders
+define the various components that are attached to the Tool Axis of
+the model. Fixture (workpiece) compensation is generally required to
+ensure the correct relationship between parts/fixtures and machine
+model. Tool compensation is also generally required to ensure the
+correct relationship between tools and parts. Additional setups
+(beyond the initial) can be defined to account for NC machine
+operator changes to the manufacturing environment during processing
+(e.g., relocation of clamps).
+
+More information on the Simulation menu selection options can be
+found in :ref:`“Simulation Menu”<simulation_menu>`.
+
+.. _cerun_debugging:
+
+Debugging
+---------
+
+There are three debugging windows that can be used to perform more
+advanced Visual debugging and testing of a control emulator. The
+debugging windows are:
+
+   | **Debug»Source** lists MCD and macro source.
+   | **Debug»Variables** enables viewing and setting of macro variables.
+   | **Debug»Stack** Shows the current MCD block and all active macros.
+
+At the start of the program, the Source window shows the MCD input file
+to be processed. This window is updated whenever processing is paused
+to show the current MCD block or macro line being processed.
+
+The Variables window shows the macro variables
+and CNC variables (if using a pre-processor)
+that are currently in use by the program.
+Variables can be viewed and modified if necessary from this window.
+
+The Stack window shows the nesting of MCD, subprograms and macros.
+
+CERUN provides **Debug»Step Over**, **Debug»Step Into** and
+**Debug»Step Out** menu commands and keyboard shortcuts to single
+step through MCD and macros. **Debug»Run to Cursor** steps to the
+selected MCD block or macro line. Finally, **Debug»Jump to Cursor**
+sets the selected MCD block as the next one to process.
+
+CERUN provides a **Debug» Breakpoint Manager** menu function as well
+as **Debug»Set/ Clear Breakpoint**, **Debug»Enable/Disable Breakpoint**
+and **Debug»Remove All Breakpoints** menu functions and keyboard
+shortcuts to set or clear stopping points in macros and MCD.
+Finally, CERUN provides a **Debug»Macro Manager** menu function to
+individually enable or disable macros for testing purposes.
+
+CERUN also provides **Run»Play**, **Run»Pause** and **Run»Step** menu
+commands and keyboard shortcuts to start, pause and step processing.
+A **Run»Fast** menu command starts processing, bringing up a progress
+bar instead of the full interface, for faster execution.
+
+When debugging a control emulator that supports multiple independent
+kernels (e.g., a merging mill-turn lathe), then the “active” kernel
+for debugging purposes can be set using the **Debug»Multi-Kernels**
+menu selection or Multi-Kernels toolbar. In a multi-kernel
+environment, the various debug windows and debug features all are
+with respect to the selected kernel. When debugging a merged PSE
+process, the Debug»Multi-Kernels menu selection can be used to switch
+between the GENER and CERUN kernels, allowing independent debugging
+of the post-processor or control emulator. When a breakpoint is
+triggered, the active kernel is automatically switched to the one
+that encountered the breakpoint.
+
+More information on the Run and Debug menu selection options can be
+found in :ref:`“Run Menu”<run_menu>` and :ref:`“Debug Menu”<debug_menu>`.
+
+.. _cerun_menus:
+
+Menus
+-----
+
+The CERUN full interface provides a wide variety of controls from the
+menu bar. The following menus are available:
+
+.. toctree::
+
+   uirmenus/file
+   uirmenus/run
+   uirmenus/view
+   uirmenus/debug
+   uirmenus/cerun
+   uirmenus/simulation
+   uirmenus/tools
+   uirmenus/window
+   uirmenus/help
+
+For those menu functions that have keyboard shortcuts, the key
+combination will be listed to the right of the menu entry. Some of
+the more common functions are also available via tool bars, which can
+be setup using the Tools»Toolbar menu function.
