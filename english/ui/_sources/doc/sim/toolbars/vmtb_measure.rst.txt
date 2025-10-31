@@ -1,0 +1,83 @@
+VM Measure Toolbar
+~~~~~~~~~~~~~~~~~~
+
+|image1|
+
+The buttons on the VM Measure toolbar are only available while in
+measurement mode, as set using the |image2| button on the VM Mode
+toolbar or Simulation»Mode»Measurement menu bar. The 3 middle buttons
+are filters that enable or disable picking of the various components of
+the triangles that make up the in-process stock.
+
++-----------+---------------------------------------------------------+
+| |image17| | **Simulation»Measure»Distances and angles**: Selection  |
+|           | measures the distance and angle between subsequently    |
+|           | selected entities, as well as the xyz offset between    |
+|           | entities.                                               |
++-----------+---------------------------------------------------------+
+| |image18| | **Simulation»Measure»Radius and center**: Selection     |
+|           | measures the radius and xyz center of a circle          |
+|           | constructed through 3 subsequently selected points      |
+|           | and/or edge midpoints.                                  |
++-----------+---------------------------------------------------------+
+| |image19| | **Simulation»Measure»Vertex**: Enables or disables the  |
+|           | picking of points on the boundary of the triangles that |
+|           | make up the in-process stock object.                    |
++-----------+---------------------------------------------------------+
+| |image20| | **Simulation»Measure»Edge**: Enables or disables the    |
+|           | picking of edges of the triangles that make up the      |
+|           | in-process stock object.                                |
++-----------+---------------------------------------------------------+
+| |image21| | **Simulation»Measure»Face**: Enables or disables the    |
+|           | picking of faces of the triangles that make up the      |
+|           | in-process stock object.                                |
++-----------+---------------------------------------------------------+
+| |image22| | **Simulation»Measure»Fan**: Switches between chained    |
+|           | (one to the next) and fanned (one to many)              |
+|           | measurements.                                           |
++-----------+---------------------------------------------------------+
+| |image23| | **Simulation»Measure»Overlay**: When enabled, the       |
+|           | objects selected for measurement will always be         |
+|           | visible, no matter how the camera is oriented.          |
++-----------+---------------------------------------------------------+
+
+|image24|
+
+If none of the Vertex, Edge or Face selections is active, then all
+objects can be selected.
+
+The xyz information in the above measurements is with respect to the
+frame selected in the VM Grid toolbar. Measurement information appears
+in the form of a small HUD (heads-up display) in the Simulation window.
+
+When measuring in-process stock, the Simulation»Cross Section function
+can be used to section the stock for better visibility or to obtain
+measurements in the cross section plane.
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/8fec47ee71b9031199fe1420dbecf42ee0a6ecb3.bmp
+.. |image2| image:: ./media/a66b9dde510424584c253bafb64f62b5b3e37783.bmp
+.. |image3| image:: ./media/4f73123eb845161ab4fdfd095c86d9b15ab39a63.bmp
+.. |image4| image:: ./media/e0287cc5de835fba2c60408434aac18dedfd6ee0.bmp
+.. |image5| image:: ./media/598d9eb46947d6bed03819f750c2393e1c49a78b.bmp
+.. |image6| image:: ./media/bc32686d058f1e4ee124536846a767d644d06cdd.bmp
+.. |image7| image:: ./media/49f1c29a4bb4b1734222f608955b02309b44cee5.bmp
+.. |image8| image:: ./media/6a551bffac3a3e3658f473a7c2e1f36a388d24c8.bmp
+.. |image9| image:: ./media/83dd38dbdbb50667e03116da3cd62a0b9e3e0f1d.bmp
+.. |image10| image:: ./media/4f73123eb845161ab4fdfd095c86d9b15ab39a63.bmp
+.. |image11| image:: ./media/e0287cc5de835fba2c60408434aac18dedfd6ee0.bmp
+.. |image12| image:: ./media/598d9eb46947d6bed03819f750c2393e1c49a78b.bmp
+.. |image13| image:: ./media/bc32686d058f1e4ee124536846a767d644d06cdd.bmp
+.. |image14| image:: ./media/49f1c29a4bb4b1734222f608955b02309b44cee5.bmp
+.. |image15| image:: ./media/6a551bffac3a3e3658f473a7c2e1f36a388d24c8.bmp
+.. |image16| image:: ./media/83dd38dbdbb50667e03116da3cd62a0b9e3e0f1d.bmp
+.. |image17| image:: ./media/4f73123eb845161ab4fdfd095c86d9b15ab39a63.bmp
+.. |image18| image:: ./media/e0287cc5de835fba2c60408434aac18dedfd6ee0.bmp
+.. |image19| image:: ./media/598d9eb46947d6bed03819f750c2393e1c49a78b.bmp
+.. |image20| image:: ./media/bc32686d058f1e4ee124536846a767d644d06cdd.bmp
+.. |image21| image:: ./media/49f1c29a4bb4b1734222f608955b02309b44cee5.bmp
+.. |image22| image:: ./media/6a551bffac3a3e3658f473a7c2e1f36a388d24c8.bmp
+.. |image23| image:: ./media/83dd38dbdbb50667e03116da3cd62a0b9e3e0f1d.bmp
+.. |image24| image:: ./media/3bf595389c1f822f3096c27112017b0e5fe6fff5.bmp
+
