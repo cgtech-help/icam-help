@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundamentals of the Macro Language &mdash; Virtual Machine V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"tex": {"macros": {"icamrange": ["{\\scriptsize \\raise#1em\\hbox{#2:n}}\\!", 2]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Function Calls" href="functioncall.html" />
+    <link rel="prev" title="The Macro Language" href="index.html" />
+    <link href="../../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Virtual Machine V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/index.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../section_quest.html">QUEST: Model Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#importing-models">Importing Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/questinterface.html">QUEST User Interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/usingquest/questinterface.html#interface-differences-between-developer-and-run-time-environments">Interface differences between Developer and Run-time Environments</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/modelreq.html">Basic Model Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/createvm.html">Creating a Virtual Machine Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/usingquest/createvm.html#general-information">General Information</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/usingquest/createvm.html#comments">Comments</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/usingquest/createvm.html#d-modelsmachines">3D Models»Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/addkinematic.html">Adding Kinematics to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/addphysicalentities.html">Adding Physical Entities to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/collisiontest.html">Collision Testing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/usingquest/collisiontest.html#collision-groups">Collision Groups</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/usingquest/collisiontest.html#collision-exclusion-groups">Collision Exclusion Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/selectiongroup.html">Selection Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/customizingmodel.html">Customizing the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usingquest/testing.html">Testing the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/icamdb.html#model-file-name-conventions">Model File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/icamdb.html#models">Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/customization.html">Model Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/dialogeditor.html">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/dialogeditor.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization/startshutmacro.html">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/startshutmacro.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/startshutmacro.html#the-declaration-macro">The Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/startshutmacro.html#the-model-startup-macro">The Model Startup Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/startshutmacro.html#the-model-shutdown-macro">The Model Shutdown Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/startshutmacro.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/startshutmacro.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/startshutmacro.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/startshutmacro.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/customization/eventmacro.html">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/eventmacro.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/eventmacro.html#the-tape-event-macro-gener-only">The Tape Event Macro <span class="smalltext">(GENER only)</span></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/eventmacro.html#the-motion-event-macro">The Motion Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/eventmacro.html#the-rapid-event-macro">The Rapid Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/eventmacro.html#the-feed-event-macro">The Feed Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../quest/customization/eventmacro.html#the-tool-event-macro">The Tool Event Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/eventmacro.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/eventmacro.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/customization/eventmacro.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/userfuncmacro.html">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/userfuncmacro.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/userfuncmacro.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/userfuncmacro.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../quest/userfuncmacro.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Virtual Machine Macros</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">The Macro Language</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="invocation.html#outputting-the-event-output">Outputting the Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#virtual-machine-variables">Virtual Machine Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#model-macro-variables">Model Macro Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../variables/summaryvar.html#model-definition-variables">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/vmvar.html">Virtual Machine Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/macrovar.html">Model Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../variables/defvar.html">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/axesfunc.html">Axes Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/channelfunc.html">Channel Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/compensationfunc.html">Compensation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/componentfunc.html">Component Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/coordinatefunc.html">Coordinate System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/displayfunc.html">Display Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/workpiecefunc.html">Fixture, Part and Stock Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/probefunc.html">Probe and Collision Test Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/toolfunc.html">Tool and Holder Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../runtime/index.html">Using VM with GENER and CERUN</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/selectvm.html">Selecting a Virtual Machine Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/selectvm.html#selecting-a-model-from-the-launch-panel">Selecting a Model from the Launch Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/selectvm.html#selecting-a-model-from-the-command-prompt">Selecting a Model from the Command Prompt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/controllingvm.html">Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-simulation">Enable/Disable Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-collision-overtravel-detection-and-avoidance">Enable/Disable Collision/Overtravel Detection and Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-positioning-collision-avoidance">Enable/Disable Positioning Collision Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#enable-disable-flute-length-optimization">Enable/Disable Flute Length Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#camera-positioning-under-program-control">Camera Positioning under Program Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#load-predefined-setup">Load Predefined Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#adjust-model-axes-travel-limits">Adjust Model Axes Travel Limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#adjust-model-axes-travel-limits-for-smartpath">Adjust Model Axes Travel Limits for SmartPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#optimize-positioning-with-smartpath">Optimize Positioning with SmartPATH™</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#positioning-clearance">Positioning Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#positioning-velocity">Positioning Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#reference-home-positioning">Reference Home Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#optimize-air-cutting-with-smartcut">Optimize Air-Cutting with SmartCUT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#air-cut-clearance">Air-cut Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#air-cut-velocity">Air-cut Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../runtime/controllingvm.html#air-cut-and-smartpath">Air-cut and SmartPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/controllingvm.html#optimize-cutting-feed-with-smartfeed">Optimize Cutting Feed with SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/actsimwindow.html">Activating the Simulation Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/adjustlight.html">Adjusting Lighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/addpartfixstock.html">Adding Parts, Fixtures and Stock to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addpartfixstock.html#differences-between-part-stock-and-fixture-components">Differences between Part, Stock and Fixture Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addpartfixstock.html#creating-part-stock-and-fixture-components">Creating Part, Stock and Fixture Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/setfixcomp.html">Setting Fixture Compensation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/addtooldef.html">Adding Tooling Definitions to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#lathe-tool-definition">Lathe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#milling-tool-definition">Milling Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#probe-tool-definition">Probe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#additive-tool-definition">Additive Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/addtooldef.html#holder-definition">Holder Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/settoolcomp.html">Setting Tool Compensation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/settoolcomp.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/settoolcomp.html#diameter-compensation">Diameter Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/monvmres.html">Monitoring Virtual Machine’s Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#animation-control">Animation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#head-up-display">Head-Up Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#tool-path-display">Tool Path Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../runtime/monvmres.html#controller-time-line">Controller Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/monvmres.html#part-stock-comparison">Part / Stock Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../runtime/monvmres.html#measurement">Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Virtual Machine Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/inputcontrol.html">Input Controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#standard-keyboard-mapping">Standard Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#construction-keyboard-mapping">Construction Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#mouse-mapping">Mouse Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/inputcontrol.html#time-line-keyboard-mapping">Time Line Keyboard Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/toolbar.html">Toolbars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#view-cerun-gener-only">View <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-construct-quest-only">VM Construct <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-mode-cerun-gener-only">VM Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-grid">VM Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-view">VM View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-view-filter-cerun-gener-only">VM View Filter <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-measure">VM Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-animation-cerun-gener-only">VM Animation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-tool-path-cerun-gener-only">VM Tool Path <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-cross-section-cerun-gener-only">VM Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/toolbar.html#vm-annotation-cerun-gener-only">VM Annotation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/menubar/index.html">Menu Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/main.html">Simulation»Virtual Machine <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/controller.html">Simulation»Controller <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/mode.html">Simulation»Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T) <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#tools">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#lathe-tool-type">Lathe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#mill-tool-type">Mill Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#probe-tool-type">Probe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#additive-tool-type">Additive Tool Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#holders">Holders</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#profile-holder-type">Profile Holder Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#generic-holder-type">Generic Holder Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/constructentity.html">Simulation»Construct Entity <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitycube">Simulation»Construct Entity»Cube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitycylinder">Simulation»Construct Entity»Cylinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitycone">Simulation»Construct Entity»Cone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitysphere">Simulation»Construct Entity»Sphere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entityrevolved">Simulation»Construct Entity»Revolved</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entityextruded">Simulation»Construct Entity»Extruded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitymesh">Simulation»Construct Entity»Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructentity.html#simulationconstruct-entitypicture">Simulation»Construct Entity»Picture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/constructaxis.html">Simulation»Construct Axis <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axislinear-axis">Simulation»Construct Axis»Linear Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axisrotary-axis">Simulation»Construct Axis»Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axiscurve-axis">Simulation»Construct Axis»Curve Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axistool-axis">Simulation»Construct Axis»Tool Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axisstock-axis">Simulation»Construct Axis»Stock Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axishead-axis">Simulation»Construct Axis»Head Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/constructaxis.html#simulationconstruct-axisreference-axis">Simulation»Construct Axis»Reference Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/show.html">Simulation»Show</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-path-ctrl-t-cerun-gener-only">Simulation»Show»Tool Path (Ctrl T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-vector-cerun-gener-only">Simulation»Show»Tool Vector <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t-cerun-gener-only">Simulation»Show»Tool Path as Overlay (Ctrl Shift T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowfilters-cerun-gener-only">Simulation»Show»Filters <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowcross-section-cerun-gener-only">Simulation»Show»Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowworkpiece-coords-ctrl-w-cerun-gener-only">Simulation»Show»Workpiece Coords (Ctrl W) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshownext-display-ctrl-d-cerun-gener-only">Simulation»Show»Next Display (Ctrl D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/show.html#simulationshowprevious-display-ctrl-shift-d-cerun-gener-only">Simulation»Show»Previous Display (Ctrl Shift D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/wcs.html">Simulation»Use World CS <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/group.html">Simulation»Group Selection <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationhide-selection-ctrl-b-quest">Simulation»Hide Selection (Ctrl B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionhide-in-view-ctrl-b-gener-and-cerun">Simulation»Selection»Hide in View (Ctrl B) <span class="smalltext">(GENER and CERUN)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionhide-in-all-views-gener-and-cerun-only">Simulation»Selection»Hide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationshow-all-rehide-ctrl-alt-b-quest">Simulation»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b-gener-and-cerun-only">Simulation»Selection»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectionshow-all-rehide-in-all-views-gener-and-cerun-only">Simulation»Selection»Show All/Rehide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationinvert-hide-state-ctrl-shift-b-quest">Simulation»Invert Hide State (Ctrl Shift B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b-gener-and-cerun-only">Simulation»Selection»Invert Hide State (Ctrl Shift B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/menubar/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/setup.html">Simulation»Open Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/menubar/setup.html#simulationsave-setup-gener-and-cerun-only">Simulation»Save Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Virtual Machine V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../section_quest.html">QUEST: Model Development</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Virtual Machine Macros</a></li>
+          <li class="breadcrumb-item"><a href="index.html">The Macro Language</a></li>
+      <li class="breadcrumb-item active">Fundamentals of the Macro Language</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fundamentals-of-the-macro-language">
+<span id="macro-fundamentals"></span><h1>Fundamentals of the Macro Language<a class="headerlink" href="#fundamentals-of-the-macro-language" title="Link to this heading"></a></h1>
+<p>There are a number of different macro types available with the ICAM
+macro language:</p>
+<ul>
+<li><p><strong>Startup and Shutdown macros</strong> are executed at the start and end of
+“special” events. For example, control emulators, post-processors and
+models all have declaration, main startup and shutdown macros. The
+declaration macro is used to initialize global and object scope
+variables that are shared by all other macros. The startup macro
+performs actions that are required to be done once at the start of
+processing. The shutdown macro typically performs any required
+housekeeping duties at the end of processing. Other startup/shutdown
+macro types exist in the different products to allow customization at
+the start and ends of key events.
+Model startup and shutdown macros were described earlier in
+<a class="reference internal" href="../../quest/customization/startshutmacro.html#startup-shutdown-macros"><span class="std std-ref">“Startup/Shutdown Macros”</span></a>.</p>
+<p></p>
+</li>
+<li><p><strong>Event macros</strong> are similar to Startup/Shutdown macros, with the
+exception that a single macro is executed to handle customization
+necessary during the event. A special OUTPUT macro command in the
+event macro specifies where the built-in action is to occur.
+VM event macros were described earlier in
+<a class="reference internal" href="../../quest/customization/eventmacro.html#event-macros"><span class="std std-ref">“Event Macros”</span></a>.</p>
+<p></p>
+</li>
+<li><p><strong>User Function macros</strong> provide for the easy definition of custom
+macro functions, which can be called in the same way as built-in
+functions during macro processing. These were described earlier in
+<a class="reference internal" href="../../quest/userfuncmacro.html#user-function-macros"><span class="std std-ref">“User Function Macros”</span></a>.</p></li>
+</ul>
+<p>All of these macro types share the same common macro language syntax.
+Many of these macro types get information about the event that they
+are customizing via $P variables (described later).</p>
+<section id="basic-macro-syntax">
+<h2>Basic Macro Syntax<a class="headerlink" href="#basic-macro-syntax" title="Link to this heading"></a></h2>
+<p>Macro statements are APT-like in appearance, similar to the ASCII CL
+file output by many CAM systems. Statements begin on a new line, in
+the form “<em>variable</em>=<em>expression</em>”, “<em>command</em>/<em>parameter-list</em>”
+or simply “<em>command</em>”. The maximum length of a macro
+line is 512 characters. Macro statements can be continued from one
+line to the next by ending the previous line with a single dollar
+character <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
+<p>Macro comment lines begin with two dollar characters <code class="docutils literal notranslate"><span class="pre">$$</span></code>. Comment can be
+appended to the end of any statement by coding $$ followed by the comment text.
+A comment can also be specified following the $
+continuation mark, but at least one space must separate the $
+character from the comment text that follows.</p>
+<p>Blanks and the case of letters are ignored by the compiler unless
+they appear within a string constant (e.g., <code class="docutils literal notranslate"><span class="pre">'Hello</span> <span class="pre">World'</span></code>) or
+comment.</p>
+<p>Macros can be shown in one of two styles (set your preference from
+the “Macro Editor” tab of the <strong>Tools</strong><strong>»Preferences</strong> menu-bar selection):</p>
+<ul>
+<li><p>“<strong>Standard</strong>” is the traditional format. Macro commands and
+variables are shown in uppercase and logical operators are shown
+using the ANSI APT “.XX.” style. For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IF</span><span class="o">/</span><span class="n">I</span><span class="o">.</span><span class="n">GT</span><span class="mf">.3</span><span class="o">.</span><span class="n">AND</span><span class="o">.</span><span class="n">I</span><span class="o">.</span><span class="n">LE</span><span class="mf">.6</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>“<strong>C</strong>” is a more modern format. Macro commands and variables are
+shown in lowercase and logical operators are shown using the C style.
+For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">/</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="macro-data-types">
+<span id="id1"></span><h2>Macro Data Types<a class="headerlink" href="#macro-data-types" title="Link to this heading"></a></h2>
+<p>There are eight data types in the macro language. REAL, LOGICAL,
+STRING and SEQUENCE are general types. KEYWORD and RECORD are
+typically only used in post-processor macros. CODE and REG are
+typically only used in control emulator macros.</p>
+<ul id="macro-data-type-real">
+<li><p>An expression with <strong>REAL</strong> data type is a number. There is no
+distinction between whole numbers and those with a fractional part.
+Exponential (or scientific) notation is not supported. The following
+are examples of valid numeric constants:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">12</span>
+<span class="mf">.003</span>
+<span class="mf">23.45</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<ul id="macro-data-type-logical">
+<li><p>An expression with <strong>LOGICAL</strong> data type is either true or false,
+represented by the following compiler constants and macro system
+variables:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.TRUE.     $$ compiler constant
+.FALSE.    $$ compiler constant
+$TRUE      $$ macro system variable
+$FALSE     $$ macro system variable
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<ul id="macro-data-type-string">
+<li><p>An expression with <strong>STRING</strong> data type is a character string. String
+constants begin and end with single quotes ('). In order to include
+the single quote character within a string constant, two single
+quotes in a row must be specified. The string constant composed only
+of two single quotes represents a string composed of zero characters,
+called the “empty string”. The following are examples of valid string
+constants:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;THIS IS A STRING&#39;
+&#39; &#39;
+&#39;This string contains a single quote (&#39;&#39;).&#39;
+</pre></div>
+</div>
+</div></blockquote>
+<p>If a string is too long to fit on one line, it can be broken into
+pieces using the concatenation operator (//) and the continuation
+character ($). Operators are discussed further in a later section.
+For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%L01=&#39;This string could not fit on a single &#39;//$
+&#39;line so it was broken into pieces in order to &#39;//$
+&#39;fully specify it.&#39;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<ul id="macro-data-type-sequence">
+<li><p>An expression with <strong>SEQUENCE</strong> data type consists of an ordered set
+of data elements. The data elements within a sequence can be of any
+type and do not all have to be the same. The following is an example
+of a sequence being assigned to a variable:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%L01={ON,$TRUE,5}
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<ul id="macro-data-type-keyword">
+<li><p>An expression with <strong>KEYWORD</strong> data type is a post-processor Minor
+word.
+If a minor word is not defined for a specific code, then the keyword
+code constant can be specified in the form “#<em>code</em>”. The Minor
+word list (and associated codes) can be modified using the QUEST Words
+Manager. The following are examples of keyword constants:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ON        or     #71
+RANGE           #145
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<ul id="macro-data-type-record">
+<li><p>An expression with <strong>RECORD</strong> data type is a post-processor Major
+word or Reserved word representing a CLDATA record
+type.
+If a Major word or Reserved name is not
+defined for a specific record type, then the record type constant can
+be specified in the form “#<em>class:subclass</em>”. The Major word list
+(and associated codes) can be modified using the QUEST Words Manager.
+Examples of record constants follow:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>COOLNT    or     #2000:1030
+GOTO             #5000:5
+                #28000:*
+</pre></div>
+</div>
+</div></blockquote>
+<p>An asterisk (*) can be used in place of the class or subclass code
+to represent all classes or all subclasses. In the third example
+above, the record type constant represents all subclasses of record
+class 28000. The constant “#*:*” represents all record types.</p>
+</li>
+</ul>
+<ul id="macro-data-type-code">
+<li><p>An expression with <strong>CODE</strong> data type is a control emulator code
+identifier. Code identifiers are constants starting with the letters
+“CODE_”. For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CODE_RAPID</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<ul id="macro-data-type-reg">
+<li><p>An expression with <strong>REG</strong> data type is a control emulator register
+identifier. Register identifiers are constants starting with the
+letters “REG_”. For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REG_AXIS_X</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p id="macro-data-type-null">There is one other special type in the macro language: null.</p>
+<ul class="simple">
+<li><p>If an expression has a <strong>null</strong> value, it is as if it has no value or
+an unknown value. The read-only system variable $NULL represents a
+null value. Note that zero is not equal to $NULL.</p></li>
+</ul>
+<p>The macro language does not require strong data typing. This means
+that the same variable can hold information of different types during
+the course of processing. This provides a great deal of flexibility
+and simplifies coding, at the expense of readability and a greater
+chance of coding errors. For those who prefer a more formal
+arrangement, the DECLAR command can be used to strongly type
+variables. The macro processor can also enforce various levels of
+strong data typing, which are described in the <a class="reference internal" href="../../quest/customization/startshutmacro.html#declar-macro"><span class="std std-ref">“Declaration Macro”</span></a>.</p>
+</section>
+<section id="macro-variables">
+<h2>Macro Variables<a class="headerlink" href="#macro-variables" title="Link to this heading"></a></h2>
+<p>The following table describes the format of the various types of
+variables:</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable Type</p></th>
+<th class="head"><p>Variable Format</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>User</p></td>
+<td><p>A…Z <span class="math notranslate nohighlight">\(\icamrange{0.8}{0}\,\big[\)</span> A…Z0…9_ <span class="math notranslate nohighlight">\(\big]\)</span></p></td>
+<td><p><span class="mono">I,ABC2,M4_J</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Predefined Global</p></td>
+<td><p>%G00…%G99</p></td>
+<td><p><span class="mono">%G2,%G02,%G23</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Predefined Local</p></td>
+<td><p>%L00…%L99</p></td>
+<td><p><span class="mono">%L2,%L02,%L23</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>$P Argument</p></td>
+<td><p>$P01…$P99</p></td>
+<td><p><span class="mono">$P2,$P2,$P23</span></p></td>
+</tr>
+<tr class="row-even"><td><p>System</p></td>
+<td><p>$<em>name</em></p></td>
+<td><p><span class="mono">$XC,$PI,$T</span></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>User variable names must always start with an alphabetic character.
+The remaining characters can be any combination of letter, digit and
+underscore characters. The maximum size of a user variable name is 32
+characters. A % must be prefixed to the user variable name if it
+conflicts with a MAJOR, MINOR or reserved keyword name.</p>
+<p>User variables can be global, object or local, depending on how they
+are declared (see <a class="reference internal" href="#macro-variable-scope"><span class="std std-ref">“Variable Scope</span></a>). Briefly, global variables retain their
+value across all macros and can therefore be used to pass information
+from one macro to another, whereas local variables are used for
+calculations local to a specific macro. By default, user variables
+are local unless a DECLAR command is given declaring the variable
+with global or object scope.</p>
+<p>For predefined global variables, predefined local variables and $P
+arguments, the leading zero of the variable number is optional (in
+other words, %G02 is same as %G2, %L02 is same as %L2 and
+$P02 is same as $P2). Predefined global variables (%G00…%G99) must
+not be specified in a DECLAR statement since they are predefined as
+global. The same is true for predefined local variables (%L01…%L99).</p>
+<p>There is a predefined set of macro system variables. Some variables
+cannot be assigned values and most that can be assigned can take only
+numeric values. See <a class="reference internal" href="../../variables/index.html#macro-system-variables"><span class="std std-ref">“Macro System Variables”</span></a>
+for a list of available macro system variables.</p>
+</section>
+<section id="explicit-type-declaration-declar">
+<span id="macro-command-declar"></span><h2>Explicit Type Declaration (DECLAR)<a class="headerlink" href="#explicit-type-declaration-declar" title="Link to this heading"></a></h2>
+<p>The DECLAR command is used to define the scope of a variable (i.e.,
+global, object or local) and/ or the type of data that the variable
+can represent (i.e., a number, a string…). All variables defined
+using the DECLAR command are automatically initialized to a default
+value. The syntax is as follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{DECLAR /}
+\begin{bmatrix}\,\begin{array}{l} \textbf{GLOBAL} \\ \textbf{OBJECT} \\ \textbf{LOCAL} \end{array}\,\end{bmatrix}
+\begin{bmatrix} ,\! \begin{array}{l} \textbf{REAL} \\ \textbf{LOGICAL} \\ \textbf{STRING} \\ \textbf{SEQUENCE} \\ \textbf{KEYWORD} \\ \textbf{RECORD} \\ \textbf{CODE} \\ \textbf{REG} \end{array}\,\end{bmatrix}
+\big[,\textbf{CHANNEL}\,\big] \;
+\icamrange{1.2}{1} \Big(,\mathit{name}\big[\mathtt{=}\mathit{expression}\,\big]\Big)\)</span></p>
+</div></blockquote>
+<section id="variable-scope">
+<span id="macro-variable-scope"></span><h3>Variable Scope<a class="headerlink" href="#variable-scope" title="Link to this heading"></a></h3>
+<p>If LOCAL is specified (the default) then the variable is local to the
+macro in which it is declared. This means that the variable only
+exists from the moment it is declared and is forgotten once the macro
+in which it was declared has ended. Local variables are often used,
+for example, to hold intermediate results and loop counters.</p>
+<p>If OBJECT is specified then the variable can be shared by all macros
+of the current object type. This means for example that if the
+variable is declared in a model macro, then it can be used
+in any other model macro, but it cannot be “seen” in Virtual
+Machine model macros. Object variables should be declared once only
+in a declaration macro. They can be used to pass information between
+macros of the same object type. The macro processor differentiates
+between the following object types:</p>
+<ul class="simple">
+<li><p>Icam Post post-processor macros</p></li>
+<li><p>Control Emulator macros</p></li>
+<li><p>Virtual Machine model macros</p></li>
+<li><p>Interface Kit macros</p></li>
+</ul>
+<p>If GLOBAL is specified, then the variable being declared is global to
+all macros. Global variables should be declared once only in a
+declaration macro. They can be used to pass information between any
+macro type.</p>
+<p>When the macro editor “Strong Declaration” setting is either PARTIAL
+or FULL, then global and object variables can only be defined in the
+declaration macro. When set to OFF, there are no restrictions on
+where global and object variables are declared.</p>
+</section>
+<section id="variable-type">
+<h3>Variable Type<a class="headerlink" href="#variable-type" title="Link to this heading"></a></h3>
+<p>By default, a variable can hold any type of information and the type
+can change at any time without restriction. If a variable is declared
+with a specific type, then the macro processor will issue an error at
+run-time if data of the wrong type is loaded into the variable.</p>
+</section>
+<section id="variable-name">
+<h3>Variable Name<a class="headerlink" href="#variable-name" title="Link to this heading"></a></h3>
+<p>One or more variable names can be defined in a single DECLAR command.
+Names must start with a letter, can consist of letters, digits and
+the underscore character, to a maximum of 32 characters. A % must be
+prefixed to the user variable name if it conflicts with a MAJOR,
+MINOR or reserved keyword name.</p>
+</section>
+<section id="variable-array">
+<span id="macro-variable-array"></span><h3>Variable Array<a class="headerlink" href="#variable-array" title="Link to this heading"></a></h3>
+<p>Any variable, excluding those of type SEQUENCE, can be defined as an
+array, by specifying the number of array elements within parenthesis
+( ) immediately following the variable name. Arrays can be specified
+with up to 4 dimensions, separated by commas within the parentheses.
+Arrays are organized in memory in row-major order, which is the same
+order as used by the C programming language. There is no limit to the
+size of a dimension, but keep in mind that memory is allocated to
+hold the entire array, whether used or not.</p>
+<p>If CHANNEL is specified, then an additional dimension of size $CHMAX
+is added to the variables being defined. $CHMAX is a read-only
+variable that indicates the number of individual channels supported
+by the CNC, which will be 2 for a merging lathe and 1 for all other
+machine types. Due to the hidden additional dimension, channel
+variables can be specified with up to 3 dimensions only.</p>
+<p>To refer to a specific element in an array variable, specify the
+element number for each dimension separated by commas within
+parentheses. The element number (also called an array index) can be
+specified either as a numeric constant or by an expression that
+returns a numeric result. The fractional portion is discarded in any
+number or expression used as an array index.</p>
+<p>The final array index can be omitted with channel variables, in which
+case $CI is used for the omitted index value. $CI is a read-only
+variable that indicates the current channel being processed. It has a
+value of 2 when processing the side turret of a merging lathe,
+otherwise it has a value of 1. Channel variables simplify macro
+coding for merging lathes, by allowing the channel specific index to
+be omitted where it is convenient to do so.</p>
+</section>
+<section id="variable-assignment">
+<h3>Variable Assignment<a class="headerlink" href="#variable-assignment" title="Link to this heading"></a></h3>
+<p>All variables except arrays can be assigned a value when declared, by
+following the variable name with an = assignment operator followed by
+a value or expression. A channel variable without additional
+dimensions can also be assigned a value when declared.</p>
+</section>
+<section id="variable-default">
+<h3>Variable Default<a class="headerlink" href="#variable-default" title="Link to this heading"></a></h3>
+<p>Variables that are not explicitly defined with a value are assigned a
+default value when they are declared. These defaults are: zero for
+REAL; .FALSE. for LOGICAL; blank string for STRING;
+{ } for SEQUENCE, #0 for KEYWORD; #0:0 for RECORD; CODE_NONE for
+CODE, REG_NONE for REG and $NULL for an untyped variable. An undeclared variable is
+assigned a default value of zero if it is referenced before it is
+assigned a value.</p>
+<p>A run time “warn about uninitialized variables” setting can
+optionally be selected to diagnose whenever a macro variable is used
+in an expression before it has been assigned a
+value.</p>
+<p>Some examples follow:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$$ a local untyped variable named I
+DECLAR/LOCAL,I
+$$ 3 model only variables that can only hold real values
+DECLAR/OBJECT,REAL,X1=0,Y1=0,Z1=0
+$$ a global logical variable named FLAG holding an array of 10 values
+DECLAR/GLOBAL,LOGICAL,FLAG(10)
+DO/I=1,10
+  FLAG(I)=.FALSE.
+ENDOF/DO
+</pre></div>
+</div>
+</div></blockquote>
+<p>It is illegal to specify a predefined variable name in a DECLAR
+command. These include %L<em>nn</em> and %G<em>nn</em> variables as well as
+macro system variables (i.e., those with a leading “$” symbol). Also,
+once a variable is declared it in effect becomes “predefined” and
+must not be declared again. That is why it is recommended that all
+global and object declarations be placed in the declaration macro,
+where they are only declared once.</p>
+</section>
+</section>
+<section id="operators">
+<span id="macro-operators"></span><h2>Operators<a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
+<section id="numeric-string-and-sequence-operators">
+<h3>Numeric, String and Sequence Operators<a class="headerlink" href="#numeric-string-and-sequence-operators" title="Link to this heading"></a></h3>
+<p>The following table summarizes the numeric, string and sequence
+operators available in the macro language in decreasing order of
+precedence. You cannot use numeric operators on strings, nor can you
+use the string operator on numbers.</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="mono">**</span></p></td>
+<td><p>Exponentiation</p></td>
+<td><p><span class="mono">$P3**2</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">/</span></p></td>
+<td><p>Division</p></td>
+<td><p><span class="mono">$PI/2</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">*</span></p></td>
+<td><p>Multiplication</p></td>
+<td><p><span class="mono">3.5*$P1</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">+</span></p></td>
+<td><p>Addition</p></td>
+<td><p><span class="mono">%G00+%L00</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">-</span></p></td>
+<td><p>Subtraction</p></td>
+<td><p><span class="mono">%G00-3</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">:</span></p></td>
+<td><p>Sub-string/sequence</p></td>
+<td><p><span class="mono">$P2(1:3)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">//</span></p></td>
+<td><p>String concatenation</p></td>
+<td><p><span class="mono">'PART'//%L02</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">( )</span></p></td>
+<td><p>Group</p></td>
+<td><p><span class="mono">%L01/(%L02+4)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">{ }</span></p></td>
+<td><p>Sequence</p></td>
+<td><p><span class="mono">{$XC,$YC,$ZC}</span></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>A series of <strong>exponentiation</strong> operations are evaluated from right to
+the left. The following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">**</span><span class="n">b</span><span class="o">**</span><span class="n">c</span>
+<span class="n">a</span><span class="o">**</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>multiplication</strong> and <strong>division</strong> operators have the same level
+of precedence. A series of multiplications and/or divisions are
+evaluated from left to right. The following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">/</span><span class="n">c</span>
+<span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">c</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>addition</strong> and <strong>subtraction</strong> operators similarly have the
+same level of precedence and are evaluated from left to right. The
+following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">-</span><span class="n">c</span>
+<span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="n">c</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Putting the numeric operators together, the following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">**</span><span class="n">c</span><span class="o">/</span><span class="n">d</span>
+<span class="n">a</span><span class="o">+</span><span class="p">((</span><span class="n">b</span><span class="o">**</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>substring</strong>/<strong>subsequence</strong> operator is used as follows
+“<em>variable</em>(<em>start</em><strong>:</strong><em>end</em>)” to return a range of
+characters instead of a single character of the named string
+variable, or to return a range of elements instead of a single
+element in the named sequence variable. It is important to note that
+the sequence operator cannot be used to return a range of elements of
+an array; only those of a sequence. If the <em>start</em> position is
+omitted, the returned range starts at the first character or element.
+If the <em>end</em> position is omitted, the returned range ends at the last
+character or element.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>STR(6:)
+$P3(1:3)
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>concatenation</strong> operator can only be used with string constants
+and variables or functions that have a string type. The <strong>addition</strong>
+operator can also be used when concatenating strings. A series of
+concatenation operators are evaluated from left to right. The
+following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&#39;(MSG, &#39;//$PARTNO//&#39;)&#39;
+&#39;(MSG, &#39;+$PARTNO+&#39;)&#39;
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>grouping</strong> operator “( )” has a variety of purposes. It can
+used following an array, string or sequence variable name to identify
+the element(s) to return. It can be used following a function name to
+define the input parameters of the function. It can also be used in
+an expression to influence the order of evaluation since expressions
+in parentheses are evaluated first, starting from the deepest nest
+level and working outwards. Use of the grouping operator can be seen
+in nearly all of the examples above.</p>
+<p>The <strong>sequence</strong> operator “{ }” is used to construct a sequence of
+zero or more elements. The return value is a sequence expression
+consisting of all the elements contained within the braces.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{1,&#39;str&#39;,.TRUE.}
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="assignment-operators">
+<span id="macro-operators-assignment"></span><h3>Assignment Operators<a class="headerlink" href="#assignment-operators" title="Link to this heading"></a></h3>
+<p>The following table lists the assignment operators available in the
+macro language.</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="mono">=</span></p></td>
+<td><p>Assignment</p></td>
+<td><p><span class="mono">%L01=$PI</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">/=</span></p></td>
+<td><p>Division assignment</p></td>
+<td><p><span class="mono">%L01/=2</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">*=</span></p></td>
+<td><p>Multiplication assignment</p></td>
+<td><p><span class="mono">%L01*=2</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">+=</span></p></td>
+<td><p>Addition assignment</p></td>
+<td><p><span class="mono">I+=1</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">-=</span></p></td>
+<td><p>Subtraction assignment</p></td>
+<td><p><span class="mono">I-=1</span></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The <strong>assignment</strong> operator copies the value or expression appearing
+on the right of the = to the variable on the left. If the variable
+being assigned a value (i.e., the L-value) has a declared data type,
+then the value or expression to the right of the = (i.e., the
+R-value) must have the same data type. If the L-value is not strongly
+typed, then it takes on whatever type was last assigned. Examples of
+assignments follow:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%L01=&#39;abc&#39;
+CLP={$XC,$YC,$ZC}
+I=0
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>division assignment</strong> operator divides the L-value by the
+R-value (which must be of type REAL) storing the result back into the
+L-value. The following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">L01</span><span class="o">/=</span><span class="mi">2</span>
+<span class="o">%</span><span class="n">L01</span><span class="o">=%</span><span class="n">L01</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>multiplication assignment</strong> operator multiples the L-value by
+the R-value (which must be of type REAL) storing the result back into
+the L-value. The following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%L01*=$PI
+%L01=%L01*PI
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>addition assignment</strong> operator can accept an R-value of type
+REAL, STRING or SEQUENCE. If REAL, the R-value is added to the
+L-value, storing the result back into the L-value. If STRING or
+SEQUENCE, the R-value is appended to the L-value. The following are
+equivalent:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$$ Real                $$ String                $$ Sequence
+%L01+=1                %L01+=&#39;abc&#39;              %L01+={ON}
+%L01=%L01+1            %L01=%L01//&#39;abc&#39;         %L01={%L01,ON}
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>subtraction assignment</strong> operator subtracts the R-value (which
+must be of type REAL) from the L-value storing the result back into
+the L-value. The following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">L01</span><span class="o">-=</span><span class="mi">1</span>
+<span class="o">%</span><span class="n">L01</span><span class="o">=%</span><span class="n">L01</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="logical-operators">
+<span id="macro-operators-logical"></span><h3>Logical Operators<a class="headerlink" href="#logical-operators" title="Link to this heading"></a></h3>
+<p>This next table lists the logical operators available in the macro
+language (two styles are available: APT standard and C) in decreasing order of
+precedence. A logical operator compares two variables or constants,
+returning a value of “.TRUE.” or “.FALSE.”. Both items being compared
+must be of the same type.</p>
+<blockquote>
+<div><table class="wrap-last docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>APT</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="mono">.EQ.</span></p></td>
+<td><p><span class="mono">==</span></p></td>
+<td><p>Equality</p></td>
+<td><p><span class="mono">%L23.EQ.$NULL</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">.NE.</span></p></td>
+<td><p><span class="mono">!=</span></p></td>
+<td><p>Non equality</p></td>
+<td><p><span class="mono">$P0.NE.1</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">.GT.</span></p></td>
+<td><p><span class="mono">&gt;</span></p></td>
+<td><p>Greater than</p></td>
+<td><p><span class="mono">$FLEN(%G00).GT.10</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">.LT.</span></p></td>
+<td><p><span class="mono">&lt;</span></p></td>
+<td><p>Less than</p></td>
+<td><p><span class="mono">1.LT.$XC</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">.GE.</span></p></td>
+<td><p><span class="mono">&gt;=</span></p></td>
+<td><p>Greater than or equal</p></td>
+<td><p><span class="mono">$YM.GE.4</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">.LE.</span></p></td>
+<td><p><span class="mono">&lt;=</span></p></td>
+<td><p>Less than or equal</p></td>
+<td><p><span class="mono">$P9.LE.$P8</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">.NOT.</span></p></td>
+<td><p><span class="mono">!</span></p></td>
+<td><p>Logical not</p></td>
+<td><p><span class="mono">.NOT.$FEOF()</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">.AND.</span></p></td>
+<td><p><span class="mono">&amp;&amp;</span></p></td>
+<td><p>Logical and</p></td>
+<td><p><span class="mono">$T.GE.1.AND.$T.LE.5</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="mono">.OR.</span></p></td>
+<td><p><span class="mono">||</span></p></td>
+<td><p>Logical or</p></td>
+<td><p><span class="mono">$P1.EQ.1.OR.$XM.GT.$YM</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="mono">.XOR.</span></p></td>
+<td><p><span class="mono">^^</span></p></td>
+<td><p>Logical exclusive or</p></td>
+<td><p><span class="mono">$P1.EQ.1.XOR.$P2.EQ.1</span></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The equality and non-equality operators are used to compare two
+expressions or variables of the same type, returning a logical
+result. These operators are evaluated first, followed by the negation
+operator, then the logical “and” followed lastly by the logical “or”.
+The following are equivalent:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>A.LT.B.OR..NOT.C.GT.D.AND.E.EQ.F
+(A.LT.B).OR.((.NOT.(C.GT.D)).AND.(E.EQ.F))
+
+a&lt;b|\|!c&gt;d&amp;&amp;e==f
+(a&lt;b)||((!(c&gt;d))&amp;&amp;(e==f))
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="detecting-data-type-mismatching">
+<h2>Detecting Data Type Mismatching<a class="headerlink" href="#detecting-data-type-mismatching" title="Link to this heading"></a></h2>
+<p>The compiler tries to ensure data type agreement between the argument
+expressions and the operators, functions or macro commands that
+operate on them. Each line is checked independently of any other
+line. Since variables can have any data type, the amount of type
+checking done is limited. For example, the following line of code
+would cause a macro compiler error in QUEST:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%L02=&#39;abc&#39;+4
+</pre></div>
+</div>
+</div></blockquote>
+<p>The following two lines would not cause a compiler error in QUEST,
+even though they are equivalent to the line above. These lines
+however would cause a processing error at run-time when GENER and CERUN
+executes the macro.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%L03=&#39;abc&#39;
+%L02=%L03+4
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="The Macro Language" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="functioncall.html" class="btn btn-neutral float-right" title="Function Calls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
