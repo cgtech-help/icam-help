@@ -1,0 +1,22 @@
+.. _command_am:
+
+The AM Command :kbd:`[MLC]`
+===========================
+
+The AM command is used to control an additive or hybrid manufacturing
+device on the machine, which is available as a **separately licensed
+option** of GENER. This command is valid for milling, turning and
+contouring machine types but may not be available on a specific
+machine.
+
+   :math:`\textbf{AM /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+   :math:`\textbf{AM / } \big[ \textbf{ POWER}, \big] \, value`
+
+The AM/ON command enables material deposition at the current or
+machine default power setting. Material deposition then remains
+active until disabled by an AM/OFF command.
+
+For those machines that support it, the deposition power can modally
+be controlled by specifying the required power value, optionally
+preceded by a POWER keyword.
