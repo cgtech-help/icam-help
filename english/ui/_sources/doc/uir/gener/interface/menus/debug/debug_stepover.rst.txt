@@ -1,0 +1,13 @@
+Debug»Step Over (F10)
+---------------------
+
+Step to the next CL record/macro line on the current stack level.
+
+Used during debugging to process the next record of CL or macro, pausing
+after the record has been processed, even if the record matches other
+macros. Compare this with `Step Into <debug_stepinto.html>`__.
+
+|image1|
+
+.. |image1| image:: ./media/c2fe457050221f621be156289b902ef1680e2ae8.gif
+
