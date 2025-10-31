@@ -1,0 +1,105 @@
+.. _sim_measure:
+
+Simulation»Measure
+------------------
+
+.. image:: ../../../media/sim_measure_menu.png
+   :height: 1.740in
+   :align: right
+
+.. |measure_button| image:: ../../../media/vm_mode_measure_button.png
+   :height: 0.219in
+
+The Simulation»Measure settings only take effect while in measurement
+mode, as set using the |measure_button| measurement mode button on the VM Mode
+toolbar or Simulation»Mode»Measurement menu bar. Once in measurement
+mode, clicking with the left-mouse button causes measurements to be
+taken between the selected objects. Press the ESC key to undo
+selections. Press and hold the Ctrl key to manipulate the camera with
+the mouse while taking measurements.
+
+.. image:: ../../../media/vm_measure.png
+   :height: 0.542in
+   :align: left
+   :class: image-lowered
+
+Within VM, objects are constructed of triangles. The
+Simulation»Measure menu-bar functions and matching VM Measure toolbar
+provide the following measurement options.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_distang_button.png
+      :height: 0.219in
+
+   The **Distances and angles** selection measures the distance and
+   angle between subsequently selected entities, as well as the *xyz*
+   offset between entities.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_radcen_button.png
+      :height: 0.219in
+
+   The **Radius and center** selection measures the radius and *xyz*
+   center of a circle constructed through 3 subsequently selected points
+   and/or edge midpoints.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_vertex_button.png
+      :height: 0.219in
+
+   The **Vertex** selection enables or disables the picking of points on
+   the boundary of the triangles that make up the object.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_edge_button.png
+      :height: 0.219in
+
+   The **Edge** selection enables or disables the picking of edges of
+   the triangles.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_face_button.png
+      :height: 0.219in
+
+   The **Face** selection enables or disables the picking of faces of
+   the triangles.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_fan_button.png
+      :height: 0.219in
+
+   The **Fan** selection switches between chained (one to the next) and
+   fanned (one to many) measurements. In fanned mode, the first
+   selection is the primary object, which is then measured against each
+   subsequent selection.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_measure_overlay_button.png
+      :height: 0.219in
+
+   The **Overlay** selection, when enabled, ensures that the objects
+   selected for measurement will always be visible, no matter how the
+   camera is oriented.
+
+.. image:: ../../../media/sim_measure.png
+   :width: 3.700in
+   :align: right
+
+If none of the Vertex, Edge or Face selections is active, then all
+objects can be selected.
+
+The *xyz* information in the above measurements is with respect to
+the frame selected in the VM Grid toolbar. Measurement information
+appears in the form of a small HUD (heads-up display) in the
+simulation window.
+
+When measuring in-process stock, the Simulation»Cross Section
+function can be used to section the stock for better visibility or to
+obtain measurements in the cross section plane.
