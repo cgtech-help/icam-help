@@ -1,0 +1,100 @@
+.. _sim_selection:
+
+Simulation»Selection
+--------------------
+
+.. image:: ../../../media/sim_selection_menu.png
+   :height: 1.135in
+   :align: right
+
+The Simulation»Selection menu selections provide the capability to hide
+objects (i.e., make them invisible), or make hidden objects visible
+again. Selecting an object in the Simulation window with the right-mouse
+button will pop up context sensitive menu that can be used to hide the
+object in the current or all views. Note that Hidden objects continue to
+be tested for collisions.
+
+The QUEST model developer has a single simulation window, so there is no
+Selection submenu or “in All Views” functions.
+
+.. _sim_sel_hide:
+
+.. rst-class:: multi-heading
+
+Simulation»Hide Selection (Ctrl B) :small:`(QUEST)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Simulation»Selection»Hide in View (Ctrl B) :small:`(GENER and CERUN)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../../../media/sim_hide.png
+   :width: 3.700in
+   :align: right
+
+The Hide Selection (QUEST) and Hide in View (GENER and
+CERUN) function makes the currently selected object or objects invisible
+in the *currently active* simulation window. Compare this to the
+Hide in All Views function below. Once an object is hidden, it is no
+longer shown in the simulation window.
+
+To select an object, press and hold the Ctrl key (if you are in Camera
+mode), move the mouse pointer to the object to be selected, then press
+the left-mouse button. The selected object will become transparent. You
+can deselect an already selected object, or add more objects to the list
+of selected ones, by holding the Shift key down when making a selection.
+Press Ctrl B to make the selected objects invisible.
+
+In the image shown above, the machine enclosure has been hidden (it is
+longer visible), and the tables and fixtures have been selected (they
+are shown transparent). Hiding and selecting are two methods you can use
+to get an unobstructed view of the manufacturing process.
+
+Simulation»Selection»Hide in All Views :small:`(GENER and CERUN only)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Hide in All Views function makes the currently selected object or
+objects invisible in *all* of the simulation windows. Compare this to
+the Hide in View function above.
+
+.. _sim_sel_show:
+
+.. rst-class:: multi-heading
+
+Simulation»Show All/Rehide (Ctrl Alt B) :small:`(QUEST)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Simulation»Selection»Show All/Rehide (Ctrl Alt B) :small:`(GENER and CERUN only)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Show All/Rehide function makes visible all hidden objects in the
+*currently active* simulation window. Compare this to the
+Show All/Rehide in All Views function below. Select this function a
+second time to again hide the objects that were just made visible.
+
+Simulation»Selection»Show All/Rehide in All Views :small:`(GENER and CERUN only)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Show All/Rehide in All Views function makes visible all hidden
+objects in *all* of the simulation windows. Compare this to the
+Show All/Rehide function above. Select this function a second time to
+again hide the objects that were just made visible.
+
+.. _sim_sel_invert_hide:
+
+.. rst-class:: multi-heading
+
+Simulation»Invert Hide State (Ctrl Shift B) :small:`(QUEST)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Simulation»Selection»Invert Hide State (Ctrl Shift B) :small:`(GENER and CERUN only)`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Invert Hide State function reverses the “hidden” state setting for
+all objects in the *currently active* simulation window. Objects that
+are hidden will now be shown; those are shown will now be hidden. You
+can use this feature to unhide one or more selected objects, as follows:
+
+1. Type Ctrl Shift B to show just the hidden (and any selected) objects
+2. Select the objects you no longer want hidden
+3. Type Ctrl B to remove them from view
+4. Type Ctrl Shift B to return back to the original display
