@@ -1,0 +1,126 @@
+Contouring Variables
+====================
+
+.. _var_assist:
+.. index:: Variables; $ASSIST
+
++------------------+-------------------------------------------------+
+| **$ASSIST**      | ASSIST status. (OFF,AIR,OXYGEN,ARGON or NITRGN) |
+|                  |                                                 |
+|                  | Type: Keyword, Read/Write                       |
++------------------+-------------------------------------------------+
+
+   This variable contains the current ASSIST status. It has a value of
+   OFF, AIR, OXYGEN, ARGON or NITRGN. Note that the value of this
+   variable is a minor word, not a numeric minor code value.
+
+.. _var_conhed:
+.. index:: Variables; $CONHED
+
++------------------+------------------------------------------+
+| **$CONHED**      | Contouring head status. (UP or DOWN)     |
+|                  |                                          |
+|                  | Type: Keyword, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current HEAD status. It has a value of UP
+   or DOWN. Note that the value of this variable is a minor word, not a
+   numeric minor code value.
+
+.. _var_lasmod:
+.. index:: Variables; $LASMOD
+
++------------------+----------------------------------------------+
+| **$LASMOD**      | Laser mode. (–1:?, 0:constant wave, 1:pulse) |
+|                  |                                              |
+|                  | Type: Numeric, Read/Write                    |
++------------------+----------------------------------------------+
+
+   This variable contains the current laser mode.
+
+.. _var_pchmod:
+.. index:: Variables; $PCHMOD
+
++------------------+-------------------------------------------+
+| **$PCHMOD**      | Hybrid punch mode (0:punch, 1:contouring) |
+|                  |                                           |
+|                  | Type: Numeric, Read/Write                 |
++------------------+-------------------------------------------+
+
+   This variable is valid for hybrid punch/contouring machines. It
+   indicates the machining mode currently in effect.
+
+.. _var_pfreq:
+.. index:: Variables; $PFREQ
+
++------------------+------------------------------------------+
+| **$PFREQ**       | Laser pulse frequency                    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current laser pulse frequency. If the
+   frequency has not been set then the value will be $NULL.
+
+.. _var_power:
+.. index:: Variables; $POWER
+
++------------------+------------------------------------------+
+| **$POWER**       | Machine power. (ON or OFF)               |
+|                  |                                          |
+|                  | Type: Keyword, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current POWER status. It has a value of ON
+   or OFF. Note that the value of this variable is a minor word, not a
+   numeric minor code value.
+
+.. _var_pwidth:
+.. index:: Variables; $PWIDTH
+
++------------------+------------------------------------------+
+| **$PWIDTH**      | Laser pulse width                        |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current laser pulse width. If the width
+   has not been set then the value will be $NULL.
+
+.. _var_shuttr:
+.. index:: Variables; $SHUTTR
+
++------------------+------------------------------------------+
+| **$SHUTTR**      | Laser shutter status. (ON or OFF)        |
+|                  |                                          |
+|                  | Type: Keyword, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current SHUTTR status. It has a value of
+   ON or OFF. Note that the value of this variable is a minor word, not
+   a numeric minor code value.
+
+.. _var_torch:
+.. index:: Variables; $TORCH
+
++------------------+------------------------------------------+
+| **$TORCH**       | Cutting mode (ON or OFF)                 |
+|                  |                                          |
+|                  | Type: Keyword, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current TORCH status. It has a value of ON
+   or OFF. Note that the value of this variable is a minor word, not a
+   numeric minor code value.
+
+.. _var_watts:
+.. index:: Variables; $WATTS
+
++------------------+------------------------------------------+
+| **$WATTS**       | Laser power (watts)                      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current laser power setting measured in
+   watts. If the power has not been set then the value will be $NULL.
