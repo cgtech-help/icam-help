@@ -1,0 +1,77 @@
+GENER Settings
+==============
+
+The GENER tab is used to select the input aptsource (CL file) to be
+post-processed, along with the post-processor, as well as various
+post-processing options.
+
+CL File
+~~~~~~~
+
+This input field is used to enter the CL file name, by either typing it
+in (you must include the full directory path), or by using the square
+browse button […] located immediately to the right of the input field,
+or by dragging and dropping a CL file onto the launch panel window. The
+last four file selections are remembered. They can be re-accessed by
+selecting them from the dropdown list. The browse CL file panel
+remembers the last directory browsed for a CL file, unless the *icam_cl*
+environment variable is set.
+
+Database
+~~~~~~~~
+
+This input field is used to select the database that contains the
+post-processor to use. You can browse for a database using the square
+browse button […] located immediately to the right of the text window,
+or you can drag and drop a database (dbf, dmp or dp) file onto the
+launch panel window. The last four database selections are remembered.
+They can be re-accessed by selecting them from the drop-down list. The
+browse database panel remembers the last directory browsed for a
+database, unless the *icam_dbf* environment variable is set.
+
+Post processor and Revision (Rev)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use these input fields to choose a post-processor from the selected
+database. The post-processor drop-down presents a list of generated and
+dedicated post-processors (i.e., it shows only those post-processors
+from the database that can be used by GENER). The revision field lists
+the latest revision of the selected post-processor and the drop-down
+lists other generated revisions, if any. Information about the selected
+post-processor will appear in the **Description** box.
+
+One of the available post-processor choices is *“Use MACHIN statement
+from CL file”*, which when selected will use the MACHIN command in the
+chosen CL file to automatically select the post-processor. You cannot
+choose a specific revision of a post when it is selected via the CL file
+MACHIN command.
+
+GENER can run a post-processor created with QUEST 2000/13.0 or later.
+GENER can not run a post-processor created with a version of QUEST that
+is higher than the GENER version.
+
+Program ID
+~~~~~~~~~~
+
+Use this input field to specify a program ID (sometimes referred to as a
+PID). Some post-processors output the PID at the start of the program.
+For those post-processors that require a PID, you can sometimes avoid
+the PID prompt (or an unwanted default value) by typing a PID string in
+this field. Anything you enter in this field will be stored in the $PID
+macro variable.
+
+User Parameters
+~~~~~~~~~~~~~~~
+
+Use this field to pass user defined parameters to the post-processor.
+Some post-processors alter their behavior based on user-defined
+parameter data. Anything typed in this input field will be passed to the
+post-processor as a user-defined parameter in the $UPARAM macro
+variable.
+
+Options and CAM buttons
+~~~~~~~~~~~~~~~~~~~~~~~
+
+-  `Options button: specifies output options <../launch/generoptions.html>`__
+-  `CAM button: specifies input CL file options <../launch/cam.html>`__
+
