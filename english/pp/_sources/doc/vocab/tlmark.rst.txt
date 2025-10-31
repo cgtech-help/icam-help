@@ -1,0 +1,49 @@
+.. _command_tmark:
+
+The TMARK Command :kbd:`[MLEPC]`
+================================
+
+The TMARK command is used to place a tape mark on the control tape to
+be used as a reference point when rewinding the tape. This command is
+valid for all machine types but may not be available on specific
+machines.
+
+There are two different methods for specifying a TMARK on the tape.
+The first method involves outputting a rewind stop code along with an
+optional end of block symbol and any leader or trailer required. A
+TMARK message can be written to the verification listing indicating
+that a TMARK block has been output. A similar message can be output
+to the tape to inform the operator of the same thing.
+
+The second method is to use a register identical in format to the
+sequence number register except for the register letter. The
+post-processor will simply replace the sequence number letter with
+the TMARK letter when outputting the command block.
+
+The syntax for the TMARK command follows:
+
+   :math:`\textbf{TMARK /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+   :math:`\textbf{TMARK /} \begin{pmatrix}\begin{array}{l} \textbf{AUTO} \\ \textbf{NEXT} \end{array}\end{pmatrix}
+   \big[,\mathit{value}\,\big]`
+
+   :math:`\textbf{TMARK / } \mathit{value} \, \big[,\mathit{count}\,\big]`
+
+The first format, ON/OFF, can be used to start and stop the
+outputting of tape marks on subsequent blocks of tape. Coding
+TMARK/ON will resume the last mode specified for TMARK. Coding
+TMARK/OFF will disable further output of tape marks until another
+TMARK command is coded.
+
+The second format is used to output a tape mark immediately, or
+whenever possible operator intervention is required. The TMARK/NEXT
+command will cause a tape mark block to be output on or prior to the
+next command block. The TMARK/AUTO command will cause a tape mark to
+be output whenever a tool change, STOP or OPSTOP occurs. If a value
+of n is defined, a tape mark will be outputted each n block.
+
+The TMARK/*value* format will cause the post-processor to output a
+tape mark block with the specified value. If the machine uses the
+rewind stop method for TMARK, then the value will be ignored. An
+optional *count* value can be specified to force a tape mark every
+*count* blocks.
