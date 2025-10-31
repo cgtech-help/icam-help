@@ -1,0 +1,79 @@
+.. _sim_annotation:
+
+Simulation»Annotation
+---------------------
+
+.. image:: ../../../media/sim_annotation_menu.png
+   :height: 1.438in
+   :align: right
+
+.. image:: ../../../media/vm_annotation.png
+   :height: 0.542in
+   :align: left
+   :class: image-lowered
+
+The Simulation»Annotation menu selections and corresponding
+VM Annotation toolbar buttons provide the capability to first
+(optionally) mark-up the simulation window and then take snapshots
+and/or videos of the simulation.
+
+The following functions are available.
+
+.. |color_button| image:: ../../../media/vm_annotation_color_button.png
+   :height: 0.219in
+   :class: icon-multi-bullet
+
+.. |erase_button| image:: ../../../media/vm_annotation_erase_button.png
+   :height: 0.219in
+   :class: icon-multi-bullet
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_annotation_annotate_button.png
+      :height: 0.219in
+
+   |color_button| |erase_button|
+   The **Annotate, Color** and **Clear** selections provide a
+   rudimentary method of superimposing freehand drawings over the
+   simulation window. When in annotation mode, the cursor will appear as
+   a small pencil that will draw in the simulation window when the
+   left-mouse button is held down. Drawing is equivalent to marking a
+   glass pane that appears on top of the simulation window.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_annotation_snapshot_button.png
+      :height: 0.219in
+
+   The **Snapshot** selection takes a PNG image of the simulation
+   window, including annotation data if present. Picture files are
+   stored in the folder identified by the
+   *vm_picture_dir*
+   configuration (i.e., DEF file) variable. If this variable is not defined or is
+   blank, then pictures are stored in the user’s “Pictures\\ICAM\\260”
+   folder. Picture files are named “pic\ *nnn*.png”, where *nnn* is a
+   number automatically chosen to avoid overwriting an existing picture.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_annotation_record_button.png
+      :height: 0.219in
+
+   The **Record** selection enables or disables the recording of the
+   contents of the simulation window, including annotation data if
+   present. Video files are stored in the folder identified by the
+   *vm_video_dir*
+   configuration (i.e., DEF file) variable.
+   If this variable is not defined or is blank, then videos are stored in the
+   user’s “Videos\\ICAM\\260” folder. Videos are named
+   “video\ *nnn*.avi” where *nnn* is a number automatically chosen to
+   avoid overwriting an existing video. Recording options can be set by
+   selecting the Video button in the Simulation»Options dialog Misc tab.
+
+.. container:: icon-bullet
+
+   .. image:: ../../../media/vm_annotation_open_button.png
+      :height: 0.219in
+
+   The **Open** selection provides quick and easy access to the user’s
+   pictures and videos folders.
