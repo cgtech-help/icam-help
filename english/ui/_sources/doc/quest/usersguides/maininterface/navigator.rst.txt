@@ -1,0 +1,83 @@
+Navigator
+~~~~~~~~~
+
+The navigator is used to quickly navigate through the databases and post
+processors.
+
+   | :ref:`Database Navigator <databasenavigator>`
+   | :ref:`Post Processor Navigator <postprocessornavigator>`
+   | :ref:`Control Emulator Navigator <controlemulatornavigator>`
+
+.. _databasenavigator:
+
+Database Navigator
+''''''''''''''''''
+
+At the bottom of the navigator, click on the *Database* tab to see a
+list of all open databases.
+
+|image1|
+
+Double click on a database name to obtain a `Database
+View <workspaces/databaseview.html>`__ listing details about the post
+processors in the database. Click on the +/- box to expand or contract
+the list of post processors in the database. The right mouse context
+menu will perform the listed actions on the database as a whole.
+
+Double click on a post processor name to load the latest revision of the
+post processor into memory. Doing so switches the navigator
+automatically to the Post Processor navigation view. Click on the +/-
+box to expand or contract the list of individual revisions of the post
+processor. The right mouse context window on an unexpanded post entry
+generally perform the listed action on all revisions as a group, where
+it makes sense. A right mouse context window on an expanded post entry
+performs the listed action on that specific revision of the post.
+
+The navigator can be split into 2 views to allow you to see different
+items at the same time.
+
+.. _postprocessornavigator:
+
+Post Processor Navigator
+''''''''''''''''''''''''
+
+At the bottom of the navigator, click on a *Post* tab to bring a post
+processor into the foreground. If you leave your mouse over a post tab,
+the post name will be displayed in a tooltip.
+
+|image2|
+
+Double clicking on the post name (identified by a tape reel symbol) or a
+section name (identified by the book symbol) will expand or collapse the
+entries contained under that post or section. You can click on the +/-
+box to get the same effect. Use the right mouse menu *Expand/Collapse
+Branch* context entry on the post name to quickly expand/collapse every
+section of the post processor.
+
+Question section that have yet to be answered or generated will appear
+as blank pages in the list. Once answered, a blue page implies that the
+feature has been answered and is available. A grayed out page indicates
+a feature that is disabled for this particular post processor. A grayed
+out page with a lock indicates a section that you are not licensed to
+enter. Double click on a section name to open it for modification. The
+small arrows show the last section entered and the next suggested
+section.
+
+The Post-processor Customization section is a little different from the
+question sections, but follows the same principles. The icon symbols are
+grayed for inactive macros and features, and dark otherwise.
+
+.. _controlemulatornavigator:
+
+Control Emulator Navigator
+''''''''''''''''''''''''''
+
+Working the same way as the post-processor navigator, the CE also has
+its own version of the navigator.
+
+|image3|
+
+.. |image1| image:: ./media/7460085af0e881a22f3055d198e55156f438b36c.gif
+.. |image2| image:: ./media/5f83d6b3b6d0e91f9ff9cd150ebaaa73cebed765.gif
+.. |image3| image:: ./media/9b9e93433c6e93b8aa632917a81466452a81837c.gif
+
