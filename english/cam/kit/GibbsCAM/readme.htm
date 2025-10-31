@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>GibbsCAM Interface Kit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../Creo/readme.htm">Creo</a>
+                <a href="../FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../Fusion360/readme.htm">Fusion 360</a>
+                <a href="../Mastercam/readme.htm">Mastercam</a>
+                <a href="../NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../Cadds5/readme.htm">Cadds5</a>
+                <a href="../Cadra/readme.htm">Cadra</a>
+                <a href="../Camand/readme.htm">Camand</a>
+                <a href="../CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../Cimatron/readme.htm">Cimatron</a>
+                <a href="../Em_Machine/readme.htm">Em Machine</a>
+                <a href="../Generic/readme.htm">Generic</a>
+                <a href="">GibbsCAM</a>
+                <a href="../hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../ICAM/readme.htm">ICAM</a>
+                <a href="../IDEAS/readme.htm">IDEAS</a>
+                <a href="../Intercim/readme.htm">Intercim</a>
+                <a href="../Intergraph/readme.htm">Intergraph</a>
+                <a href="../NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../NICAM/readme.htm">NICAM</a>
+                <a href="../NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../index.htm"><i class="fa fa-home">Kit</i></a>
+            <h1><img align="right" src="../../images/camlogo_gibbs.png"/>GibbsCAM</h1>
+            <hr />
+            <br />
+            <img src="../../images/camscrsh_GibbsCAM.jpg" width="227" height="136">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: GibbsCAM</li>
+                <li>Company: CAMBRIO </li>
+                <li>
+                    Website:<a href="https://www.gibbscam.com/en">https://www.gibbscam.com/en</a>
+                </li>
+            </ul>
+            <hr />
+            <h2>GibbsCAM TO CAM-POST INTERFACE DOCUMENTATION</h2>
+            <h3>Overview</h3>
+            <p>
+                The Gibbs Interface Kit is designed to accommodate differences in syntax between GibbsCAM's and ICAM's post processing languages.
+            </p>
+			<h3>CAM-POST to GibbsCAM Integration</h3>
+			<p>
+                The integration setup utility can be found in the <b>Tools</b> section of the Portal<br />
+            </p>
+			<img src="images/portal_tools.jpg" ><br />
+            <h3>Choose GibbsCAM system(s) to setup</h3>
+            <img src="Images/setup_GibbsCAM1.jpg"></br>
+            <p>
+                Select CAM system by checking the check-box or double-mouse-click on the already checked CAM system. Check the latest CAM-POST revision if multiple instances exists.
+            </p>
+            <h4>GibbsCAM Setup Page</h4>
+            <b>Note:</b> You may need admin priviledges.<br>
+            <img src="images/setup_GibssCAM2.jpg"><br />
+            <p>
+                Several integration options are available.
+                <ul>
+                    <!--Common-->
+                    <li><b>GENER UI</b> &amp; <b>CERUN UI</b> affect how the sofware is launched. 'Full' will launch the complete runtime interface.</li>
+                    <li><b>Setup for current user.</b> is used to setup the installation folder for this user only. <u>(Recommended)</u></li>
+                    <li><b>Setup for any user of this machine.</b> is used to setup the installation folder for all users. Admin rights are required.</li>
+                    <li><b>Update ICAMPOST.dll</b> is used to update the ICAMPOST DLL when integrating with GibbsCAM. Use the path PlungIns to specify the path to the GibbsCAM's Plugin folder in shared folder if it is not selected automatically.</li>
+                    <li><b>Interface kit</b> should be selected based on your CAM system, except if you have a custom kit. <b>GibbsCAM is recommended.</b></li>
+                    <li><b>Add default database to the list</b> will add the default database when launching ICAM within the CAM software. The default database depends on the answer for the setup. If unchecked, you can select your own
+                        database location.</li>
+                    <!--CAM Specific-->
+                    <li><b>Install Post</b>The checkbox in the post section allows you to select the desired post. Then, click Install Post to run the Gener with the selected post when you run ICAM within GibbsCAM.</li>
+                </ul>
+                Press <b>OK</b> to save the settings.<br>
+            </p>
+			<h4>Run ICAM Post within GibbsCAM</h4>
+			<img src="Images/Run_ICAM_GibbsCAM.jpg"></br>
+            <p>
+                After finishing the integration, run GibbsCAM. The CAM-POST icon will be located in the Plug-Ins Tab under Posting. Pressing on CAM-POST will run the Gener.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
