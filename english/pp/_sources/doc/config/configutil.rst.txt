@@ -1,0 +1,180 @@
+.. _configuration_utility:
+
+The ICAM Configuration Utility
+==============================
+
+.. index:: icam.def file
+.. index:: File extension; def
+
+The ICAM Configuration Utility is a graphical interface used to view
+and edit the ICAM.DEF file, which contains parameter definitions that
+control the operation of both QUEST and GENER. See :ref:`“The ICAM.DEF
+File”<def_file>` for a complete description of the definition file.
+
+Configuration settings can be used, for example, to define the
+default units of operation (inch vs. metric), the language of
+operation (English, French…),
+the CAM system CLDATA format, listing file format (text or HTML)
+and many other settings.
+
+.. _configuration_storage:
+
+Configuration Storage and Application Data
+------------------------------------------
+
+With V18 and earlier releases of ICAM software, the ICAM.DEF file and
+other configuration information was normally stored in the main
+installation directory.
+
+On Windows Vista and later systems, the “Program Files” directory is
+not writable by non-administrative users. Therefore, configuration
+data for V19 and later systems is installed by default in either the
+main “ProgramData” directory or in the user’s roaming application
+data directory, depending on the choice made during installation to
+install the software “for all users” of the computer or to install
+“just for you”.
+
+The location of the configuration ICAM.DEF file defines the root
+application data directory. Icam Post will look to this root
+application directory, called **icam_appdata**, when searching for
+the following:
+
+-  The *icam.key* license server connection file (unless using an
+   *icam_sec* environment variable)
+
+-  The *dwords.dat* default keywords file
+
+-  A *cache* directory containing temporary files used by Virtual
+   Machine
+
+-  A *kit* directory containing new and customized CAM interface kits
+
+-  A *macro* directory containing shared external macro files
+
+-  A *work* directory containing the campost.dbf database
+
+The root application data directory can also be maintained on a
+network drive to be shared by multiple users, by moving the
+as-installed configuration data to a directory of your choice.
+
+.. _appdata_search_path:
+.. index:: Environment variable; icam_appdata_260
+.. index:: Environment variable; icam_appdata
+
+Icam Post uses the following search paths, in the order listed, to
+locate the ICAM.DEF file at the start of processing:
+
+1. The directory identified by the **icam_appdata_260** environment
+   variable
+
+2. The directory identified by the **icam_appdata** environment variable
+
+3. The user’s application data **Roaming\\ICAM\\260** directory
+
+4. The user’s application data **Local\\ICAM\\260** directory
+
+5. The **ProgramData\\ICAM\\260** directory
+
+6. The **icam_lib** software installation directory
+
+Note that user and system application data directories are hidden
+from view in Windows Explorer by default. This can be controlled via
+the “Show hidden files and folders” advanced View settings.
+
+If an ICAM.DEF file is not found in the search path, then the
+application data directory is assumed to be the same as the
+installation directory (i.e., icam_lib) and all configuration
+settings take their default value.
+
+If an ICAM.DEF file is found and the file contains a “let
+ICAM_APPDATA=\ *directory_path*\ ” definition, then the ICAM.DEF file
+at that location is recursively checked for further ICAM_APPDATA
+definitions.
+
+Starting CONFIG from the Desktop
+--------------------------------
+
+The ICAM Configuration Utility may be started either from the Start
+menu or from the ICAM Portal.
+
+To start the utility from the Start menu, first locate the
+“ICAM V26 x64” Start menu, then select “Config V26”. To start the
+utility from the portal, select the Tools pane and click on the “ICAM
+Configuration Utility” tile or icon.
+
+Starting CONFIG from a Command Prompt
+-------------------------------------
+
+The ICAM Configuration Utility can be executed from the Windows
+command prompt by first setting the current working directory to the
+Icam Post V26 installation directory (i.e., C:\\Program Files\\ICAM\\V26)
+and then typing the following command:
+
+   :math:`\textbf{config}`
+
+The configuration utility does not accept command line parameters.
+
+Starting CONFIG from QUEST and GENER
+-----------------------------------------
+
+The ICAM Configuration Utility can be executed by selecting
+**Tools»Configuration** from either the QUEST or GENER menu bar. You
+must restart the QUEST or GENER application to take any configuration
+changes into account.
+
+Using the Configuration Utility
+-------------------------------
+
+When started, the configuration utility will appear as shown on the
+following page. Configuration settings are grouped into the following
+categories.
+
+-  **General** lists settings that are common to all ICAM software modules.
+
+-  **QUEST** lists settings that are specific to QUEST.
+
+-  **GENER** lists settings that are specific to GENER.
+
+-  **CAM Interface** lists settings related to the input processing of CLDATA by GENER.
+
+-  **Output** lists settings controlling output file naming and formatting.
+
+-  **Tape & DNC** lists settings controlling the output formatting of MCD by GENER.
+
+Two additional sections are also included:
+
+-  **Environment** is a read-only list of all ICAM environment variable
+   settings. An Open button starts File Explore with focus on the
+   directory listed by the variable. Environment variables can be
+   changed from the System Control Panel (see :ref:`“Environment Variables”<environment_variables>`).
+
+-  **All Entries** provides an alphabetical list of all configuration
+   settings. Settings can be changed from this section by first
+   selecting the entry and then typing a valid value.
+
+.. figure:: ../../media/config_utility.png
+   :width: 4.667in
+   :align: center
+
+   The Configuration Utility
+
+The following controls are available:
+
+**ICAM definition file:**
+   This read-only field lists the location in the search path (see
+   :ref:`here<appdata_search_path>`) where the ICAM.DEF file was found (or
+   will be created by default).
+
+**Import…**
+   Use this button to import or read the contents of another definition
+   file, merging its contents with those of the current definition file.
+
+**OK**
+   Use this button to save any changes and exit the utility.
+
+**Cancel**
+   Use this button to quit the utility without saving any changes.
+
+The configuration settings can be saved to an HTML log file for
+reference purposes by clicking on the title-bar icon and selecting
+“Save to HTML…” from the drop-down menu.
