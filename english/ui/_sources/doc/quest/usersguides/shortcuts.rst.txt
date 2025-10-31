@@ -1,0 +1,182 @@
+Shortcuts
+---------
+
++-----------------------------------+-----------------------------------+
+|                                   | **File Menu**                     |
++-----------------------------------+-----------------------------------+
+| **Ctrl + N**                      | Create a new post processor       |
++-----------------------------------+-----------------------------------+
+| **Ctrl + W**                      | Create a new post processor using |
+|                                   | the wizard                        |
++-----------------------------------+-----------------------------------+
+| **Ctrl + M**                      | Create a new model                |
++-----------------------------------+-----------------------------------+
+| **Ctrl + O**                      | Activate the Open dialog          |
++-----------------------------------+-----------------------------------+
+| **Ctrl + S**                      | Save current post/model/ce        |
++-----------------------------------+-----------------------------------+
+| **Shift + Ctrl + S**              | Save all open posts/models/ces    |
++-----------------------------------+-----------------------------------+
+| **Ctrl + G**                      | Generate current post/ce          |
++-----------------------------------+-----------------------------------+
+| **Ctrl + F4**                     | Close current post/model/ce       |
+|                                   | (prompt for save if needed)       |
++-----------------------------------+-----------------------------------+
+| **Shift + Ctrl + F4**             | Close all posts/models/ces        |
+|                                   | (prompt for save if needed)       |
++-----------------------------------+-----------------------------------+
+| **Ctrl + P**                      | Print (when in the macro editor)  |
++-----------------------------------+-----------------------------------+
+| **Alt + F4**                      | Close the application (prompt for |
+|                                   | save if needed)                   |
++-----------------------------------+-----------------------------------+
+|                                   | **Edit Menu**                     |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Z**                      | Undo (also Alt+Backspace)         |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Y**                      | Redo                              |
++-----------------------------------+-----------------------------------+
+| **Ctrl + X**                      | Cut (also Shift+Delete)           |
++-----------------------------------+-----------------------------------+
+| **Ctrl + C**                      | Copy (also Ctrl+Insert)           |
++-----------------------------------+-----------------------------------+
+| **Ctrl + V**                      | Paste (also Shift+Insert)         |
++-----------------------------------+-----------------------------------+
+| **Del**                           | Delete                            |
++-----------------------------------+-----------------------------------+
+| **Ctrl + A**                      | Select all                        |
++-----------------------------------+-----------------------------------+
+| **Ctrl + F**                      | Activate the Find dialog (when in |
+|                                   | the macro editor)                 |
+|                                   | Activate the Finder dialog (all   |
+|                                   | other cases)                      |
++-----------------------------------+-----------------------------------+
+| **Ctrl + H**                      | Activate the Replace dialog (when |
+|                                   | in the macro editor)              |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Up Arrow**               | Move editor view up one line      |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Down Arrow**             | Move editor view down one line    |
++-----------------------------------+-----------------------------------+
+|                                   | **View Menu**                     |
++-----------------------------------+-----------------------------------+
+| **Ctrl + D**                      | Show the database view in the     |
+|                                   | upper right window                |
++-----------------------------------+-----------------------------------+
+| **Ctrl + F8**                     | Toggle between graphical and      |
+|                                   | classic view in a question        |
+|                                   | section                           |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Right Arrow**            | Increase left/right (X) spacing   |
+|                                   | between controls in graphical     |
+|                                   | view                              |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Left Arrow**             | Decrease left/right (X) spacing   |
+|                                   | between controls in graphical     |
+|                                   | view                              |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Down Arrow**             | Increase top/bottom (Y) spacing   |
+|                                   | between controls in graphical     |
+|                                   | view                              |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Up Arrow**               | Decrease top/bottom (Y) spacing   |
+|                                   | between controls in graphical     |
+|                                   | view                              |
++-----------------------------------+-----------------------------------+
+|                                   | **Tools Menu**                    |
++-----------------------------------+-----------------------------------+
+| **Ctrl + F**                      | Activate the Finder dialog (all   |
+|                                   | other cases)                      |
++-----------------------------------+-----------------------------------+
+| **Ctrl + I**                      | Activate the Diff dialog          |
++-----------------------------------+-----------------------------------+
+| **F10**                           | Test the current post against     |
+|                                   | some sample CL file or current    |
+|                                   | control emulator against some     |
+|                                   | sample MCD (tape)                 |
++-----------------------------------+-----------------------------------+
+| **Shift + F10**                   | Run the last sample tested but    |
+|                                   | with the current state of the     |
+|                                   | post or control emulator and show |
+|                                   | the result panel only (Quick      |
+|                                   | test)                             |
++-----------------------------------+-----------------------------------+
+| **F9**                            | Start Runtime runs the GENER or   |
+|                                   | CERUN launch panel                |
++-----------------------------------+-----------------------------------+
+|                                   | **Help Menu**                     |
++-----------------------------------+-----------------------------------+
+| **F1**                            | On line Help                      |
++-----------------------------------+-----------------------------------+
+|                                   | **Other Edit Hot keys**           |
++-----------------------------------+-----------------------------------+
+| **F3**                            | Find next matching text           |
++-----------------------------------+-----------------------------------+
+| **Shift + F3**                    | Find previous matching text       |
++-----------------------------------+-----------------------------------+
+| **Ctrl + F3**                     | Find next occurrence of selected  |
+|                                   | text                              |
++-----------------------------------+-----------------------------------+
+| **Shift + Ctrl + F3**             | Find previous occurrence of       |
+|                                   | selected text                     |
++-----------------------------------+-----------------------------------+
+| **Page Up**                       | Up one page                       |
++-----------------------------------+-----------------------------------+
+| **Page Down**                     | Down one page                     |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Home**                   | Go to the first line or first     |
+|                                   | item of the current view          |
++-----------------------------------+-----------------------------------+
+| **Ctrl + End**                    | Go to the last line or last item  |
+|                                   | of the current view               |
++-----------------------------------+-----------------------------------+
+| **Up Arrow**                      | Move up one line                  |
++-----------------------------------+-----------------------------------+
+| **Down Arrow**                    | Move down one line                |
++-----------------------------------+-----------------------------------+
+| **Tab**                           | Set focus on next item in dialog  |
+|                                   | Indents the selection (with       |
+|                                   | selected text in Macro editor)    |
++-----------------------------------+-----------------------------------+
+| **Shift + Tab**                   | Set focus on previous item in     |
+|                                   | dialog                            |
+|                                   | Outdents the selection (with      |
+|                                   | selected text in Macro editor)    |
++-----------------------------------+-----------------------------------+
+|                                   | **Other Hot keys**                |
++-----------------------------------+-----------------------------------+
+| **Alt**                           | Activate or inactivate menu bar   |
++-----------------------------------+-----------------------------------+
+| **Alt + Enter**                   | Activate properties dialog if     |
+|                                   | available for current item        |
++-----------------------------------+-----------------------------------+
+| **F4**                            | Go to the next synchronization    |
+|                                   | line of the current tab in        |
+|                                   | console view                      |
++-----------------------------------+-----------------------------------+
+| **Shift + F4**                    | Go to the previous                |
+|                                   | synchronization line of the       |
+|                                   | current tab in console view       |
++-----------------------------------+-----------------------------------+
+| **F5**                            | Refresh database list             |
++-----------------------------------+-----------------------------------+
+| **CTRL + F6**                     | Switch the focus between          |
+|                                   | Navigator, Client View and        |
+|                                   | Console view                      |
++-----------------------------------+-----------------------------------+
+| **CTRL + Shift + F6**             | Same as Alt + F6 but in reverse   |
+|                                   | order                             |
++-----------------------------------+-----------------------------------+
+| **F7**                            | Compile current macro             |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Tab**                    | Switch between database and posts |
+|                                   | tabs (navigator)                  |
+|                                   | Switch between Build, Help,       |
+|                                   | Finder and Diffs tabs (console    |
+|                                   | view)                             |
++-----------------------------------+-----------------------------------+
+| **Ctrl + Shift + Tab**            | Same as Ctrl + Tab but in reverse |
+|                                   | order                             |
++-----------------------------------+-----------------------------------+
+
+
