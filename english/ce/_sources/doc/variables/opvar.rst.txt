@@ -1,0 +1,250 @@
+.. _operation_variables:
+.. _var_opargs:
+.. index:: Variables; $OPARGS
+.. _var_optype:
+.. index:: Variables; $OPTYPE
+
+Operation Variables
+===================
+
+The control emulator tracks information on an operation basis.
+A new operation is defined at each tool change as well as
+whenever the $OPNAME operation name variable is changed
+(conditional upon the $OPMERGE variable setting).
+There is a built-in limit of 999 operations that can be recorded, after
+which processing will occur as normal but further operation information
+will not be updated to the operation variables.
+
+.. _var_foi:
+.. index:: Variables; $FOI
+
++------------------+-------------------------------------------------+
+| **$FOI**         | First operation index for current tool (0:none) |
+|                  |                                                 |
+|                  | Type: Numeric, Read/Write                       |
++------------------+-------------------------------------------------+
+
+   This variable indicates the first operation index value ($OI) for the
+   current tool. It is reset to zero at each tool change, and if zero at
+   the start of a new operation, it is set to the new operation $OI
+   value. This variable is informational only.
+
+.. _var_oi:
+.. index:: Variables; $OI
+
++------------------+------------------------------------------+
+| **$OI**          | Current operation index                  |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable can be used as a row number index into the $OPTAB,
+   $OPMIN, $OPMAX and
+   $OPSUM tables. It will be set to 1 if an operation has not yet been
+   defined (i.e., the $OP\ *xxx* row number for the dummy operation).
+   Otherwise, it will be set to the $OP\ *xxx* row for the current
+   operation. For example, the starting sequence number of the current
+   operation can be obtained by the expression: $OPTAB(8,$OI).
+
+.. _var_opmax:
+.. index:: Variables; $OPMAX
+.. _var_opmin:
+.. index:: Variables; $OPMIN
+
++------------------+------------------------------------------+
+| **$OPMAX**       | Maximum operation travel table           |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+| **$OPMIN**       | Minimum operation travel table           |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   These tables contain maximum and minimum axes travel information for
+   each operation. The tables are organized as $OPMAX(*column,row*) and
+   $OPMIN(*column,row*), where each row contains information for a
+   specific operation and each column contains the travel for each of
+   the 15 possible machine axes, as follows (only $OPMAX shown):
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  $OPMAX(1-3,\ *n*)
+            -  X, Y and Z linear axes
+         *  -  $OPMAX(4-6,\ *n*)
+            -  U, V and W secondary linear axes
+         *  -  $OPMAX(7-9,\ *n*)
+            -  A’, B’ and C’ rotary table axes
+         *  -  $OPMAX(10-12,\ *n*)
+            -  A, B and C rotary head axes
+         *  -  $OPMAX(13,\ *n*)
+            -  Extending (quill) axis
+         *  -  $OPMAX(14-15,\ *n*)
+            -  N1 and N2 removable rotary head axes
+
+   Row 1 contains travel for the entire program to date. Rows 2 and
+   later contain travel information for specific operations. The number
+   of rows is defined by $OPSIZ. Use the $OI variable as a row index to
+   access travel information for the current operation.
+
+   Travel information represents the travel to the current point in the
+   program. A value of $NULL indicates that the axis has not moved or
+   been referenced in a motion block.
+
+.. _var_opmerge:
+.. index:: Variables; $OPMERGE
+
++------------------+------------------------------------------+
+| **$OPMERGE**     | Operation table organization setting     |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable controls when new rows are added to the operation tables.
+   A new row is always added at each tool change.
+   By default a new row is also added at the second and subsequent
+   setting of the $OPNAME system variable that occurs between tool changes.
+   Set $OPMERGE to $TRUE to inhibit the creation of new rows when
+   $OPNAME is set.
+
+.. _var_opname:
+.. index:: Variables; $OPNAME
+
++------------------+------------------------------------------+
+| **$OPNAME**      | Current operation name                   |
+|                  |                                          |
+|                  | Type: String, Read/Write                 |
++------------------+------------------------------------------+
+
+   This variable can optionally be set in macros to define the name of the upcoming operation.
+   Setting the $OPNAME variable can indicate the start of a new operation (see $OPMERGE above).
+   The operation name appears in diagnostic messages, the diagnostic summary,
+   and in various components of the CERUN user-interface.
+
+.. _var_opsiz:
+.. index:: Variables; $OPSIZ
+
++------------------+------------------------------------------+
+| **$OPSIZ**       | Size of operation tables                 |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable indicates the number of operation entries in the
+   $OP\ *xxx* tables.
+
+.. _var_opsum:
+.. index:: Variables; $OPSUM
+
++------------------+------------------------------------------+
+| **$OPSUM**       | Operation summary table                  |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This table contains timing and feed information for all operations
+   defined in the program. The table is organized as
+   $OPSUM(*column,row*), where each row contains information for a
+   specific operation and each column contains a specific type of
+   summary information, as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  $OPSUM(1,\ *n*)
+            -  Total feed time (in seconds)
+         *  -  $OPSUM(2,\ *n*)
+            -  Total positioning time (in seconds)
+         *  -  $OPSUM(3,\ *n*)
+            -  Total of all other time (in seconds)
+         *  -  $OPSUM(4,\ *n*)
+            -  Minimum feed rate (in uPM)
+         *  -  $OPSUM(5,\ *n*)
+            -  Maximum feed rate (in uPM)
+         *  -  $OPSUM(6,\ *n*)
+            -  Minimum spindle speed (in RPM)
+         *  -  $OPSUM(7,\ *n*)
+            -  Maximum spindle speed (in RPM)
+
+   Row 1 is reserved for the dummy operation (i.e., all processing
+   before the first operation is defined). Other operations appear at
+   rows 2 and later in the order in which they were defined in the
+   program. The number of rows is defined by $OPSIZ. Use the $OI
+   variable as a row index to access summary
+   information for the current operation. The minimum and maximum feed
+   rate values are initialized to 10000 and –1 respectively, and are
+   recorded at the endpoint of each motion. The minimum and maximum
+   spindle speeds are initialized to zero, and are recorded at the
+   endpoint of each motion if the spindle is turning.
+
+.. _var_optab:
+.. index:: Variables; $OPTAB
+
++------------------+------------------------------------------+
+| **$OPTAB**       | Operation table                          |
+|                  |                                          |
+|                  | Type: Any, Read/Write                    |
++------------------+------------------------------------------+
+
+   This table contains various information for all operations defined in
+   the program. The table is organized as $OPTAB(*column,row*), where
+   each row contains information for a specific operation and each
+   column contains a specific type of information, as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  $OPTAB(1,\ *n*)
+            -  $TI tool index
+         *  -  $OPTAB(2,\ *n*)
+            -  $HI head index
+         *  -  $OPTAB(3,\ *n*)
+            -  $OPTYPE value
+         *  -  $OPTAB(4,\ *n*)
+            -  $OPARGS value(s)
+         *  -  $OPTAB(5,\ *n*)
+            -  $OPNAME string
+         *  -  $OPTAB(6,\ *n*)
+            -  Start time (in seconds)
+         *  -  $OPTAB(7,\ *n*)
+            -  End time (in seconds)
+         *  -  $OPTAB(8,\ *n*)
+            -  Start N block
+         *  -  $OPTAB(9,\ *n*)
+            -  End N block
+         *  -  $OPTAB(10,\ *n*)
+            -  Maximum diagnostic severity
+         *  -  $OPTAB(11,\ *n*)
+            -  Length compensation offsets (sequence)
+         *  -  $OPTAB(12,\ *n*)
+            -  Diameter compensation offsets (sequence)
+         *  -  $OPTAB(13,\ *n*)
+            -  Fixture compensation offsets (sequence)
+         *  -  $OPTAB(14-50,\ *n*)
+            -  Available for use
+
+   Row 1 is reserved for the dummy operation (i.e., all processing
+   before the first operation is defined). Other operations appear at
+   rows 2 and later in the order in which they were defined in the
+   program.
+
+   $OPMERGE can affect how operations are added. The number of rows is
+   defined by $OPSIZ. Use the $OI variable as a row index to access
+   information for the current operation. There is a built-in limit of
+   999 operations that can be recorded, including the dummy operation,
+   after which processing will occur as normal but further operation
+   information will not be updated to the $OPMIN,
+   $OPMAX, $OPSUM and $OPTAB tables.
+
+   The operation table is constructed as the NC program executes. The
+   table is writable. Columns 14 through 50 are currently not used for
+   any built-in purpose and therefore are available to store information
+   of any type (including SEQUENCE).
+
