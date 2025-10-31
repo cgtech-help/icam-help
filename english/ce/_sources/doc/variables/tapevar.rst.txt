@@ -1,0 +1,172 @@
+MCD/Tape Variables
+==================
+
+.. _var_cecode:
+.. index:: Variables; $CECODE
+
++------------------+------------------------------------------+
+| **$CECODE**      | Current CODE identifier being processed  |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable identifies the CODE identifier that is currently being
+   processed by Control Emulator, or will be the special value CODE_NONE
+   when a code identifier is not being processed.
+
+.. _var_disply:
+.. index:: Variables; $DISPLY
+
++------------------+------------------------------------------+
+| **$DISPLY**      | Last operator message string input       |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last operator message string input by the
+   control emulator, when processing a CODE_DISPLY command.
+
+.. _var_lmcd:
+.. index:: Variables; $LMCD
+
++------------------+------------------------------------------+
+| **$LMCD**        | Last MCD block input                     |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last block of MCD input by the
+   control emulator.
+
+.. _var_mcd:
+.. index:: Variables; $MCD
+
++------------------+------------------------------------------+
+| **$MCD**         | Current MCD block being processed        |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the current block of MCD being processed by the
+   control emulator.
+
+.. _var_nmcd:
+.. index:: Variables; $NMCD
+
++------------------+------------------------------------------+
+| **$NMCD**        | Next MCD block to be processed           |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the next block of MCD to be processed by the control emulator.
+
+.. _var_mcdno:
+.. index:: Variables; $MCDNO
+
++------------------+------------------------------------------+
+| **$MCDNO**       | Current MCD block number                 |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable holds the holds the line number of the current MCD
+   block in the current MCD input file as defined by the $TAPEN
+   variable. This is not the same as the $SEQNO variable, which
+   identifies the block sequence number (e.g., typically the N
+   register).
+
+.. _var_mcdrd:
+.. index:: Variables; $MCDRD
+
++------------------+-----------------------------------------------+
+| **$MCDRD**       | Last MCD block read by TAPERD or $FGET/$FGETR |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable holds the block of MCD last read by a TAPERD command,
+   or by calling either the $FGET or $FGETR functions. This variable is writable.
+   Calling TAPEWT in a macro produces the same result as EXEC/NOW,$MCDRD.
+
+.. _var_opskip:
+.. index:: Variables; $OPSKIP
+
++------------------+------------------------------------------+
+| **$OPSKIP**      | Current OPSKIP (block delete) level      |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable tracks the current OPSKIP (also called block-delete)
+   level. On machines with a single level of OPSKIP, $OPSKIP will be set
+   to 1 (one) when OPSKIP is enabled and 0 (zero) when OPSKIP is
+   disabled. On machines with multiple OPSKIP levels, $OPSKIP indicates
+   the number of different OPSKIP levels currently active.
+
+.. _var_opskipl:
+.. index:: Variables; $OPSKIPL
+
++------------------+------------------------------------------+
+| **$OPSKIPL**     | OPSKIP (block delete) status             |
+|                  |                                          |
+|                  | Type: Logical array, Read/Write          |
++------------------+------------------------------------------+
+
+   This array variable tracks the state of OPSKIP levels 1 through 9.
+   $OPSKIPL(1) will be $TRUE if OPSKIP level 1 is active, otherwise it
+   will be set to $FALSE. Similarly, $OPSKIPL(2) through
+   $OPSKIPL(9) will be set depending on the state of OPSKIP levels 2
+   through 9.
+
+   The OPSKIP state can be modified under macro control by setting the OPSKIPL
+   array positions true or false.
+
+.. _var_seqno:
+.. index:: Variables; $SEQNO
+
++------------------+------------------------------------------+
+| **$SEQNO**       | Current sequence number                  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the sequence number (e.g., N register value) of the current block.
+
+.. _var_tapen:
+.. index:: Variables; $TAPEN
+
++------------------+------------------------------------------+
+| **$TAPEN**       | Primary tape file name                   |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable contains the primary tape file name as specified on the CERUN command line.
+
+.. _var_tprint:
+.. index:: Variables; $TPRINT
+
++------------------+------------------------------------------+
+| **$TPRINT**      | Last MCD comment string input            |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last MCD comment string input by the
+   control emulator, when processing a CODE_TPRINT command.
+
+.. _var_xmcd:
+.. index:: Variables; $XMCD
+
++------------------+------------------------------------------+
+| **$XMCD**        | Unrecognized MCD                         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the portion of the current block of MCD that does
+   not match any known CODE or DATA entities. Following the Block
+   Shutdown Macro (if any), this variable is tested and if non-blank, a
+   diagnostic is output showing the unrecognized text. $XMCD is
+   settable.
