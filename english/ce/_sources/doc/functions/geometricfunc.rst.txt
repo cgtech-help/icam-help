@@ -1,0 +1,158 @@
+Geometric Functions
+===================
+
+Geometric functions accept and return sequences that define the
+canonical form of geometrical entities. The canonical forms currently
+in use are:
+
+-  Point: {x,y,z} coordinates of the point
+
+-  Vector: {x,y,z} components of the vector; also called *i,j,k*
+   components
+
+-  Line: {x,y,z,i,j,k} point on line and direction vector of the
+   infinite line
+
+-  Plane: {d,i,j,k} distance from origin and normal vector
+
+-  Cylinder: {x,y,z,i,j,k,r} point on axis, axis vector and radius of
+   the cylinder
+
+It is important to note that geometric functions work with sequences
+and not arrays. The input arguments to geometric functions can be
+constructed using the $FSEQ function or the { } sequence operators.
+For example, the following are equivalent:
+
+   ::
+
+      P1=$FSEQ(1,2,3)
+      P1={1,2,3}
+
+Geometric functions will return a value of $NULL if the geometric
+entity cannot be created.
+
+.. _func_fgcypt3:
+.. index:: Functions; $FGCYPT3
+
++------------------------------------------------+------------------------------------------+
+| **$FGCYPT3(**\ *point1, point2, point3*\ **)** | Cylinder constructed from 3 points       |
+|                                                |                                          |
+|                                                | Returns: Cylinder sequence               |
++------------------------------------------------+------------------------------------------+
+
+   Returns an {x,y,z,i,j,k,r} sequence defining a cylinder constructed
+   through 3 points. The cylinder axis is perpendicular to a plane
+   constructed through the 3 points, while also having the 3 points
+   along its circumference. $NULL is returned if the points all lie on
+   the same line.
+
+.. _func_fglnxpl:
+.. index:: Functions; $FGLNXPL
+
++------------------------------------------------+------------------------------------------+
+| **$FGLNXPL(**\ *line, plane*\ **)**            | Intersection point of line and plane     |
+|                                                |                                          |
+|                                                | Returns: Point Sequence                  |
++------------------------------------------------+------------------------------------------+
+
+   Returns an {x,y,z} sequence defining the point at the intersection of
+   an infinite line and plane. A value of $NULL is returned if the line
+   does not intersect the plane.
+
+.. _func_fglsxcy:
+.. index:: Functions; $FGLSXCY
+
++----------------------------------------------------------------+----------------------------------------------------------------+
+| **$FGLSXCY(**\ *point1, point2, cylinder*\ **)**               | Intersection point(s) of line segment and cylinder             |
+|                                                                |                                                                |
+|                                                                | Returns: Sequence                                              |
++----------------------------------------------------------------+----------------------------------------------------------------+
+| **$FGLSXCY(**\ *point1, point2, point3, vector, radius*\ **)** | Intersection point(s) of line segment and constructed cylinder |
+|                                                                |                                                                |
+|                                                                | Returns: Sequence                                              |
++----------------------------------------------------------------+----------------------------------------------------------------+
+
+   Returns a sequence defining the point(s) of intersection between a
+   line segment and a cylinder. The line segment is defined by the start
+   and ending points: *point\ 1* and *point\ 2*. The cylinder is defined
+   either by a single *cylinder* sequence or by 3 separate sequences
+   defining its center *point\ 3*, axis *vector* and *radius*. The
+   return sequence has a length of 2, 5 or 8, with values as follows:
+
+      ::
+
+           (1) Number of intersection points: 0, 1 or 2
+           (2) Segment location with respect to cylinder:
+               –1: Segment is entirely inside the cylinder
+                0: Segment intersects the cylinder
+                1: Segment is entirely outside the cylinder
+         (3:5) First intersection point
+         (6:8) Second intersection point (furthest from start of line segment)
+
+.. _func_fglsxsp:
+.. index:: Functions; $FGLSXSP
+
++--------------------------------------------------------+--------------------------------------------------+
+| **$FGLSXSP(**\ *point1, point2, point3, radius*\ **)** | Intersection point(s) of line segment and sphere |
+|                                                        |                                                  |
+|                                                        | Returns: Sequence                                |
++--------------------------------------------------------+--------------------------------------------------+
+
+   Returns a sequence defining the point(s) of intersection between a
+   line segment and sphere. The line segment is defined by the start and
+   ending points: *point\ 1* and *point\ 2*. The sphere is defined by
+   its center *point\ 3* and *radius*. The return sequence has a length
+   of 2, 5 or 8, with values as follows:
+
+      ::
+
+           (1) Number of intersection points: 0, 1 or 2
+           (2) Segment location with respect to sphere:
+               –1: Segment is entirely inside the sphere
+                0: Segment intersects the sphere
+                1: Segment is entirely outside the sphere
+         (3:5) First intersection point
+         (6:8) Second intersection point (furthest from start of line segment)
+
+.. _func_fgplpt3:
+.. index:: Functions; $FGPLPT3
+
++------------------------------------------------+------------------------------------------+
+| **$FGPLPT3(**\ *point1, point2, point3*\ **)** | Plane constructed from 3 points          |
+|                                                |                                          |
+|                                                | Returns: Plane Sequence                  |
++------------------------------------------------+------------------------------------------+
+
+   Returns a {d,i,j,k} sequence defining a plane constructed from 3
+   points. A value of $NULL is returned if 2 or more of the points are
+   coincident.
+
+.. _func_fgplptn:
+.. index:: Functions; $FGPLPTN
+
++------------------------------------------------+------------------------------------------------+
+| **$FGPLPTN(**\ *point, vector*\ **)**          | Plane constructed from point and normal vector |
+|                                                |                                                |
+|                                                | Returns: Plane Sequence                        |
++------------------------------------------------+------------------------------------------------+
+
+   Returns a {d,i,j,k} sequence defining a plane passing through a point
+   and normal to a vector.
+
+.. _func_fgptrpl:
+.. index:: Functions; $FGPTRPL
+
++------------------------------------------------+------------------------------------------------+
+| **$FGPTRPL(**\ *point\ 1, plane*\ **)**        | Projection of a point onto a plane             |
+|                                                |                                                |
+|                                                | Returns: Point Sequence                        |
++------------------------------------------------+------------------------------------------------+
+| **$FGPTRPL(**\ *point1, point2, vector*\ **)** | Projection of a point onto a constructed plane |
+|                                                |                                                |
+|                                                | Returns: Point Sequence                        |
++------------------------------------------------+------------------------------------------------+
+
+   Returns an {x,y,z} sequence defining a point created as the
+   projection of *point\ 1* onto a plane. The plane is defined either by
+   a single *plane* sequence or as plane defined as passing through
+   *point\ 2* and perpendicular to a *vector*.
