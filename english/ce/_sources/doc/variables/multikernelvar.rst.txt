@@ -1,0 +1,96 @@
+.. _multikernel_ce_variables:
+
+Multi-Kernel Control Emulator Variables
+=======================================
+
+Control Emulator uses a multi-kernel architecture to support CNC
+machines having multiple independent controllers, as would be found
+for example on a 4-axis merging lathe. When running a Composite
+control emulator or a control emulator for a merging lathe, the
+Machine Startup macro can be used to view or modify the input MCD
+file and Virtual Machine channel associated with each kernel. This is
+done via the multi-kernel system variables as detailed below.
+
+Any changes to the multi-kernel variables must be done before the
+Machine Startup macro completes, because the kernels are instantiated
+at that time.
+
+.. _var_mcecnt:
+.. index:: Variables; $MCECNT
+
++-------------+--------------------------+
+| **$MCECNT** | Number of kernels        |
+|             |                          |
+|             | Type: Numeric, Read-only |
++-------------+--------------------------+
+
+   This variable defines the number of independent kernels in use. Two
+   (2) kernels will be defined for a 4-axis merging lathe or mill-turn
+   center with dual heads (e.g., a lathe with upper and lower turrets).
+   For a Composite CE, there can be as few as one kernel or as many
+   kernels as there are components, as defined by QUEST “General
+   Information / General Description” section responses in the composite
+   CE master.
+
+.. _var_mcechn:
+.. index:: Variables; $MCECHN
+
++-------------+---------------------------------+
+| **$MCECHN** | Kernel channel                  |
+|             |                                 |
+|             | Type: Numeric Array, Read/Write |
++-------------+---------------------------------+
+
+   This array variable defines the starting Virtual Machine (VM) channel
+   number to be assigned to each kernel. By default, channel 1 is used
+   for the first kernel and the channel number is incremented by 1 for
+   each subsequent kernel. During processing, CE kernels will output VM
+   related data to the specified channel, which is equivalent to setting
+   the Virtual Machine $VMCHN system variable.
+
+.. _var_mcemcd:
+.. index:: Variables; $MCEMCD
+
++-------------+--------------------------------+
+| **$MCEMCD** | Kernel input MCD file          |
+|             |                                |
+|             | Type: String Array, Read/Write |
++-------------+--------------------------------+
+
+   This array variable defines the input MCD file to be read by each
+   kernel. By default, the semicolon (;) separated input MCD files
+   specified on the CERUN command line are associated, left to right, to
+   increasing CE kernels. If there are fewer input MCD files specified
+   than there are kernels, the remaining kernels will not have an input
+   file defined. It is the responsibility of the CE developer to either
+   diagnose this case via the ERROR macro command, or to assign an input
+   MCD file using the $MCEMCD system variable.
+
+.. _var_mcenam:
+.. index:: Variables; $MCENAM
+
++-------------+--------------------------------+
+| **$MCENAM** | Kernel name                    |
+|             |                                |
+|             | Type: String Array, Read/Write |
++-------------+--------------------------------+
+
+   This array variable defines the name of each kernel, which will be
+   used in diagnostics and in the user interface to identify individual
+   kernels. Control Emulator assigns default names to each kernel, which
+   can be modified in the Program Startup macro to whatever names are
+   desired.
+
+.. _var_vmchn:
+.. index:: Variables; $VMCHN
+
++------------+---------------------------+
+| **$VMCHN** | Current active channel    |
+|            |                           |
+|            | Type: Numeric, Read/Write |
++------------+---------------------------+
+
+   This variable defines and can set the current active channel number.
+   By default, a merging lathe side head is controlled by channel 2; the
+   main head by channel 1. Composite control emulator channel numbers
+   are defined in the Questionnaire.
