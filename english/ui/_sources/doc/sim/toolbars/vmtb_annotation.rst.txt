@@ -1,0 +1,75 @@
+VM Annotation Toolbar
+~~~~~~~~~~~~~~~~~~~~~
+
+|image1|
+
+The Simulation»Annotation menu selections and corresponding VM
+Annotation toolbar buttons provide the capability to first (optionally)
+mark-up the simulation window and then take snapshots and/or videos of
+the simulation.
+
+The following functions are available:
+
++-----------+---------------------------------------------------------+
+| |image14| | **Simulation»Annotation»Annotate**: Toggles the         |
+|           | left-mouse action between annotate and non-annotate     |
+|           | modes. When in annotation mode, the cursor will appear  |
+|           | as a small pencil that will draw in the simulation      |
+|           | window when the left-mouse button is held down. Drawing |
+|           | is equivalent to marking a glass pane that appears on   |
+|           | top of the simulation window.                           |
++-----------+---------------------------------------------------------+
+| |image15| | **Simulation»Annotation»Color**: Opens a dialog that    |
+|           | selects the drawing color.                              |
++-----------+---------------------------------------------------------+
+| |image16| | **Simulation»Annotation»Erase**: Clears the drawing     |
+|           | pane (this cannot be undone).                           |
++-----------+---------------------------------------------------------+
+| |image17| | **Simulation»Annotation»Snapshot**: Takes a PNG image   |
+|           | of the simulation window, including annotation data if  |
+|           | present. Picture files are stored in the folder         |
+|           | identified by the VM_PICTURE_DIR configuration (i.e.,   |
+|           | DEF file) variable. If this variable is not defined or  |
+|           | is blank, then pictures are stored in the user’s        |
+|           | “Pictures\\ICAM\\240” folder. Picture files are named   |
+|           | “pic\ *nnn*.png”, where *nnn* is a number automatically |
+|           | chosen to avoid overwriting an existing picture.        |
++-----------+---------------------------------------------------------+
+| |image18| | **Simulation»Annotation»Record**: Starts or stops the   |
+|           | recording of the contents of the simulation window,     |
+|           | including annotation data if present. Video files are   |
+|           | stored in the folder identified by the VM_VIDEO_DIR     |
+|           | configuration variable. If this variable is not defined |
+|           | or is blank, then videos are stored in the user’s       |
+|           | “Videos\\ICAM\\240” folder. Video files are named       |
+|           | “video\ *nnn*.avi” where *nnn* is a number              |
+|           | automatically chosen to avoid overwriting an existing   |
+|           | video. Recording options can be set by selecting the    |
+|           | Video button in the Simulation»Options dialog Misc tab. |
++-----------+---------------------------------------------------------+
+| |image19| | **Simulation»Annotation»Open**: This provides quick and |
+|           | easy access to the user’s pictures and videos folders.  |
++-----------+---------------------------------------------------------+
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/bf66b1af510715d5ef64e90dbf7793c11e6bdb74.bmp
+.. |image2| image:: ./media/3b145c7da708157bcb0ee3842f9ce0fe4e9eabc8.bmp
+.. |image3| image:: ./media/77ec7af3e4714e1dc1bd1f49a95e10df2cf144fa.bmp
+.. |image4| image:: ./media/dd62f2eda08d2351d64293d1f05d8dcf88048828.bmp
+.. |image5| image:: ./media/94f5195dd6f523ec96361182740924946456a3a2.bmp
+.. |image6| image:: ./media/43f21be954711294ad3112c1e5d55cc9c65b1c64.bmp
+.. |image7| image:: ./media/38f32920ce354be380a1483b640dc48451059751.bmp
+.. |image8| image:: ./media/3b145c7da708157bcb0ee3842f9ce0fe4e9eabc8.bmp
+.. |image9| image:: ./media/77ec7af3e4714e1dc1bd1f49a95e10df2cf144fa.bmp
+.. |image10| image:: ./media/dd62f2eda08d2351d64293d1f05d8dcf88048828.bmp
+.. |image11| image:: ./media/94f5195dd6f523ec96361182740924946456a3a2.bmp
+.. |image12| image:: ./media/43f21be954711294ad3112c1e5d55cc9c65b1c64.bmp
+.. |image13| image:: ./media/38f32920ce354be380a1483b640dc48451059751.bmp
+.. |image14| image:: ./media/3b145c7da708157bcb0ee3842f9ce0fe4e9eabc8.bmp
+.. |image15| image:: ./media/77ec7af3e4714e1dc1bd1f49a95e10df2cf144fa.bmp
+.. |image16| image:: ./media/dd62f2eda08d2351d64293d1f05d8dcf88048828.bmp
+.. |image17| image:: ./media/94f5195dd6f523ec96361182740924946456a3a2.bmp
+.. |image18| image:: ./media/43f21be954711294ad3112c1e5d55cc9c65b1c64.bmp
+.. |image19| image:: ./media/38f32920ce354be380a1483b640dc48451059751.bmp
+
