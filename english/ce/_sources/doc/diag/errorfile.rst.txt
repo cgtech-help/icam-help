@@ -1,0 +1,70 @@
+.. _error_file:
+
+Error File
+==========
+
+The **cer260.err** file contains a list of all numbered diagnostic
+messages that can be output by the control emulator. One such file is available for
+each language and can be found in the “C:\\Program Files\\ICAM\\V26\\bin\\\ *system*\\lang”
+installation sub-directory.
+
+Each diagnostic message consists of 3 fields, in the form:
+
+   :boldmono:`\\ number severity message`
+
+-  The *number* field must not be modified because this is the number
+   that CERUN uses to find a particular diagnostic. However, you can
+   prefix a – (minus sign) to the number to disable the output of the
+   diagnostic message.
+
+-  The *severity* field specifies the severity of the diagnostic. A
+   severity from 0 through 3 signifies a message; warnings are from
+   severity 4 through 7; errors from 8 through 15; and fatal errors from
+   16 through 99.
+
+-  The *message* field specifies the text associated with the diagnostic
+   number. The message text does not have a length limitation. Long
+   messages will be wrapped over multiple lines in the CERUN listing
+   file.
+
+Lines starting with an ! (exclamation point) are a comment. Lines
+starting with a \\ (backslash) define a diagnostic message.
+Diagnostic message definitions can be continued from one line to the
+next. All excess spacing will be ignored. The backslash character can
+also be used as the last character of the message text to indicate a
+space must not be added when concatenating the next continued line of
+message text.
+
+A typical message appears as follows:
+
+   .. code-block:: text
+
+         \ 02007020 8 Circular interpolation radius !(\*), as defined by
+                      radius register, exceeds maximum permitted radius !(\*).
+
+The following steps are necessary to customize CERUN diagnostic
+messages:
+
+1. Copy an appropriate cer260.err file to your icam_appdata directory
+   and give the new file a unique name. (e.g.,
+   C:\\ProgramData\\ICAM\\260\\custom.err).
+
+2. Edit the new file and change diagnostic message text and/or severity
+   as required. Do not edit message numbers, except to prefix a – to
+   disable the diagnostic. Add your own custom diagnostics if required.
+
+3. To enable upwards compatibility with future installed releases,
+   delete all diagnostic messages that were not modified or added.
+   Ideally, this custom file should only contain modified and new
+   diagnostics.
+
+4. Run the Configuration utility (see :ref:`“The ICAM
+   Configuration Utility”<configuration_utility>`); select the Gener tab; then
+   edit the “Error file name” field and enter the custom diagnostic file
+   name (e.g., custom.err).
+   GENER and CERUN share the same custom error file.
+
+Once these steps are done, CERUN will use the messages defined in the
+selected custom diagnostic file in place of the default ones. Changes
+made to custom diagnostics will be reflected in the control emulator output the
+next time CERUN is run.
