@@ -1,0 +1,72 @@
+.. _database_upgrade:
+
+Database Upgrade Procedure
+==========================
+
+Skip this section if you do not have an earlier version of Icam Post
+on your system.
+
+The following steps must be taken to upgrade post-processors from an
+existing V25.1 or earlier database to the new V26 database prior to
+editing them. Follow the steps below carefully for a successful
+upgrade.
+
+1. Start QUEST and select **Database»Open Database** from the menu bar
+   to browse for and open the version V25.1 or earlier database. You can
+   open a QUEST 2000/13 or later database created on any computer
+   system, but you can only open a V12 and earlier database by running
+   QUEST on the same Windows or UNIX computer type that the database was
+   created on.
+
+   \
+
+2. The database you just selected and opened will now appear in the
+   database navigator. Click on the database name to set the focus and
+   then select **Database»Upgrade…** from the menu bar. You can also
+   right click on the database to access the Upgrade function from a
+   context sensitive pop-up window. If the Upgrade option is grayed out
+   (i.e., is not selectable), this means that the database is already in
+   the latest format and it does not have to be upgraded.
+
+   \
+
+3. After selecting the Upgrade option, you will be prompted for the name
+   of the new database. By default, QUEST will suggest that the new
+   database be named campost.dbf and that it be created in the *work*
+   subdirectory of the ICAM application data directory (see :ref:`“Application Data Directory”
+   <application_data_directory>`). If a non-empty database by that name already
+   exists in the *work* subdirectory, then QUEST will suggest instead
+   that the upgraded database be created in the same directory as the
+   original and have the same name with _260 appended. Attempting to
+   upgrade to an existing database will overwrite the contents of the
+   target database (you will be asked for confirmation before
+   proceeding).
+
+   \
+
+4. When the upgrade completes, the new V26 database will be listed
+   along with the old one in the database navigator. You can remove the
+   old database from the navigator window by first selecting the old
+   database and then selecting **Database»Close** from the menu bar.
+   This only removes the database from the navigator window, it does not
+   delete or otherwise change the database itself.
+
+   \
+
+5. When the target database of the upgrade is not campost.dbf in the
+   *work* subdirectory, you may want to subsequently copy the contents
+   of the newly upgraded database there. You can merge the contents of
+   an upgraded database with that of another V26 database by first
+   selecting the newly upgraded database, then selecting **Database»Copy
+   to database…** from the menu bar. You will be prompted to browse for
+   the target database, which must be one already created using V26.
+
+   \
+
+6. You are advised to run a series of tests against each upgraded
+   post-processor to ensure that problems have not been introduced by
+   upgrading to the new release.
+
+Note that upgrading the database is only necessary if you intend on
+making changes to post-processors using QUEST. Icam Post GENER V26 is quite
+capable of directly accessing a V25.1 or earlier database.
