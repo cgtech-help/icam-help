@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlling Virtual Machine from the Part Program (GENER only) &mdash; Virtual Machine V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"tex": {"macros": {"icamrange": ["{\\scriptsize \\raise#1em\\hbox{#2:n}}\\!", 2]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Activating the Simulation Windows" href="actsimwindow.html" />
+    <link rel="prev" title="Selecting a Virtual Machine Model" href="selectvm.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Virtual Machine V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../section_quest.html">QUEST: Model Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#importing-models">Importing Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/questinterface.html">QUEST User Interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/questinterface.html#interface-differences-between-developer-and-run-time-environments">Interface differences between Developer and Run-time Environments</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/modelreq.html">Basic Model Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/createvm.html">Creating a Virtual Machine Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#general-information">General Information</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#comments">Comments</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/createvm.html#d-modelsmachines">3D Models»Machines</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/addkinematic.html">Adding Kinematics to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/addphysicalentities.html">Adding Physical Entities to the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/collisiontest.html">Collision Testing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/collisiontest.html#collision-groups">Collision Groups</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest/collisiontest.html#collision-exclusion-groups">Collision Exclusion Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/selectiongroup.html">Selection Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/customizingmodel.html">Customizing the Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest/testing.html">Testing the Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#model-file-name-conventions">Model File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#models">Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/customization.html">Model Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/dialogeditor.html">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/dialogeditor.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization/startshutmacro.html">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-declaration-macro">The Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-model-startup-macro">The Model Startup Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-model-shutdown-macro">The Model Shutdown Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/startshutmacro.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/startshutmacro.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization/eventmacro.html">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-tape-event-macro-gener-only">The Tape Event Macro <span class="smalltext">(GENER only)</span></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-motion-event-macro">The Motion Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-rapid-event-macro">The Rapid Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-feed-event-macro">The Feed Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization/eventmacro.html#the-tool-event-macro">The Tool Event Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization/eventmacro.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/userfuncmacro.html">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/userfuncmacro.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../macros/index.html">Virtual Machine Macros</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../macros/language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../macros/language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/invocation.html#outputting-the-event-output">Outputting the Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../macros/stringformat.html">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../macros/stringformat.html#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../macros/stringformat.html#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#virtual-machine-variables">Virtual Machine Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#model-macro-variables">Model Macro Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#model-definition-variables">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/vmvar.html">Virtual Machine Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Model Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Model Definition Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/axesfunc.html">Axes Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/channelfunc.html">Channel Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/compensationfunc.html">Compensation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/componentfunc.html">Component Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/coordinatefunc.html">Coordinate System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/displayfunc.html">Display Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/workpiecefunc.html">Fixture, Part and Stock Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/probefunc.html">Probe and Collision Test Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/toolfunc.html">Tool and Holder Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Using VM with GENER and CERUN</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="selectvm.html">Selecting a Virtual Machine Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="selectvm.html#selecting-a-model-from-the-launch-panel">Selecting a Model from the Launch Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="selectvm.html#selecting-a-model-from-the-command-prompt">Selecting a Model from the Command Prompt</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enable-disable-simulation">Enable/Disable Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-disable-collision-overtravel-detection-and-avoidance">Enable/Disable Collision/Overtravel Detection and Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-disable-positioning-collision-avoidance">Enable/Disable Positioning Collision Avoidance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-disable-flute-length-optimization">Enable/Disable Flute Length Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-positioning-under-program-control">Camera Positioning under Program Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-predefined-setup">Load Predefined Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adjust-model-axes-travel-limits">Adjust Model Axes Travel Limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adjust-model-axes-travel-limits-for-smartpath">Adjust Model Axes Travel Limits for SmartPATH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimize-positioning-with-smartpath">Optimize Positioning with SmartPATH™</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#positioning-clearance">Positioning Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#positioning-velocity">Positioning Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-home-positioning">Reference Home Positioning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimize-air-cutting-with-smartcut">Optimize Air-Cutting with SmartCUT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#air-cut-clearance">Air-cut Clearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#air-cut-velocity">Air-cut Velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#air-cut-and-smartpath">Air-cut and SmartPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimize-cutting-feed-with-smartfeed">Optimize Cutting Feed with SmartFEED</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="actsimwindow.html">Activating the Simulation Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adjustlight.html">Adjusting Lighting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addpartfixstock.html">Adding Parts, Fixtures and Stock to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addpartfixstock.html#differences-between-part-stock-and-fixture-components">Differences between Part, Stock and Fixture Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addpartfixstock.html#creating-part-stock-and-fixture-components">Creating Part, Stock and Fixture Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="setfixcomp.html">Setting Fixture Compensation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addtooldef.html">Adding Tooling Definitions to the Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="addtooldef.html#lathe-tool-definition">Lathe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addtooldef.html#milling-tool-definition">Milling Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addtooldef.html#probe-tool-definition">Probe Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addtooldef.html#additive-tool-definition">Additive Tool Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addtooldef.html#holder-definition">Holder Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="settoolcomp.html">Setting Tool Compensation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="settoolcomp.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settoolcomp.html#diameter-compensation">Diameter Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monvmres.html">Monitoring Virtual Machine’s Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="monvmres.html#animation-control">Animation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monvmres.html#head-up-display">Head-Up Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monvmres.html#tool-path-display">Tool Path Display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monvmres.html#controller-time-line">Controller Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monvmres.html#part-stock-comparison">Part / Stock Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monvmres.html#measurement">Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Virtual Machine Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/inputcontrol.html">Input Controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#standard-keyboard-mapping">Standard Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#construction-keyboard-mapping">Construction Keyboard Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#mouse-mapping">Mouse Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/inputcontrol.html#time-line-keyboard-mapping">Time Line Keyboard Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/toolbar.html">Toolbars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#view-cerun-gener-only">View <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-construct-quest-only">VM Construct <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-mode-cerun-gener-only">VM Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-grid">VM Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-view">VM View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-view-filter-cerun-gener-only">VM View Filter <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-measure">VM Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-animation-cerun-gener-only">VM Animation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-tool-path-cerun-gener-only">VM Tool Path <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-cross-section-cerun-gener-only">VM Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toolbar.html#vm-annotation-cerun-gener-only">VM Annotation <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/menubar/index.html">Menu Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/main.html">Simulation»Virtual Machine <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/controller.html">Simulation»Controller <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/mode.html">Simulation»Mode <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T) <span class="smalltext">(CERUN &amp; GENER only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#tools">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#lathe-tool-type">Lathe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#mill-tool-type">Mill Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#probe-tool-type">Probe Tool Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#additive-tool-type">Additive Tool Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#holders">Holders</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#profile-holder-type">Profile Holder Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../reference/menubar/toolholderhead.html#generic-holder-type">Generic Holder Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/constructentity.html">Simulation»Construct Entity <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycube">Simulation»Construct Entity»Cube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycylinder">Simulation»Construct Entity»Cylinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitycone">Simulation»Construct Entity»Cone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitysphere">Simulation»Construct Entity»Sphere</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entityrevolved">Simulation»Construct Entity»Revolved</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entityextruded">Simulation»Construct Entity»Extruded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitymesh">Simulation»Construct Entity»Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructentity.html#simulationconstruct-entitypicture">Simulation»Construct Entity»Picture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/constructaxis.html">Simulation»Construct Axis <span class="smalltext">(QUEST only)</span></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axislinear-axis">Simulation»Construct Axis»Linear Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisrotary-axis">Simulation»Construct Axis»Rotary Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axiscurve-axis">Simulation»Construct Axis»Curve Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axistool-axis">Simulation»Construct Axis»Tool Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisstock-axis">Simulation»Construct Axis»Stock Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axishead-axis">Simulation»Construct Axis»Head Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/constructaxis.html#simulationconstruct-axisreference-axis">Simulation»Construct Axis»Reference Axis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/show.html">Simulation»Show</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-path-ctrl-t-cerun-gener-only">Simulation»Show»Tool Path (Ctrl T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-vector-cerun-gener-only">Simulation»Show»Tool Vector <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t-cerun-gener-only">Simulation»Show»Tool Path as Overlay (Ctrl Shift T) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowfilters-cerun-gener-only">Simulation»Show»Filters <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowcross-section-cerun-gener-only">Simulation»Show»Cross Section <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowworkpiece-coords-ctrl-w-cerun-gener-only">Simulation»Show»Workpiece Coords (Ctrl W) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshownext-display-ctrl-d-cerun-gener-only">Simulation»Show»Next Display (Ctrl D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/show.html#simulationshowprevious-display-ctrl-shift-d-cerun-gener-only">Simulation»Show»Previous Display (Ctrl Shift D) <span class="smalltext">(CERUN &amp; GENER only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/wcs.html">Simulation»Use World CS <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/group.html">Simulation»Group Selection <span class="smalltext">(QUEST only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationhide-selection-ctrl-b-quest">Simulation»Hide Selection (Ctrl B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionhide-in-view-ctrl-b-gener-and-cerun">Simulation»Selection»Hide in View (Ctrl B) <span class="smalltext">(GENER and CERUN)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionhide-in-all-views-gener-and-cerun-only">Simulation»Selection»Hide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationshow-all-rehide-ctrl-alt-b-quest">Simulation»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b-gener-and-cerun-only">Simulation»Selection»Show All/Rehide (Ctrl Alt B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectionshow-all-rehide-in-all-views-gener-and-cerun-only">Simulation»Selection»Show All/Rehide in All Views <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationinvert-hide-state-ctrl-shift-b-quest">Simulation»Invert Hide State (Ctrl Shift B) <span class="smalltext">(QUEST)</span></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b-gener-and-cerun-only">Simulation»Selection»Invert Hide State (Ctrl Shift B) <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/menubar/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/setup.html">Simulation»Open Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/menubar/setup.html#simulationsave-setup-gener-and-cerun-only">Simulation»Save Setup <span class="smalltext">(GENER and CERUN only)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Virtual Machine V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Using VM with GENER and CERUN</a></li>
+      <li class="breadcrumb-item active">Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controlling-virtual-machine-from-the-part-program-gener-only">
+<h1>Controlling Virtual Machine from the Part Program <span class="smalltext">(GENER only)</span><a class="headerlink" href="#controlling-virtual-machine-from-the-part-program-gener-only" title="Link to this heading"></a></h1>
+<p>GENER can use VM in a proactive fashion, to detect potential collisions
+and optimize the generated MCD, where possible, by taking corrective
+action to avoid these collisions. GENER provides a post-processor
+command interface to VM, primarily to define a collision avoidance
+plane, but also to control other aspects of the VM simulation.</p>
+<p>GENER provides post-processor commands to control VM for the following
+purposes, each of which is described in the sections that immediately
+follow:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#enabledisablesimulation"><span class="std std-ref">Enable/Disable Simulation</span></a></p></li>
+<li><p><a class="reference internal" href="#enabledisablecollisinovertravel"><span class="std std-ref">Enable/Disable Collision/Overtravel Detection and Avoidance</span></a></p></li>
+<li><p><a class="reference internal" href="#enabledisablecollisinavoidance"><span class="std std-ref">Enable/Disable Positioning Collision Avoidance</span></a></p></li>
+<li><p><a class="reference internal" href="#enabledisableflutelengthoptimization"><span class="std std-ref">Enable/Disable Flute Length Optimization</span></a></p></li>
+<li><p><a class="reference internal" href="#camerapositioningunderprogramcontrol"><span class="std std-ref">Camera Positioning under Program Control</span></a></p></li>
+<li><p><a class="reference internal" href="#loadpredefinedsetup"><span class="std std-ref">Load Predefined Setup</span></a></p></li>
+<li><p><a class="reference internal" href="#adjustmodelaxestravellimits"><span class="std std-ref">Adjust Model Axes Travel Limits</span></a></p></li>
+<li><p><a class="reference internal" href="#adjustmodelaxestravellimitsforsmartpath"><span class="std std-ref">Adjust Model Axes Travel Limits for SmartPATH</span></a></p></li>
+<li><p><a class="reference internal" href="#optimizepositioningwithsmartpath"><span class="std std-ref">Optimize Positioning with SmartPATH™</span></a></p></li>
+<li><p><a class="reference internal" href="#optimizeaircuttingwithsmartcut"><span class="std std-ref">Optimize Air-Cutting with SmartCUT</span></a></p></li>
+<li><p><a class="reference internal" href="#optimizecuttingfeedwithsmartfeed"><span class="std std-ref">Optimize Cutting Feed with SmartFEED</span></a></p></li>
+</ul>
+<p>GENER and CERUN can also control the simulation with macro functions.
+CERUN does not provide a collision avoidance function because CERUN is
+used only to verify an MCD program; CERUN does not change the MCD
+program in any way.</p>
+<p>It is important to note that VM post-processor commands and macro
+functions will have no effect if VM was not activated when GENER was
+first started. VM can be activated by selecting the “Enable Simulation”
+checkbox on the launch panel VM pane, or by specifying the “/model”
+option on the GENER command line.</p>
+<section id="enable-disable-simulation">
+<span id="enabledisablesimulation"></span><h2>Enable/Disable Simulation<a class="headerlink" href="#enable-disable-simulation" title="Link to this heading"></a></h2>
+<p>The ADAPTV post-processor command can be used to enable or disable
+simulation of the model. This global command setting takes precedence
+over all other settings that control simulation behavior.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ADAPTV /}
+\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{NORMAL} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>ON enables simulation, which is the default. OFF disables simulation.
+While disabled, the simulation windows will no longer be updated by the
+post-processor, and most importantly, simulation diagnostics and
+collision avoidance motions will no longer be output. Running with
+ADAPTV/OFF is equivalent to running without VM at all.</p>
+<p>NORMAL enables simulation during regular post-processing, and disables
+simulation during $FLOOK and $FINFO macro function look-ahead
+processing. This speeds look-ahead processing, but should only be used
+if the look-ahead functions of the post-processor are not affected by
+collision testing. Alternatively, specify the ADAPTV/OFF command at the
+start of any look-ahead operation that does not require VM. Note that
+ADAPTV/ON does not need to be specified before the look-ahead ends,
+since any settings made in look-head (e.g., turning VM off) are reset
+when the look-ahead ends. For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>IF/$FLOOK(1,…).EQ.0
+  ADAPTV/OFF
+  …
+ENDOF/IF
+</pre></div>
+</div>
+</div></blockquote>
+<p>The ADAPTV command will have no effect if VM was not activated when
+GENER was first started.</p>
+</section>
+<section id="enable-disable-collision-overtravel-detection-and-avoidance">
+<span id="enabledisablecollisinovertravel"></span><h2>Enable/Disable Collision/Overtravel Detection and Avoidance<a class="headerlink" href="#enable-disable-collision-overtravel-detection-and-avoidance" title="Link to this heading"></a></h2>
+<p>The following ADAPTV command controls collision and overtravel detection
+and avoidance:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ADAPTV / PROTCT},
+\begin{pmatrix}\begin{array}{l} \textbf{SCAN} \\ \textbf{TRAV} \\ \textbf{AVOID} \\ \textbf{ALL} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>SCAN diagnoses collisions and overtravel conditions. TRAV avoids
+overtravel conditions if possible during path-planning. AVOID
+avoids collisions if possible during path-planning. ALL avoids both
+overtravel and collisions during path planning. OFF disables collision
+and overtravel reporting and testing altogether. ON re-enables the last
+specified ADAPTV/PROTCT setting (AVOID is the default). When active,
+collision and overtravel diagnostic messages will be reported in the
+GENER listing file and the Console window, as follows:</p>
+<ul class="simple">
+<li><p>Error #1409008: Simulation reported collision between <em>object1</em> and
+<em>object2</em>.</p></li>
+<li><p>Error #1409009: Simulation reported overtravel: <em>axis_name</em>.</p></li>
+</ul>
+<p>Path-planning based overtravel avoidance is automatically enabled in
+GENER during 5-axis machining whenever LINTOL/SCAN (linearization path
+planning) or LINTOL/ROTREF (rotary turn-around) are active. These
+commands are documented in the “Icam Post V26 User Guide”. When collision
+avoidance is enabled (AVOID), GENER uses VM during look-ahead scanning
+in an attempt to find a tool path that is also collision free. If a good
+tool path does not exist (i.e., all tool paths contain unavoidable
+problems), then GENER will report:</p>
+<ul class="simple">
+<li><p>Error #1409012: Simulation feedback reports that it is not possible
+to avoid collision or overtravel.</p></li>
+</ul>
+<p>From the perspective of the post-processor, running with
+ADAPTV/PROTCT,OFF is equivalent to running path-planning without VM at
+all. Exercise caution when using this command. The ADAPTV/PROTCT command
+will have no effect if VM was not activated when GENER was first
+started, or if ADAPTV/OFF is currently in effect.</p>
+</section>
+<section id="enable-disable-positioning-collision-avoidance">
+<span id="enabledisablecollisinavoidance"></span><h2>Enable/Disable Positioning Collision Avoidance<a class="headerlink" href="#enable-disable-positioning-collision-avoidance" title="Link to this heading"></a></h2>
+<p>Positioning collision avoidance can be enabled under program control to
+avoid collisions that occur during RAPID positioning motions. When
+enabled, a positioning collision avoidance motion will be attempted when
+a collision occurs somewhere during a positioning motion, while at the
+same time both the start-point and end-point of the positioning motion
+are collision free. The collision avoidance motion includes an initial
+rapid retract along a specified machine linear axis to position clear of
+the work, followed by a rapid motion along the other two linear axes to
+the end-point position, and finally a rapid plunge of the tool to the
+end-point position.</p>
+<p>Positioning collision avoidance is controlled with the ADAPTV command as
+follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ADAPTV / CLEAR} \;
+\icamrange{4.6}{0} \begin{bmatrix}\begin{array}{l}
+,\! \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \end{array}\end{pmatrix} ,coord \begin{bmatrix} ,\! \begin{array}{l} \textbf{PLUS} \\ \textbf{MINUS}\end{array}\end{bmatrix} \\
+, \textbf{LENGTH}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}
+\end{array}\end{bmatrix}\)</span></p>
+</div></blockquote>
+<p>The clearance avoidance plane is established along the named machine
+axis (XAXIS, YAXIS or ZAXIS) at the specified machine coordinate
+position (not part coordinates). The first motion of a collision
+avoidance sequence will be in the specified direction (PLUS or MINUS) to
+the named axis position. PLUS is assumed if the direction keyword is
+omitted. No automatic clearance avoidance will be attempted if the named
+axis is already at or beyond the clearance position. If LENGTH,OFF is
+specified, then length tool compensation will be removed on the motion
+to the clearance position and reinstated on the motion back to the
+end-point position. The default (LENGTH,ON) leaves length compensation
+unchanged during collision avoidance motions.</p>
+<p>Positioning clearance avoidance is not active by default. A clearance
+axis and coordinate must first be specified to activate this feature.
+Once this is done, the feature can be disabled (OFF) and re-enabled (ON)
+as required using the following command:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ADAPTV / CLEAR}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The ADAPTV/CLEAR feature can produce two different diagnostics. One is a
+message indicating that the programmed positioning sequence was
+successfully altered to avoid a collision. The second is an error
+stating that a collision could not be avoided.</p>
+<ul class="simple">
+<li><p>Message #1409013: Simulation adjusted the RAPID positioning sequence
+to avoid a collision.</p></li>
+<li><p>Error #1409012: Simulation feedback reports that it is not possible
+to avoid collision or overtravel.</p></li>
+</ul>
+<p>The ADAPTV/CLEAR command will have no effect if VM was not activated
+when GENER was first started, or if ADAPTV/OFF, ADAPTV/PROTCT,SCAN or
+ADAPTV/PROTCT,OFF is currently in effect.</p>
+</section>
+<section id="enable-disable-flute-length-optimization">
+<span id="enabledisableflutelengthoptimization"></span><h2>Enable/Disable Flute Length Optimization<a class="headerlink" href="#enable-disable-flute-length-optimization" title="Link to this heading"></a></h2>
+<p>Flute length optimization (FLO) can be enabled under program control to
+determine the maximum required flute length of cutting tools. When
+enabled, material removal simulation (MRS) will perform additional
+calculations to determine the maximum penetration of the tool into the
+in-process stock. The maximum required flute length is displayed in the
+GENER or CERUN listing file when the tool is unloaded, and in the
+summary at the end of processing.</p>
+<p>The following ADAPTV command controls flute length optimization:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ADAPTV / DEPTH} \,\big[, \textbf{OPTION} ,n \,\big] \big[, \textbf{ADJUST},val \,\big]\)</span></p>
+</div></blockquote>
+<p>The OPTION value selects the method used for FLO calculations.</p>
+<p>OPTION,1 (the default) selects a faster but less accurate method. It
+measures flute length usage only up to the cutter height. The accuracy
+decreases as the cutting direction more closely approaches that of the
+tool axis. It has good accuracy when the tool is moving perpendicular to
+the tool axis.</p>
+<p>OPTION,2 is significantly slower but more accurate. It measures the
+maximum height of the contact area between stock and the combined tool
+body and cutting areas. The ADJUST,<em>val</em> parameter can be used to
+extend the height of the tool by the specified amount, but only for FLO
+calculations (this does not affect any other aspect of the simulation).</p>
+<p>Flute length optimization is not active by default. The feature can be
+disabled (OFF) and re-enabled (ON) as required using the following
+command:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ADAPTV / DEPTH}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The ADAPTV/DEPTH feature can produce two different diagnostics. One is a
+message indicating the tool number, actual flute length, required flute
+length and the Virtual Machine simulation time when this maximum was
+first reached. The second is a warning providing all of the same
+information, but also indicating that the flute length of the tool is
+smaller than the required length.</p>
+<ul class="simple">
+<li><p>Message #1329030: Tool <em>tool</em>, nominal flute length <em>value</em>, maximum
+flute length <em>value</em> recorded at VM time <em>hh:mm:ss</em>.</p></li>
+<li><p>Warning #1329031: Tool <em>tool</em>, nominal flute length <em>value</em> exceeded,
+maximum flute length <em>value</em> recorded at VM time <em>hh:mm:ss</em>.</p></li>
+</ul>
+<p>The ADAPTV/DEPTH command will have no effect if MRS was not activated
+when GENER or CERUN was first started, or if ADAPTV/OFF is currently in
+effect.</p>
+</section>
+<section id="camera-positioning-under-program-control">
+<span id="camerapositioningunderprogramcontrol"></span><h2>Camera Positioning under Program Control<a class="headerlink" href="#camera-positioning-under-program-control" title="Link to this heading"></a></h2>
+<p>The following CAMERA command will position the camera to one of 10
+predefined positions:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{CAMERA /} \,a\)</span></p>
+</div></blockquote>
+<p>Predefined camera positions are described <a class="reference internal" href="../reference/menubar/main.html#predefinedcameraposionsnavigationsim"><span class="std std-ref">here</span></a>.</p>
+<p>The CAMERA command will have no effect if VM was not activated when
+GENER was first started, or if ADAPTV/OFF is currently in effect, or if
+“Enable CL Camera” is not checked in the Simulation»Options dialog
+(Ctrl Alt O), or if the specified camera position has not been defined.</p>
+</section>
+<section id="load-predefined-setup">
+<span id="loadpredefinedsetup"></span><h2>Load Predefined Setup<a class="headerlink" href="#load-predefined-setup" title="Link to this heading"></a></h2>
+<p>The following LOAD command will load the specified or next setup:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{LOAD / SETUP} \,\big[,n\,\big]\)</span></p>
+</div></blockquote>
+<p>Setups are defined in the Simulation Manager, as described <a class="reference internal" href="../reference/menubar/manager.html#sim-manager"><span class="std std-ref">here</span></a>.
+If a setup identifier <em>n</em> is given, then the simulation session will
+change to match the specified setup. If the setup identifier <em>n</em> is
+omitted, then the next sequential setup will be selected, as listed in
+the Simulation Manager. Setups can be loaded in any order and the setup
+identifiers do not have to be sequential.</p>
+<p>The LOAD/SETUP command will have no effect if VM was not activated when
+GENER was first started, or if the specified setup has not been defined.</p>
+</section>
+<section id="adjust-model-axes-travel-limits">
+<span id="adjustmodelaxestravellimits"></span><h2>Adjust Model Axes Travel Limits<a class="headerlink" href="#adjust-model-axes-travel-limits" title="Link to this heading"></a></h2>
+<p>The following LIMIT commands will adjust axes travel limits of GENER and
+CERUN controllable axes that are defined in the model. Model travel
+limits can also be adjusted using the <a class="reference internal" href="../functions/axesfunc.html#func-fmslimit"><span class="std std-ref">$FMSLIMIT function</span></a>.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{LIMIT / SIMUL} \,
+\icamrange{6}{1} \begin{pmatrix} ,\!
+\begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} min,max \\ \rule{0pt}{2.5ex} \textbf{RECALL} \end{array}\end{pmatrix}
+\end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{LIMIT / SIMUL} \,
+\icamrange{6}{1} \begin{pmatrix} ,\!
+\begin{pmatrix}\begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS,TABLE} \\ \textbf{BAXIS,TABLE} \\ \textbf{CAXIS,TABLE} \\ \textbf{RAM} \big[,n\,\big] \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} min,max \\ \rule{0pt}{2.5ex} \textbf{ON} \\ \textbf{OFF} \\ \textbf{RECALL} \end{array}\end{pmatrix}
+\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The minimum and maximum travel can be set for named axes. OFF can be
+specified for rotary axes to remove travel restrictions; ON enables the
+previously specified rotary limits (if any). RECALL resets the travel
+limits to those defined by the model developer.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{LIMIT \ SIMUL},\textbf{RECALL}\)</span></p>
+</div></blockquote>
+<p>The above command resets the travel limits of all GENER and CERUN
+controllable axes to those defined by the model developer.</p>
+</section>
+<section id="adjust-model-axes-travel-limits-for-smartpath">
+<span id="adjustmodelaxestravellimitsforsmartpath"></span><h2>Adjust Model Axes Travel Limits for SmartPATH<a class="headerlink" href="#adjust-model-axes-travel-limits-for-smartpath" title="Link to this heading"></a></h2>
+<p>The following LIMIT/SIMUL commands adjust the axes travel limits of the VM for SmartPATH analysis:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{LIMIT / SIMUL},\textbf{SMARTP} \,
+\icamrange{6}{1} \begin{pmatrix} ,\!
+\begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} min,max \\ \rule{0pt}{2.5ex} \textbf{RECALL} \end{array}\end{pmatrix}
+\end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{LIMIT / SIMUL},\textbf{SMARTP} \,
+\icamrange{6}{1} \begin{pmatrix} ,\!
+\begin{pmatrix}\begin{array}{l} \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS,TABLE} \\ \textbf{BAXIS,TABLE} \\ \textbf{CAXIS,TABLE} \\ \textbf{RAM} \big[,n\,\big] \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} min,max \\ \rule{0pt}{2.5ex} \textbf{ON} \\ \textbf{OFF} \\ \textbf{RECALL} \end{array}\end{pmatrix}
+\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The SMARTP option activates the specified limits only during SmartPATH analysis.
+There are two additional conditions for applying the specified limit:</p>
+<ul class="simple">
+<li><p>The start and goal points of the positioning sequence being optimized must be within the specified limit.
+This condition allows the tool to be located outside the specified limit when at the tool change or home position.</p></li>
+<li><p>The post processor-VM combination must have $KINENG=1 specified.</p></li>
+</ul>
+<p>This command is primarily intended for machines with large travel ranges.
+It increases the optimality of generated positioning motions by reducing the travel range solely for SmartPATH analysis.
+The command is modal, so it only needs to be specified once, for example, in the machine startup macro.
+The specified travel range should be larger than the bounding box of the stock and related fixtures.
+The size of the bounding box can be determined using the undocumented $FMSMSHR function (contact Support for details).</p>
+</section>
+<section id="optimize-positioning-with-smartpath">
+<span id="optimizepositioningwithsmartpath"></span><h2>Optimize Positioning with SmartPATH™<a class="headerlink" href="#optimize-positioning-with-smartpath" title="Link to this heading"></a></h2>
+<p>The SmartPATH add-on (sph260 license option) optimizes part program
+positioning motions during post-processing. It can replace unsafe or
+inefficient CAM generated positioning motions, with safe optimized
+motions based on the machine’s kinematics, physical travel limitations
+and axes positioning rates. SmartPATH ensures the generated multi-axis
+motions do not cause collisions with dynamically changing in-process
+stock and all other surroundings, such as the fixtures and moving as
+well as non-moving components of the machine.</p>
+<p>SmartPATH is activated using the following command:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / } \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>ON and OFF enable or disable positioning motion optimization. When
+activated, RAPID and high feed positioning motions (as defined via the
+FEDRAT/RAPID command) will be replaced by SmartPATH so as to minimize
+positioning time, while avoiding collisions and over-travel conditions.</p>
+<p>SmartPATH uses Virtual Machine simulation to test for collision and
+over-travel conditions during post-processing. SmartPATH uses Material
+Removal Simulation (xmr260 license option) to test for collisions
+between the in-process stock and all other components in the simulation
+(e.g., machine, fixtures, tooling).</p>
+<section id="positioning-clearance">
+<h3>Positioning Clearance<a class="headerlink" href="#positioning-clearance" title="Link to this heading"></a></h3>
+<p>There are various commands that can be used to specify minimum clearance
+distances to respect when generating positioning tool paths:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / SAFE}, dist\)</span></p>
+</div></blockquote>
+<p>The SAFE parameter specifies a minimum safety distance to apply between
+the tool and all other components in the simulation during positioning
+motions. The tool will be positioned at the cutting feed rate when
+approaching or disengaging from the cut within this distance to the
+stock. This can be used to ensure the tool is always moving at feed when
+cutting stock. Specify a distance of 0 (zero) to inhibit this safety
+test.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / WALL}, dist\)</span></p>
+</div></blockquote>
+<p>The WALL parameter specifies a minimum safety distance to apply between
+the side of the tool and the stock at the start and end of positioning
+motions. The tool will be positioned laterally at the cutting feed rate
+when within this distance to the stock. This can be used to ensure the
+tool does not leave dwell marks due to contact along the side of the
+tool. Specify a distance of 0 (zero) to inhibit this safety test.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / CLEAR}, dist\)</span></p>
+</div></blockquote>
+<p>The CLEAR parameter specifies a minimum axial safety distance to apply
+at rapid when approaching or disengaging from the cut. This ensures a
+“squared-off” style of motion, with the last positioning approach motion
+being a plunge and the first positioning clearance motion being a
+retract. Specify a distance of 0 (zero) to inhibit additional axial
+positioning clearance.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP /} \big[\, \textbf{BACK}, bdist \,\big] \big[, \textbf{FEDTO}, \mathit{fdist} \,\big]\)</span></p>
+</div></blockquote>
+<p>The BACK parameter specifies a minimum axial safety retract distance to
+apply at cutting feed when disengaging from the cut. This is applied
+before any CLEAR axial clearance retract, but after any WALL lateral
+clearance. The FEDTO parameter specifies a minimum axial safety plunge
+distance to apply at cutting feed when engaging to the start of the cut.
+This is applied after any CLEAR axial clearance plunge, but before any
+WALL lateral clearance. Specify a distance of 0 (zero) to inhibit
+additional axial feed clearance.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / CYCLE}, \begin{pmatrix}\begin{array}{l} \textbf{RETURN} \\ \textbf{CLEAR} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The CYCLE parameter determines where in a cycle that SmartPATH can
+connect positioning motions. RETURN uses the higher of the cycle return
+or clearance planes. CLEAR (the default) uses the cycle clearance plane,
+ignoring any RETURN value coded in CYCLE commands.</p>
+</section>
+<section id="positioning-velocity">
+<h3>Positioning Velocity<a class="headerlink" href="#positioning-velocity" title="Link to this heading"></a></h3>
+<p>There are various commands that can be used to specify the velocity to
+use when approaching or disengaging from the cut:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / RAPID} \,\big[, \textbf{OFF} \,\big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{SMARTP /}
+\begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} \mathit{feed} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>By default SmartPATH uses RAPID positioning when replacing CAM generated
+RAPID positioning motions, or uses high feed positioning if the CAM
+generated positioning path includes one or more high feed moves. The
+RAPID qualifier (alone) forces all rapid positioning; alternately a
+positioning feed can be specified. The OFF qualifier selects the default
+behavior.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP /}
+\begin{pmatrix}\begin{array}{l} \textbf{FEDTO} \\ \textbf{BACK} \\ \textbf{WALL} \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix}
+, \mathit{feed}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{SMARTP /}
+\begin{pmatrix}\begin{array}{l} \textbf{FEDTO} \\ \textbf{BACK} \\ \textbf{WALL} \end{array}\end{pmatrix}
+, \textbf{OFF}\)</span></p>
+</div></blockquote>
+<p>By default SmartPATH uses the programmed feed for final approach
+(FEDTO), initial retract (BACK) and wall clearance (WALL) motions. An
+alternate feed can be individually specified for each of these types of
+motions. The OFF qualifier selects the default behavior.</p>
+</section>
+<section id="reference-home-positioning">
+<h3>Reference Home Positioning<a class="headerlink" href="#reference-home-positioning" title="Link to this heading"></a></h3>
+<p>SmartPATH can optionally compute the positioning path to and from the
+machine reference home and/or tool change positions.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / SAFPOS}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>ON and OFF enable or disable positioning motion optimization to and from
+machine reference positions.</p>
+<p>OFF is the default, which requires that the NC programmer include one
+clearance positioning motion following each tool change and another just
+before the next tool change or end of program. When OFF, it is the NC
+programmers responsibility to safely position between these clearance
+points and the machine reference frame. When ON, the Virtual Machine
+model must contain the reference home and/or tool change positions, so
+that SmartPATH can determine the motion of the tool as it moves between
+the workpiece coordinate system and the machine reference frame.</p>
+<p>Additional SMARTP/SAFPOS commands described below can be used to fine
+tune motions to and from machine reference positions:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / SAFPOS},\textbf{TOOL},
+\begin{pmatrix}\begin{array}{l} dist \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The TOOL parameter specifies a minimum safety distance to apply between
+the cutting tool and other objects, specifically when moving to or from
+the machine reference home. This additional safety can help account for
+any uncertainty involved when making the transition between workpiece
+and machine frames. The OFF qualifier disables additional tool safety
+distance; the ON restores the last specified safety distance.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / SAFPOS},\textbf{GROUP}
+\big[,'name' \,\big]
+, \begin{pmatrix}\begin{array}{l} dist \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The GROUP parameter specifies a minimum safety distance to apply between
+the named model component group (default name “smartpath”) and other
+objects, specifically when moving to or from the machine reference home.
+The OFF qualifier disables additional group safety distance; the ON
+restores the last specified safety distance.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / SAFPOS},
+\begin{pmatrix}\begin{array}{l} \textbf{POSX} \\ \textbf{POSY} \\ \textbf{POSZ} \\ \textbf{RADIUS} \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} dist \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The above command provides the ability to tightly control the entry and
+exit position when making the transition between workpiece and machine
+reference frames. One axis of the machine can be constrained to position
+to a specified machine value, where POSX, POSY or POSZ define the X, Y
+or Z axes value of the positioning move. Alternately, the machine can be
+forced to position to the surface of a sphere, centered at the workpiece
+origin with a specified radius. Effectively, the command specifies bounding
+surface on which tool can be safely located. The OFF qualifier disables special
+bounding surface of entry/exit positioning.</p>
+<p>Note that all distance and position quantities mentioned in this section should be expressed
+in CL file units and any position coordinates should be expressed in CL file (part frame)
+coordinates system.</p>
+</section>
+</section>
+<section id="optimize-air-cutting-with-smartcut">
+<span id="optimizeaircuttingwithsmartcut"></span><h2>Optimize Air-Cutting with SmartCUT<a class="headerlink" href="#optimize-air-cutting-with-smartcut" title="Link to this heading"></a></h2>
+<p>The SmartCUT add-on (sct260 license option) optimizes part program
+cutting motions. It uses material removal simulation to detect when the
+tool is not engaged with the material (i.e., is not cutting) while at
+the same time being programmed to move at a cutting feed. Where feasible
+SmartCUT changes these time wasting “air-cutting” motions to RAPID or
+high-feed.</p>
+<p>SmartCUT also detects RAPID or high-feed motions that cut into the
+in-process stock and (in addition to generating warning diagnostics)
+automatically reduces the feed rate to the upcoming programmed feed to
+avoid tool breakage. Similarly, when leaving the material, SmartCUT
+detects RAPID motions that cut the stock when leaving the part, and
+automatically slows down these cutting motions to the last programmed
+feed.</p>
+<p>SmartCUT is activated using the following command:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / AIRCUT}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>ON and OFF enable or disable air-cut optimization. When active, SmartCUT
+uses Material Removal Simulation (xmr260 license option) to detect when
+material is being removed by the cutting tool.</p>
+<p>SmartCUT and SmartPATH when used together can significantly improve NC
+programs containing time wasting air cuts. SmartCUT will detect the
+start point and subsequent end points of air-cut segments as normal, but
+instead of increasing the velocity along the programmed path will
+instead use SmartPATH to compute the fastest path to the start of the
+next cut. SmartPATH takes into account the current state of the
+in-process stock as well as part, fixtures and machine components, when
+computing the shortest path to the start of cut.</p>
+<p>Where desired, optimization can be restricted to air-cutting motion
+segments meeting a basic length requirement:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / AIRCUT},\textbf{LENGTH}, dist\)</span></p>
+</div></blockquote>
+<p>The LENGTH parameter specifies the minimum length of an air-cutting tool
+path that can be a candidate for SmartCUT optimization. Air-cutting tool
+paths less than this length are left unchanged. Specify a distance of 0
+(zero) to remove the minimum length restriction (the default).</p>
+<section id="air-cut-clearance">
+<h3>Air-cut Clearance<a class="headerlink" href="#air-cut-clearance" title="Link to this heading"></a></h3>
+<p>The following commands that can be used to specify minimum clearance
+distances to respect when performing air-cut optimizations:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / AIRCUT},\textbf{MINDST}, dist\)</span></p>
+</div></blockquote>
+<p>The MINDST parameter specifies a minimum safety clearance distance that
+must exist between tool and in-process stock, before the motion is
+considered air-cutting. Specify a distance of 0 (zero) to inhibit this
+safety test.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / AIRCUT} \,\big[,\textbf{BACK}, bdist \,\big] \big[,\textbf{FEDTO}, \mathit{fdist} \,\big]\)</span></p>
+</div></blockquote>
+<p>The BACK parameter specifies a minimum safe disengage distance to use
+when making the transition from cutting feed to air-cut positioning; the
+FEDTO parameter specifies a minimum safe engage distance to use when
+making the transition from air-cut positioning to cutting feed. These
+are the distances to continue interpolating at feed, despite being in an
+air-cut condition. Specify a distance of 0 (zero) to inhibit additional
+disengage/engage clearances.</p>
+</section>
+<section id="air-cut-velocity">
+<h3>Air-cut Velocity<a class="headerlink" href="#air-cut-velocity" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / AIRCUT}, \textbf{RAPID} \,\big[,\textbf{OFF}\,\big]\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{ SMARTP / AIRCUT},
+\begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix}
+, \begin{pmatrix}\begin{array}{l} \mathit{feed} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>By default, the maximum machine feed is assigned to all air-cut motions.
+This can be changed by specifying a different feed value. Specify the
+RAPID qualifier (alone) to replace air-cut feed motions by rapid
+positioning options. The OFF qualifier resets air-cut positioning to use
+the default maximum machine feed.</p>
+</section>
+<section id="air-cut-and-smartpath">
+<h3>Air-cut and SmartPATH<a class="headerlink" href="#air-cut-and-smartpath" title="Link to this heading"></a></h3>
+<p>In most cases, air cutting motions are optimized out by SmartPATH. However, there
+are instances where feed motions are carefully planned and should not be removed by
+SmartPATH, regardless of whether they are cutting in the air or not. The AIRCUT,AP
+option provides control over this situation.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / AIRCUT}, \textbf{AP}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The ON option enables for air cutting motions to be automatically replaced by
+the SmartPATH generated motions. This is the default behavior.</p>
+<p>The OFF option prevents automatic replacements of SmartCUT detected air cuts
+with SmartPATH generated positioning motions. Instead, if needed, the user can
+define and utilize FEDRAT/RAPID velocity threshold to indicate which SmartCUT
+detected air cuts motions should be replaced by SmartPATH positioning.</p>
+</section>
+</section>
+<section id="optimize-cutting-feed-with-smartfeed">
+<span id="optimizecuttingfeedwithsmartfeed"></span><h2>Optimize Cutting Feed with SmartFEED<a class="headerlink" href="#optimize-cutting-feed-with-smartfeed" title="Link to this heading"></a></h2>
+<p>The SmartFEED add-on (sfd260 license option) optimizes part program
+cutting motions. It uses material removal simulation to automatically
+recalculate the best machining feed rate based on the machine tool
+capabilities, tool reference cuts, and the real-time volume of
+in-process stock removed by the tool.</p>
+<p>SmartFEED is activated using the following command:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{ SMARTP / FEDOPT},
+\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{SIMUL} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>ON and OFF enable or disable feed-rate optimization. When active,
+SmartFEED uses Material Removal Simulation (xmr260 license option) to
+compute the volume of material being removed by the cutting tool. This
+information is then used to optimize cutting feed rates, with a
+graphical analysis displayed in the Virtual Machine Controller»Time Line
+window (see “<a class="reference internal" href="monvmres.html#controllertimeline"><span class="std std-ref">Controller Time Line</span></a>”). The SIMUL option performs the same feed
+rate analysis and display, but leaves the programmed feed rates
+unchanged in the NC program.</p>
+<p>SmartFEED relies on reference cut information to perform material
+removal rate (MRR) based feed optimization. A reference cut defines the
+spindle speed, feed rate and material removal rate of a successful cut,
+which the software then uses to determine the feed to use for the
+cutting motions present in the NC program. Reference cut information can
+be provided in the following ways:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{XREF},\textbf{RPM}, speed, \textbf{PERMIN}, \mathit{feed}, \textbf{MRR}, volume\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{XREF},\textbf{RPM}, speed, \textbf{FPT}, \mathit{feed}, \textbf{WIDTH}, width, \textbf{DEPTH}, depth\)</span></p>
+</div></blockquote>
+<p>Feed, width and depth values are in units as specified on the last UNITS
+command. The material removal rate (MRR) value is the volume of material
+removed in cubic units per minute. A reference cut must be specified
+using either of the above two formats for feed optimization to occur.
+Reference cut information is modal.</p>
+<p>SmartFEED permits limitations to optionally be enforced on the
+calculated feed, speed and spindle power:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},
+\begin{pmatrix}\begin{array}{l} \textbf{FPT} \\ \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix} ,
+\begin{pmatrix}\begin{array}{l} min,max \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{RPM},
+\begin{pmatrix}\begin{array}{l} min,max \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{POWER},
+\begin{pmatrix}\begin{array}{l}
+\rule{0pt}{2.5ex} \big[\,\textbf{WATTS},\big]\, limit, power \\
+\rule{0pt}{2.5ex} \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The OFF qualifier individually removes any limitations that were
+previously imposed. The spindle power <em>limit</em> can be specified either in
+horsepower (the default) or in watts. The <em>power</em> parameter is the
+horsepower (or watts) required to remove once cubic unit of material.</p>
+<p>SmartFEED provides various other settings that affect optimization, as
+follows:</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{STEP}, dist\)</span></p>
+</div></blockquote>
+<p>Feed optimization uses material removal simulation to compute the amount
+of material being removed. The sampling distance can be set using the
+STEP,<em>dist</em> couplet, where <em>dist</em> is the maximum distance between any
+two samples. The default sampling distance is 5 mm or 0.2 inches,
+depending on output units.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{FLOOR},
+\begin{pmatrix}\begin{array}{l}
+\begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix} ,\mathit{feed} \\
+\rule{0pt}{2.5ex} \textbf{AUTO} \\
+\textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>By default, the maximum machine feed is assigned to all moves where the
+calculated material volume removal rate is insignificant. This can be
+changed by specifying a different <em>feed</em> value. The AUTO keyword
+generates a high feed value calculated using the reference cut MRR and
+the maximum possible “insignificant” volume. The OFF qualifier resets to
+the default maximum machine feed.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{FLUTE}, \begin{pmatrix}\begin{array}{l} n \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The number of flutes for the current tool is normally defined in the
+Virtual Machine tooling information, which is automatically set by the
+appropriate Manufacturing Extractor when setting up the simulation
+session. This can be overridden by specifying the FLUTES,<em>n</em> couplet,
+where <em>n</em> is the number of flutes. The OFF qualifier (the default) uses
+the Virtual Machine tool definition.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{RETAIN} \begin{bmatrix} ,\!
+\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{bmatrix} , min\)</span></p>
+<p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{RETAIN},\textbf{OFF}\)</span></p>
+</div></blockquote>
+<p>The RETAIN qualifier specifies the minimum change in feed necessary to
+warrant a change in feed being output to the NC program. Calculated
+changes in feed that are less than the specified minimum will be
+ignored. If the feed type qualifier is omitted, then the <em>min</em> value is
+the percentage change in feed. The OFF qualifier will result in the
+calculated feed being output on every NC block, if different.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{CUTS},
+\begin{pmatrix}\begin{array}{l} n \\ \textbf{ALL},n \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The CUTS,<em>n</em> qualifier limits the increase in number of motions of the
+feed optimized tool path to be no larger than <em>n</em> for any given input
+block. Specify <em>n</em> as a whole number greater than zero. A value of 1
+does not permit an increase. This is a local limit applied to individual
+motions.</p>
+<p>The CUTS,ALL,<em>n</em> qualifier limits the increase in number of motions of
+the feed optimized tool path to be no larger than <em>n</em> % of the original
+tool path. This is a global limit applied to the entire cutting path.</p>
+<p>The OFF qualifier (the default) does not limit the number of additional
+motions that can be added to optimize the feed rate.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{STRVTM},
+\begin{pmatrix}\begin{array}{l} seconds \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The STRVTM qualifier specifies a minimum block processing time limit in
+seconds to be applied when SmartFEED subdivides motions, which guards
+against NC block processing queue starvation on the machine. ON enables
+the last specified starvation time; OFF disables starvation time limit
+checking. The starvation time can also be set using the $STRVTM macro
+system variable.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{ACCEL},
+\begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>The ACCEL qualifier specifies feed acceleration (and deceleration)
+limits to be applied when changing feed rates in the output NC program.
+ON enables feed acceleration analysis, which adjusts the calculated
+optimal feed downwards if necessary to avoid accelerating the axes of
+the machine beyond their physical limits. These limits can be specified
+in the QUEST <em>Control Description / High Speed Machining</em> section and
+overridden using the command below. OFF disables feed acceleration
+analysis. Feed acceleration analysis will be on by default if QUEST
+defined limits are specified.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\textbf{SMARTP / FEDOPT},\textbf{ACCEL}
+\icamrange{16}{1} \begin{pmatrix} ,\!
+\begin{pmatrix}\begin{array}{l}
+\textbf{ALL} \\ \textbf{LINEAR} \\ \textbf{REV} \\
+\rule{0pt}{2.5ex} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\
+\textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\
+\textbf{RAM} \big[,n\,\big] \end{array}\end{pmatrix} ,value \end{pmatrix}\)</span></p>
+</div></blockquote>
+<p>This command specifies the earth acceleration limit to be applied to
+various axes of the machine. ALL sets the same earth acceleration limit
+value for all axes, LINEAR sets the same limit for all linear axes and
+REV for all rotary axes. Limits can also be set for individual axes.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="selectvm.html" class="btn btn-neutral float-left" title="Selecting a Virtual Machine Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="actsimwindow.html" class="btn btn-neutral float-right" title="Activating the Simulation Windows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
