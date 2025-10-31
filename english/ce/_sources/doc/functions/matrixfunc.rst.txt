@@ -1,0 +1,187 @@
+.. _matrix_functions:
+
+Matrix Functions
+================
+
+Matrix functions work with sequences of length 12 that define the APT
+standard rotation and translation components of a matrix. For
+example:
+
+   :math:`\begin{array}{llll} a_1, & a_2, & a_3, & a_4, \\ a_5, & a_6, & a_7, & a_8, \\ a_9, & a_{10}, & a_{11}, & a_{12} \end{array}`
+
+Matrix functions can also work with square matrices of any dimension,
+defined as a series of numbers that represent a matrix organized in
+row-column order. For example:
+
+   :math:`\begin{array}{lll} a_1, & a_2, & a_3 \\ a_4, & a_5, & a_6 \\ a_7, & a_8, & a_9 \end{array}`
+
+Matrix functions that return a matrix, vector or point sequence do so
+by returning a sequence with the same length as that of the input
+matrix, vector or point sequence.
+
+Matrices can be constructed using the $FSEQ function or the { }
+sequence operators. For example, the following are equivalent:
+
+   ::
+
+     M1=$FSEQ(1,0,0,0,0,1,0,0,0,0,1,0)
+     M1={1,0,0,0,0,1,0,0,0,0,1,0}
+
+It is important to note that matrices are sequences and not arrays.
+Matrix functions do not work with arrays.
+
+.. _func_fmx:
+.. index:: Functions; $FMX
+
++------------------------------------------------+------------------------------------------+
+| **$FMX(**\ *…*\ **)**                          | Matrix creation                          |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function returns a 12 element matrix sequence as defined by the
+   standard <matrix> post-processor command syntax listed below:
+
+      :math:`\big[\,\textbf{INVERS},\big]\,
+      \begin{pmatrix}\begin{array}{l}
+      \Big[\,x_1,y_1 \,\big[,z_1 \,\big]\Big] \; \big[ \mathtt{<\!rotation\!>} \big] \\
+      \textbf{MSYS} \,\big[,\textbf{LAST}\,\big] \\
+      a_1,a_2,a_3,a_4,a_5,a_6,a_7,a_8,a_9,a_{10},a_{11},a_{12}
+      \end{array}\end{pmatrix}`
+
+   where <rotation> is defined as:
+
+      :math:`\icamrange{2.6}{0}\begin{bmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XYROT} \\ \textbf{YZROT}\\ \textbf{ZXROT} \end{array}\end{pmatrix} ,\mathit{angle} \end{bmatrix} \,
+      \Big[,\textbf{AT},x_{c},y_{c},\big[,z_{c}\,\big]\Big] \;
+      \Big[,\textbf{TRANS},x_2,y_2\,\big[,z_2\,\big]\Big]`
+
+   The <matrix> can be specified as an optional *x\ 1 y\ 1 z\ 1* translation
+   followed by zero or more rotations about the *XY*, *YZ* and *ZX* axes.
+   Rotation is about the origin unless an optional rotation center point is
+   defined using *xc yc zc*.
+   An additional translation with respect to the as-rotated frame can be
+   defined using *x\ 2 y\ 2 z\ 2*.
+   The matrix can also be specified using the 12 numeric values of an APT
+   standard matrix definition.
+   The INVERS keyword inverts the matrix definition.
+
+.. _func_fmxinv:
+.. index:: Functions; $FMXINV
+
++------------------------------------------------+------------------------------------------+
+| **$FMXINV(**\ *m*\ **)**                       | Matrix inversion                         |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function inverts the matrix sequence *m*, then returns the
+   result as a matrix sequence.
+
+.. _func_fmxmult:
+.. index:: Functions; $FMXMULT
+
++------------------------------------------------+------------------------------------------+
+| **$FMXMULT(**\ *m1,m2*\ **)**                  | Matrix multiplication                    |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function multiplies matrix *m1* by *m2*, then returns the result
+   as a matrix sequence. A diagnostic will be output and macro
+   processing will fail if both matrices do not have the same
+   dimensions.
+
+.. _func_fmxtrfp:
+.. index:: Functions; $FMXTRFP
+
++------------------------------------------------+------------------------------------------+
+| **$FMXTRFP(**\ *m,p*\ **)**                    | Point transformation by matrix           |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function transforms a point *p*, defined as a sequence of
+   arbitrary length, by the matrix *m*, then returns the translated and
+   rotated result as a point sequence. This function only solves for the
+   minimum number of common dimensions. Unsolved excess point dimensions
+   are not transformed in the output point sequence.
+
+.. _func_fmxtrfv:
+.. index:: Functions; $FMXTRFV
+
++------------------------------------------------+------------------------------------------+
+| **$FMXTRFV(**\ *m,v*\ **)**                    | Vector transformation by matrix          |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function transforms a vector *v*, defined as a sequence of
+   arbitrary length, by the matrix *m*, then returns the rotated result
+   as a vector sequence. This function only solves for the minimum
+   number of common dimensions. Unsolved excess vector dimensions are
+   not transformed in the output vector sequence.
+
+.. _func_fmxtrsp:
+.. index:: Functions; $FMXTRSP
+
++------------------------------------------------+------------------------------------------+
+| **$FMXTRSP(**\ *m*\ **)**                      | Matrix transposition                     |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function transposes the matrix sequence *m*, then returns the
+   result as a matrix sequence.
+
+.. _func_fmxtype:
+.. index:: Functions; $FMXTYPE
+
++------------------------------------------------+------------------------------------------+
+| **$FMXTYPE(**\ *m*\ **[**\ *,type*\ **])**     | Matrix type                              |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns a numeric value that identifies the
+   transformation type of a matrix *m.* Return values are as follows:
+
+   :    0: The matrix consists entirely of zeroes
+   :    1: Identity
+   :   10: Translation
+   :  100: Rotation (9 decimal digit or better accuracy)
+   :  200: Rotation and/or scaling and/or mirroring
+   : 1000: Scale
+   :10000: Mirror
+
+   Translation is only checked for 3x4 and homogeneous 4x4 matrixes. A
+   matrix with combined translation and rotation will return the value
+   110. Similarly, a matrix with combined scaling and translation will
+   return 1010 and a matrix with combined mirroring and translation will
+   return 10010. Scaling and mirroring cannot be detected when combined
+   with rotation. A matrix containing such a combined transformation, or
+   a matrix containing rotation defined using vectors with 8 or fewer
+   digits of precision, will return a type 200 (or 210 if combined with
+   translation).
+
+   An optional *type* keyword can be given to test for a specific
+   transformation type. A value of zero is returned if the
+   transformation is not present, otherwise the return value is as
+   listed above. The type keyword must be one of the following:
+
+   :TRANS:  Translation
+   :ROTATE: Rotation
+   :SCALE:  Scaling
+   :MIRROR: Mirroring
+
+   For example, the following IF block tests a matrix M for various
+   transformations:
+
+      ::
+
+         IF/$FMXTYPE(M).EQ.1
+           identity
+         ELSEIF/$FMXTYPE(M,TRANS).GT.0
+           translation
+         ELSEIF/…
+           …
+         ENDOF/IF
