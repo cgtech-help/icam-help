@@ -1,0 +1,9 @@
+Seek
+----
+
+The Seek dialog is displayed when loading a CL data file in memory. When
+the CL file is very large, there can be a noticeable delay when
+searching for a particular line number. The seek dialog will be
+displayed whenever GENER looks for a CL record outside of the buffered
+range. A Cancel button is available to stop the seek operation.
+
