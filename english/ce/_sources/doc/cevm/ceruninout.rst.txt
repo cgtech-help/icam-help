@@ -1,0 +1,469 @@
+.. _cerun_inputs_outputs:
+
+CERUN Inputs and Outputs
+========================
+
+CERUN inputs an MCD file and outputs a verification file and optional
+log file listing the success or failure of the control emulation
+process.
+
+Input MCD File
+--------------
+
+The input MCD (Machine Control Data, also called “NC program data”)
+file must be in 8-bit no-parity ASCII format, with a LF (ASCII code
+10) or CR/LF (ASCII codes 13/10) combination signalling the end of
+each block. If some other character is used, in addition to the
+Windows standard line termination, then this character must be
+specified as the EOB (end-of-block) code in the QUEST “General
+Description / Output Format” section question #2.2.
+
+When using punched tape formats, it is common to have leader and
+trailer sections added to the program so that it can be spooled
+between tape reels at the machine. When this is the case, a RWS
+(rewind-stop) code is commonly used to signal the start of the
+program. The RWS code is defined in the QUEST “General Description /
+Output Format” section question #2.3 and its placement is controlled
+with question #4.1. If a RWS code is expected before the start of the
+program, then CERUN will scan forward in the program looking for the
+first RWS code and will start processing on the following block. If a
+RWS code is missing at the start but present at the end, then no MCD
+will be processed. If there are no RWS codes in the program at all,
+then a diagnostic will be signalled and processing will start at the
+beginning of the MCD.
+
+CERUN will correctly process OPSKIP (optional skip, also called
+block-delete) codes, based on the current settings from the launch
+panel (see :ref:`here<optional_skip>`) or the Controller window.
+Optional skip settings are defined in the QUEST “Optional
+Post-processor Words / The OPSKIP Command” section.
+
+CERUN will also detect and process operator messages, as defined in
+the QUEST “Optional Post-processor Words / The DISPLY Command”
+section. Operator messages are output to the Console window and to
+the verification listing if operator messages are being traced.
+
+A rewind (e.g., M30) or end (e.g., M2) code will terminate processing
+in the same way that it would on the real machine. Any MCD following
+the end-of-program code will be ignored.
+
+Subprograms
+~~~~~~~~~~~
+
+Subprograms are supported by CERUN using one of the following
+methods, as defined in the QUEST “Optional Post-processor Words / The
+CALSUB Command” section questions #4 and #4.2.
+
+   **Subprogram placement at End or where Defined:** CERUN will scan
+   through the main program file looking for the subprogram when it is
+   called. CERUN cannot skip over a subprogram definition during normal
+   processing, so the “where defined” placement setting may cause
+   problems.
+
+   **Subprograms together in a separate file:** CERUN will scan through
+   a file having the same path and name as the MCD, with a file
+   extension as defined in the Questionnaire (default is “.tps”),
+   looking for the start of the subprogram. The subprogram tape file
+   extension can be changed using the $SUBEXT macro variable.
+
+   **Subprograms each in a separate file:** CERUN will look for a file
+   having the same path and name as the MCD, with the subprogram ID
+   appended in the form “\_\ *id*\ ” and with a file extension as
+   described above. The subprogram is expected to start at the beginning
+   of the file, subject to RWS code processing.
+
+If the subprogram cannot be found using the QUEST specified format
+above, then CERUN will next look for the subprogram in the internal
+“//ICAMFS/” file space (see :ref:`“File Storage”<file_storage>`).
+In this case, CERUN will look for a file
+matching the subprogram definition register formatted with the ID
+number of the subprogram being called (e.g., //ICAMFS/O9001).
+
+The Subprogram Startup Macro (see :ref:`“Subprogram Startup/Shutdown Macros”<start_end_subprogram>`)
+can be used to override the default selection of the subprogram file and
+offset. Some subprograms for example are permanently resident on the
+CNC. In this case the subprogram definition will likely reside either
+in the internal CERUN file space or in a special directory on disk.
+
+Segmented Programs
+~~~~~~~~~~~~~~~~~~
+
+At the present time it is not possible to automatically handle
+segmented programs. An external editor must be used to join all of
+the individual NC program files that comprise the single main program
+before starting CERUN.
+
+Alternately, the control emulator developer can develop custom logic
+in the Program Shutdown macro to determine the file (if any)
+containing the next segment of the NC program to run, and then call
+the :ref:`$FCERST<func_fcerst>` function to continue processing using the specified file.
+
+.. _output_verification_listing:
+
+Output Verification Listing
+---------------------------
+
+The control emulator listing file contains identification information
+about the NC program being emulated and the control emulator and
+model used in the simulation, as well as input MCD, diagnostic and
+optional tracing information, followed finally by a program summary.
+The listing is not paginated. The generation of the listing file is
+optional, but if disabled then a log file will be generated instead
+(see :ref:`“Output Log File”<output_log_file>`). The **/list** and **/nolist**
+command line options control the generation of the listing file.
+
+Program Identification
+~~~~~~~~~~~~~~~~~~~~~~
+
+When CERUN is run, a program identification header is output at the
+start for control purposes. This identifies the CERUN software
+version and modification level, the run date and time, the name of
+the input MCD file, the control emulator, configuration and keyword
+files, the Virtual Machine model (if used) and the license options.
+For example:
+
+   ::
+
+      ICAM Technologies Corporation
+      (c) Copyright 2025
+
+      Control Emulator CeRun Version 26.0-2506 Build 30984 win64
+      ICAM_LIB:     C:\Program Files\ICAM\V26
+      ICAM_APPDATA: C:\ProgramData\ICAM\260
+
+      Input:        F:\test\test.tap
+      CE:           ABC_CE,1.260;3, Created 10-Jan-2025 10:43:00.88
+      Database:     C:\ProgramData\ICAM\260\work\campost.dbf
+      DEF:          C:\ProgramData\ICAM\260\ICAM.DEF
+      Words:        C:\ProgramData\ICAM\260\words.dat
+
+      Model:        DMC125FD.260;1, Created 10-Jan-2025 10:37:04.15
+      Database:     C:\ProgramData\ICAM\260\work\campost.dbfw
+      VSW:          F:\test\test.vsw
+
+      LICENSE:      p5,xmr,vmr
+
+      PID: 9001
+
+This header page shows that version 26.0 (i.e., V26)
+mod-level 2506 (i.e., week 06 of 2025)
+build number 30984 of CERUN is being run on
+a win64 (i.e., 64-bit Windows) platform. This information must be
+referenced when communicating problems to ICAM support personnel. The
+ICAM_LIB and ICAM_APPDATA identify these two key directories, which
+contain installed and user customized files.
+
+The input MCD file is *F:\\test\\test.tap.*
+
+The CE and Database entries identify the control emulator being used
+and the database the control emulator was loaded from. The control
+emulator name “ABC_CE,1.260;3” identifies the CE name as
+“ABC_CE,1”, third revision stored in the database (i.e., ;3 ), created
+using version 26.0 of QUEST (i.e., .260).
+The creation date lists the date and time that the
+control emulator was last generated. When using composite control emulators, all
+CE component names will be listed. When using *Virtual Machine*,
+the model name, model database and the verification setup file (.vsw)
+will also be listed.
+
+The DEF entry identifies the master definitions file (see :ref:`“The ICAM Configuration Utility”<configuration_utility>`).
+The Words entry identifies a file containing the list of non-standard Major and
+Minor keywords and their associated codes.
+
+The LICENSE entry lists the run-time license in use along with any
+other optional licenses that were checked-out at the start of
+processing.
+
+If user parameters are included on the CERUN command line, then a
+UPARAM entry will list them.
+
+Program Listing
+~~~~~~~~~~~~~~~
+
+The CERUN program listing contains a trace of the input MCD as it is
+read along with any diagnostic messages as they occur in the program.
+Additional information can be listed by selecting various trace
+options using the /trace command line parameter or from the Options
+panel of the launch facility. The trace exposes the internal CERUN
+processing of each block of MCD. Traced output appears as shown in
+the following example:
+
+   .. code-block:: text
+
+      Block :   G1X12Y8.5S1200F#14L4M3; comment
+       TapEdt : G1X12Y8.5S1200F#14L4M3
+       PrePrc : G1X12Y8.5S1200F20L4M3
+       G:1
+       X:12.
+       Y:8.5
+       S:1200
+       F:20
+       M:3
+        code_spindle_clw
+          reg_spindle_rpm 1200
+            | spindle clw, rpm=1200
+        code_interp_linear
+          reg_feed_upm 20
+          reg_axis_x 12
+          reg_axis_y 8.5
+            | feed f=20
+            | goto x=12, y=8.5
+
+      Warning:L4 not recognised in 'G1X12Y8.5S1200F#14L4M3; comment'
+        SEVERITY(04)  LINE(00003)  ERRNUM(02001005)  INPUT(test.tap)
+
+If “\ *Input blocks (MCD)*\ ” tracing is *not* enabled, then each
+block of MCD is traced using the format “\ *line-number*! *mcd*\ ”,
+where *line-number* is the line number (not the sequence number) of
+the block in the file, and *mcd* is the NC program block exactly as
+read.
+
+If “\ *Input blocks (MCD)*\ ” tracing *is* enabled (/trace=i), then
+each input block is listed with a Block prefix and aligned so that
+you can better see the effect of “\ *Edited blocks*\ ” tracing
+(/trace=e), which includes tape editor string substitution
+(identified by a TapEdt header), OPSKIP processing (DelOn and DelOff
+headers), pre-processor substitution (PrePrc header), embedded macro
+substitution (EmbMac header) and block startup macro processing
+(BlkMac header).
+
+Select the “\ *Internal //icamfs subprograms*\ ” trace (/trace=z) to
+also trace MCD read from subprograms contained in the internal
+//icamfs storage area. These subprograms are not traced by default
+since they are considered CNC resident. Note that any actions
+resulting from CNC resident subprograms will be traced, if action
+tracing is enabled (see below).
+
+“\ *Word addresses*\ ” tracing (/trace=w) lists the recognized words
+(i.e., registers) and their values in the left-to-right order that
+they appear on the block, listed one per line using the format
+“\ *register*\ **:**\ *data*\ ”.
+
+“\ *CODE and DATA identifiers*\ ” tracing (/trace=c) lists the
+recognized CODE and DATA identifiers as they are processed, in the
+form code\_\ *name* and reg\_\ *name*. The order of code processing
+is dependent on the code’s Order property and not the position of the
+code the block. The order of data processing is a built-in function.
+
+If “\ *Actions*\ ” tracing *is* enabled (/trace=a), trace lines
+prefixed with a **\|** character list the data sent to the machine
+simulation process to emulate the actions of the CNC.
+
+If “\ *CODE and DATA macros*\ ” tracing (/trace=m) or “\ *Other
+macros*\ ” tracing (/trace=h) are enabled, then macro processing will
+traced to the listing file. Each macro line is output with a “Macro:”
+prefix just before it is executed, as shown in the following example
+(note that the macro being traced is one of the ones listed in the
+:ref:`“Control Emulator Macro Samples”<annex_macro_samples>` annex):
+
+   ::
+
+      Block :   G84 X0. Y0. R6. Z-20. F1.
+       G:84
+       X:0.
+       Y:0.
+       R:6.
+       Z:-20.
+       F:1.
+       Macro:* Entering Reverse tap cycle (CODE_CYCLE_TAP)
+       Macro:  $$ This macro switches a normal tap to a reverse tap if
+       Macro:  IF/$FCEGAC(CODE_SPINDLE_CCLW).EQ.CODE_SPINDLE_CCLW
+       Macro:  $P1=CODE_CYCLE_TAP_CCLW
+       Macro:  ENDOF/IF
+       Macro:  OUTPUT
+        code_cycle_tap_cclw
+          reg_feed_upr 1
+          reg_axis_z -20
+          reg_cycle_clear 6
+          reg_axis_x 0
+          reg_axis_y 0
+            | rapid
+            | goto x=0, y=0, z=6
+            | feed f=1 upr
+            | goto z=-20
+            | goto z=6
+       Macro:  ENDMAC
+       Macro:* Leaving Reverse tap cycle (CODE_CYCLE_TAP)
+
+If “\ *MDI and EXEC commands*\ ” tracing *is* enabled (/trace=x),
+then any manual data input (MDI) will be traced to the listing using
+the format “mdi! *mcd*\ ”, and any EXEC command processed in a macro
+will be traced to the listing using the format “exec:
+*command-parameters*\ ”.
+
+Finally, if “\ *Operator and other messages*\ ” tracing (/trace=s) is
+enabled, then operator messages will be traced to the listing file
+using the format “Display:” prefix, as shown below:
+
+   ::
+
+      Block :   T2M6 (1/4" DIA DRILL)
+      Display : 1/4" DIA DRILL
+       PrePrc : T2M6
+       T:2
+       M:6
+        code_tool_load
+          reg_tool 2
+            | load tool n=2
+
+Program Summary
+~~~~~~~~~~~~~~~
+
+CERUN outputs a tooling, travel, timing and diagnostic summary
+information at the end of the verification listing file.
+
+Tooling Summary
+```````````````
+
+The tooling summary is output in two sections. The first section
+lists information about each tool in the order that they were loaded,
+including: tool diameter; tool corner radius; and length and diameter
+compensation offset(s) used. The second section lists: the minimum
+and maximum feeds and spindle speeds used for each tool; as well as
+feed, rapid, miscellaneous and total times for each tool.
+
+Tool Flute Length Summary
+`````````````````````````
+
+The tool flute length summary lists the nominal (i.e., as defined)
+and maximum flute length for each tool in machine units, along with
+the VM (Virtual Machine) time when the maximum length was first
+reached. Tools that exceed their nominal flute lengths are flagged
+with an asterisk (\*).
+
+This summary is only available when material removal simulation (MRS)
+is active and flute length optimization is enabled either via the VM
+ADAPTV command or from the Simulation»Options menu MRS tab settings.
+MRS requires an add-on xmr260 license option.
+
+For example:
+
+   ::
+
+      TOOL FLUTE LENGTH SUMMARY:
+
+           POCKET  TOOL-ID  NOMINAL  MAXIMUM   VM-TIME
+                5       NA   1.0000   0.5906  00:00:03
+                6       NA   0.5000   0.9724  00:03:00  *
+
+Tool Travel Summary
+```````````````````
+
+The travel summary lists the minimum, maximum, total and accumulated
+travel for all axes. The total travel for each axis is the difference
+between the minimum and maximum travel values. The tool travel is
+with respect to the base coordinate frame of the machine.
+
+Three travel summaries are output. The first summary lists travel for
+motions that were interpolated at a cutting feed. The second summary
+lists travel for positioning (i.e., RAPID) motions. The third summary
+combines the two.
+
+For example, the travel summary for a mill-turn lathe might be:
+
+   ::
+
+      AXIS        MINIMUM      MAXIMUM        TOTAL        ACCUM
+
+      X            0.3000       4.0000       3.7000      80.7000
+      Z          -12.5000      16.0000      28.5000     416.5000
+      C         -450.000      135.000      585.000    24562.040
+
+Linear axis travels are in machine units. Rotary axis values are in
+degrees.
+
+Machining Time Summary
+``````````````````````
+
+The machining time summary lists, in hh:mm:ss format, the time spent
+positioning, cutting and on miscellaneous operations. For for merging
+lathes, the summary also includes the time spent at idle and the
+times for both heads are listed independently.
+
+In the following example, the total time spent at feed was 2 hours 6
+minutes and 24 seconds. This accounted for over 98% of the total
+machining time.
+
+   ::
+
+      TYPE       HH:MM:SS      PERCENT
+
+      FEED       02:06:24       98.338
+      RAPID      00:01:11        1.709
+      MISC       00:00:57        0.739
+      IDLE       00:00:00        0.000
+
+      TOTAL      02:08:32
+
+Diagnostic Summary
+``````````````````
+
+The diagnostic summary lists the total number of diagnostics that
+have occurred for each diagnostic severity classification. If no
+diagnostics have occurred, the summary will state that fact. There
+are four classifications of diagnostics: Messages are informational
+only; warnings indicate problems that may cause problems at the
+machine; errors indicate problems that will probably result in an
+unusable MCD file; fatal errors indicate severe problems.
+
+In the following example, 3 warnings and 2 errors have occurred.
+There were no informational messages nor were there fatal errors.
+
+   ::
+
+      TYPE      TOTAL
+
+      MESSAGE       0
+      WARNING       3
+      ERROR         2
+      FATAL         0
+
+      TOTAL         5
+
+.. _output_log_file:
+
+Output Log File
+---------------
+
+The control emulator log file contains the same program
+identification as found at the top of the listing file, a list of all
+diagnostic messages as they occur and the same program summary as
+found at the bottom of the listing file. The generation of the log
+file is optional, but if disabled then a listing file will be
+generated instead (see :ref:`“Output Verification Listing”<output_verification_listing>`).
+The **/ef** command line option controls the generation of the log file.
+
+The *icam_lce* environment variable (see :ref:`“Environment
+Variables”<environment_variables>`) can be set to
+define the default directory where CERUN will write all verification
+listing files, including the log file. The *file_ext_log* DEF file
+symbol can be set to change the log file extension default (see :ref:`here<def_file_ext_log>`).
+
+.. _output_review_file:
+
+Output Review File
+------------------
+
+If the “Save for review” launch panel preference is selected or the
+**/save** command line option is specified, then GENER and CERUN will
+save their results at the end of processing into a file having the
+same name as the listing, but with a file type of *zrj*.
+
+To review an NC program’s results, drag and drop the zrj file onto
+the launch panel or desktop icon (or open the results using the JOB
+button), then press OK. The Full interface will be activated showing
+the results at the end of GENER or CERUN processing. These include:
+
+-  Input, Output (GENER only) and Console window complete traces
+-  Source window listing the input file
+-  Diagnostic window listing all diagnostics
+-  Virtual Machine simulation windows
+-  Controller window including Time Line access to entire program
+-  Material removal simulation in-process stock final state
+-  View Listing and View NC code menu selections
+
+The save-for-review function allows, for example, a program to be run
+in background mode and then later opened for more detailed review if
+necessary. The zrj file contains sufficient information to allow a
+program to be rewound and reprocessed if desired (although this is
+not recommended for production programs).
