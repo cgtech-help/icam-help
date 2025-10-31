@@ -1,0 +1,66 @@
+Virtual Machine Tool Compensation
+=================================
+
+Setting Tool Compensation
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|image1|
+
+On most machines, the CNC provides some form of tool compensation to
+adjust for differences in the length (or position) and diameter of the
+tool. VM provides a virtual controller that supports both fixture and
+tool compensation. The VM controller can be activated from the View
+toolbar by selecting the button shown circled in the toolbar above.
+Select the button a second time to either hide the controller window or
+to restore a controller window that has been minimized. This window can
+also be controlled by selecting Simulation»Controller from the menu bar.
+Once the VM Controller window is active, select the Tool Compensation
+tab to define or modify tool length and diameter compensation amounts.
+
+|image2|
+
+Note: VM will not let you add length and/or diameter compensation
+offsets if these features are not available on the machine (as defined
+in the post-processor or control emulator).
+
+ICAM provides “Manufacturing Extractors” for many popular CAM systems,
+which can automatically define tool compensation settings from tooling
+used in the NC program.
+
+Tool compensation data is automatically saved in the verification setup
+(.vsw) file when the program is completed. This setup file will be
+reused on subsequent runs to quickly reestablish the tool compensation
+settings necessary for an accurate simulation.
+
+Length Compensation
+^^^^^^^^^^^^^^^^^^^
+
+Length compensation typically adjusts the Z-axis position of the control
+point, to account for differences between programmed and actual tool
+lengths. If the NC program already compensates for tool lengths in the
+coordinate data, then length compensation is not necessary in VM. If the
+coordinate data does not take into account the gage length of the tool,
+then length compensation must be used with VM to correctly check the NC
+program. Press the Add button and then enter the length compensation ID
+to be added. You can select any axis of any ID and type a new value. You
+can also select one or more IDs and use the Set and Zero buttons to set
+or zero offsets for all selected IDs simultaneously.
+
+Diameter Compensation
+^^^^^^^^^^^^^^^^^^^^^
+
+Diameter compensation adjusts the trajectory of the tool to compensate
+for differences between the programmed and actual tool diameters. Most
+CAM systems output coordinate data that is already offset from the part
+surface by the radius of the tool, making diameter compensation
+unnecessary in VM. If the coordinate data represents the contact point
+of the tool with the surface instead of the tool center point, then
+diameter compensation must be used with VM to correctly check the NC
+program. Press the Add button, and then enter the diameter compensation
+ID to be added. You can select any ID and type a new diameter value. You
+can also select one or more IDs and use the Zero button to zero offsets
+for all selected IDs simultaneously.
+
+.. |image1| image:: ./media/68515ad395090cfbe35de7a126a309750f568e4e.bmp
+.. |image2| image:: ./media/5d42883a96905e856ea8da9b805776d7060ff5cf.bmp
+
