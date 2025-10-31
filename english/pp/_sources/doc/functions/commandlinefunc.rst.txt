@@ -1,0 +1,79 @@
+Command Line Functions
+======================
+
+.. _func_fargc:
+.. index:: Functions; $FARGC
+
++------------------------------------------------+------------------------------------------+
+| **$FARGC(**\ [*s1* [*,s2*]] **)**              | Returns count of arguments               |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the number of arguments in the GENER command line
+   (as can be found in the :ref:`$PARAM macro variable<var_param>`).
+   If string *s1* is given, the $FARGC function will instead return the number of
+   arguments contained within the string *s1*. The *s2* string contains
+   the character used as the argument separator. The default value for
+   the separator is a blank. When using a blank as a separator, those
+   within matching `` " `` quote characters are not treated as separators.
+
+.. _func_fargv:
+.. index:: Functions; $FARGV
+
++------------------------------------------------+------------------------------------------+
+| **$FARGV(**\ *n* [*,s1* [*,s2*]]\ **)**        | Return *nth* argument                    |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function extracts the *nth* argument of the GENER command line
+   (as can be found in the :ref:`$PARAM macro variable<var_param>`).
+   If string *s1* is given, the $FARGV function will instead extract the
+   argument from this string. The *s2* string
+   contains the character used as the argument separator. The default
+   value for the separator is a blank. When using a blank as a
+   separator, those within matching `` " `` quote characters are not
+   treated as separators.
+
+.. _func_fpname:
+.. index:: Functions; $FPNAME
+.. _func_fpvalue:
+.. index:: Functions; $FPVALUE
+
++------------------------------------------------+------------------------------------------------+
+| **$FPNAME(**\ *s*\ **)**                       | Return name portion of command line qualifier  |
+|                                                |                                                |
+|                                                | Returns: String                                |
++------------------------------------------------+------------------------------------------------+
+| **$FPVALUE(**\ *s*\ **)**                      | Return value portion of command line qualifier |
+|                                                |                                                |
+|                                                | Returns: String                                |
++------------------------------------------------+------------------------------------------------+
+
+   The $FPNAME function returns the parameter name portion of a command
+   line qualifier stored in the string *s*. The $FPVALUE function
+   returns the parameter value portion. These functions are intended to
+   work with the results of the $FARGV function described above. Command
+   line qualifiers take the following form:
+
+      ::
+
+         /name=value
+
+   For example, calling ``$FPNAME('/ABC="D E F"')`` returns the string ``ABC``,
+   whereas calling ``$FPVALUE('/ABC="D E F"')`` returns the string ``D E F``.
+   If the input string does not contain a
+   / delimited qualifier, then a blank string is returned for the
+   parameter name function and the entire string is returned for the
+   parameter value function.
+
+   The following example will list all of the command line arguments
+   passed to GENER:
+
+      ::
+
+         DO/I=1,$FARGC()
+           STR=$FARGV(I)
+           PPRINT/'!(*): Name "!(*)", Value "!(*)"',I,$FPNAME(STR),$FPVALUE(STR)
+         ENDOF/DO
