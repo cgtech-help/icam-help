@@ -1,0 +1,342 @@
+Component Functions
+===================
+
+Component functions provide tools for identifying, naming, and organizing the individual elements of the virtual machine model.
+These functions support tasks such as querying component IDs, retrieving names and types, and managing hierarchical relationships between components.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`$FMSATA<func_fmsata>`
+         -  Attach one component to another
+      *  -  :ref:`$FMSID<func_fmsid>`
+         -  Get component ID of desired object
+      *  -  :ref:`$FMSIDN<func_fmsidn>`
+         -  Get the name of a component, given its ID
+      *  -  :ref:`$FMSIDS<func_fmsids>`
+         -  Get component IDs matching specified criteria
+      *  -  :ref:`$FMSIDT<func_fmsidt>`
+         -  Get the type of a component, given its ID
+
+.. _func_fmsata:
+.. index:: Functions; $FMSATA
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSATA(**\ *...*\ **)**                     | Attach/detach components                          |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSATA}\boldsymbol{(}\, child\_id, parent\_id \,\boldsymbol{)}`
+
+   Attaches the component identified by *child_id* to the component
+   identified by *parent_id.* The concept of child and parent specifies the
+   relationship after the attachment has completed, meaning that the first
+   object (i.e., *child_id*) will be attached to the second (i.e.,
+   *parent_id*). This function can be used to attach a tool to a tool axis,
+   or to move stock, fixtures and parts from one part of the model to
+   another. Component ID's are obtained using the $FMSID function.
+
+   Objects attached to a parent ID of zero (0) are removed from the
+   simulation. They can later be reattached to the simulation by specifying
+   a valid parent ID.
+
+   Care must be taken to only attach tools and holders to spindle axes, and
+   similarly to only attach parts, stock and fixtures to stock axes.
+
+.. _func_fmsid:
+.. index:: Functions; $FMSID
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSID(**\ *...*\ **)**                      | Return the component ID                           |
+|                                                |                                                   |
+|                                                | Returns: Numeric or Sequence                      |
++------------------------------------------------+---------------------------------------------------+
+
+   There are a number of different forms of the $FMSID function, designed
+   to return the component ID's of tools, parts and other named objects.
+   This function can also be used to “walk” the component tree, by
+   returning the parent or child ID of a specified ID.
+
+   It is important to note that due to how models are optimized when loaded
+   at run-time, components that are immovable in relation to each other are
+   grouped together into “stiff bodies”. The resulting run-time component
+   tree may therefore be different from the model tree as seen in the QUEST
+   model Navigator. Model reference axes are not affected by the
+   optimization process (i.e., they interrupt the stiff body grouping), so
+   they can be used where required to access model components that would
+   otherwise not be accessible using $FMSID.
+
+   Each of the $FMSID function call forms is described below:
+
+   **Named Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \bm{string} \,\boldsymbol{)}`
+
+   Returns the numeric component ID of the first component found in the model with
+   a name matching that defined by the *string* variable or constant.
+
+   **Head Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{HEAD}, \mathit{n1}\, \big[,\mathit{n2}\,\big] \,\boldsymbol{)}`
+
+   Returns the numeric component ID of the first head found with head number *n1*.
+   The *n2* value can optionally be specified to return other information
+   associated with the head, as follows:
+
+   :*n2*: Return value
+   :0: Return component id of head number *n1* (default)
+   :1: Return component id of head axis *n1*
+   :2: Return component id of head attached to head axis *n1*
+   :3: Return component id of head axis of pocket *n1*
+   :4: Return component id of head attached to pocket *n1*
+
+   **Tool Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{TOOL}, \mathit{n1}\, \big[,\mathit{n2}\,\big] \,\boldsymbol{)}`
+
+   Returns the numeric component ID of the first tool found with tool number *n1*.
+   The *n2* value can optionally be specified to return other information
+   associated with the tool, as follows:
+
+   :*n2*: Return value
+   :0: Return component id of tool number *n1* (default)
+   :1: Return component id of tool axis *n1*
+   :2: Return component id of tool attached to tool axis *n1*
+   :3: Return component id of tool axis of pocket *n1*
+   :4: Return component id of tool attached to pocket *n1*
+
+   **Stock Axis Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{PART}, \mathit{n1}, \mathit{n2} \,\big[,\mathbf{ALL}\,\big] \,\boldsymbol{)}`
+
+   Returns the numeric component ID of objects associated with the stock axis
+   identified by the number *n1*. The *n2* value defines the information to
+   return, as follows:
+
+   :*n2*: Return value
+   :1: Return component id of Stock axis number *n1*
+   :2: Return component id of the first component attached to the Stock axis number *n1*
+
+   The ALL keyword can be specified to return all components (to a maximum
+   of 1024) attached to the stock axis. In this case, the function either
+   returns a sequence of components or an empty sequence if no components
+   are attached.
+
+   **Child Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{ID}, \mathit{n1}, \mathit{n2} \,\big[,\mathbf{ALL}\,\big] \,\boldsymbol{)}`
+
+   Returns the numeric component ID of objects associated with the component
+   identified by ID *n1*. The *n2* value defines the information to return,
+   as follows:
+
+   :*n2*: Return value
+   :1: Return component id of Parent associated to component ID *n1*
+   :2: Return component id of the first Child associated to component ID *n1*
+
+   The ALL keyword can be specified to return all child components (to a
+   maximum of 1024) attached to the specified object. In this case, the
+   function either returns a sequence of components or an empty sequence if
+   no components are attached.
+
+   **Axis Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{AXIS},
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Returns the numeric component ID of the specified axis, identified either by an
+   *index* number or by a *keyword* identifier (a table of valid index
+   numbers and keywords can be found :ref:`here<tableindexnumbersandkeywords>`). A value of zero is
+   returned if the axis is not defined in the model.
+
+   **Group Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{GROUP}, name\, \big[,n\,\big] \,\boldsymbol{)}`
+
+   Returns the numeric component ID of the first group found in the model with a
+   matching *name* (string variable or constant). The *n* value can
+   optionally be specified to limit the search to a specific group type, as
+   follows:
+
+   :*n*: Group type
+   :1: Collision group
+   :2: Exclusion group
+   :3: Selection group
+   :4: User group
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\ ,\mathbf{GROUP},\mathbf{ALL} \big[,n\,\big] \,\boldsymbol{)}`
+
+   Returns a sequence of all (to a maximum of 1024) group component IDs
+   defined in the model or an empty sequence if no group components are
+   defined. The *n* value can optionally be specified to return only group
+   components of a given group type, as shown above.
+
+   **Child Component IDs of Group**
+
+      :math:`\mathit{result} = \mathbf{\$FMSID}\boldsymbol{(}\, \mathbf{GROUP},\mathbf{IN}, n \,\boldsymbol{)}`
+
+   Returns a sequence of all (to a maximum of 1024) component IDs contained
+   within the specified group, given by its ID *n*. Returns an empty
+   sequence if the group does not exist or is empty.
+
+.. _func_fmsidn:
+.. index:: Functions; $FMSIDN
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSIDN(**\ *...*\ **)**                     | returns the name of the component ID              |
+|                                                |                                                   |
+|                                                | Returns: String                                   |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDN}\boldsymbol{(}\, comp\_id \,\boldsymbol{)}`
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDN}\boldsymbol{(}\, \mathbf{GROUP}, group\_id \,\boldsymbol{)}`
+
+   This function returns the name of the component identified by the
+   component ID *comp_id* or by the group ID *group_id*. Component and
+   group ID's are obtained using the $FMSID function.
+
+.. _func_fmsids:
+.. index:: Functions; $FMSIDS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSIDS(**\ *...*\ **)**                     | Return sequence of component ID's                 |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+   There are a number of different forms of the $FMSIDS function, designed
+   to return a sequence of component ID's matching the specified criteria.
+   Each of the $FMSIDS function call forms is described below:
+
+   **Named Component IDs**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDS}\boldsymbol{(}\, \bm{name} \,\boldsymbol{)}`
+
+   Returns a sequence of component IDs of all components in the model with a name
+   wholly or partially matching the specified *name* (string variable or
+   constant). The *name* can contain special characters in the form of a
+   regular expression (RE) commonly found in UNIX search functions. See the
+   $FEDIT function in the CAM-POST or Control Emulator User Guides for a
+   description of RE's.
+
+   **Head Component IDs**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDS}\boldsymbol{(}\, \mathbf{HEAD}\, \big[,n\,\big] \,\boldsymbol{)}`
+
+   Returns a sequence of component IDs of all head or head axis components attached
+   to the model. The *n* value can optionally be specified to return
+   specific components associated with the head axes, as follows:
+
+   :*\ n*: Return value
+   :–1: Returns all head axis components
+   : 0: Returns all *head* components (default)
+   : 1: Returns all *socket* head axis components
+   : 2: Returns all *station* head axis components
+   : 9: Returns all *other* head axis components
+
+   **Tool Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDS}\boldsymbol{(}\, \mathbf{TOOL}\, \big[,n\,\big] \,\boldsymbol{)}`
+
+   Returns a sequence of component IDs of all tool or tool axis components attached
+   to the model. The *n* value can optionally be specified to return
+   specific components associated with the tool axes, as follows:
+
+   :*\ n*: Return value
+   :–1: Returns all tool axis components
+   : 0: Returns all *head* components (default)
+   : 1: Returns all *spindle/turret* tool axis components
+   : 2: Returns all *pocket* tool axis components
+   : 9: Returns all *other* tool axis components
+
+   **Coordinate Frame Component IDs**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDS}\boldsymbol{(}\, \mathbf{MSYS} \,\boldsymbol{)}`
+
+   Returns a sequence of component IDs of all CAM system coordinate frames added to
+   the session via the FRAMES feature of the Manufacturing Extractors.
+
+   **Component IDs matching a specified Type**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDS}\boldsymbol{(}\, \mathbf{TYPE}, n \,\boldsymbol{)}`
+
+   Returns a sequence of component IDs of all components that match the specified
+   type *n*. See the $FMSIDT function below for a list of component type
+   values.
+
+.. _func_fmsidt:
+.. index:: Functions; $FMSIDT
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSIDT(**\ *...*\ **)**                     | Return the type of a component                    |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+   There are a number of different forms of the $FMSIDT function, designed
+   to return the type of a component.
+
+   **Component Type**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDT}\boldsymbol{(}\, comp\_id \,\boldsymbol{)}`
+
+   This function returns one of the following numeric code types that
+   identify the component ID specified by *comp_id*. Component ID's are
+   obtained using the $FMSID function.
+
+   : 0: Unknown type
+   : 1: World component
+   : 2: Machine component
+   : 3: Reference axis component
+   : 4: Linear axis component
+   : 5: Rotary axis component
+   : 6: Curve axis component
+   : 7: Stock axis component
+   : 8: Stock component
+   : 9: Fixture component
+   :10: Design component
+   :11: Tool axis component
+   :12: Tool component
+   :13: Head axis component
+   :14: Head component
+   :15: Geometric entity component
+   :16: Assembly container (17:Part, 9:Fixture)
+   :17: Part container (10:Design, 8:Stock)
+   :18: CAM system coordinate frame
+
+   **Group Component Type**
+
+         :math:`\mathit{result} = \mathbf{\$FMSIDT}\boldsymbol{(}\, \mathbf{GROUP}, group\_id \,\boldsymbol{)}`
+
+   This function returns one of the following numeric code types that
+   identify the group ID specified by *group_id*. Group ID's are obtained
+   using the $FMSID(GROUP...) function.
+
+   :0: Unknown type
+   :1: Collision group
+   :2: Exclusion group
+   :3: Selection group
+   :4: User group
+
+   **Tool Component Type**
+
+      :math:`\mathit{result} = \mathbf{\$FMSIDT}\boldsymbol{(}\, \mathbf{TOOL}, tool\_id \,\boldsymbol{)}`
+
+   This function returns one of the following numeric code types that
+   identify the tool ID specified by *tool_id*. Tool ID's are obtained
+   using the $FMSID(TOOL...) function.
+
+   :-1: Component is not a member of a tool, or does not exist
+   : 0: Unknown type
+   : 1: Holder
+   : 2: Body
+   : 3: Body extension used for flute length optimization purposes
+   : 4: Cutting element
+   : 5: Shrunken tool used for gouge testing purposes
+   : 6: Shank
+   : 7: Probe sensor
