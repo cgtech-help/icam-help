@@ -1,0 +1,142 @@
+.. _about_portal:
+
+About the ICAM Portal
+=====================
+
+An ICAM Portal utility is available to manage all things ICAM
+related. To start the portal, select “Portal V26” from the
+“ICAM V26 x64” Start menu. To start the portal from the desktop, simply
+double-click on the “Portal V26” desktop icon. The portal utility
+will appear as shown below.
+
+.. image:: ../../media/portal_full.png
+   :width: 5.983in
+   :align: center
+
+\
+
+Each of the buttons along the left side of the portal provide access
+to different modules, utilities and types of information.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_home.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Home** page shows the latest news from ICAM. This
+   page requires Internet access as it links to current information on
+   ICAM’s website. This page is updated regularly.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_products.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Products** page provides quick access to start the
+   QUEST, GENER, CERUN and PSE products. Select a product tile with the
+   right-mouse button and choose “Show details” to list the product
+   options that you both have and do not have licenses for. Links to the
+   ICAM website provide more information about individual license options.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_tools.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Tools** page gives you quick access to check for
+   updates and to launch ICAM installed utilities, such as: the License
+   Manager that lists available licenses and their usage; the
+   Configuration utility that manages the ICAM.DEF file; the CAM
+   Integration utility that interfaces ICAM to the CAM systems installed
+   on the computer; and the ICAMID utility that generates your computer
+   system ID for licensing purposes.
+
+   Right-mouse on a product or tool tile and select “Run as administrator” to run the software in an
+   elevated security state.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_documents.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Documents** page provides links to product User
+   Guides such as this one, Help files, and other documentation that
+   have been installed locally with the ICAM software. These documents
+   do not require an Internet connection.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_progress.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Job Progress** page provides a central location to
+   track running and completed GENER, CERUN and PSE jobs. This page
+   shows a progress status bar for jobs that are running, and it show
+   completion status information for jobs that have ended. Clicking on
+   a completed job tile will bring up the run-time launcher to start the
+   job again. Use the right-mouse button anywhere in the window to
+   choose what job tiles to show. Use the right-mouse button on a
+   running job tile to abort it or open the full interface. Use the
+   right-mouse button on a completed job tile to view associated input
+   and output files.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_licenses.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Licenses** page lists all licenses that are available
+   to you with a short description of each. The license end date is also
+   listed for leased and non-permanent (i.e., temporary) licenses. Use
+   the right-mouse button and select “Show table” to view license
+   information in a tabular format. Use the right-mouse button and select “Show
+   details” to return to the initial view.
+
+.. container:: keep-together
+
+   .. image:: ../../media/portal_learn.png
+      :width: 0.521in
+      :align: left
+      :class: image-lowered
+
+   The **Learn** page provides access to educational
+   information on the ICAM website. This currently includes Tech Tips
+   (short articles addressing various technical topics), video tutorials
+   that graphically demonstrate various functionality, FAQs, and Support
+   contact links. This page will evolve over time.
+
+.. image:: ../../media/portal_minimized.png
+   :width: 1.842in
+   :align: right
+
+Use the right-mouse and select “Use minimized interface” to
+change the portal display so that it occupies less space on the
+desktop. While minimized, the large selectable tiles in the Products,
+Tools, Documents, Job Progress and Licenses sections are all
+replaced by small icons. Also, while minimized, you can further
+resize the portal as required. Use the right-mouse and select
+“Restore normal interface” to return to the original layout.
+
+If the portal is closed, it can still be accessed from the Windows
+tray bar. Select “Open” to make the portal visible on the desktop.
+Various ICAM products and utilities can be started from the tray-bar
+portal, including file explorer access to a directory containing all
+documentation. Select “Exit” to close the portal process
+completely. Job progress icons will appear in the task-bar when the
+portal is not running.
+
+On the portal main interface, click the top left caption icon on the title bar
+to show the system menu, which includes an option to close the application instead of
+minimizing it to the tray bar.
