@@ -1,0 +1,32 @@
+Simulation»Group Selection
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Objects can be grouped together in QUEST so that picking any object in a
+group will cause the entire group to be selected. For example, the
+cosmetic features of a machine could all be grouped together so that
+they could then be easily selected and hidden during GENER or CERUN
+processing.
+
+To create a selection group, drag the first object of the group from the
+model navigator to the Groups»Selection header. A new “Selection
+Group01” group will be created containing that object. Other related
+objects can then be added to the group by dragging them from the model
+navigator to the selection group. Hold the Ctrl key down when dragging
+to also include all dependent objects in the model navigator tree.
+
+Multiple selection groups can be created as necessary, but an object can
+only appear in a single selection group at a time. Objects can be easily
+dragged from one selection group to the next. Delete an object from a
+selection group to remove its “grouped” attribute.
+
+When the Group Selection function toggle is active, picking an object
+that belongs to a selection group will cause all objects of that group
+to be selected. This is the only form of object picking that is
+supported with GENER and CERUN. When the Group Selection function toggle
+is not active and an object is picked, only that object is selected. The
+Group Selection function can also be toggled from the VM Construct
+toolbar.
+
+The default visibility of a selection group can be set from the
+selection group Properties.
+
