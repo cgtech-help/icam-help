@@ -1,0 +1,35 @@
+.. _command_tprint:
+
+The TPRINT Command :kbd:`[MLEPC]`
+=================================
+
+The TPRINT command is used to output a comment to the NC control tape
+(MCD). This command is valid for all machine types. The format of the
+command is as follows:
+
+   :math:`\textbf{TPRINT / }
+   \big[\,\textbf{NEXT},\big] \;
+   \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+   :math:`\textbf{TPRINT /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+There are two methods of outputting comments to the MCD.
+
+The first method allows you to enter the character string with
+optional parameter values formatted into the string using the format
+specifications described in :ref:`“String Formatting”<string_formatting>`.
+String formatting can be disabled if desired using the PPFUN/17 command
+described in :ref:`PPFUN 17: String Formatting<string_formatting_ppfun>`. The text
+will be output by GENER to the MCD. If NEXT is specified and comments
+can be intermixed with other data on a block of MCD, then the comment
+will be appended to the next MCD block output. Otherwise, the comment
+will appear on a block alone.
+
+The second method uses the parameters ON and OFF together with
+upcoming PPRINT commands. When TPRINT/ON is coded in the CL file, all
+subsequent PPRINT commands will be interpreted as TPRINT commands,
+causing PPRINT messages be output as comments in the MCD. This
+redirection will continue until a TPRINT/OFF command is encountered.
+PPRINT commands will then be treated as regular PPRINT commands and
+be output in the verification listing.
