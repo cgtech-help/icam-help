@@ -1,0 +1,109 @@
+Heidenhain Pre-Processor
+========================
+
+This document list the specific Heidenhain 430/530 ISO/CONVERSATIONAL
+syntax supported by the pre-processor.
+
+#. `Pre-processor Setup <#setup>`__
+#. `Supported syntax <#supported>`__
+#. `Selecting a default startup syntax <#selecting>`__
+#. `Changing syntax during processing <#changing>`__
+#. `Configurable options <#options>`__
+
+1. Pre-processor setup
+~~~~~~~~~~~~~~~~~~~~~~
+
+The Heidenhain pre-processor can be setup in order to be a little bit
+more flexible. This is done via the macro function $FCEPP( ). This
+function’s purpose is really to communicate information that are
+specific to some pre-processor without being standard on every one of
+them. These are the configuration parameter supported by the Heidenhain
+pre-processor.
+
+-  $FCEPP('PROCESS', 'COMMENTS', *value* )
+
+-  $FCEPP('GRAMMAR', *value*)
+
+-  $FCEPP('SETFILEROOT', <folderpath>)
+
+-  $FCEPP('CONCATENATE', <logical>)
+
+-  $FCEPP('KEEPCYCLDEFQVARS', <logical>)
+
+-  $FCEPP('CYCLEDEF', <values>)
+
+2. Supported Syntax
+~~~~~~~~~~~~~~~~~~~
+
+The Heidenhain pre-processor support both the ISO and Conversational
+syntax of the 430/530 NC control model. Just like the real controller,
+it can not support both syntax in the same input tape file. The default
+syntax has to be selected during development of the CE in QUEST or
+changed at runtime (see #2 and #3 below). For specific ISO or
+conversational supported syntax, see the following two pages linked
+below:
+
+-  `Supported ISO Syntax <syntax_iso.html>`__
+-  `Supported Conversational Syntax <syntax_conv.html>`__
+
+3. Selecting a default startup syntax
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The default startup configuration has to be selected while selecting the
+pre-processor in QUEST.
+
+-  Auto: This configuration will select Conversational as the startup
+   language and will allow automatic switching from one syntax to the
+   other when processing subprograms. Take note that simulating programs
+   of both syntax is not an easy task since the database CE object would
+   have to support both syntax codes from the questionnaire. For
+   example, the CODE_INTERP_LINEAR code would need an alias to both “L”
+   and “G1”.
+-  ISO: This will select the ISO syntax and will lock the CE to that
+   syntax.
+-  Conversational: This will select the conversational syntax and will
+   lock the CE to that syntax.
+
+4. Changing syntax during processing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If, and only if, the configuration in QUEST has been set to “Auto”, the
+syntax will change at runtime on these conditions:
+
+-  If the input file extension is “.H”, the conversational syntax is
+   selected.
+-  If the input file extension is “.I”, the ISO syntax is selected.
+-  If a program begin by “%”, the ISO syntax is selected.
+-  If a program begin by “BEGIN PGM”, the conversational syntax is
+   selected.
+-  The $FCEPP('GRAMMAR','ISO') macro function will switch the syntax to
+   ISO.
+-  The $FCEPP('GRAMMAR','CONV') macro function will switch the syntax to
+   conversational.
+
+5. What are the configurable options?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  $FCEPP('SETFILEROOT', <path>)
+   Default to “//ICAMFS/”$TRUE. This path is used as a last location to
+   look for subprograms.
+-  $FCEPP('PROCESS', 'COMMENTS', <$TRUE or $FALSE>)
+   Default to $TRUE. Turning this option OFF will make the pre-processor
+   ignore the comments '; ...' on the block and let them be handled by
+   the CE.
+-  $FCEPP('CONCATENATE', <$TRUE or $FALSE>)
+   Default to $FALSE. Turning this option ON will make the pre-processor
+   concatenate any blocks which have a trailing continuation mark '~'.
+-  $FCEPP('KEEPCYCLDEFQVARS', <$TRUE or $FALSE>)
+   Default to $FALSE. Turning this option ON will make the pre-processor
+   leave the Q variable argument on the “CYCL DEF” blocks after
+   processing them. Their right side value will still be evaluated.
+-  $FCEPP('GRAMMAR', <'ISO' or 'CONV'>)
+   Force a change in the grammar context. See section #3 above.
+
+.. toctree::
+   :hidden:
+
+   syntax_conv
+   syntax_iso
+
