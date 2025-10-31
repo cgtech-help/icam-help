@@ -1,0 +1,95 @@
+GENER Options
+=============
+
+The Options button on the main launch panel is only available for
+selection once a CL file has been chosen. The following panel will
+appear when the Options button is pressed:
+
+Tape file
+~~~~~~~~~
+
+This field is automatically set to the default tape file name. You can
+change the name for a single execution of the post-processor, but the
+settings will not be remembered the next time GENER is launched. The
+default tape file extension can be changed to a different value using
+the *file_ext_tape* DEF file setting. The default directory path can be
+changed to a different value using the *icam_tap* environment variable.
+
+Listing file
+~~~~~~~~~~~~
+
+When checked, this field is automatically set to the default listing
+file name. When cleared, a log file will be created instead. You can
+change the name for a single execution of the postprocessor, but the
+settings will not be remembered the next time GENER is launched. The
+default listing file extension can be changed to a different value using
+the *file_ext_nclist* or *html_ext_list* DEF file settings depending on
+whether normal or HTML output is selected. The default directory path
+can be changed to a different value using the *icam_lst* environment
+variable.
+
+Plot file
+~~~~~~~~~
+
+This field is automatically set to the default back-plot file name. You
+can change the name for a single execution of the post-processor, but
+the settings will not be remembered the next time GENER is launched. The
+default back-plot file extension can be changed to a different value
+using the *file_ext_plot* DEF file setting. The default directory path
+can be changed to a different value using the *icam_lst* environment
+variable.
+
+Log file
+~~~~~~~~
+
+When checked, this field will be automatically set to the default log
+file name. When cleared, a listing file will be created instead. You can
+change the name for a single execution of the post-processor, but the
+settings will not be remembered the next time GENER is launched. The
+default log file extension can be changed to a different value using the
+*file_ext_log* DEF file setting. The default directory path can be
+changed to a different value using the *icam_lst* environment variable.
+
+Trace in Listing
+~~~~~~~~~~~~~~~~
+
+Enables the tracing of various types of data in the listing file.
+
+-  **CL Records**: If selected, CL file records will be shown in the
+   listing file as they are read.
+-  **Error messages**: If selected, diagnostic messages will include a
+   trace-back showing the macro command (if any) that was being executed
+   when the diagnostic occurred.
+-  **Regular macros**: If selected, macro commands originating from the
+   post-processor will be shown in the listing file as they are
+   processed.
+-  **Before and after macros**: If selected, macro commands originating
+   from CAM interface kits will be shown in the listing file as they are
+   processed.
+
+Also include information about…
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enables the display and tracing of additional types of data.
+
+-  **Original input source lines**: If selected, CL file records will be
+   shown in the listing file and the verbose display in their original
+   input format whenever possible. By default, GENER displays and traces
+   CL file data in an ICAM standard format. This setting only has an
+   effect when a record is first read. Records that are re-read
+   following a look-ahead or CL file repositioning, will always be shown
+   in their standard format.
+-  **Look ahead processing, curve fitting and $FGET search**: If
+   selected, tracing will also be enabled during all forms of
+   look-ahead. Select this only when debugging macros that use the
+   look-ahead features of GENER.
+
+OK, Cancel and Reset buttons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Press **OK** to accept any changes to the Options panel and return to
+the main launch panel. Press **Cancel** to ignore your changes and
+return to the main launch panel. Press **Reset** to remove all
+specialized settings and reset the file names and trace options to their
+defaults.
+
