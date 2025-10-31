@@ -1,0 +1,1820 @@
+<HTML>
+<!-- History.                                                              -->
+<!-- DICC  Who When     What                                               -->
+<!-- ----- --- -------- ----------------------------------------------------->
+<!-- 54765 MH  09/02/01 Moved to Powermill                                 -->
+<!-- 55928 MH  05/05/05 Add toolpath type                                  -->
+<!-- 59745 MH  05/05/05 Add coolant,drilling,skim,project                  -->
+<!-- 82457 MH  28/01/10 Add user parameter,orientation vector,contact normal--> 
+<!-- 87720 MH  20/11/10 Add settings and workplane records                 --> 
+<!-- 90050 MH  28/03/11 Add 1046                                           -->
+<!-- 116996 CHB 08/12/14 Add more workplane records, more special records  -->
+<!-- 125501 CHB 11/01/16  Correct cutter compensation special record       -->
+<!-- nnnnnn CNJ 15/07/16 Add copyright                            -->
+<!-- ----- --- -------- ----------------------------------------------------->
+
+<TITLE>CLDATA as used by PowerMILL</TITLE>
+<!-- Changed by: Marian Hills,  13-Nov-2010 -->
+
+<BODY>
+
+<H1>CLDATA as used by Autodesk<sup>&reg;</sup> PowerMill<sup>&reg;</sup></H1>
+<P>
+&copy; Copyright 2016 Delcam Ltd. All rights reserved.
+
+<H2>Introduction</H2>
+ 
+<P>
+This document is intended to outline CLDATA as used by PowerMill. 
+<P>
+
+PowerMill uses CLDATA in a way that broadly conforms to ISO 3592-1978 and ISO 4343-1978:
+therefore copies of those documents would be a useful addition to the information
+given below. An additional document is available from Delcam which describes the
+structure of a generic CLDATA record. 
+
+<H2>Records used by PowerMill</H2>
+<P>
+These are given by class.
+
+<H3>1000 records</H3>
+<P>
+This class of records is not used by PowerMill.
+
+<H3>2000 records</H3>
+<P>
+These records are used extensively by PowerMill. A brief outline will be given below,
+in tabular form. Further detail will be given later. This table does not give all
+2000 records that are currently meaningful to DUCTpost: rather it gives those 2000
+records that are written by PowerMill. 
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Code</B></TD>
+<TD><B>Mnemonic</B></TD>
+<TD><B>Description</B></TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>RAPID</TD>
+<TD>Indicates that following 5000 record may be performed as a point-to-point
+move
+</TD>
+</TR>
+<TR>
+<TD>17</TD>
+<TD>GOHOME</TD>
+<TD>Indicates that the next 5000 record should be interpreted as a move
+to the home position</TD>
+</TR>
+<TR>
+<TD>1004</TD>
+<TD>CLEARP</TD>
+<TD>PowerMill uses this for StartZ: this differs from the standard.</TD>
+</TR>
+<TR>
+<TD>1007</TD>
+<TD>CUTCOM</TD>
+<TD>Cutter compensation</TD>
+</TR>
+<TR>
+<TD>1009</TD>
+<TD>FEDRAT</TD>
+<TD>Specifies the feedrate</TD>
+</TR>
+<TR>
+<TD>1010</TD>
+<TD>DELAY</TD>
+<TD>Specifies any dwell</TD>
+</TR>
+<TR>
+<TD>1014</TD>
+<TD>PPLOT</TD>
+<TD>Used by PowerMill to indicate the size of the block. This differs
+from the standard</TD>
+</TR>
+<TR>
+<TD>1030</TD>
+<TD>COOLNT</TD>
+<TD>Specifies coolant flow, or type, or both</TD>
+</TR>
+<TR>
+<TD>1031</TD>
+<TD>SPINDL</TD>
+<TD>Specifies spindle function</TD>
+</TR>
+<TR>
+<TD>1044</TD>
+<TD>PPRINT</TD>
+<TD>Specifies a comment string</TD>
+</TR>
+<TR>
+<TD>1045</TD>
+<TD>PARTNO</TD>
+<TD>Gives a text string used to identify the part</TD>
+</TR>
+<TR>
+<TD>1046</TD>
+<TD>INSERT</TD>
+<TD>Text which will be inserted in the output file</TD>
+</TR>
+<TR>
+<TD>1055</TD>
+<TD>LOADTL</TD>
+<TD>Indicates that a tool should be loaded, and gives details of this tool</TD>
+</TR>
+<TR>
+<TD>1054</TD>
+<TD>CYCLE</TD>
+<TD>Indicates a canned cycle</TD>
+</TR>
+<TR>
+<TD>1079</TD>
+<TD>PPFUN</TD>
+<TD>PowerMill uses this a lot, almost as a "proprietary" record. See below
+for details</TD>
+</TR>
+<TR>
+<TD>1094</TD>
+<TD>SAFPOS</TD>
+<TD>Used by PowerMill to specify SafeZ. This differs from the standard.</TD>
+</TR>
+</TABLE>
+
+<H4>RAPID</H4>
+<P>
+This record has no effect itself, it used to flag the fact that the next 5000 5
+record may be performed as a point-to-point move. This record may contain more
+than one move, and may be continued by one or more 5000 6 records. All moves
+within the 5000 5 (and its continuation, if present) should be treated as
+point-to-point.
+
+<H4>GOHOME</H4>
+This record is used as a flag to indicate that the following 5000 5 record
+should be interpreted as a move to the home position. In actual fact, PowerMill
+currently outputs a GOHOME record at the very end of the CLDATA file, or at the
+end of every positional 5-axis toolpath.
+
+<H4>CLEARP</H4>
+This record is used by PowerMill to transmit the value of StartZ used in a
+particular toolpath. It contains one integer that gives the code for the
+Z plane (=33), followed by one real that gives the value for StartZ.
+toolpath.
+ 
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>plane code (always has value 33)</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>SafeZ value</TD>
+</TR>
+</TABLE>
+
+<H4>CUTCOM</H4>
+Cutter compensation record
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>code</TD>
+</TR>
+</TABLE>
+ 
+<P>
+The values the code can take have the following meanings:
+<UL>
+<LI>  71  : cutter compensation ON
+<LI>  72  : cutter compensation OFF
+<LI>  24  : cutter compensation RIGHT
+<LI>   8  : cutter compensation LEFT
+</UL>
+
+
+<H4>FEDRAT</H4>
+This contains the feedrate, and consists of one real that gives the 
+value of the feedrate, followed by an integer. That integer is not used
+by PowerMill, but can specify whether the feedrate is in length
+units per minute, or length units per revolution of the spindle.
+The integer is technically a units specifier, but PowerMill makes
+no use of it, taking the units from the "global" units flag.
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>feedrate value</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>integer</TD>
+<TD>units code (not actually used)</TD>
+</TR>
+</TABLE>
+
+<H4>DELAY</H4>
+Commonly known as "dwell", this record contains one real that is
+used to specify the dwell time in seconds.
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>dwell time in seconds</TD>
+</TR>
+</TABLE>
+
+
+<H4>PPLOT</H4>
+PowerMill uses this record to indicate the extents of the block. 
+It will be preceeded by a workplane record giving the coordinate system
+for the block.It
+consists of 6 reals: 
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>Block XMin</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>Block Ymin</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>Block ZMin</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>real</TD>
+<TD>Block XMax</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>real</TD>
+<TD>Block YMax</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>real</TD>
+<TD>Block ZMax</TD>
+</TR>
+</TABLE>
+
+<H4>COOLNT</H4>
+This record contains one integer.
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>coolant code</TD>
+</TR>
+</TABLE>
+
+<P>
+This integer is interpreted as follows:
+<UL>
+<LI>IC = 71 ---&gt; coolant on
+<LI>IC = 72 ---&gt; coolant off
+<LI>IC = 89 ---&gt; coolant on flood
+<LI>IC = 90 ---&gt; coolant on mist
+<LI>IC = 91 ---&gt; tapping coolant on
+<LI>IC = 92 ---&gt; coolant through the spindle
+<LI>IC = 93 ---&gt; air coolant on
+<LI>IC = 94 ---&gt; "double" coolant on - two coolant codes
+</UL>
+
+<H4>SPINDL</H4>
+This record contains information relating to the spindle, and is structured
+like so, for spindle off:
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>code (= 72, for spindle off)</TD>
+</TR>
+</TABLE>
+
+<P>
+and like so, for spindle on:
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>spindle speed, in RPM</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>integer</TD>
+<TD>code (= 78, for spindle on)</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>integer</TD>
+<TD>sense (=60 for clockwise, =59 for counterclockwise</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>integer</TD>
+<TD>range (=145 always)</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>integer</TD>
+<TD>?, always 0</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>integer</TD>
+<TD>indicates a radius value follows, always =23</TD>
+<TR>
+<TD>7</TD>
+<TD>real</TD>
+<TD>tip radius: PowerMill uses this for the tip radius of a tool</TD>
+</TR>
+<TR>
+<TD>8</TD>
+<TD>integer</TD>
+<TD>always 0
+</TR>
+<TR>
+<TD>9</TD>
+<TD>real</TD>
+<TD>always 0.0
+</TR>
+</TABLE>
+
+<H4>PPRINT</H4>
+This is used as a comment record. PowerMill uses copious amounts of comment
+records at the start of every toolpath. The comment record simply consists
+of character CLDATA, with the characters forming the text of the comment
+string.
+
+<H4>PARTNO</H4>
+This is used as an identifier for the part. Each CLDATA file should contain
+just one PARTNO record. Again, it simply consists of character CLDATA,
+with the characters forming the name of the part.
+
+<H4>INSERT</H4>
+This is again character CLDATA. It allows for text to be directly inserted into the output file, for example a code such as G56. The difference between 
+this and a comment record is that no brackets or other comment defining characters will be added on output. 
+
+<H4>LOADTL</H4>
+This is used to indicate that a tool needs to be loaded, and also to
+describe the tool. The record is structured as follows:
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>toolnumber (real is not a typo!)</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>integer</TD>
+<TD>indicates that tool length follows (=9)</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>tool length</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>integer</TD>
+<TD>indicates that the tool diameter follows (=509)</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>real</TD>
+<TD>tool diameter</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>integer</TD>
+<TD>indicates that the offset toolnumbers follow</TD>
+</TR>
+<TR>
+<TD>7</TD>
+<TD>real</TD>
+<TD>the length offset register number for the tool 
+</TR>
+<TR>
+<TD>8</TD>
+<TD>real</TD>
+<TD>the diameter offset register number for the tool
+</TR>
+<TR>
+<TD>9*</TD>
+<TD>integer</TD>
+<TD>optionally present, indicates a toolname follows (=3017)</TD>
+</TR>
+<TR>
+<TD>10*</TD>
+<TD>character</TD>
+<TD>optionally present, forms the toolname</TD>
+</TR>
+<TR>
+<TD>...*</TD>
+<TD>character</TD>
+<TD>optionally present, any additional character records required to fully specify the tool
+    name</TD>
+</TR>
+</TABLE>
+
+<H4>CYCLE</H4>
+
+<P>The following is for a multiple peck cycle:
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>code to indicate cycle type</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>clearance_plane + peck_depth</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>clearance_plane + 2.0*peck_depth</TD>
+</TR>
+<TR>
+<TD>...</TD>
+<TD>...</TD>
+<TD>...</TD>
+</TR>
+<TR>
+<TD>N</TD>
+<TD>real</TD>
+<TD>clearance_plane + (N-1)*peck_depth</TD>
+</TR>
+<TR>
+<TD>N+1</TD>
+<TD>real</TD>
+<TD>total_depth</TD>
+</TR>
+<TR>
+<TD>N+2</TD>
+<TD>integer</TD>
+<TD>=315</TD>
+</TR>
+<TR>
+<TD>N+3</TD>
+<TD>real</TD>
+<TD>feedrate</TD>
+</TR>
+<TR>
+<TD>N+4</TD>
+<TD>real</TD>
+<TD>=0.0</TD>
+</TR>
+<TR>
+<TD>N+5</TD>
+<TD>real</TD>
+<TD>clearance_plane</TD>
+</TR>
+</TABLE>
+
+<P>For single peck cycles, only the total depth is given. Note the somewhat
+odd manner in which the drill depths are defined. Also, note that the
+clearance plane is defined somewhat oddly, and is the distance
+between the Z height of the actual clearance plane, and the previous Z height.
+It would be always expected to be positive, since one expects to be above
+the clearance plane before drilling begins.
+
+<P> The drill type codes
+are like so:
+
+<UL>
+<LI> 163 : drill
+<LI> 153 : deep drill
+<LI> 154 : alternative deep drill
+<LI> 92  : drill with dwell time
+<LI> 288 : break chip
+<LI> 168 : tapping
+<LI> 169 : rigid tapping
+<LI> 170 : left handed rigid tapping
+<LI> 206 : left handed tapping
+<LI> 200 : helical 
+<LI> 201 : reverse helical 
+<LI> 202 : clockwise helical 
+<LI> 203 : reverse clockwise helical 
+<LI> 204 : profile 
+<LI> 205 : clockwise profile 
+<LI> 206 : rigid tapping 
+<LI> 209 : bore 1 
+<LI> 210 : bore 2 
+<LI> 211 : bore 3 
+<LI> 212 : bore 4 
+<LI> 213 : bore 5 
+<LI> 214 : cycle 1 
+<LI> 215 : cycle 2
+<LI> 216 : cycle 3
+<LI> 217 : cycle 4 
+<LI> 218 : cycle 5 
+<LI> 219 : fine 
+<LI> 220 : thread 
+<LI> 221 : left hand thread 
+<LI> 222 : reverse thread 
+<LI> 223 : reverse left hand thread 
+
+
+</UL>
+
+<H4>PPFUN</H4>
+This record is widely used by PowerMill as a "proprietary" CLDATA record. It consists
+of character CLDATA record. Since this record is so heavily used, it will be detailed
+below.
+
+<H4>SAFPOS</H4>
+This record is used by PowerMill to specify the SafeZ value.
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>SafeZ value</TD>
+</TR>
+</TABLE>
+
+<H3>PPFUN records</H3>
+<P>
+These contain character CLDATA. The original intention of PPFUN records
+is to allow a "user" CLDATA record that the post-processor can pick up
+and act upon. When the character CLDATA is decoded, there is a space
+delimited text string. The first token in this text string is the
+PPFUN command. These can be created by the user within PowerMill,
+but certain PPFUN records are used by PowerMill to indicate certain
+special properties. The PPFUN commands that have special meaning
+to PowerMill are listed below. Note that any numerical values are
+represented in character form.
+
+<UL>
+<LI><B>IGNORE &lt;N&gt;</B> followed by an integer N (represented as a string). Ignore
+    the next n records.
+<LI><B>FEDRAT &lt;skim_rate&gt; &lt;plunge_rate&gt; &lt;cutting_rate&gt;</B> Gives the
+    feedrates used by PowerMill for the toolpath. 
+<LI><B>CUTTIM &lt;cutting_time&gt;</B> the time taken to cut the toolpath
+<LI><B>CUTLEN &lt;cutting_length&gt;</B> the length of the toolpath
+<LI><B>HOLETOP &lt;top_of_hole&gt;</B> the absolute Z value of the top of a hole. This
+    is useful for Heidenhain drill cycles, that use this information.
+<LI><B>DRILLDWELL &lt;drill_dwell_time&gt;</B> the dwelltime required by a cycle.
+<LI><B>TOOLPATH &lt;toolpath_name&gt;</B> the name of the toolpath
+</UL>
+
+
+<H3>3000 records</H3>
+<P>
+These records are used to specify geometry. PowerMill uses these to specify
+circles (or arcs) and B-spline curves. The circle record is standard,
+and is structured as below, with major word taking the value 2:
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>=1</TD>
+<TR>
+<TD>2</TD>
+<TD>integer</TD>
+<TD>=4</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>integer</TD>
+<TD>=9</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>integer</TD>
+<TD>=0</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>integer</TD>
+<TD>=0</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>real</TD>
+<TD>centre X coordinate</TD>
+</TR>
+<TR>
+<TD>7</TD>
+<TD>real</TD>
+<TD>centre Y coordinate</TD>
+</TR>
+<TR>
+<TD>8</TD>
+<TD>real</TD>
+<TD>centre Z coordinate</TD>
+</TR>
+<TR>
+<TD>9</TD>
+<TD>real</TD>
+<TD>axis X component</TD>
+</TR>
+<TR>
+<TD>10</TD>
+<TD>real</TD>
+<TD>axis Y component</TD>
+</TR>
+<TR>
+<TD>11</TD>
+<TD>real</TD>
+<TD>axis Z component</TD>
+</TR>
+<TR>
+<TD>12</TD>
+<TD>real</TD>
+<TD>radius</TD>
+</TR>
+
+</TABLE>
+
+<P>
+Delcam also uses the 3000 class record to represent non-rational B-spline
+curves. This use of the 3000 class record uses a major word of 0, and is
+structured as follows: 
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>=0</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>integer</TD>
+<TD>Code to indicate spline record (=126)</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>integer</TD>
+<TD>=1</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>integer</TD>
+<TD>order of spline (=3)</TD>
+</TR>
+</TABLE>
+
+<P>
+The 3000 class of records are followed by 5000 5 records (possibly 
+continued by 5000 6 records). In the case of a circle record, the
+5000 5 record is a polygonisation of the circle. In the case of
+a spline record, the 5000 5 record gives points that lie on the
+underlying cubic B-spline curves. Assume that each individual curve
+is given [0,1] parameterisation:
+
+<UL>
+<LI>start point curve 1
+<LI>point at parameter t  = 1/3 on curve 1
+<LI>point at parameter t  = 2/3 on curve 1
+<LI>end point curve 1 / start point curve 2
+<LI>point at parameter t  = 1/3 on curve 2
+<LI>point at parameter t  = 2/3 on curve 2
+<LI>end point curve 2 / start point curve 3
+<LI>...
+</UL>
+
+<H3>5000 records (MOTION records)</H3>
+
+<P>
+These records contain the point data that is used to 
+specify the tool motion. PowerMill uses three types of 5000 record:
+
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Code</B></TD>
+<TD><B>Mnemonic</B></TD>
+<TD><B>Description</B></TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>FROM</TD>
+<TD>Specifies the "home" point of the toolpath.
+</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>MOTION</TD>
+<TD>General motion record, that may be modified by the immediately
+    preceding record (CIRCLE, SPLINE, CYCLE, GOHOME).
+</TD>
+</TR>
+<TD>6</TD>
+<TD>CONT</TD>
+<TD>Continuation of a 5000 5 record 
+</TD>
+</TR>
+</TABLE>
+
+<P>
+MOTION records are all structured as below, with the example record 
+showing two points. In a 5000 5 or 5000 6 record there can be up to 
+80 points.
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>X coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>Y coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>Z coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>[4</TD>
+<TD>real</TD>
+<TD>X coordinate of point 2]</TD>
+</TR>
+<TR>
+<TR>
+<TD>[5</TD>
+<TD>real</TD>
+<TD>Y coordinate of point 2]</TD>
+</TR>
+<TR>
+<TR>
+<TD>[6</TD>
+<TD>real</TD>
+<TD>Z coordinate of point 2]</TD>
+</TR>
+<TR>
+</TABLE>
+
+<P>
+If the CLDATA is in MULTAX mode, then the 5000 5/6 records contain toolvector
+information in addition to tool position information. Thus, only 40 points
+may be contained in such a record.
+
+
+</TABLE>
+
+
+<H3>6000 records</H3>
+There are two tolerance records used by PowerMill: 6000 4 (INTOL) and
+6000 5 (OUTTOL). However, these records use the same values, and are both
+structured as below:
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>tolerance value</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>tolerance value</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>tolerance value</TD>
+</TR>
+</TABLE>
+<p> 
+6000 6 is the tool information record structured as follows.
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>cutter diameter</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>corner radius</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>tip radius x</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>real</TD>
+<TD>tip radius y</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>real</TD>
+<TD>not used</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>real</TD>
+<TD>taper angle</TD>
+</TR>
+<TR>
+<TD>7</TD>
+<TD>real</TD>
+<TD>cutting length</TD>
+</TR>
+</TABLE>
+
+<H3>9000 records</H3>
+There are two records in the 9000 class that are used 
+by PowerMill. 9000 2 is the MULTAX record, and 9000 9
+is the units record.
+
+<H4>MULTAX</H4>
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>status: =1 (ON), =0 (OFF)</TD>
+</TR>
+</TABLE>
+
+<P>MULTAX ON remains active until MULTAX OFF is seen.
+
+<H4>UNITS</H4>
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>code: =171 (MM), =173 (INCH)</TD>
+</TR>
+</TABLE>
+
+PowerMill uses one record in the 18000 class. The 18000 1 record
+contains one double, which is used to specify the thickness for the toolpath.
+<p>
+<H3>20000 records</H3>
+These are just description records which appear at the start and end
+of groups of records (for example Join....Join End).
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>integer</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>integer</TD>
+<TD></TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>String</TD>
+<TD>Description</TD>
+</TR>
+</TABLE>
+<p>
+The description consists of one of the following
+<UL>
+
+<li>Lead In
+<li>Lead Out
+<li>Lead End
+<li>Link Rapid
+<li>Link End
+<li>Approach Rapid
+<li>Approach End
+<li>Retract Rapid
+<li>Retract End
+<li>Join
+<li>Join End
+</UL>
+<H3>28000 records</H3>
+Workplane records : 1 for ncprogram workplane, 2 for toolpath workplane,
+3 for block workplane, 4 is for fixture offsets, 5 is for the safe area
+workplane, and 6 is for the model location.
+<p>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>2</TD>
+<TD>real</TD>
+<TD>3</TD>
+<TD>real</TD>
+<TD>Position </TD>
+</tr>
+<tr>
+<TD>4</TD>
+<TD>real</TD>
+<TD>5</TD>
+<TD>real</TD>
+<TD>6</TD>
+<TD>real</TD>
+<TD>X Vector </TD>
+</TR>
+<tr>
+<TD>7</TD>
+<TD>real</TD>
+<TD>8</TD>
+<TD>real</TD>
+<TD>9</TD>
+<TD>real</TD>
+<TD>Y Vector </TD>
+</TR>
+<tr>
+<TD>10</TD>
+<TD>real</TD>
+<TD>11</TD>
+<TD>real</TD>
+<TD>12</TD>
+<TD>real</TD>
+<TD>Z Vector</TD>
+</TR>
+<tr>
+<TD>13</TD>
+<TD>real</TD>
+<TD>14</TD>
+<TD>real</TD>
+<TD>15</TD>
+<TD>real</TD>
+<TD>Euler angles</TD>
+</TR>
+</TABLE>
+<H3>29000 records</H3>
+These non-standard cldata records are used to pass information to the postprocessor where no standard records are available. The record always contains a real and a string, if the information to be passed is a string the numeric value is 0, if the information is numeric the string contains a description of the record to make it easier to read when looking at a printed form of the cutfile.
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>integer</TD>
+<TD>Record Code</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>string</TD>
+<TD>String value or name of record</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>Numeric value or 0</TD>
+</TR>
+</TABLE>
+<p>
+The following 29000 records are available:
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Integer</B></TD>
+<TD><B>String</B></TD>
+<TD><B>Real</B></TD>
+<TD><B>Meaning</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>Tool type</TD>
+<TD>Length</TD>
+<TD>Length to be used for multiaxis calculation</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>"Recommended_length"</TD>
+<TD>Length</TD>
+<TD>Overhang</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>workplane name</TD>
+<TD>0</TD>
+<TD>Toolpath creation workplane name</TD>
+</TR><TR>
+<TD>4</TD>
+<TD>"Tip" or "Centre"</TD>
+<TD>0</TD>
+<TD>Coordinate output - tool tip or centre</TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>"Drill_dwell"</TD>
+<TD>Dwell</TD>
+<TD>Dwell for drilling cycle</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>"Hole_top"</TD>
+<TD>Top</TD>
+<TD>Hole top for drilling</TD>
+</TR>
+<TR>
+<TD>7</TD>
+<TD>"Hole_diameter"</TD>
+<TD>Diameter</TD>
+<TD>Hole diameter for drilling</TD>
+</TR>
+<TR>
+<TD>8</TD>
+<TD>"Rapid_feed"</TD>
+<TD>Feedrate</TD>
+<TD>Rapid feedrate</TD>
+</TR>
+<TR>
+<TD>9</TD>
+<TD>"Cutting_feed"</TD>
+<TD>Feedrate</TD>
+<TD>Cutting feedrate</TD>
+</TR>
+<TR>
+<TD>10</TD>
+<TD>"Plunge_feed"</TD>
+<TD>Feedrate</TD>
+<TD>Plunge feedrate</TD>
+</TR>
+<TR>
+<TD>11</TD>
+<TD>"Number_pecks"</TD>
+<TD>Number</TD>
+<TD>Number of pecks for drilling</TD>
+</TR>
+<TR>
+<TD>12</TD>
+<TD>"Pitch"</TD>
+<TD>Value</TD>
+<TD>Thread pitch for drilling</TD>
+</TR>
+<TD>20</TD>
+<TD>Workplane name</TD>
+<TD>0</TD>
+<TD>Output workplane name</TD>
+</TR><TR>
+</TR><TR>
+<TD>21</TD>
+<TD>"Expanded_cycle"</TD>
+<TD>0</TD>
+<TD>Only written if the following data is an expanded drilling cycle</TD>
+</TR>
+<TR>
+<TD>22</TD>
+<TD>"Peck_depth"</TD>
+<TD>Depth</TD>
+<TD>Peck depth for drilling</TD>
+</TR>
+<TR>
+<TD>23</TD>
+<TD>"Peck_decrement"</TD>
+<TD>Value</TD>
+<TD>Peck decrement if each peck is to be smaller than the last</TD>
+</TR>
+<TR>
+<TD>24</TD>
+<TD>"Minimum_peck"</TD>
+<TD>Value</TD>
+<TD>Smallest peck if each peck is to be smaller than the last</TD>
+</TR>
+<TR>
+<TD>25</TD>
+<TD>"Feed_reduction"</TD>
+<TD>Value</TD>
+<TD>Proportion by which feed is to be reduced at the bottom of the drill</TD>
+</TR>
+<TR>
+<TD>26</TD>
+<TD>"Rfeed_distance"</TD>
+<TD>Distance</TD>
+<TD>Distance for  which feed is to be reduced at the bottom of the drill</TD>
+</TR>
+<TR>
+<TD>27</TD>
+<TD>"Full retract"</TD>
+<TD>0.0(partial retract) or 1.0(full retract)</TD>
+<TD>Drilling : if 1 retract to safe Z (G98) otherwise to the clear plane (G99)</TD>
+</TR>
+<TR>
+<TD>28</TD>
+<TD>"User_par"</TD>
+<TD>Value</TD>
+<TD>User defined parameter for drilling</TD>
+</TR>
+<TR>
+<TD>29</TD>
+<TD>"Draft angle"</TD>
+<TD>Value</TD>
+<TD>Draft angle for drilling</TD>
+</TR>
+<TR>
+<TD>30</TD>
+<TD>"Sfeed_reduction"</TD>
+<TD>Value</TD>
+<TD>Factor for reducing the feedrate at the top of a hole.</TD>
+</TR>
+<TR>
+<TD>31</TD>
+<TD>"Sfeed_distance"</TD>
+<TD>Value</TD>
+<TD>Fraction of the drilled depth for which the feedrate is reduced. </TD>
+</TR>
+<TR>
+<TD>32</TD>
+<TD>"Overlap"</TD>
+<TD>Value</TD>
+<TD>The factor by which a profile overlaps in profile drilling.</TD>
+</TR>
+<TR>
+<TD>33</TD>
+<TD>"Retract_Factor"</TD>
+<TD>Value</TD>
+<TD>The factor of the peck used to retract for break chip drilling</TD>
+</TR>
+<TR>
+<TD>34</TD>
+<TD>"Retract_Feed_Factor"</TD>
+<TD>Value</TD>
+<TD>The retract may be done at a different feedrate from cutting</TD>
+</TR>
+<TR>
+<TD>35</TD>
+<TD>"Chamfer_Diameter"</TD>
+<TD>Value</TD>
+<TD>Chamfer diameter for drilling</TD>
+</TR>
+<TR>
+<TD>36</TD>
+<TD>"Sub_Peck"</TD>
+<TD>Value</TD>
+<TD>Subsidiary peck (for each peck several sub pecks are performed).</TD>
+</TR>
+<TR>
+<TD>37</TD>
+<TD>"Rapid_Retract"</TD>
+<TD>0 or 1</TD>
+<TD>If 1 then drilling cycle retracts at rapid.</TD>
+</TR>
+<TR>
+<TD>38</TD>
+<TD>"Hole_Depth"</TD>
+<TD>Value</TD>
+<TD>The depth of the actual hole (which may not be the drilled depth</TD>
+</TR>
+<TR>
+<TD>39</TD>
+<TD>strategy_subtype</TD>
+<TD>Value</TD>
+<TD>Strategy type (e.g. single peck for drilling)</TD>
+</TR>
+<TR>
+<TD>40</TD>
+<TD>strategy name</TD>
+<TD>strategy code</TD>
+<TD>Toolpath strategy name</TD>
+</TR><TR>
+<TD>41</TD>
+<TD>"Number_flutes"</TD>
+<TD>Number</TD>
+<TD>The number of flutes on the tool</TD>
+</TR><TR>
+<TD>42</TD>
+<TD>"Compensation"</TD>
+<TD>Radius</TD>
+<TD>Value for radius compensation (not usually the full radius)</TD>
+</TR><TR>
+<TD>43</TD>
+<TD>"Toolpath_codebase"</TD>
+<TD>Codebase</TD>
+<TD>Toolpath creation codebase</TD>
+</TR><TR>
+<TD>44</TD>
+<TD>"Modification_status"</TD>
+<TD>0.0 (not modified) or 1.0 (modified)</TD>
+<TD>Has toolpath been edited</TD>
+</TR><TR>
+<TD>45</TD>
+<TD>"Program Number"</TD>
+<TD>Program Number</TD>
+<TD>Number which can be used at start of program output.</TD>
+</TR><TR>
+<TD>46</TD>
+<TD>"Varifeed"</TD>
+<TD>1.0</TD>
+<TD>The toolpath following this record contains some feedrates which are
+not plunge,cutting or rapid</TD>
+</TR><TR>
+<TD>47</TD>
+<TD>"Finishing"</TD>
+<TD>1.0</TD>
+<TD>Toolpath Type</TD>
+</TR><TR>
+<TD></TD>
+<TD>"Roughing"</TD>
+<TD>2.0</TD>
+<TD> </TD>
+</TR><TR>
+<TD> </TD>
+<TD>"Drilling"</TD>
+<TD>3.0</TD>
+<TD></TD>
+</TR><TR>
+<TD> </TD>
+<TD>"Semi_Finishing"</TD>
+<TD>4.0</TD>
+<TD> </TD>
+</TR><TR>
+<TD>48</TD>
+<TD>tool_description</TD>
+<TD>Text</TD>
+<TD>Tool description</TD>
+</TR><TR>
+<TD>60</TD>
+<TD>project name</TD>
+<TD>1.0</TD>
+<TD>The project name (not the full project path)</TD>
+</TR><TR>
+<TD>61</TD>
+<TD>"Skim_distance"</TD>
+<TD>Value</TD>
+<TD>The skim distance</TD>
+</TR><TR>
+<TD>62</TD>
+<TD>"Cut_direction"</TD>
+<TD>Value</TD>
+<TD>Cut direction</TD>
+</TR><TR>
+<TD>70</TD>
+<TD>"Allowance"</TD>
+<TD>Value</TD>
+<TD>The allowance for a drill profile finishing pass</TD>
+</TR><TR>
+<TD>71</TD>
+<TD>"Number_of_Cuts"</TD>
+<TD>Value</TD>
+<TD>The number of cuts for drilling</TD>
+</TR><TR>
+<TD>72</TD>
+<TD>"Number_of_Turns"</TD>
+<TD>Value</TD>
+<TD>The number of turns for drilling</TD>
+</TR><TR>
+<TD>73</TD>
+<TD>"Lead_angle"</TD>
+<TD>Value</TD>
+<TD>The drilling lead angle</TD>
+</TR><TR>
+<TD>74</TD>
+<TD>"Incr_start"</TD>
+<TD>Value</TD>
+<TD>The distance above the clearance where pecking starts</TD>
+</TR><TR>
+<TD>75</TD>
+<TD>"Secondary_Clearance"</TD>
+<TD>Value</TD>
+<TD>The secondary clearance</TD>
+</TR><TR>
+<TD>99</TD>
+<TD>"Toolpath_end"</TD>
+<TD>Value</TD>
+<TD>The toolpath end</TD>
+</TR><TR>
+<TD>100</TD>
+<TD>"required_ductpost"</TD>
+<TD>Codebase</TD>
+<TD>Minimum codebase of ductpost for this cutfile</TD>
+</TR><TR>
+<TD>101</TD>
+<TD>"axial_thickness"</TD>
+<TD>Value</TD>
+<TD>Axial thickness for this toolpath</TD>
+</TR><TR>
+<TD>102</TD>
+<TD>"SAFEAREAPLANEDIST"</TD>
+<TD>Value</TD>
+<TD>Safe area distance</TD>
+</TR><TR>
+<TD>103</TD>
+<TD>"SAFEAREAPLANEPLUNGE"</TD>
+<TD>Value</TD>
+<TD>Safe area plunge distance</TD>
+</TR><TR>
+<TD>104</TD>
+<TD>"SAFEAREAPLANENORMX"</TD>
+<TD>Value</TD>
+<TD>X component of the safe area axis</TD>
+</TR><TR>
+<TD>105</TD>
+<TD>"SAFEAREAPLANENORMY"</TD>
+<TD>Value</TD>
+<TD>Y component of the safe area axis</TD>
+</TR><TR>
+<TD>106</TD>
+<TD>"SAFEAREAPLANENORMZ"</TD>
+<TD>Value</TD>
+<TD>Z component of the safe area axis</TD>
+</TR><TR>
+<TD>107</TD>
+<TD>"SAFEAREACYLPOINTX"</TD>
+<TD>Value</TD>
+<TD>X component of the safe area point</TD>
+</TR><TR>
+<TD>108</TD>
+<TD>"SAFEAREACYLPOINTY"</TD>
+<TD>Value</TD>
+<TD>Y component of the safe area point</TD>
+</TR><TR>
+<TD>109</TD>
+<TD>"SAFEAREACYLPOINTZ"</TD>
+<TD>Value</TD>
+<TD>Z component of the safe area point</TD>
+</TR><TR>
+<TD>110</TD>
+<TD>"SAFEAREABOXLENX"</TD>
+<TD>Value</TD>
+<TD>X component of a safe area box length</TD>
+</TR><TR>
+<TD>111</TD>
+<TD>"SAFEAREABOXLENY"</TD>
+<TD>Value</TD>
+<TD>Y component of a safe area box length</TD>
+</TR><TR>
+<TD>112</TD>
+<TD>"SAFEAREABOXLENZ"</TD>
+<TD>Value</TD>
+<TD>Z component of a safe area box length</TD>
+</TR><TR>
+<TD>113</TD>
+<TD>"SAFEAREATYPE"</TD>
+<TD>1 (plane), 2 (cylinder), 3 (sphere), 4 (Box)</TD>
+<TD>The type of safe area</TD>
+</TR><TR>
+<TD>114</TD>
+<TD>"CNC Cutter Comp Type"</TD>
+<TD>1 (full radius), 2 (wear), 0 (no)</TD>
+<TD>Does the toolpath use cutter compensation</TD>
+</TR><TR>
+<TD>115</TD>
+<TD>"Drill_Lead_Dist"</TD>
+<TD>Value</TD>
+<TD>Drill lead distance</TD>
+</TR><TR>
+<TD>116</TD>
+<TD>"Feed_Ramp_LeadIn"</TD>
+<TD>Value</TD>
+<TD>Feedrate definition for ramp lead in moves</TD>
+</TR><TR>
+<TD>117</TD>
+<TD>"Feed_LeadIn"</TD>
+<TD>Value</TD>
+<TD>Feedrate definition for lead in moves</TD>
+</TR><TR>
+<TD>118</TD>
+<TD>"Feed_LeadOut"</TD>
+<TD>Value</TD>
+<TD>Feedrate definition for lead out moves</TD>
+</TR><TR>
+<TD>119</TD>
+<TD>"Ramp_LeadIN_feed"</TD>
+<TD>Value</TD>
+<TD>Marker for ramp lead in moves</TD>
+</TR><TR>
+<TD>120</TD>
+<TD>"LeadIN_feed"</TD>
+<TD>Value</TD>
+<TD>Marker for lead in moves</TD>
+</TR><TR>
+<TD>121</TD>
+<TD>"LeadOUT_feed"</TD>
+<TD>Value</TD>
+<TD>Marker for lead out moves</TD>
+</TR><TR>
+<TD>122</TD>
+<TD>Model location workplane name</TD>
+<TD>0</TD>
+<TD>Name of the model location workplane</TD>
+</TR>
+</TABLE>
+<H3>30000 records</H3>
+User paramters.
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<tr><td>1</td><td>int</td><td>1 project, 2 toolpath, 3 tool</td></tr>
+<tr><td>2</td><td>string</td><td>User parameter name</td></tr>
+<tr><td>3</td><td>double</td><td>User parameter value</td></tr>
+</table>
+<H3>30100 records</H3>
+Settings. The difference between these and user parameters is just that
+settings may appear before any point where user parameters are grouped at the
+toolpath start.
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<tr><td>1</td><td>int</td><td>Not used (always 0)</td></tr>
+<tr><td>2</td><td>string</td><td>Setting name</td></tr>
+<tr><td>3</td><td>string</td><td>Setting value</td></tr>
+</table>
+<H3>32000 records (MOTION records with orientation vector)</H3>
+
+<P>
+These records contain the point data that is used to 
+specify the tool motion together with a contact normal vector
+
+
+
+<P>
+MOTION with contact normal records are all structured as below, 
+with the example record showing two points. 
+In a 32000 5 or 32000 6 record there can be up to 40 points.
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>X coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>Y coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>Z coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>real</TD>
+<TD>I coordinate of 1st contact normal </TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>real</TD>
+<TD>J coordinate of 1st contact normal</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>real</TD>
+<TD>K coordinate of 1st contact normal</TD>
+</TR>
+<TR>
+<TD>[7</TD>
+<TD>real</TD>
+<TD>X coordinate of point 2]</TD>
+</TR>
+<TR>
+<TR>
+<TD>[8</TD>
+<TD>real</TD>
+<TD>Y coordinate of point 2]</TD>
+</TR>
+<TR>
+<TR>
+<TD>[9</TD>
+<TD>real</TD>
+<TD>Z coordinate of point 2]</TD>
+</TR>
+<TR>
+<TD>[10</TD>
+<TD>real</TD>
+<TD>I coordinate of 2nd contact normal] </TD>
+</TR>
+<TR>
+<TD>[11</TD>
+<TD>real</TD>
+<TD>J coordinate of 2nd contact normal]</TD>
+</TR>
+<TR>
+<TD>[12</TD>
+<TD>real</TD>
+<TD>K coordinate of 2nd contact normal]</TD>
+</TR>
+
+</TABLE>
+
+<P>
+If the CLDATA is in MULTAX mode, then the 32000 5/6 records contain toolvector
+information between the tool position information and contact normal. Thus, only 24 points may be contained in such a record.
+<H3>32100 records (MOTION records with orientation vector)</H3>
+
+<P>
+These records contain the point data that is used to 
+specify the tool motion together with an orientation vector
+
+
+
+<P>
+MOTION with orientation records are all structured as below, 
+with the example record showing two points. 
+In a 32000 5 or 32000 6 record there can be up to 40 points.
+
+<P>
+<TABLE BORDER=1>
+<TR>
+</TR>
+<TR>
+<TD><B>Word</B></TD>
+<TD><B>Type</B></TD>
+<TD><B>Represents</B></TD>
+</TR>
+<TR>
+<TD>1</TD>
+<TD>real</TD>
+<TD>X coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>2</TD>
+<TD>real</TD>
+<TD>Y coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>3</TD>
+<TD>real</TD>
+<TD>Z coordinate of point 1</TD>
+</TR>
+<TR>
+<TD>4</TD>
+<TD>real</TD>
+<TD>I coordinate of 1st orientation vector </TD>
+</TR>
+<TR>
+<TD>5</TD>
+<TD>real</TD>
+<TD>J coordinate of 1st orientation vector</TD>
+</TR>
+<TR>
+<TD>6</TD>
+<TD>real</TD>
+<TD>K coordinate of 1st orientation vector</TD>
+</TR>
+<TR>
+<TD>[7</TD>
+<TD>real</TD>
+<TD>X coordinate of point 2]</TD>
+</TR>
+<TR>
+<TR>
+<TD>[8</TD>
+<TD>real</TD>
+<TD>Y coordinate of point 2]</TD>
+</TR>
+<TR>
+<TR>
+<TD>[9</TD>
+<TD>real</TD>
+<TD>Z coordinate of point 2]</TD>
+</TR>
+<TR>
+<TD>[10</TD>
+<TD>real</TD>
+<TD>I coordinate of 2nd orientation vector] </TD>
+</TR>
+<TR>
+<TD>[11</TD>
+<TD>real</TD>
+<TD>J coordinate of 2nd orientation vector]</TD>
+</TR>
+<TR>
+<TD>[12</TD>
+<TD>real</TD>
+<TD>K coordinate of 2nd orientation vector]</TD>
+</TR>
+
+</TABLE>
+
+<P>
+If the CLDATA is in MULTAX mode, then the 32100 5/6 records contain toolvector
+information between the tool position information and orientation vector. Thus, only 24 points may be contained in such a record.
+
+<H3>32200 records (MOTION records with orientation vector and contact normal)</H3>
+This is the same as the 32000 and 32100 records but with both orientation vector and contact normal. In MULTAX mode the tool axis vector appears as well.
+So in multax mode for each point there are 4 triples:
+<br>
+position, tool axis vector, orientation vector, contact normal
+<br><br><br><br>
+<table border=1>
+<tr><td><b>Rev No.</b> </td><td><b>What</b></td><td><b>Who</b></td><td><b>When</b></b></td></tr>
+<tr><td>1 </td><td>Added 30000 and 32000</td><td>mh</td><td>28/01/10</td></tr>
+<tr><td>1 </td><td>Added 28000 and 30100</td><td>mh</td><td>12/11/10</td></tr>
+<tr><td>1 </td><td>Added 1046</td><td>mh</td><td>27/03/11</td></tr>
+</table>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
