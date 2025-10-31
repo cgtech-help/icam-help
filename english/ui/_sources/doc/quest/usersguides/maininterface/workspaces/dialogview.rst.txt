@@ -1,0 +1,22 @@
+Dialog View
+-----------
+
+|image1|
+
+The Dialog View is used to manage post processor dialog templates.
+Dialogs are used by GENER to interactively query the user for input. In
+this view, you can *add*, *modify* or *delete* dialogs from the list
+(dialogs are always listed alphabetically — the order is not relevant).
+
+**Load:** Used to load one or more dialogs from a file that has been
+created using the “Dump” feature. Useful to export dialogs from a post
+and import them into another post.
+
+**Dump:** Used to dump one or more dialogs to a file. When using the
+$FDIALOG() function option to display a dialog defined in a file
+(instead of in a post), the file must be created using the Dump feature.
+
+**Close:** Exit the dialog section.
+
+.. |image1| image:: ./media/8f114bc8a913c1e3a7142715adcbf9d34272d4a2.gif
+
