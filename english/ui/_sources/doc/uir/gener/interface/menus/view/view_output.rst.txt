@@ -1,0 +1,22 @@
+View»Output
+-----------
+
+This toggle activates or disables the output NC program file trace
+window. When active, NC program data will be listed in the Output window
+as it is written. The Run»Details toggle affects tracing and stepping in
+the Output window.
+
+After the window is opened, it will record in a buffer all the lines up
+to the number defined in the **Output** field of **Number of Lines to
+Record** in
+`Tools»Preferences»Trace <../tools/tools_preferences.html>`__, so you can
+use the vertical scroll bar in the window to review the process. At any
+moment, you can resize the window, minimize it, or close it. If the
+window is closed, all the records previously recorded will be erased.
+
+Note that closing this window will speed up GENER execution.
+
+|image1|
+
+.. |image1| image:: ./media/dfe48a0c9f26a8c37a422264c9dc1a8e42156c9b.gif
+
