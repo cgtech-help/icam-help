@@ -1,0 +1,678 @@
+.. _using_quest:
+
+Using QUEST
+===========
+
+This section describes the QUEST interface and other details
+necessary to effectively create and maintain post-processors.
+
+The :ref:`image below<quest_windows_interface>` shows the various components of the
+complete QUEST interface. This reference manual does not describe how
+to interact with standard Windows components (such as toolbars,
+list-boxes or push-buttons). Instead, this section will concentrate
+on the purpose of each of the main windows (there are three:
+navigator, working and information) and some of the key functions
+available through the menu-bar and toolbar menus.
+
+.. _quest_windows_interface:
+
+.. figure:: ../../media/quest_interface.png
+   :width: 6.077in
+   :align: center
+
+   QUEST Windows Interface
+
+The QUEST Interface
+-------------------
+
+The QUEST interface consists of three main windows:
+
+1) The left hand window is the **Navigator**, which is used to view the
+list of post-processors in a database as well as to access the
+different information components of a post-processor. Select the
+“Database” tab at the bottom of the navigator window to see the list
+(if any) of databases. Individual post-processors can be read into
+QUEST from the database so they can be viewed or modified. Each
+post-processor, once loaded, can be accessed by selecting one of the
+named tabs at the bottom of the navigator window. The Help tab in the
+Information window displays information about the entry selected in
+the Navigator. Double-click on a section entry in the Navigator
+window to make changes to that section.
+
+2) The upper right window is the **Main** working window. This window
+will change to show lists of questions, tables of results, dialog
+panels, macro editors, et cetera, primarily as a result of selections
+made in the Navigator. Most of your interaction with QUEST will occur
+in the main window. You can press the F1 function key to obtain
+context sensitive on-line help on how to use the main window.
+
+3) The lower right window is the **Information** window. This window
+holds various types of information, each of which can be accessed by
+selecting one of the organizational tabs arranged along the bottom
+edge of the window. Most of the time, QUEST will automatically select
+the proper tab for you based on the last feature or action requested.
+The tab names and their purpose are as follows:
+
+-  The **Help** tab provides detailed help when the Main window focus is
+   on a question, or when a section is selected in the Navigator window.
+
+   \
+
+-  The **Build** tab lists informational and diagnostic messages when
+   they occur. You can often double-click on a diagnostic message to
+   address the problem in the Main window.
+
+   \
+
+-  The **Consistency** tab lists inconsistencies found in the
+   post-processor. Use the **Tools» Consistency** menu-bar selection
+   (Ctrl Shift G shortcut) to run the consistency checks. Double click
+   on a line in the Consistency tab to review or correct a listed
+   inconsistency. This opens the appropriate section with the
+   problematic item in focus. The F4 and Shift F4 keys can be used to
+   move forwards and backwards through the list of inconsistencies. The
+   following checks are performed:
+
+   -  Differences in question responses as compared to the *General
+      Description/General Information* question 4 “Machine defaults”
+      selection. The expected response is shown on the line within
+      parentheses; the actual response is shown at the end of the line.
+
+   -  Differences in question responses as compared to the *General
+      Description/General Information* question 5 “Control defaults”
+      selection. The expected response is shown on the line within
+      parentheses; the actual response is shown at the end of the line.
+
+   -  Inconsistencies between question responses from different
+      sections. This is shown in the same way as during a File»Generate,
+      with the root question listed first and those with inconsistent
+      responses listed with a slight indent below it.
+
+   -  Out-of-date RMD actions. When an RMD action is added to a
+      post-processor, the macro text associated with that action is
+      added along with the action identifier. The RMD consistency check
+      compares the macro text stored in the post-processor against the
+      macro text of the RMD action and indicates an inconsistency if
+      different. To update an RMD macro, delete the old action and replace it with a new
+      one. Running Tools»Diffs (see below) between the original and updated
+      post-processor will show the changes. Out-of-date RMD actions are
+      also listed during a File»Generate.
+
+   -  Code inconsistencies, which are the result of two or more functions
+      sharing the same G or M code. These are also listed during a
+      Generate.
+
+.. _finder_tab:
+
+-  The **Finder** tab lists the results of the last search operation.
+   Use the **Tools»Finder** menu-bar selection (Ctrl Shift F shortcut)
+   to find questions, tape editor definitions, dialogs and macros
+   containing text matching a “search” string (press F1 to obtain help
+   on search features). Double-click on any line listed in the Finder
+   tab to change the Main window focus to the selected item. Use F4 and
+   Shift F4 to sequentially shift the Finder tab focus (and indirectly
+   the Main window focus) forwards and backwards through the list of
+   items found.
+
+.. _diffs_tab:
+
+-  The **Diffs** tab lists the differences between two selected
+   post-processors and/or control emulators. Use the **Tools»Diffs**
+   menu-bar selection (Ctrl I shortcut) to identify the objects to
+   compare (press F1 to obtain help on comparison features). You can
+   double-click on any line with a solid arrow to change the Main
+   window focus to the selected item. Various right-mouse context menu
+   functions are also available in the Diffs tab to help view the
+   comparison results.
+
+   \
+
+-  The **Axes** tab lists all machine axes and provides sliders that can
+   be used to exercise the machine model. This feature is only available
+   with a Virtual Machine Developer’s license (vmq260).
+
+The **menu-bar** at the top of the application window provides access
+to QUEST functions. Not all menu actions are available at all times.
+For example, some database actions are only available when a database
+or post-processor is selected in the navigator. Other menu actions
+are related to the macro editor and will only be available when a
+macro is being edited. Keyboard shortcuts are available for some
+common menu actions (the shortcut key is listed in the menus to the
+right of the menu selection).
+
+The most common menu actions are also available through **toolbar**
+shortcuts (the little icons arranged below the menu-bar). Toolbars
+are dockable (i.e., they can be dragged to any side of the
+application window, or even be made to appear as a separate window).
+Like the menu-bar selections they represent, toolbar icons may not be
+selectable at all times.
+
+The right-mouse button can be used to bring up a **pop-up menu**
+(context sensitive menu), listing the most common menu choices that
+can be made in the current window or on the item last selected.
+Pop-up menus also provide access to modal display and processing
+options. This feature is highly recommended to those who are new to
+QUEST, since it lists the most common actions based on the current
+context.
+
+The **vertical splitter bar** can be used to increase or decrease the
+width of the Navigator window. The **horizontal splitter bar**
+likewise determines how the main working window and informational
+window share the full application window height. You can double-click
+on the splitter bar to quickly reset it to its last position.
+
+Creating a New Post-Processor
+-----------------------------------
+
+.. _quest_interface:
+
+When QUEST is first run, the application window will appear as shown
+below.
+
+.. figure:: ../../media/quest_start.png
+   :width: 5.681in
+   :align: center
+
+   QUEST as it looks when first run
+
+You create a new post-processor using the **File»New Post**\ [#]_
+drop down menu selection. Double-click on the “General Information”
+line in the Navigator to begin editing your new post-processor. The
+Main work window will then change to show a short list of questions,
+with tabs arranged along the bottom. Your first action should be to
+change the post-processor name (i.e., NONAME,1) to something more
+appropriate.
+
+QUEST supports two different question display styles. The “classic”
+style is a top-down list of questions, organized one per line. This
+is the format that is used in textual examples in this manual (as
+shown in the text example below). A more modern “graphic” question
+style uses typical windows controls such as radio-buttons,
+checkboxes, drop-down lists, et cetera. This is the format that is
+used in example images in this manual (as shown in the
+:ref:`“A stopper question”<stopper_question>` image).
+You can switch between styles at any time using the
+**View\ »\ Graphic Questions** menu-bar toggle or the right-mouse
+button **Graphic Questions** pop-up menu toggle. You can also enable
+or disable the organization of questions by bottom tabs using the
+right-mouse button **Use tab** pop-up menu toggle.
+
+When creating a post-processor from scratch, the third question in
+the list will be shown highlighted in red (a stopper question)
+indicating that an answer must be provided before you can continue or
+even exit the section.
+
+   ::
+
+      3.00 Machine type: [Contour,Edm,Punch,Lathe,Mill-Turn,Mill,Robot,Composite] (No Response)
+
+All classic style questions have this same appearance. The square
+brackets **[ ]** define the acceptable responses (answers) to the
+question. The parentheses **( )** show the current response to the
+question. Answers can be typed by first selecting the question using
+the mouse or arrow keys, typing your response (abbreviations are
+accepted) and then pressing the Enter key. You can also answer a
+question using the mouse. When you move the mouse pointer over the
+items in the brackets and parentheses, they will be highlighted in a
+same way a browser does. You can click on a highlighted item to
+change the response to the question. For example, to answer “Mill”
+for question #3, you can move the mouse pointer over the word inside
+the [ ] brackets and then click the left-mouse button.
+
+Graphic style questions have a more varied appearance. Lists of
+acceptable responses to a question are sometimes listed vertically in
+a selection box and at other times in a drop-down list. Simple yes/no
+questions often use a checkbox, where a checked response means
+“yes”. Some questions show a list of acceptable responses in square
+brackets [ ] as part of the question prompt. The interface is
+designed, as much as possible, to show the list of possible responses
+to each question, along with the current response. You change the
+current (default) response to a question by using the mouse and
+left-mouse button to point to and select another listed choice for
+that question. For simple edit box type controls, such as the
+post-processor name selection, you must select the edit box using the
+mouse and then either type in a new response or edit the current
+response. Many question types include a **[…]** button, which when
+selected will activate a dialog box to assist you in changing the
+response to the question.
+
+The “Help” information window (bottom right of the application
+window) will always describe the selected question in more detail.
+The selected question is normally listed in blue. When using the
+graphic question style, help information will be shown as a balloon
+tooltip when you leave the mouse pointer over the input field of a
+question. You can enable or disable help tooltips at any time using
+the right-mouse button **Show Help Tips** pop-up menu toggle.
+
+Red “stopper” questions are those that do not have a default
+response. They must be answered before you can continue. In fact, all
+questions following the stopper one will not be shown, nor can the
+section be exited until a valid answer is given (the OK button will
+not be selectable). If the questions are grouped under organizational
+tabs, the tab containing the stopper question will be shown in red.
+In the image below, question 3.00 is a stopper question.
+
+.. _stopper_question:
+
+.. figure:: ../../media/quest_stopper.png
+   :width: 5.681in
+   :align: center
+
+   A “stopper” question
+
+Questions are listed in green if they have a response that is
+different from the default (i.e., those where you selected or typed
+an answer different from what was shown in the ( ) parentheses). You
+can reset a question back to its default state (provided it had a
+default) using the right-mouse context menu. One of the menu choices
+will be **Reset to “\ whatever\ ”**. You can reset every question in
+the section back to its default by clicking on the Reset button at
+the bottom of the window.
+
+Depending on the right-mouse button **Auto Clear** pop-up menu
+setting, questions and tabs might be shown in a light grey. If a
+question is greyed out, it means that it is no longer applicable
+based on some earlier response in the section. If an organizational
+tab is greyed out, then all questions listed in that section are no
+longer applicable, based on some response in another tabbed section
+(generally to the left). To see this in action, uncheck the Auto
+Clear option and then choose different responses to the machine type
+question (#3). Questions that are appropriate for milling machines
+will be greyed out when the machine type is changed to a lathe. Some
+people prefer to see this effect when they are answering questions in
+a section, others find it confusing. Greyed out questions are cleared
+when a section is exited or the right-mouse button **Clear Now**
+pop-up menu is selected.
+
+All questions are numbered. You can choose to see or not see the
+question numbers using the right-mouse **Show Question Numbers**
+pop-up menu toggle. This setting affects the appearance of questions
+in the work window, but has no effect on the Finder, Diffs and other
+QUEST functions.
+
+Questionnaire Defaults
+----------------------
+
+The easiest way to develop a post-processor is to base it on
+a preexisting controller architecture. QUEST provides many “basic post” defaults
+in support of popular and less well known controllers.
+You specify the controller basic post
+using question 5.00 in the General Information section:
+
+   ::
+
+      5.00 Control defaults: [NA,File_name,File_panel] (NA)
+
+Click on File_panel and then choose an appropriate controller from
+the list that will be presented. If a basic post is not selected,
+then QUEST follows the ISO 6983 standard where possible.
+
+Every question originally starts off in an unanswered state and most
+unanswered questions have a default response. QUEST determines the
+default response for a question in a number of ways.
+
+-  *From the basic post:* Basic posts define default responses to just
+   those questions that apply. For example, a control-type basic post
+   won’t define default answers for machine specific features (e.g.,
+   number of spindle gears).
+
+-  *From the ISO 6983 standard:* Default responses for control related
+   questions will follow this international standard where applicable.
+
+-  *Derived from earlier answers:* QUEST will propose default responses
+   that are consistent with earlier responses in the same section and
+   sometimes from other sections higher up in the Navigator list.
+
+All questions in a section are marked as answered when you press the
+OK button to leave the section. All questions in every section are
+marked as answered when you Generate the post-processor (i.e., save
+it in a format ready to be used by GENER). All questions in a section
+are reset to an unanswered state when you press the Reset button.
+Individual questions can be reset using the “Reset to” pop-up context
+menu. Answering a particular question in a section marks all lower
+numbered questions in that section as answered. To take advantage of
+QUEST’s capability to derive default responses, try to answer
+questions in a section in order from lowest numbered to highest
+numbered.
+
+Changing your Control and Machine default choices will have no effect
+on any question that has already been answered.
+
+Questionnaire Chapters and Sections
+-----------------------------------
+
+The QUEST Navigator window will list a series of chapters and
+sections that comprise the knowledge base for the current post-processor
+see the Navigator contents in the :ref:`“QUEST Windows Interface”<quest_windows_interface>` image).
+Each post-processor consists of a number of
+chapters. Each chapter in turn consists of a number of sections. Most
+(but not all) sections present a list of questions as described
+earlier. Section icons in the navigator use different colors and
+emphasis to show if the section has been answered or not and, in some
+cases, if the feature is available on the machine/controller or not.
+Double-click on a section name in the Navigator to view and/or change
+the knowledge base for that section in the Main window (i.e., the
+upper right working window). Single-click on a section name in the
+Navigator to view the knowledge base for that section in the Help
+window.
+
+The following is a list of chapters and sections of the
+questionnaire. Depending on the CNC type and its features, some of
+these sections and chapters might not be listed (since they do not
+apply).
+
+-  The **General Description** chapter has sections that obtain a
+   variety of important upfront information
+   The *General Information* section for example determines the
+   post-processor name, machine type, kinematics configuration, units
+   and positioning.
+   Use the *Comments* section to record revision change information
+   and other important notes about the post-processor.
+   The *Display Format* section is concerned with the layout of the
+   operator listing file created by GENER while post-processing.
+   The *Registers* section determines the format of the word addresses
+   supported by your control. This section should be answered early on,
+   since many questions derive their default answers based on the
+   availability and format of specific word addresses.
+   The *G/M Code Assignments* section defines the (G) and (M) code
+   word addresses.
+   The *Output Format* section determines some important information
+   about the format of the NC program codes that will be
+   created by GENER.
+
+   \
+
+-  The **Machine Description** chapter has sections that define the
+   particulars about each of the machine’s axes (e.g., sign of the axis,
+   velocity, travel limitations, offsets).
+   The *Home Position and Reference Point* section defines information about the primary home
+   point and how GOHOME and FROM commands are processed.
+   The *Feedrate* section defines how interpolation velocity is controlled.
+   The *Tool Change* and *Spindle* sections (not present for contouring machines)
+   define the capabilities of the tool change device and those of the
+   milling and turning spindles.
+
+   \
+
+-  The **Control Description** chapter is mostly concerned with the
+   various interpolation types and motion related advanced features that
+   are supported by the controller.
+   The *Coordinate System* section defines the plane selection codes (e.g.,
+   G17-19), in addition to translation, rotation, scaling and mirror (LCS)
+   capabilities of the control.
+   The *Rapid Positioning*, *Linear Interpolation* and
+   *Circular and Helical Interpolation* sections define the particulars
+   of these three main interpolation types.
+   For turret punch presses, an additional *Punch Code Assignments* section
+   defines punching and nibbling codes.
+   The *Tool and Fixture Compensation* section defines
+   tool length, tool radius, 3D tool and fixture compensation
+   capabilities and codes.
+   The *Advanced 5D Machining* section defines
+   linearization, path planning, rotary turnaround (RTA),
+   tool-tip programming (RTCP) and Cartesian-to-polar (C2P) features available
+   for machines with continuous rotary axes.
+   The *Spline Interpolation*, *Pattern Interpolation* (for punch presses) and
+   *High Speed Machining* sections will only be available if you are licensed
+   to use these advanced options.
+
+   \
+
+-  The **Automated Canned Cycles** chapter is only present for lathes
+   and for mills with a Z axis. It has a *General Drill Cycle
+   Information* section and a *Drill Cycles* section that handle the
+   requirements for single-point cycles such as drilling, tapping,
+   boring et cetera. Answer the *General Drill Cycle* section first,
+   since answers in this section have an effect on the *Drill Cycles*
+   section. The *Thread Cycles* section handles single-pass and
+   multi-pass threading cycles available on many lathe controllers.
+
+   \
+
+-  The **Optional Post-processor Words** chapter has sections that deal
+   with various features of the machine and controller. They are
+   organized by their related ISO 4343:2000 standard post-processor
+   command name. For example, the *COOLNT Command* section has questions
+   dealing with various types of coolant, which are controlled in the
+   post-processor using a COOLNT command.
+
+   \
+
+-  The **Post-Processor Customization** chapter is designed to handle
+   machine and controller requirements that are not supported in any of
+   the other sections. Note that in most cases, customizing a post-processor
+   requires a knowledge of the ICAM macro programming language. This
+   section starts with a set of *Startup/Shutdown Procedures* that can
+   be used at key points in the program (for example, start of program
+   or tool change) to handle special or repetitive requirements. A *Tape
+   Editor* section can be used to define a series of find/replace
+   strings, which will be applied to the MCD as it is written.
+   The *Dialog Editor* section can be used to define dialog boxes that can
+   be used by your post-processor, through macros, to prompt the NC
+   programmer for input while GENER is running.
+   The *User Defined Syntax Macros* section allows you to create new
+   post-processor commands to control features of your machine not covered
+   by Icam Post.
+   The *User Function Macros* section allows you to create your own macro
+   functions that can be called by other macros in the post-processor.
+   Finally, a *File Storage* section is available to store
+   data that can be read by the macro processor.
+   See :ref:`“Post-Processor Customization”<quest_customization>` for more details.
+
+   \
+
+-  The **Code Table** section is a reference table listing the codes
+   that have been defined in all questions asking for a G or M code. The
+   code is listed as it will appear in the MCD along with: its code
+   identifier, the register and value(s) that identify the code, and a
+   description if available. If a code has associated registers, they
+   are listed below the code. Double-click on a code or register to go
+   directly to the question where that code or register was defined.
+   Click on a column header to sort the list using the selected column.
+
+The *General Description / Registers* section contains a “Use default
+resolution/minimum/maximum values” checkbox that when selected will
+inhibit the resolution, minimum and maximum value questions that
+typically immediately follow each register definition. When checked,
+the resolution and minimum responses will be set to the smallest
+value that can be represented by the register; the maximum response
+will be set to the largest value that can be represented by the
+register. The checkbox is enabled by default on new
+post-processors. The checkbox setting is saved with the post-processor
+when exporting, saving or generating.
+
+New and even experienced users sometimes have trouble finding a
+question that relates to a feature of the control or machine they are
+trying to define or modify. Before trying to customize a post-processor,
+we strongly recommend that you first use the
+**Tools»Finder** menu-bar selection (Ctrl Shift F shortcut) to find
+questions related to the feature (see :ref:`here<finder_tab>`).
+
+Saving and Generating your work
+-------------------------------
+
+Changes made to a post-processor occur in the in-memory copy. To
+preserve your work, you have to either Save or Generate the
+post-processor to the post-processor database (see :ref:`icamdb`
+for details on the database). Save your
+work periodically when performing extensive or time consuming
+changes, since your changes will be lost if a power failure or system
+hang-up occurs.
+
+The **File»Save** menu-bar selection saves a copy of the
+post-processor exactly as-is. Use this to save your work on an
+interim or periodic basis.
+
+The **File»Generate** menu-bar selection first checks the
+post-processor for inconsistencies, then marks all questions as
+answered and finally creates post-processor documentation for
+record-keeping purposes, before saving the post-processor to the database.
+Generated post-processors can be used by GENER in a production
+setting. A QUEST listing will be created while generating, which
+contains the responses, macro source and other data that comprises
+the post-processor. The listing is written to the same directory as
+the post-processor database, or to the directory specified by the
+*icam_lis* environment variable if set.
+
+Two types of errors can be detected during the consistency checking:
+invalid or missing responses to questions in a particular section;
+and inconsistent responses to questions in different sections.
+
+-  The first type of error occurs when a section or question is
+   encountered that has not been answered and for which defaults
+   responses are not available (i.e., stopper questions). This type of
+   error will cause the Generate function to abort after creating the
+   post-processor documentation but before saving to the database (i.e.,
+   a new post-processor **will not** be generated). As each error is
+   detected, a message will appear in the documentation at the point of
+   error and a similar message will be shown in the Build information
+   window.
+   Double-click on the error message (in the Build window), or
+   right-mouse on the error and select “Go to Error/Tag”, to correct
+   the question in error.
+
+   \
+
+-  The second type of error occurs when an answer to a particular
+   question is inconsistent with answers to one or more other questions
+   in other sections. This type of error (warning actually) will not
+   cause the Generate function to abort (i.e., a new post-processor
+   **will** be generated). As each inconsistency is detected, the
+   problem is registered, grouped together with related problems and
+   displayed in both the Build information window and the
+   documentation. Double-click on the indented consistency warning (in
+   the Build window) to correct what QUEST believes is the root or
+   source of the problem. Double-click on outdented consistency warnings
+   to correct the result or target of the problem.
+   The most common warning
+   is when two or more functions of the post-processor have been answered
+   using the exact same MCD, as shown in the example below:
+
+      ::
+
+         Conflicting codes:
+            M6 (code_tool_load)
+            M6 (code_tool_load_manual)
+
+   Double-click on the consistency warning in the Build window to modify
+   the related question if necessary.
+
+Regenerate once all problems have been corrected. It is not an error
+to have post-processors with inconsistencies.
+
+Testing your Post-Processor
+---------------------------------
+
+The **Tools»Start Runtime** menu-bar selection (F9 shortcut) provides
+a convenient method of running GENER against any of the
+post-processors currently being edited. When testing the post-processor
+in this manner, it is not necessary to generate or even
+save the post-processor before starting GENER. The standard GENER
+launch panel will appear (see :ref:`“The Launch Panel”<launch_panel>`).
+When it does, the default database will show “QUEST --
+(Posts
+in Memory)” and the post-processor name drop-down selection will list those
+post-processors out for editing that can generate without errors.
+
+Any changes made to your post-processor after selecting the
+Tools»Start Runtime menu-bar item, but before pressing OK on the
+GENER launch panel, will be respected. Changes made after GENER
+starts processing will not be respected. The GENER interface supports
+a restart capability. Any post-processor changes made prior to
+restarting will be respected once GENER restarts.
+
+.. note::
+
+   Because the test feature does not require a saved or
+   generated post-processor, you might be tempted to go long periods of
+   time before saving or generating. You are cautioned to save your work
+   periodically to minimize loss of data caused by power failures or
+   other serious problems.
+
+In addition, a **Tools»Test** menu-bar selection (F10 shortcut) provides
+a simple interface to test your post-processor. First drag & drop a test
+CL file onto the dialog, or use the […] browse button to locate a file,
+or type or paste sample CL into the window. Then press the Test button.
+An output window will appear, as shown below, tracing the input CL data
+and generated MCD (i.e., NC program) along with any diagnostic messages.
+
+.. image:: ../../media/quest_test.png
+   :width: 4.500in
+   :align: center
+
+\
+
+Hovering the mouse pointer over the generated MCD will produce a tool-tip
+identifying codes and registers as well as the commands that caused them
+to be generated. A right-mouse context menu will list the register or code
+if applicable, and if selected will cause QUEST to open the questionnaire
+section and set focus on the question that defined the selected register or code.
+
+The **Tools»Retest** menu-bar selection (Shift F10 shortcut) can be used to
+quickly test a post-processor using the last specified CL data and test settings.
+
+Modifying an Existing Post-Processor
+------------------------------------------
+
+The **File»Open…** menu-bar selection can be used to open a
+post-processor that has been previously saved or generated. You can
+also open a post-processor by selecting it from the Database Navigator (more on
+that in the next section). When opened, it is copied into a
+new or unused Navigator tab. Use the Navigator to select the sections
+you need to modify.
+
+The **Tools»Finder** menu-bar selection (Ctrl Shift F shortcut) can
+help you find pertinent questions or a list of changes you have made
+to the post-processor. Matching results are shown in the lower right
+Finder information window (see :ref:`here<finder_tab>`).
+
+The **Tools»Diffs** menu-bar selection (Ctrl I shortcut) can be used
+to compare the post-processor you are editing against another
+post-processor or control emulator in memory or in the current or a
+selected database. The difference output appears in the lower right
+Diffs information window (see :ref:`here<diffs_tab>`).
+
+The **File»Listing** menu-bar selection produces post-processor
+documentation, which you may find useful for locating where changes
+are necessary. The listing is written to the same directory as the
+ICAM database, or to the directory specified by the *icam_lis*
+environment variable if set.
+
+A **Modification Wizard** toolbar shortcut can be selected to make
+the most common types of changes using window’s controls, instead of
+through the standard question-list approach.
+
+Wrapping Up
+-----------
+
+When you close a post-processor (**File»Close** or **File»Close
+All**), it is removed from the Navigator window. You will be prompted
+to save your work if you attempt to close an unsaved post-processor,
+or if you attempt to exit QUEST (**File»Exit**) before saving all
+opened post-processors.
+
+If one of the post-processors being edited is stuck on a stopper
+question, you will receive the message “You must provide a response
+to this question” when you attempt to close the post-processor or
+exit QUEST. The stopper condition must be corrected, or the section
+containing the stopper question must be canceled (using the Cancel
+button), before you can proceed.
+
+.. container:: keep-together
+
+   .. image:: ../../media/quest_restart.png
+      :width: 3.008in
+      :align: right
+
+   When exiting, you will be prompted (as shown at right) for
+   the startup configuration to use the next time you run QUEST. You can
+   choose to restart with a new post-processor
+   ready for creation, or to resume
+   with the post-processors, control emulators and models currently open
+   for editing, or to start with an empty session. If this prompt is
+   disabled, you can re-enable it and/or change the restart settings
+   from the “General” tab of the **Tools»Preferences** menu-bar selection.
+
+.. [#] You may find it more convenient to create a new post-processor using the
+   **File»New Post Wizard** menu-bar selection, which guides you
+   step-by-step through the creation of your post-processor.
