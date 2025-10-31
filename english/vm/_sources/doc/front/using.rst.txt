@@ -1,0 +1,40 @@
+Using this manual
++++++++++++++++++
+
+ICAM Virtual Machine (VM) is a CNC machine simulator, which is fully
+integrated into ICAM’s Icam Post GENER post-processing and Control
+Emulator CERUN products.
+
+This manual is organized as follows.
+
+-  “:ref:`overview`” provides a brief description of Virtual Machine.
+
+   \
+
+-  “:ref:`quest_section`” describes how to create and maintain Virtual Machine models
+   using the ICAM QUEST Developer’s System. It explains how to define the
+   kinematics (i.e., axes) of the CNC machine, how to flesh out the model by
+   creating and/or importing machine components and enabling or disabling
+   collision testing of these components, and how to customize the model using
+   the ICAM macro language to support special features.
+
+   \
+
+-  “:ref:`vm_runtime`” describes the operation of Virtual Machine with ICAM’s
+   Icam Post post-processing (GENER) and Control Emulator (CERUN) products.
+   It explains the post-processor command interface that can be used with
+   GENER to control the simulation. It also describes a common user
+   interface used by both GENER and CERUN to view and manipulate the model
+   during the simulation, as well as to define cutting tools, holding
+   fixtures, finish part, rough stock, and workpiece and tool
+   compensations, which are used to validate the simulation.
+
+   \
+
+-  “:ref:`vm_reference`” describes the input controls (keys, keyboard shortcuts
+   and mouse actions), toolbar menus and menu bar selections, and macro
+   customization features available with Virtual Machine.
+
+Following these sections are:
+a :ref:`glossary` of terms used in this manual;
+and an :ref:`genindex`.
