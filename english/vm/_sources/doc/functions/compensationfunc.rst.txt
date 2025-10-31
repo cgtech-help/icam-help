@@ -1,0 +1,362 @@
+Compensation Functions
+======================
+
+Compensation functions provide access to tool and fixture offset values used during simulation.
+These functions allow you to query and set diameter, length, fixture, and corner radius compensation parameters.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`$FMSGDCV<func_fmsgdcv>`
+         -  Get diameter compensation offset
+      *  -  :ref:`$FMSGFCV<func_fmsgfcv>`
+         -  Get fixture compensation offset
+      *  -  :ref:`$FMSGLCV<func_fmsglcv>`
+         -  Get length compensation offset
+      *  -  :ref:`$FMSGRCV<func_fmsgrcv>`
+         -  Get corner radius compensation offset
+      *  -  :ref:`$FMSSDCV<func_fmssdcv>`
+         -  Set diameter compensation values
+      *  -  :ref:`$FMSSFCV<func_fmssfcv>`
+         -  Set fixture compensation value
+      *  -  :ref:`$FMSSLCV<func_fmsslcv>`
+         -  Set tool length compensation value
+      *  -  :ref:`$FMSSRCV<func_fmssrcv>`
+         -  Set corner radius compensation value
+
+.. _func_fmsgdcv:
+.. index:: Functions; $FMSGDCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGDCV(**\ *...*\ **)**                    | Returns tool diameter compensation amounts        |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGDCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2} \,\boldsymbol{)}`
+
+   This function returns tool diameter compensation amounts. There are two
+   possible forms of referencing tool diameter compensation values. If the
+   machine supports “offset unique by tool” compensation, then *n1*
+   specifies the tool number and *n2* specifies the compensation switch
+   number for that tool. Otherwise, the value of *n1* is ignored and *n2*
+   specifies the diameter compensation offset switch number. Specify 0
+   (zero) for both *n1* and *n2* to return the base diameter compensation
+   amount
+
+   The return value is the numeric diameter compensation offset amount. A value of
+   zero is returned if the offset is not defined.
+
+.. _func_fmsgfcv:
+.. index:: Functions; $FMSGFCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGFCV(**\ *...*\ **)**                    | Get the fixture compensation amounts              |
+|                                                |                                                   |
+|                                                | Returns: Sequence or Numeric                      |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGFCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2} \,\big[,\mathbf{ALL}\,\big] \boldsymbol{)}`
+
+   This form of the $FMSGFCV function returns a sequence of fixture compensation
+   amounts associated with the fixture (or workpiece) compensation code
+   *n1*. For example, on machines with a range of G codes, such as G54-G59,
+   specify a number in the range 1-6 for *n1*; the value of *n2* is
+   ignored. On controllers that support an extended workpiece compensation
+   range, *n1* specifies the primary index and *n2* specifies the secondary
+   index. Specify 0 (zero) for both *n1* and *n2* to return the base
+   fixture compensation amount.
+
+   If the ALL keyword is specified, the return value is a sequence of
+   length 16 containing the fixture compensation values for all possible
+   axes for the specified compensation index. Otherwise, the return value
+   is a sequence of length 6 containing the fixture compensation values for
+   the active axes (as defined by the $AXES system variable). A sequence of
+   zeros is returned if the compensation index is not defined.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGFCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2},
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Similar to the above, this form of the $FMSGFCV function returns the numeric
+   fixture compensation amount for the specified axis, identified either by
+   an *index* number or by a *keyword* identifier. A value of zero is
+   returned if the compensation index is not defined, or if axis is not
+   defined in the post-processor or control emulator.
+
+.. _tableindexnumbersandkeywords:
+
+   \
+
+      .. list-table:: Axes Indices and Keywords
+         :widths: auto
+         :header-rows: 1
+         :class: wrap-last
+
+         *  -  *index*
+            -  *keyword*
+            -  Axis
+         *  -  1
+            -  XAXIS
+            -  Primary X axis
+         *  -  2
+            -  AXIS
+            -  Primary Y axis
+         *  -  3
+            -  ZAXIS
+            -  Primary Z axis
+         *  -  4
+            -  UAXIS
+            -  Secondary X axis
+         *  -  5
+            -  VAXIS
+            -  Secondary Y axis
+         *  -  6
+            -  WAXIS
+            -  Secondary Z axis
+         *  -  7
+            -  AAXIS,TABLE
+            -  Rotary A axis table
+         *  -  8
+            -  BAXIS,TABLE
+            -  Rotary B axis table
+         *  -  9
+            -  CAXIS,TABLE
+            -  Rotary C axis table
+         *  -  10
+            -  AAXIS
+            -  Rotary A axis head
+         *  -  11
+            -  BAXIS
+            -  Rotary B axis head
+         *  -  12
+            -  CAXIS
+            -  Rotary C axis head
+         *  -  13
+            -  QUILL
+            -  Extending linear axis
+         *  -  14
+            -  RAM[,1]
+            -  Primary rotary on exchangeable head
+         *  -  15
+            -  RAM,2
+            -  Secondary rotary on exchangeable head
+         *  -  16
+            -  ORIENT
+            -  Spindle orientation
+
+.. _func_fmsglcv:
+.. index:: Functions; $FMSGLCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGLCV(**\ *...*\ **)**                    | Get length compensation amounts                   |
+|                                                |                                                   |
+|                                                | Returns: Sequence or Numeric                      |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGLCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2}\, \big[,\mathbf{ALL}\,\big] \boldsymbol{)}`
+
+   This function returns a sequence of length compensation amounts. There are two
+   possible forms of referencing tool length compensation values. If the
+   machine supports “offset unique by tool” compensation, then *n1*
+   specifies the tool number and *n2* specifies the compensation switch
+   number for that tool. Otherwise, the value of *n1* is ignored and *n2*
+   specifies the length compensation offset switch number. Specify 0 (zero)
+   for both *tool_id* and *n* to return the base length compensation
+   amount.
+
+   If the ALL keyword is specified, the return value is a sequence of
+   length 16 containing the length compensation values for all possible
+   axes for the specified offset switch number. Otherwise, the return value
+   is a sequence of length 6 containing the length compensation values for
+   the active axes (as defined by the $AXES system variable). A sequence of
+   zeros is returned if the offset switch number is not defined.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGLCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2},
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Similar to the above, this form of the $FMSGLCV function returns the numeric
+   length compensation amount for the specified axis, identified either by
+   an *index* number or by a *keyword* identifier (a table of valid index
+   numbers and keywords can be found :ref:`here<tableindexnumbersandkeywords>`). A value of zero is
+   returned if the offset switch number is not defined or if axis is not
+   defined in the post-processor or control emulator.
+
+   Note: Currently, length compensation is supported only for the XYZ
+   linear axes and for the ABC rotary head axes, conditional upon these
+   axes being defined in the post-processor or control emulator.
+
+.. _func_fmsgrcv:
+.. index:: Functions; $FMSGRCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSGRCV(**\ *...*\ **)**                    | Returns tool corner radius compensation amounts   |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSGRCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2} \,\boldsymbol{)}`
+
+   This function returns tool corner radius compensation amounts. There are
+   two possible forms of referencing tool corner radius compensation
+   values. If the machine supports “offset unique by tool” compensation,
+   then *n1* specifies the tool number and *n2* specifies the compensation
+   switch number for that tool. Otherwise, the value of *n1* is ignored and
+   *n2* specifies the diameter compensation offset switch number. Specify 0
+   (zero) for both *n1* and *n2* to return the base corner radius
+   compensation amount.
+
+   The return value is the numeric corner radius compensation offset amount. A
+   value of zero is returned if the offset is not defined.
+
+.. _func_fmssdcv:
+.. index:: Functions; $FMSSDCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSSDCV(**\ *...*\ **)**                    | Sets tool diameter compensation amounts           |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSDCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2}, \mathit{n3} \,\boldsymbol{)}`
+
+   This function sets tool diameter compensation amounts. There are two
+   possible forms of referencing tool diameter compensation values. If the
+   machine supports “offset unique by tool” compensation, then *n1*
+   specifies the tool number and *n2* specifies the compensation switch
+   number for that tool. Otherwise, the value of *n1* is ignored and *n2*
+   specifies the diameter compensation offset switch number. Specify 0
+   (zero) for both *n1* and *n2* to set the base diameter compensation
+   value, which will be added to *any* diameter compensation offset in
+   effect.
+
+   This function sets the tool diameter compensation amount for the
+   specified index to *n3*.
+
+   A value of 1 is returned if the diameter compensation amount was
+   successfully applied, otherwise a value of 0 (zero) is returned.
+
+.. _func_fmssfcv:
+.. index:: Functions; $FMSSFCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSSFCV(**\ *...*\ **)**                    | Sets the fixture compensation amounts             |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSFCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2}, q\, \big[,\mathbf{ALL}\,\big] \boldsymbol{)}`
+
+   This form of the $FMSSFCV function sets the fixture compensation amounts
+   to be associated with the fixture (or workpiece) compensation code *n1*.
+   For example, on machines with a range of G codes, such as G54-G59,
+   specify a number in the range 1-6 for *n1*; the value of *n2* is
+   ignored. On controllers that support an extended workpiece compensation
+   range, *n1* specifies the primary index and *n2* specifies the secondary
+   index. Specify 0 (zero) for both *n1* and *n2* to set the base fixture
+   compensation values, which will be applied in addition to *any* fixture
+   compensation amount in effect. Base compensation is applied even when
+   fixture compensation is not active.
+
+   Fixture compensation values are set for the specified index to the
+   values defined by the sequence variable *q*. If the ALL keyword is
+   specified, use a sequence of length 16 to define the fixture
+   compensation values for all possible axes for the specified compensation
+   index. Otherwise, use a sequence of length 6 to define the fixture
+   compensation values for the active axes (as defined by the $AXES system
+   variable). A value of 1 is returned if the fixture compensation amount
+   was successfully applied, otherwise a value of 0 (zero) is returned.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGFCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2}, value,
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Similar to the above, this form of the $FMSSFCV function sets the
+   fixture compensation *value* for the specified axis, identified either
+   by an *index* number or by a *keyword* identifier (a table of valid
+   index numbers and keywords can be found :ref:`here<tableindexnumbersandkeywords>`). A value of 1 is
+   returned if the fixture compensation amount was successfully applied,
+   otherwise a value of 0 (zero) is returned.
+
+.. _func_fmsslcv:
+.. index:: Functions; $FMSSLCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSSLCV(**\ *...*\ **)**                    | Sets length compensation amounts                  |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSLCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2},
+      \begin{pmatrix}\begin{array}{l} q\, \big[,\mathbf{ALL}\,\big] \\ \\ \big[\,x,y,\big]\,z \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   This form of the $FMSSLCV function sets length compensation amounts.
+   There are two possible forms of referencing tool length compensation
+   values. If the machine supports “offset unique by tool” compensation,
+   then *n1* specifies the tool number and *n2* specifies the compensation
+   switch number for that tool. Otherwise, the value of *n1* is ignored and
+   *n2* specifies the length compensation offset switch number. Specify 0
+   (zero) for both *n1* and *n2* to set the base length compensation
+   values, which will be added to *any* length compensation offset in
+   effect.
+
+   Length compensation values can be set for the specified offset switch
+   number to the values defined by the sequence variable *q*. If the ALL
+   keyword is specified, use a sequence of length 16 to define the length
+   compensation values for all possible axes for the specified offset
+   switch number. Otherwise, use a sequence of length 6 to define the
+   length compensation values for the active axes (as defined by the $AXES
+   system variable).
+
+   Alternatively, the length compensation offsets can be specified for the
+   XYZ axes using numeric variables or constants (if *x,y* is omitted they
+   are set to zero).
+
+   A value of 1 is returned if the length compensation amount was
+   successfully applied, otherwise a value of 0 (zero) is returned.
+
+      :math:`\mathit{result} = \mathbf{\$FMSGFCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2}, value,
+      \begin{pmatrix}\begin{array}{l} index \\ keyword \end{array}\end{pmatrix}
+      \boldsymbol{)}`
+
+   Similar to the above, this form of the $FMSSLCV function sets the length
+   compensation *value* for the specified axis, identified either by an
+   *index* number, or by a *keyword* identifier (a table of valid index
+   numbers and keywords can be found :ref:`here<tableindexnumbersandkeywords>`). A value of 1 is returned
+   if the length compensation amount was successfully applied, otherwise a
+   value of 0 (zero) is returned.
+
+   Note: Currently, length compensation is supported only for the XYZ
+   linear axes and for the ABC rotary head axes, conditional upon these
+   axes being defined in the post-processor or control emulator.
+
+.. _func_fmssrcv:
+.. index:: Functions; $FMSSRCV
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSSRCV(**\ *...*\ **)**                    | Sets tool corner radius compensation amounts      |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSSRCV}\boldsymbol{(}\, \mathit{n1}, \mathit{n2}, \mathit{n3} \,\boldsymbol{)}`
+
+   This function sets tool corner radius compensation amounts. There are
+   two possible forms of referencing tool corner radius compensation
+   values. If the machine supports “offset unique by tool” compensation,
+   then *n1* specifies the tool number and *n2* specifies the compensation
+   switch number for that tool. Otherwise, the value of *n1* is ignored and
+   *n2* specifies the diameter compensation offset switch number. Specify 0
+   (zero) for both *n1* and *n2* to set the base corner radius compensation
+   value, which will be added to *any* corner radius compensation offset in
+   effect.
+
+   This function sets the tool corner radius compensation amount for the
+   specified index to *n3*.
+
+   A value of 1 is returned if the corner radius compensation amount was
+   successfully applied, otherwise a value of 0 (zero) is returned.
