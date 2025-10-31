@@ -1,0 +1,50 @@
+.. _command_unload:
+
+The UNLOAD Command :kbd:`[MLE]`
+===============================
+
+The UNLOAD command is used to cut the wire on a wire EDM and to
+unload tools and heads on mills and lathes.
+
+Wire EDM machines:
+------------------
+
+   :math:`\textbf{UNLOAD /} \begin{pmatrix}\begin{array}{l} \textbf{WIRE} \\ \textbf{TOOL} \end{array}\end{pmatrix}`
+
+Causes the wire to be cut. The choice of TOOL or WIRE keyword is not important.
+
+The wire can also be cut by loading wire zero. The following are equivalent:
+
+   .. code-block::
+
+      UNLOAD/WIRE
+      LOAD/WIRE,0
+
+Mill and Lathe machines:
+------------------------
+
+   :math:`\textbf{UNLOAD /} \begin{pmatrix}\begin{array}{l} \textbf{TOOL} \\ \textbf{HEAD} \end{array}\end{pmatrix}`
+
+Causes the current tool or head to be unloaded. Depending on the
+machine, unloading a tool or head may leave the device empty, or may
+result in a plug being loaded.
+
+Other tool or head options can be specified following the TOOL or
+HEAD keywords. See :ref:`the TOOLNO command<command_toolno>` for a complete list of allowable
+options. Any such options specified are stored in an internal tooling
+table for the current tool/head being unloaded and will be used on
+subsequent related tooling commands. Tool and head options are modal
+and need only be specified once, ideally on a TOOLNO command.
+
+A tool (or head) can also be unloaded by loading tool (or head) zero.
+The following are equivalent:
+
+   .. code-block::
+
+      UNLOAD/TOOL
+      LOAD/TOOL,0
+
+      UNLOAD/HEAD
+      LOAD/HEAD,0
+
+..
