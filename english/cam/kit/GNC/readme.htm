@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>GNC TO CAM-POST INTERFACE DOCUMENTATION</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<style type="text/css">
+<!--
+body { background-color: #F9F9F9; }
+body,td,th {
+	font-family: Helvetica, Tahoma, sans-serif;
+
+	color: #000000;
+}
+a:link { color: #0b2eb4; }
+a:visited { color: #8801a1; }
+a:hover { color: #ae0116; }
+
+.style51 {font-size: 12px; 
+
+}
+
+
+.big_name { 
+font-family: Helvetica, Tahoma, sans-serif;
+
+	color: #000000;
+
+
+
+ }
+
+.bold_name { 
+font-family: Helvetica, Tahoma, sans-serif;
+
+	color: #000000;
+        font-weight: bold;
+
+
+
+ }
+.name_mid{
+
+	color: #000033;
+
+}
+.white { color: #FFFFFF; }
+.red { color: #CC0000; }
+.small { }
+.large { }
+.style52 {font-size: smaller}
+
+-->
+</style>
+</head>
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="850" bgcolor="#e7e9ef" align="center">
+  <tr>
+    <td colspan="4" bgcolor="#547EC8" ><img src="../../images/header.jpg" width="750" height="78" name="icam_banner1"  id="icam_banner1"></td>
+  </tr>
+ 
+  <tr>
+    <td colspan="4" height="25"><table width="97%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+					<td width="4%"><img src="../../images/blank.gif" width="31" height="25"></td>
+                      <td width="5%" valign="middle"><a href="../index.htm"><img src="../../images/arrow3.gif" width="25" height="17" vspace="3" border="0"></a></td>
+                      <td width="5%"><span class="style51">Index</span></td>
+                      
+                      <td width="76%">&nbsp;</td>
+                      <td width="10%">&nbsp;</td>
+                    </tr>
+                  </table></td>
+  </tr>
+  <tr>
+    <td colspan="4" bgcolor="#e7e9ef">
+        <table  width="800" bgcolor="#FFFFFF" align="center" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <center>
+			  <table width="90%"><tr><td>
+			  
+			  <br>
+			  <h3>GNC TO CAM-POST INTERFACE DOCUMENTATION</h3>
+			  <hr size="2" color="#CC0000">
+			  <h3>Overview</h3>
+			  <hr size="2" color="#CC0000">
+			  <p>The GNC Interface Kit is designed to accommodate differences in syntax between<br>
+			    GNC and ICAM's postprocessing languages. GNC's APT commands in a cutter <br>
+			    location source (.CL) file are input to CAD-APT and/or CAM-POST. The syntax for<br>
+			    these statements are found in the &quot;GNC CLdata, Information for Postprocessor<br>
+			    Writers&quot; manual. See the CAM-POST chapter &quot;Post-processor Vocabulary&quot; for more<br>
+			    information on CAM-POST supported syntax.</p>
+			  <p>Only automatically generated GNC commands are accounted for in the GNC <br>
+			    Interface Kit. Other postprocessor statements are passed through. Not all<br>
+			    translations shown in this document may be used with all ICAM posts. For<br>
+			    example, a CYCLE statement may be output by GNC and correctly reformatted by<br>
+			    the interface, but the post-processor may not support that CYCLE type; a<br>
+			    postprocessing error would result.</p>
+			  <p>A &quot;*.CL&quot; file will be posted regardless of the number of translations that<br>
+			    cannot be made. The messages in the &quot;*.lis&quot; and &quot;*.lst&quot; files are meant to<br>
+			    warn users that there are items in the &quot;*.CL&quot; file that could not be<br>
+			    interpreted. These items should be checked to ensure valid tape output.<br>
+			    </p>
+			  <h3>NOTE</h3><hr size="2" color="#CC0000">
+			  <p>The GNC Interface kit requires IXCL runtime license.<br>
+			    </p>
+			  <h3>POST-PROCESSOR COMMANDS SYNTAX</h3><hr size="2" color="#CC0000">
+			  <p><strong>INPUT (from GNC)     			PROCESSED AS (in CAM-POST)</strong><br>
+			    ++++++++++++++++	 		++++++++++++++++++++++++++<br>
+			    </p>
+			  <p>CUTCOM<br>
+			    &quot;&quot;&quot;&quot;&quot;&quot;</p>
+			  <p>CUTCOM/ RIGHT				CUTCOM/	RIGHT, OSETNO, n<br>
+			    LEFT					LEFT<br>
+			    (only if radius compensation switch <br>
+			    MCOMP exists on the LOADTL command)<br>
+			    </p>
+			  <p>CYCLE<br>
+			    &quot;&quot;&quot;&quot;&quot;</p>
+			  <p>CYCLE/ DRILL, d, IPM, f, 0, c		CYCLE/ DRILL, d-c, IPM, f, c<br>
+			    TAP	 IPR			       TAP 	   IPR<br>
+			    MMPM			            	   MMPM<br>
+			    MMPR			                   MMPR</p>
+			  <p>CYCLE/ DEEP,d1,d2,d3,..., IPM,f,0,c	CYCLE/ DEEP,d1-c,d2-c,d3-c,..., IPM,f,c<br>
+			    BRKCHP	          IPR		      BRKCHP                    IPR<br>
+			    MMPM	   				        MMPM<br>
+			    MMPR	   				        MMPR</p>
+			  <p>CYCLE/ BORE5, d, IPM, f, c		CYCLE/ REAM, d-c, IPM, f, c<br>
+			    IPR			                  IPR<br>
+			    MMPM			                  MMPM<br>
+			    MMPR			                  MMPR</p>
+			  <p>CYCLE/ BORE6, d, IPM, f, c		CYCLE/ BORE, d-c, IPM, f, c<br>
+			    IPR			                  IPR<br>
+			    MMPM			                  MMPM<br>
+			    MMPR			                  MMPR</p>
+			  <p>CYCLE/ BORE7, d, IPM, f, c		CYCLE/ BORE, d-c, IPM, f, c, ORIENT<br>
+			    IPR			                  IPR<br>
+			    MMPM			                  MMPM<br>
+			    MMPR			                  MMPR</p>
+			  <p>CYCLE/ BORE8, d, IPM, f, c		CYCLE/ BORE, d-c, IPM, f, c, DWELL<br>
+			    IPR			                  IPR<br>
+			    MMPM			                  MMPM<br>
+			    MMPR			                  MMPR</p>
+			  <p>CYCLE/ BORE9, d, IPM, f, c		CYCLE/ REAM, d-c, IPM, f, c, DWELL<br>
+			    IPR			                  IPR<br>
+			    MMPM			                  MMPM<br>
+			    MMPR			                  MMPR</p>
+			  <p>For ALL CYCLEs, the control points issued by GNC will be adjusted to match the<br>
+			    ISO definition of CYCLE points. All points will be shifted along their tool <br>
+			    vectors (in the opposite direction) by the clearance amount ( c ).</p>
+			  <p>A CYCLE/OFF will be output before the first command (any post-processor command)<br>
+			    following all CYCLE GOTO points.<br>
+			    </p>
+			  <p>INTOL<br>
+			    &quot;&quot;&quot;&quot;&quot;</p>
+			  <p>INTOL/ d, e, f				INTOL/ d<br>
+			    OUTTOL/ d<br>
+			    </p>
+			  <p>LOADTL<br>
+			    &quot;&quot;&quot;&quot;&quot;&quot;</p>
+			  <p>LOADTL/ n,...,OSETNO,o,mcomp,HOLDER,h[,...]<br>
+			    LOADTL/n, ..., OSETNO, o, HOLDER, h</p>
+			  <p>LOADTL/ n,...,OSETNO,o,mcomp,HOLDER,0[,...]<br>
+			    LOADTL/n, ..., OSETNO, o<br>
+			    (mcomp will be the radius register for <br>
+			    the upcomming CUTCOM command)<br>
+			    </p>
+			  <p>OFSTNO<br>
+			    &quot;&quot;&quot;&quot;&quot;&quot;</p>
+			  <p>OFSTNO/ h				CUTCOM/ ON, LENGTH, h</p>
+			  <p>OFSTNO/ h, d				CUTCOM/ ON, LENGTH, h<br>
+			    (mcomp will be the radius register for <br>
+			    the upcomming CUTCOM command, unless <br>
+			    previously specified on the LOADTL <br>
+			    command)</p>
+			  <p>&nbsp;</p>
+			  <p>SPINDL<br>
+			    &quot;&quot;&quot;&quot;&quot;&quot;</p>
+			  <p>SPINDL/ s,[RPM],[CCLW],[RANGE,g],[XCOORD,v],[MAXRPM,m],...<br>
+			    SFM	 CLW       	  RADIUS <br>
+			    SMM				SPINDL/ s,RPM,CCLW,RANGE,g,MAXRPM,m,...<br>
+			    SFM  CLW<br>
+			    SMM<br>
+			    (is RANGE value g is 0, the RANGE <br>
+			    couplet is omitted)<br>
+			    </p>
+			  <p>TOOLNO<br>
+			    &quot;&quot;&quot;&quot;&quot;&quot;</p>
+			  <p>TOOLNO/ ..., 'string' 			PPRINT/'TOOLNO    string' <br>
+			    </p>
+			  <p><br>
+			    </p><p><div align="right" class="bodytext">
+	 <a href="#icam_banner1" > <span class="style51">Back to top</span>  <img src="../../images/arr_back_top.gif" width="9" height="15" border="0"></a><img src="../../images/blank.gif" width="25" height="8">
+	  </div>
+                          </p>
+			</td></tr></table>
+              </center>
+          </td></tr>
+      </table>
+    </td>
+  </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+</table>
+		<div align="center"><br><br>
+		<p style="text-align:center">Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p>
+		  <br></div>
