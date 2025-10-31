@@ -1,0 +1,51 @@
+.. _cerun_menu:
+
+CERUN Menu
+~~~~~~~~~~
+
+The Control Emulator specific menu options are described below.
+
+**CERUN»Code Groups**
+
+   The Controller window contains a Code Groups tab that can be used to
+   view and optionally modify the currently active code for each of the
+   code groups defined by the control emulator. See
+   :ref:`“Simulation»Controller: Code Groups”<sim_controller_code_groups>`.
+
+**CERUN»MDI**
+
+   The Controller window contains an MDI (manual data input) tab that
+   can be used to execute one or more blocks of MCD at the start of the
+   program, or during program verification when the program is paused.
+   See :ref:`“Simulation»Controller: MDI”<sim_controller_mdi>`.
+
+**CERUN»Opskip**
+
+   The Controller window also contains an Opskip (optional-skip, also
+   known as “block-delete”) tab that can be used to change the opskip
+   settings during processing. See
+   :ref:`“Simulation»Controller: Opskip”<sim_controller_opskip>`.
+
+**CERUN»Option**
+
+   Use this menu selection to activate the CERUN options dialog, which
+   is used to set the actions of the Control Emulator when various
+   special codes are encountered in the program. These codes are
+   identified by their post-processor command name, if defined in the
+   control emulator, as follows:
+
+   :STOP: Code used to halt processing (e.g., M0)
+   :OPSTOP: Code used to optionally halt processing (e.g., M1) REWIND Code used to restart processing (e.g., M30)
+   :END: Code used to end processing (e.g., M2)
+
+   You can set the action for each code as follows:
+
+   -  **Pause** will stop CERUN processing when the code is encountered.
+      You must then select one of the Run menu selections to continue or
+      restart processing.
+   -  **Halt** will end CERUN processing. Once halted, you can either exit
+      or restart processing from the beginning of the program.
+   -  **Ignore** simply ignores the code, which can be useful to continue
+      processing past an END or REWIND code.
+
+   These settings are remembered in the Windows Registry.
