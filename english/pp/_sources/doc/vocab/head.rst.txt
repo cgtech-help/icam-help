@@ -1,0 +1,339 @@
+.. _command_head:
+
+The HEAD Command :kbd:`[LEC]`
+=============================
+
+The HEAD command is used to control selection and synchronization of
+heads on a 4-axis merging lathe, synchronize motions between the
+lower and upper wire guides of a 4-axis wire EDM and to control the
+contouring head on a contouring machine or hybrid punch press.
+
+-  :ref:`“Merging Lathes”<merging_lathes>`
+-  :ref:`“4-Axis Wire EDMs”<4axis_wire_edms>`
+-  :ref:`“Contouring Heads”<contouring_heads>`
+
+.. _merging_lathes:
+
+Merging Lathes
+--------------
+
+On a 4-axis lathe, one head may be moving while the other is idle, or
+both heads may be moving together. The first mode of operation is
+called the “non merge mode” and the latter is called the “merge
+mode”. The user can control the mode of operation of a 4-axis lathe
+using the HEAD command.
+
+The Non-Merge Mode
+~~~~~~~~~~~~~~~~~~
+
+In the non-merge mode, one head (the main or the side head) is
+moving, while the other remains idle.
+
+   :math:`\textbf{HEAD /} \begin{pmatrix}\begin{array}{l} \textbf{MAIN} \\ \textbf{SIDE} \end{array}\end{pmatrix}`
+
+HEAD/MAIN and HEAD/SIDE are commands that tell GENER which head
+should be active. All commands following these will be performed on
+the specified head. To signal the end of a command sequence for the
+active head, a HEAD command for the idle head has to be given. Any
+commands encountered in the CL file before the first HEAD command
+will apply to the main head by default.
+
+Consider the following example:
+
+   .. code-block::
+
+      ISN
+      …
+      0012 HEAD/MAIN
+      0013 TURRET/1,1
+      0014 GOTO/1,1
+      …
+      0029 COOLNT/OFF
+      0030 HEAD/SIDE
+      0031 TURRET/1,2
+      0032 GOTO/2,2
+      …
+      0043 AIR/OFF
+      0044 HEAD/MAIN
+      0045 GOHOME
+      0046 FINI
+
+In the above example of the non merge mode of operation, commands
+from ISN 13 up to 29 are performed by the main head because of the
+HEAD/MAIN command at ISN 12. Commands from ISN 31 up to 43 are
+performed by the side head because of the HEAD/SIDE command at ISN
+30.
+
+The last GOHOME command is performed by the main head, again because
+of the HEAD/MAIN command at ISN 44. In this example, while one head
+is active, the other will remain idle.
+
+The Merge Mode
+~~~~~~~~~~~~~~
+
+In the merge mode, the two heads of a 4-axis lathe move together
+(i.e., are synchronized).
+
+   :math:`\textbf{HEAD / } \big[ \,\textbf{MANUAL},\big]
+   \begin{pmatrix}\begin{array}{l} \textbf{BOTH} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+   :math:`\textbf{HEAD / } \big[ \,\textbf{MANUAL},\big]
+   \begin{pmatrix}\begin{array}{l} \textbf{MAIN} \\ \textbf{SIDE} \end{array}\end{pmatrix} \;
+   \big[ ,\textbf{SPINDL},n \,\big]`
+
+HEAD/BOTH and HEAD/OFF are the commands that signal respectively the
+beginning and the end of the merge mode of operation. Each main head
+sequence begins with a HEAD/MAIN command. Each side head sequence
+begins with a HEAD/SIDE command. Each successive pair of head
+sequences is merged together. The HEAD/BOTH command must be
+immediately followed by a HEAD/MAIN or a HEAD/SIDE command. If
+invalid head merging syntax is detected, an error is issued and
+processing continues in non-merge mode. Any commands encountered in
+the CL file after the HEAD/OFF command will apply to the main head by
+default.
+
+Specifying the optional keyword MANUAL will inhibit the output of
+synchronization codes to the MCD, however GENER will continue
+processing as though the synchronization codes were output.
+
+When MAIN and SIDE heads are operating on the same turning spindle
+with constant surface speed spindle mode in effect, the controlling
+spindle can be specified using the optional SPINDL,\ *n* couplet,
+where *n* defines the controlling spindle. A value of 1 indicates
+that the MAIN head X axis controls the spindle RPM and a value of 2
+indicates that the SIDE head X axis controls the spindle RPM. If the
+controlling spindle is not specified, or is specified as zero (0),
+then GENER will internally assign the controlling spindle to
+whichever head first processes a SPINDL command.
+
+The following is a valid sequence of commands used in the merge mode:
+
+   .. code-block::
+
+      ISN
+      …
+      0012 HEAD/BOTH
+      0013 HEAD/MAIN,SPINDL,1
+      0014 TURRET/1,1
+      0015 FEDRAT/50,IPM
+      0016 GOTO/…
+      …
+      0020 GOTO/HOM1
+      0021 HEAD/SIDE,SPINDL,1
+      0022 COOLNT/ON
+      0023 TURRET/2,2
+      0024 FEDRAT/80,IPM
+      0025 GOTO/…
+      …
+      0029 COOLNT/OFF
+      0030 HEAD/OFF
+
+In the above example of merged mode of operation, commands from ISN
+14 up to 20 are performed by the main head because of the HEAD/MAIN
+command at ISN 13. Commands from ISN 22 up to 29 are performed by
+the side head because of the HEAD/SIDE command
+at ISN 21. Both heads will operate simultaneously, due to the
+HEAD/BOTH command at ISN 12.
+
+   :math:`\textbf{HEAD / } \big[ \,\textbf{MANUAL},\big] \;
+   \textbf{NEXT} \big[ ,\mathit{value} \,\big] \;
+   \big[ ,\textbf{SPINDL},n \,\big]`
+
+Synchronization between a merge pair occurs at the start of each
+pair. Synchronization can also be achieved within a merge pair using
+the HEAD/NEXT command. Each HEAD/NEXT command in the main head
+sequence is synchronized with a corresponding HEAD/NEXT command in
+the side head sequence. HEAD/NEXT commands can be numbered for
+convenience and to further verify alignment. (e.g., HEAD/NEXT,4).
+GENER will issue a warning message if corresponding synchronization
+points do not have the same number. A HEAD/NEXT command without an
+explicit number is considered identical to a HEAD/NEXT,0 command. If
+the same number of HEAD/NEXT commands are not found for each head
+being merged, an error message is given and the HEAD/ NEXT commands
+without correspondents on the other head are ignored.
+
+Specifying the optional keyword MANUAL will inhibit the output of
+synchronization codes to the MCD, however GENER will continue
+processing as though the synchronization codes were output. The head
+controlling the spindle constant surface speed can also be specified
+using the optional SPINDL,\ *n* couplet, as described above for the
+HEAD/MAIN-SIDE command.
+
+There are several ways to achieve the same result using different
+HEAD syntax. The example below illustrates this. The three columns
+describe different methods to achieve the same tape output. The first
+column has two HEAD/BOTH blocks, each containing one pair of head
+sequences to be merged. The second column shows how these two
+HEAD/BOTH blocks can be merged together. The third column shows how
+the HEAD/NEXT command can be used to reorganize a HEAD/ BOTH block
+with multiple HEAD/MAIN and HEAD/SIDE commands so that there is one
+HEAD/ MAIN and one HEAD/SIDE command.
+
+   .. code-block::
+
+      HEAD/BOTH
+      HEAD/MAIN               HEAD/BOTH                   HEAD/BOTH
+      goto/m1                 HEAD/MAIN                   HEAD/MAIN
+      HEAD/SIDE               goto/m1                     goto/m1
+      goto/s1                 HEAD/SIDE                   HEAD/NEXT
+      HEAD/OFF                goto/s1                     goto/m2
+      HEAD/BOTH               HEAD/SIDE                   HEAD/SIDE
+      HEAD/SIDE               goto/s2                     goto/s1
+      goto/s2                 goto/s3                     HEAD/NEXT
+      goto/s3                 HEAD/MAIN                   goto/s2
+      HEAD/MAIN               goto/m2                     goto/s3
+      goto/m2                 HEAD/OFF                    HEAD/OFF
+      HEAD/OFF
+
+GENER uses a switching method, based on the predicted processing time
+of the buffered commands for each head. The first head section of the
+pair will always be started first. In merge mode, GENER will output
+tape until the accumulated time for the current head is greater than
+the accumulated time for the other head. When the time for the other
+head is less, GENER switches to the other head. This minimizes the
+amount of time that either head remains idle.
+
+To allow for maximum head synchronization, the END, OPSTOP, REWIND
+and STOP commands should not be coded while in the merge mode,
+although they are allowed in non-merge mode.
+
+.. _4axis_wire_edms:
+
+4-Axis Wire EDM Machines
+------------------------
+
+On a 4-axis wire EDM, complex 5-axis shapes can be programmed using
+MULTAX to include the wire orientation information for each end point
+(swarf cut). GENER can also merge two independent 2-axis contours for
+the lower and upper wire guides to produce complex 5-axis shapes. The
+first mode of operation is called the “non merge mode” and the latter
+is called the “merge mode”. The user controls the mode of operation
+in merge mode using the HEAD command.
+
+The syntax of the HEAD command for 4-axis EDMs is as follows:
+
+   :math:`\textbf{HEAD / BOTH } \big[,\textbf{STEP}\,\big]`
+
+   :math:`\textbf{HEAD / }
+   \begin{pmatrix}\begin{array}{l} \textbf{HIGH} \\ \textbf{LOW} \\ \textbf{OFF}\end{array}\end{pmatrix}`
+
+   :math:`\textbf{HEAD / NEXT }\; \big[,\mathit{value}\,\big]`
+
+The Non-Merge Mode
+~~~~~~~~~~~~~~~~~~
+
+In the non-merge mode, all motions refer either to the lower wire
+guide, the upper guide, or to a logical program position in line with
+both guides. The actual position used is controlled using the PIVOTZ
+command. Both guides are controlled by individual motion points, with
+or without associated tool axis vectors. No HEAD commands are
+necessary.
+
+The Merge Mode
+~~~~~~~~~~~~~~
+
+In the merge mode, the two guides of a 4-axis EDM move together.
+HEAD/BOTH and HEAD/OFF are the commands that signal respectively the
+beginning and the end of the merge mode of operation. Each lower
+guide sequence begins with a HEAD/LOW command. Each upper guide
+sequence begins with a HEAD/HIGH command. Each successive pair of
+guide sequences is merged together. The HEAD/BOTH command must be
+immediately followed by a HEAD/LOW or a HEAD/HIGH command. If invalid
+guide merging syntax is detected, an error is issued and processing
+continues in non-merge mode. Commands given after a HEAD/OFF command
+will again refer to both heads using the current PIVOTZ settings.
+
+The following is a valid sequence of commands used in the merge mode:
+
+   .. code-block::
+
+      ISN
+      …
+      0012 HEAD/BOTH
+      0013 HEAD/LOW
+      0014 GOTO/…
+      …
+      0020 GOTO/…
+      0021 HEAD/HIGH
+      0022 GOTO/…
+      …
+      0029 GOTO/…
+      0030 HEAD/OFF
+
+In the above example of merged mode of operation, commands from ISN
+14 up to 20 are performed by the lower guide because of the HEAD/LOW
+command at ISN 13. Commands from ISN 22 up
+to 29 are performed by the upper guide because of the HEAD/HIGH
+command at ISN 21. Both guides will operate simultaneously, due to
+the HEAD/BOTH command at ISN 12.
+
+Synchronization between a merge pair occurs at the end of each pair.
+Synchronization can also be achieved within a merge pair using the
+HEAD/NEXT command. Each HEAD/NEXT command in the lower guide sequence
+is synchronized with a corresponding HEAD/NEXT command in the upper
+guide sequence. HEAD/NEXT commands can be numbered for the user’s
+convenience and to further verify alignment. (e.g., HEAD/NEXT,4).
+GENER will issue a warning message if corresponding synchronization
+points do not have the same number. A HEAD/NEXT command without an
+explicit number is considered identical to a HEAD/NEXT,0 command. If
+the same number of HEAD/NEXT commands are not found for each guide
+being merged, an error message is given and the HEAD/NEXT commands
+without correspondents on the other guide are ignored.
+
+There are several ways to achieve the same result using different
+HEAD syntax. The example below illustrates this. The three columns
+describe different methods to achieve the same tape output. The first
+column has two HEAD/BOTH blocks, each containing one pair of guide
+sequences to be merged. The second column shows how these two
+HEAD/BOTH blocks can be merged together. The third column shows how
+the HEAD/NEXT command can be used to reorganize a HEAD/ BOTH block
+with multiple HEAD/LOW and HEAD/HIGH commands so that there is one
+HEAD/ LOW and one HEAD/HIGH command.
+
+   .. code-block::
+
+      HEAD/BOTH
+      HEAD/LOW                HEAD/BOTH                   HEAD/BOTH
+      goto/m1                 HEAD/LOW                    HEAD/LOW
+      HEAD/HIGH               goto/m1                     goto/m1
+      goto/s1                 HEAD/HIGH                   HEAD/NEXT
+      HEAD/OFF                goto/s1                     goto/m2
+      HEAD/BOTH               HEAD/HIGH                   HEAD/HIGH
+      HEAD/HIGH               goto/s2                     goto/s1
+      goto/s2                 goto/s3                     HEAD/NEXT
+      goto/s3                 HEAD/LOW                    goto/s2
+      HEAD/LOW                goto/m2                     goto/s3
+      goto/m2                 HEAD/OFF                    HEAD/OFF
+      HEAD/OFF
+
+If the STEP keyword is specified on the HEAD/BOTH command, GENER
+merges the lower and upper wire guide motions based on the number of
+elements between synchronization points. Therefore, the first element
+in the lower contour is synchronized with the first element in the
+upper contour; the second elements on both contours are synchronized;
+and so on. Elements may be linear moves (simple GOTO), or circular.
+
+If the STEP keyword is omitted, GENER merges lower and upper wire
+guide motions based on the distance traveled between synchronization
+points. Additional interpolated motions may be inserted as necessary
+into the upper or lower guide paths to maintain a proper final wire
+path.
+
+To allow for proper guide synchronization, the END and REWIND
+commands cannot be coded while in the merge mode.
+
+.. _contouring_heads:
+
+Contouring Heads
+----------------
+
+Contouring heads are supported on contouring machines and hybrid
+punch press machines with contouring attachments.
+
+The syntax of the command is as follows:
+
+   :math:`\textbf{HEAD /} \begin{pmatrix}\begin{array}{l} \textbf{UP} \\ \textbf{DOWN} \end{array}\end{pmatrix}`
+
+The first command causes the contouring head to move up and away from
+the workpiece. The second command causes the contouring head to move
+into the workpiece.
