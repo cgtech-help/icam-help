@@ -1,0 +1,30 @@
+.. _cerun_with_vm:
+
+CERUN with Virtual Machine
+**************************
+
+ICAM’s control emulator run-time **CERUN** emulates the MCD
+processing and movements of a CNC machine, based on information
+previously entered (using the QUEST developer’s module) about the
+machine and controller combination.
+
+This chapter provides details about CERUN and its Virtual Machine
+interface, used for both machine simulation and in-process stock
+material removal simulation.
+
+.. toctree::
+   :hidden:
+
+   startcerun
+   ceruninout
+   usingcerun
+
+-  :ref:`“Starting CERUN”<start_cerun>` explains how to start CERUN from ICAM Manufacturing Extractors, from the desktop as well as from the Windows command prompt.
+
+   \
+
+-  :ref:`“CERUN Inputs and Outputs”<cerun_inputs_outputs>` describes the various inputs and outputs of Control Emulator, including input MCD files and the output verification listings.
+
+   \
+
+-  :ref:`“Using CERUN with Virtual Machine”<using_cerun_with_vm>` describes the operation of Control Emulator with Virtual Machine.
