@@ -1,0 +1,355 @@
+Generating CL Records in a Macro
+--------------------------------
+
+There are several ways that macros can issue CL records. The TAPEWT
+macro command (described in a later section) is one way. This section
+will describe other ways.
+
+Post-Processor Commands in a Macro
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All post-processor records can be specified within macros. If an
+alias does not exist for the record then the record can be issued
+using an explicit string. (e.g., #2000:9999). Macro expressions
+(local variables, keywords, etcetera) can be used to describe each
+record argument. REAL, STRING, MINOR, RECORD or SEQUENCE expressions
+can be given. Each SEQUENCE argument causes the sequence to be
+inserted at that position. NULL and LOGICAL arguments are not
+allowed. Consider the following SPINDL macro:
+
+   +------------------------------------------------------------------------------+
+   |           **MACRO SDL**                                                      |
+   +==============================================================================+
+   | $$ Match any SPINDL record that specifies RANGE,HIGH                         |
+   |                                                                              |
+   | \SPINDL/$P1\*,RANGE,HIGH,$P2\*                                               |
+   |                                                                              |
+   | \PPRINT/'Selecting MEDIUM range'                                             |
+   |                                                                              |
+   | \SPINDL/$P1,RANGE,MEDIUM,$P2                                                 |
+   +------------------------------------------------------------------------------+
+
+   +-----------------------------------+--------------------------------+
+   |       **CLDATA input**            |    **Matches**                 |
+   +===================================+================================+
+   | SPINDL/RANGE,HIGH,CLW,500,SFM     | $P1=<> $P2=<CLW,500,SFM>       |
+   +-----------------------------------+--------------------------------+
+   | **Macro output**                                                   |
+   +-----------------------------------+--------------------------------+
+   | PPRINT/'Selecting MEDIUM range'                                    |
+   |                                                                    |
+   | SPINDL/RANGE,MEDIUM,CLW,500,SFM                                    |
+   +-----------------------------------+--------------------------------+
+
+   +-----------------------------------+--------------------------------+
+   |       **CLDATA input**            |    **Matches**                 |
+   +===================================+================================+
+   | SPINDL/100,RANGE,HIGH             | $P1=<100> $P2=<>               |
+   +-----------------------------------+--------------------------------+
+   | **Macro output**                                                   |
+   +-----------------------------------+--------------------------------+
+   | PPRINT/'Selecting MEDIUM range'                                    |
+   |                                                                    |
+   | SPINDL/100,RANGE,MEDIUM                                            |
+   +-----------------------------------+--------------------------------+
+
+By default, records generated in this way are candidates for macro
+matching. In this way, a macro may “call” another macro. Macros that
+are already being executed are not candidates for invocation. This
+means that a macro can never call itself, either directly or
+indirectly. Macro matching may be disabled to prevent command records
+in a macro from calling macros. The “Macro Invocation” section
+describes the MATCH/OFF command that does this.
+
+Suppressing Post-Processor Commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As mentioned earlier, it is possible to ignore a particular type of
+record entirely by creating a user-defined macro that consists only
+of a syntax definition line describing the syntax to be suppressed.
+For example, the following macro suppresses all CAMERA commands.
+
+   ::
+
+      CAMERA/
+      TERMAC
+
+Outputting the Matched Record (OUTPUT)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The OUTPUT command is used to instruct GENER to process the matched
+CL file command exactly as it was read.
+The syntax of the OUTPUT command is simply:
+
+   :math:`\textbf{OUTPUT}`
+
+Any modification made to any $Pn variables or any minor words will be
+ignored when this command is used.
+
+   +--------------------------------------------------------------------+
+   |                **Macro SDL**                                       |
+   +====================================================================+
+   | SPINDL/$P1,[$P2(CLW,CCLW)],[RANGE,$P3]                             |
+   |                                                                    |
+   | PPRINT/'Code put here will precede the SPINDL command'             |
+   |                                                                    |
+   | OUTPUT                                                             |
+   |                                                                    |
+   | PPRINT/'Code put here will follow the SPINDL command'              |
+   +--------------------------------------------------------------------+
+
+   +-----------------------------------+--------------------------------+
+   | **CLDATA input**                  |    **Matches**                 |
+   +===================================+================================+
+   | SPINDL/100,CLW,RANGE,4            | $P1=100 $P2=CLW $P3=4          |
+   +-----------------------------------+--------------------------------+
+   | **Macro output**                                                   |
+   +-----------------------------------+--------------------------------+
+   | PPRINT/'Code put here will precede the SPINDL command'             |
+   |                                                                    |
+   | SPINDL/100,CLW,RANGE,4                                             |
+   |                                                                    |
+   | PPRINT/'Code put here will follow                                  |
+   | the SPINDL command',                                               |
+   +-----------------------------------+--------------------------------+
+
+   +-----------------------------------+--------------------------------+
+   | **CLDATA input**                  |    **Matches**                 |
+   +===================================+================================+
+   | SPINDL/500,RANGE,4,CCLW           | $P1=500 $P2=CCLW $P3=4         |
+   +-----------------------------------+--------------------------------+
+   | **Macro output**                                                   |
+   +-----------------------------------+--------------------------------+
+   | PPRINT/'Code put here will precede the SPINDL command'             |
+   |                                                                    |
+   | SPINDL/500,RANGE,4,CCLW                                            |
+   |                                                                    |
+   | PPRINT/'Code put here will follow                                  |
+   | the SPINDL command'                                                |
+   +-----------------------------------+--------------------------------+
+
+Generating Other CL Record Types
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Any class record can be issued from within a macro. This can be done
+by specifying the explicit representation of the record. For
+instance, “#5000:5/2,2,2” specifies a 5000 class record, subclass 5
+with three arguments. For those familiar with ISO class definitions
+you will recognize this as a GOTO record. Common records have built
+in aliases. They are described in the following sections. With these
+commands, only REAL and MINOR arguments may be specified, depending
+on the record type. NULL, LOGICAL, STRING and SEQUENCE arguments are
+not permitted.
+
+Motion CL Records
+~~~~~~~~~~~~~~~~~
+
+Motion statements (class 5000 records) are used to cause the tool to
+move from its current location to a new one and/or to modify the
+orientation of the tool axis with respect to the machined part. All
+motions are point to point since no other canonical form exists in
+post-processor macros. For example, it is not possible to generate a
+set of moves to follow an arbitrary surface since no mechanism exists
+to define such surfaces. However, the different formats of motion
+statements are sufficiently powerful to handle a wide scope of
+applications.
+
+At this point, a distinction must be made between CL file and machine
+coordinates. Post-processing a “CL file point” (defined by an XYZ
+triplet) results in a “machine point” that is, most of the time, very
+different than the originating CL file point. Many factors determine
+the mapping between CL file and machine points but for the purpose of
+the example, consider the following NC statements:
+
+   ::
+
+      UNITS/INCHES
+      GOTO/1,1,1
+
+Clearly, the CL file point value corresponding to the above program
+would be XYZ (CL file) = 1,1,1. Now if the machine units is in
+millimeters, the resulting machine point would be XYZ (machine) =
+25.4,25.4,25.4. Therefore, confusion would arise in a post-processor
+macro as to what point a motion statement refers to: the CL file or
+the machine point! When TRANSL is specified the coordinates will be
+translated into machine coordinates.
+
+There are three motion commands supported in post-processor macros
+namely:
+
+   :math:`\begin{array}{l}
+   \textbf{GOTO} \\
+   \textbf{FROM} \\
+   \textbf{GODLTA}
+   \end{array}`
+
+The GOTO and GODLTA statements both cause motions to occur but the
+FROM statement changes the post-processors reference point. It is
+mostly used when dealing with incremental machines. The following
+lists and describes all the motion statements that can be used in
+post-processor macros.
+
+In all formats below, *xm,ym,zm* refer to machine coordinates and
+*xc,yc,zc* refer to CL file coordinates. The *i,j,k* triplet
+represents the orientation vector that the tool should assume at the
+end of the motion. However, it must be understood that the above
+triplets really stand for arbitrary arithmetic expressions. For
+example, format #1 below could be coded as “:mono:`GOTO/$XC–3,$YC,$ZC–%G00+1`”.
+
+   :math:`\begin{array}{l}
+   \rule{0pt}{2.5ex} \textbf{MOVARC/} xc, yc, zc, xv, yv, zv, \mathit{radius} \big[,\textbf{TIMES},\mathit{count}\,\big] \\
+   \rule{0pt}{2.5ex} \textbf{GOTO/}\big[\textbf{TRANSL},\big] xe, ye, ze \big[,i, j, k \,\big]
+   \end{array}`
+
+This command will generate a circular motion record. The *xc,yc,zc*
+parameters define a point on the axis of the circle. The *xv,yv,zv*
+parameters define a vector parallel to the circle axis and the
+direction of rotation about the circle using the :term:`right hand rule`. The
+radius parameter specifies the radius of the circular surfaces being
+machined. The optional count modifier is used when you need to
+generate circular motions in excess of 360 degrees. A count of 1 will
+generate an arc from the current position to the next position
+specified by *xe,ye,ze*. A count of 2 will generate an arc exactly
+360 degrees larger than the default.
+
+The MOVARC command **must** be followed by a GOTO/ command that
+defines the end point of the arc. The coordinates of the GOTO command
+can be in machine or CL file coordinates. The keyword TRANSL is used
+to specify that the coordinates are in CL file coordinates. The
+MOVARC coordinates are presumed to be in the same coordinate system
+as the end point GOTO coordinates.
+
+   :math:`\textbf{GOTO/} xm,ym,zm`
+
+Move to the machine point *xm,ym,zm*.
+
+   :math:`\textbf{GOTO/TRANSL},xc,yc,zc`
+
+Move to the CL file point *xc,yc,zc*.
+
+   :math:`\textbf{GOTO/TRANSL},xc,yc,zc,i,j,k`
+
+Move to the CL file point *xc,yc,zc* with a tool vector orientation
+of *i,j,k*.
+
+   :math:`\textbf{FROM/}xm,ym,zm`
+
+Change the reference point to *xm,ym,zm*.
+
+   :math:`\textbf{FROM/TRANSL},xc,yc,zc`
+
+Change the reference point after conversion of *xc,yc,zc* to machine
+coordinates.
+
+   :math:`\textbf{FROM/TRANSL},xc,yc,zc,i,j,k`
+
+Change the reference point after conversion of *xc,yc,zc* to machine
+coordinates and conversion of *i,j,k* to machine angles.
+
+   :math:`\textbf{GODLTA/}\mathit{delta}`
+
+Move the machine tool tip to a new location that is “delta” machine
+units along the current tool axis.
+
+   :math:`\textbf{GODLTA/}xm,ym,zm`
+
+Move the machine tool tip location by an increment of *xm,ym,zm*.
+
+   :math:`\textbf{GODLTA/TRANSL},\mathit{delta}`
+
+Move the machine tool tip to a new location that is “delta” CL file
+units along the current tool axis.
+
+   :math:`\textbf{GODLTA/TRANSL},xc,yc,zc`
+
+Move the CL file tool tip location by an increment of *xc,yc,zc*.
+
+   :math:`\textbf{GODLTA/TRANSL},\mathit{delta},i,j,k`
+
+Move the machine tool tip to a new location that is “delta” CL file
+units along the current tool axis with a tool orientation vector of
+*i,j,k*.
+
+   :math:`\textbf{GODLTA/TRANSL},xc,yc,zc,i,j,k`
+
+Move the CL file tool tip location by an increment of *xc,yc,zc*; the
+tool orientation vector is set to *i,j,k*.
+
+**Implied MULTAX**
+
+In all the above formats that modify the tool orientation vector,
+MULTAX is automatically generated by the post-processor only for that
+next motion, if the multi-axis mode was not already on.
+
+For example, the following post-processor motion statement (format #3
+above):
+
+   .. code-block::
+
+      GOTO/TRANSL,1,2,3,1,0,0
+
+is conceptually equivalent to the following portion of an NC program:
+
+   .. code-block::
+
+      MULTAX/ON
+      TLAXIS/1,0,0
+      GOTO/1,2,3
+      MULTAX/OFF
+
+Note that when using the TRANSL method, the specified coordinates and
+optional vector are subject to all the processing normally performed
+on CL coordinates. This includes effects of the ORIGIN/
+, TRANS/, tool offsets, etcetera.
+
+**Examples of motion statements:**
+
+   .. code-block::
+
+      GOTO/1,1,1
+
+   ..
+
+      Go to the machine point 1,1,1.
+
+   .. code-block::
+
+      GOTO/TRANSL,1,1,1
+
+   ..
+
+      Go to the CL file point 1,1,1.
+
+   .. code-block::
+
+      GOTO/TRANSL,1,2,3,0,0,1
+
+   ..
+
+      Go to the CL file point 1,2,3 with the tool axis parallel to the Z axis.
+
+   .. code-block::
+
+      GODLTA/TRANSL,2
+
+   ..
+
+      Slide the tool tip 2 CL file units along the current tool axis.
+
+Environment Control CL Records
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following 6000 class commands are supported and have predefined
+aliases: INTOL, OUTTOL and CUTTER. All require a single numeric
+argument. The following 9000 class commands are supported: MULTAX and
+UNITS. MULTAX requires a single minor word argument (ON or OFF).
+UNITS requires at most two arguments. The first is a minor word (CM,
+INCHES, MM, or FEET). The second, if present, is a numeric value
+specifying a scale factor. The 14000 class record (FINI) is also
+supported. It does not require any arguments.
+
+Other class CL commands must be specified using explicit strings
+(#15000:0) for the command name. Arguments can be specified in the
+standard manner. Such records can also be constructed using the
+“CLPUT” macro command and put out using the “TAPEWT” macro command.
+Refer to the :ref:`“CL File I/O From Macros”<cl_file_macro_io>` section.
