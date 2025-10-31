@@ -1,0 +1,127 @@
+.. _command_safpos:
+
+The SAFPOS Command :kbd:`[MLEPC]`
+=================================
+
+The SAFPOS command allows the part programmer to change and restore
+the tool and head change position. The tool and head change positions
+are defined by QUEST, but they can be modified at any time with the
+SAFPOS command.
+The following SAFPOS command functions are available:
+
+-  :ref:`“Reference Tool/Head Change Position”<safpos_reference>`
+-  :ref:`“Machine Tool/Head Change Position”<safpos_machine>`
+-  :ref:`“Reset Tool/Head Change Position”<safpos_reset>`
+
+GENER recognizes three different types of machines
+when it comes to tool change and home point processing:
+
+-  A “\ **fixed home**\ ” machine is one that has a fixed “lights-on”
+   position that is always used for the tool and head change positions.
+   The SAFPOS command has no effect on fixed home machines.
+
+   \
+
+-  A “\ **reference home**\ ” machine is one that has a machine tool
+   builder defined coordinate system that is different from that of the
+   workpiece coordinate system. This includes both the G28 style fixed
+   reference position and the G53 style reference coordinate system
+   types.
+
+   \
+
+-  A “\ **no home**\ ” machine is one that has a single workpiece
+   coordinate system.
+
+GENER uses the tool and head change positions to estimate motion
+position timing and to obtain a sense of direction following any tool
+or head change.
+
+.. _safpos_reference:
+
+Reference Tool/Head Change Position
+-----------------------------------
+
+The reference tool and head change positions define the position of
+the machine during a tool or head change operation. The tool and head
+change position definitions in QUEST can be changed by coding the
+following:
+
+   :math:`\textbf{SAFPOS / } \big[\,\textbf{HEAD},\big] \!\icamrange{15}{1}\! \begin{pmatrix} \,
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \\ \\ \textbf{NEXT} \end{array} \end{pmatrix}
+   \begin{pmatrix} \!,\! \begin{array}{l} \mathit{value} \\ \textbf{MINPOS} \\ \textbf{MAXPOS} \\ \textbf{UNKPOS} \end{array} \end{pmatrix}
+   \,\end{pmatrix}`
+
+Specify the HEAD keyword when defining a head change position. Omit
+the HEAD keyword when defining a tool change position. Tool change
+and head change positions can be defined either in absolute machine
+coordinates, or as symbolic coordinates that define the relative
+position of the reference change position with respect to the machine
+envelope. Symbolic coordinates are only valid for reference home
+machines.
+
+-  Select **MINPOS** if the reference change position for the specified
+   axis moves the machine to the extremity of the axis travel in the
+   negative direction.
+
+-  Select **MAXPOS** for the reverse.
+
+-  Select **UNKPOS** if the reference change position is at neither
+   extremity.
+
+-  Enter a coordinate **value** if the change position is known.
+
+GENER uses the reference change point settings to establish a sense
+of direction for safe positioning motion analysis when returning from
+a tool or head change operation. The string “?.???” will be shown in
+the verification listing file axis column display for any axis that
+is at a symbolic position. The same string “?.???” will also be shown
+in the travel summaries for any axis that has remained at a symbolic
+position for the entire program. Symbolic positions are not included
+in travel calculations.
+
+Only those axes referenced in the SAFPOS command will be moved during
+a tool or head change operation. See :ref:`here<axis_names>`
+for a table correlating axes name keywords with machine axes. The
+NEXT keyword can be specified break the motion to the change point
+into a series of steps. For example, the following command will first
+retract the Z axis to the home point and then move the X axes:
+
+   .. code-block::
+
+      SAFPOS/ZAXIS,MAXPOS,NEXT,XAXIS,MINPOS
+      LOAD/TOOL,1
+
+      G91 G28 Z0
+      G28 X0 T1 M06
+
+.. _safpos_machine:
+
+Machine Tool/Head Change Position
+---------------------------------
+
+Reference home machines using a G53 style reference coordinate system
+must output a coordinate value for each axis taken to the tool or
+head change position. These reference coordinate values are defined
+in QUEST and can be changed by coding the following:
+
+   :math:`\textbf{SAFPOS / ABSOL}, \big[\,\textbf{HEAD},\big] \!\icamrange{13}{1}\! \begin{pmatrix}
+   \,\begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array}\end{pmatrix}
+   , \mathit{value} \end{pmatrix}`
+
+The machine reference tool change and head change (specify the HEAD
+keyword) coordinate axes values do not have any effect on travel
+checking and motion analysis. Only those axes that are moved to the
+tool or head change position will be output. See :ref:`here<axis_names>`
+for a table correlating axes name keywords with machine axes.
+
+.. _safpos_reset:
+
+Reset Tool/Head Change Position
+-------------------------------
+
+The following command removes any program defined tool or head change
+position information and reverts tool or head change positioning to
+QUEST defaults.
+
+   :math:`\textbf{SAFPOS / } \big[\,\textbf{HEAD},\big] \,\textbf{NOMORE}`
