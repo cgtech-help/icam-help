@@ -1,0 +1,19 @@
+Replacement String
+------------------
+
+|image1|
+
+This dialog appears when adding or modifying entries in the Tape Editor.
+
+**Replace:** Specifies a regular expression to match against a block of
+tape. The arrow button lists common regular expression formats to aid in
+the creation of the expression.
+
+**By:** Specifies the text string to output in replacement of the one
+matched by the *Replace* regular expression. If text was tagged in the
+*Replace* field (using **\\(** and **\\)** operators), the arrow button
+can be used in the *By* field to copy the tagged text to the replacement
+string.
+
+.. |image1| image:: ./media/606df604e57fc1adcf810219f92cdce64c568bac.gif
+
