@@ -1,0 +1,84 @@
+.. _simulation_menu:
+
+Simulation Menu
+~~~~~~~~~~~~~~~
+
+The Simulation menu is only available if Material Removal Simulation
+and/or Virtual Machine Simulation were selected in the Simulation
+launch panel settings (see :ref:`“VM Tab”<vm_tab>`). More
+details on the Simulation menu functions can be found in the
+*“Virtual Machine Users Guide”*. The following simulation menu
+functions are available:
+
+   .. toctree::
+      :hidden:
+
+      ../simulation/main
+      ../simulation/controller
+      ../simulation/manager
+      ../simulation/mode
+      ../simulation/partfixture
+      ../simulation/toolholderhead
+      ../simulation/camera
+      ../simulation/show
+      ../simulation/measure
+      ../simulation/annotation
+      ../simulation/selection
+      ../simulation/grid
+      ../simulation/lights
+      ../simulation/material
+      ../simulation/display
+      ../simulation/chip
+      ../simulation/compare
+      ../simulation/options
+      ../simulation/setup
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`Virtual Machine<sim_vm>`
+         -  Main simulation viewing windows
+      *  -  :ref:`Controller<sim_controller>`
+         -  Virtual controller functions
+      *  -  :ref:`Manager<sim_manager>`
+         -  Simulation manager window
+      *  -  :ref:`Mode<sim_mode>`
+         -  Camera, selection, measurement, MRS & gouge settings
+      *  -  :ref:`Parts/Fixtures<sim_partfixture>`
+         -  Part (design & stock) and fixture definition
+      *  -  :ref:`Tools/Holders/Heads<sim_toolholderhead>`
+         -  Tool & holder definitions / Head selection
+      *  -  :ref:`Camera<sim_camera>`
+         -  Viewpoint manipulation
+      *  -  :ref:`Show<sim_show>`
+         -  General object visibility
+      *  -  :ref:`Measure<sim_measure>`
+         -  Measurement functions
+      *  -  :ref:`Annotation<sim_annotation>`
+         -  Markup, video and snapshot functions
+      *  -  :ref:`Hide in View<sim_sel_hide>`
+         -  Physical component visibility
+      *  -  :ref:`Show All/Rehide<sim_sel_show>`
+         -  Physical component visibility
+      *  -  :ref:`Invert Hide State<sim_sel_invert_hide>`
+         -  Physical component visibility
+      *  -  :ref:`Grid<sim_grid>`
+         -  Grid settings
+      *  -  :ref:`Lights<sim_lights>`
+         -  Lighting settings
+      *  -  :ref:`Material<sim_material>`
+         -  Material definitions
+      *  -  :ref:`Display<sim_display>`
+         -  Heads-Up Display settings
+      *  -  :ref:`Chip and Split<sim_chip>`
+         -  Disconnected in-process stock chip removal
+      *  -  :ref:`Compare<sim_compare>`
+         -  In-process stock vs. part comparison
+      *  -  :ref:`Options<sim_options>`
+         -  Other options
+      *  -  :ref:`Open Setup<sim_open_setup>`
+         -  Load setup from another session
+      *  -  :ref:`Save Setup<sim_save_setup>`
+         -  Save current session
