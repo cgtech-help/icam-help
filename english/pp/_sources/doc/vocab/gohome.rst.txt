@@ -1,0 +1,52 @@
+.. _command_gohome:
+
+The GOHOME Command :kbd:`[MLEPC]`
+=================================
+
+The GOHOME command is used to allow a part programmer to return the
+tool to a home position either by register or code output. Depending
+on QUEST settings, the GOHOME command might also output a STOP or
+OPSTOP command after reaching the home position. This command is
+valid for all machine types.
+
+There are two forms of the GOHOME command:
+
+   :math:`\textbf{GOHOME}`
+
+   :math:`\textbf{GOHOME /} \!
+   \icamrange{15}{1}\! \begin{pmatrix},
+   \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \\ \\ \textbf{NEXT} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \mathit{value} \\ \textbf{MINPOS} \\ \textbf{MAXPOS} \\ \textbf{UNKPOS} \end{array}\,\end{bmatrix}
+   \end{pmatrix}`
+
+If the GOHOME command is programmed without parameters, it will
+return the tool to a home position defined by the HOMEPT command, a
+default starting position or alternately, to the last FROM position
+coded in the CL file. The home point depends on the type of machine.
+
+If the GOHOME command is coded with parameters, only the named axes
+will be positioned to their default or specified home positions.
+See :ref:`here<axis_names>` for a table correlating axes name
+keywords with machine axes. See :ref:`the HOMEPT command<command_homept>` for details on defining axes home positions.
+The following examples both position the Z-axis to the default home
+position first, followed by a move to the X-axis and Y-axis default
+home positions:
+
+   .. code-block::
+
+      GOHOME/ZAXIS
+      GOHOME/XAXIS,YAXIS
+
+or
+
+   .. code-block::
+
+      GOHOME/ZAXIS,NEXT,XAXIS,YAXIS
+
+.. note::
+
+   It is important to note that both TRANS amounts and ROTABL
+   without ROTREF amounts are canceled for any rotary axis that is moved
+   to the HOME position.
+
+..
