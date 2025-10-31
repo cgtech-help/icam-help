@@ -1,0 +1,70 @@
+.. _command_calsub:
+
+The CALSUB Command :kbd:`[MLEPC]`
+=================================
+
+The CALSUB command is used to activate a predefined subprogram.
+
+   :math:`\textbf{CALSUB / ID},
+   \, \begin{pmatrix}\begin{array}{l} a \\ \mathtt{'}\mathit{name}\,\mathtt{'} \end{array}\end{pmatrix}
+   \begin{bmatrix} ,\textbf{TYPE}, \begin{pmatrix}\begin{array}{l} \textbf{CNC} \\ \textbf{RANGE} \\ \textbf{INCLUD} \\ \textbf{CLDATA} \\ \textbf{SYSTEM} \end{array}\end{pmatrix} \end{bmatrix}
+   \big[ ,\textbf{TIMES} ,b \, \big] \;
+   \Big[ \big[ ,\textbf{OPTION} \, \big] ,c \, \Big]`
+
+The subprogram ID\ [#]_ can be identified by either a whole
+number value *a*, or by a quoted subprogram *name*.
+
+Various subprogram types are supported. If a subprogram type is
+specified with the CALSUB command, then it must match the type
+defined on the corresponding DEFSUB command.
+
+-  CNC specifies a subprogram defined in a separate program element than
+   the caller. The post-processor will output a subprogram containing
+   the code generated from the DEFSUB-ENSUB block either immediately, or
+   when called, or at the end of processing, depending on how the
+   post-processor is configured. For each call, the post-processor will
+   update the processing status based on the subprogram contents, and
+   then will generate a call instruction to the subprogram.
+
+   \
+
+-  RANGE specifies a subprogram defined as repeat range in the same
+   program element as the caller. The post-processor will process the
+   DEFSUB-ENDSUB contents at the first call, bounded by labels or
+   sequence numbers. For each subsequent call, the post-processor will
+   update the processing status based on the subprogram contents, and
+   then will generate a call instruction to repeat the bounded code.
+
+   \
+
+-  INCLUD specifies an emulated subprogram. The post-processor will save
+   the contents of the subprogram when defined, and then post-process
+   the saved CLDATA contents at each call.
+
+   \
+
+-  CLDATA specifies to use preferably a CNC subprogram if supported, but
+   if not then a RANGE repeat if supported, otherwise to emulate the
+   subprogram (i.e., INCLUD).
+
+   \
+
+-  SYSTEM specifies a controller resident subprogram. For each call, the
+   post-processor will update the processing status based on the
+   subprogram contents if a subprogram was defined, and then generate a
+   call instruction to the controller resident subprogram. A SYSTEM
+   subprogram does not have to be defined.
+
+The couplet (keyword,real) TIMES\ *,b* specifies the number of times
+to execute the subprogram.
+
+The couplet (keyword,real) OPTION\ *,c* specifies optional subprogram
+parameters, to be included on the subprogram activation (call) NC
+block. This qualifier might not be valid for a specific NC controller
+and cannot be used when emulating subprograms.
+
+A subprogram can call another subprogram, to a maximum nesting depth
+of 16 if emulated, and to a QUEST defined limit if supported by the
+machine.
+
+.. [#] For compatibility purposes, the ID and TYPE keywords can be omitted.
