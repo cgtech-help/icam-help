@@ -1,0 +1,16 @@
+New DATA Macro (Control Emulator only)
+--------------------------------------
+
+The new DATA macro dialog is shown when creating a new macro from the
+Data Macro section. It allows you to specify which data registers can
+fire the macro.
+
+|image1|
+
+Just add all the data identifiers that can fire the macro. One of them
+is sufficient to execute it.
+
+Then add a name for the macro in the *Description* text field.
+
+.. |image1| image:: ./media/f5843c96e1ea5f2c9959b79f97a72ab4e581604d.gif
+
