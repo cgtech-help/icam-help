@@ -1,0 +1,228 @@
+
+Coolant, Feed Rate and Spindle Variables
+========================================
+
+.. _var_cooldev:
+.. index:: Variables; $COOLDEV
+
++------------------+-----------------------------------------------------+
+| **$COOLDEV**     | Auxiliary COOLNT device status (–1:NA, 0:OFF, 1:ON) |
+|                  |                                                     |
+|                  | Type: Numeric, Read/Write                           |
++------------------+-----------------------------------------------------+
+
+   This variable is an array containing the status of 9 auxiliary
+   coolant devices, where a value of –1 indicates an unknown state or
+   unsupported device, 0 indicates the coolant device is OFF and 1
+   indicates the device is ON.
+
+.. _var_coolnt:
+.. index:: Variables; $COOLNT
+
++------------------+------------------------------------------------+
+| **$COOLNT**      | Primary COOLNT status name (OFF, FLOOD, MIST…) |
+|                  |                                                |
+|                  | Type: Any, Read/Write                          |
++------------------+------------------------------------------------+
+
+   This variable contains the current primary coolant status in the form
+   of a minor word, a major word or a sequence of minor and/or major
+   words. It will be one of the values: OFF, FLOOD, MIST, TAPKUL, THRU
+   or a custom coolant keyword or sequence of keywords as defined in
+   QUEST.
+
+.. _var_cooltyp:
+.. index:: Variables; $COOLTYP
+
++------------------+------------------------------------------------------+
+| **$COOLTYP**     | Primary COOLNT status type (0:OFF, 1:FLOOD, 2:MIST…) |
+|                  |                                                      |
+|                  | Type: Numeric, Read/Write                            |
++------------------+------------------------------------------------------+
+
+   This variable contains the current primary coolant status in the form
+   of a number. It has a value of 0 for OFF, 1:FLOOD, 2:MIST, 3:TAPKUL,
+   4:THRU or the values 5-9 for custom coolant types.
+
+.. _var_f:
+.. index:: Variables; $F
+
++------------------+------------------------------------------+
+| **$F**           | Current feed rate in the current mode    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current feed rate in the current mode of
+   operation.
+
+.. _var_fmode:
+.. index:: Variables; $FMODE
+
++------------------+---------------------------------------------------+
+| **$FMODE**       | Feed rate mode. (–1:? 0:uPM 1:uPR 2:inverse time) |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   This variable contains the current feed rate mode. If the value is –1
+   then the mode is currently unknown.
+   Setting this variable changes the output feed rate mode, it does not change
+   the input feed rate mode and units specified in the CL file.
+
+.. _var_hpcool:
+.. index:: Variables; $HPCOOL
+
++------------------+---------------------------------------------------+
+| **$HPCOOL**      | High pressure coolant status (–1:NA, 0:OFF, 1:ON) |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   This variable contains the state of the high pressure coolant pump.
+   It has a value of –1:unknown state or unsupported device, 0:OFF and
+   1:ON.
+
+.. _var_maxprssur:
+.. index:: Variables; $MAXPRSSUR
+
++------------------+------------------------------------------+
+| **$MAXPRSSUR**   | Maximum coolant pressure (0:NA)          |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable sets the maximum permitted coolant pressure in the units
+   of pressure as defined in QUEST. This limits the pressure that can be
+   defined via the COOLNT/PRSSUR command.
+   Set this variable to 0 (zero) to reset the maximum pressure to the device
+   upper limit as defined in QUEST.
+
+.. _var_maxrpm:
+.. index:: Variables; $MAXRPM
+
++------------------+------------------------------------------+
+| **$MAXRPM**      | Current maximum RPM setting              |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current spindle speed maximum revolutions
+   per minute. Setting $MAXRPM will override the maximum RPM for the current gear and
+   spindle, but will not output NC codes to set the maximum RPM at the machine.
+   Use the SPINDL/MAXRPM command to both set the maximum and output appropriate NC codes.
+
+.. _var_prssur:
+.. index:: Variables; $PRSSUR
+
++------------------+------------------------------------------+
+| **$PRSSUR**      | Current coolant pressure                 |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current coolant pressure in the units of
+   pressure as defined in QUEST.
+
+.. _var_s:
+.. index:: Variables; $S
+
++------------------+-------------------------------------------+
+| **$S**           | Current spindle speed in the current mode |
+|                  |                                           |
+|                  | Type: Numeric, Read/Write                 |
++------------------+-------------------------------------------+
+
+   This variable contains the current spindle speed in the current mode
+   of operation. If the spindle is off then the value will be zero (0).
+   Setting $S sets both $SR and $SS.
+
+.. _var_sdir:
+.. index:: Variables; $SDIR
+
++------------------+------------------------------------------+
+| **$SDIR**        | Spindle direction. (0:? 1:CLW 2:CCLW)    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current spindle direction. If the value is
+   zero, then the direction is unknown. Setting this variable to zero
+   does not stop the spindle.
+
+.. _var_sgmax:
+.. index:: Variables; $SGMAX
+
++------------------+------------------------------------------+
+| **$SGMAX**       | Spindle gear maximum.                    |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This array contains the maximum spindle speed for each gear, in the
+   form $SGMAX(*gear*). A value of 0 (zero) is returned if the gear is
+   not defined. A maximum of 10 gears are supported.
+
+.. _var_sgmin:
+.. index:: Variables; $SGMIN
+
++------------------+------------------------------------------+
+| **$SGMIN**       | Spindle gear minimum.                    |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This array contains the minimum spindle speed for each gear, in the
+   form $SGMIN(*gear*). A value of 0 (zero) is returned if the gear is
+   not defined. A maximum of 10 gears are supported.
+
+.. _var_smode:
+.. index:: Variables; $SMODE
+
++------------------+------------------------------------------+
+| **$SMODE**       | Spindle mode. (0:Off 1:SFM 2:RPM 3:SMM)  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current spindle mode. Setting this
+   variable to a non zero value sets the current output mode. Set it to
+   zero to indicate a stopped spindle.
+
+.. _var_sr:
+.. index:: Variables; $SR
+
++------------------+------------------------------------------+
+| **$SR**          | Current spindle speed in RPM             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current spindle speed in revolutions per
+   minute. If the spindle is off then the value will be zero (0).
+
+.. _var_srange:
+.. index:: Variables; $SRANGE
+
++------------------+-------------------------------------------------------+
+| **$SRANGE**      | Current spindle gear number. (–1:?, 1-10:gear number) |
+|                  |                                                       |
+|                  | Type: Numeric, Read/Write                             |
++------------------+-------------------------------------------------------+
+
+   This variable contains the current gear number specified by the range
+   option of the SPINDL command. Set the range to –1 to force a range
+   change with the next SPINDL command.
+
+.. _var_ss:
+.. index:: Variables; $SS
+
++------------------+------------------------------------------+
+| **$SS**          | Current spindle speed in SFM or SMM      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the current spindle speed in surface feet per
+   minute or surface meters per minute. If the spindle is off then the
+   value will be zero (0).
