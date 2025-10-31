@@ -1,0 +1,22 @@
+Console Trace
+-------------
+
+This window displays messages from the system including any warnings,
+errors or messages to the operator. It also contains the message to
+notify the completion of the process.
+
+After the window is opened, it will record in a buffer all the lines up
+to the number defined in the **Console** field of **Number of Lines to
+Record** in
+`Tools»Preferences»Trace <../menus/tools/tools_preferences.html>`__, so
+you can use the vertical scroll bar in the window to review the process.
+At any moment, you can resize the window, minimize it, or close it. If
+the window is closed, all the records previously recorded will be
+erased.
+
+Note that closing this window may speed up CERUN execution.
+
+|image1|
+
+.. |image1| image:: ./media/0754ca5952e63ed2de8805bd0ac76da563c54b2c.gif
+
