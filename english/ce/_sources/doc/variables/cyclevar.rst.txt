@@ -1,0 +1,489 @@
+.. _var_cyapt:
+.. index:: Variables; $CYAPT
+.. _var_cycafl:
+.. index:: Variables; $CYCAFL
+.. _var_cyclrc:
+.. index:: Variables; $CYCLRC
+.. _var_cyclrs:
+.. index:: Variables; $CYCLRS
+.. _var_cyend:
+.. index:: Variables; $CYEND
+.. _var_cyinvr:
+.. index:: Variables; $CYINVR
+.. _var_cymultrd:
+.. index:: Variables; $CYMULTRD
+.. _var_cyrpto:
+.. index:: Variables; $CYRPTO
+.. _var_cytime:
+.. index:: Variables; $CYTIME
+
+Automated Canned Cycle Variables
+================================
+
+Cycle variables are classified as drilling (reaming, tapping, etc.) and threading.
+The :ref:`Drill Cycle variables<drill_cycle_variables>` with one exception start with the characters $CY;
+the :ref:`Thread Cycle variables<thread_cycle_variables>` all start with the characters $TH.
+
+.. _drill_cycle_variables:
+
+Drill Cycle Variables
+---------------------
+
+.. _var_crmode:
+.. index:: Variables; $CRMODE
+
++------------------+----------------------------------------------------+
+| **$CRMODE**      | Selected retract plane. (<0:? 0:Initial 1:R-Plane) |
+|                  |                                                    |
+|                  | Type: Numeric, Read/Write                          |
++------------------+----------------------------------------------------+
+
+   This variable contains the selected retract plane for cycles. If the
+   value is less than one (1) then the retract plane is unknown.
+
+.. _var_cyclro:
+.. index:: Variables; $CYCLRO
+
++------------------+------------------------------------------+
+| **$CYCLRO**      | Cycle ORIENT clearance distance          |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the REG_CYCLE_BORE_JOG ORIENT type cycle
+   clearance specified on the last BORE with ORIENT or BORE-BACK cycle.
+   If neither cycle has been processed, the variable will be set to zero.
+
+.. _var_cyclrp:
+.. index:: Variables; $CYCLRP
+
++------------------+------------------------------------------+
+| **$CYCLRP**      | Cycle standard clearance                 |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the REG_CYCLE_CLEAR cycle clearance specified on
+   the last cycle. If a cycle has not yet been processed, the variable
+   will be set to zero.
+
+.. _var_cyclrx:
+.. index:: Variables; $CYCLRX
+.. _var_cyclry:
+.. index:: Variables; $CYCLRY
+.. _var_cyclrz:
+.. index:: Variables; $CYCLRZ
+
++------------------+------------------------------------------+
+| **$CYCLR{XYZ}**  | Cycle ORIENT *xyz* clearance             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   These variables hold the REG_CYCLE_BORE_JOG\_[XYZ] *xyz* components
+   of the ORIENT type cycle clearance specified on the last BORE with
+   ORIENT or BORE-BACK cycle. If neither cycle has been processed, these
+   variables will be set to $NULL.
+
+.. _var_cydecr:
+.. index:: Variables; $CYDECR
+
++------------------+------------------------------------------+
+| **$CYDECR**      | Cycle DECR value                         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the REG_CYCLE_STEP_DECR cycle step DECR value
+   specified on the last DEEP or BRKCHP cycle. If neither cycle type has
+   been processed, the variable will be set to zero.
+
+.. _var_cydir:
+.. index:: Variables; $CYDIR
+
++------------------+--------------------------------------------------+
+| **$CYDIR**       | TAP cycle in-feed direction (0:?, 1:CLW, 2:CCLW) |
+|                  |                                                  |
+|                  | Type: Numeric, Read-only                         |
++------------------+--------------------------------------------------+
+
+   This read-only variable holds the TAP cycle in-feed spindle
+   direction. It is only valid for TAP cycles (i.e., floating, rigid,
+   deep and chip-breaking).
+
+.. _var_cydpth:
+.. index:: Variables; $CYDPTH
+
++------------------+------------------------------------------+
+| **$CYDPTH**      | Total cycle depth                        |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the REG_CYCLE_DEPTH\_[XYZE] cycle depth specified
+   on the last cycle. If a cycle has not yet been processed, the
+   variable will be set to zero.
+
+.. _var_cydwel:
+.. index:: Variables; $CYDWEL
+
++------------------+------------------------------------------+
+| **$CYDWEL**      | Cycle dwell time                         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle dwell time at the full cycle depth.
+   If the value is positive, it represents seconds.
+   If it is negative, it represents revolutions.
+   This variable affects Virtual Machine simulation and cycle timing.
+
+.. _var_cydwls:
+.. index:: Variables; $CYDWLS
+
++------------------+------------------------------------------+
+| **$CYDWLS**      | Cycle step dwell time                    |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle dwell time at each step in a DEEP or
+   BRKCHP cycle.
+   If the value is positive, it represents seconds.
+   If it is negative, it represents revolutions.
+   This variable affects
+   Virtual Machine simulation and cycle timing.
+
+.. _var_cydwlt:
+.. index:: Variables; $CYDWLT
+
++------------------+------------------------------------------+
+| **$CYDWLT**      | Cycle top dwell time                     |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle dwell time at each retract in a DEEP
+   cycle and following the thread reversal retract of a TAP cycle.
+   If the value is positive, it represents seconds.
+   If it is negative, it represents revolutions.
+   This variable affects
+   Virtual Machine simulation and cycle timing.
+
+.. _var_cyfedt:
+.. index:: Variables; $CYFEDT
+
++------------------+------------------------------------------+
+| **$CYFEDT**      | Cycle feed rate type                     |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle feed rate type.
+   Valid values are 1=IPM, 2=IPR, 3=MMPM, 4=MMPR, 5=PERMIN, 6=PERREV.
+   If a cycle has not yet been processed, the variable will be set to zero.
+
+.. _var_cyfedv:
+.. index:: Variables; $CYFEDV
+
++------------------+------------------------------------------+
+| **$CYFEDV**      | Cycle feed rate                          |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle feed rate.
+   If a cycle has not yet been processed, the variable will be set to zero.
+
+.. _var_cyincr:
+.. index:: Variables; $CYINCR
+
++------------------+------------------------------------------+
+| **$CYINCR**      | Cycle increment                          |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the REG_CYCLE_STEP cycle increment value.
+   If multiple increments were coded on the cycle block,
+   this variable represents the first increment.
+   If a cycle has not yet been processed, the variable will be set to $NULL.
+
+.. _var_cymch:
+.. index:: Variables; $CYMCH
+
++------------------+------------------------------------------+
+| **$CYMCH**       | Machine in-cycle flag                    |
+|                  |                                          |
+|                  | Type: Logical, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable is set to $TRUE when a CYCLE block
+   processed.
+   It is set to $FALSE when the cycle is canceled.
+
+.. _var_cymin:
+.. index:: Variables; $CYMIN
+
++------------------+------------------------------------------+
+| **$CYMIN**       | Cycle minimum step value                 |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the minimum drill step amount supported by the
+   control. This is relevant when using the
+   step decrement form
+   of the DEEP and BRKCHP cycles.
+   The minimum drill step value defined using QUEST can be changed by
+   setting the $CYMIN variable.
+
+.. _var_cyornt:
+.. index:: Variables; $CYORNT
+
++------------------+------------------------------------------+
+| **$CYORNT**      | Cycle ORIENT angle                       |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle ORIENT angle.
+   It is valid on the BORE with ORIENT, BORE-BACK, TAP-RIGID, TAP-DEEP and TAP-BRKCHP cycles.
+   If none of these cycles has been processed, the variable will be set to 0.
+
+.. _var_cyratio:
+.. index:: Variables; $CYRATIO
+
++------------------+------------------------------------------+
+| **$CYRATIO**     | Cycle RATIO value                        |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle RATIO value and is valid for TAP and REAM cycle types.
+   If not set, the variable has the value one (1).
+
+.. _var_cyretn:
+.. index:: Variables; $CYRETN
+
++------------------+------------------------------------------+
+| **$CYRETN**      | Cycle RETURN value                       |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle RETURN (i.e. retract) value and is
+   valid for all cycle types.
+   If a cycle has not yet been processed, the variable will be set to $NULL.
+
+.. _var_cyrigid:
+.. index:: Variables; $CYRIGID
+
++------------------+----------------------------------------------------------+
+| **$CYRIGID**     | Rigid cycle activation state (-1:?, 0:off, 1:on, 2:code) |
+|                  |                                                          |
+|                  | Type: Numeric, Read/Write                                |
++------------------+----------------------------------------------------------+
+
+   This variable indicates the rigid tap cycle activation state.
+   It is set to two (2) when a rigid tap activation code is
+   processed, or to one (1) when a rigid tap cycle is processed
+   that does not require a rigid activation code.
+   It is set to zero (0) when rigid tapping is canceled.
+
+.. _var_cytype:
+.. index:: Variables; $CYTYPE
+
++------------------+------------------------------------------+
+| **$CYTYPE**      | Cycle type                               |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the cycle type. Valid values are:
+
+   : –2: Unknown cycle type
+   : –1: NOMORE
+   :  0: OFF
+   :  1: DRILL or CSINK
+   :  2:  FACE or DRILL with dwell or CSINK with dwell
+   :  3:  TAP-FLOAT
+   :  4:  Reverse TAP-FLOAT
+   :  5:  BORE
+   :  6:  BORE with dwell
+   :  7:  BORE with ORIENT
+   :  8:  BORE-BACK
+   :  9:  REAM
+   : 10: REAM with dwell
+   : 11: DRILL-DEEP
+   : 12: DRILL-BRKCHP
+   : 13: THRU
+   : 14: TAP-RIGIDl
+   : 15: Reverse TAP-RIGID
+   : 16: TAP-DEEP
+   : 17: Reverse TAP-DEEP
+   : 18: TAP-BRKCHP
+   : 19: Reverse TAP-BRKCHP
+   :100: MANUAL
+
+.. _thread_cycle_variables:
+
+Thread Cycle Variables
+----------------------
+
+.. _var_thchfa:
+.. index:: Variables; $THCHFA
+
++------------------+------------------------------------------+
+| **$THCHFA**      | Chamfer angle                            |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the thread chamfer
+   angle.
+
+.. _var_thchfl:
+.. index:: Variables; $THCHFL
+
++------------------+------------------------------------------+
+| **$THCHFL**      | Chamfer length                           |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the thread chamfer
+   length.
+
+.. _var_thchft:
+.. index:: Variables; $THCHFT
+
++------------------+------------------------------------------+
+| **$THCHFT**      | Chamfer type (0:off, 1:on)               |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable indicates whether a thread chamfer is enabled.
+
+.. _var_thcuts:
+.. index:: Variables; $THCUTS
+
++------------------+------------------------------------------+
+| **$THCUTS**      | Number of regular passes                 |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of regular
+   passes for the thread cycle.
+
+.. _var_thdpth:
+.. index:: Variables; $THDPTH
+
++------------------+------------------------------------------+
+| **$THDPTH**      | Thread depth                             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the total thread
+   depth.
+
+.. _var_thfina:
+.. index:: Variables; $THFINA
+
++------------------+------------------------------------------+
+| **$THFINA**      | Finish allowance                         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the amount of finish
+   allowance.
+
+.. _var_thfinc:
+.. index:: Variables; $THFINC
+
++------------------+------------------------------------------+
+| **$THFINC**      | Number of finish passes                  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of finish
+   passes.
+
+.. _var_thmin:
+.. index:: Variables; $THMIN
+
++------------------+------------------------------------------+
+| **$THMIN**       | Thread minimum step value                |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the minimum thread step amount supported by
+   the control. This is relevant when using the constant cross section
+   in-feed method. The minimum thread step value defined using QUEST can
+   be changed by setting the $THMIN variable.
+
+.. _var_thmode:
+.. index:: Variables; $THMODE
+
++------------------+------------------------------------------+
+| **$THMODE**      | Thread in-feed mode (0-4)                |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the thread in-feed
+   mode.
+   Valid values range from 0 through 4.
+
+   :0: constant amount, along CUTANG (default)
+   :1: constant amount, single edge
+   :2: constant amount, alternating edges
+   :3: constant depth, single edge
+   :4: constant depth, alternating edges
+
+.. _var_thnose:
+.. index:: Variables; $THNOSE
+
++------------------+------------------------------------------+
+| **$THNOSE**      | Tool nose angle                          |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the tool nose
+   angle.
+
+.. _var_thstep:
+.. index:: Variables; $THSTEP
+
++------------------+------------------------------------------+
+| **$THSTEP**      | Thread first step value                  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the first thread step
+   amount.
+
+.. _var_thtype:
+.. index:: Variables; $THTYPE
+
++------------------+------------------------------------------+
+| **$THTYPE**      | Thread cycle type                        |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable holds the machine cycle type. Valid values are:
+
+   :  0:   Off
+   :101: Single thread cut, turning
+   :102: Single thread cut, facing
+   :201: Multiple thread cut, turning
+   :202: Multiple thread cut, facing
