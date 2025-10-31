@@ -1,0 +1,267 @@
+.. _start_quest:
+
+Starting QUEST
+==============
+
+This section explains how to start QUEST from the desktop as well as
+from the Windows command prompt.
+
+Starting QUEST from the Desktop
+-------------------------------
+
+QUEST may be started either from the Start menu or from the ICAM
+Portal.
+
+To start QUEST from the Start menu, first locate the “ICAM V26 x64”
+Start menu, then select “Quest V26”. To start QUEST from the
+portal, select the Products pane and click on the “ICAM QUEST
+Developer” tile or icon.
+
+You can drag-and-drop dedicated post-processors and exported
+post-processors onto a running portal application or the portal desktop icon.
+QUEST will load the post-processors into the default database (if one exists).
+You may also drag-and-drop macro interface kit source code, in which case
+QUEST will compile it for use with the GENER macro-before and macro-after options.
+
+Starting QUEST from a Command Prompt
+------------------------------------
+
+QUEST can be started from a Windows command prompt by first setting
+the current working directory to the Icam Post V26 installation
+directory (i.e., C:\\Program Files\\ICAM\\V26) and then typing the
+following command:
+
+   :math:`\textbf{quest }
+   \Big[\,\mathit{file}\textnormal{-}\mathit{name}\,
+   \big[\,\mathit{file}\textnormal{-}\mathit{name…}\,\big]\,\Big] \;
+   \mathit{qualifiers}`
+
+You can optionally specify one or more files on the QUEST command
+line, to have QUEST perform special actions in a “batch” mode of
+operation. QUEST looks at the content of each file specified and then
+performs the appropriate action. The full QUEST interface is not
+activated when QUEST is run in a batch mode. The files that QUEST
+recognizes for batch operation are:
+
+-  Macro kit files (*mac* file type) are compiled to their *obj* binary
+   equivalent.
+
+-  Dedicated post-processors (*dp*) are loaded into the default or
+   specified database.
+
+-  Exported post-processors (*dmp*) are loaded into the default or
+   specified database.
+
+If files are not specified on the QUEST command line, the full QUEST
+interface will be started, which you can use to maintain and create
+post-processors.
+
+.. _quest_qualifiers:
+
+qualifiers
+~~~~~~~~~~
+
+The command line qualifiers are keyword value pairs separated by an
+**=** (equal sign). The qualifier keywords must be preceded with a
+**/** (forward slash). The following is an alphabetical list of
+optional command qualifiers and their usage:
+
+:math:`\textbf{/dbf}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   Specifies the database file name. By default, the database is named
+   campost.dbf and resides in the work subdirectory of the *icam_appdata*
+   directory (see :ref:`“Configuration Storage and Application Data”<configuration_storage>`).
+   The *icam_dbf* environment variable can also be used to define the database.
+
+:math:`\textbf{/def}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   Specifies which definition file to use. By default, the definition
+   file is named ICAM.DEF and resides in the *icam_appdata* directory.
+   If a directory path is not specified with the file name, then QUEST
+   will search for the file as described :ref:`here<configuration_storage>`.
+
+:math:`\textbf{/ef}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   This qualifier specifies the name of a log file echoing the error
+   messages generated during the execution of QUEST.
+
+:math:`\textbf{/kit}\big[\mathtt{=}\mathit{name}\,\big]`
+
+   Specifies the name of a CAM interface kit to use (see the
+   :ref:`“CAD/CAM System Interfaces”<annex_cadcamsystem>` annex for interface kit
+   details). QUEST only uses the interface kit to determine the Major
+   and Minor words that are defined by that interface. The interface kit
+   being used can be easily changed in QUEST by selecting a kit name
+   from the drop-down list shown in the status bar.
+
+   This qualifier will override the *interface_kit* symbol if specified
+   in the ICAM.DEF file. Specify it without a name to run without an
+   interface kit, regardless of the *interface_kit* symbol setting.
+
+:math:`\textbf{/post}\mathtt{=}\mathit{post}\textnormal{-}\mathit{name}`
+
+   Specifies the name of the post-processor that should be loaded into
+   memory when QUEST starts. By default, QUEST creates a new empty
+   “NONAME,1” post-processor at the start of processing. This qualifier
+   is not permitted when running QUEST in a batch mode of operation.
+
+:math:`\textbf{/words}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   If specified, QUEST will use the words list supplied. The words list
+   defines Major and Minor words and their associated codes. This list
+   can be created and modified from the QUEST Tools»Words Manager
+   menu-bar selection. By default, QUEST uses
+   the words file defined by the interface kit, or if none, then from
+   a file named *dwords.dat* in the *icam_appdata* directory.
+
+   This qualifier will override the *words* symbol if specified in the
+   ICAM.DEF file.
+
+.. _quest_precompiling_macros:
+
+Pre-Compiling Macros for GENER
+------------------------------
+
+QUEST can be used in a batch mode of operation to compile
+user-defined macros, which are then used by the GENER macro-before
+and macro-after feature. These are macros that are applied to all
+post-processors whenever GENER runs, using the **mbdef**
+(macro-before) and **madef** (macro-after) definition file symbols.
+This capability can make commonly used macros available to all post-processors
+at run-time (i.e., when GENER runs), rather than
+individually including the macros into each post-processor.
+
+The use of compiled macros is optional. At the cost of an
+insignificant overhead in processing time, GENER can also accept
+macro source for the macro-before and macro-after feature. In this
+case GENER will compile the macros at the start of processing.
+
+Each user-defined macro in the macro source (.\ *mac*) input file
+must be terminated by an ENDMAC command. All macros in the file are
+compiled together and output to a corresponding binary compiled
+object (.\ *obj*) output file. The binary object file is
+cross-platform compatible, meaning that an object file created on one
+computer type can be used on any other ICAM supported computer type.
+The binary object file however is not cross-version compatible,
+meaning that an object file compiled with QUEST V26 can not be used
+with any other version of Icam Post.
+
+Macros can be compiled simply by dragging and by dropping a file
+containing the macro text onto a running portal application or the
+portal desktop icon. The compiled *obj* file and a macro compiler
+listing will both be created with the same file name and in the same
+directory as the macro source file.
+
+The macro compiler can also be executed from a Windows command prompt
+by first setting the current working directory to the Icam Post V26
+installation directory (i.e., C:\\Program Files\\ICAM\\V26) and then
+typing either of the following commands:
+
+   :math:`\textbf{quest } \,
+   \mathit{file}\textnormal{-}\mathit{name}\ \,
+   \big[\,\mathit{file}\textnormal{-}\mathit{name…}\,\big] \;
+   \mathit{qualifiers}`
+
+   :math:`\textbf{quest }
+   \textbf{/compile}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name} \;
+   \big[\, \textbf{/object}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name} \,\big] \;
+   \mathit{qualifiers}`
+
+The command line qualifiers are keyword value pairs separated by an
+**=** (equal sign). The qualifier keywords must be preceded with a
+**/** (forward slash). The **compile** and **object** qualifiers are
+an older optional way of telling QUEST to compile macros for GENER
+interface kits. Do not mix the old and new methods on a single
+command line:
+
+:math:`\textbf{/compile}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   Specifies the name of the macro source input file. If a file type is
+   omitted, QUEST will assume a file type of *mac*.
+
+:math:`\textbf{/object}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   Specifies the name of the compiled macro output file. By default, the
+   compiled output is written to a file having the same name as the
+   macro source file with a file type of *obj*.
+
+See :ref:`“QUEST Qualifiers”<quest_qualifiers>` above for an
+alphabetical list of optional QUEST compiler qualifiers and their
+usage.
+
+The results of the compilation will be written to the screen. A full
+compilation listing will also be written to a file having the same
+name as the macro source file, with a file type of *lis*.
+
+Importing Post-Processors
+-------------------------------
+
+QUEST can be used in a batch mode of operation to import dedicated
+post-processors (*dp* file type) and exported post-processors (*dmp*
+file type) into the default or specified database. Post-processors
+can be imported simply by dragging and by dropping the post-processor
+file (*dp* or *dmp*) onto a running portal application or the portal
+desktop icon.
+
+The import operation can also be executed from a Windows command
+prompt by first setting the current working directory to the Icam Post
+V26 installation directory (i.e., C:\\Program Files\\ICAM\\V26) and
+then typing either of the following commands:
+
+   :math:`\textbf{quest } \,
+   \mathit{file}\textnormal{-}\mathit{name}\ \,
+   \big[\,\mathit{file}\textnormal{-}\mathit{name…}\,\big] \;
+   \mathit{qualifiers}`
+
+   :math:`\textbf{quest }
+   \textbf{/dp}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name} \;\,
+   \mathit{qualifiers}`
+
+The command line qualifiers are keyword value pairs separated by an
+**=** (equal sign). The qualifier keywords must be preceded with a
+**/** (forward slash). The **dp** qualifier is an older optional way
+of telling QUEST to import a post-processor. Do not mix the old and
+new methods on a single command line:
+
+:math:`\textbf{/dp}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   Specifies the name of the post-processor file. If a file type is
+   omitted, QUEST will assume a file type of *dp*.
+
+See :ref:`“QUEST Qualifiers”<quest_qualifiers>` above for an
+alphabetical list of optional QUEST qualifiers and their usage.
+
+Creating a Database Listing
+---------------------------
+
+QUEST can create a database listing, which you can use for your own
+purposes. The database listing contains the names of generated
+post-processors and control emulators, listed one per line with their
+associated titles. The listing also contains the names of any Virtual
+Machine models present in the database (models do not have titles).
+From a Windows command prompt first set the current working directory
+to the Icam Post V26 installation directory (i.e., C:\\Program Files\\ICAM\\V26)
+and then type the following command:
+
+   :math:`\textbf{quest }
+   \textbf{/list}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name} \;
+   \big[\,\mathit{match\_pattern}\,\big] \;
+   \mathit{qualifiers}`
+
+:math:`\textbf{/list}\mathtt{=}\mathit{file}\textnormal{-}\mathit{name}`
+
+   The **list** qualifier must be specified to obtain a database
+   listing. The optional file name specifies the name of the database
+   listing output file. QUEST will add a file type of *lis* if missing
+   from the file name. By default, the database listing is written to a
+   scrolling window.
+
+The **match_pattern** is a regular expression, in the same style as
+is used with the $FMATCH macro command, which can optionally be used
+to list only those objects whose database descriptors match
+the specified criteria.
+For example, a match pattern of ``M3`` would list only generated
+post-processors and control emulators for 3-axis milling machines.
+
+See :ref:`“QUEST Qualifiers”<quest_qualifiers>` above for an
+alphabetical list of optional QUEST qualifiers and their usage.
