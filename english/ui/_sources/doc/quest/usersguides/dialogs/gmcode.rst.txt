@@ -1,0 +1,35 @@
+G/M Code Question Panel (Graphical Questions & Wizard)
+------------------------------------------------------
+
+|image1|
+
+This panel simplifies answering of a [G/M,ALT,NA] code question. This
+panel is only accessible by using the graphical question mode or by
+using one of the two wizards. Depending on the question choices, some
+answer type (**G**,\ **M**,\ **ALT**,\ **NA**,\ **Simulate**) will be
+disabled.
+
+Answer Type:
+------------
+
++----------------+----------------------------------------------------+
+| **G** or **M** | Use the panel to enter the code value if between 0 |
+|                | and 99, else enter the code value in the bottom    |
+|                | “Value” editbox if it is larger than 99.           |
++----------------+----------------------------------------------------+
+| **ALT**        | Choose a register from the list and enter a value  |
+|                | if needed at the bottom of the dialog. You can     |
+|                | either enter a numeric value by selecting the      |
+|                | “Value” radio button or a string value by          |
+|                | selecting the “String” one.                        |
++----------------+----------------------------------------------------+
+| **NA**         | Clicking on this one will automatically exit the   |
+|                | panel and answer “NA” to the question.             |
++----------------+----------------------------------------------------+
+| **Simulate**   | Clicking on this one will automatically exit the   |
+|                | panel and answer “Simulate” to the question.       |
++----------------+----------------------------------------------------+
+
+.. |image1| image:: ./media/794df0bda50d4af4271a9b19d5861fe2d3444799.gif
+
+
