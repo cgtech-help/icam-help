@@ -1,0 +1,54 @@
+Machining Time Variables
+========================
+
+.. _var_fedtim:
+.. index:: Variables; $FEDTIM
+
++------------------+------------------------------------------+
+| **$FEDTIM**      | Machining time in feed rate mode         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the current accumulated feed time in seconds. For
+   lathes with more than one head, the machining time refers to the time
+   accumulated by the current head.
+
+.. _var_idltim:
+.. index:: Variables; $IDLTIM
+
++------------------+------------------------------------------+
+| **$IDLTIM**      | Idle machining time                      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the current accumulated idle time in seconds. It
+   is valid for 4-axis lathes only. The machining time refers to the
+   idle time accumulated by the current head.
+
+.. _var_mistim:
+.. index:: Variables; $MISTIM
+
++------------------+------------------------------------------+
+| **$MISTIM**      | Miscellaneous machining time             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the current accumulated miscellaneous time in
+   seconds. For lathes with more than one head, the machining time
+   refers to the time accumulated by the current head.
+
+.. _var_raptim:
+.. index:: Variables; $RAPTIM
+
++------------------+------------------------------------------+
+| **$RAPTIM**      | Machining time in rapid mode             |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable holds the current accumulated rapid positioning time in
+   seconds. For lathes with more than one head, the machining time
+   refers to the time accumulated by the current head.
