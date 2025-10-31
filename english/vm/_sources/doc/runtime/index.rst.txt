@@ -1,0 +1,44 @@
+.. _vm_runtime:
+
+Using VM with GENER and CERUN
++++++++++++++++++++++++++++++
+
+This section describes how to select Virtual Machine models for use both
+with Icam Post GENER and with Control Emulator CERUN. It explains the
+post-processor command interface that can be used with GENER to control
+the simulation. It also describes a common user interface (UI) made
+available by both GENER and CERUN that you can use to view and
+manipulate the model during the simulation, as well as to define cutting
+tools, holding fixtures, finish part, rough stock, and workpiece and
+tool compensations used to validate the simulation.
+
+VM provides the ability to test for axis overtravel and for collisions
+between various components of the machine and those of the part being
+manufactured. GENER and CERUN use this information to report problems,
+and GENER can use this information in some instances to correct problems
+*before* they occur.
+
+The following is a list of things you should know to effectively use VM.
+Each of these topics is discussed in the sections that follow.
+
+.. toctree::
+   :titlesonly:
+
+   selectvm
+   controllingvm
+   actsimwindow
+   adjustlight
+   addpartfixstock
+   setfixcomp
+   addtooldef
+   settoolcomp
+   monvmres
+
+The steps outlined in this section are not all necessary, but the
+completeness and accuracy of the simulation depends on complete and
+accurate data. At a minimum, tool compensation and fixture compensation
+are needed to validate travel and machine related collisions. At a
+minimum, tool definitions are needed to validate tool related
+collisions. Part and fixture definitions improve the collision detection
+process. Stock definitions are required to take advantage of material
+removal simulation for part verification purposes.
