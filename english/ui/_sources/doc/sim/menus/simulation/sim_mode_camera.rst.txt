@@ -1,0 +1,28 @@
+Simulation»Mode»Camera
+~~~~~~~~~~~~~~~~~~~~~~
+
+When the Camera mode menu bar selection is active, holding the
+left-mouse button down while moving the mouse changes the orientation of
+the camera. The cursor appears as a four-way arrow when in Camera mode.
+This mode can also be activated by selecting the circled button in the
+VM Mode toolbar above. While in Camera mode, you can press and hold the
+Ctrl key to temporarily switch to Selection mode. This can be used to
+quickly select objects to rotate about or to attach the camera to.
+
+There are two types of camera rotation.
+
+#. The default rotation is to keep the camera position fixed but to
+   change where the camera is aimed. This is similar to how we rotate
+   our head to look around a scene.
+#. You can hold the Shift key to change how the camera rotates. When
+   Shift is pressed, the camera rotates around a point in space. This
+   rotation point is by default the center of the world or the selected
+   VM Grid object, but can be changed by selecting any object and
+   choosing Simulation»Camera»Pivot (Ctrl P). As a quick shortcut,
+   double-clicking an object in a simulation window will set that object
+   as the Pivot center and fit the object in the window.
+
+If you prefer the second form of camera rotation by default, clear the
+“Default to Look-Around camera” check-box in the Simulation»Options
+(Ctrl Alt O) dialog.
+
