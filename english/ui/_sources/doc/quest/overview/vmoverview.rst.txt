@@ -1,0 +1,76 @@
+Virtual Machine Overview
+========================
+
+The ICAM Virtual Machine (VM) simulator graphically depicts the
+operation and motions of a CNC machine during post processing. VM
+provides feedback to CAM-POST (the post processor), which can use this
+information to provide collision detection and avoidance.
+
+Machine simulation includes the following:
+
+-  A computerized model of the machine
+-  A CNC control simulator
+-  Tool, Part, Stock and Fixture definitions
+
+The machine model is developed and maintained using CAM-POST QUEST. The
+resultant data is stored in a CAM-POST database (.dbf) file with the
+post processor data, or externally in a binary "dmp" file format. The
+model describes the kinematics and the physical characteristics of the
+machine. The model is in an ICAM proprietary format. Models from other
+popular machine simulation systems cannot be imported at the present
+time.
+
+| VM includes a virtual controller that is fully integrated with the
+  post processor. The virtual controller requires no additional logic to
+  manage the simulation. The controller automatically handles
+  positioning, interpolating and canned cycle motions, to the extent
+  supported by the real machine. It simulates work piece and tool
+  compensation features to more accurately test collisions using
+  expected tooling data. The VM controller also provides features to
+  move and test machine axes.
+| |image1|
+
+| Tool definitions follow the ISO standard 7-parameter cutter format,
+  which at the present time limits simulation to milling applications
+  only. Tool holders are defined by a swept 2D profile. Tools and
+  holders can be automatically or manually associated with each other.
+  The finished part, rough stock and fixtures can all be defined using
+  simple primitives and/or by importing STL files. VM does not perform
+  material removal simulation (commonly called part verification). VM
+  does however check for collisions between the machine, tooling, part,
+  stock and fixtures.
+| |image2|
+
+VM serves two primary purposes:
+
+-  Collision detection and avoidance during post processing
+-  Visual confirmation of kinematics during post processor development
+
+CAM-POST QUEST provides additional features used to define the
+kinematics and physical representation of a CNC machine. This data is
+referred to as the "model" which can be stored in the database with its
+associated post processor. A model can be, but need not be, associated
+with a single post processor1. In addition to the machine, the model
+designer can define standard viewpoints, lighting (shown below),
+fixtures and tooling.
+
+CAM-POST GENER uses VM to detect and, where possible, avoid collisions.
+Collision detection can account for the effects of work piece and tool
+compensation, given experimental or actual values for compensation
+offsets. Collision detection is a natural part of the look-ahead
+optimizations that GENER performs during path planning, meaning that
+GENER can automatically choose an appropriate tool path to avoid
+collisions. The machine simulation can be displayed in one of the GENER
+output windows, synchronized with other GENER output. Collision
+detection and avoidance can be active even when the simulation is not
+being show, for example, when running GENER in a minimized state.
+
+VM is currently available for Windows NT and compatible systems only.
+
+|image3|
+
+.. |image1| image:: ./media/624cb95fa99a722fa253936f596e9ac8c83a6552.gif
+.. |image2| image:: ./media/9e1b0a7f6a50c0cb4ed9adeb12d752ddc43dada7.gif
+.. |image3| image:: ./media/a84698d3a5b2c808578d3ea192c565e959deee61.gif
+
+
