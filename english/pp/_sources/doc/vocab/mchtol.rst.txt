@@ -1,0 +1,142 @@
+.. _command_mchtol:
+
+The MCHTOL Command :kbd:`[MLPC]`
+================================
+
+The MCHTOL command allows the user to define the acceptable machining
+tolerance, measured as the maximum allowable error from the
+programmed tool path due to machine slide dynamics. It is valid for
+contouring machines, hybrid punch/contouring machines, lathes and
+mills.
+
+The following MCHTOL functions are available:
+
+-  :ref:`“Exact-Stop Machining Tolerance”<mchtol_exact>`
+-  :ref:`“High Speed Machining Tolerance”<mchtol_hs>`
+
+.. _mchtol_exact:
+
+Exact-Stop Machining Tolerance
+------------------------------
+
+Sharp changes of feed rate during corner cutting may result in out of
+tolerance machining due to roundness or overshoot. This is because
+the machine motion will lag the actual commanded motion by some
+amount. Exact stop codes (for example, the G09 code) can be used to
+decelerate all axes (usually to zero) at the end of the move,
+providing a good finish at corners.
+
+   :math:`\textbf{MCHTOL /} \begin{pmatrix}\,\begin{array}{l} \mathit{toler} \\ \textbf{FINE} \\ \textbf{COARSE} \end{array}\,\end{pmatrix}`
+
+The *toler* value specifies the magnitude of allowable error measured in part
+reference units. FINE specifies that the allowable error shall be
+minimized. COARSE specifies that a normal amount of error can be
+tolerated.
+
+.. _mchtol_hs:
+
+High Speed Machining Tolerance
+------------------------------
+
+HSM (high speed machining) implies faster than normal cutting, often
+requiring specialized controllers, machines, tooling and cutting
+fluids. GENER can support HSM controllers and emulate HSM
+capabilities on non-HSM equipped machines. HSM processing is
+restricted to feed interpolation motions only; GENER does not
+account for acceleration and deceleration on rapid positioning
+motions. HSM is not supported for polar interpolation, SmartCUT and
+SmartFEED.
+
+   :math:`\textbf{MCHTOL / CONTUR},
+   \Big[\,\big[\,\textbf{FEED},\big]\,\mathit{toler}\,\Big] \;
+   \big[,\textbf{RAPID}\,\big] \;
+   \big[,\mathtt{<\!options\!>}\,\big]`
+
+   :math:`\textbf{MCHTOL / CONTUR},
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+**[FEED,]** *toler* specifies the magnitude of allowable error measured
+in part reference (CL file) units. This option activates HSM analysis
+and output for cutting motions. Depending on Icam Post QUEST settings
+the result will be a modified tape output featuring HSM adjusted feeds
+(so called emulation mode) or only reported machining time adjusted by
+machine dynamics (so called simulation mode).
+
+**RAPID** option is activating HSM analysis for rapid positioning sequences.
+This mode is available only in HSM Simulation mode that is causing adjusted
+motion time being reported. This option never impacts tape output.
+
+**ON** enables HSM at the last specified tolerance. **OFF** disables the HSM feature.
+
+The **<options>** provide detailed control over the parameters used to
+measure and compensate for machining error. These parameters are
+defined in the post-processor but can be modified on the MCHTOL
+command to simplify calibration of the post-processor.
+
+   :math:`\textbf{OPTION},\textbf{0}`
+
+When emulating HSM, selects machine acceleration.
+
+   :math:`\textbf{OPTION},\textbf{1} \; \big[,\mathit{feed,time,toler}\,\big]`
+
+Selects linear acceleration and optionally specifies the acceleration
+rate as *feed*/*time*. *Toler* specifies the allowable difference
+between the emulated feed curve and the actual machine acceleration,
+in CL units per minute (this parameter must be specified but is
+ignored for true HSM machines).
+
+   :math:`\textbf{OPTION},\textbf{2} \; \big[,\mathit{feed,time,toler,bell}\,\big]`
+
+Selects bell-shaped acceleration and optionally specifies the
+acceleration rate as *feed*/*time*. *Toler* specifies the allowable
+difference between the emulated feed curve and the actual machine
+acceleration, in CL units per minute (this parameter must be
+specified but is ignored for true HSM machines). *Bell* specifies, in
+terms of a percentage (0 to 100), the total amount of time not spent
+at a constant rate of acceleration.
+
+   :math:`\textbf{OPTION},\textbf{3} \; \big[,\mathit{eaccel,toler}\,\big]`
+
+Same as option 2, but specifies the acceleration as a fraction of
+Earth acceleration.
+
+   :math:`\textbf{TYPE},\textbf{1} \!
+   \icamrange{4.6}{1}\! \begin{pmatrix} \!,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{RECALL} \\ \textbf{LINEAR},\mathit{max} \\ \textbf{REV},\mathit{max} \end{array} \end{pmatrix}`
+
+Enables (ON), disables (OFF) or resets to the QUEST default (RECALL)
+the HSM **feed control error** setting. LINEAR,\ *max* defines the
+maximum change in velocity for linear axes (in CL units per minute).
+REV,\ *max* does the same for rotary axes (in degrees per minute).
+
+   :math:`\textbf{TYPE},\textbf{2} \!
+   \icamrange{4.6}{1}\! \begin{pmatrix} \!,\! \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{RECALL} \\ \textbf{LINEAR},\mathit{max} \\ \textbf{REV},\mathit{max} \end{array} \end{pmatrix}`
+
+Enables (ON), disables (OFF) or resets to the QUEST default (RECALL)
+the HSM **acceleration error** setting. LINEAR,\ *max* defines the
+maximum acceleration for linear axes (in CL units per minute).
+REV,\ *max* does the same for rotary axes (in degrees per minute).
+
+   :math:`\textbf{TYPE},\textbf{3},
+   \begin{pmatrix}\begin{array}{l}\textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+Enables (ON) or disables (OFF) the **following error** control
+setting.
+
+   :math:`\textbf{TYPE},\textbf{4},
+   \begin{pmatrix}\begin{array}{l}\textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+Enables (ON) or disables (OFF) the **overshoot table** control
+setting.
+
+   :math:`\textbf{SCAN},
+   \begin{pmatrix}\begin{array}{l}\textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+Enables (ON) or disables (OFF) the **feed-forward scanning** control
+setting.
+
+   :math:`\mathtt{'}string\,\mathtt{'}`
+
+Activates specialized logic to better estimate the machining time and
+velocity for true HSM equipped controllers. Valid strings are:
+*SN840D98* for the Sinumerik 840D; *FNC15M98* for the Fanuc 15-M; and
+*ICAM98* for the default generic calculations.
