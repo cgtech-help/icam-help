@@ -1,0 +1,229 @@
+
+Cutter Compensation Variables
+=============================
+
+.. _var_dcomp:
+.. index:: Variables; $DCOMP
+
++------------------+--------------------------------------------------------------+
+| **$DCOMP**       | Current diameter compensation type (–1:LEFT, 1:RIGHT, 0:OFF) |
+|                  |                                                              |
+|                  | Type: Numeric, Read/Write                                    |
++------------------+--------------------------------------------------------------+
+
+   This variable contains the current tool diameter compensation type
+   specified by the CUTCOM command.
+
+.. _var_dcompm:
+.. index:: Variables; $DCOMPM
+
++------------------+------------------------------------------+
+| **$DCOMPM**      | Diameter compensation method             |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable identifies the current tool diameter compensation
+   method in use. This information is used by Virtual Machine when it
+   applies diameter compensation. Valid values for $DCOMPM are as
+   follows:
+
+   :0: Inactive
+   :1: 2D planar compensation to the left or right
+   :2: Reserved for future use
+   :3: 3D compensation normal to surface
+   :4: PQR vector compensation
+
+.. _var_dcorner:
+.. index:: Variables; $DCORNER
+
++------------------+--------------------------------------------------------------+
+| **$DCORNER**     | Diameter compensation corner method (0:auto, 1:sharp, 2:arc) |
+|                  |                                                              |
+|                  | Type: Numeric, Read/Write                                    |
++------------------+--------------------------------------------------------------+
+
+   This variable identifies the current tool diameter compensation
+   cornering method in use. This information is used by Virtual Machine
+   when it applies diameter compensation. Valid values for
+   $DCORNER are as follows:
+
+   :0: Use corner angle to choose between sharp or arc, based QUEST angle setting
+   :1: Use sharp corners
+   :2: Interpolate corners using an arc motion
+
+.. _var_dynfix:
+.. index:: Variables; $DYNFIX
+
++------------------+-------------------------------------------------------+
+| **$DYNFIX**      | Dynamic fixture compensation status ($TRUE or $FALSE) |
+|                  |                                                       |
+|                  | Type: Logical, Read/Write                             |
++------------------+-------------------------------------------------------+
+
+   This variable will be set $TRUE when dynamic fixture compensation is activated
+   (via the CUTCOM/TABLE,ON post-processor command)
+   and $FALSE when dynamic fixture compensation is deactivated (CUTCOM/TABLE,OFF).
+   The $DYNFIX variable can be set from within a macro to change the mode
+   but when doing so the enable/disable NC codes will not be output.
+
+.. _var_limadj:
+.. index:: Variables; $LIMADJ
+
++------------------+-----------------------------------------------+
+| **$LIMADJ**      | Fixture (workpiece) compensation *xyz* values |
+|                  |                                               |
+|                  | Type: Sequence, Read-only                     |
++------------------+-----------------------------------------------+
+
+   This sequence variable contains the current fixture (workpiece)
+   compensation *xyz* amounts as defined by a LIMIT/ADJUST command.
+
+.. _var_limlen:
+.. index:: Variables; $LIMLEN
+
++------------------+-----------------------------------------------+
+| **$LIMLEN**      | Fixture (workpiece) compensation *xyz* values |
+|                  |                                               |
+|                  | Type: Sequence, Read-only                     |
++------------------+-----------------------------------------------+
+
+   This sequence variable contains the current tool length compensation
+   *xyz* amounts as defined by a LIMIT/LENGTH command.
+
+.. _var_tcd:
+.. index:: Variables; $TCD
+
++------------------+-----------------------------------------------------+
+| **$TCD**         | Programmed tool diameter compensation offset (<1:?) |
+|                  |                                                     |
+|                  | Type: Numeric, Read/Write                           |
++------------------+-----------------------------------------------------+
+
+   This variable contains the
+   programmed
+   tool diameter compensation offset number.
+   If diameter compensation is not available, then the value will be zero (0).
+   If the value is less than one (1) then the current offset number is unknown.
+   This variable can be assigned a value only if the machine supports diameter compensation.
+
+.. _var_tcdm:
+.. index:: Variables; $TCDM
+
++------------------+----------------------------------------------------------------+
+| **$TCDM**        | Current tool diameter compensation offset (–1:OFF, *n*:offset) |
+|                  |                                                                |
+|                  | Type: Numeric, Read-only                                       |
++------------------+----------------------------------------------------------------+
+
+   This variable contains the current tool diameter compensation offset number.
+   If diameter compensation is not available or not active then the value will be –1,
+   otherwise the value will be the diameter compensation offset number in effect.
+
+.. _var_tcf:
+.. index:: Variables; $TCF
+
++------------------+-----------------------------------------------+
+| **$TCF**         | Programmed fixture compensation offset (<1:?) |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable contains the
+   programmed
+   fixture compensation offset number.
+   If fixture compensation is not available, then the value will be zero (0).
+   If the value is less than one (1) then the current offset number is unknown.
+   This variable can be assigned a value only if the machine supports fixture compensation.
+
+.. _var_tcfm:
+.. index:: Variables; $TCFM
+
++------------------+----------------------------------------------------------+
+| **$TCFM**        | Current fixture compensation offset (–1:OFF, *n*:offset) |
+|                  |                                                          |
+|                  | Type: Numeric, Read-only                                 |
++------------------+----------------------------------------------------------+
+
+   This variable contains the current fixture compensation offset number.
+   If fixture compensation is not available or not active, then the value will be –1,
+   otherwise the value will be the fixture compensation offset number in effect.
+
+.. _var_tcfx:
+.. index:: Variables; $TCFX
+.. _var_tcfy:
+.. index:: Variables; $TCFY
+.. _var_tcfz:
+.. index:: Variables; $TCFZ
+
++---------------------+-------------------------------------------------+
+| **$TCF**\ **{XYZ}** | Current axis fixture compensation offset (<1:?) |
+|                     |                                                 |
+|                     | Type: Numeric, Read/Write                       |
++---------------------+-------------------------------------------------+
+
+   These variables contain the current fixture compensation offset number
+   for the X, Y and Z axes. These variables can only be utilized if the machine
+   supports per/axis fixture compensation.
+
+.. _var_tcl:
+.. index:: Variables; $TCL
+
++------------------+---------------------------------------------------+
+| **$TCL**         | Programmed tool length compensation offset (<1:?) |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   This variable contains the programmed tool length compensation offset number.
+   If length compensation is not available, then the value will be zero (0).
+   If the value is less than one (1), the current offset number is unknown.
+   This variable can be assigned a value only if the machine supports length compensation.
+
+.. _var_tcldir:
+.. index:: Variables; $TCLDIR
+
++------------------+------------------------------------------+
+| **$TCLDIR**      | Current length compensation axis         |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable identifies the current tool length compensation axis
+   direction. This information is used by Virtual Machine when it
+   applies length compensation. Valid values for $TCLDIR are as follows:
+
+   :0: Compensate along the tool axis
+   :1-3: Compensate along positive 1:X, 2:Y, 3:Z
+   :4-6: Compensate along negative 4:X, 5:Y, 6:Z
+
+.. _var_tclm:
+.. index:: Variables; $TCLM
+
++------------------+--------------------------------------------------------------+
+| **$TCLM**        | Current tool length compensation offset (–1:OFF, *n*:offset) |
+|                  |                                                              |
+|                  | Type: Numeric, Read-only                                     |
++------------------+--------------------------------------------------------------+
+
+   This variable contains the current tool length compensation offset number.
+   If length compensation is not available or not active then the value will be –1,
+   otherwise the value will be the length compensation offset number in effect.
+
+.. _var_tclset:
+.. index:: Variables; $TCLSET
+
++------------------+------------------------------------------+
+| **$TCLSET**      | Tool length compensation type (1-4)      |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable indicates and can set the tool length compensation type
+   on machines where there are multiple length compensation types
+   defined (QUEST *Control Description / Tool and Fixture Compensation /
+   Length comp* questions #114, #115 and #116).
+   It defines the tool length compensation type to be used if not explicitly set on the
+   CUTCOM/LENGTH post-processor command (see :ref:`“Length Compensation”<length_compensation>`).
+   Type 1 is the standard length compensation supported by all machines. Types 2
+   through 4 are defined by the post-processor developer and include various RTCP settings.
