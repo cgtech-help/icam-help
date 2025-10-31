@@ -1,0 +1,48 @@
+GENER CAM Dialog
+================
+
+The CAM button on GENER panel is used to specify the type of CAM system
+that created the CL file. Changes made to these settings are remembered
+from one run to the next. The following panel will appear when the CAM
+button is pressed:
+
+CAM System
+~~~~~~~~~~
+
+Specifies the name of a CAM interface kit.
+
+Each CAM interface is self contained in a separate directory. All
+standard interfaces can be found in the *kit* subdirectory below the
+installation directory. User customized interface kits can be created in
+the *kit* subdirectory below the application data directory. The
+application data kit subdirectory is searched first for a matching kit
+name, before searching the installation kit subdirectory. Each kit must
+contain an ICAM.DEF file defining the configuration details that are
+necessary for that specific CAM system format. Kit DEF file symbols take
+precedence over (i.e., override) those in the regular ICAM.DEF file.
+
+The drop-down control can be used to select a kit from the list of
+available choices. You can obtain more information about the selected
+interface kit using the [ ? ] button. Select “-- **No CAM interface
+kit** --” to run GENER with the default or customized settings listed in
+the Settings box. Select “-- **Automatic** --” to have GENER choose an
+appropriate interface kit based on the input CL file type and content.
+The CAM system choice will take precedence over (i.e., override) the
+*interface_kit* symbol definition in the selected definitions file.
+
+Settings
+~~~~~~~~
+
+This group lists the DEF file settings that can have an effect on how a
+CL file is read. Normally all fields are inaccessible except for the
+“Customize Settings” checkbox. You can see the effect various DEF files
+and CAM settings have by looking at the fields in the Settings group.
+
+OK, Cancel and Reset buttons
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Press **OK** to accept any changes to the CAM panel and return to the
+main launch panel. Press **Cancel** to ignore your changes and return to
+the main launch panel. Press **Reset** to remove all specialized
+settings and reset the CL file input format options to their defaults.
+
