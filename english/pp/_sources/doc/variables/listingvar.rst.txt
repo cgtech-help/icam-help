@@ -1,0 +1,135 @@
+Verification Listing Variables
+==============================
+
+.. _var_colcrd:
+.. index:: Variables; $COLCRD
+
++---------------------+------------------------------------------------+
+| **$COLCRD**         | Column coordinate position type                |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   The variable indicates the current coordinate type that are displayed in the
+   columns of the verification listing.
+
+   :0: Coordinates expressed in Joint frame
+   :1: Coordinates expressed in Machine frame
+   :2: Coordinates expressed in WCS frame
+
+.. _var_coldat:
+.. index:: Variables; $COLDAT
+
++---------------------+------------------------------------------------+
+| **$COLDAT**         | Column numeric data                            |
+|                     |                                                |
+|                     | Type: Numeric array, Read/Write                |
++---------------------+------------------------------------------------+
+
+   This array defines the current value to display for each column in
+   the verification listing. Each array position contains the value for
+   one column. Only user defined columns 24 through 28 should be
+   modified. Numeric column data is only output when the corresponding
+   $COLFMT array position is set to values from 0 through 8.
+
+.. _var_colfmt:
+.. index:: Variables; $COLFMT
+
++------------------+--------------------------------------------+
+| **$COLFMT**      | Column format (–1:off, 0-8:value, 10:text) |
+|                  |                                            |
+|                  | Type: Numeric array, Read/Write            |
++------------------+--------------------------------------------+
+
+   This array defines the content format of each column in the
+   verification listing. Each array position represents the format for
+   one column. Only user defined columns 24 through 28 should be
+   modified. Setting the column format to –1 inhibits output of the
+   column. Values from 0 through 8 indicate that numeric data is to be
+   output in the column and also defines the number of fractional digits
+   to show for numeric values. Setting the column format to 10 indicates
+   that text data is to be output (see $COLTXT).
+
+.. _var_colincr:
+.. index:: Variables; $COLINCR
+
++---------------------+------------------------------------------------+
+| **$COLINCR**        | Column coordinate positioning mode             |
+|                     |                                                |
+|                     | Type: Numeric, Read/Write                      |
++---------------------+------------------------------------------------+
+
+   The variable indicates the current absolute or incrementation positioning mode
+   that are used to display coordinates in the columns of the verification listing.
+
+   :0: Coordinates expressed in absolute mode
+   :1: Coordinates expressed in incrementation mode
+
+.. _var_coltxt:
+.. index:: Variables; $COLTXT
+
++------------------+------------------------------------------+
+| **$COLTXT**      | Column text data                         |
+|                  |                                          |
+|                  | Type: String array, Read/Write           |
++------------------+------------------------------------------+
+
+   This array defines the current string to display for each column in
+   the verification listing. Each array position contains the text for
+   one column. Only user defined columns 24 through 28 should be
+   modified. String column data is only output when the corresponding
+   $COLFMT array position is set to 10.
+
+.. _var_hdline:
+.. index:: Variables; $HDLINE
+
++------------------+----------------------------------------------+
+| **$HDLINE**      | User defined header for verification listing |
+|                  |                                              |
+|                  | Type: String, Read/Write                     |
++------------------+----------------------------------------------+
+
+   This variable defines a header line at the top of the verification
+   listing. If the header is defined as
+   $NULL (the default) or blank, its output to the verification listing
+   is suppressed. Text defined for the header line may be justified
+   using the **~** character. The first **~** character encountered in
+   the header line specifies that the text following should be centered.
+   The second **~** encountered indicates that the text following should
+   be right justified. Some examples are shown below:
+
+      .. code-block:: text
+
+         this is left justified
+         ~this is centered
+         ~~this is right justified
+         this is left justified~and centered
+         ~this is centered~and right justified
+         this is left justified~centered~and right justified
+
+.. _var_pprint:
+.. index:: Variables; $PPRINT
+
++------------------+------------------------------------------+
+| **$PPRINT**      | Last listing comment string output       |
+|                  |                                          |
+|                  | Type: String, Read-only                  |
++------------------+------------------------------------------+
+
+   This variable holds the last listing comment string output by the
+   post-processor via a PPRINT command.
+
+.. _var_trline:
+.. index:: Variables; $TRLINE
+
++------------------+-----------------------------------------------+
+| **$TRLINE**      | User defined trailer for verification listing |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable defines a footer line, also referred to as a trailer
+   line, at the bottom of the verification listing. If the footer is
+   defined as $NULL or blank, its output to the verification listing is
+   suppressed. Text defined for the footer line may be justified using
+   the **~** character as described for the $HDLINE variable.
