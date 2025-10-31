@@ -1,0 +1,46 @@
+.. _quest_customization:
+
+Model Customization
+===================
+
+This section describes the model customization features available with
+QUEST. The image shows the main customization features accessible using
+the Navigator.
+
+.. image:: ../../media/quest_vmcust.png
+   :width: 2.219in
+   :align: right
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   dialogeditor
+   customization/startshutmacro
+   customization/eventmacro
+   userfuncmacro
+
+**Section Overview**
+
+-  The :ref:`Dialog Editor<dialog_editor>` allows you to build custom dialog
+   boxes, which can be activated during processing to query the NC programmer
+   for any necessary information.
+
+   \
+
+-  :ref:`Startup/Shutdown Macros<startup_shutdown_macros>` allow you
+   to customize the actions of the model at the start and end of processing.
+
+   \
+
+-  :ref:`Event Macros<event_macros>` provide customization control
+   at other key events in the simulation of the program.
+
+   \
+
+-  :ref:`User Function Macros<user_function_macros>` are used to develop your own macro
+   functions that can be called by other macros in the model.
+
+Virtual Machine uses the ICAM macro language facility
+(see “:ref:`macro_language`”) to customize models.
+This is the same programming facility that is used with GENER and CERUN.
