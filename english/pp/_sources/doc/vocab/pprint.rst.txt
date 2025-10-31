@@ -1,0 +1,23 @@
+.. _command_pprint:
+
+The PPRINT Command :kbd:`[MLEPC]`
+=================================
+
+The PPRINT command is used to output a message to the verification
+listing or to the NC control tape. This command is valid for all
+machine types. The format of the command is as follows:
+
+   :math:`\textbf{PPRINT / } \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+The character string will normally be written to the verification
+listing. The optional values can be formatted into the string using
+the format specifications described in :ref:`“String Formatting”<string_formatting>`.
+String formatting can be disabled if desired using the PPFUN/17 command described in
+:ref:`“PPFUN 17: String Formatting”<string_formatting_ppfun>`.
+
+If DISPLY/ON has been coded then the character string will appear in
+the NC control tape as an operator message if this functionality is
+available. If TPRINT/ON has been coded then the character string will
+appear in the NC control tape as a comment if this functionality is
+available.
