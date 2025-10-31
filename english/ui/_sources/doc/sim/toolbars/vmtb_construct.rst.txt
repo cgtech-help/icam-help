@@ -1,0 +1,168 @@
+VM Construct Toolbar
+~~~~~~~~~~~~~~~~~~~~
+
+|image1|
+
++-----------+---------------------------------------------------------+
+| |image36| | **Simulation»Use World CS**: When selected, object      |
+|           | coordinates are listed in world coordinates,            |
+|           | originating from the center of the grids. When          |
+|           | unselected, an object?s coordinates are listed relative |
+|           | to its parent (i.e., in local coordinates). This button |
+|           | also affects the placement of objects copied from one   |
+|           | place to another in the model navigator. When world     |
+|           | coordinates are selected, the object retains its        |
+|           | position despite being moved or copied from one place   |
+|           | to another in the navigator hierarchy. When local       |
+|           | coordinates are selected, the object is placed relative |
+|           | to its new parent at the same offset it was originally  |
+|           | at relative to its old parent.                          |
++-----------+---------------------------------------------------------+
+| |image37| | **Simulation»Group Selection**: When selected, picking  |
+|           | any component of a group will select the entire group.  |
+|           | Objects can be grouped into larger components, for      |
+|           | selection purposes, in the 3D Models»Groups»Selection   |
+|           | section of the model navigator.                         |
++-----------+---------------------------------------------------------+
+| |image38| | **Simulation»Construct Entity»Cube**: Creates a cubic   |
+|           | entity, given an XYZ origin and the width, length and   |
+|           | height of the cube. Once created, the cube can be       |
+|           | further rotated to the required orientation.            |
++-----------+---------------------------------------------------------+
+| |image39| | **Simulation»Construct Entity»Cylinder**: Creates a     |
+|           | cylindrical entity, given an XYZ origin and the radius  |
+|           | and height of the cylinder. Once created, the cylinder  |
+|           | can be further rotated to the required orientation. The |
+|           | starting and ending radii can also be modified.         |
++-----------+---------------------------------------------------------+
+| |image40| | **Simulation»Construct Entity»Cone**: Creates a conical |
+|           | entity, given an XYZ origin, base radius and height of  |
+|           | the cone. Once created, the cone can be further rotated |
+|           | to the required orientation. The starting and ending    |
+|           | radii can also be modified.                             |
++-----------+---------------------------------------------------------+
+| |image41| | **Simulation»Construct Entity»Sphere**: Creates a       |
+|           | spherical entity, given an XYZ origin and radius of the |
+|           | sphere. Once created, the sphere can be further rotated |
+|           | to the required orientation. The “number of             |
+|           | subdivisions” controls the smoothness of the sphere,    |
+|           | with a value 0 producing a (20 face) icosahedron, and   |
+|           | increasing subdivisions increases the faces by a factor |
+|           | of 3. A maximum of 6 subdivisions is permitted (very    |
+|           | CPU intensive).                                         |
++-----------+---------------------------------------------------------+
+| |image42| | **Simulation»Construct Entity»Revolved**: Sweeps a 2D   |
+|           | profile over a complete or partial arc to produce a     |
+|           | surface of revolution. The profile is defined as a      |
+|           | series of (radius, height) pairs of coordinates, which  |
+|           | is swept around the Z-axis. Once created, the surface   |
+|           | can be further rotated to the required orientation.     |
++-----------+---------------------------------------------------------+
+| |image43| | **Simulation»Construct Entity»Extruded**: Sweeps a 2D   |
+|           | closed profile along a vector to produce an extruded    |
+|           | surface. The profile is defined as a series of (x, y)   |
+|           | pairs of coordinates, joined at the start an end, which |
+|           | is extruded along a vector (positive Z by default) for  |
+|           | a specified distance. Once created, the surface can be  |
+|           | further rotated to the required orientation.            |
++-----------+---------------------------------------------------------+
+| |image44| | **Simulation»Construct Entity»Mesh**: Imports an STL    |
+|           | mesh into the model. Once imported, the mesh surface    |
+|           | can be further scaled and rotated to its required size  |
+|           | and orientation.                                        |
++-----------+---------------------------------------------------------+
+| |image45| | **Simulation»Construct Entity Picture**: Loads a bitmap |
+|           | image, given the point in the model for the lower left  |
+|           | corner of the image, and the X-axis width and Y-axis    |
+|           | height of the image in model coordinates. The picture   |
+|           | can be rotated to the required orientation.             |
++-----------+---------------------------------------------------------+
+| |image46| | **Simulation»Construct Axis»Linear Axis**: Creates a    |
+|           | linear axis, given a point of origin and the direction  |
+|           | and range of motion.                                    |
++-----------+---------------------------------------------------------+
+| |image47| | **Simulation»Construct Axis»Rotary Axis**: Creates a    |
+|           | rotary axis, given a point of origin, the rotation axis |
+|           | and an optional range of motion.                        |
++-----------+---------------------------------------------------------+
+| |image48| | **Simulation»Construct Axis»Curve Axis**: Creates a     |
+|           | curved axis, given a point of origin and an open or     |
+|           | closed 2D profile. The profile is defined as a series   |
+|           | of (x, y) pairs of coordinates. The curved axis can be  |
+|           | further rotated the required orientation.               |
++-----------+---------------------------------------------------------+
+| |image49| | **Simulation»Construct Axis»Tool Axis**: Creates a tool |
+|           | reference point that can identify one of: the SCP of    |
+|           | the machine, a specific pocket in the tool changer, or  |
+|           | other named places where tools might be attached.       |
++-----------+---------------------------------------------------------+
+| |image50| | **Simulation»Construct Axis»Stock Axis**: Creates a     |
+|           | part reference point that identifies where fixtures and |
+|           | parts are loaded on the machine.                        |
++-----------+---------------------------------------------------------+
+| |image51| | **Simulation»Construct Axis»Head Axis**: Creates a head |
+|           | reference point that can identify one of: the head      |
+|           | attachment point on the machine, head storage locations |
+|           | for inactive heads, and other places where heads might  |
+|           | be attached.                                            |
++-----------+---------------------------------------------------------+
+| |image52| | **Simulation»Construct Axis»Reference Axis**: Creates a |
+|           | reference point in the model. Reference points are used |
+|           | to group related entities.                              |
++-----------+---------------------------------------------------------+
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/50ba30da231d3461b0d583c90155a61add38b2c5.bmp
+.. |image2| image:: ./media/39197198f77e3217bded5bee74f3197e6a09d99a.bmp
+.. |image3| image:: ./media/ad16d2cb8a3dfc1f0ce03172929a26bfbbed2c2f.bmp
+.. |image4| image:: ./media/2e658b0f965e28e20250e99dd60269898fd242dc.bmp
+.. |image5| image:: ./media/ac79ff68ad35d6260fb0517c60dfbdc2d3c59ad5.bmp
+.. |image6| image:: ./media/6996d14e567b03502f4544ca83f40c528b34367c.bmp
+.. |image7| image:: ./media/4803d6c92a0bcef428aa714a3d8a82cf192fc4d3.bmp
+.. |image8| image:: ./media/c1381bc55770a652e3d0385dabcec9fa59787c52.bmp
+.. |image9| image:: ./media/56ad81f2f4f7c0bf8aca13a3bb283c7b5557e1f2.bmp
+.. |image10| image:: ./media/af1d64ef055b057a8116fc12c9cc22b4aa254462.bmp
+.. |image11| image:: ./media/59fe808d1d5c682d98de7f72ae09ce5a2a23e12e.bmp
+.. |image12| image:: ./media/e93e9aec2319ce3d6afe48460e7a7529ba83aa92.bmp
+.. |image13| image:: ./media/c5bfdeb4635200fb53ac38da51285c6b121b7e0a.bmp
+.. |image14| image:: ./media/7f0cb1059ba180086157a0c295d53157d6fe8688.bmp
+.. |image15| image:: ./media/5c9e29c4993d77cc821e90bfefa118e8fafca208.bmp
+.. |image16| image:: ./media/450fd181e9946ad2a7eec876fa040a231e84697d.bmp
+.. |image17| image:: ./media/6906897a12bcd42a3f45ab7e050a21b9b7a48330.bmp
+.. |image18| image:: ./media/31706059200c547626b184e4a80b13b36ffa230e.bmp
+.. |image19| image:: ./media/39197198f77e3217bded5bee74f3197e6a09d99a.bmp
+.. |image20| image:: ./media/ad16d2cb8a3dfc1f0ce03172929a26bfbbed2c2f.bmp
+.. |image21| image:: ./media/2e658b0f965e28e20250e99dd60269898fd242dc.bmp
+.. |image22| image:: ./media/ac79ff68ad35d6260fb0517c60dfbdc2d3c59ad5.bmp
+.. |image23| image:: ./media/6996d14e567b03502f4544ca83f40c528b34367c.bmp
+.. |image24| image:: ./media/4803d6c92a0bcef428aa714a3d8a82cf192fc4d3.bmp
+.. |image25| image:: ./media/c1381bc55770a652e3d0385dabcec9fa59787c52.bmp
+.. |image26| image:: ./media/56ad81f2f4f7c0bf8aca13a3bb283c7b5557e1f2.bmp
+.. |image27| image:: ./media/af1d64ef055b057a8116fc12c9cc22b4aa254462.bmp
+.. |image28| image:: ./media/59fe808d1d5c682d98de7f72ae09ce5a2a23e12e.bmp
+.. |image29| image:: ./media/e93e9aec2319ce3d6afe48460e7a7529ba83aa92.bmp
+.. |image30| image:: ./media/c5bfdeb4635200fb53ac38da51285c6b121b7e0a.bmp
+.. |image31| image:: ./media/7f0cb1059ba180086157a0c295d53157d6fe8688.bmp
+.. |image32| image:: ./media/5c9e29c4993d77cc821e90bfefa118e8fafca208.bmp
+.. |image33| image:: ./media/450fd181e9946ad2a7eec876fa040a231e84697d.bmp
+.. |image34| image:: ./media/6906897a12bcd42a3f45ab7e050a21b9b7a48330.bmp
+.. |image35| image:: ./media/31706059200c547626b184e4a80b13b36ffa230e.bmp
+.. |image36| image:: ./media/39197198f77e3217bded5bee74f3197e6a09d99a.bmp
+.. |image37| image:: ./media/ad16d2cb8a3dfc1f0ce03172929a26bfbbed2c2f.bmp
+.. |image38| image:: ./media/2e658b0f965e28e20250e99dd60269898fd242dc.bmp
+.. |image39| image:: ./media/ac79ff68ad35d6260fb0517c60dfbdc2d3c59ad5.bmp
+.. |image40| image:: ./media/6996d14e567b03502f4544ca83f40c528b34367c.bmp
+.. |image41| image:: ./media/4803d6c92a0bcef428aa714a3d8a82cf192fc4d3.bmp
+.. |image42| image:: ./media/c1381bc55770a652e3d0385dabcec9fa59787c52.bmp
+.. |image43| image:: ./media/56ad81f2f4f7c0bf8aca13a3bb283c7b5557e1f2.bmp
+.. |image44| image:: ./media/af1d64ef055b057a8116fc12c9cc22b4aa254462.bmp
+.. |image45| image:: ./media/59fe808d1d5c682d98de7f72ae09ce5a2a23e12e.bmp
+.. |image46| image:: ./media/e93e9aec2319ce3d6afe48460e7a7529ba83aa92.bmp
+.. |image47| image:: ./media/c5bfdeb4635200fb53ac38da51285c6b121b7e0a.bmp
+.. |image48| image:: ./media/7f0cb1059ba180086157a0c295d53157d6fe8688.bmp
+.. |image49| image:: ./media/5c9e29c4993d77cc821e90bfefa118e8fafca208.bmp
+.. |image50| image:: ./media/450fd181e9946ad2a7eec876fa040a231e84697d.bmp
+.. |image51| image:: ./media/6906897a12bcd42a3f45ab7e050a21b9b7a48330.bmp
+.. |image52| image:: ./media/31706059200c547626b184e4a80b13b36ffa230e.bmp
+
