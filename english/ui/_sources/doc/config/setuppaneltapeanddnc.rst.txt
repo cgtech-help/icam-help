@@ -1,0 +1,86 @@
+Tape & DNC
+==========
+
+|image1|
+
+**Tape:** Specifies the physical output format of CNC codes (tape) for
+post processors which are setup to output paper/mylar tape format
+(search for mylar or DNC).
+
+   | **Tape format:**
+   | *Variable* indicates that each tape block will have a variable
+     size, taking only the required space.
+   | *Fixed* indicates that all blocks are of a given size. If a tape
+     block is shorter than the given size, the record is blank filled to
+     the end.
+   | *Packed* is similar to fixed except that the next record is used to
+     fill space at the end of a given record. In other words, packed
+     tries to fit as may logical blocks on a physical record as
+     possible. (``TAPE_FORMAT``)
+
+   **Tape Record length:** If the tape format is fixed or packed the
+   default record size is 72,80 where the first 72 columns contain data
+   and the records are blocked at 80 characters. This default can be
+   altered by specifying the data portion of the record and optionally
+   the full size. (``TAPE_RECL``)
+
+   **Tape sequence numbering**: Sequence numbering can be provided in
+   the non-data portion of fixed length tape blocks (*fixed* or
+   *packed*). By default, the numbering is in columns 73 to 80.Use
+   *None* to have no sequence numbering. *Left* left justifies the
+   sequence number, while *Right* right justifies it. Use *Padded* to
+   add leading zeros to the sequence number field of the record.
+   (``TAPE_SEQ``)
+
+   **Tape end of record marker:** If the tape format is fixed or packed,
+   the end of record character or characters can be defined. If special
+   characters must be entered, use the standard CAM-POST ^### where ###
+   is the ASCII code of the special character. For example, ^013^010
+   would be the character codes for a CRLF end of record marker. Be sure
+   to specify 3 digits when specifying the ASCII code. By default, there
+   is no end of record marker for fixed or packed records.
+   (``TAPE_EOR``)
+
+**DNC:** Specifies the physical output format of CNC codes (tape) for
+post processors which are setup to output DNC program format (search for
+mylar or DNC).
+
+   | **DNC format:**
+   | *Variable* indicates that each tape block will have a variable
+     size, taking only the required space.
+   | *Fixed* indicates that all blocks are of a given size. If a tape
+     block is shorter than the given size, the record is blank filled to
+     the end.
+   | *Packed* is similar to fixed except that the next record is used to
+     fill space at the end of a given record. In other words, packed
+     tries to fit as may logical blocks on a physical record as
+     possible. (``DNC_FORMAT``)
+
+   **DNC Record length:** If the DNC format is fixed or packed the
+   default record size is 72,80 where the first 72 columns contain data
+   and the records are blocked at 80 characters. This default can be
+   altered by specifying the data portion of the record and optionally
+   the full size. (``DNC_RECL``)
+
+   **DNC sequence numbering:** Sequence numbering can be provided in the
+   non-data portion of fixed length tape blocks (fixed or packed). By
+   default, the numbering is in columns 73 to 80. Use *None* to have no
+   sequence numbering. *Left* left justifies the sequence number, while
+   *Right* right justifies it. Use *Padded* to add leading zeros to the
+   sequence number field of the record. (``DNC_SEQ``)
+
+   **DNC end of record marker:** If the DNC format is fixed or packed,
+   the end of record character or characters can be defined. If special
+   characters must be entered, use the standard CAM-POST ^### where ###
+   is the ASCII code of the special character. For example, ^013^010
+   would be the character codes for a CRLF end of record marker. Be sure
+   to specify 3 digits when specifying the ASCII code. By default, there
+   is no end of record marker for fixed or packed records. (``DNC_EOR``)
+
+**Write block size:** This specifies whether the size of each tape
+record is written at the start of each tape block. If the box is
+selected, the size is written using two bytes followed by a space.
+(``BLOCK_SIZE``)
+
+.. |image1| image:: ./media/158cd8e28f35b90bd334d48093392e6037018cb1.png
+
