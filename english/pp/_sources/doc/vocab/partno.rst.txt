@@ -1,0 +1,22 @@
+.. _command_partno:
+
+The PARTNO Command :kbd:`[MLEPC]`
+=================================
+
+The PARTNO command is used to provide part program identification.
+This command is valid for all machine types.
+
+   :math:`\textbf{PARTNO / } \, \mathtt{'}\mathit{string}\,\mathtt{'}`
+
+The PARTNO command specifies a textual identification of the NC
+program. The identification text is printed on the verification
+listing at the top of each page. It can also appear in man readable
+characters in the leader and/or trailer sections of the NC control
+tape file. Man readable tape output is an optional feature controlled
+by QUEST in the “Output Format” topic under the “General Description”
+section.
+
+If a PARTNO command is not found within the first 20 records of a CL
+file, then the identification text will default to “Undefined
+PARTNO”. The default limit of 20 can be changed in the configuration
+file.
