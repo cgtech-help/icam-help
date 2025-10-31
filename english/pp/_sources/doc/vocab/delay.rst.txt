@@ -1,0 +1,26 @@
+.. _command_delay:
+
+The DELAY Command :kbd:`[MLEPC]`
+================================
+
+The DELAY command is used to establish a tool dwell or a machine halt
+for a given amount of time, typically using a G04 code. This command
+is valid for all machine types but some functions may not be
+available on specific machines.
+
+   :math:`\textbf{DELAY / } \big[ \,\textbf{DWELL}, \big] \mathit{seconds}`
+
+   :math:`\textbf{DELAY / REV} ,\mathit{revolutions}`
+
+There are two methods of controlling the length of the delay. The
+first method is to specify the number of seconds for which the
+machine should stop all movement. The second method is to specify the
+actual number of revolutions of the spindle during which the machine
+should not move. If neither DWELL or REV is specified, the delay
+value is assumed to be seconds.
+
+GENER will convert a delay in seconds to one in revolutions, or vice
+versa, if only one delay method is available on the machine.
+Depending on post-processor preferences, GENER may convert between
+delay methods to avoid changing the feed-rate mode setting at the
+control.
