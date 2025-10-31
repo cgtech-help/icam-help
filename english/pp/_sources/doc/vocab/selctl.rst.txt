@@ -1,0 +1,22 @@
+.. _command_selctl:
+
+The SELCTL Command :kbd:`[MLP]`
+===============================
+
+The SELCTL command is a non-standard\ [#]_ alias for the
+SELECT/TOOL and SELECT/HEAD commands. It is used to control the
+preselection of tools and heads loaded by an automatic tool or head
+changer. This command is only valid for machines that require
+preselection of tooling.
+
+   :math:`\textbf{SELCTL / } \mathit{tool\_id} \; \big[,\mathtt{<\!tool\_information\!>}\,\big]`
+
+   :math:`\textbf{SELCTL / HEAD}, \mathit{head\_id} \; \big[,\mathtt{<\!head\_information\!>}\,\big]`
+
+See :ref:`the TOOLNO command<command_toolno>` for a description of the tool and head information
+parameters. See :ref:`the SELECT command<command_select>` for more details on the preselection of
+tools and heads.
+
+.. [#] International Standards Organization ISO 4343:1972 defined SELCTL
+   as a standard post-processor command, but this was later revised to
+   SELECT/TOOL in the ISO 4343:2000 update.
