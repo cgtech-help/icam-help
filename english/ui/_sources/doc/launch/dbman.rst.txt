@@ -1,0 +1,49 @@
+DB Manager / AUTOPOST Button
+============================
+
+Database Manager
+~~~~~~~~~~~~~~~~
+
+The DB Manager button can be used to perform routine maintenance
+activities on ICAM databases. All of the functions available with the
+QUEST Database Navigator are also available from the DB Manager dialog.
+These include, for example, the ability to add, rename, copy and delete
+post-processors, as well as the ability to create new databases and move
+or copy post-processors between them. The database manager can also be
+used to add or remove password protection on a database.
+
+The following panel will appear when the DB Manager button is pressed.
+The upper half of the DB Manager dialog lists the databases in the same
+way as the QUEST database navigator; the lower half logs the status of
+any changes.
+
+One of the most important functions of the DB Manager is to import into
+the database CAM-POST post-processors, Virtual Machine models and
+Control Emulators that have been provided to you in an “export” format.
+Select the production database, press the right-mouse button, and then
+choose **Import** from the pop-up context menu. You can use the Import
+feature to load dedicated posts, models and control emulators (files
+with a *dp* file extension), exported posts, models and control
+emulators (files with a *dmp* file extension) and even the content of
+entire databases (files with *dbf* file extension) into the selected
+database.
+
+The Import panel includes a “Detect new/updated files on the next run”
+checkbox that, if selected, will notify you when exported files are
+added to or changed in the last directory used by the Import feature.
+This test is performed each time the launch panel is run. It checks for
+exported files more recent than the date of the last import.
+
+AUTOPOST (requires "xqs" license)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you have an AUTOPOST license, then the "DB Manager" button will be
+changed to "AUTOPOST". AUTOPOST has all of the same database
+functionality as the DB Manager, but also gives you access to the "New
+Post Wizard" and "Modification Wizard". These Wizards, normally only
+available from QUEST, provide the ability to create and modify
+post-processors.
+
+In AUTOPOST mode, the toolbar New and Modify buttons are used to call
+the wizards.
+
