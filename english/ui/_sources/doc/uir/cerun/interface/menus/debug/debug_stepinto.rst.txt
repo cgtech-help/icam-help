@@ -1,0 +1,11 @@
+Debug»Step Into (F11)
+---------------------
+
+Step to the next MCD block/macro line on the current stack level or into
+a new macro if one is to be called.
+
+Used during debugging to process the next block of MCD or macro line,
+pausing at the very next block of MCD or macro to be processed. When
+Step Into is selected on a record that matches a macro, processing will
+pause at the first executable line of code in the matched macro.
+
