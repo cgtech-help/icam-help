@@ -1,0 +1,50 @@
+RMD View
+--------
+
+RMD is an acronym for Rapid Macro Development. The RMD View as activated
+from the Startup/Shutdown macro section when a startup or shutdown macro
+is desired. These macros are automatically activated when specific
+events occur in the program.
+
+|image1|
+
+To create or modify an RMD macro, first select an event type from the
+Startup/Shutdown Procedures section, then click the *Modify* button. A
+clear icon in front of the event type indicates that an RMD macro does
+not yet exist for this event. A solid green icon indicates an active RMD
+macro. RMD macros can be inactivated by clearing the checkbox (the icon
+changes color).
+
+**Close:** Closes the startup/shutdown procedures section.
+
+A typical RMD view follows:
+
+|image2|
+
+RMD macros consist of a series of modular operations or actions. A large
+choice of available actions is listed in the *Actions* window. The
+*Macro* window lists the actions that have already been selected.
+
+To add an action, select it, optionally select where in the Macro list
+it should follow, then click on the *Add*>> button. Some RMD actions
+require additional information. If so, an `RMD
+Prompt <../../dialogs/rmdprompt.html>`__ dialog will appear. When adding
+a custom macro, the `Macro Editor View <macroeditorview.html>`__ will
+appear so you can create the macro. To modify one of the actions in the
+Macro list, select it and then click *Modify* (the same `RMD
+Prompt <../../dialogs/rmdprompt.html>`__ or `Macro Editor
+View <macroeditorview.html>`__ will appear). To delete one or more
+actions, first select them, then click *Delete*. To reorder an action
+(actions are listed in the order they are run), either select it and use
+the arrow buttons, or select and hold the mouse button down to drag and
+drop the action to its new position. To disable an action, uncheck the
+box left of the action name.
+
+**Cancel:** Closes the RMD macro discarding all changes (can **not** be
+undone).
+
+**OK:** Closes the RMD macro keeping all changes.
+
+.. |image1| image:: ./media/476ac347a16ac31df0269cb2afb70b48b1d19d3a.gif
+.. |image2| image:: ./media/56d33050014e1634044cb5e516683c8d2829135b.gif
+
