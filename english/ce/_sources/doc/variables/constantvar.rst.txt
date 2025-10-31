@@ -1,0 +1,56 @@
+Variables Defining Constants
+============================
+
+The following variables have fixed values that cannot be changed,
+i.e., are constant. These variables are the only ones permitted in a
+CASE statement WHEN command.
+
+.. _var_false:
+.. index:: Variables; $FALSE
+
++-------------+-------------------------------+
+| **$FALSE**  | False logical value           |
+|             |                               |
+|             | Type: Logical, Read-only      |
++-------------+-------------------------------+
+
+   This variable stores the logical constant representing *false*.
+
+.. _var_null:
+.. index:: Variables; $NULL
+
++-------------+-----------------------------------+
+| **$NULL**   | “Not Used”, “Not Available” value |
+|             |                                   |
+|             | Type: Null, Read-only             |
++-------------+-----------------------------------+
+
+   This variable has a special fixed value, which is used to indicate
+   not used or not available. $NULL has a value with a null data type:
+   it is not a number, string, minor word or sequence. $NULL is
+   therefore not equal to any number, string, minor word or sequence.
+
+   $P variables and some macro system variables will be set to $NULL to
+   indicate that a value is not available or has yet to be specified.
+
+.. _var_pi:
+.. index:: Variables; $PI
+
++-------------+-------------------------------+
+| **$PI**     | PI Trigonometric value        |
+|             |                               |
+|             | Type: Numeric, Read-only      |
++-------------+-------------------------------+
+
+   This variable stores the PI trigonometric constant.
+
+.. _var_true:
+.. index:: Variables; $TRUE
+
++-------------+-------------------------------+
+| **$TRUE**   | True logical value            |
+|             |                               |
+|             | Type: Logical, Read-only      |
++-------------+-------------------------------+
+
+   This variable stores the logical constant representing *true*.
