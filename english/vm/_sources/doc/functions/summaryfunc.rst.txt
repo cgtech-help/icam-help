@@ -1,0 +1,192 @@
+Function Summary
+================
+
+.. list-table:: Axes Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSGPOS<func_fmsgpos>`
+      -  Get current axis position
+   *  -  :ref:`$FMSGPOSJ<func_fmsgposj>`
+      -  Get current axes positions
+   *  -  :ref:`$FMSGPOSW<func_fmsgposw>`
+      -  Get current axes positions in WCS frame
+   *  -  :ref:`$FMSLIMIT<func_fmslimit>`
+      -  Query, adjust model axes travel limits
+   *  -  :ref:`$FMSMAX<func_fmsmax>`
+      -  Map a model axis to a GENER or CERUN axis
+   *  -  :ref:`$FMSMOVE<func_fmsmove>`
+      -  Move a model axis
+   *  -  :ref:`$FMSSLAV<func_fmsslav>`
+      -  Slave one axis to another
+   *  -  :ref:`$FMSUNWIND<func_fmsunwind>`
+      -  Reset model rotary axis to modulo-360 value
+   *  -  :ref:`$FMSUPDPOS<func_fmsupdpos>`
+      -  Update GENER or CERUN position from VM model axes
+
+.. list-table:: Channel Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSACH<func_fmsach>`
+      -  Activate or deactivate channel
+   *  -  :ref:`$FMSDCH<func_fmsdch>`
+      -  Delete channel
+   *  -  :ref:`$FMSGAX<func_fmsgax>`
+      -  Associate an axis to a channel
+   *  -  :ref:`$FMSGCH<func_fmsgch>`
+      -  Get channel number
+   *  -  :ref:`$FMSNCH<func_fmsnch>`
+      -  Create a new channel
+   *  -  :ref:`$FMSRAX<func_fmsrax>`
+      -  Release an axis from a channel
+   *  -  :ref:`$FMSWCH<func_fmswch>`
+      -  Wait for mark number or channel synchronization
+
+.. list-table:: Compensation Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSGDCV<func_fmsgdcv>`
+      -  Get diameter compensation offset
+   *  -  :ref:`$FMSGFCV<func_fmsgfcv>`
+      -  Get fixture compensation offset
+   *  -  :ref:`$FMSGLCV<func_fmsglcv>`
+      -  Get length compensation offset
+   *  -  :ref:`$FMSGRCV<func_fmsgrcv>`
+      -  Get corner radius compensation offset
+   *  -  :ref:`$FMSSDCV<func_fmssdcv>`
+      -  Set diameter compensation values
+   *  -  :ref:`$FMSSFCV<func_fmssfcv>`
+      -  Set fixture compensation value
+   *  -  :ref:`$FMSSLCV<func_fmsslcv>`
+      -  Set tool length compensation value
+   *  -  :ref:`$FMSSRCV<func_fmssrcv>`
+      -  Set corner radius compensation value
+
+.. list-table:: Component Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSATA<func_fmsata>`
+      -  Attach one component to another
+   *  -  :ref:`$FMSID<func_fmsid>`
+      -  Get component ID of desired object
+   *  -  :ref:`$FMSIDN<func_fmsidn>`
+      -  Get the name of a component, given its ID
+   *  -  :ref:`$FMSIDS<func_fmsids>`
+      -  Get component IDs matching specified criteria
+   *  -  :ref:`$FMSIDT<func_fmsidt>`
+      -  Get the type of a component, given its ID
+
+.. list-table:: Coordinate System Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSGCS<func_fmsgcs>`
+      -  Get coordinate system information
+   *  -  :ref:`$FMSGREF<func_fmsgref>`
+      -  Get model reference position
+   *  -  :ref:`$FMSLCS<func_fmslcs>`
+      -  Establish or remove a local coordinate system
+   *  -  :ref:`$FMSSCS<func_fmsscs>`
+      -  Set coordinate system information
+   *  -  :ref:`$FMSSREF<func_fmssref>`
+      -  Set model reference position
+
+.. list-table:: Display Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSTPS<func_fmstps>`
+      -  Set tool path trace line style
+   *  -  :ref:`$FMSCMRA<func_fmscmra>` 
+      -  Set camera position and/or display settings
+   *  -  :ref:`$FMSPIC<func_fmspic>`
+      -  Take a picture of the simulation
+
+.. list-table:: Fixture, Part and Stock Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSCHIP<func_fmschip>`
+      -  Remove uncut stock fragments from the simulation
+   *  -  :ref:`$FMSESF<func_fmsesf>`
+      -  Export in-process stock to a file
+   *  -  :ref:`$FMSFIXTURE<func_fmsfixture>`
+      -  Dynamic fixture creation
+   *  -  :ref:`$FMSPART<func_fmspart>`
+      -  Dynamic part creation
+   *  -  :ref:`$FMSSETUP<func_fmssetup>`
+      -  Select part/stock/fixture/tooling setup
+   *  -  :ref:`$FMSTRN<func_fmstrn>`
+      -  Transfer stock/fixture/part between stock mount points
+
+.. list-table:: Probe and Collision Test Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSCEZ<func_fmscez>`
+      -  Summary of collision/over-travel events
+   *  -  :ref:`$FMSLSR<func_fmslsr>`
+      -  Laser probing
+   *  -  :ref:`$FMSNEAR<func_fmsnear>`
+      -  Adjust collision safety zone surrounding components
+   *  -  :ref:`$FMSPDAT<func_fmspdat>`
+      -  Details of probe/collision/over-travel events
+   *  -  :ref:`$FMSPPOS<func_fmsppos>`
+      -  Axes positions at touch
+   *  -  :ref:`$FMSPRID<func_fmsprid>`
+      -  Select the object to be used as a probe
+   *  -  :ref:`$FMSPROB<func_fmsprob>`
+      -  Activate/deactivate probing
+   *  -  :ref:`$FMSVCL<func_fmsvcl>`
+      -  Enable/disable collision testing on objects
+
+.. list-table:: Tool and Holder Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSADDTOOL<func_fmsaddtool>`
+      -  Manage additional active tools
+   *  -  :ref:`$FMSBTC<func_fmsbtc>`
+      -  Indicates the start of a tool change sequence
+   *  -  :ref:`$FMSCOLR<func_fmscolr>`
+      -  Color definition for dynamic tools and holders
+   *  -  :ref:`$FMSETC<func_fmsetc>`
+      -  Indicates the end of a tool change sequence
+   *  -  :ref:`$FMSGOUG<func_fmsgoug>`
+      -  Manage gouge testing status
+   *  -  :ref:`$FMSPCK<func_fmspck>`
+      -  Get pocket number associated with the tool
+   *  -  :ref:`$FMSTOOL<func_fmstool>`
+      -  Dynamic tool creation
+   *  -  :ref:`$FMSHLD<func_fmshld>`
+      -  Dynamic holder creation
+
+.. list-table:: Other Functions
+   :widths: auto
+   :header-rows: 0
+   :class: wrap-last
+
+   *  -  :ref:`$FMSADPT<func_fmsadpt>`
+      -  Manage Virtual Machine activation status
+   *  -  :ref:`$FMSCHUCK<func_fmschuck>`
+      -  Set clamping force of a chuck device on the workpiece
+   *  -  :ref:`$FMSDELAY<func_fmsdelay>`
+      -  Delay (i.e., dwell) for a specified time in seconds
+   *  -  :ref:`$FMSMRS<func_fmsmrs>`
+      -  Get/Set material removal simulation (MRS) status
+   *  -  :ref:`$FMSMSP<func_fmsmsp>`
+      -  Set master (i.e. active) spindle
+   *  -  :ref:`$FMSTOLER<func_fmstoler>`
+      -  Get and optionally set simulation tolerances
