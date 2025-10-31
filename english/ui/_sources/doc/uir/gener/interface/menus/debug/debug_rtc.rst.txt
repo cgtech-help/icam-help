@@ -1,0 +1,15 @@
+Debug»Run to Cursor (Ctrl+F10)
+------------------------------
+
+Continues processing to the selected macro line or CLDATA record. Select
+the macro line or CLDATA record first, before selecting the “Run to
+cursor” feature.
+
+Used during debugging to run to the currently selected CL record or
+macro line, provided no other breakpoint is activated before reaching
+the selected record or line.
+
+|image1|
+
+.. |image1| image:: ./media/f936b8782da3e45cde16ace2ed0a8ee8bc8c0957.gif
+
