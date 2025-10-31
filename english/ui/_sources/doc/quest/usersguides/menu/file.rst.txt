@@ -1,0 +1,57 @@
+File
+----
+
+**New Post** *(Ctrl+N)*\ **:** Create a new post.
+
+**New Post Wizard**\ *(Ctrl+W)*\ **:** Create a new post using the
+wizard.
+
+**New CE:** Create a new Control Emulator either from scratch or based
+on a already existing post-processor.
+
+**New Model:** Create a new Virtual Machine model either from scratch or
+based on a already existing post-processor or control emulator.
+
+**Open...**\ *(Ctrl+O)*\ **:** Load a post processor from the database.
+(See `Open <../dialogs/openpost.html>`__ dialog)
+
+**Save**\ *(Ctrl+S)*\ **:** Save the active post.
+
+**Save As...**\ *(Ctrl+Shift+S)*\ **:** Save the active post using a
+different name or to a different database. (See `Save
+As <../dialogs/savepost.html>`__ dialog)
+
+**Save All:** Save all posts that have been loaded into memory and
+modified.
+
+**Generate...**\ *(Ctrl+G)*\ **:** Generate the active post, or the
+latest revision of the selected post in the database, or all posts in
+the selected database. (See `Generate As <../dialogs/generateas.html>`__
+dialog)
+
+**Close**\ *(Ctrl+F4)*\ **:** Close the active post.
+
+**Close All**\ *(Ctrl+Shift+F4)*\ **:** Close all posts that have been
+loaded into memory.
+
+**Copy...:** Copy the selected post. (See
+`Copy <../dialogs/copypost.html>`__ dialog)
+
+**Delete...:** Delete the selected post.
+
+**Rename...:** Rename the selected post. (See
+`Rename <../dialogs/rename.html>`__ dialog)
+
+**Print**\ *(Ctrl+P)*\ **:** Print the macro shown in the macro editor
+view.
+
+**Print Preview:** Preview of the print.
+
+**Page Setup...:** Page setup.
+
+**Listing...:** List all answers of the active or selected post to a
+file.
+
+**Exit**\ *(Alt+F4)*\ **:** Quit QUEST; prompts to save unsaved post
+processors.
+
