@@ -1,0 +1,43 @@
+.. _command_disply:
+
+The DISPLY Command :kbd:`[MLEPC]`
+=================================
+
+The DISPLY command is used to display text messages on the control’s
+CRT. This command is valid for all machine types but may not be
+available on a specific machine.
+
+   :math:`\textbf{DISPLY / }
+   \big[\,\textbf{NEXT},\big] \;
+   \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+   :math:`\textbf{DISPLY /}
+   \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The DISPLY command can be used to send instructions to the machine
+operator concerning such areas as tool changes, feed rates and so on.
+GENER will structure the text to specifications given in QUEST as to
+length of lines, number of lines displayed and possible truncation.
+
+There are two methods of outputting text messages to be displayed at
+the control’s CRT.
+
+The first method allows you to enter the character string with
+optional parameter values formatted into the string using the format specifications
+described in :ref:`“String Formatting”<string_formatting>`.
+String formatting can be disabled if desired using the PPFUN/17 command
+described in :ref:`“PPFUN 17: String Formatting”<string_formatting_ppfun>`.
+The text will be output by GENER to the CRT of the control. If NEXT is
+specified and operator messages can be intermixed with other data on
+a block of MCD, then the message will be appended to the next MCD
+block output. Otherwise, the message will appear on a block alone.
+
+The second method uses the parameters ON and OFF together with
+upcoming PPRINT commands. When DISPLY/ON is coded in the CL file, all
+subsequent PPRINT commands will be interpreted as DISPLY commands.
+The PPRINT messages will then be directed to the CRT of the control
+and also will appear in the verification listing. This redirection
+will continue until a DISPLY/OFF command is encountered. PPRINT
+commands will then be treated as regular PPRINT commands and be
+output in the verification listing.
