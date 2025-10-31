@@ -1,0 +1,95 @@
+.. _composite_variables:
+.. _var_cppfil:
+.. index:: Variables; $CPPFIL
+.. _var_cpppfl:
+.. index:: Variables; $CPPPFL
+
+Composite Control Emulator Variables
+======================================
+
+A Composite control emulator is a combination of different
+control emulators or components. A set of system macro variables are
+available to trace and control composite control emulator execution.
+
+.. _var_cppads:
+.. index:: Variables; $CPPADS
+
++------------------+-----------------------------------------------+
+| **$CPPADS**      | Array of component designator                 |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable is an array containing all the component designators.
+
+.. _var_cppanm:
+.. index:: Variables; $CPPANM
+
++------------------+-----------------------------------------------+
+| **$CPPANM**      | Array of component names                      |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable is an array containing all the component (individual
+   control emulator) names.
+
+.. _var_cppcnt:
+.. index:: Variables; $CPPCNT
+
++------------------+-----------------------------------------------+
+| **$CPPCNT**      | Count of components                           |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the number of components (individual
+   control emulator) in the composite control emulator.
+
+.. _var_cppdes:
+.. index:: Variables; $CPPDES
+
++------------------+-----------------------------------------------+
+| **$CPPDES**      | Current component designator                  |
+|                  |                                               |
+|                  | Type: Keyword, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the designator of the current control emulator
+   component.
+
+.. _var_cppnam:
+.. index:: Variables; $CPPNAM
+
++------------------+-----------------------------------------------+
+| **$CPPNAM**      | Current component name                        |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the control emulator name of the current
+   component.
+
+.. _var_cpppds:
+.. index:: Variables; $CPPPDS
+
++------------------+-----------------------------------------------+
+| **$CPPPDS**      | Previous designator name                      |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the designator of the previous component.
+
+.. _var_cpppnm:
+.. index:: Variables; $CPPPNM
+
++------------------+-----------------------------------------------+
+| **$CPPPNM**      | Previous component name                       |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the control emulator name of the previous
+   component.
+
