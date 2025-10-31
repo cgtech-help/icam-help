@@ -1,0 +1,28 @@
+File»Save For Review
+--------------------
+
+You can select Save For Review from the File menu. It will save the
+current state of post-processing into a ZRJ file for later review.
+Explicitly saving the process inhibits the automatic save that normally
+occurs at the end of processing when the “save for review” launch panel
+preference is selected.
+
+To review an NC program’s results, drag and drop the ZRJ file onto the
+launch panel or desktop icon (or open the results using the [Job]
+button), then press OK. The Full interface will be activated showing the
+results at the end of GENER or CERUN processing. These include:
+
+-  Input, Output (GENER only) and Console window complete traces
+-  Source window listing the input file
+-  Diagnostic window listing all diagnostics
+-  Virtual Machine simulation window
+-  Controller window including TimeLine access to entire program
+-  Material removal simulation in-process stock final state
+-  View Listing and View NC code menu selections
+
+The save-for-review function allows, for example, a program to be run in
+background mode and then later opened for more detailed review if
+necessary. The ZRJ file contains sufficient information to allow a
+program to be rewound and reprocessed if desired (although this is not
+recommended for production programs).
+
