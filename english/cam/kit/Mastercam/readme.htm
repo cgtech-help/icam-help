@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Mastercam Interface kit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../Creo/readme.htm">Creo</a>
+                <a href="../FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../Fusion360/readme.htm">Fusion 360</a>
+                <a href="">Mastercam</a>
+                <a href="../NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../Cadds5/readme.htm">Cadds5</a>
+                <a href="../Cadra/readme.htm">Cadra</a>
+                <a href="../Camand/readme.htm">Camand</a>
+                <a href="../CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../Cimatron/readme.htm">Cimatron</a>
+                <a href="../Em_Machine/readme.htm">Em Machine</a>
+                <a href="../Generic/readme.htm">Generic</a>
+                <a href="../GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../ICAM/readme.htm">ICAM</a>
+                <a href="../IDEAS/readme.htm">IDEAS</a>
+                <a href="../Intercim/readme.htm">Intercim</a>
+                <a href="../Intergraph/readme.htm">Intergraph</a>
+                <a href="../NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../NICAM/readme.htm">NICAM</a>
+                <a href="../NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../index.htm"><i class="fa fa-home">Kit</i></a>
+            <h1><img align="right" src="../../images/camlogo_mcam.gif" width="304" height="41" />Mastercam</h1>
+            <hr />
+            <br />
+            <img src="../../images/camscrsh_mcam.jpg" width="300" height="225">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: Mastercam</li>
+                <li>Company: CNC Software Inc.</li>
+                <li>Website:<a href="https://www.mastercam.com/">www.mastercam.com</a></li>
+            </ul>
+            <br />
+            <div class="table">
+                <div class="card">
+                    <a href="../../integration/Mastercam/Integration/index.htm"><img src="../../images/integration.png" />Mastercam integration</a>
+                </div>
+                <div class="card">
+                    <a href="../../integration/Mastercam/Extractor/index.htm"><img src="../../images/mfg.png" />ICAM MFG Extractor for Mastercam</a>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <h2>Mastercam TO CAM-POST INTERFACE DOCUMENTATION</h2>
+            <h3>Overview</h3>
+            <p>
+                The Mastercam Interface Kit is designed to accommodate differences in syntax between Mastercam's and ICAM's post processing languages.
+                CAM-POST can directly process the Mastercam ".NCI" file format. Internally, NCI records are converted directly to an APT standard format.
+                The INPUT_FORMAT definition file variable must be set to MCAM to enable this conversion.
+            <ul style="list-style: none;">
+                <li>let INPUT_FORMAT = "MCAM"    (same as MCAM3) </li>
+                <li>let INPUT_FORMAT = "MCAM1"   for Mastercam 9</li>
+                <li>let INPUT_FORMAT = "MCAM2"   for Mastercam X with CAM-POST V19 and earlier</li>
+                <li>let INPUT_FORMAT = "MCAM3"   for Mastercam X with CAM-POST V20 (default)</li>
+            </ul>
+            </p>
+            <p>
+                Many NCI records do not have a standard APT equivalent. These records are converted to a record, 
+                which can be captured inside the post processor for whatever purpose you desire.
+                The following lines show a typical NCI record and the resultant record in the CL file.
+            </p>
+            <p>
+            <u>NCI record (two lines)</u>
+            <ul style="list-style: none;">
+                <li>1012</li>
+                <li>1 2 3 4 5 6 7 8 9 10</li>
+            </ul>
+            </p>
+            <p>
+            <u>PPFUN command representation for Mastercam 9</u>
+            <ul style="list-style: none;">
+                <li>PPFUN/'1012 1 2 3 4 5 6 7 8 9 10'</li>
+            </ul>
+            <u>ISN command representation for Mastercam X</u>
+            <ul style="list-style: none;">
+                <li>#1001:1012,1,2,3,4,5,6,7,8,9,10</li>
+            </ul>
+            </p>
+            <p>
+                Mastercam also supports a "cantext" concept, which allows an integer flag to be added (or piggy-backed) on to motions.
+                These flags can then be used in the post processor for special processing. The cantext value is converted into a PLABEL command.
+                For example, a cantext value of "10" added to a linear rapid motion would appear as follows:
+            </p>
+            <p>
+           <u>NCI record (two lines)</u>
+           <ul style="list-style: none;">
+            <li>0</li>
+            <li>10000 1. 2. 3. -2</li>
+        </ul>                      
+        </p>
+        <p>
+            <u>APT representation</u>
+            <ul style="list-style: none;">
+                <li>PLABEL/10</li>
+                <li>RAPID</li>
+                <li>GOTO/1.,2.,3.</li>
+            </ul>
+        </p>
+            <p>
+                Mastercam has slightly different record formats for Mill, Turn and Edm applications.
+                Note that CAM-POST does not support the Edm application format.
+                The Mill and Turn formats however are supported. CAM-POST determines the format in use by the operation code (opcode$) defined on the 1013 record,
+                as follows:
+            <ul style="list-style: none;">
+                <li>1 through 99 -> Mill mode</li>
+                <li>100 through 199 -> Turn mode</li>
+            </ul>
+                With the MCAM1 and MCAM2 formats, tool changes in milling mode are represented by a LOADTL command and tool changes in turning mode are represented by a TURRET command.
+                With the MCAM3 format (default), tool changes are always represented by a LOAD/TOOL command, irregardless of the mode.
+            </p>
+            <h3>Post Processor Commands Conversion</h3>
+            <p>
+                Within the Mastercam kit folder, there is an insert.apt file that contains special commands that control NCI to APT conversion details.
+                This file should not be changed. There is also a kit.mac file that contains the following macros:
+            </p>
+            <p>
+                LOADTL/$P1* $$ Check for MILL tools on lathes
+                <ul>
+                    Only valid for MCAM1 and MCAM2 formats. This macro converts LOADTL commands to TURRET commands if the post is a simple lathe.
+                    For mill/turn lathes, this macro inserts an APPLY/MILL command before the LOADTL, if necessary, to switch to milling mode.
+                    For all other machine types the LOADTL is processed as-is.<br />
+                    With the MCAM3 format, a LOAD/TOOL is generated for both milling and turning tool changes, and an APPLY/MILL or APPLY/TURN is output if required.
+                </ul>
+                TURRET/* $$ Switch to TURN mode on lathe
+                <ul>
+                    Only valid for MCAM1 and MCAM2 formats. For mill/turn lathes, this macro inserts an APPLY/TURN command before the TURRET,
+                    if necessary, to switch to turning mode. For all other machine types the TURRET is processed as-is.<br />
+                    With the MCAM3 format, a LOAD/TOOL is generated for both milling and turning tool changes, and an APPLY/MILL or APPLY/TURN is output if required.
+                </ul>
+                PPFUN/$P1'' $$ Ignore unprocessed NCI records
+                <ul>
+                    This is a "do nothing" macro that removes unprocessed nci record information from the input APT data stream.
+                    Without this macro, GENER would issue a diagnostic that the PPFUN syntax was unknown when using the MCAM1 format.
+                </ul>
+                PLABEL/$P1 $$ Ignore unprocessed NCI cantext data
+                <ul>
+                    This is a "do nothing" macro that removes unprocessed cantext data from the input APT data stream.
+                    Without this macro, GENER would issue a diagnostic that the PLABEL command is not supported.
+                </ul>
+            </p>
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
+
