@@ -1,0 +1,145 @@
+Miscellaneous Variables
+=======================
+
+.. _var_back:
+.. index:: Variables; $BACK
+
++------------------+-----------------------------------------------+
+| **$BACK**        | Background processing flag ($TRUE or $FALSE)  |
+|                  |                                               |
+|                  | Type: Logical, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable will be set $TRUE if the /back command line qualifier
+   is specified when starting CERUN. The purpose of this variable is to
+   *advise* macros that the control emulator is running in a state where
+   user interaction is not possible (e.g., as a background process). It
+   is the responsibility of the control emulator writer to test this
+   variable before calling the $FDIALOG function or performing I/O to
+   the STDIN and STDOUT devices.
+
+   For example:
+
+      ::
+
+         $$ Set default processing options
+         …
+         IF/.NOT.$BACK
+           $$ Ask user for processing options
+           %L01=$FDIALOG('STARTUP')
+         ENDOF/IF
+
+.. _var_date:
+.. index:: Variables; $DATE
+
++------------------+-----------------------------------------------+
+| **$DATE**        | Current date and time                         |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the current date and time. The character
+   string given is formatted as “dd-mmm-yyyy hh:mm:ss.ss”.
+
+.. _var_i_:
+.. index:: Variables; $I_
+
++------------------+-----------------------------------------------+
+| **$I\_**         | $FDOC range operator value                    |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the current range operator value when
+   processing a $FDOC tag macro containing a “\*”, “\ *m*::*n*\ ” or
+   “:::” range operator. Range operators are replaced by “$I\_” when the
+   $FDOC function compiles the tag macros in a Word template. When $FDOC
+   subsequently executes the tag macro, once for each instance of the
+   range (e.g., row of a table), it sets the $I\_ variable to the
+   appropriate range value for each row.
+
+.. _var_kineng:
+.. index:: Variables; $KINENG
+
++------------------+-----------------------------------------------+
+| **$KINENG**      | VM kinematics engine                          |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable defines the kinematics engine used by Virtual Machine
+   during MCD based simulation. It is set in the questionnaire *General
+   Description / General Information* section question #6.5 “VM
+   kinematics engine”. Normally a value of 1 (one) is used when running
+   control emulator with Virtual Machine.
+
+.. _var_param:
+.. index:: Variables; $PARAM
+
++------------------+-----------------------------------------------+
+| **$PARAM**       | CERUN command line parameters                 |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the command line that initiated CERUN. It will
+   list all of the run time options selected by the user for CERUN
+   processing. See $UPARAM for information concerning user defined
+   parameters.
+
+.. _var_pid:
+.. index:: Variables; $PID
+
++------------------+-----------------------------------------------+
+| **$PID**         | Control Emulator part identification          |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable contains the control emulator part identification if
+   one has been specified.
+
+.. _var_pse:
+.. index:: Variables; $PSE
+
++------------------+-----------------------------------------------+
+| **$PSE**         | PSE processing flag ($TRUE or $FALSE)         |
+|                  |                                               |
+|                  | Type: Logical, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable will be set $TRUE if CERUN is running in parallel with
+   GENER (the ICAM post-processor)
+   See :ref:`“Starting PSE from the Command Prompt”<starting_pse>`.
+
+.. _var_uparam:
+.. index:: Variables; $UPARAM
+
++------------------+-----------------------------------------------+
+| **$UPARAM**      | User defined CERUN command line parameters.   |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   The $UPARAM macro system variable is similar to the $PARAM macro
+   system variable.
+   $UPARAM is a string containing the user defined parameters from the
+   CERUN command line following the /u option. The $PARAM string on the
+   other hand lists all command line parameters, including the user
+   defined ones. See the $FARGC and $FARGV functions for information on
+   how to extract general and user defined parameters.
+
+.. _var_v_:
+.. index:: Variables; $V_
+
++------------------+-----------------------------------------------+
+| **$V\_**         | $FDOC tag macro value                         |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable defines the value to be substituted by $FDOC for the
+   placeholder text in the content control. The $FDOC function prefixes
+   “$V\_=” to single-line tag macros in a Word template when it compiles
+   them. When $FDOC subsequently executes the tag macro, it replaces the
+   content control placeholder text with the $V\_ result.
