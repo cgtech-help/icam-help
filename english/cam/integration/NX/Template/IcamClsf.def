@@ -1,0 +1,190 @@
+##############################################################################
+# Description
+#     This is the Definition File for CLS File Generation
+#
+# Revisions
+#
+#   Date        Who     Reason
+#
+#$HISTORY$
+#
+###############################################################################
+MACHINE GENMACH_CLDATA
+
+
+
+FORMATTING 
+{
+WORD_SEPARATOR ", " 
+END_OF_LINE    "" 
+FORMAT  Vector     "%-.7f"
+FORMAT  Real       "%-.6f"
+FORMAT  Real_x     "%-.4f"
+FORMAT  Real_y     "%-.4f"
+FORMAT  Real_z     "%-.4f"
+FORMAT  Int        "%d"
+FORMAT  String     "%s"
+
+ADDRESS TEXT {
+                 LEADER ""
+                 FORMAT String
+                 FORCE always 
+             }
+
+ADDRESS TEXTOFF {
+                 LEADER ""
+                 FORMAT String
+                 FORCE off 
+             }
+
+ADDRESS ROTAXIS {
+                 LEADER ""
+                 FORMAT String
+                 FORCE off 
+             }
+
+ADDRESS XYZ {
+              LEADER ""
+              FORMAT Real
+              FORCE always
+            }
+
+ADDRESS CENTER_XYZ {
+              LEADER ""
+              FORMAT Real
+              FORCE always
+            }
+ADDRESS ARC_IJK {
+              LEADER ""
+              FORMAT Real
+              FORCE always
+            }
+ADDRESS ARC_ANGLE {
+              LEADER ""
+              FORMAT Real
+              FORCE always
+            }
+ADDRESS ARC_RAD {
+              LEADER ""
+              FORMAT Real
+              FORCE always
+            }
+ADDRESS ARC_TIMES {
+              LEADER "TIMES, "
+              FORMAT Real
+              FORCE always
+            }
+
+ADDRESS INT {
+                LEADER ""
+                FORMAT Int
+                FORCE off 
+          } 
+ADDRESS REAL {
+            LEADER ""
+            FORMAT Real 
+            FORCE  off 
+          } 
+ADDRESS Rtrval {
+                LEADER ""
+                FORMAT Real 
+                FORCE off 
+               } 
+ADDRESS Minor1 {
+                LEADER ""
+                FORMAT String 
+                FORCE off 
+               } 
+ADDRESS Minor2 {
+                LEADER ""
+                FORMAT String 
+                FORCE off 
+               } 
+ADDRESS Pressure {
+                    LEADER ""
+                    FORMAT String 
+                    FORCE off 
+                 }
+ADDRESS Guides {
+                  LEADER ""
+                  FORMAT String 
+                  FORCE off 
+               }
+ADDRESS Register {
+                   LEADER ""
+                   FORMAT Int 
+                   FORCE off 
+                 } 
+ADDRESS Rotate {
+               LEADER ""
+               FORMAT Real 
+               FORCE off 
+               } 
+
+#=====================================================================
+#
+# TEMPLATES FOR OUTPUT
+#
+#=====================================================================
+
+BLOCK_TEMPLATE icam_version {"#1003:0/'ICAMCLSF.DEF',24,2115"}
+
+#
+# MOVARC/center_x, center_y, center_j, i, j, k, radius_value, ANGLE, angle_value
+#
+BLOCK_TEMPLATE movarc {"MOVARC/"\nows
+                     CENTER_XYZ[$mom_arc_center(0)]
+                     CENTER_XYZ[$mom_arc_center(1)]
+                     CENTER_XYZ[$mom_arc_center(2)]
+                     ARC_IJK[$mom_arc_axis(0)]
+                     ARC_IJK[$mom_arc_axis(1)]
+                     ARC_IJK[$mom_arc_axis(2)]
+                     ARC_RAD[$mom_arc_radius]
+                     "ANGLE"
+                     ARC_ANGLE[$mom_arc_angle]
+					 ARC_TIMES[$mom_arc_times]}
+
+BLOCK_TEMPLATE delay {"DELAY/"\nows
+                      TEXTOFF[$mom_delay_mode]\opt
+                      REAL[$mom_delay_value]\opt
+                      INT[$mom_delay_revs]\opt
+                      TEXT[$mom_delay_text]\opt} 
+
+BLOCK_TEMPLATE flush_tank {"FLUSH/"\nows
+                           TEXT[$mom_flush_tank]
+                           TEXT[$mom_flush_tank_text]\opt}
+
+BLOCK_TEMPLATE flush {"FLUSH/"\nows
+                      TEXT[$mom_flush_status]
+                      Guides[$mom_flush_guides]\opt
+                      Pressure[$mom_flush_pressure]\opt
+                      Register[$mom_flush_register]\opt
+                      TEXT[$mom_flush_text]\opt} 
+
+BLOCK_TEMPLATE set_adjust {"SET/ADJUST"
+                           Register[$mom_length_comp_register]\opt
+                           TEXTOFF[$mom_text]\opt
+                           TEXT[$mom_length_comp_register_text]\opt}
+
+BLOCK_TEMPLATE lock_axis {"SET/LOCK"
+                           Minor1[$mom_lock_axis]\opt
+                           Minor2[$mom_lock_axis_plane]\opt
+                           Rtrval[$mom_lock_axis_value]\opt}
+
+
+# THIS MOVE IS AN XY MOVE ABOVE THE HOLE BEFORE RAPIDING DOWN IN Z
+# MOST MACHINES DON'T NEED THIS POINT BUT SOME DO.
+# THIS MOVE IS AN XY MOVE ABOVE THE HOLE BEFORE RAPIDING DOWN IN Z
+# MOST MACHINES DON'T NEED THIS POINT BUT SOME DO.
+BLOCK_TEMPLATE cycle_goto_1 {"GOTO/"\nows
+                                  XYZ[$mom_mcs_goto(0)]
+                                  XYZ[$mom_mcs_goto(1)]
+                                  XYZ[$mom_prev_mcs_goto(2)]}
+
+BLOCK_TEMPLATE cycle_goto_2 {"GOTO/"\nows
+                                  XYZ[$mom_prev_mcs_goto(0)]
+                                  XYZ[$mom_prev_mcs_goto(1)]
+                                  XYZ[$mom_mcs_goto(2)]}
+
+
+}
