@@ -1,0 +1,605 @@
+.. _command_lintol:
+
+The LINTOL Command :kbd:`[ML]`
+==============================
+
+Linear motions on a NC machine are linear with respect to the machine
+control point. When a move includes a change in one or more of the
+rotary axes, the tool tip path with respect to the part will not be
+linear. The amount of deviation from the straight line is a function
+of the rotation amount and the distance between the rotary axis and
+the tool tip. Deviations grow larger as the rotation amount or the
+distance from rotary axes increases.
+
+The problem can be eliminated by insuring that no single motion ever
+requires a large rotary move. Setting INTOL and OUTTOL parameters in
+the CAM system to a small value will generate more intermediate
+points, which will help eliminate the linear tolerance problems. A
+more effective and optimal solution is to use the LINTOL command,
+which specifies an acceptable deviation of the straight line motion
+of the tool tip from the desired CL data linear path. When LINTOL is
+active, GENER will choose the rotary solution (or pose) that keeps
+tool axis deviations to a minimum.
+
+Some modern controllers have a built in linearization capability,
+which eliminates the requirement to linearize in the post-processor.
+See :ref:`“Rotating Tool Center Point”<rotating_tool_center_point>` for more information.
+
+The LINTOL command is valid for machines having one or more
+continuous rotary axes. The following functions are available:
+
+-  :ref:`“Linearization Activation”<linearization_activation>`
+-  :ref:`“Linearization Tool-Tip Tolerance”<linearization_tootip_tolerance>`
+-  :ref:`“Linearization Tool Length Adjustment”<linearization_toollength_adjustment>`
+-  :ref:`“Linearization Angular Tolerance”<linearization_angular_tolerance>`
+-  :ref:`“Linearization Stepping Control”<linearization_stepping_control>`
+-  :ref:`“Singularity Push-Thru”<singularity_push_thru>`
+-  :ref:`“Tool-Tip-Only Linearization”<tltip_only_linearization>`
+-  :ref:`“Linearization with RTCP”<linearization_with_rtcp>`
+-  :ref:`“Linearization Spline Fitting”<linearization_spline_fitting>`
+-  :ref:`“Rotary Turn-Around”<rotary_turn_around>`
+-  :ref:`“Linearization Path Planning”<linearization_path_planning>`
+-  :ref:`“Forced Path-Planning Scan”<forced_path_planning_scan>`
+-  :ref:`“Singular Pre-Positioning”<singular_prepositioning>`
+-  :ref:`“Rotary Winding”<rotary_winding>`
+
+.. _linearization_activation:
+
+Linearization Activation
+------------------------
+
+   :math:`\textbf{LINTOL /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+OFF disables linearization. ON re-enables linearization using the
+last specified settings. Generally post-processors will enable
+linearization by default.
+
+   :math:`\textbf{LINTOL / OFF},\textbf{NEXT}`
+
+The NEXT option with OFF disables linearization for the next motion
+only, whether feed or rapid. Use this feature to enable a change in
+rotary axis pose on a feed positioning motion, or on a rapid motion
+when rapid linearization is active.
+
+.. _linearization_tootip_tolerance:
+
+Linearization Tool-Tip Tolerance
+--------------------------------
+
+The following two commands are equivalent:
+
+   :math:`\textbf{LINTOL / } \mathit{feed} \; \big[,\mathit{rapid}\,\big]`
+
+   :math:`\textbf{LINTOL /} \icamrange{1.6}{1}\! \begin{pmatrix} \begin{array}{l} \textbf{FINE}, \mathit{feed} \\ \textbf{COARSE}, \mathit{rapid} \end{array}\,\end{pmatrix}`
+
+The *feed* value specifies the allowable tool tip deviation from the
+programmed straight-line path permitted during motions at feed. The
+*rapid* value similarly specifies the allowable tool tip deviation
+during rapid moves. By default, linearization of rapid motions will
+not occur if a *rapid* value is omitted.
+
+Whenever necessary, GENER automatically generates intermediate points
+along the tool path to insure that any deviation caused by rotary
+axis swing does not exceed the specified tolerance. If the specified
+tolerance cannot be achieved, GENER will diagnose this condition and
+use the best possible tolerance.
+
+The choice of rotary axis position is limited while linearization is
+active. On a 5 axis machine there are generally two possible rotary
+solutions (or poses) that satisfy any given tool axis orientation.
+GENER will always choose the orientation that results in the least
+amount of tool axis deviation during the move. This is known as
+“large circle interpolation”. Note that GENER may choose a solution
+that is outside travel limits, instead of one that is inside travel
+limits, in order to satisfy the rotary axis pose requirements imposed
+by large circle interpolation. Path planning and rotary-turn-around
+features (both described below) can eliminate or reduce this problem.
+
+LINTOL is not active during rapid motions if a *rapid* tolerance
+value is not specified. This means that rapid motions will be output
+without regard to the actual motion of the tool tip with respect to
+the part and without regard to the change of the tool axis from start
+to end of the motion. Only the final position is important with a
+non-linearized rapid motion. On the other hand, if rapid
+linearization is active, GENER will segment rapid motions in order to
+respect the specified straight line tolerance at the tool tip and by
+default will choose a rotary pose that minimizes tool axis deviations
+during the move (in exactly the same way that feed linearization is
+handled). This restriction on choice of rotary pose may inhibit the
+use of path planning, preferred positioning and overtravel avoidance
+features. See :ref:`“Tool-Tip-Only Linearization”<tltip_only_linearization>` for details.
+
+.. _linearization_toollength_adjustment:
+
+Linearization Tool Length Adjustment
+------------------------------------
+
+GENER computes linearization intermediate points based on the
+distance between the rotary axis pivot point and the tool tip. The
+LENGTH option can be used to adjust the pivot point to tool tip
+distance, without affecting the output coordinates, by defining the
+expected gauge length of the tool.
+
+   :math:`\textbf{LINTOL / LENGTH},
+   \begin{pmatrix}\,\begin{array}{l} \mathit{length} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The *length* value should specify the longest expected gauge length
+that will be used at the machine, measured in CL input units (e.g.,
+inches for UNITS/INCHES; millimeters for UNITS/MM). OFF (the default)
+disables any gauge length adjustment. ON re-enables the last
+specified gauge length value.
+
+.. _linearization_angular_tolerance:
+
+Linearization Angular Tolerance
+-------------------------------
+
+When LINTOL is active, GENER forces the tool axis to follow the path
+of least change while interpolating from one point to the next. This
+generally produces a smooth change in tool orientation when combined
+with the segmentation that occurs due to tool tip linearization.
+However, it is possible to specify an additional angular tolerance,
+to have GENER measure and limit the amount of angular wobble
+permitted in linearized feed motions.
+
+   :math:`\textbf{LINTOL / ANGLE},
+   \begin{pmatrix}\,\begin{array}{l} \mathit{degrees} \\ \textbf{DIST},\mathit{tolerance} \\ \textbf{FINE} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+FINE tolerance keeps wobble within two pulse widths of the rotary
+axes (e.g., 0.002 degrees on a rotary with a 0.001 resolution).
+*Degrees* limits wobble of the tool axis to the specified value. A
+*tolerance* can be specified to limit wobble measured at both the top
+of the tool (defined by the tool length) and at the cutting edge
+(defined by the tool diameter). If the specified tolerance cannot be
+achieved, GENER will diagnose this condition and use the best
+possible tolerance.
+
+OFF disables angular tolerance (this is the default), which means
+that GENER will only measure and control tool-path tolerance at the
+tool tip.
+
+Angular tolerance applies to feed linearization motions only.
+
+.. _linearization_stepping_control:
+
+Linearization Stepping Control
+-------------------------------
+
+The following command affects how intermediate points are calculated
+along the motion being linearized.
+
+   :math:`\textbf{LINTOL / SMOOTH},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+In V20 and earlier releases of GENER, the linearized intermediate
+step distances would tend to decrease as the motion was subdivided,
+resulting in potentially very small subdivisions at the end of very
+large rotary moves. Starting with V21, the linearization logic was
+enhanced to eliminate the bias that was causing step sizes to progressively
+decrease, which results in smoother stepping. OFF (the default) selects the
+old behavior. ON selects enhanced stepping.
+
+.. _singularity_push_thru:
+
+Singularity Push-Thru
+---------------------
+
+When the tool axis vector is parallel to the axis of rotation of one
+of the rotary axes, that rotary axis is said to be “singular”. This
+is because the orientation has no real effect on the tool-to-part
+relationship. The machine rotary axis behavior as it approaches
+singularity can be seemingly quite erratic. Quite often a very large
+change in machine rotary axis position is necessary to reflect a very
+small change in tool axis vector orientation with respect to the
+part.
+
+   :math:`\textbf{LINTOL / THRU},
+   \begin{pmatrix}\,\begin{array}{l} \mathit{angle} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The THRU option activates special singularity processing that will
+attempt to minimize the rotation of the singular axis as the tool
+axes traverses through or close to singularity. Without this option,
+the rotation of the singular axes can be as much as 180 degrees
+within a very short span of motion in part space, which is necessary
+to maintain an exact tool-to-part orientation at all times. Although
+this is mathematically the “correct” solution, the resulting dwell
+mark might be unacceptable. The THRU option replaces this large
+singular rotation by a very short rotation of the second non-singular
+rotary axis, thereby eliminating the dwell mark. Note that the choice
+of *angle* is important, since this can result in a tool axis
+deviation in part space by as much as 2\*\ *angle*. The *angle* is
+restricted to the range 0.2 through 3 degrees.
+
+THRU,OFF disables push-thru processing; THRU,ON enables push-thru
+processing at the last specified angle (1 degree by default).
+
+Push-thru processing should only be enabled when it is more
+acceptable to have a tool axis deviation of the specified angle than
+it is to have a dwell caused by a near 180 degree rotation of one of
+the machine’s axes.
+
+.. _tltip_only_linearization:
+
+Tool-Tip-Only Linearization
+---------------------------
+
+Tool-tip-only linearization is a feature that generates straight line
+motion at the tool tip, while allowing the rotary axes to position
+independently to a final position. GENER does not impose any
+limitations on the rotary axis pose when tool-tip-only linearization
+is active.
+
+   :math:`\textbf{LINTOL / TLANGL},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF}\,\big[,\textbf{ALL}\,\big] \end{array}\,\end{pmatrix}`
+
+ON (the default) specifies standard tool angle linearization control,
+which limits GENER to selecting the single rotary pose that satisfies
+the requirements imposed by large circle interpolation.
+
+OFF disables large circle interpolation for RAPID linearized motions
+only. This option has no effect unless rapid linearization is active.
+By disabling large circle interpolation for rapid motions, GENER is
+then free to choose any rotary pose on a positioning motion to
+satisfy path planning, preferred positioning and overtravel avoidance
+features. Note that although the tool tip will move in a straight
+line with respect to the part, the axis of the tool is not
+constrained in any way.
+
+OFF,ALL disables large circle interpolation for all linearized
+motions; both rapid and feed. Tool-tip-only linearization on feed
+motions should only be used on feed positioning motions and never
+when the tool is in contact with the final part.
+
+.. _linearization_with_rtcp:
+
+Linearization with RTCP
+-----------------------
+
+As mentioned at the start of this section, some modern controllers
+have a built in linearization capability, which should eliminate the
+requirement to linearize in the post-processor. See :ref:`“Rotating Tool Center Point”<rotating_tool_center_point>` for more information. However,
+some controllers, while providing tool tip linearization, do not
+support “large circle interpolation” to ensure the minimum amount of
+tool axis deviation during the move. GENER provides the following
+LINTOL option to overcome this limitation:
+
+   :math:`\textbf{LINTOL / RTCP},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON}\,\big[,\textbf{FINE}\,\big] \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+ON enables the output of intermediate linearization generated points
+while RTCP is active. Use this option if gouging occurs on motions
+with a large change in rotary position while RTCP is active. Use
+“ON,FINE” to limit linearization of RTCP motions to cutting motions
+only; RAPID and high feed motions will not be linearized. OFF (the
+default) inhibits the output of linearized intermediate points while
+RTCP is active.
+
+.. _linearization_spline_fitting:
+
+Linearization Spline Fitting
+----------------------------
+
+Linearization of motions with a large change in rotary axis position,
+or when the tool tip is far from the rotary pivot, may generate many
+intermediate motions. This can greatly increase total program size.
+GENER provides a LINTOL spline fitting option that may reduce the
+total tape length on machines that support 5D spline interpolation.
+
+   :math:`\textbf{LINTOL / SPLINE},
+   \begin{pmatrix}\,\begin{array}{l} n \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The value *n* defines the minimum number of linearized intermediate
+points that must be output for a single motion in order to be a
+candidate for spline fitting. A minimum of 4 points is required for
+spline fitting. GENER will attempt to interpolate the motion using 5D
+spline interpolation (if available). OFF (the default) disables
+linearization spline fitting. ON re-enables linearization spline
+fitting.
+
+.. _rotary_turn_around:
+
+Rotary Turn-Around
+------------------
+
+Rotary turn-around (RTA) provides for automatic retraction and
+repositioning during LINTOL to avoid travel limitations. RTA is only
+available for 5-axis machining (i.e., 2 rotary axes). It is activated when
+the current tool path is about to exceed travel limits and the
+alternate solution tool path is within travel limits. RTA is
+controlled by the following command:
+
+   :math:`\textbf{LINTOL / ROTREF},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+OFF disables RTA. ON re-enables RTA using the last specified
+settings. Some post-processors will enable RTA by default. RTA
+settings may be defined in the post-processor by default, but can
+also be specified using the following command:
+
+   :math:`\textbf{LINTOL / ROTREF} \!
+   \icamrange{7}{0} \begin{bmatrix} ,
+   \begin{array}{l} \begin{pmatrix}\begin{array}{l} \textbf{BACK} \\ \textbf{FEDTO} \end{array}\end{pmatrix} ,\mathit{dist} \begin{bmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{IPR} \\ \textbf{MMPR} \\ \textbf{PERMIN} \\ \textbf{PERREV} \end{array}\end{pmatrix} ,\mathit{feed}\, \end{bmatrix} \\ \begin{pmatrix}\begin{array}{l} \textbf{RTRCTO} \\ \textbf{RAPTO} \end{array}\end{pmatrix} ,\mathit{dist} \end{array} \end{bmatrix} \; \ldots`
+
+      :math:`\hspace{3.52cm} \ldots \;
+      \begin{bmatrix} , \begin{pmatrix}\,\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \end{array}\,\end{pmatrix} , \begin{pmatrix}\,\begin{array}{l} \mathit{coord} \\ \textbf{NOMORE} \end{array}\,\end{pmatrix} \end{bmatrix}
+      \begin{bmatrix} ,\textbf{LENGTH}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix} \; \ldots`
+
+      :math:`\hspace{3.52cm} \ldots \;
+      \begin{bmatrix} ,\textbf{AXIAL}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}\end{bmatrix} \; \ldots`
+
+      :math:`\hspace{3.52cm} \ldots \;
+      \begin{bmatrix} ,\textbf{OFSETL}, \begin{pmatrix}\begin{array}{l} dx,dy \big[,dz \,\big] \\ \textbf{ON} \end{array}\,\end{pmatrix} \end{bmatrix} \,
+      \begin{bmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{LEFT} \\ \textbf{RIGHT} \end{array}\,\end{pmatrix} , \begin{pmatrix}\begin{array}{l} \mathit{dist} \\ \textbf{ON} \end{array}\,\end{pmatrix} \end{bmatrix}`
+
+BACK specifies a retraction distance along the tool axis at the
+current or specified feed. RTRCTO specifies an additional retraction
+at rapid, also along the tool axis. RAPTO specifies a plunge motion
+along the new tool axis at rapid. FEDTO specifies an additional
+plunge motion at the current or specified feed. One or more of these
+keywords can be omitted to reduce the number of steps during RTA. For
+example, BACK can be omitted to eliminate the feed retract.
+
+A clearance plane can also be specified in machine coordinates using
+one of the XAXIS, YAXIS or ZAXIS keywords and the machine coordinate
+value. RTA will position to the clearance plane after the BACK and
+RTRCTO moves, staying on this plane while positioning above the first
+RAPTO or FEDTO point. The LENGTH,OFF option can be used to
+automatically remove and reinstate tool length compensation on the
+motions to and from the clearance plane. By default length
+compensation is not changed during RTA (i.e., LENGTH,ON). The
+clearance plane and LENGTH options are modal (specify NOMORE with one
+of *XYZ*\ AXIS to disable the extra clearance motion).
+
+The AXIAL,ON option can be used to align the tool parallel to the
+rotary axis being repositioned, after retracting the tool and before
+the rotary repositioning motion is output. This avoids sweeping the
+tool in a large arc through the workpiece space, which can allow the
+RTA action to be performed much closer to the workpiece (i.e., with
+smaller clearances). By default the tool axis is not straightened
+during RTA repositioning (i.e., AXIAL,OFF), The AXIAL option is
+modal.
+
+When a T-slot tool or a non-symmetrical tool (e.g., an ultrasonic tool)
+is loaded, the tool must first be moved away from the stock wall to a
+clearance position before the classic RTA sequence can be generated by
+moving the tool along the tool axis. The RTA's OFSETL, LEFT and RIGHT parameters define
+an extra offset that moves the tool out of the slot or away from the wall.
+The offset can be specified either as an OFSETL vector, which defines the direction
+and amount of the offset, or as a scalar, where a LEFT or RIGHT keyword indicates the
+direction of the offset.
+
+-  The OFSETL *dx,dy,dz* parameters define a vectorial offset.
+   The direction is expressed in the local coordinate frame defined by the motion direction.
+   The axes of this local coordinate system (CS) are:
+   the x-axis, defined by the motion direction;
+   the z-axis, defined by the tool axis direction;
+   and the y-axis, defined as the cross product of z × x.
+
+   \
+
+-  The offset direction can also be specified using either the LEFT or RIGHT keywords,
+   where the amount of the offset is given by a scalar *dist* value.
+   When CUTCOM diameter compensation is active and its (LEFT\|RIGHT) specification does not
+   match the RTA (LEFT\|RIGHT) specification, then the CUTCOM specification takes precedence
+   (the OFSETL vector is not affected by CUTCOM).
+
+   \
+
+-  An offset value of 0.0 or an offset vector of zero length disables the feature.
+   The last active offset can be reactivated by specifying (OFSETL\|LEFT\|RIGHT),ON.
+   The last active offset type and direction are reactivated regardless of the OFSETL, LEFT or RIGHT
+   keyword used.
+
+The orientation shift from one rotary solution to the next occurs on
+the lateral positioning move between the last retract motion and the
+first plunge motion.
+
+.. _linearization_path_planning:
+
+Linearization Path Planning
+---------------------------
+
+Linearization path planning (LPP) can:
+
+-  Eliminate or reduce the number of out-of-travel motions in a part
+   program and avoid collision events (when VM simulation is present)
+   by selecting an initial pose that avoids an overtravel or collision
+   during the cutting process.
+
+-  Minimize the number of rotary turn-around (RTA) events (see :ref:`“Rotary Turn-Around”<rotary_turn_around>`)
+   by selecting an initial pose that maximizes the initial cut length.
+
+-  Pre-position singular axes on a positioning or cutting motion, to
+   avoid dwell marks caused when a rotary must be rotated in place at
+   the start of a motion (see :ref:`“Singular Pre-Positioning”<singular_prepositioning>`).
+
+-  Optimize the winding of rotary axes with limited travel in excess of
+   360 degrees (see :ref:`“Rotary Winding”<rotary_winding>`), by reducing or eliminating out-of-travel
+   motions or RTA events.
+
+LPP performs these optimizations by scanning forward in the part
+program to the end of the current tool path (defined as a positioning
+motion or any LINTOL command) and using this analysis to apply an
+optimal 5-axis pose at the start of the tool path. LPP is controlled
+as follows:
+
+   :math:`\textbf{LINTOL / SCAN},\textbf{ON} \;
+   \big[,\textbf{MAXDPM},\ldots \big]\;
+   \big[,\textbf{OPTION},n \,\big]`
+
+   :math:`\textbf{LINTOL / SCAN},\textbf{OFF}`
+
+OFF disables LPP. ON enables LPP. An LPP scan begins when a RAPID or
+high feed positioning motion is encountered. LPP scans forwards through
+all subsequent positioning motions and then through the entire feed
+interpolation tool path, analyzing the motions so as to generate an
+optimal initial positioning move.
+
+If RAPID linearization is active, then a LINTOL/TLANG,OFF condition
+(see :ref:`“Tool-Tip-Only Linearization”<tltip_only_linearization>`) must
+be in effect to give LPP the flexibility to change from one rotary
+axis pose to another during the positioning move. Otherwise, GENER
+will be forced to choose a single rotary path, which negates the
+effectiveness of LPP. If a rotary axis is moved during a high feed
+positioning motion, then the feed motion will be tool-tip-only
+linearized, regardless of the LINTOL/TLANGL setting.
+
+   :math:`\big[,\textbf{MAXDPM},\ldots \big]`
+
+see :ref:`“Singular Pre-Positioning”<singular_prepositioning>` for a description of the MAXDPM option.
+
+   :math:`\big[,\textbf{OPTION},n \,\big]`
+
+When there is a sequence of two or more positioning motions at the
+start of a tool path, LPP by default applies the pose change on the
+positioning motion that has the longest lateral component. This
+default can be changed by coding a modal OPTION,\ *n* value as
+follows:
+
+: 1: SCAN,NEXT during longest lateral move (default)
+: 2: SCAN,NOW at start of longest lateral move
+: 3: ROTREF,NEXT during longest lateral move
+: 4: ROTREF,NOW at start of longest lateral move
+:11: SCAN,NEXT during first positioning move
+:12: SCAN,NOW at start of first positioning move
+:13: ROTREF,NEXT during first positioning move
+:14: ROTREF,NOW at start of first positioning move
+:21: SCAN,NEXT during highest positioning move
+:22: SCAN,NOW at start of highest positioning move
+:23: ROTREF,NEXT during highest positioning move
+:24: ROTREF,NOW at start of highest positioning move
+
+Because LPP can cause the machine to move from one pose to another on
+the initial positioning motion, it is important to program
+positioning motions well clear of the part. In particular, options 11
+and 12 should be used with caution as they will result in a rotary
+pose change while in contact with the part when the first positioning
+move starts in contact with the part.
+
+As with RTA, LPP passage can be replaced by SmartPATH generated safe and
+optimal positioning sequence.
+
+.. _forced_path_planning_scan:
+
+Forced Path-Planning Scan
+-------------------------
+
+LPP analysis can be activated at a specific location using the
+following commands:
+
+   :math:`\textbf{LINTOL / SCAN},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{NEXT} \\ \textbf{NOW} \end{array}\,\end{pmatrix}`
+
+   :math:`\textbf{LINTOL / ROTREF},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{NEXT} \\ \textbf{NOW} \end{array}\,\end{pmatrix}`
+
+With either of these commands, an LPP analysis is performed and a
+pose change is performed only if necessary.
+
+With SCAN,NOW the pose change occurs in place at the current tool tip
+position. With SCAN,NEXT the pose change occurs on the motion to the
+next tool position. Use the SCAN method when the tool is well clear
+of the part.
+
+With ROTREF,NOW the pose change occurs in place at the current tool
+tip location using a rotary turn-around (RTA) motion (see :ref:`“Rotary Turn-Around”<rotary_turn_around>`).
+With ROTREF,NEXT the pose change also uses a rotary turn-around, retracting from the
+current position and plunging at the next tool position.
+
+The NOW and NEXT options do not change the ON or OFF state of LPP. If
+LPP is disabled, the NOW and NEXT options cause a one-time analysis.
+If LPP is enabled, the NOW and NEXT options simply define specific
+locations (overriding any default or specified OPTION value) where an
+LPP pose change should be applied if required.
+
+Please note that forced LPP may not be always possible. LPP avoids
+overtravel or Collision on a 5-axis machine by selecting one of the
+two available kinematics paths, selecting the one that features no
+interference. It may happen that at current position the desired
+kinematic solution is not available (out-of travel or it would collide
+the machine). This is why it is always better to run SCAN,ON method
+allowing post processor to choose the best position where LPP rotation
+should be applied.
+
+.. _singular_prepositioning:
+
+Singular Pre-Positioning
+------------------------
+
+A rotary axis is said to be singular when the axis of rotation is
+parallel to the tool axis. In this case, the orientation of the
+rotary axis has no effect on the orientation of the tool with respect
+to the part. As an example, a typical machine C rotary axis will be
+singular when the tool is in either a (0,0,1) or (0,0,–1)
+orientation.
+
+Linearization path planning and rotary turn-around both include logic
+that test for the case where a rotary axis is singular at the start
+of the cutting sequence. GENER will look forward in the feed
+interpolation block looking for the first motion that forces the
+singular rotary axis to a specific angle. This rotation is then
+output during the positioning sequence before cutting starts, to
+avoid dwell marks caused by rotating the rotary axis in-place during
+cutting.
+
+GENER also provides an option to similarly test for singular
+pre-positioning *while* cutting. In this case, the test checks for
+the case where a rotary axis goes from a non-singular to a singular
+condition during cutting. GENER can look ahead in the cutting
+tool-path for the next feed motion that forces the singular rotary
+axis to a specific angle and then carefully apply the rotation during
+the cutting sequence to avoid rotating the axis in place.
+
+Singular pre-positioning while cutting is controlled by including the
+MAXDPM keyword option on the LINTOL/SCAN command\ [#]_:
+
+   :math:`\textbf{LINTOL / SCAN},\ldots,\textbf{MAXDPM}
+   \begin{pmatrix} \!,\! \begin{array}{l} \big[\,\mathit{low},\big]\,\mathit{high} \\ \;\textbf{ON} \\ \;\textbf{OFF} \end{array}\,\end{pmatrix}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{START} \\ \textbf{END} \end{array}\,\end{bmatrix}`
+
+The *low* and *high* values specify the range of rotary axis rotation
+speeds (in degrees per minute) to use when a singular rotary axis is
+pre-positioned. The default maximum *high* rate is the physical
+rotary axis limit. The default *low* rate is half the maximum. GENER
+will attempt to rotate the axis at a speed as close as possible to
+the low end of the range. GENER will segment a motion, if possible
+and if necessary, to avoid exceeding the maximum rotation rate.
+
+START specifies that the singular pre-positioning should happen in
+the motions immediately after the rotary axis goes singular. END (the
+default) defers the singular pre-positioning to the motions
+immediately before the rotary axis goes non-singular (i.e., is
+needed).
+
+.. [#] In V16 and earlier releases, the macro variables $LINSNG and
+   $LINSRT provided rudimentary control over singular positioning while
+   cutting. These variables have been deprecated.
+
+.. _rotary_winding:
+
+Rotary Winding
+--------------
+
+Rotary axis winding is a process that winds (i.e., backs up) a rotary
+axis on a positioning motion, so as to extend the range of travel
+available during the cutting motions. Winding works in combination
+with linearization path planning (LPP) and rotary turn-around (RTA),
+but only on machines that have one or more rotary axes with “range”
+travel limits of 360 degrees or larger
+
+Winding is controlled by the following command:
+
+   :math:`\textbf{LINTOL / WIND},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+OFF (the default) disables rotary axis winding. ON enables winding.
+When winding is active with LPP, GENER will rotate (i.e., wind) a
+rotary axis as much as is necessary or possible on the positioning
+motion, so as to avoid an overtravel condition on that rotary axis
+during the cutting process. When winding is active with RTA, GENER
+will do the same on the lateral orientation shift motion.
+
+Winding can produce positioning motions that include multiple full
+revolutions of one or both rotary axes. However, winding only rotates
+these axes by the minimum amount necessary to avoid or limit
+out-of-travel conditions for the upcoming tool path.
