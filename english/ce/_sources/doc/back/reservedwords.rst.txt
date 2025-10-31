@@ -1,0 +1,18 @@
+.. _annex_reserved_words:
+
+Reserved Words
+**************
+
+Reserved words are keywords that are used by the ICAM macro language.
+Words marked with \*\* are reserved for use by the Icam Post product.
+
+   .. Developer's note:
+      Sphinx does not support text that flows from the bottom of one column to the
+      top of the next in a multi-column table. If a word is added or removed from
+      the list of reserved words, then the table must be manually reorganized. The
+      reserved words are maintained in a 4 column product-specific csv file in the
+      hope that this makes it easier to modify the table.
+
+   .. csv-table::
+      :file: reservedwords.csv
+      :widths: 1 1 1 1
