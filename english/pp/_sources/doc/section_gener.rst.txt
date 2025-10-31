@@ -1,0 +1,30 @@
+.. _gener_section:
+
+GENER: The Post-Processor
++++++++++++++++++++++++++
+
+This section describes the use of the post-processor runtime, named GENER.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   gener/index
+   vocab/index
+   diag/index
+
+**Section Overview**
+
+-  :ref:`“GENER”<gener>` provides a general description of the
+   operation of GENER, the run-time post-processing module.
+
+   \
+
+-  :ref:`“Post-Processor Vocabulary”<vocabulary>` details the individual
+   post-processor commands and related options recognized by GENER.
+
+   \
+
+-  :ref:`“Diagnostic Messages”<diagnostics>` examines the different classes
+   of errors, the post-processor actions that occur when they are detected, the format of
+   error messages, and how to customize them.
