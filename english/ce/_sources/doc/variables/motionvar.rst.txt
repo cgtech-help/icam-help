@@ -1,0 +1,581 @@
+.. _motion_related_variables:
+.. _var_axesmcd:
+.. index:: Variables; $AXESMCD
+.. _var_c2papt:
+.. index:: Variables; $C2PAPT
+.. _var_clrmod:
+.. index:: Variables; $CLRMOD
+.. _var_clrsrf:
+.. index:: Variables; $CLRSRF
+.. _var_duppnt:
+.. index:: Variables; $DUPPNT
+.. _var_gotocln:
+.. index:: Variables; $GOTOCLN
+.. _var_lcamod:
+.. index:: Variables; $LCAMOD
+.. _var_lcaoff:
+.. index:: Variables; $LCAOFF
+.. _var_lcaon:
+.. index:: Variables; $LCAON
+.. _var_lcauto:
+.. index:: Variables; $LCAUTO
+.. _var_lcautot:
+.. index:: Variables; $LCAUTOT
+.. _var_lcprefrot:
+.. index:: Variables; $LCPREFROT
+.. _var_lcsaft:
+.. index:: Variables; $LCSAFT
+.. _var_lcsaut:
+.. index:: Variables; $LCSAUT
+.. _var_lcsbef:
+.. index:: Variables; $LCSBEF
+.. _var_lcsid:
+.. index:: Variables; $LCSID
+.. _var_lcspnd:
+.. index:: Variables; $LCSPND
+.. _var_lintol:
+.. index:: Variables; $LINTOL
+.. _var_lintolf:
+.. index:: Variables; $LINTOLF
+.. _var_lintolr:
+.. index:: Variables; $LINTOLR
+.. _var_mrgcir:
+.. index:: Variables; $MRGCIR
+.. _var_mulsiz:
+.. index:: Variables; $MULSIZ
+.. _var_multax:
+.. index:: Variables; $MULTAX
+.. _var_origin:
+.. index:: Variables; $ORIGIN
+.. _var_originl:
+.. index:: Variables; $ORIGINL
+.. _var_polract:
+.. index:: Variables; $POLRACT
+.. _var_polrapt:
+.. index:: Variables; $POLRAPT
+.. _var_raplin:
+.. index:: Variables; $RAPLIN
+.. _var_rdntlr:
+.. index:: Variables; $RDNTLR
+.. _var_rotspl:
+.. index:: Variables; $ROTSPL
+.. _var_rtaid:
+.. index:: Variables; $RTAID
+.. _var_rtaidl:
+.. index:: Variables; $RTAIDL
+.. _var_safid:
+.. index:: Variables; $SAFID
+.. _var_safidn:
+.. index:: Variables; $SAFIDN
+.. _var_scanid:
+.. index:: Variables; $SCANID
+.. _var_scanidl:
+.. index:: Variables; $SCANIDL
+.. _var_scanmtn:
+.. index:: Variables; $SCANMTN
+.. _var_sngpole:
+.. index:: Variables; $SNGPOLE
+.. _var_tcpfmtopt:
+.. index:: Variables; $TCPFMTOPT
+.. _var_tlmode:
+.. index:: Variables; $TLMODE
+.. _var_track:
+.. index:: Variables; $TRACK
+.. _var_trans:
+.. index:: Variables; $TRANS
+.. _var_ugmode:
+.. index:: Variables; $UGMODE
+.. _var_windprt:
+.. index:: Variables; $WINDPRT
+
+Motion-Related Variables
+========================
+
+.. _var_axes:
+.. index:: Variables; $AXES
+
++------------------+-----------------------------------------+
+| **$AXES**        | String showing active axes              |
+|                  |                                         |
+|                  | Type: String, Read-only                 |
++------------------+-----------------------------------------+
+
+   This variable displays the currently active axes in the form of a
+   character string containing 6 characters. At any one time, Control Emulator will
+   allow a maximum of 3 linear axes, 2 rotary axes and 1 additional
+   extending or co-linear axis to be controlled. Therefore the maximum
+   number of active axes is 6.
+
+   The characters displayed in the $AXES string are one letter
+   abbreviations representing the axis names. Any of the axes supported
+   by Control Emulator may be represented. The abbreviations are as follows:
+
+      .. _axis_names:
+
+         .. list-table:: Axes Names
+            :widths: auto
+            :header-rows: 1
+            :class: wrap-last
+
+            *  -  Character
+               -  Axis name
+            *  -  X
+               -  X-axis (primary X-axis)
+            *  -  Y
+               -  Y-axis (primary Y-axis)
+            *  -  Z
+               -  Z-axis (primary Z-axis)
+            *  -  U
+               -  U-axis (secondary X-axis)
+            *  -  V
+               -  V-axis (secondary Y-axis)
+            *  -  W
+               -  W-axis (secondary Z-axis)
+            *  -  E
+               -  Extending axis
+            *  -  a
+               -  A'-axis table
+            *  -  b
+               -  B'-axis table
+            *  -  c
+               -  C'-axis table (or C-axis on lathe)
+            *  -  A
+               -  A-axis head
+            *  -  B
+               -  B-axis head
+            *  -  C
+               -  C-axis head
+            *  -  N
+               -  Primary nutating axis
+            *  -  n
+               -  Secondary nutating axis
+
+   The first three characters of $AXES display active linear axes (note
+   that these may be XYZ primary or UVW secondary linear axes). The
+   fourth and fifth characters display active rotary axes (including
+   nutating axes). The sixth location is reserved for the extending or
+   co-linear axis. A “\ **\*”** will be shown for any $AXES location for
+   which there is no corresponding active axis. For example, the value
+   of $AXES for a 3-axis mill will be “XYZ**\*” because the machine has
+   neither rotary, extending or co-linear axes.
+
+   On machines where axes will be activated and deactivated, the $AXES
+   string is useful in writing motion
+   event macros. It can be used to determine the location in the $P2 machine
+   coordinate sequence that applies to a given axis. (Note $P2
+   contains machine coordinates for active axes only).
+   To determine if a B'-axis table is active or not, the following could be
+   coded in a motion macro.
+
+      ::
+
+         $$ %L01 = axis index to $P2 sequence
+         %L01=$FINDEX($AXES,'b')
+         $$ If B'-axis is active, set %L02
+         IF/%L01.GE.1.AND.%L01.LE.6
+           $$ %L02=B'-axis machine coordinate
+           %L02=$P2(%L01)
+         ENDOF/IF
+
+   If the $FINDEX function returns 0 (see :ref:`“Character and
+   Sequence Functions”<character_and_sequence_functions>` for a description of the
+   $FINDEX function), the axis for which the index was requested is not
+   active and therefore it’s value will not be found in the
+   $P2
+   sequence. For the case above, the $BTM macro system variable could be
+   used to determine the location of the B'-axis.
+
+.. _var_axesc2p:
+.. index:: Variables; $AXESC2P
+
++------------------+-----------------------------------------------------+
+| **$AXESC2P**     | String showing axes controlled by C2P interpolation |
+|                  |                                                     |
+|                  | Type: String, Read-only                             |
++------------------+-----------------------------------------------------+
+
+   This variable identifies the C2P (i.e., polar interpolation) axes in
+   the form of a character string containing 2 characters. The
+   characters are one letter abbreviations representing the axis names
+   as shown in the :ref:`“Axes Names”<axis_names>` table. This string
+   will be blank when C2P interpolation is not active.
+
+.. _var_c2pmch:
+.. index:: Variables; $C2PMCH
+
++-----------------+--------------------------------------------+
+| **$C2PMCH**     | C2P interpolation status ($TRUE or $FALSE) |
+|                 |                                            |
+|                 | Type: Logical, Read-only                   |
++-----------------+--------------------------------------------+
+
+   This variable will be set $TRUE when C2P (Cartesian to Polar
+   Programming) interpolation mode is active on the CNC and $FALSE when
+   C2P interpolation is not active on the CNC.
+
+.. _var_chsiz:
+.. index:: Variables; $CHSIZ
+
++------------------+-----------------------------------------+
+| **$CHSIZ**       | Number of available kernel channels     |
+|                  |                                         |
+|                  | Type: Numeric, Read-only                |
++------------------+-----------------------------------------+
+
+   This variable indicates the number of kernel channels.
+   It will have a value of 2 for a merging lathe
+   and a value of 1 for all other machine types.
+
+.. _var_ci:
+.. index:: Variables; $CI
+
++------------------+-----------------------------------------+
+| **$CI**          | Current active kernel channel           |
+|                  |                                         |
+|                  | Type: Numeric, Read-only                |
++------------------+-----------------------------------------+
+
+   This variable indicates the current active channel.
+   It will have a value of 2 when processing the side head of a merging lathe
+   and a value of 1 at all other times.
+
+.. _var_lcs:
+.. index:: Variables; $LCS
+
++------------------+-----------------------------------------+
+| **$LCS**         | LCS programmed status ($TRUE or $FALSE) |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable will be set $TRUE when LCS (Local Coordinate System)
+   transformation is activated
+   and $FALSE when LCS is deactivated.
+   The $LCS variable can be set from within a macro to change the mode.
+
+.. _var_lcsang:
+.. index:: Variables; $LCSANG
+
++------------------+-----------------------------------------+
+| **$LCSANG**      | LCS rotation angle parameter            |
+|                  |                                         |
+|                  | Type: Numeric, Read-only                |
++------------------+-----------------------------------------+
+
+   This variable indicates the current LCS rotation angle for CNC
+   machines that use the “Axis” form of 3D rotation.
+
+.. _var_lcscen:
+.. index:: Variables; $LCSCEN
+
++------------------+-----------------------------------------+
+| **$LCSCEN**      | LCS rotation or scale center parameters |
+|                  |                                         |
+|                  | Type: Sequence, Read-only               |
++------------------+-----------------------------------------+
+
+   This variable indicates the current LCS {x,y,z} center of rotation or
+   scaling.
+
+.. _var_lcsm:
+.. index:: Variables; $LCSM
+
++------------------+----------------------------------------------------------+
+| **$LCSM**        | Local coordinate system machine status ($TRUE or $FALSE) |
+|                  |                                                          |
+|                  | Type: Logical, Read-only                                 |
++------------------+----------------------------------------------------------+
+
+   This variable indicates the current LCS activation state on the
+   machine. It will be $TRUE when any form of LCS transformation is
+   active on the machine and will be $FALSE otherwise.
+
+.. _var_lcsmir:
+.. index:: Variables; $LCSMIR
+
++------------------+-----------------------------------------+
+| **$LCSMIR**      | LCS mirror parameters                   |
+|                  |                                         |
+|                  | Type: Sequence, Read-only               |
++------------------+-----------------------------------------+
+
+   This variable indicates the current LCS {x,y,z} mirror parameters. A
+   parameter value of 1 indicates that mirroring is in effect; a
+   parameter value of 0 (zero) indicates no mirroring.
+
+.. _var_lcsmtn:
+.. index:: Variables; $LCSMTN
+
++------------------+---------------------------------------------+
+| **$LCSMTN**      | Effect of LCS on machine rotary axes (–1-3) |
+|                  |                                             |
+|                  | Type: Numeric, Read/Write                   |
++------------------+---------------------------------------------+
+
+   This variable indicates if and how LCS affects the rotary axes of the
+   machine when LCS is activated. If the value is –1, then LCS is not
+   capable of moving the rotary axes and attempting to set this variable
+   to any other value will result in a diagnostic.
+
+   :–1: LCS generated motions are not available – adjust frame only
+   : 0: no motion – adjust frame only
+   : 1: rotary-only motion
+   : 2: rotary motion around tool-tip (i.e., RTCP motion)
+   : 3: method 1 or 2 depending on current RTCP state
+
+.. _var_lcsmx:
+.. index:: Variables; $LCSMX
+
++------------------+-----------------------------------------+
+| **$LCSMX**       | Current LCS transformation matrix       |
+|                  |                                         |
+|                  | Type: Sequence, Read-only               |
++------------------+-----------------------------------------+
+
+   This variable contains a sequence of 12 parameters defining the LCS
+   transformation matrix (see :ref:`“Matrix Functions”<matrix_functions>`
+   for a description of the matrix parameters).
+
+.. _var_lcsord:
+.. index:: Variables; $LCSORD
+
++------------------+-----------------------------------------+
+| **$LCSORD**      | String identifying $LCSROT values       |
+|                  |                                         |
+|                  | Type: String, Read-only                 |
++------------------+-----------------------------------------+
+
+   This string variable identifies the contents of the $LCSROT sequence
+   variable. When $LCSROT contains the *ijk* vector of the LCS axis of
+   rotation, then $LCSORD will be the string “IJK”. When $LCSROT contains a sequence
+   of angles rotating in some order around the X, Y and Z axes, then
+   $LCSROT will be a 2 or 3-character string “xxx” where each character
+   “x” in the string will be one of the letters A, B or C representing
+   rotation about the X, Y or Z axes respectively.
+
+.. _var_lcsrot:
+.. index:: Variables; $LCSROT
+
++------------------+-----------------------------------------+
+| **$LCSROT**      | LCS rotation parameters                 |
+|                  |                                         |
+|                  | Type: Sequence, Read-only               |
++------------------+-----------------------------------------+
+
+   This variable indicates the current LCS {i,j,k} axis of rotation for
+   CNC machines that use the “Axis” form of 3D rotation. Otherwise this
+   variable contains 3 rotation values based on the form of LCS rotation
+   being used.
+
+.. _var_lcssca:
+.. index:: Variables; $LCSSCA
+
++------------------+-----------------------------------------+
+| **$LCSSCA**      | LCS scale parameters                    |
+|                  |                                         |
+|                  | Type: Sequence, Read-only               |
++------------------+-----------------------------------------+
+
+   This variable indicates the current LCS {x,y,z} scale parameters.
+
+.. _var_lcstra:
+.. index:: Variables; $LCSTRA
+
++------------------+-----------------------------------------+
+| **$LCSTRA**      | LCS translation parameters              |
+|                  |                                         |
+|                  | Type: Sequence, Read-only               |
++------------------+-----------------------------------------+
+
+   This variable indicates the current LCS {x,y,z} translation amounts.
+
+.. _var_plmode:
+.. index:: Variables; $PLMODE
+
++------------------+-----------------------------------------+
+| **$PLMODE**      | Plane mode. (<1:? 1:XY 2:ZX 3:YZ)       |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable contains the current plane mode in effect for cutter
+   compensation, circular interpolation and cycles. If the value is
+   less than one (1) then the mode is unknown.
+
+.. _var_pnmode:
+.. index:: Variables; $PNMODE
+
++------------------+---------------------------------------------------+
+| **$PNMODE**      | Positioning mode. (<0:? 0:Absolute 1:Incremental) |
+|                  |                                                   |
+|                  | Type: Numeric, Read/Write                         |
++------------------+---------------------------------------------------+
+
+   This variable contains the current absolute or incremental
+   positioning mode of the machine. If the value is less than zero (0)
+   then the mode is unknown.
+
+.. _var_rapid:
+.. index:: Variables; $RAPID
+
++------------------+-----------------------------------------+
+| **$RAPID**       | RAPID flag ($TRUE if in RAPID mode)     |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable indicates whether or not the next motion will be at
+   rapid.
+
+.. _var_robcfgm:
+.. index:: Variables; $ROBCFGM
+
++------------------+-----------------------------------------------+
+| **$ROBCFGM**     | Robot shoulder, elbow and wrist configuration |
+|                  |                                               |
+|                  | Type: Keyword, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable sets a preference, where available, between the
+   different possible robot shoulder, elbow and wrist configurations.
+   The preference is defined using a keyword, as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+
+         *  -  $ROBCFGM(1)
+            -  RIGHT or LEFT
+         *  -  $ROBCFGM(2)
+            -  DOWN or UP
+         *  -  $ROBCFGM(3)
+            -  FRONT or REAR
+
+.. _var_robcfgn:
+.. index:: Variables; $ROBCFGN
+
++------------------+-----------------------------------------------+
+| **$ROBCFGN**     | Robot shoulder, elbow and wrist configuration |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable sets a preference, where available, between the
+   different possible robot shoulder, elbow and wrist configurations.
+   The preference is defined using a numeric value, as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+
+         *  -  $ROBCFGN(1)
+            -  0:RIGHT or 1:LEFT
+         *  -  $ROBCFGN(2)
+            -  0:DOWN or 1:UP
+         *  -  $ROBCFGN(3)
+            -  0:FRONT or 1:REAR
+
+.. _var_skipcod:
+.. index:: Variables; $SKIPCOD
+
++------------------+---------------------------------------------+
+| **$SKIPCOD**     | Skip-code function status (0:off, 1:active) |
+|                  |                                             |
+|                  | Type: Numeric, Read/Write                   |
++------------------+---------------------------------------------+
+
+   This variable indicates the current probe “skip code” status. A value
+   of 0 indicates that skip code processing is not active; a value of 1
+   indicates the function is active. When active and Virtual Machine
+   simulation has a probe enabled, a probe touch event stops further
+   axis motion for the current block.
+
+.. _var_skiperr:
+.. index:: Variables; $SKIPERR
+
++------------------+----------------------------------------------------+
+| **$SKIPERR**     | Skip-code function error (0:none, 1:touch, 2:miss) |
+|                  |                                                    |
+|                  | Type: Numeric, Read-only                           |
++------------------+----------------------------------------------------+
+
+   This variable indicates the probe “skip code” state recorded at the
+   end of the last motion. A value of 0 indicates no error. When active
+   and Virtual Machine simulation is enabled, a value of 1 indicates a
+   touch event occurred and a value of 2 indicates that a touch event
+   did not occur.
+
+.. _var_tcp:
+.. index:: Variables; $TCP
+
++------------------+-----------------------------------------+
+| **$TCP**         | RTCP status ($TRUE or $FALSE)           |
+|                  |                                         |
+|                  | Type: Logical, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable will be set $TRUE when RTCP (Rotating Tool Center-point
+   Programming) is activated
+   and $FALSE when RTCP is deactivated.
+   The $TCP variable can be set from within a macro to change the mode.
+
+.. _var_tcpfmt:
+.. index:: Variables; $TCPFMT
+
++------------------+-----------------------------------------+
+| **$TCPFMT**      | RTCP format (0:None, 1:Axes, *n*:Other) |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable defines how rotary information is
+   interpreted when RTCP is active.
+   The default format is defined in QUEST and can be controlled using the
+   CODE_RTCP_ORIENT\_\* codes (if available).
+   You can also set the $TCPFMT variable to change the format “\ *n*\ ”, as follows:
+
+   :1: Input true rotary axes values
+   :2: Input machine tool axis vector
+   :3: Input tool-tip and tool-top points (dual curve) to define angle
+   :4: Input RPY (roll-pitch-yaw) angle
+   :5: Input Euler angles
+   :6: Input custom virtual axes as defined by QUEST
+
+.. _var_tcpset:
+.. index:: Variables; $TCPSET
+
++------------------+-----------------------------------------+
+| **$TCPSET**      | RTCP method (1-2)                       |
+|                  |                                         |
+|                  | Type: Numeric, Read/Write               |
++------------------+-----------------------------------------+
+
+   This variable indicates and can set the RTCP method on machines where
+   there are multiple RTCP methods defined (QUEST *Control Description /
+   Advanced 5D Machining / RTCP* question #100.1).
+
+.. _var_tcpsim:
+.. index:: Variables; $TCPSIM
+.. _var_tcpsimr:
+.. index:: Variables; $TCPSIMR
+
++------------------+-------------------------------------------------------------+
+| **$TCPSIM**      | RTCP feed interpolation (0:Standard, 1:Pole, 2:TTO, 3:None) |
+|                  |                                                             |
+|                  | Type: Numeric, Read/Write                                   |
++------------------+-------------------------------------------------------------+
+| **$TCPSIMR**     | RTCP rapid positioning (0:Standard, 1:Pole, 2:TTO, 3:None)  |
+|                  |                                                             |
+|                  | Type: Numeric, Read/Write                                   |
++------------------+-------------------------------------------------------------+
+
+   The $TCPSIM variable defines how CERUN (and *Virtual Machine* if used
+   will interpolate *feed* motions while in RTCP mode.
+   The $TCPSIMR variable defines how *rapid* motions are interpolated while in RTCP mode.
+   The default setting is defined in QUEST.
+
+   :0: Full linearization
+   :1: Apply singularity cone (Siemens 840D) *not available at present*
+   :2: Shortest rotary solution with tool tip linearization (Fanuc G43.4)
+   :3: Shortest rotary solution with no linearization (Fanuc G43.1)
+
