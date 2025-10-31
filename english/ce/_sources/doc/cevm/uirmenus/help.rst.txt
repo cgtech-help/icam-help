@@ -1,0 +1,72 @@
+.. _help_menu:
+
+Help Menu
+~~~~~~~~~
+
+**Help»Online** (F1)
+
+   Use this menu selection to activate the Online help to get context
+   sensitive information about the currently selected window.
+
+**Help»Topics**
+
+   This selection brings up the Online help root menu.
+
+**Help»Documentation**
+
+   This selection brings up Windows Explorer to show the contents of the
+   product installation documents subdirectory, which contains ICAM
+   product User Guides.
+
+**Help»Web Support**
+
+   Use this menu selection to access the ICAM’s Customer Support Area on
+   the Internet.
+
+**Help»E-Mail Support**
+
+   Use this menu selection to send an email to ICAM’s Technical Support
+   department. `support@icam.com <mailto:support@icam.com>`_
+
+**Help»Package job…**
+
+   Saves the current CERUN state and all associated files into
+   a compressed archive file, with file extension *zpj*, suitable for
+   e-mailing to ICAM Technical Support. This can be done at any time during
+   control emulation. The zpj file will include the control emulator and model,
+   interface kit, input MCD file(s), simulation data, and all
+   listing and log files generated to that point.
+   A *job_info.html* is also included in the archive listing system information,
+   ICAM environment variables, ICAM licensing and CERUN command line options.
+
+**Help»Customer ID…**
+
+   This menu selection lists your customer ID, also called a PRISER
+   (primary serial number). This unique identification is required when
+   making technical support requests.
+
+| **Help»Check for Update…**
+| **Help»Update Available…**
+
+   The **Check for Update** menu selection contacts an ICAM server on
+   the Internet to determine if there is a more recent release of the
+   software available for download. If so, a [Download…] button will be
+   available. Updates come in two forms: official updates periodically
+   made available to all customers, and hotfix updates made available to
+   specific customers to solve a reported problem.
+
+   Selecting the download button will download an installation
+   executable file with the name
+   icam\_\ *version*-*modlev*\ \_win\ *nn*.exe. To install the update,
+   follow the :ref:`“Installing from download link”<install_download>` instructions.
+
+   Updates are automatically checked once per day unless disabled by
+   clearing the “Check for update” box on the dialog. If updates are
+   available, the menu selection changes to **Update Available**.
+
+**Help»About**
+
+   This menu selection lists the version and mod-level (modification
+   level). This information is also available at the top of the CERUN
+   listing. It is generally helpful to include the version and mod-level
+   in any technical support request.
