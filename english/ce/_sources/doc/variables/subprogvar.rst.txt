@@ -1,0 +1,64 @@
+.. _var_labinc:
+.. index:: Variables; $LABINC
+.. _var_labno:
+.. index:: Variables; $LABNO
+.. _var_submod:
+.. index:: Variables; $SUBMOD
+.. _var_subtyp:
+.. index:: Variables; $SUBTYP
+
+Subprogram Variables
+====================
+
+.. _var_subext:
+.. index:: Variables; $SUBEXT
+
++------------------+-----------------------------------------------+
+| **$SUBEXT**      | Subprogram tape file extension                |
+|                  |                                               |
+|                  | Type: String, Read/Write                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the subprogram tape file extension to use for
+   subsequent subprogram files. The default file extension for
+   subprograms is *tps*.
+
+.. _var_sublvl:
+.. index:: Variables; $SUBLVL
+
++------------------+-----------------------------------------------+
+| **$SUBLVL**      | Current sub-level in subprogram               |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable indicates the subprogram nest level. A value of 0 means
+   that there is no subprogram active. A value of 1 is for the first
+   call.
+
+.. _var_subnam:
+.. index:: Variables; $SUBNAM
+
++------------------+-----------------------------------------------+
+| **$SUBNAM**      | Current subprogram name                       |
+|                  |                                               |
+|                  | Type: String, Read-only                       |
++------------------+-----------------------------------------------+
+
+   This variable contains the current subprogram name or subprogram
+   number in string format. It will be blank if a subprogram is not
+   active.
+
+.. _var_subno:
+.. index:: Variables; $SUBNO
+
++------------------+-----------------------------------------------+
+| **$SUBNO**       | Current subprogram stack                      |
+|                  |                                               |
+|                  | Type: Sequence, Read-only                     |
++------------------+-----------------------------------------------+
+
+   This sequence variable lists all of the subprograms on the current call stack.
+   An empty sequence indicates that no subprograms are active.
+   Each successive entry in the sequence lists subprograms that are more deeply nested.
+
