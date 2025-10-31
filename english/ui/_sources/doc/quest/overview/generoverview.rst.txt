@@ -1,0 +1,56 @@
+GENER Overview
+==============
+
+For a general understanding of how post-processing works, it is
+important to first discuss the software that is used to create the
+specific files associated with, or needed for post-processing.
+
+**Computer Aided Drafting And Design (CAD)**
+
+The first software application that is used in the post-processing
+journey is Computer Aided Drafting and Design (CAD). A design engineer
+uses CAD software to create a part drawing, containing all features and
+dimensions required to manufacture a part. Some of the more common
+drawing file extensions are IGES, DXF and STEP to name a few.
+
+**Computer Aided Manufacturing (CAM)**
+
+Computer Aided Manufacturing (CAM) evolved from the need to manufacture
+parts using numerically controlled machine tools. Once the CAD drawing
+is complete, it can be imported into the CAM software for further use.
+Using the various functions within the CAM software, the programmer
+selects various lines, circles, surfaces or other entities from the
+imported CAD drawing and then develops cutting sequences, or tool paths,
+that simulate actual machining of those entities.
+
+**Cutter Location File (CL file)**
+
+For most CAM applications, the tool path that is generated for each
+cutting sequence is placed into a file in a specific order and syntax,
+almost like a structured language. This file is called a Cutter Location
+Data (CLDATA) File, or CL file for short. It contains various APT-like
+commands, as well as X, Y, Z coordinate values, and in the case of four
+and five axes machines, will also contain tool vector I, J, K values
+used to determine the angle of the tool in relation to the part. APT,
+CL, CLD, CLS, NCI and NCL are some of the more common CL file extensions
+you might see.
+
+**Post-Processing and the CL file**
+
+The most important file required by CAM-POST GENER is the previously
+discussed CL file. CAMPOST GENER reads each statement or command
+contained within the CL file and post-processes or translates each of
+those statements or commands into CNC machine code. This CNC machine
+code (also referred to as G-Code output) is created based on the content
+of the CL file and in combination with the settings within the QUEST
+post-processor file.
+
+When a command from the CL file is incorrect, or certain settings have
+not been selected in the QUEST post-processor file, GENER will output
+error messages indicating that it either does not recognize a particular
+CL file statement or command, or that it cannot create output because a
+particular function has not been selected in QUEST. It is important to
+understand that CAM-POST will always output correct G-code as long as
+the CL file statements and syntax are correct.
+
+
