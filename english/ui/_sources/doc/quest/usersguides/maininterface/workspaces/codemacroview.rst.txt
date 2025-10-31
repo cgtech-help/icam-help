@@ -1,0 +1,34 @@
+Code Macro View (Control Emulator only)
+---------------------------------------
+
+|image1|
+
+The Code Macro View is used when adding, modifying and deleting Code
+macros. The Code Macro View can be activated in two ways. The first is
+by double clicking on the *Code Macros* section in the `Control Emulator
+Navigator <../navigator.html#CE%20Navigator>`__. All macros are listed.
+The second is by double clicking on one of the top level macro names
+listed in the *Code Macros* section.
+
+To add a new code macro, click on the *Add* button and the `New Code
+Macro <../../dialogs/newcodemacro.html>`__ dialog will appear.
+
+To modify a code macro, first select a macro and then click on the
+*Modify* button to bring up the `Macro Editor
+View <macroeditorview.html>`__.
+
+To modify the matching expression of a code macro, first select a macro
+and then click on the small arrow on the right of the *Modify* button to
+bring up the `Code Properties dialog <../../dialogs/codemodify.html>`__.
+
+To delete a macro, select a macro and click on the *Delete* button.
+
+To reorder a macro, either select it and use the arrow buttons, or
+select and hold the mouse button down to drag and drop the macro to its
+new position (macros sharing the same command name must remain in
+groups).
+
+**Close:** Closes the Code Macro View.
+
+.. |image1| image:: ./media/e0af6b540f6eb677275406e5163446e048d372ee.gif
+
