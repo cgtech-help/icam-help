@@ -1,0 +1,141 @@
+.. _view_menu:
+
+View Menu
+~~~~~~~~~
+
+The amount and types of information traced to the Input, Output,
+Console and Macro windows can be set using the
+Tools»Preferences»Trace menu function as well as from the launch
+panel Output dialog (see :ref:`here<options_dialog>`).
+
+**View»Input**
+
+   This toggle activates or disables the input
+   CL file trace window. When active, CL records
+   will be listed in the Input window as they are read.
+   Right-mouse in the Input window and select Options to bring up the
+   following Tools»Preferences»Trace settings that affect Input tracing:
+
+   -  **Original input file source lines:** If selected, CL file records
+      will be shown in their original input format whenever possible. By
+      default, GENER traces CL file data in an ICAM standard format. This
+      setting only has an effect when a record is first read. Records that
+      are re-read following a look-ahead or CL file repositioning, will
+      always be shown in their standard format.
+   -  **Look-ahead processing, curve fitting and the $FGET search:** If
+      selected, tracing will also be enabled during all forms of
+      look-ahead. Select this only when debugging macros that use the
+      look-ahead features of GENER.
+
+The last 20,000 input trace lines are remembered unless changed via
+the Tools»Preferences»Trace settings. The Output, Console and Macro
+trace windows (described below) are similarly limited.
+
+**View»Output**
+
+   This toggle activates or disables the
+   output NC program file trace window.
+   When active, NC program data will be listed in the Output window as it is written.
+
+   The **Run»Details** toggle affects tracing and stepping in the Output
+   window. When selected, tracing and stepping occurs as individual
+   registers are placed in the output NC program buffer.
+
+   Hovering the cursor over the output trace will show a tooltip
+   containing the following contextual information: the code or register
+   type, the post-processor command name that caused the code or
+   register data to be output, and the current ISN and CL record numbers
+   at the moment the code or register was output. The appearance of
+   contextual help tooltips in the output trace is controlled from the
+   Tools»Preferences»Debug “\ **Enable output trace context
+   information**\ ” checkbox.
+
+**View»Console**
+
+   This toggle activates or disables the console trace window.
+   When active, operator messages, diagnostic messages and macro processor
+   I/O will be listed in the Console window.
+   Right-mouse in the Console window and select Options to bring up the
+   following Tools»Preferences»Trace settings that affect Console tracing:
+
+   -  **Operator and other** **message:** traces operator
+      messages (DISPLY command).
+   -  **Macro IO commands:** traces macro processor file I/O (OPEN, READ,
+      WRITE and CLOSE commands).
+   -  **Diagnostics:** traces diagnostic messages with the specified and
+      higher severity.
+
+**View»Macro**
+
+   This toggle activates or disables the Macro trace window. When active,
+   macro commands will be listed in the Macro window as they are processed.
+   The Macro trace window also identifies when macros are activated and completed.
+   The formatting of macro code can be controlled from the Tools»Preferences»Debug
+   “\ **Macro format**\ ” selection.
+
+**View»Controller**
+
+   This toggle shows or hides the Controller window. This window
+   includes a **Codes** tab pane that lists active modal G and M codes,
+   and a **PPFUN** tab pane that lists the current state of the various
+   PPFUN commands. When running with Virtual Machine, the controller
+   window has additional tab panes to view and modify model related
+   data.
+
+**View»Diagnostic**
+
+   This toggle shows or hides the Diagnostic window. This window records
+   all diagnostic messages output since the start of processing,
+   regardless of whether or not the window was visible or not.
+
+   The diagnostic window provides “filter” toggle buttons that can be
+   used to hide/show errors, warnings and informational messages. A
+   right-mouse pop-up window provides access to additional
+   functionality, as follows:
+
+   -  **Synchronize** simulation, trace and source windows to the selected
+      diagnostic.
+   -  **Mark as reviewed** marks individual diagnostics as reviewed, as an
+      aid to a systematic review of the program. Various options permit
+      marking of similar diagnostics. Diagnostics can also be marked
+      reviewed by selecting them and checking the Reviewed box.
+   -  **Hide reviewed** toggle shows or hides all diagnostics marked as
+      reviewed.
+   -  **Clear reviewed** clears the “reviewed” state of all diagnostics.
+      The reviewed state of diagnostics can also be cleared by selecting
+      them and clearing the Reviewed box.
+   -  **Clear sorting** causes diagnostics to be listed in the order they
+      were originally output. Clicking on a diagnostic column header causes
+      diagnostics to be sorted in increasing or decreasing order by that
+      column’s information.
+   -  **Column** settings indicate the type of information to be listed.
+   -  **Copy selection** to the paste buffer.
+
+   Diagnostic window settings are remembered with other user preferences
+   in the Windows Registry.
+
+**View»Loading Sequence**
+
+   This brings back the Loading dialog that normally appears while the
+   software is initializing and that then disappears once processing is
+   ready to start. This dialog lists the various initialization actions
+   and the elapsed time taken for each. Indentation is used to break
+   down multiple steps of an initialization process. The Loading dialog
+   must be closed before continuing processing. The appearance of the
+   Loading dialog at the start of processing can be controlled from the
+   “\ **Loading/ Processing Detail**\ ” selection in the
+   Tools»Preferences»General settings.
+
+| **View»Increase X Margin** (Ctrl Left)
+| **View»Decrease X Margin** (Ctrl Right)
+
+   These change the width of the left hand field that lists axes names
+   in the Controller»Axes tab.
+
+**View»Status bar**
+
+   This toggle enables the display of the status bar. The status bar
+   lists various information about the progress of the post-processor,
+   including: count of diagnostics,
+   CL and ISN numbers, machining time, NC program length
+   and a progress bar.
