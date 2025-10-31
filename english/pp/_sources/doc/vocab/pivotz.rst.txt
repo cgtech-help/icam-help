@@ -1,0 +1,73 @@
+.. _command_pivotz:
+
+The PIVOTZ Command :kbd:`[EP]`
+==============================
+
+The PIVOTZ command is used to define the setting distances for wire
+EDM guide heights and to specify the sheet thickness for punch
+presses. This command is valid for punches and wire EDMs having 2
+separately controllable wire guides. The syntax is as follows:
+
+Punch Presses
+-------------
+
+   :math:`\textbf{PIVOTZ /} value`
+
+The above command is used to specify the sheet thickness required (on
+some machines) for nibble patterns. In addition, GENER will check
+that the requested nibble increment is never less than *value*.
+
+Wire EDM Machines
+-----------------
+
+   :math:`\textbf{PIVOTZ / }
+   \big[\,\textbf{TABLE},\textbf{HIGH},\mathit{phyu}\,\big] \;
+   \big[,\textbf{TABLE},\textbf{LOW},\mathit{phyl}\,\big] \; \ldots`
+
+         :math:`\hspace{1cm} \ldots \;
+         \begin{bmatrix} ,\textbf{ROTREF},\textbf{HIGH}, \begin{pmatrix}\begin{array}{l} \mathit{logu} \\ \textbf{AUTO} \end{array} \end{pmatrix}\end{bmatrix}
+         \begin{bmatrix} ,\textbf{ROTREF},\textbf{LOW}, \begin{pmatrix}\begin{array}{l} \mathit{logl} \\ \textbf{AUTO} \end{array} \end{pmatrix}\end{bmatrix} \; \ldots`
+
+         :math:`\hspace{1cm} \ldots \;
+         \begin{bmatrix} ,\textbf{ADJUST}, \begin{pmatrix}\begin{array}{l} \mathit{zval} \\ \textbf{HIGH} \\ \textbf{LOW} \\ \textbf{SMALL} \\ \textbf{LARGE} \end{array}\end{pmatrix}\end{bmatrix}`
+
+   :math:`\textbf{PIVOTZ / } \mathit{phyu,phyl,}
+   \begin{pmatrix}\begin{array}{l} \mathit{logu} \\ \textbf{AUTO} \end{array}\end{pmatrix},
+   \begin{pmatrix}\begin{array}{l} \mathit{logl} \\ \textbf{AUTO} \end{array}\end{pmatrix},       \begin{pmatrix}\begin{array}{l} \mathit{zval} \\ \textbf{HIGH} \\ \textbf{LOW} \\ \textbf{LARGE} \\ \textbf{SMALL} \end{array}\end{pmatrix}`
+
+The two forms of the PIVOTZ command provide different methods of
+specifying the same information. Note that if the second method is
+used all 5 parameters must be specified in the order shown.
+
+   :math:`\big[\,\textbf{TABLE},\textbf{HIGH},\mathit{phyu}\,\big] \;
+   \big[,\textbf{TABLE},\textbf{LOW},\mathit{phyl}\,\big]`
+
+These parameters define the physical wire guide positions. The values
+indicate the Z axis height of the upper and lower wire guides with
+respect to the machine origin. This information is used by GENER to
+perform travel limit checking, as travel limit checking is based on
+the physical movement of the guides.
+
+   :math:`\begin{bmatrix} ,\textbf{ROTREF},\textbf{HIGH}, \begin{pmatrix}\begin{array}{l} \mathit{logu} \\ \textbf{AUTO} \end{array} \end{pmatrix}\end{bmatrix}
+   \begin{bmatrix} ,\textbf{ROTREF},\textbf{LOW}, \begin{pmatrix}\begin{array}{l} \mathit{logl} \\ \textbf{AUTO} \end{array} \end{pmatrix}\end{bmatrix}`
+
+These parameters define the logical wire guide positions. The values
+indicate the Z axis height of the upper and lower programmed
+positions with respect to the machine origin. The NC machine will
+assume that lower and upper wire guide information is relative to
+these guide positions. CL coordinates are projected to the logical
+guide height positions before being output in the NC control tape. To
+output the CL Z axis data as a machine W or Z axis value, specify
+AUTO instead of an upper or lower wire guide position.
+
+   :math:`\begin{bmatrix} ,\textbf{ADJUST}, \begin{pmatrix}\begin{array}{l} \mathit{zval} \\ \textbf{HIGH} \\ \textbf{LOW} \\ \textbf{SMALL} \\ \textbf{LARGE} \end{array}\end{pmatrix}\end{bmatrix}`
+
+This parameter defines the position along the wire where feed rate
+calculations occur. This information is used in GENER for total
+machining time calculations. The time can be computed using the upper
+wire guide movements or the lower guide movements by specifying HIGH
+or LOW respectively. In multi-axis moves the wire guides will move
+different distances and specifying SMALL or LARGE will select the
+smallest or largest guide movement distance respectively. A Z axis
+height “\ *zval*\ ” can be entered to have time calculations based at
+the specified height relative to the machine origin.
