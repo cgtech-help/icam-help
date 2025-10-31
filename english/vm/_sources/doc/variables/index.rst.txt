@@ -1,0 +1,29 @@
+.. _macro_system_variables:
+
+Macro System Variables
+**********************
+
+This section lists the macro system variables available for use in Virtual Machine (VM) model macros.
+Many (but not all) VM variables are easily identified by a two letter $VM prefix. 
+All variables return a value, but those identified as read-only cannot be assigned a value.
+VM variables can be used in post-processor and control emulator macros;
+however, diagnostics may be generated if a model is not being used.
+Variables are organized in groups.
+
+The first section summarizes the variables by category.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   summaryvar
+   vmvar
+   macrovar
+   defvar
+
+**Syntax Format Conventions**
+
+Special notation is used to simplify the listing of a series of similar variable names. Square brackets
+[ ] enclose a list of characters of which one may be optionally selected; and braces { } enclose a list
+of characters of which one must be selected. For example, $[AB]C{DE} is short for $CD, $CE,
+$ACD, $ACE, $BCD and $BCE.
