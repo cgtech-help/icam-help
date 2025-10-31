@@ -1,0 +1,540 @@
+.. _character_and_sequence_functions:
+
+Character and Sequence Functions
+================================
+
+Character functions deal with arguments of type STRING. Sequence
+functions deal with arguments matched using the $P\ *n*\ \*
+construct. In both cases, these arguments have a concept of length.
+The length of a string is the number of characters it contains. The
+length of a sequence is the number of elements (any combination of
+numbers, strings and keywords) it contains.
+
+.. _func_fchar:
+.. index:: Functions; $FCHAR
+
++------------------------------------------------+------------------------------------------+
+| **$FCHAR(**\ *n*\ **)**                        | Conversion to character                  |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the ASCII character corresponding to the
+   nearest whole value of *n*.
+
+.. _func_fdate:
+.. index:: Functions; $FDATE
+
++------------------------------------------------+------------------------------------------+
+| **$FDATE(**\ *s*\ [*,a*] **)**                 | Formatted date                           |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function formats the current or specified date/time argument *a*
+   according to the supplied format argument *s* and returns the result
+   as a string.
+
+   The optional argument *a* is either a STRING in ICAM date format
+   (e.g., $DATE, $PPDATE…) or a REAL value representing the number of
+   seconds since an operating system specific “epoch” date (i.e., as
+   returned by the $FSTAT function). If omitted, the current date and
+   time is used.
+
+   The format argument *s* is a STRING consisting of one or more codes
+   preceded by a percent sign (%) as listed below. Characters that do
+   not begin with a percent are copied unchanged in the string returned
+   by $FDATE. The LC_TIME category of the current locale affects the
+   output formatting.
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  **%a**
+            -  Abbreviated weekday name
+         *  -  **%A**
+            -  Full weekday name
+         *  -  **%b**
+            -  Abbreviated month name
+         *  -  **%B**
+            -  Full month name
+         *  -  **%c**
+            -  Date and time representation appropriate for locale
+         *  -  **%d**
+            -  Day of month as decimal number (01 – 31)
+         *  -  **%H**
+            -  Hour in 24-hour format (00 – 23)
+         *  -  **%I**
+            -  Hour in 12-hour format (01 – 12)
+         *  -  **%j**
+            -  Day of year as decimal number (001 – 366)|
+         *  -  **%m**
+            -  Month as decimal number (01 – 12)
+         *  -  **%M**
+            -  Minute as decimal number (00 – 59)
+         *  -  **%p**
+            -  Current locale’s A.M./P.M. indicator for12-hour clock
+         *  -  **%s**
+            -  Hundredths of a second as decimal number (00 – 99)
+         *  -  **%S**
+            -  Second as decimal number (00 – 59)
+         *  -  **%U**
+            -  Week of year as decimal number, with Sunday as first day of week (00 – 53)
+         *  -  **%w**
+            -  Weekday as decimal number (0 – 6; Sunday is 0)
+         *  -  **%W**
+            -  Week of year as decimal number, with Monday as first day of week (00 – 53)
+         *  -  **%x**
+            -  Date representation for current locale
+         *  -  **%X**
+            -  Time representation for current locale
+         *  -  **%y**
+            -  Year without century, as decimal number (00 – 99)
+         *  -  **%Y**
+            -  Year with century, as decimal number
+         *  -  **%z**
+            -  Abbreviated time-zone name; no characters if time zone is unknown
+         *  -  **%Z**
+            -  Time-zone name; no characters if time zone is unknown
+         *  -  **%%**
+            -  Percent sign
+
+   The hash character (#) may prefix any formatting code. In that case,
+   the meaning of the format code is changed as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  **%#a**
+            -  # ignored
+         *  -  **%#A**
+            -  # ignored
+         *  -  **%#b**
+            -  # ignored
+         *  -  **%#B**
+            -  # ignored
+         *  -  **%#c**
+            -  Long date and time for current locale, e.g. “Tuesday, June 06, 2024, 12:41:29”
+         *  -  **%#d**
+            -  Remove leading zeros (if any)
+         *  -  **%#H**
+            -  Remove leading zeros (if any)
+         *  -  **%#I**
+            -  Remove leading zeros (if any)
+         *  -  **%#j**
+            -  Remove leading zeros (if any)
+         *  -  **%#m**
+            -  Remove leading zeros (if any)
+         *  -  **%#M**
+            -  Remove leading zeros (if any)
+         *  -  **%#p**
+            -  # ignored
+         *  -  **%#s**
+            -  Remove leading zeros (if any)
+         *  -  **%#S**
+            -  Remove leading zeros (if any)
+         *  -  **%#U**
+            -  Remove leading zeros (if any)
+         *  -  **%#W**
+            -  Remove leading zeros (if any)
+         *  -  **%#x**
+            -  Long date for current locale, e.g. “Tuesday, April 3, 2018”
+         *  -  **%#X**
+            -  # ignored
+         *  -  **%#y**
+            -  Remove leading zeros (if any)
+         *  -  **%#Y**
+            -  Remove leading zeros (if any)
+         *  -  **%#z**
+            -  # ignored
+         *  -  **%#Z**
+            -  # ignored
+         *  -  **%#%**
+            -  # ignored
+
+   For example, the following call to $FDATE will return the current
+   date in YYYY.MM.DD format:
+
+      ::
+
+         %L01=$FDATE('%Y.%m.%d')
+
+.. _func_fedit:
+.. index:: Functions; $FEDIT
+
++------------------------------------------------+------------------------------------------+
+| **$FEDIT(**\ s1,s2[,s3][,n] **)**              | Edit string                              |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function searches for one or more occurrences of the search
+   string *s2* in string *s1*. For each occurrence, the matching portion
+   is substituted by the contents of string *s3*, or if *s3* is not
+   specified, the matching portion is deleted. The default action is to
+   replace all matching occurrences of *s2* in *s1* by *s3*. This can be
+   changed by specifying *n*. If *n* is zero, then all matching
+   occurrences are replaced (the default). If *n* is one (1), only the
+   first match is replaced. Larger values of *n* cause the specified
+   match number to be changed. If a match is not found, $FEDIT returns
+   the string *s1* unchanged.
+
+   The search string *s2* can contain special characters in the form of
+   a regular expression (RE) commonly found in UNIX search functions.
+   The characters that form single character RE’s are:
+
+      ``c``
+         Any ordinary character not listed below. An ordinary character matches itself.
+
+      ``\``
+         Backslash. When followed by one of < > ( ) { } or a numeric digit, represents an operator
+         in the RE. When followed by any other character, represents the character.
+
+      ``.``
+         Dot. Matches any single character.
+
+      ``^``
+         Caret. As the leftmost character in the search string, it constrains the search to match
+         the leftmost portion of the target string. The caret character loses its special meaning
+         if it appears in any position other than the first in  the search string.
+
+      ``$``
+         Dollar. As the rightmost character in the search string, it constrains the search to match
+         the rightmost portion of the target string. The dollar character loses its special meaning
+         if it appears in any position other than the last in the search string.
+
+      ``\<``
+         The sequence \\< constrains the next item in the search string to match something at the
+         beginning of a “word”. That is, either at the beginning of the target string, or just
+         before a letter, digit or underline and after a character not one of these.
+
+      ``\>``
+         The sequence \\> constrains the next item in the search string to match something
+         at the end of a “word”.
+
+      ``[c…]``
+         A non empty string of characters enclosed in square brackets matches any single character
+         in the string. If the first character following [ is ^ (caret), then the RE matches
+         any character except those in the string. A caret in any other position is an ordinary
+         character. To match a ] character, specify it first (after an initial ^, if any).
+         A minus sign , between two characters, indicates a range of consecutive ASCII characters
+         to match. To match a – character, specify it first (after an initial ^, if any) or last
+         in the string.
+
+   The following rules and special characters allow for constructing
+   RE’s from single character RE’s.
+
+      ``*``
+         Asterisk. A single character RE, followed by an asterisk matches zero or more occurrences
+         of the single character RE.
+         For example, [0–9][0–9]\* matches any string of one or more digits.
+
+      ``\{m\}`` ``\{m,\}`` ``\{m,n\}``
+         A single character RE followed by one of these brace operators is an RE that matches
+         a range of occurrences of the single character RE. The values of *m* and *n* must be
+         integers in the range 0-255. \\{*m*\\} matches exactly *m* occurrences; \\{*m*,\\}
+         matches at least *m* occurrences; \\{*m*,\ *n*\\} matches the largest number of
+         occurrences between *m* and *n*.
+
+      ``\( … \)``
+         An RE enclosed between the character sequence \\( and \\) matches whatever the unadorned
+         RE matches, but saves the matched string in a numbered buffer. Up to 9 buffers are
+         permitted, assigned sequentially.
+
+      ``\n``
+         Match the contents of the *n*\ th substring buffer. For example, the expression
+         ``\([0-9]\)\1\1*`` matches any string of two or more identical digits.
+
+   The substitution string *s3* in the $FEDIT function can reference
+   matched text saved in numbered buffers using the \\( and \\)
+   sequence. For example:
+
+      ::
+
+         $P3=$FEDIT($P3,'G44\(..*\)','\1G44')
+
+   This searches for G44 followed by one or more characters (saved in
+   buffer number one). The substitution string replaces the matched text
+   by the contents of the saved buffer number 1 and the string G44. This
+   has the effect of reversing the order of appearance of G44 in the
+   string.
+
+.. _func_felem:
+.. index:: Functions; $FELEM
+
++------------------------------------------------+------------------------------------------+
+| **$FELEM(**\ *q,n*\ **)**                      | Element                                  |
+|                                                |                                          |
+|                                                | Returns: Any                             |
++------------------------------------------------+------------------------------------------+
+
+   This function provides an obsolete method of returning the value of
+   element *n* in sequence *q*. It is used to extract the individual
+   elements of sequence variables. The macro **( )** grouping operator
+   should be used instead of $FELEM. For example, specify *q*\ (*n*)
+   instead of $FELEM(*q*,\ *n*).
+
+.. _func_ffind:
+.. index:: Functions; $FFIND
+
++------------------------------------------------+------------------------------------------+
+| **$FFIND(**\ *a1,a2* [*,n*] **)**              | Index of a value in an array or sequence |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function finds the first occurrence of the value *a2* in the
+   array or sequence *a1*. The array can optionally be specified with an
+   index. If no match was found a value of zero is returned. Note that
+   for arrays, the return value specifies the position found with
+   respect to the array index (1 by default). The maximum number of
+   entries to search can be specified with *n*. If not specified, the
+   search terminates at the end of the array or sequence.
+
+   For example %L01=$FFIND($P1,ON) searches for the position of the
+   minor word ON in the sequence $P1 and
+   %L02=$FFIND($TLTAB(5,2),4,$TLSIZ) searches in the tool table for a
+   tool offset with the value of 4. The search starts at the second row.
+   $TLSIZ limits the search for the number of defined tools. Note that
+   $TLTAB(5,n) contains the OSETNO data. A return value of 6 indicates
+   that, the sixth entry searched contains the desired value, not an
+   index value of 6. Thus
+   $TLTAB(5,7) contains a tool offset of 4 since 2 (start index) plus 6
+   (return value) minus 1 comes out to 7.
+
+.. _func_fichar:
+.. index:: Functions; $FICHAR
+
++------------------------------------------------+------------------------------------------+
+| **$FICHAR(**\ *s*\ **)**                       | Conversion from character                |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the ASCII numeric representation of the
+   character *s*. Only the first character of *s* is used by this
+   function.
+
+.. _func_findex:
+.. index:: Functions; $FINDEX
+
++------------------------------------------------+------------------------------------------+
+| **$FINDEX(**\ *s1,s2*\ **)**                   | Index of a substring                     |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the starting position of the string *s2* within
+   the string *s1*. If *s2* is not contained in *s1*, the function will
+   return 0.
+
+.. _func_flen:
+.. index:: Functions; $FLEN
+
++------------------------------------------------+------------------------------------------+
+| **$FLEN(**\ *a*\ **)**                         | Length of string or sequence             |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the length of the input string or sequence *a*.
+   An empty sequence will return a length of zero. An empty string
+   however will return a length of 1, since internally in the macro
+   processor an empty string is represented as a single blank character.
+
+.. _func_fmatch:
+.. index:: Functions; $FMATCH
+
++------------------------------------------------+------------------------------------------+
+| **$FMATCH(**\ *s1,s2* [*,s3*] [*,n*]\ **)**    | Match string                             |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function searches for an occurrence of the search string *s2* in
+   string *s1*. If found, the matched portion of string *s1* is
+   returned, or if string *s3* is specified, string *s3* will be
+   returned. The default action is to locate the first matching
+   occurrence of *s2* in *s1*. This can be changed by specifying *n*. If
+   *n* is one (1), only the first match is returned (the default).
+   Larger values of *n* cause the specified match number to be returned.
+   If a match is not found, $FMATCH returns an empty string.
+
+   The search string *s2* can contain special characters in the form of
+   a regular expression (RE). See :ref:`the $FEDIT function<func_fedit>` for a
+   description of RE’s.
+
+   The substitution string *s3* in the $FMATCH function can reference
+   matched text saved in numbered buffers using the \\( and \\)
+   sequence. For example:
+
+      ::
+
+        %L01=$FMATCH($P3,'N\([0-9][0-9]*\)','\1')
+
+   This returns only the numeric portion of the matched text. If the
+   third argument was omitted, the entire matched text would be
+   returned.
+
+.. _func_fseq:
+.. index:: Functions; $FSEQ
+
++-------------------------------------------------------+------------------------------------------+
+| **$FSEQ(**\ [*a1*\ **[**\ *,a2*\ **[**\ *,…*]]] **)** | Creates a sequence                       |
+|                                                       |                                          |
+|                                                       | Returns: Sequence                        |
++-------------------------------------------------------+------------------------------------------+
+
+   This function provides an obsolete method of constructing a sequence.
+   The $FSEQ function returns a sequence equivalent to all the arguments
+   it is called with. The macro **{ }** sequence operator should be used
+   instead of $FSEQ. For example, specify {*a1*,\ *a2*} instead of
+   $FSEQ(*a1*,\ *a2*).
+
+.. _func_fsplit:
+.. index:: Functions; $FSPLIT
+
++------------------------------------------------+------------------------------------------+
+| **$FSPLIT(**\ *s1,s2*\ [*,n*]\ **)**           | Split a string by a regular expression   |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function returns a sequence containing substrings of the source
+   string *s1* split along boundaries matched by the pattern string
+   *s2*. If the optional limit *n* is specified, then the return
+   sequence will have at most *n* substrings with the remainder of the
+   source string being placed in the last returned substring. A limit of
+   0 means “no limit” (this is the default).
+
+   The pattern string *s2* can contain special characters in the form of
+   a regular expression (RE). See :ref:`the $FEDIT function<func_fedit>` for a
+   description of RE’s.
+
+   For example:
+
+      ::
+
+         DECLAR/LOCAL,SEQUENCE,Q
+         Q=$FSPLIT($P1,'=',2)
+
+   If $P1 does not contain an “=” character, then a sequence containing
+   a single $P1 string is returned. If $P1 contains one or more =
+   characters, then the first substring of the returned sequence is the
+   characters of $P1 before the = character, and the second substring of
+   the returned sequence is the characters of $P1 after the = character.
+
+.. _func_fsubsq:
+.. index:: Functions; $FSUBSQ
+
++------------------------------------------------+------------------------------------------+
+| **$FSUBSQ(**\ *q,n1,n2*\ **)**                 | Extract subsequence                      |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function provides an obsolete method of returning zero or more
+   elements of a sequence variable
+   *q*. This function returns the portion of the sequence *q* starting
+   at element number *n1* and ending at element number *n2*. Both *n1*
+   and *n2* must be positive non-zero values. If *n2* is less than *n1*,
+   a sequence of length zero is returned. The macro colon operator
+   should be used instead of $FSUBSQ. For example, specify
+   *q*\ (*n1*\ **:**\ *n2*) instead of $FSUBSQ(*q*,\ *n1,n2*).
+
+.. _func_fsubst:
+.. index:: Functions; $FSUBST
+
++------------------------------------------------+------------------------------------------+
+| **$FSUBST(**\ *s,n1,n2*\ **)**                 | Extract substring                        |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function provides an obsolete method of returning a portion of a
+   string variable *s*. This function returns the portion of the string
+   *s* starting at character position *n1* and ending at character
+   position *n2*. Both *n1* and *n2* must be positive non-zero values.
+   If *n2* is less than *n1*, a blank string is returned. The macro
+   colon operator should be used instead of $FSUBST. For example,
+   specify *s*\ (*n1*\ **:**\ *n2*) instead of $FSUBST(*s*,\ *n1,n2*).
+
+.. _func_fswrit:
+.. index:: Functions; $FSWRIT
+
++-------------------------------------------------------------------+------------------------------------------+
+| **$FSWRIT(**\ *s*\ [,\ *a1*\ **[**\ *,a2*\ **[**\ *,…*\ **]]] )** | String formatting                        |
+|                                                                   |                                          |
+|                                                                   | Returns: String                          |
++-------------------------------------------------------------------+------------------------------------------+
+
+   This function returns the string *s* into which the subsequent
+   arguments *a1*, *a2*, etcetera, have been formatted. It effectively
+   does an internal write of the arguments into the format string and
+   returns the result. The returned string is produced by inserting the
+   arguments into the string *s* wherever special format specifiers are
+   found. More information on these specifiers can be found in
+   :ref:`“String Formatting”<string_formatting>`.
+
+.. _func_ftolowr:
+.. index:: Functions; $FTOLOWR
+.. _func_ftouper:
+.. index:: Functions; $FTOUPER
+
++------------------------------------------------+------------------------------------------+
+| **$FTOLOWR(**\ *string*\ **)**                 | String conversion to lower case          |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+| **$FTOUPER(**\ *string*\ **)**                 | String conversion to upper case          |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   These functions convert a string to lower or to upper case.
+
+.. _func_ftrim:
+.. index:: Functions; $FTRIM
+.. _func_ftriml:
+.. index:: Functions; $FTRIML
+.. _func_ftrimr:
+.. index:: Functions; $FTRIMR
+
++------------------------------------------------+---------------------------------------------------------+
+| **$FTRIM(**\ *s1*\ [*,s2*]\ **)**              | Trim white space from both sides of a string            |
+|                                                |                                                         |
+|                                                | Returns: String                                         |
++------------------------------------------------+---------------------------------------------------------+
+| **$FTRIML(**\ *s1*\ [*,s2*]\ **)**             | Trim white space from the left side (front) of a string |
+|                                                |                                                         |
+|                                                | Returns: String                                         |
++------------------------------------------------+---------------------------------------------------------+
+| **$FTRIMR(**\ *s1*\ [*,s2*] **)**              | Trim white space from the right side (end) of a string  |
+|                                                |                                                         |
+|                                                | Returns: String                                         |
++------------------------------------------------+---------------------------------------------------------+
+
+   These functions return a string with white space or other unwanted
+   characters stripped from the beginning and/or end of the source
+   string *s1*. The characters to be stripped can optionally be
+   specified using the mask string *s2*. If the mask string is omitted,
+   the trim functions will strip the following characters:
+
+      | Space (ASCII 32)
+      | Tab (ASCII 9)
+      | Line feed (ASCII 10)
+      | Carriage return (ASCII 13)
+      | NUL byte (ASCII 0)
+      | Vertical tab (ASCII 11)
+
+   Use **..** in the mask string to specify a range of characters. For
+   example, to strip all control codes from the start and end of the $P1
+   string:
+
+      ::
+
+         S=$FTRIM($P1,$FCHAR(0)//'..'//$FCHAR(31))
