@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Creo Integration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="../../../kit/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="page">
+        <a id="top"></a>
+        <div class="header">
+            <img src="../../../images/header_2.jpg" />
+        </div>
+        <div class="sidebar">
+            <div class="navbar">
+                <h2>Post Processor with Optional Simulation</h2>
+                <a href="../../../kit/3DEXPERIENCE/readme.htm"><b>3D</b>EXPERIENCE</a>
+                <a href="../../../kit/Creo/readme.htm">Creo</a>
+                <a href="../../../kit/FeatureCAM/readme.htm">FeatureCAM</a>
+                <a href="../../../kit/Fusion360/readme.htm">Fusion 360</a>
+                <a href="../../../kit/Mastercam/readme.htm">Mastercam</a>
+                <a href="../../../kit/NX_CLS/readme.htm">NX_CLS</a>
+                <a href="../../../kit/NX_ICAM/readme.htm">NX_ICAM</a>
+                <a href="../../../kit/PowerMill/readme.htm">PowerMill</a>
+            </div>
+            <div class="navbar">
+                <h2>Post Processor Only</h2>
+                <a href="../../../kit/Cadds5/readme.htm">Cadds5</a>
+                <a href="../../../kit/Cadra/readme.htm">Cadra</a>
+                <a href="../../../kit/Camand/readme.htm">Camand</a>
+                <a href="../../../kit/CAMWorks/readme.htm">CAMWorks</a>
+                <a href="../../../kit/Cimatron/readme.htm">Cimatron</a>
+                <a href="../../../kit/Em_Machine/readme.htm">Em Machine</a>
+                <a href="../../../kit/Generic/readme.htm">Generic</a>
+                <a href="../../../kit/GibbsCAM/readme.htm">GibbsCAM</a>
+                <a href="../../../kit/hyperMILL/readme.htm">hyperMILL</a>
+                <a href="../../../kit/ICAM/readme.htm">ICAM</a>
+                <a href="../../../kit/IDEAS/readme.htm">IDEAS</a>
+                <a href="../../../kit/Intercim/readme.htm">Intercim</a>
+                <a href="../../../kit/Intergraph/readme.htm">Intergraph</a>
+                <a href="../../../kit/NCCS_NCLCAM/readme.htm">NCCS NCLCAM</a>
+                <a href="../../../kit/NICAM/readme.htm">NICAM</a>
+                <a href="../../../kit/NX_CLF/readme.htm">NX_CLF</a>
+                <a href="../../../kit/Pathtrace/readme.htm">Pathtrace</a>
+                <a href="../../../kit/SurfCAM/readme.htm">SurfCAM</a>
+                <a href="../../../kit/TopSolid/readme.htm">TopSolid</a>
+            </div>
+            <div class="navbar">
+                <div class="style9"><p>Copyright &copy; 2023 ICAM Technologies Corporation. All Rights Reserved.</p></div>
+            </div>
+        </div>
+        <div class="content">
+            <br />
+            <a href="../../../integration/index_Integration.htm"><i class="fa fa-home">Integration Utility</i></a>
+            <a href="../../../kit/index.htm"><i class="fa fa-home">Kit</i></a>
+            <a href="../../../kit/Creo/readme.htm"><i class="fa fa-mail-reply">Return to previous</i></a>
+            <h1><img align="right" src="../../../images/camlogo_ptc.jpg" />ICAM to Creo Integration</h1>
+            <hr />
+            <br />
+            <img src="../../../images/camscrsh_ptc.jpg" width="240" height="130">
+            <br />
+            <ul style="list-style:none">
+                <li>CAM System: PTC Creo 1,2,3,4,5,6,7</li>
+                <li>Company: PTC, Inc.</li>
+                <li>Website:<a href="https://www.ptc.com/">www.ptc.com</a></li>
+                <li>Release: 22.0-1702</li>
+            </ul>
+            <br />
+            <hr />
+            <!-- Content -->
+            <h2>CAM-POST to Creo Integration Documentation</h2>
+            <h3>Overview</h3>
+            <p>Thanks for choosing CAM-POST, the NC post processing Product from ICAM Technologies Corporation.</p>
+            <p>
+                CAM-POST is a post processor generator embedded within the Creo architecture to generate NC Data output.
+                It can accommodate a wide variety of machine types having multiple axis path control.
+            </p>
+            <p>
+                This integration document is addressed to Creo end-users to help organize post-processor usage through Creo; Describes the steps to install,
+                upgrade and configure CAM-POST to run in an integrated Pro/NC CREO environment.
+            </p>
+            <h3>ICAM to Creo Integration Setup Utility</h3>
+            <p>
+                The integration setup utility can be found in the <b>Tools</b> section of the Portal<br />
+            </p>
+            <img src="Images/portal_tools.jpg" ><br />
+            <h3>Choose Creo system(s) to setup</h3>
+            <img src="Images/setup_ptc1.jpg">
+            <p>
+                Select CAM system by checking the check-box or double-mouse-click on the already checked CAM system will redirect the focus to the corresponding CAM
+                setup page.<br />
+                Or, select the CAM system setup page for modifying. Check the latest CAM-POST revision if multiple instances exists.
+            </p>
+            <h4>Creo Setup Page</h4>
+            <b>Note:</b> You may need admin priviledges.<br>
+            <img src="Images/setup_ptc2.jpg">
+            <p>
+                Several integration options are available.
+                <ul>
+                    <li><b>Using Windchill PLM</b> is used when the user uses Windill PLM to load Creo manufacturing parts.</li>
+                    <li><b>GENER UI</b> &amp; <b>CERUN UI</b> affect how the sofware is launched. 'Full' will launch the complete runtime interface.</li>
+                    <li><b>Setup for this user.</b> is used to setup the installation folder for this user only. <u>(Recommended)</u></li>
+                    <li><b>Setup for any user of this machine.</b> is used to setup the installation folder for all users.</li>
+                    <li>CREO system need to start from <b>StartIn</b> folder. It is recommended to choose <b>ProgramData</b> location for this folder so that CAM-POST integration with mutilple Creo version is easily supported. 
+                        The <b>StartIn</b> folder should be the same as the one indicated in Creo executable properties. <br/> <img src="Images/setup_ptc3.jpg"><br /></li>                    
+                    <li><b>Set Extractor</b> is used to install the Extractor for simulation purposes.</li>
+                    <li><b>Install Post</b> to create the selected ICAM post processor into Creo.</li>
+                    <li><b>Interface kit</b> should be selected based on your CAM system, except if you have a custom kit. <b>Creo is recommended.</b></li>
+                    <li><b>Use default database</b> will be the database use when launching ICAM within the CAM software. The default database depends on the answer for the setup. If unchecked, you can select your own
+                    database location.</li>
+                </ul>
+                Press <b>OK</b> to save the settings.<br>
+            </p> 
+            <h3>Creo CAM Setup</h3>
+            <ul>
+                <li>Within Creo startup window, go to <b>File -> Options -> Options</b><br/> <img src="Images/setup_ptc4.jpg"></li>
+                <li>Click on the <b>Configuration Editor</b> and press <b>Add</b>.<br/> <img src="Images/setup_ptc5.jpg"></li>
+                <li>In the Option name, write <b>protkdat</b>, and for the Option value, browse for the protk file created during the integration step in the previous chapter. If you used the path recommended, you will find it in the ProgramData\ICAM directory. 
+                    Press <b>OK</b> to accept the new option. <br/> <img src="Images/setup_ptc6.jpg">
+                </li>
+                <li>Press <b>OK</b> to exit the Options window. Creo will ask to update the Configuration file as shown in the following picture. 
+                    Press <b>Yes</b>, and browse to the <b>config.pro</b> file in the directory shown below at the top of the Creo Parametric Options dialogue.<br/> <img src="Images/setup_ptc7.jpg">
+                </li>
+                <li>Open the <b>Auxiliary Applications</b> from <b>Home tab -> Utilities -> Auxiliary Applications</b>. <br/> <img src="Images/setup_ptc8.jpg"></li>
+                <li>Click the <b>Register</b> button and browse for the protk file created previously. <br/> <img src="Images/setup_ptc9.jpg"> </li>
+                <li>Two options will appear: <b>icam_extractor</b> & <b>icam_post</b>. Select each one and press the <b>Start</b> button.<br/> <img src="Images/setup_ptc10.jpg"></li>
+            </ul>
+            <h3>Launch ICAM Post-processor from Creo</h3>
+            <p>In a manufacturing session, the <b>ICAM Post-processor</b> application will be available under the <b>Tools -> TOOLKIT</b>. <br/><img src="Images/setup_ptc11.jpg">
+                <br/><img src="Images/setup_ptc12.jpg">
+            </p>
+            <h4>Post-processor Nodes</h4>
+            <ul>
+                <li class="lidb"><b>Setup Root:</b> Shows the full path and filename of the ICAM database set during integration.
+                    <ul>
+                        <li style="list-style-image: url('Images/e_grg.jpg');"><b>Operation Nodes:</b> Same as the program nodes in Creo which is the parent to all subsequent manufacturing data.
+                            <ul>
+                                <li class="lires"><b>ICAM Resources Group:</b>
+                                    <ul>
+                                        <li class="lipost">Post-processor</li>
+                                    </ul>
+                                </li>
+                                <li style="list-style-image: url('Images/e_qmark.jpg');"><b>Cutter Location Source File:</b> The default path and filename used when generating CL data.</li>
+                                <li style="list-style-image: url('Images/e_cog.jpg');"><b></b></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <h4>Using the Post </h4>
+            <p>
+                If multiple post-processors are available in your database, you can right-click the post-processor name in the <b>ICAM resources</b> node and select another post-processor.
+                <br/><img src="Images/e_newpost.jpg"><br/>
+                If you prefer to place the CL and NC files at a different location than the folder containing the Creo manufacturing assembly and related files, uncheck Use CAM folder and press the <img src="Images/e_folder.jpg"> next to the field at the bottom to select another directory.
+                <br/><img src="Images/e_folderpath.jpg"><br/>
+            </p>
+            <a href="#top"><i class="fa fa-angle-double-up">Back to top</i></a>
+        </div>
+    </div>
+</body>
+</html>
+
