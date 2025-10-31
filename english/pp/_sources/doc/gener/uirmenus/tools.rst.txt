@@ -1,0 +1,69 @@
+.. _tools_menu:
+
+Tools Menu
+~~~~~~~~~~
+
+**Tools»Configuration…**
+
+   Use this menu selection to activate the Configuration utility (see
+   :ref:`“The ICAM Configuration Utility”<configuration_utility>`). Configuration
+   changes made after processing has begun will only take effect once the
+   current program is rewound to the start or when GENER is next started.
+
+.. _tools_preferences:
+
+**Tools»Preferences…**
+
+   Use this menu selection to set personal preferences for the operation of GENER.
+   Preferences affect the interface of GENER; preferences do not affect
+   the NC code produced by GENER.
+   The following preferences are available:
+
+   -  General
+
+      -  Fonts and colors used in the Trace windows
+      -  Automatic generation of a “Save for Review” zpj file on exit.
+      -  Display of a “Loading…” dialog at the start of processing
+
+      \
+
+   -  Debug
+
+      -  Colorization settings of text in the Source and Trace windows
+      -  Various debugging options, including:
+
+         -  display of variables with $NULL value in the Variables window
+         -  display of a Pause/Continue dialog when a breakpoint is encountered
+         -  generation of a warning when uninitialized variables are used
+         -  ability to debug into $FLOOK type look-aheads
+         -  control of contextual help of codes and registers in the Output trace window
+
+      -  Macro strong declaration setting
+      -  Macro format to use lowercase with C operators or uppercase with APT operators
+
+      \
+
+   -  Trace
+
+      -  Limit number of lines written to Trace and Source windows
+      -  Option to trace operator (DISPLY command) and other messages to the Console window
+      -  Option to trace MACRO I/O command processing to the Console window
+      -  Option to trace diagnostic messages at or above a minimum severity to the Console window
+
+| **Tools»Find…**
+| **Tools»Find Next**
+| **Tools»Find Previous**
+
+   These functions are used to search the selected trace window for
+   matching text.
+
+**Tools»Toolbar…**
+
+   Use this menu selection to activate or disable the various toolbar
+   menus available with GENER. Toolbars can be docked along any of the
+   sides of the main window, or they can be detached as separate
+   windows.
+
+   Tooltips (balloon text that appears when the cursor is left on top of
+   an input field or control) can also be enabled or disabled from the
+   toolbar menu dialog.
