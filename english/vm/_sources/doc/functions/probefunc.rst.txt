@@ -1,0 +1,488 @@
+.. _probefunctions:
+
+Probe and Collision Test Functions
+==================================
+
+Probe and collision test functions simulate the behavior of touch or laser probes
+and allow you to monitor for collision and over-travel events.
+These functions support probing setup, event reporting, and collision zone management.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`$FMSCEZ<func_fmscez>`
+         -  Summary of collision/over-travel events
+      *  -  :ref:`$FMSLSR<func_fmslsr>`
+         -  Laser probing
+      *  -  :ref:`$FMSNEAR<func_fmsnear>`
+         -  Adjust collision safety zone surrounding components
+      *  -  :ref:`$FMSPDAT<func_fmspdat>`
+         -  Details of probe/collision/over-travel events
+      *  -  :ref:`$FMSPPOS<func_fmsppos>`
+         -  Axes positions at touch
+      *  -  :ref:`$FMSPRID<func_fmsprid>`
+         -  Select the object to be used as a probe
+      *  -  :ref:`$FMSPROB<func_fmsprob>`
+         -  Activate/deactivate probing
+      *  -  :ref:`$FMSVCL<func_fmsvcl>`
+         -  Enable/disable collision testing on objects
+
+The following steps are necessary for **touch probing**:
+
+1. Call the :ref:`$FMSPRID<func_fmsprid>` function to designate an object that will be used for touch probing.
+
+2. Call the :ref:`$FMSPROB<func_fmsprob>` function to enable probing (i.e., arm the probe).
+
+3. Move the model via GENER or CERUN motion processing, or via :ref:`$FMSMOVE<func_fmsmove>` calls.
+
+4. Check for probe touch via the :ref:`$VMPRCOD<var_vmprcod>` probe status variable.
+
+5. Retrieve basic touch information via the :ref:`$VMXFER<var_vmxfer>` and :ref:`$VMP*<var_vmplxm>` variables.
+
+6. Retrieve details via calls to the :ref:`$FMSPDAT<func_fmspdat>` and :ref:`$FMSPPOS<func_fmsppos>` functions.
+
+7. Optionally call :ref:`$FMSVCL<func_fmsvcl>` to disable further collision checking touching objects.
+
+8. Call the :ref:`$FMSPROB<func_fmsprob>` function again to disable probing.
+
+9. Call the :ref:`$FMSPRID<func_fmsprid>` function again to disable the probe object.
+
+The following steps are necessary for **laser probing**:
+
+1. Call $FMSGCS to obtain the coordinate frame in which the measurement
+   will be taken.
+
+2. Call the :ref:`$FMSLSR<func_fmslsr>` function with a point and vector that specifies the
+   origin and direction of the light beam, and test the return value for
+   measurement information.
+
+The following steps are necessary to **check for collisions and
+over-travels**:
+
+1. Optionally call :ref:`$FMSVCL<func_fmsvcl>` to enable/disable collision checking on specific objects.
+
+2. Optionally call :ref:`$FMSNEAR<func_fmsnear>` to adjust the collision safety zone for specific objects.
+
+3. Move the model via GENER or CERUN motion processing, or via :ref:`$FMSMOVE<func_fmsmove>` calls.
+
+4. Retrieve basic collision/over-travel event information via the :ref:`$VMXFER<var_vmxfer>` variable.
+
+5. Call :ref:`$FMSCEZ<func_fmscez>` to obtain summary information concerning each event.
+
+6. Call :ref:`$FMSPDAT<func_fmspdat>` to obtain details concerning each event.
+
+.. _func_fmscez:
+.. index:: Functions; $FMSCEZ
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSCEZ(**\ *...*\ **)**                     | Returns information about collisions              |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSCEZ}\boldsymbol{(}\, n \,\boldsymbol{)}`
+
+   This function returns information about the *n*\ :sup:`th` collision or
+   over-travel event that occurred on the last motion. A sequence of length
+   3 is returned, as follows:
+
+   :1: Time at start of event
+   :2: Time at end of event
+   :3: Count of interference pairs
+
+   The :ref:`$VMXFER(1)<var_vmxfer>` system variable contains the number of collision and/or
+   over-travel events that occurred on the last motion. This is the upper
+   limit for *n*.
+
+   The count of interference pairs can be used when calling the :ref:`$FMSPDAT<func_fmspdat>`
+   function to get details of which axes over-traveled or which component
+   pairs collided during the event.
+
+.. _func_fmslsr:
+.. index:: Functions; $FMSLSR
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSLSR(**\ *...*\ **)**                     | Probing function various state of Virtual Machine |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSLSR}\boldsymbol{(}\, point, vector \big[,options\,\big] \boldsymbol{)}`
+
+   This function projects a beam from a *point* in space along a specified
+   *vector*, and returns a sequence of length 15 containing information
+   about the first object that the beam intersects, as follows:
+
+   :1: Status: <0=error, 0=no intersection, 1=intersection found
+   :2: ID number of the intersecting object
+   :3: Name of the intersecting object
+   :4–6: XYZ coordinates of the light source point
+   :7–9: IJK direction vector of the light beam
+   :10–12: XYZ coordinates of the intersection point
+   :13–15: IJK surface normal at intersection point
+
+   Various *options* affect the operation of the $FMSLSR function:
+
+      :math:`\mathbf{IN}, id\_sequence`
+
+         If specified, only those component id's listed in the *id_sequence*
+         variable will be checked for interference with the beam. By default
+         all objects are tested.
+
+      :math:`\mathbf{OUT}, id\_sequence`
+
+         If specified, those component id's listed in the *id_sequence*
+         variable will not be checked for interference with the beam. By
+         default all objects are tested.
+
+      :math:`\mathbf{TRFORM}, lcs`
+
+         The *lcs* sequence defines a homogeneous 3x4 matrix specifying the
+         transformation between local and World coordinate systems (as can be
+         obtained from the :ref:`$FMSGCS<func_fmsgcs>` function). The point and vector input data
+         and the resulting measurement data are expressed in that coordinate
+         frame. By default all data and measurements are in the model World
+         coordinate system.
+
+      :math:`\mathbf{SIDE},\begin{pmatrix}\begin{array}{l} \mathbf{OUT} \\ \mathbf{IN} \\ \mathbf{ALL} \end{array}\end{pmatrix}`
+
+         Specifies which sides of a surface are visible for measurement
+         purposes. SIDE,OUT is the default and indicates that only outside
+         surfaces can be detected. SIDE,IN causes only inside surfaces to be
+         detected. SIDE,ALL will detect all surfaces.
+
+      :math:`\mathbf{MODIFY},\mathbf{1},\mathbf{RADIUS}, radius, \mathbf{STEP}, count`
+
+         Provided that the beam contacts an object, fires additional beams at
+         that object *count* times at the specified *radius* around the
+         *point*. The return coordinates and normals are averaged.
+
+      :math:`\mathbf{MODIFY},\mathbf{2},\mathbf{RADIUS}, radius, \mathbf{STEP}, count`
+
+         Fires additional beams *count* times at the specified *radius* around
+         the *point*. Returns the closest object and its surface normal.
+
+.. _func_fmsnear:
+.. index:: Functions; $FMSNEAR
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSNEAR(**\ *...*\ **)**                    | Collision safety nearness                         |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+   This function gets and optionally sets the collision safety nearness
+   zone around physical components. Nearness information is returned as a
+   sequence of {*id*,\ *value*,\ *status*} tuples, one for each physical
+   component, where *id* is the component ID, *value* is a non-negative
+   nearness amount and *status* is either 0 for disabled or 1 for enabled.
+
+   Note that the :ref:`$FMSVCL<func_fmsvcl>` function can be used to enable or disable
+   collision testing on components. This does not affect the nearness value
+   or status of a component, however the nearness value and status will be
+   ignored for any component that is not also enabled for collision
+   testing.
+
+   **Get Nearness for All Components**
+
+      :math:`\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \mathbf{ALL} \,\boldsymbol{)}`
+
+   Returns a sequence of {*id*,\ *value*,\ *status*} nearness tuples for
+   all collision enabled objects in the model and for all run-time
+   components (i.e., tools, holders, parts and fixtures).
+
+   **Get/Set Nearness for Component ID**
+
+      :math:`\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \bm{comp\_id} \, \big[,value\,\big]
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+      \big[,\mathbf{ALL}\,\big]
+      \boldsymbol{)}`
+
+   Returns a sequence of {*id*,\ *value*,\ *status*} nearness tuples for
+   the component ID indicated by *comp_id*. If ALL is specified, then
+   nearness information for all child components of *comp_id* is also
+   returned. If a *value* is specified, then the nearness offset for the
+   identified component(s) is set to the value specified. If ON or OFF is
+   specified, then the nearness status is set for the identified
+   component(s).
+
+   **Get/Set Nearness for Components in Group**
+
+      :math:`\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \mathbf{GROUP}, \bm{group\_id} \, \big[,value\,\big]
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   Returns a sequence of {*id*,\ *value*,\ *status*} nearness tuples for
+   each of the member components of the group identified by *group_id*. If
+   a *value* is specified, then the nearness offset for the components in
+   the group is set to the value specified. If ON or OFF is specified, then
+   the nearness status is set for the components in the group.
+
+   **Get/Set Nearness for Current Tool**
+
+      :math:`\mathit{result} = \mathbf{\$FMSNEAR}\boldsymbol{(}\, \mathbf{TOOL} \, \big[,value\,\big]
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   Returns the nearness tuple sequence{*id*,\ *value*,\ *status*} for the
+   currently loaded tool. If a *value* is specified, then the nearness
+   offset for the tool is set to the value specified. If ON or OFF is
+   specified, then the nearness status is set for the tool. Tool nearness
+   is used for RAPID and high feed positioning motions.
+
+.. _func_fmspdat:
+.. index:: Functions; $FMSPDAT
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSPDAT(**\ *...*\ **)**                    | Information about interference pairs              |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSPDAT}\boldsymbol{(}\, n, p \,\boldsymbol{)}`
+
+   This function returns information about the *p*\ :sup:`th` interference
+   pair of the *n*\ :sup:`th` collision/over-travel event that occurred on
+   the last motion. A sequence of length 7 is returned, as follows:
+
+   :1: Event type. 1=over-travel, 2=collision, 3=measurement
+   :2: ID number of the first component
+   :3: Name of the first component
+   :4: ID number of the second component (0 if over-travel event)
+   :5: Name of the second component (blank if over-travel event)
+   :6: Time at start of event
+   :7: Time at end of event (same as start time for measurement event)
+
+   The :ref:`$VMXFER(1)<var_vmxfer>` system variable contains the number of collision and/or
+   over-travel events that occurred on the last motion. This is the upper
+   limit for *n*. The :ref:`$FMSCEZ<func_fmscez>` function can be called to get the count of
+   interference pairs for each collision/over-travel event. This is the
+   upper limit for *p*.
+
+   For example, to list all collisions:
+
+      .. code-block:: text
+
+            DECLAR/LOCAL,REAL,N,P
+            DECLAR/LOCAL,SEQUENCE,CEZ,PDAT
+            DO/N=1,$VMXFER(1)
+              CEZ=$FMSCEZ(N)
+              DO/P=1,CEZ(3)
+                PDAT=$FMSPDAT(N,P)
+                IF/PDAT(1).EQ.2
+                  ERROR/8,'Collision detected between !(*) and !(*)',$
+                    PDAT(3),PDAT(5)
+                ENDOF/IF
+              ENDOF/DO
+            ENDOF/DO
+
+.. _func_fmsppos:
+.. index:: Functions; $FMSPPOS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSPPOS(**\ *...*\ **)**                    | returns the axes positions at the last probing    |
+|                                                | contact                                           |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSPPOS}\boldsymbol{(} \; \boldsymbol{)}`
+
+   This function returns the axes positions at the last point of probe
+   contact for all moving axes. A variable length sequence is returned, as
+   follows:
+
+   :1: Number of axes moved (0 if none)
+   :2–4: ID number, name and position of the first axis at the touch point
+   :5–7: ID, name and position of the second axis at the touch point
+   :...: *repeats for additional axes*
+
+   To simplify processing, the :ref:`$VMP*<var_vmplxm>` macro variables can also be used to
+   obtain the XYZ linear axes positions at the start and end (i.e., trigger
+   point) of the probe motion.
+
+.. _func_fmsprid:
+.. index:: Functions; $FMSPRID
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSPRID(**\ *...*\ **)**                    | Sets the touch probe object                       |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSPRID}\boldsymbol{(} \big[\, id \,\big] \boldsymbol{)}`
+
+   This function sets the touch probe object to the specified component
+   *id*, which can be any component in the world (excluding in-process
+   stock) that has a physical representation. This function returns the
+   previously active probe object id. Specify an object id of –1 to
+   deactivate the current probe object without specifying another.
+
+   The $FMSPRID function can be called without an argument to obtain the
+   current probe component id.
+
+.. _func_fmsprob:
+.. index:: Functions; $FMS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSPROB(**\ *...*\ **)**                    | Activates or deactivates probing                  |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSPROB}\boldsymbol{(} \big[\, status \,\big] \boldsymbol{)}`
+
+   This function activates or deactivates probing, returning the previous
+   probe activation status. The following values for *status* are
+   permitted:
+
+   :0: Deactivate probing; contact with probe will cause a collision
+   :1: Activate probing; probe is armed
+   :2: Deactivate probing; ignore contact with probe
+
+   The $FMSPROB function can be called without an argument to obtain the
+   current probe component id.
+
+   Once the probe is active, any motion that causes contact between the
+   probe object (which must first be defined first using :ref:`$FMSPRID<func_fmsprid>`) and
+   another collision enabled object, will cause a probe event to be
+   triggered. The model axes motion will be interrupted at the point of
+   probe contact, and the probe status information will be returned in the
+   :ref:`$VMPRCOD<var_vmprcod>` system variable.
+
+   The following example will close the chuck jaws so that they come into
+   contact with the raw stock or part. This example assumes there is a
+   chuck jaw identified as “JAW” and that it can be moved with an axis
+   identified as “JAW-AXIS”. This code should be included in the model
+   startup macro:
+
+      .. code-block:: text
+
+            DECLAR/LOCAL,REAL,JAW_ID=$FMSID('JAW')
+            IF/JAW_ID.GT.0
+              %L01=$FMSPRID(JAW_ID) $$ set jaws as probe
+              %L01=$FMSPROB(1) $$ activate probing
+              %L01=$FMSMOVE($FMSID('JAW-AXIS'),0,1000) $$ close jaws
+              CASE/$VMPRCOD
+                WHEN/0
+                  ERROR/4,'No part in chuck'
+                WHEN/1
+                  $$ get touched object and disable collision with jaw
+                  DECLAR/LOCAL,SEQUENCE,PDAT
+                  PDAT=$FMSPDAT($VMXFER(6),$VMXFER(7))
+                  %L01=$FMSVCL(JAW_ID,OFF,PDAT(4))
+                WHEN/OTHERS
+                  ERROR/8,'Jaws in contact with part at start'
+              ENDOF/CASE
+              %L01=$FMSPROB(0) $$ deactivate probing
+              %L01=$FMSPRID(-1) $$ deactivate probe
+            ENDOF/IF
+
+.. _func_fmsvcl:
+.. index:: Functions; $FMS
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSVCL(**\ *...*\ **)**                     | Single Component Collision Status                 |
+|                                                |                                                   |
+|                                                | Returns: Sequence                                 |
++------------------------------------------------+---------------------------------------------------+
+
+   **Single Component Collision Status**
+
+      :math:`\mathit{result} = \mathbf{\$FMSVCL}\boldsymbol{(}\, id \,
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{bmatrix}
+      \begin{bmatrix} ,\! \begin{array}{l} \mathbf{LOCK} \\ \mathbf{AUTO} \end{array}\end{bmatrix}
+      \boldsymbol{)}`
+
+   This form of the $FMSVCL function activates, deactivates or reports on
+   the collision testing property of the specified object *id*. If neither
+   ON nor OFF is specified, then the collision property remains unchanged
+   (i.e., the status is reported only). The function returns a sequence of
+   two numbers. The first number is equal to the component *id* of the
+   tested object. The second number indicates the status as follows:
+
+   :–2: Not a physical object — collision testing is not applicable
+   :–1: A physical object, but collision testing is not available
+   : 0: Collision testing has been deactivated
+   : 1: Collision testing is enabled
+
+   This function affects the collision testing status of a single physical
+   object. Use the aggregate form of the function (described below) to
+   affect the collision status of aggregate (i.e., container) objects such
+   as tools, parts and fixtures.
+
+   Specify LOCK to ensure that the collision status setting will not be
+   modified during the normal course of processing. For example, spindle
+   activation and deactivation changes the collision status of some
+   components of a tool. Specify AUTO at some later point to restore normal
+   collision status processing.
+
+   The following example disables collision testing of tool “body”
+   components attached to tool axis #1:
+
+      .. code-block:: text
+
+            DECLAR/LOCAL,REAL,N
+            DECLAR/LOCAL,SEQUENCE,VCL=$FMSVCL($FMSID(TOOL,1,2),ALL)
+            DO/N=1,$FLEN(VCL),2
+              IF/$FMSIDT(TOOL,VCL(N)).EQ.2 $$ is this a body component?
+                %L01=$FMSVCL(VCL(N),OFF,LOCK) $$ disable collision testing
+              ENDOF/IF
+            ENDOF/DO
+
+   **Aggregate Component Collision Status**
+
+      :math:`\mathit{result} = \mathbf{\$FMSVCL}\boldsymbol{(} \big[\, id, \big]
+      \begin{bmatrix} \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array} , \end{bmatrix}
+      \mathbf{ALL}
+      \boldsymbol{)}`
+
+   This form of the $FMSVCL function activates, deactivates or reports on
+   the collision testing property of *all collision enabled/disabled*
+   objects mounted at or below the specified component *id* (all objects in
+   the World if *id* is not specified or is zero). If neither ON nor OFF is
+   specified, then the collision property remains unchanged (i.e., the
+   status is reported only).
+
+   Collision properties are returned in a variable length sequence
+   containing {component ID, status(0|1)} pairs, where the collision status
+   value (0=off, 1=on) is reported *before* making any ON-OFF changes.
+
+   The following macro shows how to save the collision testing state of the
+   model and then later restore the original collision status:
+
+      .. code-block:: text
+
+            $$ Save collision state
+            VCL=$FMSVCL(ALL)
+            ...
+            $$ Restore collision state
+            DO/N=1,$FLEN(VCL),2
+              %L01=$FMSVCL(VCL(N),$FIF(VLC(N+1).EQ.1,ON,OFF))
+            ENDOF/DO
+
+   **Component Pair Collision Status**
+
+      :math:`\mathit{result} = \mathbf{\$FMSVCL}\boldsymbol{(}\, id_1
+      \begin{pmatrix} ,\! \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array}\end{pmatrix} ,
+      id_2 \,\boldsymbol{)}`
+
+   This form of the $FMSVCL function activates or deactivates collision
+   testing between pairs of components as specified by their component IDs.
+   The function returns a sequence of two numbers. The first number is
+   equal to the component :math:`id_1` of the tested object. The second number
+   indicates the status as follows:
+
+   :–2: The first object is not a physical body — collision testing cannot be changed
+   :–1: Both are physical objects, but collision testing is not available for one or both objects
+   : 0: Collision testing has been deactivated
+   : 1: Collision testing is enabled
+
+   Component :math:`id_1` must represent a single physical component. Do not
+   specify an aggregate (i.e., container) component such as a tool, part or
+   fixture.
+
+   Component :math:`id_2` can represent either a physical component or an
+   aggregate component.
