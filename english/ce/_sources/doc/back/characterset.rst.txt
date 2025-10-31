@@ -1,0 +1,402 @@
+.. _annex_character_set:
+
+Character Set
+*************
+
+.. list-table::
+   :widths: auto
+   :header-rows: 1
+
+   *  -  ASCII
+
+         Code
+      -  Character
+      -  Description
+   *  -  0
+      -  NUL
+      -  Null
+   *  -  1
+      -  SOH
+      -  Start of heading
+   *  -  2
+      -  STX
+      -  Start of text
+   *  -  3
+      -  ETX
+      -  End of text
+   *  -  4
+      -  EOT
+      -  End of transmission
+   *  -  5
+      -  ENQ
+      -  Inquiry
+   *  -  6
+      -  ACK
+      -  Acknowledgment
+   *  -  7
+      -  BEL
+      -  Bell
+   *  -  8
+      -  BS
+      -  Backspace
+   *  -  9
+      -  HT
+      -  Horizontal tab
+   *  -  10
+      -  LF
+      -  Line feed
+   *  -  11
+      -  VT
+      -  Vertical tab
+   *  -  12
+      -  FF
+      -  Form feed
+   *  -  13
+      -  CR
+      -  Carriage return
+   *  -  14
+      -  SO
+      -  Shift out
+   *  -  15
+      -  SI
+      -  Shift in
+   *  -  16
+      -  DLE
+      -  Data link escape
+   *  -  17
+      -  DC1
+      -  Device control 1
+   *  -  18
+      -  DC2
+      -  Device control 2
+   *  -  19
+      -  DC3
+      -  Device control 3
+   *  -  20
+      -  DC4
+      -  Device control 4
+   *  -  21
+      -  NAK
+      -  Negative acknowledgment
+   *  -  22
+      -  SYN
+      -  Synchronous idle
+   *  -  23
+      -  ETB
+      -  End of transmission block
+   *  -  24
+      -  CAN
+      -  Cancel
+   *  -  25
+      -  EM
+      -  End of medium
+   *  -  26
+      -  SUB
+      -  Substitute
+   *  -  27
+      -  ESC
+      -  Escape
+   *  -  28
+      -  FS
+      -  File separator
+   *  -  29
+      -  GS
+      -  Group separator
+   *  -  30
+      -  RS
+      -  Record separator
+   *  -  31
+      -  US
+      -  Unit separator
+   *  -  32
+      -  SP
+      -  Space or blank
+   *  -  33
+      -  !
+      -  Exclamation mark
+   *  -  34
+      -  “
+      -  Quotation mark
+   *  -  35
+      -  #
+      -  Number sign
+   *  -  36
+      -  $
+      -  Dollar sign
+   *  -  37
+      -  %
+      -  Percent sign
+   *  -  38
+      -  &
+      -  Ampersand
+   *  -  39
+      -  '
+      -  Apostrophe
+   *  -  40
+      -  (
+      -  Left Parenthesis
+   *  -  41
+      -  )
+      -  Right Parenthesis
+   *  -  42
+      -  \*
+      -  Asterisk
+   *  -  43
+      -  \+
+      -  Plus sign
+   *  -  44
+      -  ,
+      -  Comma
+   *  -  45
+      -  \-
+      -  Minus sign or hyphen
+   *  -  46
+      -  .
+      -  Period or decimal point
+   *  -  47
+      -  /
+      -  Slash
+   *  -  48
+      -  0
+      -  Zero
+   *  -  49
+      -  1
+      -  One
+   *  -  50
+      -  2
+      -  Two
+   *  -  51
+      -  3
+      -  Three
+   *  -  52
+      -  4
+      -  Four
+   *  -  53
+      -  5
+      -  Five
+   *  -  54
+      -  6
+      -  Six
+   *  -  55
+      -  7
+      -  Seven
+   *  -  56
+      -  8
+      -  Eight
+   *  -  57
+      -  9
+      -  Nine
+   *  -  58
+      -  :
+      -  Colon
+   *  -  59
+      -  ;
+      -  Semicolon
+   *  -  60
+      -  <
+      -  Left angle bracket
+   *  -  61
+      -  =
+      -  Equal sign
+   *  -  62
+      -  >
+      -  Right angle bracket
+   *  -  63
+      -  ?
+      -  Question mark
+   *  -  64
+      -  @
+      -  At sign
+   *  -  65
+      -  A
+      -  Upper case A
+   *  -  66
+      -  B
+      -  Upper case B
+   *  -  67
+      -  C
+      -  Upper case C
+   *  -  68
+      -  D
+      -  Upper case D
+   *  -  69
+      -  E
+      -  Upper case E
+   *  -  70
+      -  F
+      -  Upper case F
+   *  -  71
+      -  G
+      -  Upper case G
+   *  -  72
+      -  H
+      -  Upper case H
+   *  -  73
+      -  I
+      -  Upper case I
+   *  -  74
+      -  J
+      -  Upper case J
+   *  -  75
+      -  K
+      -  Upper case K
+   *  -  76
+      -  L
+      -  Upper case L
+   *  -  77
+      -  M
+      -  Upper case M
+   *  -  78
+      -  N
+      -  Upper case N
+   *  -  79
+      -  O
+      -  Upper case O
+   *  -  80
+      -  P
+      -  Upper case P
+   *  -  81
+      -  Q
+      -  Upper case Q
+   *  -  82
+      -  R
+      -  Upper case R
+   *  -  83
+      -  S
+      -  Upper case S
+   *  -  84
+      -  T
+      -  Upper case T
+   *  -  85
+      -  U
+      -  Upper case U
+   *  -  86
+      -  V
+      -  Upper case V
+   *  -  87
+      -  W
+      -  Upper case W
+   *  -  88
+      -  X
+      -  Upper case X
+   *  -  89
+      -  Y
+      -  Upper case Y
+   *  -  90
+      -  Z
+      -  Upper case Z
+   *  -  91
+      -  [
+      -  Left square bracket
+   *  -  92
+      -  \\
+      -  Back slash
+   *  -  93
+      -  ]
+      -  Right square bracket
+   *  -  94
+      -  ^
+      -  Circumflex
+   *  -  95
+      -  \_
+      -  Underscore
+   *  -  96
+      -  \`
+      -  Grave accent
+   *  -  97
+      -  a
+      -  Lower case a
+   *  -  98
+      -  b
+      -  Lower case b
+   *  -  99
+      -  c
+      -  Lower case c
+   *  -  100
+      -  d
+      -  Lower case d
+   *  -  101
+      -  e
+      -  Lower case e
+   *  -  102
+      -  f
+      -  Lower case f
+   *  -  103
+      -  g
+      -  Lower case g
+   *  -  104
+      -  h
+      -  Lower case h
+   *  -  105
+      -  i
+      -  Lower case i
+   *  -  106
+      -  j
+      -  Lower case j
+   *  -  107
+      -  k
+      -  Lower case k
+   *  -  108
+      -  l
+      -  Lower case l
+   *  -  109
+      -  m
+      -  Lower case m
+   *  -  110
+      -  n
+      -  Lower case n
+   *  -  111
+      -  o
+      -  Lower case o
+   *  -  112
+      -  p
+      -  Lower case p
+   *  -  113
+      -  q
+      -  Lower case q
+   *  -  114
+      -  r
+      -  Lower case r
+   *  -  115
+      -  s
+      -  Lower case s
+   *  -  116
+      -  t
+      -  Lower case t
+   *  -  117
+      -  u
+      -  Lower case u
+   *  -  118
+      -  v
+      -  Lower case v
+   *  -  119
+      -  w
+      -  Lower case w
+   *  -  120
+      -  x
+      -  Lower case x
+   *  -  121
+      -  y
+      -  Lower case y
+   *  -  122
+      -  z
+      -  Lower case z
+   *  -  123
+      -  {
+      -  Left brace
+   *  -  124
+      -  \|
+      -  Vertical line
+   *  -  125
+      -  }
+      -  Right brace
+   *  -  126
+      -  ~
+      -  Tilde
+   *  -  127
+      -  DEL
+      -  Delete
+
+Note that the extended character set (values 128-255) may be used.
+However, since the characters of the extended set vary across
+locales, they are not presented here.
