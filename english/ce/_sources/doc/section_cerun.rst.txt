@@ -1,0 +1,31 @@
+.. _cerun_section:
+
+CERUN: The Control-Emulator
++++++++++++++++++++++++++++
+
+This section describes the use of the control emulator runtime, named CERUN.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   cevm/index
+   cedelmia/index
+   diag/index
+
+**Section Overview**
+
+-  :ref:`“CERUN with Virtual Machine”<cerun_with_vm>` describes the CERUN launch panel settings,
+   return codes, inputs and outputs, along with instructions detailing the operation of
+   Control Emulator CERUN running with a Virtual Machine model.
+
+   \
+
+-  :ref:`“CERUN with DELMIA”<cerun_with_delmia>` details the steps necessary to use Control Emulator
+   CERUN integrated within the Dassault Systèmes CATIA V5 and 3DEXPERIENCE DELMIA machine simulation products.
+
+   \
+
+-  :ref:`“Diagnostic Messages”<diagnostics>` examines the different classes
+   of errors, the control emulator actions that occur when they are detected, the format of
+   error messages, and how to customize them.
