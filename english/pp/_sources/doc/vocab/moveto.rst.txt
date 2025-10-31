@@ -1,0 +1,34 @@
+.. _command_moveto:
+
+The MOVETO Command :kbd:`[MLEPC]`
+=================================
+
+The MOVETO command is used to move one or more machine axes to
+specified coordinate positions. This command is available for all
+machine types.
+
+   :math:`\textbf{MOVETO / } \big[ \textbf{ MANUAL}, \big] \!
+   \icamrange{13}{1}\! \begin{pmatrix} , \begin{pmatrix}\begin{array}{l} \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[ ,n \, \big] \end{array}\end{pmatrix} ,\mathit{value} \end{pmatrix}`
+
+The machine axes will be linearly interpolated at the current feed
+rate, or positioned at high speed if RAPID is in effect. Specify
+MANUAL to move the axes without actually generating any codes in the
+NC program or adjusting the time.
+
+If an axes being moved is currently clamped, then the MOVETO command
+will cause the axis to be unclamped before it is moved and reclamped
+after the move has completed.
+
+See :ref:`here<axis_names>` for a table correlating axes name
+keywords with machine axes. The scalar *value* specifies the machine
+coordinates of the axis position to move to. When a local coordinate
+frame is in effect (see :ref:`the LCS command<command_lcs>`), the linear axes values specify the position
+with respect to the local frame origin. When RTCP is in effect (see
+:ref:`the MODE/RTCP command<rotating_tool_center_point>`), the linear axes values
+specify the position with respect to the workpiece origin.
+
+When moving rotary axes, the angle specified is the exact angle to
+which the axis will be moved. For example, if a C-axis is wrapped
+around to 730 degrees and a MOVETO/CAXIS,0 is coded, the C-axis will
+not move 10 degrees to 720 (i.e., the nearest modulo-360 position).
+Instead, it will move 730 degrees all the way back to 0 (zero).
