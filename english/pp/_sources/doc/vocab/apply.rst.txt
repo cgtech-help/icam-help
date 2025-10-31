@@ -1,0 +1,102 @@
+.. _command_apply:
+
+The APPLY Command :kbd:`[MLEPCS]`
+=================================
+
+The APPLY command is used to switch between different machining modes
+of a post-processor.
+
+   :math:`\textbf{APPLY /} \begin{pmatrix} \begin{array}{l} \textbf{CONTUR} \\ \textbf{FLAME} \\ \textbf{LASER} \\ \textbf{MILL} \\ \textbf{PUNCH} \\ \textbf{TURN} \\ \textbf{WEDM} \end{array} \end{pmatrix}`
+
+On machines with a single mode of operation, the APPLY command
+performs no action.
+
+.. _milling_vs_turning_caxis_lathes:
+
+Milling vs. Turning for C Axis Lathes
+-------------------------------------
+
+The APPLY command is used to select the machining mode on composite
+milling/turning machines.
+
+   :math:`\textbf{APPLY / MILL } \big[ ,\textbf{CAXIS} \,\big] \; \big[ ,\textbf{YAXIS} \,\big]`
+
+   :math:`\textbf{APPLY / TURN}`
+
+By default mill-turn lathes are considered to be in TURN mode at the
+start of an NC program. The
+selection of live tooling is done by coding a APPLY/MILL command.
+Turning mode can be later reinstated by coding APPLY/TURN.
+
+On mill-turn lathes having a Y axis, the APPLY command can also be
+used to define the axes configuration to be used for milling. If
+neither CAXIS or YAXIS is specified, then the QUEST defined default
+configuration is used. If CAXIS is specified alone, then the X and C
+axes will be used in place of the Y axis during face milling. If
+YAXIS is specified alone, then the XYZ axes will be used during face
+milling and the C axis will remain immobile. If both CAXIS and YAXIS
+are specified, then both will be available. The MODE/POLAR command
+(see :ref:`“Polar Interpolation”<polar_interpolation>` and :ref:`“Polar Emulation”<polar_emulation>`)
+can be used to define the preferred use of C and Y axes during face milling.
+
+Two origins are maintained for mill-turn machining, one for each
+mode. By default the machine origin is the same as the CL coordinate
+origin. Coding an ORIGIN command in TURN mode only affects the CL
+coordinates for TURN mode. A separate ORIGIN is necessary for MILL
+mode. The ORIGIN commands are modal for a given mode (i.e., they do
+not have to be repeated each time a turn or mill mode is reselected).
+
+The XYZ CL coordinates in MILL mode refer to the machine XYZ axes. If
+the Y axis is not available or disabled, Y positions are converted
+automatically into C and X axis positions. If the CL file includes
+tool axis information, then the machine can be programmed as a 4 axis
+mill.
+
+In TURN mode, the XYZ CL axes are not parallel to the machine axes.
+They correspond to those of a regular lathe and therefore depend on
+the type of lathe; horizontal or vertical.
+
+Punching vs. Contouring
+-----------------------
+
+The APPLY command is used to select the machining mode on composite
+punch/contouring machines. This command syntax is only valid on punch
+presses with a contouring attachment
+
+   :math:`\textbf{APPLY / PUNCH}`
+
+   :math:`\textbf{APPLY /} \begin{pmatrix} \begin{array}{l} \textbf{CONTUR} \\ \textbf{FLAME} \\ \textbf{LASER} \end{array} \end{pmatrix}`
+
+The first command sets the machine in punch mode. The second command
+applies to machines with a laser or flame cutting attachment. Any of
+the three keywords CONTUR, FLAME or LASER sets the machine in
+contouring mode.
+
+Composite Machines
+------------------
+
+The APPLY command is used to activate a post-processor component of a
+composite post-processor. Each time the APPLY command requests a
+change of an active component, a series of actions takes place.
+First, the machine shutdown macro of the active component is
+executed. Then the active post-processor is saved and the new one is
+loaded into memory. Finally, the machine startup macro of the newly
+loaded component is executed.
+
+   :math:`\textbf{ APPLY / } \mathit{designator}`
+
+   :math:`\textbf{ APPLY / } \mathit{designator,} \, \mathit{regular\_APPLY\_syntax}`
+
+The first form of the command will activate the specified component.
+
+The second form of the command can be used when there is a conflict
+between regular form of the APPLY command and composite component
+selection. For example:
+
+   .. code-block:: text
+
+      APPLY/TURN,MILL,CAXIS
+
+The above command activates the TURN composite component. This component is a
+mill-turn post-processor and it will be put in MILL mode using the
+CAXIS as soon as it is activated.
