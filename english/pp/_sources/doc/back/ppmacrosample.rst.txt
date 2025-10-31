@@ -1,0 +1,269 @@
+.. _annex_macro_samples:
+
+Post-Processor Macro Samples
+****************************
+
+This appendix shows three macro examples. The first two are
+user-defined post-processor macros, the third is a motion startup
+macro.
+
+:ref:`“Macro Example #1”<pp_macro_example_1>` shows how to
+defer the application of diameter compensation to the first feed
+motion.
+
+:ref:`“Macro Example #2”<pp_macro_example_2>` shows how
+look-ahead variables can be used within a motion startup macro to
+determine the angle between successive moves. The usage of
+trigonometric functions within a macro is also illustrated. The
+example only outputs PPRINT statements, but M or G codes could have
+been put to the tape instead.
+
+:ref:`“Macro Example #3”<pp_macro_example_3>` shows the use
+of a LOAD/TOOL user-defined macro to handle optional coolant and
+spindle settings on the LOAD/TOOL command.
+
+.. _pp_macro_example_1:
+
+Macro Example #1
+================
+
+The following macros when used together ensure that the activation of
+diameter compensation (e.g., G41, G42) is deferred to the first feed
+motion that follows. This can be useful in case the CAM system
+outputs diameter compensation activation with the tool change instead
+of where it is actually required.
+
+The first step is to define a GLOBAL variable that will remember the
+diameter compensation command parameters when the command is
+encountered in the CL file. A sequence is the best way to hold a list
+of command parameters. This sequence will be initialized empty in the
+Declaration macro (which is the recommended place to declare global
+and object scope variables).
+
+   **Declaration Macro**
+
+   .. code-block::
+
+      $$ Declare global variables
+      DECLAR/GLOBAL,SEQUENCE,SAVE_CUTCOM={}
+
+Next, a User-Defined macro is needed to catch the CUTCOM/LEFT… or
+CUTCOM/RIGHT… command. This macro will simply copy the command
+parameters to the global SAVE_CUTCOM variable created in the
+declaration macro. It will not actually process the command right
+away. A warning message will be output if a new diameter compensation
+command is coded while we are still waiting for a feed motion to
+output an earlier one.
+
+   **User-Defined Syntax Macros: CUTCOM**
+
+   .. code-block::
+
+      CUTCOM/$P1(LEFT,RIGHT),$P2* $$ Defer to feed motion
+      IF/$FLEN(SAVE_CUTCOM).GT.0
+        ERROR/4,'Deferred diameter comp <!(*)> ignored',SAVE_CUTCOM
+      ENDOF/IF
+      SAVE_CUTCOM={$P1,$P2}
+
+Finally, a Motion Startup Macro is needed to output the deferred
+CUTCOM command when a feed motion is encountered. Macro matching must
+be disabled when outputting the deferred CUTCOM, otherwise the
+command will simply be saved into the SAVE_CUTCOM variable instead of
+being output. After outputting the command, the SAVE_CUTCOM variable
+is set empty so that we do not keep activating CUTCOM on every feed
+motion.
+
+   **Motion:Startup Macro**
+
+   .. code-block::
+
+      $$ Process deferred diameter comp
+      IF/.NOT.$RAPID                 $$ Not a RAPID motion?
+        IF/$FLEN(SAVE_CUTCOM).GT.0   $$ Global variable is not empty?
+          MATCH/OFF                  $$ Disable macro matching
+          CUTCOM/SAVE_CUTCOM         $$ Process
+          CUTCOM command MATCH/ON    $$ Re-enable macro matching
+          SAVE_CUTCOM={}             $$ Set the variable empty
+        ENDOF/IF
+      ENDOF/IF
+
+The following is a sample input source to test the deferred CUTCOM command.
+
+   .. code-block::
+
+      ISN
+      …
+      002  LOAD/TOOL,1
+      003  CUTCOM/RIGHT
+      004  SPINDL/3000
+      005  RAPID,GOTO/-2,-2,10
+      006  RAPID,GOTO/-2,-2,0
+      007  FEDRAT/PERMIN,20
+      008  GOTO/0,0,0
+      009  GOTO/10,0,0
+      010  CUTCOM/OFF
+      011  GOTO/12,-2,0
+      012  GOHOME
+      …
+
+The GENER listing appears as follows (the time column shows the
+incremental time for each block in mmm:ss.ss format):
+
+   .. code-block::
+
+      NC CONTROL CODE                      TIME       ISN
+      …
+      T1 M6                             0:00.00         2
+      S3000 M3                          0:00.00         4
+      G0 G43 X-2. Y-2. Z10. H1          0:03.00         5
+      Z0.                               0:03.00         6
+      G42 G1 X0. Y0. F20. D1            0:08.49         8
+      X10.                              0:30.00         9
+      G40 G1 X12. Y-2.                  0:08.49        11
+      G91 G28 X0. Y0. Z0.               0:00.00        12
+      …
+
+.. _pp_macro_example_2:
+
+Macro Example #2
+================
+
+The following motion startup macro is used to write the angle between
+successive moves to the listing file.
+See :ref:`“Macro Look-Ahead Processing”<macro_lookahead>`
+for details regarding macro variable look-ahead.
+
+   .. code-block::
+
+      PPRINT/'Last XY: !@X,!@Y'
+      PPRINT/'New  XY: !(@X),!(@Y)',$P03(1),$P03(2)
+      PPRINT/'Next XY: !(@X),!(@Y)',$NXM,$NYM
+      DECLAR/LOCAL,SEQUENCE,V1,V2
+      V1=$FSEQ($P03(1)-$XM,$P03(2)-$YM)
+      V2=$FSEQ($NXM-$P03(1),$NYM-$P03(2))
+      IF/$FVLEN(V1).EQ.0.OR.$FVLEN(V2).EQ.0
+        %L01='**points are too close**'
+      ELSE
+        %L01=$FVANG(V1,V2)
+      ENDOF/IF
+      PPRINT/'Angle: !(*)',%L01
+
+Note the use of the ``!@X`` and ``!@Y`` format descriptors in the first
+PPRINT. These output the current X and Y axes values and therefore do
+not require a numeric parameter as do the ``!(@X)`` and ``!(@Y)`` format
+descriptors on the next two PPRINTS. Note also the use of the ``!(*)``
+format descriptor to format a value of any type. This is needed since
+%L01 might contain either text or numeric data.
+
+The V1 and V2 variables are sequences that contain the XY
+displacement of the motion from the old position to the new (V1) and
+from the new to the next (V2). The $FVLEN and $FVANG are vector
+functions that work with sequences.
+
+The following is a sample input source to test this macro.
+
+   .. code-block::
+
+      ISN
+      …
+      002  RAPID
+      003  GOTO/0,0,0
+      004  FEDRAT/10
+      005  GOTO/1,0,0
+      006  GOTO/1,1,0
+      007  GOTO/0,0,0
+      …
+
+The GENER listing appears as follows:
+
+   .. code-block::
+
+      NC CONTROL CODE                      TIME       ISN
+      …
+      Last XY: X0.,Y0.
+      New  XY: X0.,Y0.
+      Next XY: X1.,Y0.
+      Angle: **points are too close**
+
+      G0 X0. Y0. Z0.                    0:00.00         3
+
+      Last XY: X0.,Y0.
+      New  XY: X1.,Y0.
+      Next XY: X1.,Y1.
+      Angle: 90
+
+      G1 X1. F10.                       0:06.00         5
+
+      Last XY: X1.,Y0.
+      New  XY: X1.,Y1.
+      Next XY: X0.,Y0.
+      Angle: 135
+
+      Y1.                               0:06.00         6
+
+      Last XY: X1.,Y1.
+      New  XY: X0.,Y0.
+      Next XY: X0.,Y0.
+      Angle: **points are too close**
+
+      X0. Y0.                           0:08.49         7
+
+.. _pp_macro_example_3:
+
+Macro Example #3
+================
+
+The following macro implements special LOAD/TOOL syntax that includes
+spindle and coolant information. Depending upon the parameters passed
+to the macro, SPINDL and COOLNT commands may be automatically
+generated after the loading of a tool.
+
+   .. code-block::
+
+      LOAD/TOOL,$P1,[RPM,$P2,$P3(CLW,CCLW)],[$P4(FLOOD,THRU,MIST)],[$P5*]
+      $$
+      $$ $P1     := Tool number (required)
+      $$ $P2,$P3 := Spindle direction and speed (optional)
+      $$ $P4     := Coolant (optional)
+      $$ $P5     := Other LOAD/TOOL qualifiers (optional)
+      $$
+      $$ Output the tool change excluding spindle and coolant
+      LOAD/TOOL,$P1,$P5
+      $$
+      $$ Output spindle speed if given
+      IF/$P2.NE.$NULL
+        SPINDL/$P2,RPM,$P3 $$ Output SPINDL
+      ENDOF/IF
+      $$
+      $$ Output coolant if given
+      IF/$P4.NE.$NULL
+        COOLNT/$P4 $$ Output COOLNT
+      ENDOF/IF
+
+The following is sample input source to test the LOAD/TOOL macro.
+
+   .. code-block::
+
+      ISN
+      …
+      003  GOHOME
+      004  LOAD/TOOL,1,OSETNO,10,RPM,2000,CLW,FLOOD
+      005  RAPID
+      006  GOTO/1,1,1
+      …
+
+The GENER listing appears as follows:
+
+   .. code-block::
+
+      NC CONTROL CODE                      TIME       ISN
+      …
+      G91 G28 X0. Y0. Z0.               0:00.00         3
+      T1 M6                             0:00.00         4
+      S2000 M3                          0:00.00         4
+      G90 M8                            0:00.00         4
+      G54                               0:00.00         6
+      G0 G43 X1. Y1. Z1. H10            0:00.12         6
+      …
+
+..
