@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Tools/Holders/Heads Dialog &mdash; ICAM V26 User Interface 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="The Tool Axis Property Dialog" href="vmtoolaxis.html" />
+    <link rel="prev" title="The Stock Axis Property Dialog" href="vmstockaxis.html" />
+    <link href="../../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ICAM V26 User Interface
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../licensing/index.html">ICAM Licensing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../licensing/manager/manager.html">License Manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../licensing/manager/manager.html#license-manager-client">License Manager (CLIENT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../licensing/manager/manager.html#license-manager-server">License Manager (SERVER)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../licensing/icamid/icamid.html">ICAMID Utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../licensing/icamid/icamid.html#icam-system-id">ICAM System ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../licensing/icamid/icamid.html#network-test">Network Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../licensing/icamid/icamid.html#server-test">Server Test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../config/index.html">ICAM Configuration Panel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanel.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanelgeneral.html">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanelquest.html">QUEST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanelgener.html">GENER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanelcam.html">CAM Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppaneltapeanddnc.html">Tape &amp; DNC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppaneloutput.html">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanelenvironment.html">Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config/setuppanelallentries.html">All Entries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../launch/index.html">Launch Panel (GENER/CERUN)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/launch.html">Launch Panel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/launch.html#center-tab-selections">Center tab selections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/launch.html#processing">Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/launch.html#interface">Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/launch.html#merged-pse-processing">Merged PSE Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/launch.html#def-file">DEF file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/launch.html#ok-cancel-and-other-buttons">OK, Cancel and other buttons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/job.html">JOB Button</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/job.html#job-files">Job Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/job.html#review-files">Review Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/dbman.html">DB Manager / AUTOPOST Button</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/dbman.html#database-manager">Database Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/dbman.html#autopost-requires-xqs-license">AUTOPOST (requires &quot;xqs&quot; license)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/gener.html">GENER Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/gener.html#cl-file">CL File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/gener.html#database">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/gener.html#post-processor-and-revision-rev">Post processor and Revision (Rev)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/gener.html#program-id">Program ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/gener.html#user-parameters">User Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/gener.html#options-and-cam-buttons">Options and CAM buttons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/cam.html">GENER CAM Dialog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/cam.html#cam-system">CAM System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/cam.html#settings">Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/cam.html#ok-cancel-and-reset-buttons">OK, Cancel and Reset buttons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/generoptions.html">GENER Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#tape-file">Tape file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#listing-file">Listing file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#plot-file">Plot file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#log-file">Log file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#trace-in-listing">Trace in Listing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#also-include-information-about">Also include information about…</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/generoptions.html#ok-cancel-and-reset-buttons">OK, Cancel and Reset buttons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/vo.html">Optimizer/Force Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/vo.html#use-vericut-optimizer-force-on-cl-file">Use Vericut Optimizer/Force on CL File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/vo.html#project-file">Project File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/vo.html#optimized-cl-file">Optimized CL File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/vo.html#user-interface">User Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/vo.html#optimizer-force-launch-button">Optimizer/Force launch button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/cerun.html">CERUN Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/cerun.html#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/cerunoptions.html">CERUN Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/sim.html">Virtual Machine Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../launch/preferences.html">Preferences Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/preferences.html#enable-launch-panel-tooltip-help">Enable launch panel tooltip help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/preferences.html#use-common-browse-directory">Use common browse directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/preferences.html#detect-new-updated-files-on-launch">Detect new/updated files on launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../launch/preferences.html#save-for-review">Save for review</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quest/index.html">QUEST Developer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quest/welcome.html">Welcome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quest/overview/overview.html">QUEST Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/overview/generoverview.html">GENER Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/overview/ceoverview.html">Control Emulator Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/overview/vmoverview.html">Virtual Machine Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quest/usersguides/usersguide.html">Users Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/shortcuts.html">Shortcuts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/maininterface.html">Main interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/navigator.html">Navigator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/navigator.html#database-navigator">Database Navigator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/navigator.html#post-processor-navigator">Post Processor Navigator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/navigator.html#control-emulator-navigator">Control Emulator Navigator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/consoleview.html">Console View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/consoleview.html#help">Help</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/consoleview.html#build">Build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/consoleview.html#consistency">Consistency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/consoleview.html#finder">Finder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/consoleview.html#diffs">Diffs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/workspaces.html">Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/databaseview.html">Database View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/commentview.html">Comment View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/questview.html">Questionnaire View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/gqview.html">Graphical Questionnaire View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/registerview.html">Register View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/rmdview.html">RMD View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/tapeeditorview.html">Tape Editor View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/dialogview.html">Dialog View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/dialogedtview.html">Dialog Editor View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroview.html">Macro View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroview.html#user-defined-syntax-macros">User Defined Syntax macros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroview.html#user-function-macros">User Function macros</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroeditorview.html">Macro Editor View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroeditorview.html#editing-features-functions">Editing Features/Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroeditorview.html#right-mouse-context-menu-functions">Right-Mouse Context Menu Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/macroeditorview.html#section-controls">Section Controls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/filestorage.html">File Storage (Windows only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/codecustomview.html">Code Customization View (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/datacustomview.html">Data Customization View (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/ceeventmacroview.html">Event Macro View (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/codemacroview.html">Code Macro View (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/datamacroview.html">Data Macro View (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/maininterface/workspaces/codetableview.html">Code Table View</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quest/usersguides/menu/menu.html">Menu Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/file.html">File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/edit.html">Edit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/database.html">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/view.html">View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/dialog.html">Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/menu/help.html">Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../quest/usersguides/dialogs/dialogs.html">Dialogs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/aboutquest.html">About...</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/byposttype.html">By Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/calculator.html">Calculator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/charset.html">Character Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/clresult.html">Test Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/cltest.html">Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/cltest.html#gener-test">GENER Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/cltest.html#cerun-test">CERUN Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/codemodify.html">Code Properties Dialog (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/copypost.html">Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/datamodify.html">Data Properties Dialog (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/dbautorefresh.html">Auto Refresh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/diffs.html">Diffs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/dlgctrlproperties.html">Dialog Control Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/dumpmacros.html">Dump Macros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/expressionevaluator.html">Expression Evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/finder.html">Finder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/generateas.html">Generate As</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/gmcode.html">G/M Code Question Panel (Graphical Questions &amp; Wizard)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/gmcode.html#answer-type">Answer Type:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/initializeregisters.html">Initialize Registers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/load.html">Load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/newcodemacro.html">New CODE Macro (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/newdatamacro.html">New DATA Macro (Control Emulator only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/newmacro.html">New Macro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/openpost.html">Open</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/password.html">Add/Remove Password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/preferences.html">QUEST Preferences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/preferencesmacroeditor.html">Preferences: Macro Editor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/preferencesquest.html">Preferences: General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/progress.html">Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/properties.html">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/purge.html">Purge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/register.html">Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/rename.html">Rename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/rencopy.html">There are two ways of changing a post processor’s name.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/replacemacro.html">Replace Macro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/replacementstring.html">Replacement String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/rmdprompt.html">RMD Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/saveobjects.html">Save/Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/savepost.html">Save As</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/selectconfiguration.html">Select Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/selectuser.html">Select User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/spindletable1.html">Spindle Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/spindletable2.html">Spindle Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/startupenv.html">Startup Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/tipoftheday.html">Tip of the Day</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/toolbars.html">Toolbars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/unlock.html">Unlock database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/wordsmanager1.html">Words Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quest/usersguides/dialogs/wordsmanager2.html">Words Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Virtual Machine</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../vmoverview.html">Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="vmdialogs.html">Virtual Machine Dialogs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="vmchip.html">The Chip and Split Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmcollision.html">The Collision Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmcompare.html">The Compare Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmcube.html">The Cube Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmcurveaxis.html">The Curve Axis Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmcylinder.html">The Cylinder/Cone Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmdisplay.html">The Display Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmextruded.html">The Extruded Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmgrid.html">The Grid Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmgroup.html">The Group Dialog </a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vmgroup.html#collision-groups">Collision Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vmgroup.html#collision-exclusion-groups">Collision Exclusion Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vmgroup.html#selection-groups">Selection Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vmheadaxis.html">The Head Axis Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmlight.html">The Light Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmlinearaxis.html">The Linear Axis Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmmaterial.html">The Material Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmmesh.html">The Mesh Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmoptions.html">The Options Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmpicture.html">The Picture Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmreferenceaxis.html">The Reference Axis Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmrevolved.html">The Revolved Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmrotaryaxis.html">The Rotary Axis Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmsfpdlg.html">The Parts/Fixtures Dialog </a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmsphere.html">The Sphere Property Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmstatistics.html">The Statistics Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmstockaxis.html">The Stock Axis Property Dialog</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The Tools/Holders/Heads Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lathe-tool-type">Lathe Tool Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mill-tool-type">Mill Tool Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#probe-tool-type">Probe Tool Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additive-tool-type">Additive Tool Type</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#holders">Holders</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#profile-holder-type">Profile Holder Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generic-holder-type">Generic Holder Type</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#heads">Heads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmtoolaxis.html">The Tool Axis Property Dialog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../menus/menus.html">Virtual Machine Specific Menus</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_annotation.html">Simulation Menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_attach.html">Simulation»Camera»Attach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_center.html">Simulation»Camera»Center (Ctrl+Shift+Space)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_fit.html">Simulation»Camera»Fit (Ctrl+Space)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_loadsave.html">Simulation»Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_perspective.html">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_pivot.html">Simulation»Camera»Pivot (Ctrl+P)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_reset.html">Simulation»Camera»Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_sides.html">Simulation»Camera»Front</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_speed_incdec.html">Simulation»Camera»Speed Increase (Ctrl+'+')</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_camera_viewangle_incdec.html">Simulation»Camera»View Angle Increase (Shift+'+')</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_chip.html">Simulation»Chip and Split (Ctrl+Alt+C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_compare.html">Simulation»Compare... (Ctrl+Alt+Q)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_controller.html">Simulation»Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_curveaxis.html">Simulation»Construct Axis»Curve Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_headaxis.html">Simulation»Construct Axis»Head Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_linearaxis.html">Simulation»Construct Axis»Linear Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_referenceaxis.html">Simulation»Construct Axis»Reference Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_rotaryaxis.html">Simulation»Construct Axis»Rotary Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_stockaxis.html">Simulation»Construct Axis»Stock Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructaxis_toolaxis.html">Simulation»Construct Axis»Tool Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_Conecylinder.html">Simulation Menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_cube.html">Simulation»Construct Entity»Cube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_Extruded.html">Simulation»Construct Entity»Extruded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_Mesh.html">Simulation»Construct Entity»Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_Picture.html">Simulation»Construct Entity»Picture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_Revolved.html">Simulation»Construct Entity»Revolved</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_contructentity_Sphere.html">Simulation»Construct Entity»Sphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_display.html">Simulation»Display (Ctrl+Alt+D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_grid.html">Simulation»Grid (Ctrl+Alt+G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_groupselection.html">Simulation»Group Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_hideselection.html">Simulation»Hide Selection (Ctrl+B) (QUEST)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_hideselection.html#simulationselectionhide-in-view-ctrl-b-cerun-and-gener">Simulation»Selection»Hide in View (Ctrl+B) (CERUN and GENER)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_hideselection.html#simulationselectionhide-in-all-views-cerun-and-gener-only">Simulation»Selection»Hide in All Views (CERUN and GENER only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_inverthide.html">Simulation»Invert Hide State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_lights.html">Simulation»Lights (Ctrl+Alt+L)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_manager.html">Simulation»Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_material.html">Simulation»Materials (Ctrl+Alt+M)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_measure.html">Simulation»Measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_mode_camera.html">Simulation»Mode»Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_mode_measurement.html">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_mode_pausegouge.html">Simulation»Mode»Pause Gouge Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_mode_pausematerial.html">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_mode_selection.html">Mode»Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_opensetup.html">Simulation»Open Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_options.html">Simulation»Options (Ctrl+Alt+O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_savesetup.html">Simulation»Save Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_axesmarker.html">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_crosssection.html">Simulation»Cross Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_display.html">Simulation»Show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_filters.html">Simulation»Filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_kinematics.html">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_planegrid.html">Simulation»Show»Plane Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_safetyzones.html">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_tooloverlay.html">Simulation»Show»Tool Path as Overlay (Ctrl+Shift+T)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_toolpath.html">Simulation»Show»Tool Path (Ctrl+T)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_toolref.html">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_toolvector.html">Simulation»Show»Tool Vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_wireframe.html">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_workpcoords.html">Simulation»Show»Workpiece Coords (Ctrl+W)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_show_workpref.html">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_showall.html">Simulation»Show All/Rehide (Ctrl+Alt+B) (QUEST)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_showall.html#simulationselectionshow-all-rehide-ctrl-alt-b-cerun-and-gener">Simulation»Selection»Show All/Rehide (Ctrl+Alt+B) (CERUN and GENER)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_showall.html#simulationselectionshow-all-rehide-in-all-views-cerun-and-gener-only">Simulation»Selection»Show All/Rehide in All Views (CERUN and GENER only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_statistics.html">Simulation»Statistics (Ctrl+Alt+O)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_stockfixturepart.html">Simulation»Parts/Fixtures... (Ctrl+Alt+P)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_toolsholdersheads.html">Simulation»Tools/Holders/Heads (Ctrl+Alt+T)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_useworldcs.html">Simulation»Use World CS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/sim_virtualmachine.html">Simulation»Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/simulation.html">Simulation Menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/simulation_builder.html">QUEST Simulation menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../menus/simulation/simulation_runtime.html">GENER/CERUN Simulation menu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toolbars/vmtoolbars.html">Simulation Toolbars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_animation.html">VM Animation Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_annotation.html">VM Annotation Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_construct.html">VM Construct Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_crosssection.html">VM Cross Section Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_grid.html">VM Grid Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_measure.html">VM Measure Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_mode.html">VM Mode Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_view.html">View Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_viewfilter.html">VM View Filter Toolbar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../toolbars/vmtb_vmview.html">VM View Toolbar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../windows/vmwindows.html">Simulation Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmcontroller.html">VM Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmcontroller_axes.html">VM Controller / Axes Tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmcontroller_fixtcomp.html">VM Controller / Fixture Compensation Tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmcontroller_timeline.html">VM Controller / Time Line Tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmcontroller_toolcomp.html">VM Controller / Tool Compensation Tab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmmanager.html">Simulation Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../windows/vmvirtualmachine.html">Virtual Machine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../other/vmother.html">Virtual Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmaddingpartfixtstock.html">Virtual Machine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmaddingpartfixtstock.html#adding-parts-fixtures-and-stock-to-the-simulation">Adding Parts, Fixtures and Stock to the Simulation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmaddingpartfixtstock.html#differences-between-part-stock-and-fixture-components">Differences between Part, Stock and Fixture Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmaddtooldef.html">Virtual Machine Tooling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmaddtooldef.html#adding-tooling-definitions-to-the-simulation">Adding Tooling Definitions to the Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmadjustlights.html">Virtual Machine Lighting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmadjustlights.html#adjusting-the-lighting">Adjusting the lighting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmcamera.html">Virtual Machine Camera Manipulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmcamera.html#navigating-the-simulation-window">Navigating the Simulation Window</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmcamera.html#camera-panning"><em>Camera Panning:</em></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmcamera.html#camera-rotation"><em>Camera Rotation:</em></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmcamera.html#camera-roll"><em>Camera Roll:</em></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmcamera.html#camera-origin-and-attachment"><em>Camera origin and attachment:</em></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmcamera.html#camera-viewpoint"><em>Camera viewpoint:</em></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmcamera.html#to-summarize"><em>To summarize:</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vminputcontrols.html">Virtual Machine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vminputcontrols.html#simulation-input-controls">Simulation Input Controls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../other/vminputcontrols.html#standard-keyboard-mapping">Standard Keyboard Mapping</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vminputcontrols.html#construction-keyboard-mapping">Construction Keyboard Mapping</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vminputcontrols.html#mouse-mapping">Mouse Mapping</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vminputcontrols.html#time-line-keyboard-mapping">Time Line Keyboard Mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmmonitoringresults.html">Virtual Machine's Results</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmmonitoringresults.html#monitoring-virtual-machine-s-results">Monitoring Virtual Machine's Results</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmmonitoringresults.html#animation-control">Animation Control</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmmonitoringresults.html#head-up-display">Head-Up Display</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmmonitoringresults.html#tool-path-display">Tool Path Display</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmmonitoringresults.html#vm-controller-time-line">VM Controller Time-Line</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmmonitoringresults.html#part-vs-stock-comparison">Part vs. Stock Comparison</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmsetfixtcomp.html">Virtual Machine Fixture Compensation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmsetfixtcomp.html#setting-fixture-compensation">Setting Fixture Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../other/vmsettoolcomp.html">Virtual Machine Tool Compensation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../other/vmsettoolcomp.html#setting-tool-compensation">Setting Tool Compensation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmsettoolcomp.html#length-compensation">Length Compensation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../other/vmsettoolcomp.html#diameter-compensation">Diameter Compensation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../uir/gener/index.html">GENER User Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../uir/gener/welcome.html">Welcome to GENER Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../uir/gener/interface/interface.html">CAM-POST GENER Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/gener/interface/dialogs/dialogs.html">Dialogs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/about.html">About</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/find.html">Find</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/goto.html">Goto…</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/breakpointmanager.html">Breakpoint Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/macromanager.html">Macro Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/preferences.html">Preferences...</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/dialogs/preferences.html#general-tab">General tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/dialogs/preferences.html#debug-tab">Debug tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/dialogs/preferences.html#trace-tab">Trace tab</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/progresswindows.html">Progress Window</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/seekdialogs.html">Seek</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/dialogs/toolbars.html">Toolbars</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/gener/interface/menus/menus.html">Menus</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug.html">Debug</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_breakpointmanager.html">Debug»Breakpoint Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_enadis.html">Debug»Enable/Disable Breakpoint (Ctrl+F9)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_jtc.html">Debug»Jump to Cursor (Ctrl+Shift+F10)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_kinematics.html">Debug»Kinematics status</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_listing.html">Debug»Source</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_macromanager.html">Debug»Macro Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_remove.html">Debug»Remove All Breakpoints (Ctrl+Shift+F9)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_rtc.html">Debug»Run to Cursor (Ctrl+F10)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_setclear.html">Debug»Set/Clear Breakpoint (F9)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_stack.html">Debug»Stack</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_stepinto.html">Debug»Step Into (F11)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_stepout.html">Debug»Step Out (Shift+F11)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_stepover.html">Debug»Step Over (F10)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/debug/debug_variable.html">Debug»Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/file/file.html">File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/file/file_nj.html">File»New Job (Ctrl+N)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/file/file_saveforreview.html">File»Save For Review</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/file/file_viewlisting.html">File»View Listing File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/file/file_viewtape.html">File»View Tape File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/file/file_exit.html">File»Exit (Alt+F4)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/help/help.html">Help</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_online.html">Help Online</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_pj.html">Help»Package Job</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_support.html">Getting Product Support</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_support.html#before-calling"><em>Before Calling...</em></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_support.html#to-contact-icam-support"><em>To contact ICAM support...</em></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_support.html#headquarters"><strong>Headquarters</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/help/help_topics.html">Help Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/run/run.html">Run</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/run/run_details.html">Run»Details</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/run/run_fast.html">Run»Fast (F8)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/run/run_pause.html">Run»Pause (F6)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/run/run_play.html">Run»Play (F5)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/run/run_restart.html">Run»Restart (Shift+F5)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/run/run_step.html">Run»Step (F7)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/tools/tools.html">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/tools/tools_conf.html">Tools»Configuration...</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/tools/tools_preferences.html">Tools»Preferences...</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/tools/tools_find.html">Tools»Find</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/tools/tools_toolbar.html">Tools»Toolbar...</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/view/view.html">View</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_input.html">View»Input</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_output.html">View»Output</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_macro.html">View»Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_console.html">View»Console</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_diagnostic.html">View»Diagnostic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_margin.html">View</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_page.html">View»Previous axes page</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/view/view_status.html">View»Status bar</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/menus/windows/windows.html">Windows</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/windows/windows_load.html">Window»Load Layout</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/windows/windows_save.html">Window»Save Layout</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/windows/windows_style.html">Window»Style</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/gener/interface/menus/windows/windows_default.html">Window»Default Layout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/gener/interface/toolbars/toolbars.html">Toolbars</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/toolbars/debug.html">Debug</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/toolbars/job.html">Job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/toolbars/layout.html">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/toolbars/run.html">Run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/toolbars/view.html">View</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/gener/interface/windows/windows.html">Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/console.html">Console Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/diagnostic.html">Diagnostic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/input.html">Input Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/kinematics.html">Kinematics status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/listing.html">Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/macro.html">Macro Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/output.html">Output Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/stack.html">Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/gener/interface/windows/variable.html">Variable</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/gener/interface/other/synchronize.html">Synchronize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../uir/cerun/index.html">CERUN User Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../uir/cerun/welcome.html">Control Emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../uir/cerun/preprocessors/overview.html">Control Emulator Pre-Processors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/ABB/intro.html">ABB Robot Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/ABB/syntax.html">ABB Robot Pre-Processor Syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/intro.html">Fanuc Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html">Fanuc Pre-Processor Syntax</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#pre-processor-setup">1. Pre-processor setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#command-abbreviations">2. Command Abbreviations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#operators">3. Operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#arithmetic-operators">4. Arithmetic operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#unconditional-branching">5. Unconditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#conditional-branching">6. Conditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#repetition">7. Repetition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#variables">8. Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#sub-program-related">9. Sub-program related</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Fanuc/syntax.html#other-matching-patterns">10. Other matching patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/intro.html">Heidenhain Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/intro.html#pre-processor-setup">1. Pre-processor setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/intro.html#supported-syntax">2. Supported Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/intro.html#selecting-a-default-startup-syntax">3. Selecting a default startup syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/intro.html#changing-syntax-during-processing">4. Changing syntax during processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/intro.html#what-are-the-configurable-options">5. What are the configurable options?</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html">Heidenhain Conversational Pre-Processor Syntax</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html#fn-functions">1. “FN” Functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html#supported-arithmetic-operators-functions">2. Supported arithmetic operators &amp; functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html#string-variable-declaration">3. String variable declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html#string-functions">4. String functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html#variables-parameters">5. Variables / Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_conv.html#program-label-sub-program">6. Program / Label / Sub-program</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html">Heidenhain ISO Pre-Processor Syntax</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html#d-functions">1. “D” Functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html#supported-arithmetic-operators-functions">2. Supported arithmetic operators &amp; functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html#string-variable-declaration">3. String variable declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html#string-functions">4. String functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html#variables-parameters">5. Variables / Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/preprocessors/Heidenhain/syntax_iso.html#program-label-sub-program">6. Program / Label / Sub-program</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/intro.html">Mazak EIA/ISO Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html">Mazak EIA/ISO Pre-Processor Syntax</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#pre-processor-setup">1. Pre-processor setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#command-abbreviations">2. Command Abbreviations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#operators">3. Operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#arithmetic-operators">4. Arithmetic operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#unconditional-branching">5. Unconditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#conditional-branching">6. Conditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#repetition">7. Repetition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#variables">8. Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#sub-program-related">9. Sub-program related</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Mazak/syntax.html#other-matching-patterns">10. Other matching patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/intro.html">Okuma Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html">Okuma Pre-Processor Syntax</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#pre-processor-setup">1. Pre-processor setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#operators">2. Operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#arithmetic-operators">3. Arithmetic operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#unconditional-branching">4. Unconditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#conditional-branching">5. Conditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#variables">6. Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#sub-program-related">7. Sub-program related</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Okuma/syntax.html#other-matching-patterns">8. Other matching patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/intro.html">Fanuc Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html">OSAI 10 Series Pre-Processor Syntax</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#pre-processor-setup">1. Pre-processor setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#register-default-value">2. Register default value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#operators">3. Operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#arithmetic-operators">4. Arithmetic operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#unconditional-branching">5. Unconditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#conditional-branching">6. Conditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#repetition">7. Repetition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#variables">8. Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#sub-program-related">9. Sub-program related</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Osai/syntax.html#other-matching-patterns">10. Other matching patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/intro.html">Siemens Pre-Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html">Siemens Pre-Processor Syntax</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#pre-processor-setup">1. Pre-processor setup</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#supported-operators">2. Supported operators</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#supported-arithmetic-operators-functions">3. Supported arithmetic operators &amp; functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#unconditional-branching">4. Unconditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#conditional-branching">5. Conditional branching</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#repetition">6. Repetition</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#variables">7. Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#sub-program-related">8. Sub-program related</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#other-matching-patterns">9. Other matching patterns</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#misc-functions">10. Misc Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#system-variables">11. System Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/preprocessors/Siemens/syntax.html#frame-support">12. Frame Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/preprocessors/Z32/intro.html">Control Emulator Pre-Processors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/preprocessors/Z32/syntax.html">Z32 Syntax</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../uir/cerun/interface/interface.html">CERUN Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/interface/dialogs/dialogs.html">Dialogs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/about.html">About</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/cerunoption.html">CERUN Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/find.html">Find</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/goto.html">Goto…</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/breakpointmanager.html">Breakpoint Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/macromanager.html">Macro Manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/preferences.html">Preferences...</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/dialogs/preferences.html#general-tab">General tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/dialogs/preferences.html#debug-tab">Debug tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/dialogs/preferences.html#trace-tab">Trace tab</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/progresswindows.html">Progress Window</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/seekdialogs.html">Seek</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/dialogs/toolbars.html">Toolbars</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/interface/menus/menus.html">Menus</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug.html">Debug</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_breakpointmanager.html">Debug»Breakpoint Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_enadis.html">Debug»Enable/Disable Breakpoint (Ctrl+F9)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_jtc.html">Debug»Jump to Cursor (Ctrl+Shift+F10)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_listing.html">Debug»Source</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_macromanager.html">Debug»Macro Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_remove.html">Debug»Remove All Breakpoints (Ctrl+Shift+F9)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_rtc.html">Debug»Run to Cursor (Ctrl+F10)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_setclear.html">Debug»Set/Clear Breakpoint (F9)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_stack.html">Debug»Stack</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_stepinto.html">Debug»Step Into (F11)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_stepout.html">Debug»Step Out (Shift+F11)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_stepover.html">Debug»Step Over (F10)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/debug/debug_variable.html">Debug»Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/file/file.html">File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/file/file_nj.html">File»New Job (Ctrl+N)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/file/file_saveforreview.html">File»Save For Review</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/file/file_viewlisting.html">File»View Listing File</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/file/file_exit.html">File»Exit (Alt+F4)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help.html">Help</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_online.html">Help Online</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_pj.html">Help»Package Job</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_support.html">Getting Product Support</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_support.html#before-calling"><em>Before Calling...</em></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_support.html#to-contact-icam-support"><em>To contact ICAM support...</em></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_support.html#headquarters"><strong>Headquarters</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/help/help_topics.html">Help Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/cerun/cerun.html">CERUN</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/cerun/cerun_codegroups.html">CERUN»Code Groups</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/cerun/cerun_mdi.html">CERUN»MDI</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/cerun/cerun_opskip.html">CERUN»Opskip</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/cerun/cerun_option.html">CERUN»Option</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/run/run.html">Run</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/run/run_fast.html">Run»Fast (F8)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/run/run_pause.html">Run»Pause (F6)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/run/run_play.html">Run»Play (F5)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/run/run_restart.html">Run»Restart (Shift+F5)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/run/run_step.html">Run»Step (F7)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/tools/tools.html">Tools</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/tools/tools_configuration.html">Tools»Configuration...</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/tools/tools_preferences.html">Tools»Preferences...</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/tools/tools_find.html">Tools»Find</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/tools/tools_toolbar.html">Tools»Toolbar...</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view.html">View</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_input.html">View»Input</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_output.html">View»Output</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_macro.html">View»Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_console.html">View»Console</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_diagnostic.html">View»Diagnostic</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_margin.html">View»Increase Margin</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_page.html">View»Previous axes page</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/view/view_status.html">View»Status bar</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/menus/windows/windows.html">Windows</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/windows/windows_load.html">Window»Load Layout</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/windows/windows_save.html">Window»Save Layout</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/windows/windows_style.html">Window»Style</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../uir/cerun/interface/menus/windows/windows_default.html">Window»Default Layout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/interface/toolbars/toolbars.html">Toolbars</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/toolbars/debug.html">Debug</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/toolbars/job.html">Job</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/toolbars/layout.html">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/toolbars/run.html">Run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/toolbars/view.html">View</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/interface/windows/windows.html">Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/controlleropskip.html">Controller » Opskip tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/controllermdi.html">Controller » MDI tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/controllercodegroups.html">Controller » Code Groups tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/console.html">Console Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/diagnostic.html">Diagnostic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/input.html">Input Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/listing.html">Source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/macro.html">Macro Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/output.html">Output Trace</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/stack.html">Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uir/cerun/interface/windows/variable.html">Variable</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../uir/cerun/interface/other/synchronize.html">Synchronize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ICAM V26 User Interface</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Virtual Machine</a></li>
+          <li class="breadcrumb-item"><a href="vmdialogs.html">Virtual Machine Dialogs</a></li>
+      <li class="breadcrumb-item active">The Tools/Holders/Heads Dialog</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-tools-holders-heads-dialog">
+<h1>The Tools/Holders/Heads Dialog<a class="headerlink" href="#the-tools-holders-heads-dialog" title="Link to this heading"></a></h1>
+<p>This dialog provides the ability to add <strong>tool</strong> and associated
+<strong>holder</strong> definitions to the simulation, as well as to select the
+active <strong>head</strong> on a machine that supports multiple head attachments.
+The term “Holder” is used by VM to refer to a device that securely holds
+the tool in the spindle. The term “Head” is used by VM to refer to an
+exchangeable head (e.g., a right angle head attachment).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#tools">Tools tab</a></p></li>
+<li><p><a class="reference external" href="#holders">Holders tab</a></p></li>
+<li><p><a class="reference external" href="#heads">Heads tab</a></p></li>
+</ul>
+<p>Tool and holder definitions are automatically saved in the verification
+setup (.vsw) file when the program is completed. This setup file will be
+reused on subsequent runs to quickly reestablish the tooling necessary
+for an accurate simulation. Tool and holder definitions from another
+part program can be imported into the current session by pressing the
+Import button and then selecting the verification setup (.vsw) file of
+the other part program.</p>
+<p>Tooling definitions, like fixture and part definitions, are not a
+required element for simulation, but if used they add to simulation
+accuracy and realism. VM attaches solid model representations of holders
+and tools to the spindle control point (SCP). Once attached, they become
+a part of the collision detection process.</p>
+<p>The left side of the dialog lists the known tools, holders and heads.
+Heads are defined in the model and the sole purpose of this dialog is to
+select the active head (see “Heads” below). The middle section of the
+tool/holder dialog contains the various controls that allow for the
+creation and modification of tools and holders. The right side of the
+tool/holder dialog has two viewing panes that are dynamically updated to
+reflect modifications done in the center section.</p>
+<ul class="simple">
+<li><p>The upper right pane is the construction view. Depending on the type
+of tool or holder, this can either be in a 2D or 3D view format. For
+the 2D format, hold the left-mouse button down to pan the view, hold
+and release the right-mouse button to zoom to a selected region, and
+use the mouse wheel to zoom in and out. Double-click in the view to
+reset the zoom factor to make the tool or holder fully visible. The
+standard VM controls apply for navigating a 3D view.</p></li>
+<li><p>The lower right pane is a 3D assembly preview centered on the tool or
+holder. The standard VM controls apply for navigating a 3D view.
+Holding and then releasing the left-mouse while moving horizontally
+will impart a spin on the object; click once in the window to remove
+the spin. The right-mouse pop-up context menu provides additional
+functions to aid in viewing the tool or holder.</p></li>
+</ul>
+<p><img alt="image1" src="../../../_images/51967c1627dd6d5074e02994b6882b70132a2804.bmp" /> Some tool and holder definitions are identified as being
+“Generic”, which means that the tool or holder shape is defined using an
+STL mesh. These are added to the tool and holder definitions using the
+same Mesh Component dialog as is used in QUEST to import machine
+components into the model. From this dialog, you can specify the name of
+the STL mesh component, its position and orientation in space and its
+material color properties. An Import button on the dialog is used to
+specify the STL file to read and the units of measure of the STL object.
+A Scale button on the dialog can be used to change the size of the
+imported object if required. The Keep as an external reference setting
+saves a reference to the STL in the verification setup (.vsw) file
+instead of the object itself. Note that the Collision detection options
+are not available since tools and holders are always tested for exact
+collision.</p>
+<p>When exiting the Tools/Holders/Heads dialog, VM will validate the tool
+and holder dimensions against the Controller window tool and diameter
+compensation amounts. If the tool compensation amounts do not agree with
+the tool definitions, a dialog will appear listing suggested tool
+compensation changes highlighted in blue. Selecting OK will
+automatically adjust the tool compensation for selected tools.</p>
+<div class="line-block">
+<div class="line">When running VM with a Manufacturing Extractor, tools and holders will
+be automatically created to match those used in the CAM manufacturing
+program.</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Link to this heading"></a></h1>
+<p>Select the Tools tab to add, modify or delete tool definitions. Select
+the New button to define a new tool. Select an existing tool definition
+to modify that tool. Select one or more tools and press the Delete
+button to remove the selected tools.</p>
+<p>The following tool types are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#lathetooltype"><span class="std std-ref">Lathe</span></a></p></li>
+<li><p><a class="reference internal" href="#milltooltype"><span class="std std-ref">Mill</span></a></p></li>
+<li><p><a class="reference internal" href="#probetooltype"><span class="std std-ref">Probe</span></a></p></li>
+<li><p><a class="reference internal" href="#additivetooltype"><span class="std std-ref">Additive</span></a></p></li>
+</ul>
+<p>The tool table lists the following information for each tool:</p>
+<ul class="simple">
+<li><p><strong>ID:</strong> Identifies the tool using the native form of tool numbering
+on the controller.</p></li>
+<li><p><strong>Type:</strong> Lists the tool type as defined when the tool was created or
+last modified.</p></li>
+<li><p><strong>Unit:</strong> Shows the units of measure used for non-angular tool
+dimensions.</p></li>
+<li><p><strong>Lock:</strong> GENER will automatically define a default milling or
+drilling tool if a tool definition does not exist for the one being
+loaded. GENER uses the APT CUTTER command to define the shape of the
+tool. Tools defined in this way have a cutting length equal to the
+total tool length, and do not have a shank or associated holder.
+Automatically created tools are by default “unlocked” (i.e., the Lock
+state is “No”); meaning that their definition will change each time a
+CUTTER command is encountered. Any tool that is created manually or
+that is subsequently modified is set locked (i.e., the Lock state is
+“Yes”) so that these modifications will not be overridden. CERUN does
+not have the ability to automatically define tools. Double-click on
+this field to change the locked state of a tool.</p></li>
+<li><p><strong>Default pocket:</strong> Primarily used when simulating tool changers on
+models that define tool pocket locations. Double click on this field
+to choose the pocket where the tool will reside.</p></li>
+<li><p><strong>Current pocket:</strong> The current location of the tool. This field is
+updated dynamically by VM as tools are loaded. You can manually
+insert a tool into the spindle by double clicking on this field and
+selecting the primary tool axis.</p></li>
+</ul>
+<p>Individual tool definitions include the above properties, as well as the
+following ones that are common to most tools:</p>
+<ul class="simple">
+<li><p><strong>Holder:</strong> Lists zero or more holders for the tool. The tool is
+attached to the lowest holder in the list, and each holder in the
+list is attached to the one above it, with the topmost holder in the
+list being attached to the model’s spindle control point. To add a
+holder, double-click an empty line in the list, and then type the
+holder name or select one from the drop-list. To modify a holder,
+select an existing holder in the list and enter the new holder name.
+The order of holders can be rearranged by dragging and dropping. Use
+the Delete key to remove selected holders from the list. Holder names
+are listed in red if the holder has not yet been defined.</p></li>
+<li><p><strong>Usage:</strong> Specifies the intended use of the tool, which can be one
+of “Finishing”, “Semi-Finishing” or “Roughing”. A tool’s intended
+usage affects the in-process stock machining tolerance when the
+Material Removal Simulation (MRS) option is enabled. A “finishing”
+tool will use the gouge tolerance for MRS simulation; a
+“semi-finishing” tool will use a 5 times coarser tolerance; and a
+“roughing” tool will use a 10 times coarser tolerance. The gouge
+tolerance amount is defined in the Simulation»Options dialog
+Tolerances tab. Manufacturing Extractors will set the tool usage if
+this information is available from the CAM system, otherwise the
+usage will be set to Finishing.</p></li>
+<li><p><strong>Cut Color:</strong> Specifies the normal cutting color to use with the
+selected tool on the in-process stock when the Material Removal
+Simulation (MRS) option is enabled. The selection drop-down provides
+“Auto”, “Custom” and “Stock” choices. The “Auto” selection will
+automatically assign a color (from a pallet of 12 basic colors) to
+the tool each time it is loaded. The “Custom” selection allows any
+color to be chosen from a standard color picker. The “Stock”
+selection will use the actual stock color instead of a special color.</p></li>
+</ul>
+<section id="lathe-tool-type">
+<span id="lathetooltype"></span><h2>Lathe Tool Type<a class="headerlink" href="#lathe-tool-type" title="Link to this heading"></a></h2>
+<p>Select “Lathe” as the tool type to define a turning tool insert/holder
+combination. The following lathe insert types can be defined:</p>
+<ul class="simple">
+<li><p><strong>Round</strong>: A round or circular insert.</p></li>
+<li><p><strong>Trigon</strong>: A three cornered insert resembling a triangle, but with
+an intermediate angle on the sides, to allow for a higher included
+angles at the tips.</p></li>
+<li><p><strong>Diamond</strong>: A four-sided insert with two acute angles.</p></li>
+<li><p><strong>Symmetrical</strong>: Any “n” equal sided insert.</p></li>
+<li><p><strong>Thread</strong>: A three cornered threading insert, with a tooth shape on
+each corner.</p></li>
+<li><p><strong>Groove</strong>: A single or double-sided insert that can be used for
+threading, grooving or cut-off.</p></li>
+<li><p><strong>Profile</strong>: An insert defined by a 2D profile.</p></li>
+<li><p><strong>Generic</strong>: An insert defined by an STL mesh.</p></li>
+</ul>
+<p>Inserts are defined in the ZX plane of the machine. The blue dotted line
+represents the positive Z-axis of the machine. The red dotted line
+represents the positive X-axis of the machine. Tool path traces are
+drawn originating from the center point of the fillet radius of the
+insert. Currently, tool nose compensation is only available from the
+center of the insert nose (i.e., P0 or P9 type compensation) and not
+from the theoretical tool tip.</p>
+<p>All turning tools have the following settings:</p>
+<ul class="simple">
+<li><p><strong>Units</strong>: The unit of measure for non-angular values. Angles are
+always measured in degrees.</p></li>
+<li><p><strong>ID</strong>: Identifies the tool using the native form of tool numbering
+on the controller.</p></li>
+<li><p><strong>Left/Right hand</strong>: Controls how the insert is mated with the
+holder.</p></li>
+<li><p><strong>Colors</strong>: Defines the display color of the lathe insert tool. When
+the MRS license option is enabled, the Cut selection defines the
+color to show the cutting action of the tool on the in-process stock.
+See the <a class="reference external" href="#cutcolor">Cut Color</a> description above for more
+information.</p></li>
+<li><p><strong>Usage</strong>: Specifies the intended use of the tool, which can be one
+of “Finishing”, “Semi-Finishing” or “Roughing”. A tool’s intended
+usage affects the in-process stock machining tolerance when the
+Material Removal Simulation (MRS) option is enabled. See the
+<a class="reference external" href="#usage">Usage</a> description above for more information.</p></li>
+<li><p><strong>Holder</strong>: Lists zero or more holders for the tool. See the
+<a class="reference external" href="#holder">Holder</a> description above for more information.</p></li>
+</ul>
+<p>The Round, Trigon, Diamond, Symmetrical, Thread and Groove turning tools
+have one or more additional parameters follows:</p>
+<ul class="simple">
+<li><p><strong>Number of sides (n)</strong>: Defines the number of cutting edges on the
+insert. Applicable to Symmetrical and Groove insert types only.</p></li>
+<li><p><strong>Inscribed circle (r)</strong>: An ANSI standard measure of insert size.
+Setting this field automatically adjusts the cutting length
+dimension.</p></li>
+<li><p><strong>Internal angle (t)</strong>: Specifies the angle between adjacent sides of
+the insert at the cutting edge. Applicable to Trigon and Diamond
+insert types only.</p></li>
+<li><p><strong>Corner radius (cr)</strong>: The radius of the cutting edge of the insert.
+Not applicable for Round insert types.</p></li>
+<li><p><strong>Tooth width (tw), height (th), offset (to), clearance (tc)</strong>:
+Defines the form shape of the thread or groove insert. Applicable to
+Thread and Groove insert types only.</p></li>
+<li><p><strong>Width (j)</strong>: The width of the insert. Applicable to Groove insert
+type only.</p></li>
+<li><p><strong>Joint radius (j)</strong>: The radius of the center hole. Not applicable
+to Groove insert type.</p></li>
+<li><p><strong>Height (h)</strong>: The height of the insert.</p></li>
+<li><p><strong>Clearance angle (a)</strong>: The relief angle of the insert.</p></li>
+</ul>
+<p>The Profile turning tool has a different set of parameters, as follows:</p>
+<ul class="simple">
+<li><p><strong>Cutting profile</strong>: Defines the outer edge of the insert as a 2D ZX
+axes profile, with one set of coordinates per line. An R value
+defines an arc with given radius tangent to the profile segments that
+immediately precede and follow it. The right-mouse context menu can
+be used to insert and remove points from the table.</p></li>
+<li><p><strong>ZX Offset</strong>: Defines the offset from the contour origin to the
+holder mating point.</p></li>
+<li><p><strong>Height (h)</strong>: The height of the insert.</p></li>
+<li><p><strong>Clearance angle (a)</strong>: The relief angle of the insert.</p></li>
+</ul>
+<p>Finally, the Generic turning tool is defined as follows:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: A 3D STL shape defining the insert. For material removal
+purposes, the insert will be intersected along the cutting plane and
+the resultant 2D shape used for MRS calculations.</p></li>
+<li><p>Select the <strong>Mesh button</strong> to modify the mesh properties (see the
+<a class="reference external" href="#mesh">Mesh dialog</a> description above).</p></li>
+<li><p><strong>Tool mounting offset</strong>: Defines the offset from the STL origin to
+the holder mating point.</p></li>
+</ul>
+</section>
+<section id="mill-tool-type">
+<span id="milltooltype"></span><h2>Mill Tool Type<a class="headerlink" href="#mill-tool-type" title="Link to this heading"></a></h2>
+<p>Select “Mill” as the tool type to define a milling or drilling
+tool/holder combination. The following mill tool types can be defined:</p>
+<ul class="simple">
+<li><p><strong>End mill</strong>: A milling tool with sharp corner radius.</p></li>
+<li><p><strong>Ball nose</strong>: A milling tool with corner radius equal to ½ the tool
+diameter.</p></li>
+<li><p><strong>Bull nose</strong>: A milling tool with non-zero corner radius less than ½
+the tool diameter.</p></li>
+<li><p><strong>Drill</strong>: A typical drilling tool.</p></li>
+<li><p><strong>APT 7</strong>: A milling tool whose shape is defined by the APT standard
+CUTTER definition.</p></li>
+<li><p><strong>Profile</strong>: A tool defined by a revolved 2D profile.</p></li>
+<li><p><strong>Generic</strong>: A tool defined by one or more cutting and non-cutting
+STL meshes.</p></li>
+</ul>
+<p>Milling tools, with the exception of Generic, are all defined in a 2D
+profile view. The blue dotted line represents the positive Z-axis of the
+machine. The red dotted line represents the positive X-axis of the
+machine. Tool path traces are drawn originating from the center bottom
+tip of the tool.</p>
+<p>All milling tools have the following settings:</p>
+<ul class="simple">
+<li><p><strong>Units</strong>: The unit of measure for non-angular values. Angles are
+always measured in degrees.</p></li>
+<li><p><strong>ID</strong>: Identifies the tool using the native form of tool numbering
+on the controller.</p></li>
+<li><p><strong>Number of flutes (n)</strong>: Defines the number of cutting teeth, edges,
+inserts or flutes on the tool.</p></li>
+<li><p><strong>Left/Right hand</strong>: Defines the cutting direction.</p></li>
+<li><p><strong>Colors</strong>: Defines the display colors for the shank (if used), body
+and cutting portions of the tool. When the MRS license option is
+enabled, the Cut selection defines the color to show the cutting
+action of the tool on the in-process stock. See the <a class="reference external" href="#cutcolor">Cut
+Color</a> description above for more information.</p></li>
+<li><p><strong>Usage</strong>: Specifies the intended use of the tool, which can be one
+of “Finishing”, “Semi-Finishing” or “Roughing”. A tool’s intended
+usage affects the in-process stock machining tolerance when the
+Material Removal Simulation (MRS) option is enabled. See the
+<a class="reference external" href="#usage">Usage</a> description above for more information.</p></li>
+<li><p><strong>Holder</strong>: Lists zero or more holders for the tool. See the
+<a class="reference external" href="#holder">Holder</a> description above for more information.</p></li>
+</ul>
+<p>The End mill, Ball nose, Bull nose, Drill and APT 7 milling tools have
+one or more additional parameters follows:</p>
+<ul class="simple">
+<li><p><strong>Tool diameter (d)</strong>: The diameter of the cutting portion of the
+tool, measured at the intersection of the bottom and sides of the
+tool.</p></li>
+<li><p><strong>Cutter length (l)</strong>: The total length of the tool from bottom tip
+to the mating point (TCP) of the holder, or if not using holders, to
+the spindle control point (SCP).</p></li>
+<li><p><strong>Flute length (fl)</strong>: The cutting length of the tool, measured from
+the bottom tip.</p></li>
+<li><p><strong>Corner radius (cr)</strong>: The corner radius of the tool. Not applicable
+for end mills (whose corner radius is zero), ball nose end mills
+(whose corner radius is ½ the diameter), or for drills.</p></li>
+<li><p><strong>Bottom angle (ba)</strong>: The angle of the bottom cutting edge of the
+tool. The angle must be zero or larger. Only applicable for drills
+and APT 7 cutter types.</p></li>
+<li><p><strong>Side angle (sa)</strong>: The angle of the side cutting edge of the tool.
+The angle can be positive or negative. Only applicable for APT 7
+cutter types.</p></li>
+<li><p><strong>Body offset (o)</strong>: Defines the relief on the tool diameter to apply
+to the cutter body portion of the tool.</p></li>
+<li><p><strong>Set shank</strong>: Select this checkbox to define the shank of the tool
+extending above the mating point with the holder or spindle.</p></li>
+<li><p><strong>Shank length (sl)</strong>: The length of the shank.</p></li>
+<li><p><strong>Shank diameter (sd)</strong>: The diameter of the shank.</p></li>
+</ul>
+<p>The Profile milling tool has a different set of parameters, as follows:</p>
+<ul class="simple">
+<li><p><strong>Cutting</strong>: Defines the radial and axial coordinates of the cutting
+tool profile, with one set of coordinates per line. An R value
+defines an arc with given radius tangent to the profile segments that
+immediately precede and follow it. Only define the right half profile
+of the tool (i.e., zero or positive radial values only). Positive
+axial values are measured downwards, from the mating point of the
+holder (TCP) or spindle face (SCP) towards the bottom tip of the
+tool. The right-mouse context menu can be used to insert and remove
+points from the table, and to insert a “delimiter” line that
+separates the list into multiple distinct cutting profiles.</p></li>
+<li><p><strong>Non-Cutting</strong>: Defines the radial and axial coordinates of the
+non-cutting tool profile, in the same fashion as described above for
+the cutting profile.</p></li>
+<li><p><strong>Body offset (o)</strong>: Defines the relief on the tool diameter to apply
+to the non-cutting profiles portion of the tool.</p></li>
+</ul>
+<p>Finally, the Generic milling tool is defined as follows:</p>
+<ul class="simple">
+<li><p><strong>Tool mesh components</strong>: Defines one or more cutting and non-cutting
+mesh components of the tool. Use the right-mouse context menu to
+“Import” a mesh from an STL file (see the <a class="reference external" href="#mesh">Mesh dialog</a>
+description above) or to select a lathe tool insert already defined
+in the tool table. Once loaded, the Dup column defines the number of
+instances of the mesh to be equally spaced around the tool center and
+the Angle column specifies an angular XY plane offset. For material
+removal purposes, meshes indicated as cutting (i.e., with the Cut
+column selected) will be revolved around the tool center and the
+resultant 3D shape used for MRS calculations. The right-mouse context
+menu can be used to insert and remove meshes from the table, and to
+modify the properties of individual meshes. The order that the meshes
+are listed in the table is not important.</p></li>
+<li><p><strong>Tool mounting offset</strong>: Defines the xyz offset from the tool tip to
+the tool origin (holder mating point).</p></li>
+</ul>
+</section>
+<section id="probe-tool-type">
+<span id="probetooltype"></span><h2>Probe Tool Type<a class="headerlink" href="#probe-tool-type" title="Link to this heading"></a></h2>
+<p>Select Probe as the tool type to define a straight or star stylus probe:</p>
+<ul class="simple">
+<li><p><strong>Straight</strong>: A probe with a single straight stylus.</p></li>
+<li><p><strong>Star</strong>: A probe with a multi-tip star stylus (5 balls).</p></li>
+</ul>
+<p>When a probe tool is loaded, VM is aware that it is a probe and that it
+cannot be used for cutting. VM has macro functions and variables that
+can be used to query the results of a probe touch.</p>
+<p>Probe tools are all defined in a 2D profile view. The blue dotted line
+represents the positive Z-axis of the machine. The red dotted line
+represents the positive X-axis of the machine. Tool path traces are
+drawn originating from the center bottom tip of the probe.</p>
+<p>All probe tools have the following settings:</p>
+<ul class="simple">
+<li><p><strong>Units</strong>: The unit of measure for non-angular values. Angles are
+always measured in degrees.</p></li>
+<li><p><strong>ID</strong>: Identifies the tool using the native form of tool numbering
+on the controller.</p></li>
+<li><p><strong>Stylus length (sl)</strong>: The total length of the probe from the center
+of the bottom ball to the mating point (TCP) of the holder, or if not
+using holders, to the spindle control point (SCP).</p></li>
+<li><p><strong>Stylus diameter (sd)</strong>: The diameter of the stylus.</p></li>
+<li><p><strong>Probe radius (r)</strong>: The radius of the probe ball.</p></li>
+<li><p><strong>Colors</strong>: Defines the display colors for the stylus (the “Base”)
+and ball (the “Probe”) portions of the probe tool.</p></li>
+<li><p><strong>Holder</strong>: Lists zero or more holders for the tool. Probe tools
+define just the stylus; the probe body can be defined as a holder to
+which the stylus is then attached. See the <a class="reference external" href="#holder">Holder</a>
+description above for more information.</p></li>
+</ul>
+<p>The Star probe tool has the following additional parameters:</p>
+<ul class="simple">
+<li><p><strong>Height (h)</strong>: The height of the horizontal 4-ball star section,
+measured from the center of the bottom ball to the center of the star
+section balls.</p></li>
+<li><p><strong>Width (w)</strong>: The distance from the center of the probe tool to the
+center of the star section balls.</p></li>
+</ul>
+</section>
+<section id="additive-tool-type">
+<span id="additivetooltype"></span><h2>Additive Tool Type<a class="headerlink" href="#additive-tool-type" title="Link to this heading"></a></h2>
+<p>Select “Additive” as the tool type to define a hybrid additive
+manufacturing (AM) tool or device. The following AM tool types can be
+defined:</p>
+<ul class="simple">
+<li><p><strong>Profile</strong>: A tool defined by revolved 2D profiles of the body and
+additive material regions.</p></li>
+<li><p><strong>Generic</strong>: A tool defined by one or more body and additive STL
+meshes.</p></li>
+</ul>
+<p>The Profile AM tool is defined as follows:</p>
+<ul class="simple">
+<li><p><strong>Body</strong>: Defines the radial and axial coordinates of the AM tool
+body profile, with one set of coordinates per line. An R value
+defines an arc with given radius tangent to the profile segments that
+immediately precede and follow it. Only define the right half profile
+of the tool (i.e., zero or positive radial values only). Positive
+axial values are measured downwards, from the mating point of the
+holder (TCP) or spindle face (SCP) towards the bottom tip of the
+tool. The right-mouse context menu can be used to insert and remove
+points from the table, and to insert a “delimiter” line that
+separates the list into multiple distinct body profiles.</p></li>
+<li><p><strong>Additive</strong>: Defines the radial and axial coordinates of the
+additive material profile, in the same fashion as described above for
+the body profile (only a single profile is supported). The AM profile
+defines the shape of the material that will be added to the
+in-process stock when the AM tool is loaded and activated.</p></li>
+<li><p><strong>Z Offset (z)</strong>: Defines the offset from the point in space where
+the tool-path trace will be drawn to the tool origin (holder mating
+point). This also affects the suggested length compensation amounts.</p></li>
+</ul>
+<p>The Generic AM tool is defined as follows:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: Defines additive material (AM) and body mesh components of
+the tool. Only one mesh component can be additive, as indicated by
+selecting the AM check box. The AM mesh defines the shape of the
+material that will be added to the in-process stock when the AM tool
+is loaded and activated.</p></li>
+<li><p>Select the <strong>Mesh button</strong> to modify the mesh properties (see the
+<a class="reference external" href="#mesh">Mesh dialog</a> description above).</p></li>
+<li><p><strong>XYZ Offset</strong>: Defines the offset from the point in space where the
+tool-path trace will be drawn to the tool origin (holder mating
+point). This also affects the suggested length compensation amounts.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="holders">
+<h1>Holders<a class="headerlink" href="#holders" title="Link to this heading"></a></h1>
+<p>Holder definitions add to simulation accuracy and realism. VM attaches
+solid model representations of holders and tools to the spindle control
+point (SCP). Once attached, they become a part of the collision
+detection process. Holders are associated with tools using the Tools
+dialog.</p>
+<p>Note that the term “Holder” is used by VM to refer to a device used to
+securely hold the tool in the spindle. The term “Head” is used by VM to
+refer to detachable spindle units (e.g., a right angle head attachment).
+The GENER HEAD keyword on a LOAD or TOOLNO command refers to a head
+attachment, not the tool holder.</p>
+<p>Select the Holders tab to add, modify or delete holder definitions.
+Select the New button to define a new holder. Select an existing holder
+definition to modify that holder. Select one or more holder and press
+the Delete button to remove the selected holder.</p>
+<p>The following holder types are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#profileholdertype"><span class="std std-ref">Profile</span></a></p></li>
+<li><p><a class="reference internal" href="#genericholdertype"><span class="std std-ref">Generic</span></a></p></li>
+</ul>
+<p>The holder table lists the following information for each holder:</p>
+<ul class="simple">
+<li><p><strong>Name</strong>: The name of the holder.</p></li>
+<li><p><strong>Type</strong>: Identifies the sub-type of the holder as being Profile (a
+holder defined by a 2D profile revolved about the spindle axis) or
+Generic (a holder defined by one or more STL meshes).</p></li>
+<li><p><strong>Unit</strong>: Defines the units of measure for non-angular holder
+dimensions.</p></li>
+</ul>
+<section id="profile-holder-type">
+<span id="profileholdertype"></span><h2>Profile Holder Type<a class="headerlink" href="#profile-holder-type" title="Link to this heading"></a></h2>
+<p>Select “Profile” as the holder type to define a cylindrical holder by a
+2D profile that will be swept around the spindle axis. A 2D profile
+holder is defined as follows:</p>
+<ul class="simple">
+<li><p><strong>Holder</strong>: The name of the holder. This name must be used in a tool
+definition to reference the holder.</p></li>
+<li><p><strong>Units</strong>: The unit of measure for profile and contact coordinates.</p></li>
+<li><p><strong>Contact point</strong>: Defines how the holder is attached to the machine
+and tool models. The Spindle contact point is aligned with the
+machine SCP (spindle control point) or the TCP of another parent
+holder. The Tool contact point identifies where the top of the tool
+or the SCP of another child holder is aligned.</p></li>
+<li><p><strong>Color</strong>: Defines the display color for the holder body.</p></li>
+<li><p><strong>Act as a head</strong>: Select this checkbox if the holder offset between
+spindle (SCP) and tool (TCP) is not included in the tool length
+compensation settings on the machine. This affects the tool length
+validation calculation as described <a class="reference external" href="#compensation">above</a>.</p></li>
+<li><p><strong>Profile</strong>: Defines the radial and axial coordinates of the holder
+profile, with one set of coordinates per line. An R value defines an
+arc with given radius tangent to the profile segments that
+immediately precede and follow it. Only define the right half profile
+of the holder (i.e., zero or positive radial values only). Positive
+axial values are measured downward, from the spindle face (SCP) or
+mating point of a parent holder (TCP), towards the bottom tip of the
+holder. The right-mouse context menu can be used to insert and remove
+points from the table.</p></li>
+</ul>
+</section>
+<section id="generic-holder-type">
+<span id="genericholdertype"></span><h2>Generic Holder Type<a class="headerlink" href="#generic-holder-type" title="Link to this heading"></a></h2>
+<p>Select “Generic” as the holder type to define a holder defined by one or
+more STL mesh components. A generic holder is defined as follows:</p>
+<ul class="simple">
+<li><p><strong>Holder</strong>: The name of the holder. This name must be used in a tool
+definition to reference the holder.</p></li>
+<li><p><strong>Units</strong>: The unit of measure for contact coordinates.</p></li>
+<li><p><strong>Contact point</strong>: Defines how the holder is attached to the machine
+and tool models. The Spindle XYZ contact point is aligned with the
+machine SCP (spindle control point) or the TCP of another holder. The
+Tool XYZ contact point identifies where the top of the tool or the
+SCP of another holder is aligned. The Rotate XYZ angles define the
+orientation of tool as mounted in the holder.</p></li>
+<li><p><strong>Act as a head</strong>: Select this checkbox if the holder offset between
+spindle (SCP) and tool (TCP) is not included in the tool length
+compensation settings on the machine. This affects the tool length
+validation calculation as described <a class="reference external" href="#compensation">above</a>.</p></li>
+<li><p><strong>Internally geared</strong>: Select this checkbox if the holder itself does
+not rotate, but instead transmits the spindle rotation force
+internally from the spindle contact point to the tool contact point.
+You can then specify a signed spindle ratio that defines the effect
+internal gearing (if any) has on the tool.</p></li>
+<li><p><strong>Mesh components</strong>: Defines one or more mesh components of the
+holder. Use the right-mouse context menu to “Import” a mesh from an
+STL file (see the <a class="reference external" href="#mesh">Mesh dialog</a> description above). The
+right-mouse context menu can be used to insert and remove meshes from
+the table, and to modify the properties of individual meshes. The
+order that the meshes are listed in the table is not important. The
+XYZ values in the table list the position of the mesh as described
+below.</p></li>
+</ul>
+<div class="line-block">
+<div class="line">Use the four view buttons along the top edge of the construction pane
+to change the construction view orientation. The red/green/blue dotted
+lines show the zero-point origin of the holder. A tool-axis kinematics
+marker shows the mating point of the holder with the SCP of the
+machine (or the TCP of a parent holder). A solid red/green/blue axis
+marker shows where and at what orientation the tool will be mounted to
+the holder (the TCP).</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="heads">
+<h1>Heads<a class="headerlink" href="#heads" title="Link to this heading"></a></h1>
+<p>A head is a removable device that attaches to the machine and which
+provides some form of extended machining capability. Common examples of
+such devices are 90 degree angled heads that mount the tool at an angle,
+long reach heads that extend the Z axis travel of the tool and heads
+with one or more controllable rotary axes that provide 4 or 5-axis
+control of the tool. Head devices (there can be multiple heads) are
+predefined in the model.</p>
+<p>The Head Definition tab is used to establish where the head devices are
+currently located in the model space and which head device is currently
+active. Heads can be parked at designated stations near the machine, and
+automatically loaded and unloaded by VM in the same way that tools are
+automatically loaded and unloaded. The Head Definition tab provides
+manual control over the placement of heads in the same way that the Tool
+Definition tab provides manual control over tools. The table lists the
+following information for each head defined in the model:</p>
+<ul class="simple">
+<li><p><strong>ID</strong>: Identifies the head using the native form of head numbering
+on the controller.</p></li>
+<li><p><strong>Name</strong>: Identifies the head using the name assigned by the creator
+of the VM model.</p></li>
+<li><p><strong>Current station</strong>: The current location of the head. This field is
+updated dynamically by VM as heads are loaded. You can manually load
+or park a head by double clicking on this field and selecting a head
+attachment point from the drop-down list.</p></li>
+</ul>
+<p>Head attachment points are defined in the model with QUEST using the
+Simulation»Construct Axis»Head axis menu selection (see description on
+page 119). Only one head at a time can reside at any single head
+attachment point.</p>
+<p>A head must be attached to the machine (actually, to a head axis
+identified as a “head socket”) for it to be active.</p>
+<p>Heads do not have to be visible in the model. A head will not be shown
+if its current selected station is “None”.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vmstockaxis.html" class="btn btn-neutral float-left" title="The Stock Axis Property Dialog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vmtoolaxis.html" class="btn btn-neutral float-right" title="The Tool Axis Property Dialog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
