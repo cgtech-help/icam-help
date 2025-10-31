@@ -1,0 +1,1033 @@
+.. _def_file:
+
+The ICAM.DEF File
+=================
+
+.. index:: icam.def file
+.. index:: File extension; def
+
+The ICAM.DEF file contains parameter definitions that control the
+operation of both QUEST and GENER. This file is located in the
+icam_appdata directory.
+
+ICAM.DEF can be modified by running the Configuration Utility from
+the desktop or Windows command prompt (see :ref:`“The ICAM Configuration
+Utility”<configuration_utility>`) or by
+selecting Tools»Configuration from the QUEST or GENER menu bar.
+
+The ICAM.DEF file can also be modified using a text editor. When
+editing the file, keep the following in mind: The “begin *xxx*\ ” and
+paired “end” commands indicate that the values assigned with the
+“let” commands between these commands are for a specific purpose. Do
+not move the “let” commands out of the “begin … end” block. Each
+“let” command defines a symbol, where the text string on the right of
+the **=** is assigned to the symbol named on the left. Text not
+surrounded by quotes will be converted to uppercase characters. Quote
+the text to preserve case. Environment variables may be used as all
+or part of the text value. A **$** symbol in front of a name
+identifies it as an environment symbol (e.g., $icam_lib). Enclose the
+symbol name in braces **{ }** if the name contains characters other
+than digits, characters and underscores, or to distinguish the symbol
+name from immediately following text (e.g., ${icam_lib}tmp). Use $$
+to specify $ as text. Anything following a **#** character (outside
+of a quoted string) on a line is considered a comment and is not
+processed.
+
+The following list describes the meaning of each symbol that is
+referenced by Icam Post, with the default shown in ( ) parenthesis.
+Items are listed alphabetically.
+
+.. _def_block_size:
+.. index:: block_size config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`block_size`
+
+   .. container::
+
+      :boldmono:`(off)`
+
+..
+
+   Specifies whether the size of each tape record is written at the
+   start of the tape record. If “on” is specified, the size is written
+   in ASCII using two bytes, followed by a blank. Valid choices are “on”
+   and “off”.
+
+.. _def_circles:
+.. index:: circles config parameter
+.. index:: Circle; segmentation
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`circles`
+
+   .. container::
+
+      :boldmono:`(segmented)`
+
+..
+
+   When ISO source, APT-like source and other ASCII formatted CL files
+   are read in, they are automatically converted to ICAM’s binary
+   format. In this binary format circle records can be stored in one of
+   two ways: “segmented” (default) and “unsegmented”. With the segmented
+   circle record structure, a series of 5000 class records is created
+   representing the points on the circle. The points are generated so
+   that straight lines joining the points are all within a tolerance of
+   the true arc. With the unsegmented record structure a single 15000
+   class record is generated containing the circle center and radius.
+
+   The CONTRL APT source command can be used to override the circle
+   method chosen here.
+
+.. _def_cir_360:
+.. index:: cir_360 config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`cir_360`
+
+   .. container::
+
+      :boldmono:`(yes)`
+
+..
+
+   This specifies the circular arc limits when the CL file input to
+   GENER is APT-like. It indicates if the CAM system can generate a full
+   360 degree arc using a MOVARC or CIRCLE command with just the circle
+   center, axis and radius information. Use “no” if the CAM system
+   generates multiple MOVARC or CIRCLE commands for a full 360 degree
+   arc. In this case, if the start and end point of the circle are the
+   same, then a span of zero degrees is assumed. Use “yes” (the default)
+   if the CAM system can generate full 360 degree arcs. In this case, if
+   the start and end point of the circle are the same, then a span of
+   360 degrees is assumed.
+
+.. _def_cir_dir:
+.. index:: cir_dir config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`cir_dir`
+
+   .. container::
+
+      :boldmono:`(automatic)`
+
+..
+
+   This specifies the default circular interpolation direction used when
+   the CL file input to GENER is APT-like. GENER selects the circular
+   interpolation direction based on the data found in the circle record.
+   The default “automatic” is clw for CIRCLE/ and cclw for SURFACE/. If
+   this data does not conform to the standard, you may have to reverse
+   the direction. Use “clw” or “cclw” to override the default action of
+   “automatic” Use “none” if the circle record does not indicate
+   direction, in which case arcs must be less than 180 degrees.
+
+   The CONTRL APT source command can be used to override the direction
+   chosen here.
+
+.. _def_cir_gofwd_catia:
+.. index:: cir_gofwd_catia config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`cir_gofwd_catia`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   This specifies how the GO**\* continuous path motion commands are
+   processed when read from an APT-like CL file in GENER. Specify “no”
+   to use the industry standard interpretation, which drives the circle
+   or cylinder until the desired end condition is reached with the part
+   or line check surface. Specify “yes” to interpret the command based
+   on the Dassault Systèmes document “Syntaxes Interpreted by APT
+   Import”, which extracts the arc data and end point from the CIRCLE
+   and LINE or CYLNDR and PLANE definitions (this is the default with
+   the “catia” input format).
+
+.. _def_cir_no_adjust_ps:
+.. index:: cir_no_adjust_ps config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`cir_no_adjust_ps`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   Controls the definition of an implied part surface following each
+   motion in an APT-like CL file. The part surface is the tool tip
+   contact plane when interpolating circles using one of the GO**\*
+   continuous path motions commands. Specify “no” to automatically
+   assume an AUTOPS operation following each motion (this is the normal
+   default). Specify “yes” to inhibit the automatic definition of the
+   part surface, relying instead only on AUTOPS and PSIS commands in the
+   APT source file (this is the default with the “catia” input format).
+
+.. _def_cir_ps_autops:
+.. index:: cir_ps_autops config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`cir_ps_autops`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   This specifies how an AUTOPS command should be processed when read
+   from an APT-like CL file in GENER. The industry standard
+   interpretation of AUTOPS is to establish a part surface passing
+   through the current tool tip position and parallel to the XY plane.
+   The part surface is the tool tip contact plane when interpolating
+   circles using one of the GO**\* continuous path motions commands.
+   Specify “no” to select the industry standard interpretation (this is
+   the normal default). Specify “yes” to instead establish the part
+   surface as passing through the current tool tip position, but
+   perpendicular to the tool axis (this is the default with the “euclid”
+   input format).
+
+.. _def_comment:
+.. index:: comment config parameter
+
+:boldmono:`comment`
+
+   Specifies an alternate comment delimiter to use when GENER inputs
+   APT-like source files. The delimiter can be one or more characters in
+   length. The setting of an alternate comment delimiter will not affect
+   the normal processing of the $$ comment delimiter.
+
+.. _def_dnc_eor:
+.. index:: dnc_eor config parameter
+
+:boldmono:`dnc_eor`
+
+   If the dnc format is fixed or packed the end of record character or
+   characters can be defined. If special characters must be entered, use
+   the standard Icam Post ^### format where ### is the ASCII code of the
+   special character. For example, ^013^010 would be the character codes
+   for a carriage-return line-feed end of record marker. Be sure to
+   specify 3 digits when specifying the ASCII code. By default, there is
+   no end of record marker for fixed or packed records.
+
+.. _def_dnc_format:
+.. index:: dnc_format config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`dnc_format`
+
+   .. container::
+
+      :boldmono:`(variable)`
+
+..
+
+   The DNC file can be formatted in 3 ways; variable (default) fixed and
+   packed. Variable indicates that each tape block will have a variable
+   size, taking only the required space. Fixed indicates that all blocks
+   are of a given size. If a tape block is shorter than the given size,
+   the record is blank filled to the end. Packed is similar to fixed
+   except that the next record is used to fill space at the end of a
+   given record. In other words, packed tries to fit as many logical
+   blocks on a physical record as possible.
+
+.. _def_dnc_recl:
+.. index:: dnc_recl config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`dnc_recl`
+
+   .. container::
+
+      :boldmono:`(72,80)`
+
+..
+
+   If the DNC format is fixed or packed the default record size is 72,80
+   where the first 72 columns contain data and the records are blocked
+   at 80 characters. This default can be altered by specifying the data
+   portion of the record and optionally the full size.
+
+.. _def_dnc_seq:
+.. index:: dnc_seq config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`dnc_seq`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   Sequence numbering can be provided in the non-data portion of fixed
+   length tape blocks (fixed or packed). By default, the numbering is in
+   columns 73 to 80. Use “no” to have no sequence numbering. “left” left
+   justifies the sequence number, while “right” right justifies it. Use
+   “padded” to add leading zeros to the sequence number field of the
+   record.
+
+.. _def_erfile:
+.. index:: erfile config parameter
+
+:boldmono:`erfile`
+
+   Specifies the path and file name of the GENER error message file. If
+   a file is not specified (the default), internal error messages are
+   used.
+
+.. _def_extended_chars:
+.. index:: extended_chars config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`extended_chars`
+
+   .. container::
+
+      :boldmono:`(1-127)`
+
+..
+
+   Specifies the valid range of characters permitted in a text string.
+   By default, GENER only recognizes characters in the ASCII range
+   1-127. All (or portions) of strings containing NUL or characters with
+   the sign bit set will be processed as floating point values. To have
+   GENER recognize extended characters, specify the additional
+   characters by ASCII code. A range of characters can be specified
+   using *nnn*-*nnn*. Separate multiple specifications using a comma
+   (,). For example, to permit characters in the range 145 through 200
+   and the NUL (0) character, specify “145–200,0”. Specify “0–255” for
+   all characters (not recommended).
+
+.. _def_file_ext:
+.. index:: file_ext config parameter
+.. _def_file_ext_list:
+.. index:: file_ext_list config parameter
+.. _def_file_ext_log:
+.. index:: file_ext_log config parameter
+.. _def_file_ext_nclist:
+.. index:: file_ext_nclist config parameter
+.. _def_file_ext_plot:
+.. index:: file_ext_plot config parameter
+.. _def_file_ext_sub:
+.. index:: file_ext_sub config parameter
+.. _def_file_ext_tape:
+.. index:: file_ext_tape config parameter
+.. _def_file_ext_tape2:
+.. index:: file_ext_tape2 config parameter
+.. container:: two-column
+
+   .. container::
+
+      | :boldmono:`file_ext_list`
+      | :boldmono:`file_ext_log`
+      | :boldmono:`file_ext_nclist`
+      | :boldmono:`file_ext_plot`
+      | :boldmono:`file_ext_sub`
+      | :boldmono:`file_ext_tape`
+      | :boldmono:`file_ext_tape2`
+
+   .. container::
+
+      | :boldmono:`(lis)`
+      | :boldmono:`(log)`
+      | :boldmono:`(lst)`
+      | :boldmono:`(bkp)`
+      | :boldmono:`(tps)`
+      | :boldmono:`(tap)`
+      | :boldmono:`(tp2)`
+
+..
+
+   Specifies default file extensions (or file types) for the various
+   output files that are created by QUEST and GENER. The default file
+   extension is used when a specific name is not specified on the GENER
+   command line.
+   The QUEST listing file (*file_ext_list*) and GENER listing file (*file_ext_nclist*)
+   extensions are used when these listings are generated in a regular file format (i.e., not HTML).
+   The subprogram tape file extension can be changed using the $SUBEXT macro variable.
+
+.. _def_file_locks:
+.. index:: file_locks config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`file_locks`
+
+   .. container::
+
+      :boldmono:`(system)`
+
+..
+
+   Specifies how the Icam Post database is locked when it is being
+   written to. The default “system” lock uses Windows file locking. For
+   legacy purposes, Icam Post supports the simulation of Windows file
+   locking by creating a temporary lock file indicating that the
+   database is in use. This is called a “file” lock. Database file
+   locking can be disabled by specifying “no”. ICAM recommends that
+   Windows file locking always be used. This is the default.
+
+.. _def_html_ext:
+.. index:: html_ext config parameter
+.. _def_html_ext_list:
+.. index:: html_ext_list config parameter
+.. _def_html_ext_nclist:
+.. index:: html_ext_nclist config parameter
+
+.. container:: two-column
+
+   .. container::
+
+      | :boldmono:`html_ext_list`
+      | :boldmono:`html_ext_nclist`
+
+   .. container::
+
+      | :boldmono:`(htm)`
+      | :boldmono:`(htm)`
+
+..
+
+   Specifies default file extensions (or file types) for the QUEST
+   listing (*html_ext_list*) and GENER listing (*html_ext_nclist*) files
+   when using the HTML output format.
+
+.. _def_icam_appdata:
+.. index:: icam_appdata config parameter
+
+:boldmono:`icam_appdata`
+
+   If used, this configuration setting *must be manually added* at the
+   start of the ICAM.DEF file before the first “begin” command.
+
+      ::
+
+         let ICAM_APPDATA = "directory path"
+
+   Specifies the application data directory path, overriding all other
+   application data directory definitions to this point. The content of
+   the current DEF file (i.e., the one containing the *icam_appdata*
+   definition) is ignored. The target directory ICAM.DEF file, if one
+   exists, may contain an *icam_appdata* setting, which will be
+   recursively applied. A circular reference will be diagnosed with an
+   error.
+
+   If an ICAM.DEF file does not exist in the specified application data
+   directory, then default values will be used for all configuration
+   settings.
+
+.. _def_input_format:
+.. index:: input_format config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`input_format`
+
+   .. container::
+
+      :boldmono:`(apt)`
+
+..
+
+   Specifies the default input CL file type. Valid choices are “apt”,
+   “ai”, “cadra”, “catia”, “cdc”, “duct5”, “esprit”, “euclid”, “exapt”,
+   “hypermill”, “ibmb”, “ibme”, “icam”, “iso”, “mcam”, “nclcam”,
+   “nx” and “ptc”. The *apt* format supports APT-like
+   source statements generated by most CAM systems (the default). The
+   *ai*, *cadra*, *catia*, *cdc*, *esprit*, *euclid*, *exapt*, *nx* and *ptc*
+   formats support APT-like source statements generated by these
+   specific systems. The *icam* format supports ICAM’s binary CL. The
+   *iso* format supports ASCII CL defined by the ISO 3592-2000 standard.
+   The *ibmb*, *ibme* and *nclcam* formats support
+   binary CL generated by these CAM and APT systems (binary CL file
+   support is a licensed program option). The *hypermill* format
+   supports POF files from OPEN MIND. The *mcam* format supports NCI
+   files from Mastercam. The *duct5* format supports numeric CL from
+   DELCAM. This symbol can be overridden with the GENER /format command
+   line qualifier.
+
+.. _def_input_width:
+.. index:: input_width config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`input_width`
+
+   .. container::
+
+      :boldmono:`(72)`
+
+..
+
+   Specifies the maximum number of characters in the input record when
+   GENER inputs APT-like CL. Up to 256 characters per input line can be
+   specified, with a minimum of 40. This symbol can be overridden with
+   the CONTRL APT source command.
+
+.. _def_insert:
+.. index:: insert config parameter
+
+:boldmono:`insert`
+
+   Specifies the name of an APT-like input file to read and process
+   before GENER processes the main APT input file. An insert file will
+   only be processed when using one of the APT-like input formats. If
+   this symbol is not specified, then an insert file will not be
+   processed. This symbol can be overridden with the GENER
+   /insert command line qualifier.
+
+.. _def_interface_kit:
+.. index:: interface_kit config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`interface_kit`
+
+   .. container::
+
+      :boldmono:`(automatic)`
+
+..
+
+   Specifies either “automatic” (the default) or the name of a CAM
+   interface kit.
+
+   Each CAM interface is self contained in a separate directory. All
+   standard interfaces can be found in the *kit* subdirectory below the
+   installation directory. User customized interface kits can be created
+   in the *kit* subdirectory below the application data directory. The
+   value specified for the interface_kit symbol must match one of the
+   subdirectory names of the *kit* directories. The application data
+   *kit* subdirectory is searched first for a matching kit name, before
+   searching the installation *kit* subdirectory.
+
+   Each kit must contain an ICAM.DEF file defining the configuration
+   details that are necessary for that specific CAM system format (see
+   the :ref:`“CAD/CAM System Interfaces”<annex_cadcamsystem>` annex for
+   interface kit details). Kit DEF file symbols take precedence over
+   (i.e., override) those in the regular ICAM.DEF file.
+
+   Automatic interface kit selection uses special ``kit_clfile`` and
+   ``kit_cltext`` definitions in the ICAM.DEF file in each interface kit to
+   assist the post-processor in selecting the appropriate interface kit
+   based on the input CL file. The ``kit_clfile`` symbol defines a
+   file-match pattern unique to the specific CAM system (e.g.,
+   “\*.aptsource”). A semicolon can be used to delimit a series of
+   possible file-match patterns (e.g., “\*.ncl;\*.ncl.\*”). The
+   ``kit_cltext`` symbol defines text (in the form of a regular expression)
+   that is expected to be found in the first 100 bytes of the file if
+   the kit can not be uniquely defined by the file-match pattern. If two
+   or more kits are valid candidates, then GENER will prompt for the
+   appropriate kit, or if prompting is not possible, will abort
+   execution with a diagnostic message.
+
+   This symbol can be overridden with the /kit command line qualifier.
+
+.. _def_isn_on_output:
+.. index:: isn_on_output config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`isn_on_output`
+
+   .. container::
+
+      :boldmono:`(yes)`
+
+..
+
+   Specifies whether 1000 class records should be created when the CL
+   input file format is APT. A 1000 class record identifies the input
+   command by an ISN number. The ISN number is referenced in error
+   messages and optionally with the tape listing as an aid to tracking
+   the source of problems. Valid choices are “yes” and “no”.
+
+.. _def_keyword_size:
+.. index:: keyword_size config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`keyword_size`
+
+   .. container::
+
+      :boldmono:`(24)`
+
+..
+
+   Specifies the maximum number of significant characters in a Major or
+   Minor keyword, within the range 6-24 characters. It is an error to
+   attempt to load keywords that are longer than this limit from a words
+   file. When processing aptsource files, keywords longer than this
+   limit will be quietly truncated before testing for a match with a
+   known Major or Minor keyword.
+
+.. _def_language:
+.. index:: language config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`language`
+
+   .. container::
+
+      :boldmono:`(english)`
+
+..
+
+   Specifies the name of the default language to use for all text
+   output. The language name must match a subdirectory name of the
+   “$icam_lib/bin/$icam_bin/lang” directory. If “language” is not
+   specified, or if it is invalid, all text output will be in English.
+   This symbol takes precedence over the LANG environment variable.
+
+.. _def_lines_per_page:
+.. index:: lines_per_page config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`lines_per_page`
+
+   .. container::
+
+      :boldmono:`(60)`
+
+..
+
+   Specifies the number of lines per page on
+   all output listings.
+   If 0 (zero) is specified, there will be no page breaks and headers will be
+   output at the top of the program and at the top of the program summary only.
+
+.. _def_max_errors:
+.. index:: max_errors config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`max_errors`
+
+   .. container::
+
+      :boldmono:`(0)`
+
+..
+
+   Specifies the maximum number of errors (severity 8 or higher) that
+   are permitted during post-processing. Once this limit is exceeded,
+   post-processing will abort. A value of zero (the default) inhibits
+   this feature, meaning that post-processing will not intentionally
+   abort.
+
+.. _def_madef:
+.. index:: madef config parameter
+.. _def_mbdef:
+.. index:: mbdef config parameter
+
+| :boldmono:`madef`
+| :boldmono:`mbdef`
+
+   Specifies the source (.mac) or object (.obj) file names of standard
+   user-defined macros that GENER will automatically place before and
+   after macros defined within the selected post-processor. The “mbdef”
+   symbol specifies the full path and file name of a file containing
+   user-defined macros to be matched *before* regular post-processor
+   defined ones; the “madef” symbol specifies the full path and file
+   name of a file containing user-defined macros to be matched *after*
+   regular post-processor defined ones. Use an ENDMAC command to end
+   each user-defined macro in the source file. Startup/Shutdown macros
+   can not be specified.
+
+   Macros can be optionally precompiled using the QUEST /compile command
+   line qualifier. Precompiled macro object files are cross platform
+   compatible but are not cross version compatible.
+
+   These symbols can be overridden with the GENER /ma and /mb command
+   line qualifiers.
+
+.. _def_msys9:
+.. index:: msys9 config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`msys9`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   Specifies if the MSYS APT-like CL file command requires special
+   processing to convert it from a 9 parameter to 12 parameter matrix
+   format. Select “no” to process the MSYS command as-is (this is the
+   normal default). Select “yes” to convert the 9-parameter MSYS command
+   matrix from Unigraphics format to a standard matrix format.
+
+.. _def_non_std_contin:
+.. index:: non_std_contin config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`non_std_contin`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   Indicates if a $ continuation marker can be used to continue a text
+   string or comment from one input APT source card to the next. Valid
+   choices are “yes” and “no”.
+
+.. _def_null_input:
+.. index:: null_input config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`null_input`
+
+   .. container::
+
+      :boldmono:`(error)`
+
+..
+
+   Specifies how null parameters in the input APT-like source CL file
+   should be treated. A null parameter occurs when two commas appear in
+   a row. Choices are: “error” to output a diagnostic and ignore the
+   CLDATA record (this is the normal default); “zero” to use the value
+   0 for null parameters; and “ignore” to ignore null parameters (this
+   is the default with the “catia” input format).
+
+.. _def_omit_after_slash:
+.. index:: omit_after_slash config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`omit_after_slash`
+
+   .. container::
+
+      :boldmono:`(0)`
+
+..
+
+   Specifies how many characters should be omitted following the slash
+   (/) in fixed format text commands (e.g., PARTNO, PPRINT, INSERT…).
+
+.. _def_page_format:
+.. index:: page_format config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`page_format`
+
+   .. container::
+
+      :boldmono:`(list)`
+
+..
+
+   Defines the output page format.
+   Either “list” or “fcc” can be
+   specified. List type output uses a form-feed character to advance the
+   printer carriage to a new page. FCC type output (also known as ASA)
+   reserves the first character of each line as a carriage control
+   indicator, where values of 1, 0 and space cause a page advance,
+   double space or single space action.
+
+.. _def_plot_data:
+.. index:: plot_data config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`plot_data`
+
+   .. container::
+
+      :boldmono:`(cl)`
+
+..
+
+   This symbol specifies the output units of back-plot data generated by
+   GENER. Valid choices are “machine” and “cl”. With machine output, XYZ
+   coordinates are in the same units as the machine measured from the
+   tool tip with vector information omitted. With cl output (the
+   default), back-plot coordinate data is in the same units and
+   reference system as the input CL data, also measured at the tool tip,
+   but with vector information included if necessary.
+
+.. _def_plot_type:
+.. index:: plot_type config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`plot_type`
+
+   .. container::
+
+      :boldmono:`(apt)`
+
+..
+
+   This symbol specifies the output format of back-plot data generated
+   by GENER. Valid choices are “binary”, “apt” and “catia”. Binary
+   output produces a CL file that can be input to any ICAM product that
+   accepts binary CL files. APT output (the default) produces an
+   APT-like CL file. CATIA output produces an APT-like CL file
+   compatible with the 3DEXPERIENCE NC Manufacturing Review feature.
+
+.. _def_start_lookahead:
+.. index:: start_lookahead config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`start_lookahead`
+
+   .. container::
+
+      :boldmono:`(20)`
+
+..
+
+   Specifies the number of records to search to find the first
+   occurrences of the PARTNO, UNITS and MACHIN statements. If 0 (zero)
+   is specified, a search is performed on the entire input file.
+
+.. _def_tape_eor:
+.. index:: tape_eor config parameter
+
+:boldmono:`tape_eor`
+
+   If the tape format is fixed or packed the end of record character or
+   characters can be defined. If special characters must be entered, use
+   the standard Icam Post ^### where ### is the ASCII code of the special
+   character. For example, ^013^010 would be the character codes for a
+   carriage-return line-feed end of record marker. Be sure to specify 3
+   digits when specifying the ASCII code. By default, there is no end of
+   record marker for fixed or packed records.
+
+.. _def_tape_format:
+.. index:: tape_format config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`tape_format`
+
+   .. container::
+
+      :boldmono:`(variable)`
+
+..
+
+   The tape file can be formatted in three ways; variable (default)
+   fixed and packed. Variable indicates that each tape block will have a
+   variable size, taking only the required space. Fixed indicates that
+   all blocks are of a given size. If a tape block is shorter than the
+   given size, the record is blank filled to the end. Packed is similar
+   to fixed except that the next record is used to fill space at the end
+   of a given record. In other words, packed tries to fit as many
+   logical blocks on a physical record as possible.
+
+.. _def_tape_recl:
+.. index:: tape_recl config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`tape_recl`
+
+   .. container::
+
+      :boldmono:`(72,80)`
+
+..
+
+   If the tape format is fixed or packed the default record size is
+   72,80 where the first 72 columns contain data and the records are
+   blocked at 80 characters. This default can be altered by specifying
+   the data portion of the record and optionally the full size.
+
+.. _def_tape_seq:
+.. index:: tape_seq config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`tape_seq`
+
+   .. container::
+
+      :boldmono:`(no)`
+
+..
+
+   Sequence numbering can be provided in the non-data portion of fixed
+   length tape blocks (fixed or packed). By default, the numbering is in
+   columns 73 to 80. Use “no” to have no sequence numbering. “left” left
+   justifies the sequence number, while “right” right justifies it. Use
+   “padded” to add leading zeros to the sequence number field of the
+   record.
+
+.. _def_units:
+.. index:: units config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`units`
+
+   .. container::
+
+      :boldmono:`(inch)`
+
+..
+
+   Specifies the default unit of measure to be used before the first
+   UNITS command or in the absence of a UNITS command. It can be set to
+   “mm” or “inch”. Set it to “mm” if the majority of CL files are in
+   metric and set it to “inch” if the majority of CL files are in
+   imperial units.
+
+.. _def_use_html:
+.. index:: use_html config parameter
+.. _def_use_html_list:
+.. index:: use_html_list config parameter
+.. _def_use_html_nclist:
+.. index:: use_html_nclist config parameter
+.. container:: two-column
+
+   .. container::
+
+      | :boldmono:`use_html_list`
+      | :boldmono:`use_html_nclist`
+
+   .. container::
+
+      | :boldmono:`(no)`
+      | :boldmono:`(no)`
+
+..
+
+   Specifies if the HTML output format option should be used for the
+   QUEST listing (*use_html_list*)
+   and GENER listing (*use_html_nclist*) files.
+   Valid choices are “yes” and “no” (the default).
+
+.. _def_user_questions:
+.. index:: user_questions config parameter
+
+:boldmono:`user_questions`
+
+   This symbol specifies the full path and file name of a user-defined
+   questions file. QUEST uses this file to present a customized question
+   section to the user. See the :ref:`“User-Defined Questions”<annex_user_defined_questions>`
+   annex for file format details.
+
+.. _def_vm_picture_dir:
+.. index:: vm_picture_dir config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`vm_picture_dir`
+
+   .. container::
+
+      :boldmono:`("My Pictures\\ICAM\\260\\")`
+
+..
+
+   This symbol specifies the directory to use when creating screenshots
+   of a Virtual Machine simulation window. The default is the system “My
+   Pictures\\ICAM\\260” directory. If this symbol defines a relative
+   path, then the pictures directory will be relative to the input
+   CLDATA file.
+
+.. _def_vm_video_dir:
+.. index:: vm_video_dir config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`vm_video_dir`
+
+   .. container::
+
+      :boldmono:`("My Videos\\ICAM\\260\\")`
+
+..
+
+   This symbol specifies the directory to use when creating videos of a
+   Virtual Machine simulation window. The default is the system “My
+   Videos\\ICAM\\260” directory. If this symbol defines a relative
+   path, then the videos directory will be relative to the input CLDATA
+   file.
+
+.. _def_words:
+.. index:: words config parameter
+.. container:: two-column
+
+   .. container::
+
+      :boldmono:`words`
+
+   .. container::
+
+      :boldmono:`("$icam_appdata\\dwords.dat")`
+
+..
+
+   Specifies a file containing additional major and minor words and
+   codes used by your CAM system. By default, ICAM uses the ISO standard
+   words with common extensions. This symbol can be overridden using the
+   /words command line qualifier (valid for both QUEST and GENER).
