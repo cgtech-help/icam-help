@@ -1,0 +1,153 @@
+License Manager
+***************
+
+   An ICAM License Manager (ICAMLM) utility is available to check
+   license availability and perform other license related tasks. The
+   License Manager may be started either from the Start menu or from the
+   ICAM Portal. In the descriptions that follow, keep in mind that with
+   node-locked licenses, the server and client computer are the same,
+   and that the license manager can be run from either perspective
+   depending on where it is started.
+
+-  To start the license manager utility from a **client** computer Start
+   menu, first locate the “ICAM V26 x64” Start menu and then select
+   “License Manager (CLIENT)”. To start the utility from the ICAM
+   portal, select the Tools pane and click on the “ICAM License Manager
+   (CLIENT)” tile or icon.
+
+-  To start the license manager utility from the license **server**
+   computer Start menu, first locate the “ICAM License Server V26 x64”
+   Start menu and then select “License Manager (SERVER)”.
+
+   You will see a window that looks similar to the one shown below.
+
+|image14|
+
+The title bar of the license manager window lists the server
+connection information.
+
+Each line in the top half of the window lists a licensed product and
+its options, the maximum number of licenses that are available and
+the actual number that are in use including the hostname or IP
+address of each computer that has the license checked out.
+
+The bottom half of the window traces the activity of the license
+server. From left to right this includes: the date and time of the
+action; a 3-letter code describing the action; the client hostname or
+IP address, or “icamlm” if it is a server related action; followed by
+the action data (e.g., the license that was checked out). Select
+Help»Legend for a description of the action codes. When the license
+manager starts, it shows last 10 lines from the server log. This
+initial count of lines can be changed from the Setup»Server
+Connection menu.
+
+The license manager functions available on the Setup menu depend on
+whether the manager is being run from the client or from the server.
+
+License Manager (CLIENT)
+========================
+
+The CLIENT version of the license manager is responsible for
+establishing a connection to the ICAM license server. Server
+connection information is contained in the *icam.key* file, which is
+either stored in the ICAM application data directory (e.g.,
+C:\\ProgramData\\ICAM\\240\\icam.key), or is kept elsewhere and
+identified using an *icam_sec* environment variable.
+   
+To find the *icam.key* file, please run the ICAM Configuration utility
+and look at the *Environment* tab.
+   
+-  **License commuting**: Starting with V26, you can commute licenses to use offline. Here are the rules and limitation of license commuting:
+   *  Maximum of 7 days for a license commute.
+   *  In order to commute a license, you must have a minimum of 2 available.
+   *  The license must be version 260 or later.
+   
+To commute or return a commuted license, right-click on the license.
+   
+|image17|
+
+The following functions are available from
+the Setup menu:
+
+|image16|
+
+-  **Server Connection**: This dialog establishes a connection to an
+   ICAM floating license server. You can drag and drop an icam.key file
+   onto this dialog, or browse for the key file, to establish a
+   connection to the server identified in the key file.
+
+   You can setup the server connection manually, by entering the port
+   number and name or IP address of the license server computer. A “Find
+   LAN Servers” button will search for running ICAM license servers on
+   the same LAN only (i.e., it cannot find a server that is one or more
+   network hops away). For cloud servers, you must also enter the cloud
+   security ID string that was given to you by the ICAM licensing
+   department (keyfiles@icam.com), and your computer must have an
+   Internet connection.
+
+-  **Change** **Password**: A password can be setup to restrict access
+   to changes to the client computer list from the license manager
+   running on a client computer. From the client license manager, the current
+   password need to be specified in order to change it.
+
+-  **Manage Client List**: See the License Manager (SERVER) section
+   below.
+
+License Manager (SERVER)
+========================
+
+   The SERVER version of the license manager is responsible for setting
+   up ICAM product licenses and configuring some ICAM license server
+   options. ICAM product license information is contained in the
+   *icamls.key* file in the ICAM server application data directory
+   (e.g., C:\\ProgramData\\ICAM\\ Server\\icamls.key).
+
+   The following functions are available from the Setup menu:
+
+-  **Update Key File**: Use this funtion when a new *icamls.key* file is
+   received from ICAM. You can drag and drop the new key file onto this
+   dialog, or browse for the key file, or open the key file directory to
+   facilitate copying the updated key file directly there.
+
+-  **Server Port**: Set the primary port number to be used by the
+   license server, which will become effective once all current licenses
+   have been checked in, or following the next reboot or license server
+   restart. Each client computer’s *icam.key* license server connec-
+   tion file must be edited to specify the changed port number.
+
+-  **Server Log Settings**: Defines the use, location and contents of a
+   licensing activity log file. These changes become effective
+   immediately.
+
+-  **Change** **Password**: A password can be setup to restrict access
+   to changes to the client computer list from the license manager
+   running on a client computer. The current password is shown. If there
+   is no password (the default) then the current password field will be
+   empty. To create or change the password, enter the new password and
+   repeat it, then press Ok. To remove the current password, simply
+   press Ok without specifying a new password. Press Cancel to exit the
+   dialog without changing the password.
+
+-  **Manage Client List**: This dialog lists all client computers that
+   have ever connected to the license server and checked out a license.
+   The list of clients is maintained on a first come / first served
+   basis. If all client spaces have been used, then new client computers
+   cannot check out licenses. You can remove obsolete client computers
+   from this list by selecting them and pressing the **Remove Client**
+   button. When doing so from a client license manager, you must enter
+   the password if one has been setup with the server license manager.
+   Removing obsolete client computers from the list frees up space for
+   new client computers.
+   Note that once a client computer has been removed from the list, it
+   is not eligible to check out licenses until the listed time limit has
+   elapsed.
+   
+|image15|
+   
+
+.. |image14| image:: ../media/manager.png
+.. |image15| image:: ../media/manager_clientlist.png
+.. |image16| image:: ../media/manager_connection.png
+.. |image17| image:: ../media/manager_commuting.png
+
+   
