@@ -1,0 +1,88 @@
+.. _command_load:
+
+The LOAD Command :kbd:`[MLEP]`
+==============================
+
+The LOAD command is used to: thread and cut the wire on a wire EDM;
+to select the active punch tools for punch presses; and to load and
+unload tools and heads on mills and lathes.
+
+Wire EDM machines:
+------------------
+
+   :math:`\textbf{LOAD /} \begin{pmatrix}\begin{array}{l} \textbf{WIRE} \\ \textbf{TOOL} \end{array}\end{pmatrix} ,\mathit{tool\_id}`
+
+Specify a positive non-zero *tool_id* to cause the wire to be
+threaded at the current position; specify a zero (0) tool id to cause
+the wire to be cut (or use the UNLOAD/WIRE command). The choice of
+TOOL or WIRE keyword is not important.
+
+Punch Press machines:
+---------------------
+
+   :math:`\textbf{LOAD / TOOL},\mathit{tool\_id}`
+
+Specify a positive non-zero *tool_id* to cause the punch tool to be
+changed.
+
+Mill and Lathe machines:
+------------------------
+
+   :math:`\textbf{LOAD / }
+   \big[\,\textbf{TOOL}, \mathtt{<\!tool\_information\!>}\,\big] \;
+   \big[,\textbf{HEAD}, \mathtt{<\!head\_information\!>}\,\big]`
+
+See :ref:`the TOOLNO command<command_toolno>` for a description of the tool and head information parameters.
+
+If the *tool_id* on the LOAD/TOOL command matches the tool currently
+loaded, then a redundant tool change operation will be generated. The
+same is true if the head id on the LOAD/HEAD command matches the head
+currently loaded.
+
+On machines that support it, a value of zero (0) can be specified for
+the tool or head id to unload the tool or head. This provides the
+same functionality as the UNLOAD command.
+
+The LOAD command is one of a group of commands used for the
+management of tools. The TOOLNO command can optionally be used to
+define the tool and head properties, so that only the *tool_id* or
+*head_id* need later be specified with the other commands in the
+group. The TOOLNO command performs no machine related actions; it is
+used to preset the internal GENER tooling tables for those tools
+specified. The SELECT and SELCTL commands are used to pre-select a
+tool or head ready for use, but to not actually load it. The LOAD,
+LOADTL and TURRET commands performs the action of loading the tool or
+head. The UNLOAD command removes the current tool from the spindle or
+head from the machine.
+
+For example:
+
+   .. code-block::
+
+      TOOLNO/1,LENGTH,5.25,OSETNO,11
+      TOOLNO/2,LENGTH,4.50,OSETNO,12
+      TOOLNO/3,LENGTH,8.00,OSETNO,13,MANUAL
+      $$
+      SELECT/TOOL,1    $$ Select tool 1
+      LOAD/TOOL,1      $$ Load tool 1
+      SELCTL/TOOL,2    $$ Get tool 2 ready
+      $$
+      Motion commands for tool number 1
+      $$
+      LOAD/TOOL,2      $$ Load tool 2
+      SELECT/TOOL,3    $$ Get tool 3 ready
+      $$
+      Motion commands for tool number 2
+      $$
+      LOAD/TOOL,3      $$ Load last tool (3)
+      SELECT/TOOL,0    $$ Get the dummy tool ready
+      $$
+      Motion commands for tool number 3
+      $$
+      UNLOAD/TOOL      $$ Remove tool 3
+      END
+
+In the above example, the TOOLNO commands specify the length of the
+tools, their length compensation offset numbers and for the third
+tool, the fact that it must be loaded by hand. Thereafter, the
+SELECT, LOAD and UNLOAD commands need only specify the tool number.
