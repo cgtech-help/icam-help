@@ -1,0 +1,70 @@
+.. _command_vtlaxs:
+
+The VTLAXS Command :kbd:`[M]`
+=============================
+
+The VTLAXS command defines angular tolerances that can be used by the
+post-processor to eliminate or reduce rotary motions that have an
+insignificant effect on the tool-to-part orientation.
+The following VTLAXS command functions are available:
+
+-  :ref:`“Rotary Axis Tolerance”<vtlaxs_angle>`
+-  :ref:`“Tool Vector Tolerance”<vtlaxs_tlvec>`
+
+.. _vtlaxs_angle:
+
+Rotary Axis Tolerance
+---------------------
+
+Large rotations and oscillations of a rotary axis can occur as that
+rotary axis approaches a “singular” orientation. This happens when
+the tool axis is parallel or is nearly parallel to the axis of
+rotation of a rotary axis. These rotations, although large, have very
+little effect on the tool-to-part orientation. The following command
+defines an angular tolerance to help eliminate unnecessary rotation:
+
+   :math:`\textbf{VTLAXS / ANGLE},
+   \begin{pmatrix}\begin{array}{l} \mathit{toler} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The *toler* value specifies the angular tolerance in degrees,
+measured as a conical half angle from each rotary axis of revolution.
+When the tool axis falls within this cone, it will be adjusted (i.e.,
+snapped) parallel to the rotary axis of revolution and the
+corresponding rotary axis will be marked as singular and no longer
+rotated. The choice of appropriate tolerance is a function of the CAM
+system vector word size (in the CL file) and manufacturing
+tolerances. For example, if *ijk* vector data is output to 4 decimal
+places in the CL file, then a tolerance of 0.006 degrees (i.e., arc
+tangent of 0.0001) is necessary to ignore round-off errors that may
+affect the rotary axis position. Generally the error is not due to
+the *ijk* word size, but is instead due to internal manufacturing
+tolerances used by the CAM system. In this case the tolerance may
+have to be set experimentally to produce the least amount of
+unnecessary singular rotation while still respecting part angular
+tolerances. The accumulated travel summary at the end of the GENER
+listing can give an indication of the effectiveness of various
+tolerance settings.
+
+OFF inhibits the angular tolerance feature. ON re-enables the last
+specified tolerance.
+
+.. _vtlaxs_tlvec:
+
+Tool Vector Tolerance
+---------------------
+
+Very small changes in tool axis vector can cause unwanted movement of
+the rotary axes. The following command defines a vectorial tolerance
+to help eliminate unnecessary rotation caused by slight changes in
+tool vector orientation:
+
+   :math:`\textbf{VTLAXS / TLVEC},
+   \begin{pmatrix}\begin{array}{l} \mathit{toler} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The *toler* value specifies a vectorial tolerance in degrees. When
+this tolerance is active, the rotary axes will not move provided that
+the compounded change in tool axis orientation is smaller than the
+specified vectorial tolerance value.
+
+OFF inhibits the vectorial tolerance feature. ON re-enables the last
+specified tolerance.
