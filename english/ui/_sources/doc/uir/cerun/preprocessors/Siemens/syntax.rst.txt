@@ -1,0 +1,495 @@
+Siemens Pre-Processor Syntax
+============================
+
+This document lists the 840D syntax supported by the pre-processor.
+
+Important: Note that the 840D pre-processor is for the SIEMENS style
+dialect and will not work properly in ISO dialect. If ISO dialect is
+used, it is recommended not to use this pre-processor.
+
+--------------
+
+#. `Pre-processor setup <#setup>`__
+#. `Operators <#operators>`__
+#. `Arithmetic operators & functions <#arithmetic>`__
+#. `Unconditional branching <#unconditional>`__
+#. `Conditional branching <#conditional>`__
+#. `Repetition <#repetition>`__
+#. `Variables <#variables>`__
+#. `Sub-program <#subprogram>`__
+#. `Other matching patterns <#other>`__
+#. `Misc Functions <#misc>`__
+#. `System Variables <#system>`__
+#. `Frame support <#frames>`__
+
+1. Pre-processor setup
+~~~~~~~~~~~~~~~~~~~~~~
+
+The 840D pre-processor can be setup in order to be a little bit more
+flexible. This is done via the macro function $FCEPP( ). This function’s
+purpose is really to communicate information that are specific to some
+pre-processor without being standard on every one of them.
+
+These are the configuration parameter supported by the 840D
+pre-processor.
+
+-  $FCEPP('PROCESS', <operation>, <boolean>)
+
+Parameter 1: This function tell the pre-processor which operation it
+should take care of. The options available here are ‘COMMENTS’,
+‘MESSAGES’ and ‘SUBPROGRAMS’
+
+Parameter 2: $TRUE to tell the pre-processor to process the specified
+operation. $FALSE to tell the pre-processor not to process it (So the
+user can do it within a macro).
+
+Description: They all default to $TRUE so the pre-processor will handle
+them if not instructed otherwise.
+
+-  $FCEPP('GLOBALDEF', <boolean>)
+
+Parameter: $TRUE or $FALSE
+
+| Description: When set to $TRUE, the CNC variables declared from the
+  MCD data or pushed using a macro EXEC command will all be global
+  variables. If $FALSE (default), they will be local to the current
+  source stack from where they are defined.
+| The standard usage of this function is to turn GLOBAL definition true
+  and then EXEC multiple variable declaration blocks from the program
+  startup macro, then turn the GLOBAL definition back off.
+
+-  $FCEPP('PROCESSGUDFILES' [, <seq>])
+
+Parameter: The parameter is optional. Its a sequence of strings
+representing the GUD file names.
+
+Description: If no values are passed, there is a standard list of GUD
+files that will be looked for and processed. Those are “SMAC_DEF”,
+“MMAC_DEF”, “UMAC_DEF”, “SGUD_DEF”, “MGUD_DEF”, “UGUD_DEF”, “GUD4_DEF”,
+“GUD5_DEF”, “GUD6_DEF”, “GUD7_DEF”, “GUD8_DEF”, “GUD9_DEF”.
+
+-  $FCEPP('SETFILEROOT', <folderpath>)
+
+Parameter: Specify the absolute path to the folder to be used as the
+root of the controller.
+
+Description: The ROOT folder will act as the root from the internal
+folders of the 840D. This is where the subprograms will be looked for
+and processed from. The main program should also be there if it contains
+embedded subprograms.
+
+-  $FCEPP('COLLAPSEASSIGNSPACES', <boolean>)
+
+Parameter: $TRUE or $FALSE
+
+Description: When turned $TRUE, this functionality will remove any
+spaces before and after address assignation so the CE can match them
+more appropriately. ( Ex: “X = 3.4” will become “X=3.4” ). The default
+value is $FALSE which is not to collapse the spaces.
+
+-  $FCEPP('COLLAPSEASSIGNS', <boolean>)
+
+Parameter: $TRUE or $FALSE
+
+Description: When turned $TRUE, this functionality will remove the
+assignation character ‘=’ when the address to the left of the
+assignation is only 1 character long. ( Ex: “X=23.1” will become “X23.1”
+). The default value is $FALSE which is not to remove the assignation
+character.
+
+-  $FCEPP('SETALSEVERITY', <severity number>)
+
+Parameter: ICAM Severity number from 0 to 99
+
+Description: Specify the severity to set for all SETAL() 840D functions.
+By default alarms comes out to the console as diagnostic messages. This
+function is used to change the severity level so they could be output as
+warning, error or fatal errors.
+
+-  $FCEPP('APPLYFRAMES', <LOGICAL>)
+
+Parameter: LOGICAL value indicating to use the frames
+
+Description: The default is $FALSE in V20 and $TRUE in V21. The reason
+for this is not to impact existing V20 production CE's.
+
+If $FALSE, the FRAME transformation chained are still parsed, computed
+and acquired from the simulation but will not automatically be applied
+back in to the simulation when changed from the program. The user can
+use macro to access those FRAME system variables via $FCEGNCV(...) which
+will return them the 12 element matrix of the combined frame.
+
+2. Supported operators
+~~~~~~~~~~~~~~~~~~~~~~
+
+-  == Is equal
+-  <> Not equal
+-  >= Greater or equal than
+-  > Greater than
+-  <= Less or equal than
+-  < Less than
+-  B_AND Bitwise AND
+-  B_OR Bitwise OR
+-  B_XOR Bitwise exclusive OR
+-  B_NOT NOT operation
+
+3. Supported arithmetic operators & functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  - Subtraction
+-  + Addition
+-  \* Multiplication
+-  / Division
+-  = Assignation
+-  ( ) Priority
+-  SIN(x) Sinus
+-  ASIN(x) Arcsinus
+-  COS(x) Cosinus
+-  ACOS(x) ArcCosinus
+-  TAN(x) Tangeant
+-  ATAN2(x) ArcTangeant
+-  SQRT(x) Square root
+-  ABS(x) Absolute value
+-  ROUND(x) Rounding value
+-  ROUNDUP(x) Rounding value UP
+-  TRUNC(x) Truncate the fractional part
+-  POT(x) Power of 2
+-  LN(x) Logarithm
+-  EXP(x) Exponential value
+
+4. Unconditional branching
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| GOTOB label                       | | Jump to a specific label before |
+|                                   |   the current block               |
+|                                   | | GOTOB label1                    |
++-----------------------------------+-----------------------------------+
+| GOTOF label                       | | Jump to a specific label after  |
+|                                   |   the current block :             |
+|                                   | | GOTOF label1                    |
++-----------------------------------+-----------------------------------+
+| | GOTO label                      | | Jump to a specific label.       |
+|                                   | | GOTO label1                     |
++-----------------------------------+-----------------------------------+
+| | GOTOC label                     | | Jump to a specific label. Do    |
+|                                   |   not diagnose if label not       |
+|                                   |   found.                          |
+|                                   | | GOTOC label1                    |
++-----------------------------------+-----------------------------------+
+| | GOTOS                           | | Jump to the start of the        |
+|                                   |   program/subprogram.             |
+|                                   | | GOTOS                           |
++-----------------------------------+-----------------------------------+
+
+5. Conditional branching
+~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| | IF (x) GOTOF label              | | Evaluate boolean condition x    |
+| | IF (x) GOTOB label              |   and branch if true              |
+|                                   | | IF (VAR1==12) GOTOF 30          |
++-----------------------------------+-----------------------------------+
+| IF (x) ... ELSE ... ENDIF         | | Evaluate boolean condition and  |
+|                                   |   execute following blocks if     |
+|                                   |   true, execute blocks after the  |
+|                                   |   ELSE if false. Stop at the      |
+|                                   |   ENDIF                           |
+|                                   | | IF (VAR1==12)                   |
+|                                   | | ...                             |
+|                                   | | ELSE                            |
+|                                   | | ...                             |
+|                                   | | ENDIF                           |
++-----------------------------------+-----------------------------------+
+| CASE ...                          | | CASE expression with jump to    |
+|                                   |   specific labels.                |
+|                                   | | CASE (I) OF 1 GOTOF label1 2    |
+|                                   |   DEFAULT GOTOF label2            |
+|                                   | | label1: G0 X5.                  |
+|                                   | | label2: G0 X-5.                 |
++-----------------------------------+-----------------------------------+
+
+6. Repetition
+~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Example                           |
++-----------------------------------+-----------------------------------+
+| | LOOP                            | | LOOP                            |
+| | ...                             | | ...                             |
+| | ENDLOOP                         | | ENDLOOP                         |
++-----------------------------------+-----------------------------------+
+| | FOR var=value TO endvalue       | | FOR i=1 TO 10                   |
+| | ...                             | | ...                             |
+| | ENDFOR                          | | ENDFOR                          |
++-----------------------------------+-----------------------------------+
+| | WHILE (expression)              | | WHILE i>1                       |
+| | ...                             | | ...                             |
+| | ENDWHILE                        | | ENDWHILE                        |
++-----------------------------------+-----------------------------------+
+| | REPEAT                          | | REPEAT                          |
+| | ...                             | | ...                             |
+| | UNTIL (expression)              | | UNTIL i==1                      |
++-----------------------------------+-----------------------------------+
+| REPEAT (label) (repeat_count)     | REPEAT LBL1 P=3                   |
++-----------------------------------+-----------------------------------+
+| REPEAT (label_begin) (label_end)  | REPEAT LBL1 LBL2 P=3              |
+| (repeat_count)                    |                                   |
++-----------------------------------+-----------------------------------+
+| REPEATB (label) (repeat_count)    | REPEATB LBL1 P=5                  |
++-----------------------------------+-----------------------------------+
+
+7. Variables
+~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| DEF <scope><type><name>           | Declare a variable. type can be   |
+|                                   | INT,                              |
+|                                   | REAL,BOOL,CHAR,STRING,AXIS,FRAME. |
+|                                   |                                   |
+|                                   | | DEF INT i1                      |
+|                                   | | DEF REAL r1=1.4, r2=3.4         |
+|                                   | | DEF STRING[12] str1="Hello"     |
+|                                   |                                   |
+|                                   | The scope can be NCK or CHAN:     |
+|                                   |                                   |
+|                                   | -  NCK: The variable will be      |
+|                                   |    global to the whole job.       |
+|                                   | -  CHAN: The variable will be     |
+|                                   |    scoped to current channel      |
+|                                   |    only.                          |
++-----------------------------------+-----------------------------------+
+| | R<number>                       | | R variables from R0 to R100     |
+| | R[<number>]                     | | R2=23                           |
+| | $R<number>                      |                                   |
+| | $R[<number>]                    |                                   |
++-----------------------------------+-----------------------------------+
+| AX[<axis var>]                    | | The macro AX[] can be use to    |
+|                                   |   get the axis name so the CE can |
+|                                   |   process the right axis          |
+|                                   | | DEF AXIS \_AXVAR = X            |
+|                                   | | AX[AXVAR]=150.                  |
+|                                   | | This last line will be          |
+|                                   |   preprocessed to “X=150.”        |
++-----------------------------------+-----------------------------------+
+
+8. Sub-program related
+~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| EXTERN <subprogname and           | | Declare a subprogram. The       |
+| parameters>                       |   <VAR>in the parameter           |
+|                                   |   declaration means that the      |
+|                                   |   value will be passed as a       |
+|                                   |   reference. You MUST declare the |
+|                                   |   subprogram for the              |
+|                                   |   pre-processor to be able to     |
+|                                   |   call them.                      |
+|                                   | | EXTERN Sub1(REAL,INT,INT)       |
+|                                   |                                   |
+|                                   | EXTERN Sub1(VAR REAL,VAR INT,VAR  |
+|                                   | INT)                              |
++-----------------------------------+-----------------------------------+
+| L<number>                         | | Predefined calsub command. This |
+|                                   |   would call a subprogram file    |
+|                                   |   with the name of the calsub.    |
+|                                   |   Meaning a call like L210 would  |
+|                                   |   look for a L210.SPF file. These |
+|                                   |   calls CAN’T have parameters.    |
+|                                   | | L47                             |
++-----------------------------------+-----------------------------------+
+| PROC <subprogname and parameters> | | Just like EXTERN declar a       |
+|                                   |   subprogram. The PROC keyword    |
+|                                   |   defined it (this should be the  |
+|                                   |   first line of a subprogram).    |
+|                                   | | PROC Sub1(REAL length,INT i,INT |
+|                                   |   j)                              |
++-----------------------------------+-----------------------------------+
+| M17 or RET                        | The M17 or RET command end the    |
+|                                   | current subprogram or main        |
+|                                   | program. The pre-processor do not |
+|                                   | support the return to another     |
+|                                   | position using parameters with    |
+|                                   | the RET command.                  |
++-----------------------------------+-----------------------------------+
+| P<number>                         | | Program execution count.        |
+|                                   |   Default is P1 (as in one        |
+|                                   |   execution of the subprogram).   |
+|                                   | | SUB1(VAR1,I2) P3                |
++-----------------------------------+-----------------------------------+
+| CALL <subprogram name>            | | Calling a subprogram with       |
+|                                   |   filename specified. The         |
+|                                   |   filename may have to be         |
+|                                   |   modified from the subprogram    |
+|                                   |   startup macro to match the      |
+|                                   |   actual filepath in the PC.      |
+|                                   | | CALL “/wkp.dir/sub”             |
++-----------------------------------+-----------------------------------+
+| EXTCALL <subprogram name>         | | Calling a subprogram with       |
+|                                   |   filename specified. The         |
+|                                   |   filename may have to be         |
+|                                   |   modified from the subprogram    |
+|                                   |   startup macro to match the      |
+|                                   |   actual filepath in the PC.      |
+|                                   | | EXTCALL “/wkp.dir/sub”          |
++-----------------------------------+-----------------------------------+
+| MCALL <subprogram call>           | | Having the MCALL on the same    |
+|                                   |   line as the subprogram calling  |
+|                                   |   will make that call happen on   |
+|                                   |   every blocks until the modal    |
+|                                   |   call is cancelled.              |
+|                                   | | MCALL L70                       |
++-----------------------------------+-----------------------------------+
+| MCALL                             | | Cancelling a modal subprogram   |
+|                                   |   call.                           |
+|                                   | | MCALL                           |
++-----------------------------------+-----------------------------------+
+
+\*\* The PCALL command is not supported yet.
+
+**Rules to follow for the sub-programs to be found**
+
+Subprogram files: The root folder for the subprogram need to be set by
+using the $FCEPP('SETFILEROOT','<absolute path>') macro function,
+preferably in the program startup macro. This folder will act as the
+internal root folder.
+
+All the file and folder names under the root one must be in PC format
+and not internal 840D filename format. This mean that a folder called
+“\_N_DEF_DIR” would need to be called “def.dir” and a subprogram file
+named “\_N_SUBPROG1_SPF” would be called “subprog1.spf”. So basically,
+the rules are removing the leading “\_N\_”, having the 3 character
+extension use a dot instead of an underscore, and the filename being
+lowercase (case does not really matter in windows though).
+
+Subprogram in current source: When calling a subprogram name, if the
+subprogram is not found as a file, it will be looked up inside the
+current source. The rules for this is to look for a rewind line (Start
+with a %) containing the name of the subprogram.
+
+9. Other matching patterns
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| DEFINE <text>AS <text>            | | Define macro to replace         |
+|                                   |   something by something else in  |
+|                                   |   the block                       |
+|                                   | | DEFINE M5 AS M3                 |
++-----------------------------------+-----------------------------------+
+| MSG(<text message>)               | | Operator message                |
+|                                   | | MSG(this is a message)          |
++-----------------------------------+-----------------------------------+
+| 'H<hexadecimal characters>'       | | Hexadecimal value               |
+|                                   | | 'HFF'                           |
++-----------------------------------+-----------------------------------+
+| 'B<binary digits (0 or 1)>'       | | Binary value                    |
+|                                   | | 'B0100111'                      |
++-----------------------------------+-----------------------------------+
+| <name>:                           | | Defining a label so that we can |
+|                                   |   jump to it.                     |
+|                                   | | LABEL1:                         |
++-----------------------------------+-----------------------------------+
+| <number>EX-<number>               | | Exponential notation            |
+|                                   | | 23.3EX-4                        |
++-----------------------------------+-----------------------------------+
+| string1<<string2                  | | String concatenation operator   |
+|                                   | | sf=STR1<<STR2                   |
++-----------------------------------+-----------------------------------+
+| AC(<value>)                       | Specify axis value as absolute    |
++-----------------------------------+-----------------------------------+
+| IC(<value>)                       | Specify axis value as incremental |
++-----------------------------------+-----------------------------------+
+
+10. Misc Functions
+~~~~~~~~~~~~~~~~~~
+
+Here is the supported conversion utility functions. See the official
+840D control manual for description.
+
+-  AXSTRING()
+-  ISAXIS()
+-  ISNUMBER()
+-  ISVAR()
+-  ISFILE()
+-  NUMBER()
+-  AXNAME()
+-  TOUPPER()
+-  TOLOWER()
+-  STRLEN()
+-  INDEX()
+-  RINDEX()
+-  MINDEX()
+-  MATCH()
+-  SUBSTR()
+-  SETAL()
+-  ROUNDUP()
+-  MINVAL()
+-  MAXVAL()
+-  BOUND()
+
+11. System Variables
+~~~~~~~~~~~~~~~~~~~~
+
+The set of supported system variables is very limited. Here is what is
+supported at this time.See the official 840D control manual for
+description.
+
+-  $AA_IW
+-  $AA_IB
+-  $AA_IM
+-  $MN_SCALING_SYSTEM_IS_METRIC
+-  $MN_SCALING_VALUE_INCH
+-  $P_AXN1
+-  $P_AXN2
+-  $P_AXN3
+-  $P_BFRAME
+-  $P_DRYRUN: Always 0 in simulation
+-  $P_F
+-  $P_FA
+-  $P_GG
+-  $P_IFRAME
+-  $P_ISTEST
+-  $P_MC
+-  $P_MSNUM
+-  $P_PFRAME
+-  $P_PROG
+-  $P_S
+-  $P_S_TYPE
+-  $P_SDIR
+-  $P_SEARCH
+-  $P_SEARCH1
+-  $P_SEARCH2
+-  $P_STACK
+-  $P_SUBPAR
+-  $P_UIFRNUM
+-  $P_UIFR
+
+12. Frame Support
+~~~~~~~~~~~~~~~~~
+
+The following transformation can be used to calculate final frames and
+assign the value to a FRAME variable.
+
+-  CTRANS(...)
+-  CFINE(...)
+-  CROT(...)
+-  CSCALE(...)
+-  CMIRROR(...)
+
+Accessing a FRAME component using the available identifiers
+TR,FI,RT,SC,MI
+
+Ex: R15 = $P_PFRAME[X,TR]
+
+**Note:**\ This is only a subset of the Siemens frame support.
+
