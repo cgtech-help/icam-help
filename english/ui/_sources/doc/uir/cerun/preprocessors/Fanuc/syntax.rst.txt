@@ -1,0 +1,293 @@
+Fanuc Pre-Processor Syntax
+==========================
+
+This document list the specific FANUC syntax supported by the
+pre-processor.
+
+--------------
+
+#. `Pre-processor Setup <#setup>`__
+#. `Command Abbreviations <#command>`__
+#. `Operators <#operators>`__
+#. `Arithmetic operators <#arithmetic>`__
+#. `Unconditional branching <#unconditional>`__
+#. `Conditional branching <#conditional>`__
+#. `Repetition <#repetition>`__
+#. `Variables <#variables>`__
+#. `Sub-program <#subprogram>`__
+#. `Other matching patterns <#other>`__
+
+--------------
+
+1. Pre-processor setup
+~~~~~~~~~~~~~~~~~~~~~~
+
+The Fanuc pre-processor can be setup in order to be a little bit more
+flexible. This is done via the macro function $FCEPP( ). This function’s
+purpose is really to communicate information that are specific to some
+pre-processor without being standard on every one of them. These are the
+configuration parameter supported by the Fanuc pre-processor.
+
+-  $FCEPP('PROCESS', 'COMMENTS', *value* )
+
+| Value: $TRUE to let the pre-processor process the comments (this is
+  the default).
+| $FALSE to have the pre-processor leave the comments as-is on the
+  blocks.
+
+-  $FCEPP('PROCESS', 'MESSAGES', *value* )
+
+| Value: $TRUE to let the pre-processor process the operator
+  messages(this is the default).
+| $FALSE to have the pre-processor leave the operator messages as-is on
+  the blocks.
+
+-  $FCEPP('PROCESS', 'SYSVARASSIGNMENT', *value* )
+
+| Value: $TRUE to have pre-processor calling the identification macro
+  when a value is being assigned to a Fanuc system variable.
+| $FALSE to have the pre-processor not call the identification but just
+  assign and keep the value for that system variable.
+
+-  $FCEPP('USENULL', *value* )
+
+| Value: $TRUE to have pre-processor set <null> value to undefined
+  variable and constant #0/#3100. Unsupported system variables will
+  still return value 0(this is the default).
+| $FALSE to have the pre-processor set value 0 to any undefined or
+  unsupported variable. This is used solely to keep backward
+  compatibility with V21 and earlier
+
+2. Command Abbreviations
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following commands can be coded by specifying at least 2 or more
+characters instead of the whole command name.
+
+-  **TH**\ EN
+-  **GO**\ TO
+-  **WH**\ ILE
+-  **EN**\ D
+-  **SI**\ N
+-  **AS**\ IN
+-  **CO**\ S
+-  **AC**\ OS
+-  **TA**\ N
+-  **AT**\ AN
+-  **SQ**\ RT
+-  **AB**\ S
+-  **RO**\ UND
+-  **FI**\ X
+-  **FU**\ P
+-  **EX**\ P
+-  **AN**\ D
+-  **XO**\ R
+
+3. Operators
+~~~~~~~~~~~~
+
+-  EQ Is equal
+-  NE Not equal
+-  GE Greater or equal then
+-  GT Greater than
+-  LE Less or equal than
+-  LT Less than
+-  AND Logical AND
+-  && Logical AND
+-  OR Logical OR
+-  \|\| Logical OR
+-  XOR Bitwise OR
+
+4. Arithmetic operators
+~~~~~~~~~~~~~~~~~~~~~~~
+
+======== ==================================
+-        Subtraction
++        Addition
+\*       Multiplication
+/        Division
+=        Assignation
+[ ]      Priority
+SIN[x]   Sinus
+ASIN[x]  ArcSinus
+COS[x]   Cosinus
+ACOS[x]  ArcCosinus
+TAN[x]   Tangent
+ATAN[x]  ArcTangeant
+SQRT[x]  Square root
+ABS[x]   Absolute value
+ROUND[x] Rounding value
+FIX[x]   Nearest integer part closest to 0
+FUP[x]   Nearest integer part farthest to 0
+LN[x]    Logarithm
+EXP[x]   Exponential value
+MOD[x]   Modulo (get the remainder part)
+======== ==================================
+
+5. Unconditional branching
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| GOTO                              | | Jump to a specific sequence     |
+|                                   |   number in the MCD.              |
+|                                   | | GOTO 150                        |
++-----------------------------------+-----------------------------------+
+
+6. Conditional branching
+~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| IF                                | | Evaluate boolean condition and  |
+|                                   |   optionally branch.              |
+|                                   | | IF [ [212]EQ[442|2*12]EQ[44/2]  |
+|                                   |   ] GOTO30;                       |
+|                                   |                                   |
+|                                   | IF [#2GT5.5] THEN #4=#2           |
++-----------------------------------+-----------------------------------+
+| IF/ELSE/ENDIF                     | | Evaluate boolean condition and  |
+|                                   |   execute block of codes.         |
+|                                   | | IF [ [212]EQ[442|2*12]EQ[44/2]  |
+|                                   |   ] THEN                          |
+|                                   | | G0 X100.                        |
+|                                   | | ENDIF                           |
++-----------------------------------+-----------------------------------+
+
+7. Repetition
+~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| WHILE [expr] DO n ... END n       | | Execute a portion of blocks     |
+|                                   |   between the WHILE and END as    |
+|                                   |   long as the expression is true. |
+|                                   |   The DO number and END number    |
+|                                   |   must match to form a valid      |
+|                                   | | WHILE block.                    |
+|                                   | | WHILE [#3 GT 15] DO 1           |
+|                                   |                                   |
+|                                   | G0X#3                             |
+|                                   |                                   |
+|                                   | #3=#3-1                           |
+|                                   |                                   |
+|                                   | END 1                             |
++-----------------------------------+-----------------------------------+
+
+8. Variables
+~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| #n                                | | Variables are defined starting  |
+|                                   |   from 1 (#n)                     |
+|                                   | | #1, #45, #123, ...              |
++-----------------------------------+-----------------------------------+
+
+9. Sub-program related
+~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Syntax                            | Description                       |
++-----------------------------------+-----------------------------------+
+| G65                               | | Call subprogram non-modal       |
+|                                   |   (won’t repeat) and use a new    |
+|                                   |   local variable stack. This call |
+|                                   |   can have variable parameters.   |
+|                                   | | G65 P9000 L1 A20. B34.56        |
+|                                   | | G65 <DRILL2> L1 A20. B34.56     |
++-----------------------------------+-----------------------------------+
+| G66                               | | Call subprogram modal (will     |
+|                                   |   repeat on every motion block    |
+|                                   |   until a G67 is encountered).    |
+|                                   |   Also create a new local         |
+|                                   |   variable stack.                 |
+|                                   | | G66 P9000 L1 A20. B34.56        |
+|                                   | | G66 <DRILL2> L1 A20. B34.56     |
++-----------------------------------+-----------------------------------+
+| G66.1                             | | Call subprogram modal (will     |
+|                                   |   repeat on every block until a   |
+|                                   |   G67 is encountered). It reads   |
+|                                   |   macro parameters on every       |
+|                                   |   block. Also create a new local  |
+|                                   |   variable stack.                 |
+|                                   | | G66.1 P9000 L1 A20. B34.56      |
+|                                   | | G66.1 <DRILL2> L1 A20. B34.56   |
++-----------------------------------+-----------------------------------+
+| G67                               | Stop any modal subprogram         |
+|                                   | calling.                          |
++-----------------------------------+-----------------------------------+
+| M98                               | | Call a subprogram non-modal     |
+|                                   |   (won’t repeat). And variable    |
+|                                   |   stack stay the same. All the    |
+|                                   |   current variables will be       |
+|                                   |   accessible from the subprogram. |
+|                                   |   Because of this, no parameters  |
+|                                   |   can be passed to the            |
+|                                   |   subprogram.                     |
+|                                   | | M98 P9000 L2                    |
+|                                   | | M98 <FACE2> L2                  |
++-----------------------------------+-----------------------------------+
+| M198                              | | Same as M98                     |
+|                                   | | M198 P9000 L2                   |
+|                                   | | M198 <FACE1> L2                 |
++-----------------------------------+-----------------------------------+
+| (Other)                           | | Subprogram calling using        |
+|                                   |   G,M,T,S,B and other supported   |
+|                                   |   addresses is available.         |
+|                                   | | Please consult the Fanuc        |
+|                                   |   programming manual under the    |
+|                                   |   "CUSTOM MACROS" section.        |
+|                                   | | It is recommended to use the    |
+|                                   |   program startup macro to set    |
+|                                   |   the required variables          |
+|                                   |   (parameters) via EXEC command   |
+|                                   |   calls.                          |
++-----------------------------------+-----------------------------------+
+| M99                               | End current subprogram.           |
++-----------------------------------+-----------------------------------+
+| P[0-9]+                           | | Specify the subprogram number   |
+|                                   |   to call.                        |
+|                                   | | G65 P9002                       |
++-----------------------------------+-----------------------------------+
+| <file-name>                       | | Specify the subprogram file to  |
+|                                   |   call.                           |
+|                                   | | Also specify the beginning of a |
+|                                   |   subprogram.                     |
+|                                   | | G65 <SUBPROG>                   |
+|                                   | | <SUBPROG>                       |
++-----------------------------------+-----------------------------------+
+| O[0-9]+                           | | Specify beginning of            |
+|                                   |   program/subprogram              |
+|                                   | | O9002                           |
++-----------------------------------+-----------------------------------+
+| L[0-9]+                           | | Specify repeat count to the     |
+|                                   |   subprogram. L0 means 1          |
+|                                   |   execution and is the default.   |
+|                                   |   So L1 means 1 repeat (2         |
+|                                   |   execution).                     |
+|                                   | | G65 P9002 L1                    |
+|                                   | | G65 <FACE3> L1                  |
++-----------------------------------+-----------------------------------+
+
+10. Other matching patterns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| Description                       | Description                       |
++-----------------------------------+-----------------------------------+
+| (Comments)                        | | Comments. Text enclosed between |
+|                                   |   ( )                             |
+|                                   | | (this is a comment)             |
++-----------------------------------+-----------------------------------+
+| ;                                 | | The “;”marks the end of a       |
+|                                   |   block. Everything after it is   |
+|                                   |   ignored                         |
+|                                   | | N12 G0 Z120.5; After end of     |
+|                                   |   block                           |
++-----------------------------------+-----------------------------------+
+
