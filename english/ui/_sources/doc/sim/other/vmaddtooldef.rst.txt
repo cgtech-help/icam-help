@@ -1,0 +1,51 @@
+Virtual Machine Tooling
+=======================
+
+Adding Tooling Definitions to the Simulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+VM can attach solid model representations of tools and their holders to
+the machine model when they are loaded. Once attached, they become part
+of the collision detection process. When Material Removal Simulation
+(MRS) is enabled, VM will modify stock and machinable fixture objects to
+simulate the cutting actions of the tool. VM supports a variety of tool
+types for both milling and turning applications, and can support both 2D
+revolved contour or generic 3D shapes for holder definitions. Select
+Simulation»Tools (Ctrl Alt T short cut) to activate the
+`Tools/Holders/Heads <../dialogs/vmthhdlg.html>`__ dialog.
+
+|image1|
+
+Select the **Tools** and **Holders** tabs to switch between tool and
+holder definitions. Select the New button to define a new tool or
+holder. Select an existing definition and use the central pane to make
+modifications; press the Apply button when done. Modified entries are
+listed in red until changes are applied. Select an existing definition
+and press the Delete button to remove it. Select the **Heads** tab to
+load or unload head attachments that are defined within the model.
+
+All tool definitions (excluding probes) include a cutting color
+selection, which is used with MRS (material removal simulation) to
+identify surfaces on the in-process stock formed by the cutting or
+additive action of the tool. Tools also include a usage setting, which
+can override the default MRS cutting tolerance, loosening it for
+Semi-Finishing and Roughing tools (to reduce CPU usage).
+
+When exiting the Tools/Holders/Heads dialog, VM will check for
+consistency between the tool length settings as defined for each tool,
+and the corresponding tool length compensation settings as defined in
+the Simulation»Controller window Tool Compensation tab. Inconsistencies
+are listed along with the choice to correct problems for all, selected
+or no tools.
+
+Tool and holder definitions are automatically saved in the verification
+setup (.vsw) file when the program is completed. This setup file will be
+reused on subsequent runs to quickly reestablish the tooling necessary
+for an accurate simulation.
+
+ICAM provides “Manufacturing Extractors” for many popular CAM systems,
+which automatically create tool and holder definitions that match those
+used in the NC program.
+
+.. |image1| image:: ./media/5fc0400feb014e4d5cd6505f4c1ea48025f113f0.bmp
+
