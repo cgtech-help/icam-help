@@ -1,0 +1,21 @@
+View»Macro
+----------
+
+This command toggles the opening or closing of the window tracing macro
+execution.
+
+After the window is opened, it will record in a buffer all the lines up
+to the number defined in the **Macro** field of **Number of Lines to
+Record** in
+`Tools»Preferences»Trace <../tools/tools_preferences.html>`__, so you can
+use the vertical scroll bar in the window to review the process. At any
+moment, you can resize the window, minimize it, or close it. If the
+window is closed, all the records previously recorded will be erased.
+
+Note that closing this window will speed up GENER execution with
+post-processors that use macros.
+
+|image1|
+
+.. |image1| image:: ./media/b3ac0d85dbb85fd1be4390960b190451a6af4146.gif
+
