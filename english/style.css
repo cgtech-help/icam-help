@@ -1,0 +1,134 @@
+body {
+  /* I think it's safe to say that FontAwesome is missing here */
+  font-family: FontAwesome;
+  /* Read the Docs theme attributes */
+  color: #fcfcfc;
+  font-weight: 700;
+  /* I think it's safe to say that FontAwesome is missing here */
+  font: normal normal normal 14px / 1 FontAwesome;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+#documentation-navigator {
+  display: flex;
+  flex-direction: row;
+  background-color: #2980b9;
+}
+
+#documentation-navigator .section-entry {
+  padding: 4px;
+  padding-right: 8px;
+}
+#documentation-navigator .section-entry:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.document-container {
+  width: 100%;
+  height: 94vh;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#navigator {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.documentation-entry {
+  padding: 20px;
+  margin: 20px;
+  width: 320px;
+  height: 300px;
+  background-color: #2980b9;
+  border: 1px solid slategray;
+  border-radius: 20px;
+  box-shadow: 7px 7px 5px slategray;
+  
+}
+
+
+.documentation-entry .title {
+  /* Questionable behaviour */
+  transition: all 500ms;
+}
+
+.documentation-entry .title:hover {
+  cursor: pointer;
+
+  /* Questionable behaviour */
+  font-size: 105%;
+  font-size-adjust: 20px;
+}
+
+.documentation-entry .description {
+  line-height: 1.5;
+  text-align: center;
+}
+
+.navigation-row .documentation-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+hr {
+  border: 1px solid #fcfcfc;
+  width: 90%;
+}
+
+#brand-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 7px;
+  height: 125px;
+  background-color: slategray;
+}
+
+#brand-area .title {
+  font-family: arial;
+  font-weight: bold;
+  font-size: 60px;
+  text-align: center;
+  margin-left: 35px;
+}
+
+#icam-logo {
+  /* 
+  These values come from the file directly.
+  cam\english\images\icamlogo.png
+  */
+  width: 110px !important;
+  height: 110px !important;
+  margin-left: 10px;
+}
+
+#cgtech-logo {
+  width: 399px !important;
+  height: 111px !important;
+  margin-left: 10px;
+}
+
+/* Pure CSS Framework addons */
+.pure-menu-link:hover {
+  cursor: pointer;
+}
