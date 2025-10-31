@@ -1,0 +1,26 @@
+.. _command_tlname:
+
+The TLNAME Command :kbd:`[ML]`
+==============================
+
+The TLNAME command is used to identify the name of the next tool to
+be loaded. This command is valid for all machine types. The format of
+the command is as follows:
+
+   :math:`\textbf{TLNAME / } \mathtt{'}\mathit{string}\,\mathtt{'} \;
+   \,\icamrange{0.8}{0}\, \big[,\mathit{value}\,\big]`
+
+The character string specifies the name of the tool. The optional
+values can be formatted into the string using the format
+specifications described in :ref:`“String Formatting”<string_formatting>`.
+String formatting can be disabled if desired using the PPFUN/17 command
+described in :ref:`“PPFUN 17: String Formatting”<string_formatting_ppfun>`.
+
+The tool name will appear in diagnostic messages. It will also appear
+in the Full Interface window status bar and in the Progress window.
+When using HTML output, the tool name will appear in the Navigator
+window (appended to the tool number) as a link to the tool change
+operation.
+
+The tool name can also be specified using the TLNAME parameter on the
+TOOLNO command.
