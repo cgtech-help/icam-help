@@ -1,0 +1,91 @@
+VM Grid Toolbar
+~~~~~~~~~~~~~~~
+
+|image1|
+
+The VM Grid toolbar contains a drop-down list of all axes defined in the
+model (including tool, head and stock axes). The grid reference zero and
+orientation will be with respect to the selected axis. The standard
+viewpoint settings in the VM View toolbar are also with respect to the
+selected grid axis.
+
++-----------+---------------------------------------------------------+
+| |image20| | **Simulation»Show»XY Plane Grid**: Activates or         |
+|           | deactivates the XY plane grid. Line spacing, colors,    |
+|           | units and other settings are controlled by selecting    |
+|           | Simulation»Grid (Ctrl G shortcut).                      |
++-----------+---------------------------------------------------------+
+| |image21| | **Simulation»Show»YZ Plane Grid**: Activates or         |
+|           | deactivates the YZ plane grid.                          |
++-----------+---------------------------------------------------------+
+| |image22| | **Simulation»Show»ZX Plane Grid**: Activates or         |
+|           | deactivates the ZX plane grid.                          |
++-----------+---------------------------------------------------------+
+| |image23| | **Simulation»Show»Axes Marker**: Activates or           |
+|           | deactivates the axes marker showing the origin. Marker  |
+|           | size, colors and other settings are controlled by       |
+|           | selecting Simulation»Grid (Ctrl G shortcut).            |
++-----------+---------------------------------------------------------+
+| |image24| | **Simulation»Show»Kinematics**: Activates or            |
+|           | deactivates the kinematics markers showing the type and |
+|           | position of linear axes, rotary axes, and the TCP and   |
+|           | SCP control point positions.                            |
++-----------+---------------------------------------------------------+
+| |image25| | **Simulation»Show»Safety Zones**: Activates or          |
+|           | deactivates the display of the safety zone that         |
+|           | surrounds objects that have a safe distance setting for |
+|           | collision testing. The safety zone is drawn with a      |
+|           | fixed transparent color, so that the underlying object  |
+|           | can also be seen.                                       |
++-----------+---------------------------------------------------------+
+| |image26| | **Simulation»Show»Workpiece Reference**: Activates or   |
+|           | deactivates the display of a marker showing the origin  |
+|           | and orientation of the workpiece coordinate frame. This |
+|           | frame includes the effects of fixture compensation,     |
+|           | RTCP and any local coordinate system (LCS).             |
++-----------+---------------------------------------------------------+
+| |image27| | **Simulation»Show»Tool Reference**: Activates or        |
+|           | deactivates the display of a marker showing the offset  |
+|           | at the spindle control point (SCP) due to the effects   |
+|           | of tool length or tool offset compensation.             |
++-----------+---------------------------------------------------------+
+| |image28| | **Simulation»Grid** (Ctrl Alt G): Activates or          |
+|           | deactivates the “snap-to-grid” mode of object           |
+|           | construction using the mouse. When activated, mouse     |
+|           | coordinates snap to a defined grid size. Hold the Shift |
+|           | key to temporarily (while the key is held) reverse the  |
+|           | snap-to-grid setting. Grid spacing can also be set by   |
+|           | selecting Simulation»Grid.                              |
++-----------+---------------------------------------------------------+
+
+`"Virtual Machine Toolbars" <vmtoolbars.html>`__
+
+.. |image1| image:: ./media/74516c608a184a3b3b7ab61a00707e2bb56c8510.bmp
+.. |image2| image:: ./media/7db73abd59f2b011d01c60435a64b2d91d62c3ff.bmp
+.. |image3| image:: ./media/840a620d204cbb7f93c1bf6a08f4ca1e63dd7d78.bmp
+.. |image4| image:: ./media/fc6f9385cd4b676efbfeb55a6bc904c1b12b4f4d.bmp
+.. |image5| image:: ./media/d11c97ba6fc9e853b1406b89514f8172d253a2ed.bmp
+.. |image6| image:: ./media/ad48a721c486fc27a1e5127b5b1eccdf0243a1b6.bmp
+.. |image7| image:: ./media/52f0ac851c38c8a5f9fc70274f44f9a4ec350120.bmp
+.. |image8| image:: ./media/dfc7e283404d6485fa1277af99381eb1fa6ebdd4.bmp
+.. |image9| image:: ./media/c0502b437f2b091afaf2689fcb2bd455475e3feb.bmp
+.. |image10| image:: ./media/e8ae05d87b04156b198655e7fea857ba00480dda.bmp
+.. |image11| image:: ./media/7db73abd59f2b011d01c60435a64b2d91d62c3ff.bmp
+.. |image12| image:: ./media/840a620d204cbb7f93c1bf6a08f4ca1e63dd7d78.bmp
+.. |image13| image:: ./media/fc6f9385cd4b676efbfeb55a6bc904c1b12b4f4d.bmp
+.. |image14| image:: ./media/d11c97ba6fc9e853b1406b89514f8172d253a2ed.bmp
+.. |image15| image:: ./media/ad48a721c486fc27a1e5127b5b1eccdf0243a1b6.bmp
+.. |image16| image:: ./media/52f0ac851c38c8a5f9fc70274f44f9a4ec350120.bmp
+.. |image17| image:: ./media/dfc7e283404d6485fa1277af99381eb1fa6ebdd4.bmp
+.. |image18| image:: ./media/c0502b437f2b091afaf2689fcb2bd455475e3feb.bmp
+.. |image19| image:: ./media/e8ae05d87b04156b198655e7fea857ba00480dda.bmp
+.. |image20| image:: ./media/7db73abd59f2b011d01c60435a64b2d91d62c3ff.bmp
+.. |image21| image:: ./media/840a620d204cbb7f93c1bf6a08f4ca1e63dd7d78.bmp
+.. |image22| image:: ./media/fc6f9385cd4b676efbfeb55a6bc904c1b12b4f4d.bmp
+.. |image23| image:: ./media/d11c97ba6fc9e853b1406b89514f8172d253a2ed.bmp
+.. |image24| image:: ./media/ad48a721c486fc27a1e5127b5b1eccdf0243a1b6.bmp
+.. |image25| image:: ./media/52f0ac851c38c8a5f9fc70274f44f9a4ec350120.bmp
+.. |image26| image:: ./media/dfc7e283404d6485fa1277af99381eb1fa6ebdd4.bmp
+.. |image27| image:: ./media/c0502b437f2b091afaf2689fcb2bd455475e3feb.bmp
+.. |image28| image:: ./media/e8ae05d87b04156b198655e7fea857ba00480dda.bmp
+
