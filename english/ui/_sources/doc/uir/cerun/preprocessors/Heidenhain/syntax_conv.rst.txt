@@ -1,0 +1,170 @@
+Heidenhain Conversational Pre-Processor Syntax
+==============================================
+
+This document lists the Heidenhain 430/530 CONVERSATIONAL syntax
+supported by the pre-processor.
+
+--------------
+
+#. `“FN” Functions <#fn>`__
+#. `Supported arithmetic operators & functions <#arithmetic>`__
+#. `String variable declaration <#stringvar>`__
+#. `String functions <#stringfun>`__
+#. `Variables / Parameters <#variables>`__
+#. `Program / Label / Sub-programming <#program>`__
+
+--------------
+
+1. “FN” Functions
+~~~~~~~~~~~~~~~~~
+
+============== =============== ===================================
+**D Function** **Description** **Example**
+FN 0           Assignation     FN 0: Q1 = 23.1
+FN 1           Addition        FN 1: Q2 = +5.5 + Q1
+FN 2           Subtraction     FN 2: Q2 = Q01 - +10
+FN 3           Multiplication  FN 3: Q2 = Q1 \* 2
+FN 4           Division        FN 4: Q2 = +Q2 DIV 4
+FN 5           Square root     FN 5: Q2 = SQRT 36
+FN 6           Sinus           FN 6: Q2 = SIN 1
+FN 7           Cosinus         FN 7: Q2 = COS 1
+FN 8           Tangent         FN 8: Q2 = 3 LEN 4
+FN 9           If equal        FN 9: IF Q30 EQU 1 GOTO LBL "LBL11"
+FN 10          If not equal    FN 10: IF Q30 NE 4 GOTO LBL "LBL10"
+FN 11          If greater      FN 11: IF Q30 GT 4 GOTO LBL "LBL12"
+FN 12          If lower        FN 12: IF Q30 LT 4 GOTO LBL "LBL13"
+FN 13          Angle           FN 13: Q2 = 3 ANG 4
+FN 14          Error output    FN 14: ERROR = 15
+============== =============== ===================================
+
+2. Supported arithmetic operators & functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  - Subtraction
+-  + Addition
+-  \* Multiplication
+-  / Division
+-  = Assignation
+-  % Modulo
+-  ^ Power
+-  PI Constant
+-  LN Natural logarithm
+-  LOG Logarithm
+-  EXP Exponential
+-  NEG Negation
+-  INT Integer part
+-  ABS Absolute value
+-  FRAC Fractional part
+-  SGN Sign (1.0 or -1.0)
+-  SQ Square
+-  SQRT Square root
+-  SIN Sinus
+-  COS Cosinus
+-  ASIN ArcSinus
+-  ACOS ArcCosinus
+-  TAN Tangent
+-  ATAN ArcTangeant
+-  ( ) Priority operators
+
+3. String variable declaration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+============= ================== =================================
+**Syntax**    **Description**    **Example**
+DECLAR STRING String declaration DECLARE STRING QS10 = “WORKPIECE”
+============= ================== =================================
+
+4. String functions
+~~~~~~~~~~~~~~~~~~~
+
++--------------+--------------------------+--------------------------+
+| **Function** | **Description**          | **Example**              |
++--------------+--------------------------+--------------------------+
+| TOCHAR       | Convert real to string   | QS11 = TOCHAR ( DAT+Q50  |
+|              |                          | DECIMALS3 )              |
++--------------+--------------------------+--------------------------+
+| SUBSTR       | Extract part of a string | QS13 = SUBSTR ( SRC_QS10 |
+|              |                          | BEG2 LEN4 )              |
++--------------+--------------------------+--------------------------+
+| TONUMB       | String to real           | Q82 = TONUMB ( SRC_QS11  |
+|              |                          | )                        |
++--------------+--------------------------+--------------------------+
+| INSTR        | String search            | Q50 = INSTR ( SRC_QS10   |
+|              |                          | SEA_QS13 BEG2 )          |
++--------------+--------------------------+--------------------------+
+| STRLEN       | String length            | Q52 = STRLEN ( SRC_QS15  |
+|              |                          | )                        |
++--------------+--------------------------+--------------------------+
+| STRCOMP      | Compare strings          | Q52 = STRCOMP ( SRC_QS12 |
+|              |                          | SEA_QS14 )               |
++--------------+--------------------------+--------------------------+
+| \|\|         | String concatenation     | QS10 = QS12 \|\| QS13    |
+|              |                          | \|\| QS14                |
++--------------+--------------------------+--------------------------+
+
+5. Variables / Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
++------------+--------------------------------------------------------+
+| **Syntax** | **Description**                                        |
++------------+--------------------------------------------------------+
+| Q<index>   | Variable accepting real values. Index is 1-1999. They  |
+|            | are all undefined variable. The pre-processor do not   |
+|            | support any pre-defined system variables.              |
++------------+--------------------------------------------------------+
+| QL<index>  | Program/Sub-Program local variable accepting real      |
+|            | values. Index is 0-499.                                |
++------------+--------------------------------------------------------+
+| QR<index>  | CeRun handle the QR variables just like the Q ones.    |
+|            | They are not non-volatile like on the real controller. |
+|            | Index is 0-499.                                        |
++------------+--------------------------------------------------------+
+| QS<index>  | Variable accepting string values. Index is 1-1999.     |
++------------+--------------------------------------------------------+
+
+6. Program / Label / Sub-program
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++-----------------------------------+-----------------------------------+
+| **Syntax**                        | **Description**                   |
++-----------------------------------+-----------------------------------+
+| | LBL <number>                    | Label definition or internal      |
+| | LBL "<name>"                    | subprogram.                       |
++-----------------------------------+-----------------------------------+
+| | CALL LBL <number>               | | Predefined label command. This  |
+| | CALL LBL "<name>"               |   would call a internal           |
+| | CALL LBL <number> REP <number>  |   subprogram in the same current  |
+| | CALL LBL "<name>" REP <number>  |   program file.                   |
+|                                   | | If the REP keyword is coded     |
+|                                   |   followed by a number, the       |
+|                                   |   number represent the repeat     |
+|                                   |   count.                          |
++-----------------------------------+-----------------------------------+
+| LBL 0                             | End of internal subprogram        |
++-----------------------------------+-----------------------------------+
+| CALL PGM <subprogram name>        | Call a separate subprogram with   |
+|                                   | the provided name. Use the        |
+|                                   | subprogram startup macro in the   |
+|                                   | CE to identify the target         |
+|                                   | subprogram file.                  |
++-----------------------------------+-----------------------------------+
+| CALL PGM TNC:<filepath>           | Call a subprogram using an        |
+|                                   | explicit file path. The “TNC:” is |
+|                                   | automatically mapped to the CE    |
+|                                   | internal file storage root        |
+|                                   | folder.                           |
++-----------------------------------+-----------------------------------+
+| BEGIN PGM <program name> <unit>   | This is the conversational        |
+|                                   | beginning of program line. It     |
+|                                   | will switch the pre-processor to  |
+|                                   | conversational syntax if the      |
+|                                   | configuration has been set to     |
+|                                   | “Auto”                            |
++-----------------------------------+-----------------------------------+
+| END PGM <program name> <unit>     | End of conversational program     |
++-----------------------------------+-----------------------------------+
+| M99                               | Cycle call (non-modal)            |
++-----------------------------------+-----------------------------------+
+| M89                               | Cycle call (modal)                |
++-----------------------------------+-----------------------------------+
+
