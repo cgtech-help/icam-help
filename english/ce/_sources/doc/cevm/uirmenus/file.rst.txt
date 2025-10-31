@@ -1,0 +1,32 @@
+.. _file_menu:
+
+File Menu
+~~~~~~~~~
+
+**File»New Job** (Ctrl N)
+
+   Stops processing and returns to the launch panel where new
+   options or an entirely different program can be specified.
+
+**File»Save for review**
+
+   Saves the current processing state, trace, simulation and
+   diagnostic window contents, and all associated files into a
+   compressed archive file, with file extension *zrj*, suitable for
+   later viewing. To view a zrj file, either load the file using the JOB
+   button or drop the file onto the launch panel or desktop icon.
+   Explicitly saving the process inhibits the automatic save that
+   normally occurs at the end of processing when the “save for review”
+   launch panel preference is selected.
+
+**File»View Listing File**
+
+   Once processing has completed, the control emulator listing can be
+   viewed by selecting this menu selection or its related toolbar
+   button, or by selecting the “View Listing” button on the progress
+   dialog. The WordPad editor will be used to view the file if there is
+   no application associated with the CERUN listing file type.
+
+**File»Exit** (Alt F4)
+
+   Stops processing and exits CERUN.
