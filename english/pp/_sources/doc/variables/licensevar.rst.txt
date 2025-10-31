@@ -1,0 +1,423 @@
+Licensed Option Variables
+=========================
+
+Licensed option variables are those that are related to optional
+add-on products. These include:
+
+-  Arc and spline fitting (see below)
+-  :ref:`High speed machining<high_speed_machining_variables>`
+-  :ref:`SmartPATH™<smartpath_variables>`
+-  :ref:`SmartCUT<smartcut_variables>`
+-  :ref:`SmartFEED<smartfeed_variables>`
+
+Arc and Spline Fitting Variables
+--------------------------------
+
+The curve fitting add-ons can reduce the length of programs
+containing many small point-to-point motions.
+
+**Arc** fitting (**xaf** license option) attempts to replace long
+sequences of point-to-point motions with circular or helical motions.
+Arc fitting is controlled via the MODE/CIRCUL command (see
+:ref:`“Arc and Helix Fitting”<arc_helix_fitting>`).
+
+**Spline** fitting (**xsf** license option) attempts to replace long
+sequence of point-to-point motions with a higher order curve function
+(e.g., NURBS, Bezier, etcetera) available on the machine. Spline
+fitting is controlled via the MODE/SPLINE command (see
+:ref:`“Spline Fitting”<spline_fitting>`).
+
+.. _var_acutyp:
+.. index:: Variables; $ACUTYP
+
++------------------+-----------------------------------------------+
+| **$ACUTYP**      | Arc fit cut type. (0:over cut, 1:average cut) |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable controls the definition of the arcs. When set to 0
+   (over cut), arcs will be constructed to pass (on average) through the
+   points they replace. When set to 1 (average cut), arcs will be
+   constructed to pass (on average) through both the points they
+   replaces and the midpoints of each linear span.
+
+   The average cut method will produce slightly flatter arcs than the
+   over cut method. In either case, arcs will never deviate by more than
+   the allowable arc tolerance ($ATOLER) from the original
+   point-to-point motions being replaced. Both the starting and ending
+   points of the circle are always points that exist in the CL file.
+
+.. _var_arcfit:
+.. index:: Variables; $ARCFIT
+.. index:: Circle; fitting arcs
+
++------------------+--------------------------------------------------+
+| **$ARCFIT**      | Arc fit mode. (0:Off, 1:Circle, 2:Helix, 3:Both) |
+|                  |                                                  |
+|                  | Type: Numeric, Read/Write                        |
++------------------+--------------------------------------------------+
+
+   This variable controls the application of the arc fitting function.
+   When set to 0 (MODE/CIRCUL,OFF) arc fitting will be disabled. When
+   set to 3 (MODE/CIRCUL,ON) arc fitting will be enabled. Settings 1 and
+   2 restrict arc fitting to just circles or helices only.
+
+.. _var_arcpts:
+.. index:: Variables; $ARCPTS
+
++------------------+-----------------------------------------------+
+| **$ARCPTS**      | Minimum number of points per arc.             |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable defines minimum number of points necessary to construct
+   an arc. Arcs will not be created to replace points that lie on a
+   natural circular path if the total number of points is less than the
+   $ARCPTS value. The limit can be set using the MODE/CIRCUL command or
+   using the $ARCPTS variable. The limit defaults to 5 points if not otherwise
+   specified.
+
+.. _var_atoler:
+.. index:: Variables; $ATOLER
+
++------------------+-----------------------------------------------+
+| **$ATOLER**      | Arc fit tolerance                             |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable defines the deviation tolerance between the arc and the
+   points it replaces. The tolerance can be set using the MODE/CIRCUL
+   command or using the $ATOLER variable. The tolerance will default to
+   INTOL+OUTTOL if not otherwise specified.
+
+.. _var_fitmaxpts:
+.. index:: Variables; $FITMAXPTS
+
++------------------+-------------------------------------------------+
+| **$FITMAXPTS**   | Maximum number of points allowed during fitting |
+|                  |                                                 |
+|                  | Type: Numeric, Read/Write                       |
++------------------+-------------------------------------------------+
+
+   This variable sets an upper limit on the number of motion points
+   evaluated when fitting point-to-point motions into an arc or spline
+   (default 5000). Specify 0 to remove the upper limit.
+
+.. _var_splfit:
+.. index:: Variables; $SPLFIT
+
++------------------+-----------------------------------------------+
+| **$SPLFIT**      | Spline fit status: 0:Off, 1:On                |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable controls status of spline fitting. When set to 0
+   (MODE/LINEAR) spline fitting is disabled. When set to 1 (MODE/SPLINE)
+   spline fitting is active.
+
+.. _var_splpts:
+.. index:: Variables; $SPLPTS
+
++------------------+-----------------------------------------------+
+| **$SPLPTS**      | Minimum number of CL points per spline        |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable defines a minimum number of points necessary to
+   construct a spline. For more details see :ref:`“Spline Fitting”<spline_fitting>`.
+
+.. _var_splrat:
+.. index:: Variables; $SPLRAT
+
++------------------+---------------------------------------------------------------+
+| **$SPLRAT**      | Maximum non-uniformity ratio permitted for any spline segment |
+|                  |                                                               |
+|                  | Type: Numeric, Read/Write                                     |
++------------------+---------------------------------------------------------------+
+
+   The $SPLRAT variable defines the maximum permitted non-uniformity for
+   the parameterization of a curve. In practice, we have found that some
+   controllers limit the amount of non-uniformity that can be used in a
+   NURBS definition. The default non-uniformity ratio is 4:1. Higher
+   values may produce smaller programs at the expense of potential CNC
+   controller problems (a 6:1 limit has currently been observed).
+
+.. _var_splseg:
+.. index:: Variables; $SPLSEG
+
++------------------+--------------------------------------------------------+
+| **$SPLSEG**      | Maximum motion points permitted for any spline segment |
+|                  |                                                        |
+|                  | Type: Numeric, Read/Write                              |
++------------------+--------------------------------------------------------+
+
+   The $SPLSEG variable defines the maximum number of motion points that
+   can be interpolated over a single curve span (from one curve control
+   point to another). Higher values may produce smaller programs, at the
+   expense of considerably more CPU during the fitting process. The
+   default value is 24, which limits compression to 96%.
+
+.. _var_spltlr:
+.. index:: Variables; $SPLTLR
+
++------------------+-----------------------------------------------+
+| **$SPLTLR**      | Spline fit tolerance                          |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is used to specify the tolerance, which is the maximum
+   deviation between original motions and the spline that replaces them.
+
+.. _high_speed_machining_variables:
+
+High Speed Machining Variables
+------------------------------
+
+The High Speed Machining (HSM) add-on (**xhs** license option) can
+adjust feed rates to emulate the properties of a HSM controller on
+non-HSM equipped machines. The HSM feature can also be used to obtain
+a better estimate of machining time on HSM equipped machines.
+HSM is controlled via the MCHTOL/CONTUR command
+(see :ref:`“High Speed Machining Tolerance”<mchtol_hs>`).
+
+.. _var_hsm:
+.. index:: Variables; $HSM
+
++------------------+-----------------------------------------------+
+| **$HSM**         | High speed machining                          |
+|                  |                                               |
+|                  | Type: Logical, Read-only                      |
++------------------+-----------------------------------------------+
+
+   When high speed machining (HSM) is active, the $HSM variable will be
+   set $TRUE.
+
+.. _var_hsmove:
+.. index:: Variables; $HSMOVE
+
++------------------+-----------------------------------------------+
+| **$HSMOVE**      | High speed machining intermediate motion      |
+|                  |                                               |
+|                  | Type: Logical, Read-only                      |
++------------------+-----------------------------------------------+
+
+   This variable is set $TRUE when the current motion has been segmented
+   due to HSM processing. Since HSM processing occurs after the motion
+   startup macro processing has completed, testing for
+   $HSMOVE should be restricted to a Tape macro only.
+
+.. _var_hsmtlr:
+.. index:: Variables; $HSMTLR
+
++------------------+-----------------------------------------------+
+| **$HSMTLR**      | High speed machining tolerance                |
+|                  |                                               |
+|                  | Type: Numeric, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   Current HSM tolerance as set by the MCHTOL/CONTUR command. This
+   tolerance can be changed by setting $HSMTLR to a non-zero positive
+   value.
+
+.. _smartpath_variables:
+
+SmartPATH Variables
+-------------------
+
+The SmartPATH add-on (**sph** license option) optimizes part program
+positioning motions. It can replace unsafe or inefficient CAM
+generated positioning motions, with safe optimized motions based on
+the machine’s kinematics, physical travel limitations and axes
+positioning rates. SmartPATH ensures the generated multi-axis
+motions do not cause collisions with dynamically changing in-process
+stock and all other surroundings, such as the fixtures and moving and
+non-moving components of the machine. SmartPATH works in conjunction
+with ICAM’s *Virtual Machine* product.
+
+SmartPATH is controlled via the SMARTP command (see :ref:`“SmartPATH”<smartpath>`).
+
+.. _var_ap:
+.. index:: Variables; $AP
+
++------------------+-----------------------------------------------+
+| **$AP**          | SmartPATH status                              |
+|                  |                                               |
+|                  | Type: Logical, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is set $TRUE when SmartPATH is active; and set $FALSE
+   otherwise. The $AP variable can be set in a macro to enable or
+   disable SmartPATH processing, which is equivalent to using the SMARTP
+   command.
+
+.. _var_apid:
+.. index:: Variables; $APID
+.. _var_apidn:
+.. index:: Variables; $APIDN
+
++------------------+-----------------------------------------------+
+| **$APID**        | ID of current generated SmartPATH motion      |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+| **$APIDN**       | Number of generated SmartPATH motions         |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   When SmartPATH replaces a sequence of one or more CAM generated
+   positioning motions with a new sequence of motions, it sets the
+   $APIDN system variable to the count of motions in the new sequence,
+   and updates the $APID variable to indicate which motion is being
+   processed.
+
+   A value of zero for either variable indicates that the current motion
+   was not generated by SmartPATH.
+
+.. _var_apids:
+.. index:: Variables; $APIDS
+
++------------------+-----------------------------------------------+
+| **$APIDS**       | ID of generated SmartPATH safety motion       |
+|                  |                                               |
+|                  | Type: Numeric, Read-only                      |
++------------------+-----------------------------------------------+
+
+   When SmartPATH generates a motion to or from a machine reference home
+   position, the $APIDS variable is set to a number in the range
+   1-$APIDN identifying which motion in the series of SmartPATH
+   generated motions is traversing to/from the reference home. Typically
+   $APIDS is 1 when traversing from home to the workpiece; $APIDS is the
+   same as $APIDN when traversing from the workpiece to the reference
+   home.
+
+   A value of zero indicates that the current motion was either not
+   generated by SmartPATH or it does not include a traversal to or from
+   a reference home position.
+
+.. _smartcut_variables:
+
+SmartCUT Variables
+------------------
+
+The SmartCUT add-on (**sct** license option) optimizes part program
+cutting motions. It uses material removal simulation to detect when
+the tool is not engaged with the material (i.e., is not cutting)
+while at the same time being programmed to move at a cutting feed.
+Where feasible SmartCUT changes these time wasting “air-cutting”
+motions to RAPID or high-feed.
+
+SmartCUT also detects RAPID or high-feed motions that cut into the
+in-process stock and (in addition to generating warning diagnostics)
+automatically reduces the feed rate to the upcoming programmed feed
+to avoid tool breakage. Similarly, when leaving the material,
+SmartCUT detects RAPID motions that cut the stock when leaving the
+part, and automatically slows down these cutting motions to the last
+programmed feed.
+
+SmartCUT is controlled via the SMARTP/AIRCUT command (see
+:ref:`“SmartCUT”<smartcut>`).
+
+.. _var_aircut:
+.. index:: Variables; $AIRCUT
+
++------------------+-----------------------------------------------+
+| **$AIRCUT**      | SmartCUT status                               |
+|                  |                                               |
+|                  | Type: Logical, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is set $TRUE when SmartCUT is active; and set $FALSE
+   otherwise. The $AIRCUT variable can be set in a macro to enable or
+   disable SmartCUT processing, which is equivalent to using the
+   SMARTP/AIRCUT command.
+
+.. _var_scstrv:
+.. index:: Variables; $SCSTRV
+
++------------------+-----------------------------------------------------+
+| **$SCSTRV**      | SmartCUT segmented motion minimum (starvation) time |
+|                  |                                                     |
+|                  | Type: Numeric, Read/Write                           |
++------------------+-----------------------------------------------------+
+
+   This variable defines the minimum time for any SmartCUT generated
+   feed motion. When a portion of a rapid or high-feed positioning
+   motion is converted to a cutting feed motion, the generated feed
+   motion will be extended if necessary to ensure it takes at least as
+   long as the minimum time limit. This is done to avoid feed starvation
+   at the control.
+
+   The default starvation time is as defined in the QUEST *General
+   Description* / *Output Format* “minimum block read time” question, or
+   the *Control Description* / *High Speed Machining* “block transfer time”
+   question if defined, otherwise it is 0.025 seconds.
+
+.. _var_sctlrng:
+.. index:: Variables; $SCTLRNG
+
++------------------+---------------------------------+
+| **$SCTLRNG**     | SmartCUT look-ahead range       |
+|                  |                                 |
+|                  | Type: Numeric, Read/Write       |
++------------------+---------------------------------+
+
+   This variable defines the upper limit on the number of continuous
+   feed motions analyzed during each SmartCUT look-ahead.
+   By default, each look-ahead can process up to 10,000 feed motions.
+   This limit can be set to as few as 100 (for better responsiveness at
+   the expense of longer processing time) or as many as 50,000 (for
+   poorer responsiveness but shorter processing).
+
+   This variable also affects the :ref:`SmartFEED look-ahead range<var_sctlrng_sfd>`.
+
+.. _smartfeed_variables:
+
+SmartFEED Variables
+-------------------
+
+The SmartFEED add-on (**sfd** license option) optimizes part program
+cutting motions. It uses material removal simulation to automatically
+recalculate the best machining feed rate based on the machine tool
+capabilities, tool reference cuts, and the real-time volume of
+in-process stock removed by the tool.
+
+SmartFEED is controlled via the SMARTP/FEDOPT command (see :ref:`“SmartFEED”<smartfeed>`).
+
+.. _var_fedopt:
+.. index:: Variables; $FEDOPT
+
++------------------+-----------------------------------------------+
+| **$FEDOPT**      | SmartFEED status                              |
+|                  |                                               |
+|                  | Type: Logical, Read/Write                     |
++------------------+-----------------------------------------------+
+
+   This variable is set $TRUE when SmartFEED is active; and set $FALSE
+   otherwise. The $FEDOPT variable can be set in a macro to enable or
+   disable SmartFEED processing, which is equivalent to using the
+   SMARTP/FEDOPT command.
+
+.. _var_sctlrng_sfd:
+.. index:: Variables; $SCTLRNG_SFD
+
++------------------+----------------------------------+
+| **$SCTLRNG**     | SmartFEED look-ahead range       |
+|                  |                                  |
+|                  | Type: Numeric, Read/Write        |
++------------------+----------------------------------+
+
+   This variable defines the upper limit on the number of continuous
+   feed motions analyzed during each SmartFEED look-ahead.
+   By default, each look-ahead can process up to 10,000 feed motions.
+   This limit can be set to as few as 100 (for better responsiveness at
+   the expense of longer processing time) or as many as 50,000 (for
+   poorer responsiveness but shorter processing).
+
+   This variable also affects the :ref:`SmartCUT look-ahead range<var_sctlrng>`.
