@@ -1,0 +1,42 @@
+.. _macro_system_variables:
+
+Macro System Variables
+**********************
+
+This chapter lists the macro system variables available for use in CERUN macros. All variables
+return a value, but those identified as read-only cannot be assigned a value. Variables are organized
+in groups.
+
+The first section summarizes the various variables by category.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   summaryvar
+   constantvar
+   coordinatevar
+   motionvar
+   macrovar
+   conversionvar
+   coolfedspinvar
+   cuttercompvar
+   opvar
+   toolvar
+   lathevar
+   cyclevar
+   tapevar
+   machtimevar
+   defvar
+   errorvar
+   multikernelvar
+   compositevar
+   subprogvar
+   miscvar
+
+**Syntax Format Conventions**
+
+Special notation is used to simplify the listing of a series of similar variable names. Square brackets
+[ ] enclose a list of characters of which one may be optionally selected; and braces { } enclose a list
+of characters of which one must be selected. For example, $[AB]C{DE} is short for $CD, $CE,
+$ACD, $ACE, $BCD and $BCE.
