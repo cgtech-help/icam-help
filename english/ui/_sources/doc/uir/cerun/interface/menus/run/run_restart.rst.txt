@@ -1,0 +1,14 @@
+Run»Restart (Shift+F5)
+----------------------
+
+You can select restart from either the Run menu or the tool bar restart
+(rewind) button. This will reset CERUN back to the beginning as though
+you just started it. If you want to rerun CERUN using different settings
+then those currently set, use the file menu new job instead.
+
+You can also use the keyboard shortcut Ctrl+Shift+F5 to restart without
+being prompted for confirmation
+
+Stops processing and rewinds the MCD file to the start. All debugging
+breakpoints and settings are remembered.
+
