@@ -1,0 +1,105 @@
+Text File I/O from a Macro
+--------------------------
+
+The macro language provides the ability to read from and write to
+external text files. These files are connected to and disconnected
+from the macro processor using OPEN and CLOSE commands. Input and
+output to external files is done using the READ and WRITE commands.
+
+When a file is opened, it must be assigned a “unit” number. This is a
+number that for historical purposes must range from 20 through 29.
+This unit number will then be used in subsequent READ, WRITE and
+CLOSE statements to identify the particular file opened. In this way
+more than one file can be processed simultaneously.
+
+If an error occurs during text file I/O,
+the error return code will be stored in the $ERRNO macro system variable
+(see :ref:`“Error Message Variables”<error_message_variables>`).
+Macros must test for I/O errors and act accordingly since a diagnostic will
+not be output to indicate an I/O failure.
+
+Text file I/O processing can optionally be monitored in the CERUN
+Console trace window for debugging purposes. Tracing of I/O is off by
+default. Tracing is controlled from the CERUN full display
+Tools»Preferences»Trace menu “Macro IO commands” check box.
+
+.. _opening_text_file:
+.. _macro_command_open:
+
+Opening a Text File (OPEN)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The OPEN command opens a text file with a given name on a given unit.
+The file name is optional if the unit is pre-connected. If FRONT is
+specified, the unit is rewound. If REAR is specified, the unit is
+positioned at the end-of-file. FRONT is the default. The OPEN command
+has the following syntax:
+
+   :math:`\textbf{OPEN / } \mathit{unit}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{FRONT} \\ \textbf{REAR} \end{array}\,\end{bmatrix} \big[,\mathit{filename}\,\big]`
+
+Two special file names are predefined to permit input and output to
+the console; they are STDIN and STDOUT.
+
+.. _macro_command_close:
+
+Closing a Text File (CLOSE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CLOSE command closes a text file. It has the following syntax:
+
+   :math:`\textbf{CLOSE / } \mathit{unit}`
+
+It is good programming practice to close files when finished using
+them.
+
+.. _macro_command_write:
+
+Writing to a Text File (WRITE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The WRITE command writes a string into a text file. The syntax of the
+WRITE command is:
+
+   :math:`\textbf{WRITE / } \mathit{unit}, \;\mathit{format\_string} \; \,\icamrange{0.8}{0}\, \big[,\mathit{expression}\,\big]`
+
+See :ref:`“Output String Format”<output_string_format>`
+for a description of how the string to be written is constructed
+using the *format_string* argument.
+
+.. _macro_command_read:
+
+Reading from a Text File (READ)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The READ command can be used to read a line from a text file into one
+or more macro variables. The text file must be open when the READ is
+executed. The syntax of the READ from text file command is:
+
+   :math:`\textbf{READ / } \mathit{unit}
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{INCR }\\ \textbf{DECR} \end{array}\,\end{bmatrix}
+   ,\mathit{format\_string}
+   \; \,\icamrange{0.8}{0}\, \big(,\mathit{variable\_name}\,\big)`
+
+If INCR is specified, the next line is read. This is the default. A
+READ using INCR should only be performed if a call to “$FEOF(unit)” returns
+false. If DECR is specified, the last line is read again. If no lines
+have been read yet, the first line is read.
+
+See :ref:`“Input String Format”<input_string_format>` for
+a description of how the variables in the input list are assigned
+values from the input text using the *format_string*.
+
+Reading from a String Value (READ)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The READ command can also be used to do an “internal read” from a
+string value. The syntax of the internal READ command is:
+
+   :math:`\textbf{READ / } \mathit{source\_string} , \;\mathit{format\_string}
+   \; \,\icamrange{0.8}{0}\, \big(,\mathit{variable\_name}\,\big)`
+
+See :ref:`“Input String Format”<input_string_format>` for
+a description of how the variables in the input list are assigned
+values from the input string variable *source_string* using the
+*format_string*.
