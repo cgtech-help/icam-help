@@ -1,0 +1,46 @@
+.. _command_auxfun:
+
+The AUXFUN Command :kbd:`[MLEPC]`
+=================================
+
+The AUXFUN command is used to output auxiliary function (M) codes
+directly to the tape file. GENER does not check to see if the
+codes are supported by the control. This command is valid for all
+machine types.
+
+   :math:`\textbf{AUXFUN / } \mathit{code} \;\icamrange{0.8}{0}\, \big[ ,\mathit{code} \,\big]
+   \begin{bmatrix} ,\! \begin{array}{l} \textbf{NOW} \\ \textbf{NEXT} \\ \textbf{SAME} ,\mathit{register\_list} \end{array} \, \end{bmatrix}`
+
+The numeric value or values specified on the AUXFUN command will be
+output, in sequence, using auxiliary function codes (commonly the M
+register) to the tape file. GENER will only accept codes ranging
+from 0 through 999.9 inclusive. If one or more codes are invalid, the
+entire command is ignored.
+
+If NOW is specified, GENER will break to a new tape block after each
+code is output. If NEXT is specified (the default), as many M codes
+as are permitted by the control will be output on each block.
+
+For example, to output an M3 you can use:
+
+   .. code-block:: text
+
+      AUXFUN/3
+
+If SAME is specified, the output of the M codes will be deferred
+until a register is output to the current tape block that matches one
+of the listed registers. Matching registers can be defined by index
+number or string descriptor. The keyword XYZ can be specified in
+place of individual X, Y and Z axes registers. Axis specific keywords
+(see :ref:`the table<axis_names>`) can be specified in
+place of axis specific registers.
+
+For example, to output an M3 on the next NC block containing an S
+register:
+
+   .. code-block:: text
+
+      AUXFUN/3,SAME,'S'
+
+M codes output by AUXFUN are subject to PPFUN modification (–9, –16,
+–18 and –19).
