@@ -1,0 +1,24 @@
+Generate As
+-----------
+
+|image1|
+
+This dialog appears when Generating a single post processor. Generation
+is somewhat similar to saving, except that final consistency checks are
+made, which enables the post processor to be used by GENER.
+
+**Post Name:** Name of the post to generate. By default, the generated
+post processor will have the same name as the ungenerated one.
+
+**All posts in the selected database:** This window lists the names of
+all posts in the selected database for reference. You can select a name
+from this list, which will then change the *Post Name* entry.
+
+**Select database:** This drop-down lists all databases that are open.
+The generated version of the post processor will be written to the
+selected database. Use the *...* button to browse for the database if it
+does not appear in the drop-down list.
+
+.. |image1| image:: ./media/9234d589fe39a622f248f8cc5c03e9e46151290e.gif
+
+
