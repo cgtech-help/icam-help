@@ -1,0 +1,27 @@
+.. _command_air:
+
+The AIR Command :kbd:`[MLPC]`
+=============================
+
+The AIR command is used to control the supply of air to a device on
+the machine. It could be used to control a chip vacuum or spindle
+exhaust. This command is valid for all machine types but may not be
+available on a specific machine.
+
+   :math:`\textbf{AIR /} \begin{pmatrix} \begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+   :math:`\textbf{AIR / ON} ,\mathit{seconds}`
+
+There are two methods of controlling the air device. The first method
+is used to turn the device on or off at different points in the
+machining operation. This is done by coding AIR/ON to start the
+device and AIR/OFF to stop the device. This is only valid if the air
+device is modal, meaning that the device will not shut off
+automatically, it must be instructed to do so.
+
+The second method of controlling the air device is used to activate
+the device for a specific length of time and then shut it off. This
+is done by coding AIR/ON,\ *seconds*, where *seconds* is the amount
+of time the device is to remain active. The AIR/OFF command is not
+required as the device is automatically shut off after the time
+period has expired.
