@@ -1,0 +1,586 @@
+.. _annex_major_words:
+
+Post-Processor Major Words
+**************************
+
+Major words are post-processor commands that are represented in the
+CLDATA using unique subclass codes of the 2000 class record. These
+words generally appear in an APT source file at the start of records,
+before the / character (if any). The tables below list the built-in
+Major words supported by Icam Post, sorted both alphabetically and
+numerically by subclass code.
+
+New Major words and their associated codes can be added to the
+default words file, or to the words file associated with an interface
+kit. Major word names must start with an alphabetic character and
+consist only of alphanumeric characters, to a maximum length of 24
+characters.
+
+Major word subclass codes must be positive whole numbers. By
+convention, words representing commands that will not have parameters
+(e.g., RAPID) have code values less than 1000, and those with
+parameters (e.g., FEDRAT) have code values 1000 and higher. To avoid
+defining a new code for your own use that might ultimately conflict
+with a built-in code, use the ranges 90–99 and 1900–1999.
+
+   .. container:: two-column
+
+      .. container::
+
+        .. list-table:: Alphabetic Order
+            :widths: auto
+            :header-rows: 1
+
+            *  -  Word
+               -  Code
+            *  -  ADAPTV
+               -  1118
+            *  -  AIR
+               -  1011
+            *  -  AM
+               -  1052
+            *  -  APPLY
+               -  1120
+            *  -  ARCSLP
+               -  1029
+            *  -  ASLOPE
+               -  1053
+            *  -  ASSIGN
+               -  1144
+            *  -  ASSIST
+               -  1129
+            *  -  AUXFUN
+               -  1022
+            *  -  BARFED
+               -  1104
+            *  -  BREAK
+               -  16
+            *  -  CALSUB
+               -  1142
+            *  -  CAMERA
+               -  1047
+            *  -  CATCHR
+               -  1105
+            *  -  CHANNL
+               -  1153
+            *  -  CHECK
+               -  1023
+            *  -  CHUCK
+               -  1073
+            *  -  CLAMP
+               -  1074
+            *  -  CLDATA
+               -  1095
+            *  -  CLDIST
+               -  1071
+            *  -  CLEARP
+               -  1004
+            *  -  CLRSRF
+               -  1057
+            *  -  CODEL
+               -  14
+            *  -  COOLNT
+               -  1030
+            *  -  COPY
+               -  1040
+            *  -  COUPLE
+               -  1049
+            *  -  CUTCOM
+               -  1007
+            *  -  CYCLE
+               -  1054
+            *  -  DEFCON
+               -  1143
+            *  -  DEFSUB
+               -  1140
+            *  -  DELAY
+               -  1010
+            *  -  DISPLY
+               -  1021
+            *  -  DRAFT
+               -  1059
+            *  -  DRESS
+               -  8
+            *  -  END
+               -  1
+            *  -  ENDSUB
+               -  1141
+            *  -  FEDRAT
+               -  1009
+            *  -  FLUSH
+               -  1127
+            *  -  GENRTR
+               -  1133
+            *  -  GOHOME
+               -  17
+            *  -  GOPARK
+               -  1098
+            *  -  HEAD
+               -  1002
+            *  -  HOMEPT
+               -  1112
+            *  -  INCLUD
+               -  1123
+            *  -  INDEX
+               -  1039
+            *  -  INDPOS
+               -  1082
+            *  -  INSERT
+               -  1046
+            *  -  INTCOD
+               -  1020
+            *  -  ISTOP
+               -  4
+            *  -  LCS
+               -  1135
+            *  -  LEADER
+               -  1013
+            *  -  LETTER
+               -  1043
+            *  -  LIMIT
+               -  1078
+            *  -  LINTOL
+               -  1067
+            *  -  LOAD
+               -  1075
+            *  -  LOADTL
+               -  1055
+            *  -  LOCATE
+               -  1138
+            *  -  LPRINT
+               -  1065
+            *  -  MACHIN
+               -  1015
+            *  -  MATERL
+               -  1077
+            *  -  MAXDPM
+               -  1062
+            *  -  MAXVEL
+               -  1064
+            *  -  MCHFIN
+               -  1018
+            *  -  MCHTOL
+               -  1016
+            *  -  MDEND
+               -  1052
+            *  -  MDWRIT
+               -  1051
+            *  -  MODE
+               -  1003
+            *  -  MOVETO
+               -  1107
+            *  -  MSYS
+               -  1139
+            *  -  OFSTNO
+               -  1083
+            *  -  OP
+               -  1122
+            *  -  OPNAME
+               -  1147
+            *  -  OPSKIP
+               -  1012
+            *  -  OPSTOP
+               -  3
+            *  -  OPTYPE
+               -  1150
+            *  -  ORIGIN
+               -  1027
+            *  -  OVPLOT
+               -  1042
+            *  -  PARKPT
+               -  1100
+            *  -  PARTNO
+               -  1045
+            *  -  PENDWN
+               -  12
+            *  -  PENUP
+               -  11
+            *  -  PICKUP
+               -  9
+            *  -  PIERCE
+               -  1090
+            *  -  PITCH
+               -  1050
+            *  -  PIVOTZ
+               -  1017
+            *  -  PLABEL
+               -  1061
+            *  -  PLOT
+               -  1041
+            *  -  PLUNGE
+               -  1001
+            *  -  POSTN
+               -  1024
+            *  -  POWER
+               -  1032
+            *  -  PPFUN
+               -  1079
+            *  -  PPLOT
+               -  1014
+            *  -  PPRINT
+               -  1044
+            *  -  PPTIME
+               -  1125
+            *  -  PREFUN
+               -  1048
+            *  -  PROBE
+               -  1103
+            *  -  RAPID
+               -  5
+            *  -  RESET
+               -  15
+            *  -  RETRCT
+               -  7
+            *  -  REVERS
+               -  1008
+            *  -  REWIND
+               -  1006
+            *  -  ROTABL
+               -  1026
+            *  -  ROTATE
+               -  1066
+            *  -  ROTHED
+               -  1035
+            *  -  SAFETY
+               -  1028
+            *  -  SAFPOS
+               -  1094
+            *  -  SELCTL
+               -  1056
+            *  -  SELECT
+               -  1101
+            *  -  SEQNO
+               -  1019
+            *  -  SET
+               -  1087
+            *  -  SHUTTR
+               -  1136
+            *  -  SLOWDN
+               -  1063
+            *  -  SMARTP
+               -  1149
+            *  -  SPINDL
+               -  1031
+            *  -  STAN
+               -  1080
+            *  -  STDYRS
+               -  1108
+            *  -  STOP
+               -  2
+            *  -  SWITCH
+               -  6
+            *  -  SYNCTR
+               -  1116
+            *  -  THREAD
+               -  1036
+            *  -  TLLIFE
+               -  1126
+            *  -  TLNAME
+               -  1146
+            *  -  TLSTCK
+               -  1117
+            *  -  TMARK
+               -  1005
+            *  -  TOOLNO
+               -  1025
+            *  -  TORCH
+               -  1132
+            *  -  TPRINT
+               -  1148
+            *  -  TRACE
+               -  1151
+            *  -  TRACUT
+               -  1038
+            *  -  TRANS
+               -  1037
+            *  -  TURRET
+               -  1033
+            *  -  UNLOAD
+               -  10
+            *  -  VERIFY
+               -  1131
+            *  -  VTLAXS
+               -  1070
+            *  -  ZERO
+               -  13
+
+      .. container::
+
+        .. list-table:: Numeric Order
+            :widths: auto
+            :header-rows: 1
+
+            *  -  Word
+               -  Code
+            *  -  END
+               -  1
+            *  -  STOP
+               -  2
+            *  -  OPSTOP
+               -  3
+            *  -  ISTOP
+               -  4
+            *  -  RAPID
+               -  5
+            *  -  SWITCH
+               -  6
+            *  -  RETRCT
+               -  7
+            *  -  DRESS
+               -  8
+            *  -  PICKUP
+               -  9
+            *  -  UNLOAD
+               -  10
+            *  -  PENUP
+               -  11
+            *  -  PENDWN
+               -  12
+            *  -  ZERO
+               -  13
+            *  -  CODEL
+               -  14
+            *  -  RESET
+               -  15
+            *  -  BREAK
+               -  16
+            *  -  GOHOME
+               -  17
+            *  -  PLUNGE
+               -  1001
+            *  -  HEAD
+               -  1002
+            *  -  MODE
+               -  1003
+            *  -  CLEARP
+               -  1004
+            *  -  TMARK
+               -  1005
+            *  -  REWIND
+               -  1006
+            *  -  CUTCOM
+               -  1007
+            *  -  REVERS
+               -  1008
+            *  -  FEDRAT
+               -  1009
+            *  -  DELAY
+               -  1010
+            *  -  AIR
+               -  1011
+            *  -  OPSKIP
+               -  1012
+            *  -  LEADER
+               -  1013
+            *  -  PPLOT
+               -  1014
+            *  -  MACHIN
+               -  1015
+            *  -  MCHTOL
+               -  1016
+            *  -  PIVOTZ
+               -  1017
+            *  -  MCHFIN
+               -  1018
+            *  -  SEQNO
+               -  1019
+            *  -  INTCOD
+               -  1020
+            *  -  DISPLY
+               -  1021
+            *  -  AUXFUN
+               -  1022
+            *  -  CHECK
+               -  1023
+            *  -  POSTN
+               -  1024
+            *  -  TOOLNO
+               -  1025
+            *  -  ROTABL
+               -  1026
+            *  -  ORIGIN
+               -  1027
+            *  -  SAFETY
+               -  1028
+            *  -  ARCSLP
+               -  1029
+            *  -  COOLNT
+               -  1030
+            *  -  SPINDL
+               -  1031
+            *  -  POWER
+               -  1032
+            *  -  TURRET
+               -  1033
+            *  -  ROTHED
+               -  1035
+            *  -  THREAD
+               -  1036
+            *  -  TRANS
+               -  1037
+            *  -  TRACUT
+               -  1038
+            *  -  INDEX
+               -  1039
+            *  -  COPY
+               -  1040
+            *  -  PLOT
+               -  1041
+            *  -  OVPLOT
+               -  1042
+            *  -  LETTER
+               -  1043
+            *  -  PPRINT
+               -  1044
+            *  -  PARTNO
+               -  1045
+            *  -  INSERT
+               -  1046
+            *  -  CAMERA
+               -  1047
+            *  -  PREFUN
+               -  1048
+            *  -  COUPLE
+               -  1049
+            *  -  PITCH
+               -  1050
+            *  -  MDWRIT
+               -  1051
+            *  -  MDEND
+               -  1052
+            *  -  ASLOPE
+               -  1053
+            *  -  CYCLE
+               -  1054
+            *  -  LOADTL
+               -  1055
+            *  -  SELCTL
+               -  1056
+            *  -  CLRSRF
+               -  1057
+            *  -  DRAFT
+               -  1059
+            *  -  PLABEL
+               -  1061
+            *  -  MAXDPM
+               -  1062
+            *  -  SLOWDN
+               -  1063
+            *  -  MAXVEL
+               -  1064
+            *  -  LPRINT
+               -  1065
+            *  -  ROTATE
+               -  1066
+            *  -  LINTOL
+               -  1067
+            *  -  VTLAXS
+               -  1070
+            *  -  CLDIST
+               -  1071
+            *  -  CHUCK
+               -  1073
+            *  -  CLAMP
+               -  1074
+            *  -  LOAD
+               -  1075
+            *  -  MATERL
+               -  1077
+            *  -  LIMIT
+               -  1078
+            *  -  PPFUN
+               -  1079
+            *  -  STAN
+               -  1080
+            *  -  INDPOS
+               -  1082
+            *  -  OFSTNO
+               -  1083
+            *  -  SET
+               -  1087
+            *  -  PIERCE
+               -  1090
+            *  -  SAFPOS
+               -  1094
+            *  -  CLDATA
+               -  1095
+            *  -  GOPARK
+               -  1098
+            *  -  PARKPT
+               -  1100
+            *  -  SELECT
+               -  1101
+            *  -  PROBE
+               -  1103
+            *  -  BARFED
+               -  1104
+            *  -  CATCHR
+               -  1105
+            *  -  MOVETO
+               -  1107
+            *  -  STDYRS
+               -  1108
+            *  -  HOMEPT
+               -  1112
+            *  -  SYNCTR
+               -  1116
+            *  -  TLSTCK
+               -  1117
+            *  -  ADAPTV
+               -  1118
+            *  -  APPLY
+               -  1120
+            *  -  OP
+               -  1122
+            *  -  INCLUD
+               -  1123
+            *  -  PPTIME
+               -  1125
+            *  -  TLLIFE
+               -  1126
+            *  -  FLUSH
+               -  1127
+            *  -  ASSIST
+               -  1129
+            *  -  VERIFY
+               -  1131
+            *  -  TORCH
+               -  1132
+            *  -  GENRTR
+               -  1133
+            *  -  LCS
+               -  1135
+            *  -  SHUTTR
+               -  1136
+            *  -  LOCATE
+               -  1138
+            *  -  MSYS
+               -  1139
+            *  -  DEFSUB
+               -  1140
+            *  -  ENDSUB
+               -  1141
+            *  -  CALSUB
+               -  1142
+            *  -  DEFCON
+               -  1143
+            *  -  ASSIGN
+               -  1144
+            *  -  TLNAME
+               -  1146
+            *  -  OPNAME
+               -  1147
+            *  -  TPRINT
+               -  1148
+            *  -  SMARTP
+               -  1149
+            *  -  OPTYPE
+               -  1150
+            *  -  TRACE
+               -  1151
+            *  -  AM
+               -  1152
+            *  -  CHANNL
+               -  1153
+
+..
