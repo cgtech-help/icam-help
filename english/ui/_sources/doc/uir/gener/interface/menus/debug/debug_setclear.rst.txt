@@ -1,0 +1,15 @@
+Debug»Set/Clear Breakpoint (F9)
+-------------------------------
+
+Add or remove a breakpoint on the current line where the text cursor is.
+
+Used during debugging to set or clear a breakpoint on the Listing window
+line that currently has been selected. A solid red circle appears in the
+margin of the Listing window next to any CL record or macro line that
+has a breakpoint set. GENER pauses processing when it encounters a
+breakpoint.
+
+|image1|
+
+.. |image1| image:: ./media/e2be8b318ec6d0c8f0c20e5682bb64b12a373cdd.gif
+
