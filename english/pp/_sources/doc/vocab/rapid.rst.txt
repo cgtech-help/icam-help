@@ -1,0 +1,28 @@
+.. _command_rapid:
+
+The RAPID Command :kbd:`[MLEPC]`
+================================
+
+The RAPID command is used for “punch off” positioning moves for punch
+presses and high speed positioning for other types of machines. This
+command is valid for all machine types.
+
+   :math:`\textbf{RAPID}`
+
+The RAPID command must be coded with no parameters. It can be modal
+or one-shot (non-modal). The QUEST verification file should be
+checked to see which method is used for a particular machine. When
+modal is selected, RAPID is disabled when a FEDRAT command is
+encountered. If non-modal is selected, only the next motion is
+performed at rapid: Feed rate mode is immediately reinstated
+following the rapid motion.
+
+For punch presses this command will cause the next motion (or
+motions) to be a positioning move with punching and nibbling turned
+off.
+
+For other machine types the RAPID command will cause the next motion
+(or motions) to be executed by the machine in the high speed
+positioning mode. RAPID motions are processed at the highest linear
+interpolation rate available on machines not having separate
+positioning and interpolation modes.
