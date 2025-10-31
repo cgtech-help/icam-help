@@ -1,0 +1,8 @@
+[build]
+  command = ""
+  publish = "english"
+
+[[redirects]]
+  from = "/*"
+  to = "/home.html"
+  status = 200
