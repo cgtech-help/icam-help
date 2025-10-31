@@ -1,0 +1,1423 @@
+.. _annex_minor_words:
+
+Post-Processor Minor Words
+**************************
+
+Minor words are post-processor command keywords that are represented
+in the CLDATA using unique integer codes of the 2000 class record
+data. These words must appear in an APT source file after the /
+character. The tables below list the built-in Minor words supported
+by Icam Post, sorted both alphabetically and numerically by integer
+code.
+
+New Minor words and their associated codes can be added to the
+default words file, or to the words file associated with an interface
+kit. Minor word names should (by convention) start with an alphabetic
+character and consist only of alphanumeric characters, to a maximum
+length of 24 characters.
+
+Minor word codes must be positive whole numbers. To avoid defining a
+new code for your own use that might ultimately conflict with a
+built-in code, use the range 900–999.
+
+   .. container:: two-column
+
+      .. container::
+
+        .. list-table:: Alphabetic Order
+            :widths: auto
+            :header-rows: 1
+
+            *  -  Word
+               -  Code
+            *  -  AAXIS
+               -  140
+            *  -  ABSOL
+               -  180
+            *  -  ACCEL
+               -  524
+            *  -  ADJUST
+               -  159
+            *  -  AIRCUT
+               -  212
+            *  -  ALIGN
+               -  401
+            *  -  ALL
+               -  51
+            *  -  ANGLE
+               -  252
+            *  -  ARBOR
+               -  226
+            *  -  ARC
+               -  182
+            *  -  ARGON
+               -  375
+            *  -  AT
+               -  189
+            *  -  ATANGL
+               -  1
+            *  -  AUTO
+               -  88
+            *  -  AVOID
+               -  187
+            *  -  AXIAL
+               -  441
+            *  -  AXIS
+               -  420
+            *  -  BACK
+               -  317
+            *  -  BAR
+               -  451
+            *  -  BAXIS
+               -  141
+            *  -  BCD
+               -  165
+            *  -  BINARY
+               -  164
+            *  -  BLACK
+               -  130
+            *  -  BLUE
+               -  133
+            *  -  BOLTC
+               -  331
+            *  -  BORE
+               -  82
+            *  -  BOTH
+               -  83
+            *  -  BRKCHP
+               -  288
+            *  -  CAXIS
+               -  142
+            *  -  CCLW
+               -  59
+            *  -  CENTER
+               -  2
+            *  -  CHAMFER
+               -  238
+            *  -  CHANEL
+               -  109
+            *  -  CHPLD
+               -  521
+            *  -  CHPTHK
+               -  522
+            *  -  CIRCUL
+               -  75
+            *  -  CLEAR
+               -  181
+            *  -  CLW
+               -  60
+            *  -  CM
+               -  172
+            *  -  CNC
+               -  178
+            *  -  COARSE
+               -  195
+            *  -  COLLET
+               -  139
+            *  -  COND
+               -  300
+            *  -  CONST
+               -  64
+            *  -  CONTUR
+               -  206
+            *  -  COORD
+               -  421
+            *  -  CORNER
+               -  274
+            *  -  CROSS
+               -  3
+            *  -  CSINK
+               -  256
+            *  -  CSKDIA
+               -  297
+            *  -  CSS
+               -  319
+            *  -  CTRLIN
+               -  126
+            *  -  CUSP
+               -  242
+            *  -  CUTANG
+               -  160
+            *  -  CUTS
+               -  511
+            *  -  DARK
+               -  137
+            *  -  DASH
+               -  124
+            *  -  DAXIS
+               -  243
+            *  -  DECR
+               -  65
+            *  -  DEDM
+               -  373
+            *  -  DEEP
+               -  153
+            *  -  DEEPBK
+               -  216
+            *  -  DEEPCL
+               -  208
+            *  -  DEPTH
+               -  510
+            *  -  DESIGN
+               -  535
+            *  -  DIAMET
+               -  509
+            *  -  DIST
+               -  400
+            *  -  DITTO
+               -  127
+            *  -  DOTTED
+               -  125
+            *  -  DOWN
+               -  113
+            *  -  DRAG
+               -  278
+            *  -  DRAW
+               -  244
+            *  -  DRILL
+               -  163
+            *  -  DWELL
+               -  279
+            *  -  EAXIS
+               -  360
+            *  -  EDM
+               -  423
+            *  -  ENDARC
+               -  58
+            *  -  EXPAND
+               -  307
+            *  -  FACE
+               -  81
+            *  -  FEDOPT
+               -  520
+            *  -  FEDTO
+               -  281
+            *  -  FEED
+               -  282
+            *  -  FEET
+               -  174
+            *  -  FINCUT
+               -  512
+            *  -  FINE
+               -  193
+            *  -  FIXTUR
+               -  209
+            *  -  FLAME
+               -  425
+            *  -  FLOAT
+               -  283
+            *  -  FLOOD
+               -  89
+            *  -  FLOOR
+               -  414
+            *  -  FLUTES
+               -  223
+            *  -  FOURPT
+               -  101
+            *  -  FPM
+               -  560
+            *  -  FPR
+               -  561
+            *  -  FPT
+               -  406
+            *  -  FRONT
+               -  148
+            *  -  FUEL
+               -  350
+            *  -  FUNOFY
+               -  4
+            *  -  GREEN
+               -  132
+            *  -  GRID
+               -  67
+            *  -  GRIND
+               -  305
+            *  -  GROOVE
+               -  407
+            *  -  GROUP
+               -  415
+            *  -  HIGH
+               -  62
+            *  -  HOLDER
+               -  157
+            *  -  HOLDIA
+               -  293
+            *  -  ID
+               -  229
+            *  -  IN
+               -  48
+            *  -  INCHES
+               -  173
+            *  -  INCR
+               -  66
+            *  -  INHIBT
+               -  176
+            *  -  INTENS
+               -  134
+            *  -  INTERC
+               -  46
+            *  -  INTOF
+               -  5
+            *  -  INVERS
+               -  6
+            *  -  IPM
+               -  73
+            *  -  IPR
+               -  74
+            *  -  LAG
+               -  426
+            *  -  LARGE
+               -  7
+            *  -  LASER
+               -  427
+            *  -  LAST
+               -  52
+            *  -  LEAD
+               -  428
+            *  -  LEFT
+               -  8
+            *  -  LENGTH
+               -  9
+            *  -  LIGHT
+               -  100
+            *  -  LINCIR
+               -  95
+            *  -  LINEAR
+               -  76
+            *  -  LITE
+               -  135
+            *  -  LOCK
+               -  114
+            *  -  LOW
+               -  63
+            *  -  LOWER
+               -  231
+            *  -  MAIN
+               -  513
+            *  -  MANUAL
+               -  158
+            *  -  MAXDST
+               -  211
+            *  -  MAXIPM
+               -  96
+            *  -  MAXPOS
+               -  204
+            *  -  MAXRPM
+               -  79
+            *  -  MED
+               -  136
+            *  -  MEDIUM
+               -  61
+            *  -  MILL
+               -  151
+            *  -  MINDST
+               -  210
+            *  -  MINPOS
+               -  203
+            *  -  MINSTP
+               -  214
+            *  -  MINUS
+               -  10
+            *  -  MIRROR
+               -  56
+            *  -  MIST
+               -  90
+            *  -  MM
+               -  171
+            *  -  MMPM
+               -  315
+            *  -  MMPR
+               -  316
+            *  -  MODAL
+               -  440
+            *  -  MODIFY
+               -  55
+            *  -  MRR
+               -  523
+            *  -  MULTRD
+               -  119
+            *  -  MXMMPM
+               -  506
+            *  -  MXPERM
+               -  507
+            *  -  NEGX
+               -  11
+            *  -  NEGY
+               -  12
+            *  -  NEGZ
+               -  13
+            *  -  NEUTRL
+               -  166
+            *  -  NEXT
+               -  162
+            *  -  NIBBLE
+               -  236
+            *  -  NITRGN
+               -  371
+            *  -  NIXIE
+               -  99
+            *  -  NODRAG
+               -  289
+            *  -  NOMORE
+               -  53
+            *  -  NOREVR
+               -  329
+            *  -  NORMAL
+               -  111
+            *  -  NOW
+               -  161
+            *  -  NOX
+               -  14
+            *  -  NOY
+               -  15
+            *  -  NOZ
+               -  16
+            *  -  NRMTRN
+               -  342
+            *  -  OD
+               -  230
+            *  -  OFF
+               -  72
+            *  -  OFSETL
+               -  275
+            *  -  OMIT
+               -  186
+            *  -  ON
+               -  71
+            *  -  OPTION
+               -  144
+            *  -  ORIENT
+               -  246
+            *  -  OSETNO
+               -  508
+            *  -  OUT
+               -  49
+            *  -  OVRLAP
+               -  402
+            *  -  OXYGEN
+               -  175
+            *  -  PA
+               -  453
+            *  -  PALLET
+               -  239
+            *  -  PARAB
+               -  77
+            *  -  PARLEL
+               -  17
+            *  -  PART
+               -  313
+            *  -  PAST
+               -  70
+            *  -  PAXIS
+               -  333
+            *  -  PEN
+               -  128
+            *  -  PERMIN
+               -  501
+            *  -  PERPTO
+               -  18
+            *  -  PERREV
+               -  504
+            *  -  PERSEC
+               -  366
+            *  -  PIPE
+               -  361
+            *  -  PLUS
+               -  19
+            *  -  PNT
+               -  202
+            *  -  POLAR
+               -  544
+            *  -  POST
+               -  179
+            *  -  POSX
+               -  20
+            *  -  POSY
+               -  21
+            *  -  POSZ
+               -  22
+            *  -  PROFIL
+               -  362
+            *  -  PROTCT
+               -  213
+            *  -  PRSSUR
+               -  352
+            *  -  PSI
+               -  452
+            *  -  PSTAN
+               -  146
+            *  -  PTNORM
+               -  104
+            *  -  PTSLOP
+               -  103
+            *  -  PULSE
+               -  334
+            *  -  PUNCH
+               -  430
+            *  -  QAXIS
+               -  248
+            *  -  QUILL
+               -  287
+            *  -  RADIUS
+               -  23
+            *  -  RAIL
+               -  93
+            *  -  RAM
+               -  500
+            *  -  RANDOM
+               -  147
+            *  -  RANGE
+               -  145
+            *  -  RAPOUT
+               -  363
+            *  -  RAPTO
+               -  280
+            *  -  RATIO
+               -  286
+            *  -  RAXIS
+               -  249
+            *  -  RCTNGL
+               -  403
+            *  -  REAM
+               -  262
+            *  -  REAR
+               -  149
+            *  -  RECALL
+               -  353
+            *  -  RED
+               -  131
+            *  -  RETAIN
+               -  184
+            *  -  RETURN
+               -  276
+            *  -  REV
+               -  97
+            *  -  REVTRN
+               -  255
+            *  -  RIGHT
+               -  24
+            *  -  RIGID
+               -  284
+            *  -  ROTREF
+               -  68
+            *  -  ROUGH
+               -  404
+            *  -  ROUND
+               -  263
+            *  -  RPM
+               -  78
+            *  -  RTCP
+               -  167
+            *  -  RTHETA
+               -  106
+            *  -  RTRCTO
+               -  295
+            *  -  SADDLE
+               -  150
+            *  -  SAFE
+               -  412
+            *  -  SAME
+               -  54
+            *  -  SAVE
+               -  354
+            *  -  SCALE
+               -  25
+            *  -  SCAN
+               -  405
+            *  -  SCRIBE
+               -  129
+            *  -  SETANG
+               -  156
+            *  -  SETOOL
+               -  155
+            *  -  SETTCP
+               -  169
+            *  -  SETUP
+               -  530
+            *  -  SFACE
+               -  369
+            *  -  SFM
+               -  115
+            *  -  SHEAR
+               -  264
+            *  -  SIDE
+               -  94
+            *  -  SIMUL
+               -  433
+            *  -  SIZE
+               -  196
+            *  -  SLOPE
+               -  47
+            *  -  SMALL
+               -  26
+            *  -  SMM
+               -  505
+            *  -  SMOOTH
+               -  516
+            *  -  SOLID
+               -  123
+            *  -  SPLINE
+               -  105
+            *  -  START
+               -  57
+            *  -  STEP
+               -  92
+            *  -  STOCK
+               -  536
+            *  -  STRVTM
+               -  434
+            *  -  SYMBOL
+               -  235
+            *  -  SYSTEM
+               -  364
+            *  -  TABLE
+               -  177
+            *  -  TANTO
+               -  27
+            *  -  TAP
+               -  168
+            *  -  TAPER
+               -  540
+            *  -  TAPKUL
+               -  91
+            *  -  THETAR
+               -  107
+            *  -  THICKD
+               -  409
+            *  -  THICKF
+               -  410
+            *  -  THRU
+               -  152
+            *  -  TIME
+               -  435
+            *  -  TIMES
+               -  28
+            *  -  TLANGL
+               -  294
+            *  -  TLMATL
+               -  393
+            *  -  TLVEC
+               -  437
+            *  -  TO
+               -  69
+            *  -  TOOL
+               -  170
+            *  -  TORR
+               -  454
+            *  -  TPI
+               -  143
+            *  -  TRANSL
+               -  29
+            *  -  TRAV
+               -  154
+            *  -  TRFORM
+               -  110
+            *  -  TURN
+               -  80
+            *  -  TWOPT
+               -  102
+            *  -  TYPE
+               -  98
+            *  -  UAXIS
+               -  241
+            *  -  UNIT
+               -  30
+            *  -  UNKPOS
+               -  205
+            *  -  UNWIND
+               -  517
+            *  -  UP
+               -  112
+            *  -  UPPER
+               -  266
+            *  -  VAXIS
+               -  228
+            *  -  VOLUME
+               -  285
+            *  -  WALL
+               -  413
+            *  -  WATTS
+               -  192
+            *  -  WAXIS
+               -  220
+            *  -  WEDM
+               -  411
+            *  -  WIDTH
+               -  439
+            *  -  WIND
+               -  515
+            *  -  WIRE
+               -  318
+            *  -  XAXIS
+               -  84
+            *  -  XCOORD
+               -  116
+            *  -  XDIM
+               -  270
+            *  -  XDIR
+               -  563
+            *  -  XDIST
+               -  197
+            *  -  XLARGE
+               -  31
+            *  -  XOFF
+               -  290
+            *  -  XREF
+               -  514
+            *  -  XSMALL
+               -  32
+            *  -  XYPLAN
+               -  33
+            *  -  XYROT
+               -  34
+            *  -  XYVIEW
+               -  120
+            *  -  XYZ
+               -  108
+            *  -  YAXIS
+               -  85
+            *  -  YCOORD
+               -  117
+            *  -  YDIM
+               -  272
+            *  -  YDIR
+               -  564
+            *  -  YDIST
+               -  198
+            *  -  YLARGE
+               -  35
+            *  -  YOFF
+               -  291
+            *  -  YSMALL
+               -  36
+            *  -  YZPLAN
+               -  37
+            *  -  YZROT
+               -  38
+            *  -  YZVIEW
+               -  121
+            *  -  ZAXIS
+               -  86
+            *  -  ZCOORD
+               -  118
+            *  -  ZDIM
+               -  314
+            *  -  ZDIR
+               -  565
+            *  -  ZDIST
+               -  199
+            *  -  ZIGZAG
+               -  185
+            *  -  ZLARGE
+               -  39
+            *  -  ZOFF
+               -  292
+            *  -  ZSMALL
+               -  40
+            *  -  ZXPLAN
+               -  41
+            *  -  ZXROT
+               -  42
+            *  -  ZXVIEW
+               -  122
+
+      .. container::
+
+        .. list-table:: Numeric Order
+            :widths: auto
+            :header-rows: 1
+
+            *  -  Word
+               -  Code
+            *  -  ATANGL
+               -  1
+            *  -  CENTER
+               -  2
+            *  -  CROSS
+               -  3
+            *  -  FUNOFY
+               -  4
+            *  -  INTOF
+               -  5
+            *  -  INVERS
+               -  6
+            *  -  LARGE
+               -  7
+            *  -  LEFT
+               -  8
+            *  -  LENGTH
+               -  9
+            *  -  MINUS
+               -  10
+            *  -  NEGX
+               -  11
+            *  -  NEGY
+               -  12
+            *  -  NEGZ
+               -  13
+            *  -  NOX
+               -  14
+            *  -  NOY
+               -  15
+            *  -  NOZ
+               -  16
+            *  -  PARLEL
+               -  17
+            *  -  PERPTO
+               -  18
+            *  -  PLUS
+               -  19
+            *  -  POSX
+               -  20
+            *  -  POSY
+               -  21
+            *  -  POSZ
+               -  22
+            *  -  RADIUS
+               -  23
+            *  -  RIGHT
+               -  24
+            *  -  SCALE
+               -  25
+            *  -  SMALL
+               -  26
+            *  -  TANTO
+               -  27
+            *  -  TIMES
+               -  28
+            *  -  TRANSL
+               -  29
+            *  -  UNIT
+               -  30
+            *  -  XLARGE
+               -  31
+            *  -  XSMALL
+               -  32
+            *  -  XYPLAN
+               -  33
+            *  -  XYROT
+               -  34
+            *  -  YLARGE
+               -  35
+            *  -  YSMALL
+               -  36
+            *  -  YZPLAN
+               -  37
+            *  -  YZROT
+               -  38
+            *  -  ZLARGE
+               -  39
+            *  -  ZSMALL
+               -  40
+            *  -  ZXPLAN
+               -  41
+            *  -  ZXROT
+               -  42
+            *  -  INTERC
+               -  46
+            *  -  SLOPE
+               -  47
+            *  -  IN
+               -  48
+            *  -  OUT
+               -  49
+            *  -  ALL
+               -  51
+            *  -  LAST
+               -  52
+            *  -  NOMORE
+               -  53
+            *  -  SAME
+               -  54
+            *  -  MODIFY
+               -  55
+            *  -  MIRROR
+               -  56
+            *  -  START
+               -  57
+            *  -  ENDARC
+               -  58
+            *  -  CCLW
+               -  59
+            *  -  CLW
+               -  60
+            *  -  MEDIUM
+               -  61
+            *  -  HIGH
+               -  62
+            *  -  LOW
+               -  63
+            *  -  CONST
+               -  64
+            *  -  DECR
+               -  65
+            *  -  INCR
+               -  66
+            *  -  GRID
+               -  67
+            *  -  ROTREF
+               -  68
+            *  -  TO
+               -  69
+            *  -  PAST
+               -  70
+            *  -  ON
+               -  71
+            *  -  OFF
+               -  72
+            *  -  IPM
+               -  73
+            *  -  IPR
+               -  74
+            *  -  CIRCUL
+               -  75
+            *  -  LINEAR
+               -  76
+            *  -  PARAB
+               -  77
+            *  -  RPM
+               -  78
+            *  -  MAXRPM
+               -  79
+            *  -  TURN
+               -  80
+            *  -  FACE
+               -  81
+            *  -  BORE
+               -  82
+            *  -  BOTH
+               -  83
+            *  -  XAXIS
+               -  84
+            *  -  YAXIS
+               -  85
+            *  -  ZAXIS
+               -  86
+            *  -  AUTO
+               -  88
+            *  -  FLOOD
+               -  89
+            *  -  MIST
+               -  90
+            *  -  TAPKUL
+               -  91
+            *  -  STEP
+               -  92
+            *  -  RAIL
+               -  93
+            *  -  SIDE
+               -  94
+            *  -  LINCIR
+               -  95
+            *  -  MAXIPM
+               -  96
+            *  -  REV
+               -  97
+            *  -  TYPE
+               -  98
+            *  -  NIXIE
+               -  99
+            *  -  LIGHT
+               -  100
+            *  -  FOURPT
+               -  101
+            *  -  TWOPT
+               -  102
+            *  -  PTSLOP
+               -  103
+            *  -  PTNORM
+               -  104
+            *  -  SPLINE
+               -  105
+            *  -  RTHETA
+               -  106
+            *  -  THETAR
+               -  107
+            *  -  XYZ
+               -  108
+            *  -  CHANEL
+               -  109
+            *  -  TRFORM
+               -  110
+            *  -  NORMAL
+               -  111
+            *  -  UP
+               -  112
+            *  -  DOWN
+               -  113
+            *  -  LOCK
+               -  114
+            *  -  SFM
+               -  115
+            *  -  XCOORD
+               -  116
+            *  -  YCOORD
+               -  117
+            *  -  ZCOORD
+               -  118
+            *  -  MULTRD
+               -  119
+            *  -  XYVIEW
+               -  120
+            *  -  YZVIEW
+               -  121
+            *  -  ZXVIEW
+               -  122
+            *  -  SOLID
+               -  123
+            *  -  DASH
+               -  124
+            *  -  DOTTED
+               -  125
+            *  -  CTRLIN
+               -  126
+            *  -  DITTO
+               -  127
+            *  -  PEN
+               -  128
+            *  -  SCRIBE
+               -  129
+            *  -  BLACK
+               -  130
+            *  -  RED
+               -  131
+            *  -  GREEN
+               -  132
+            *  -  BLUE
+               -  133
+            *  -  INTENS
+               -  134
+            *  -  LITE
+               -  135
+            *  -  MED
+               -  136
+            *  -  DARK
+               -  137
+            *  -  COLLET
+               -  139
+            *  -  AAXIS
+               -  140
+            *  -  BAXIS
+               -  141
+            *  -  CAXIS
+               -  142
+            *  -  TPI
+               -  143
+            *  -  OPTION
+               -  144
+            *  -  RANGE
+               -  145
+            *  -  PSTAN
+               -  146
+            *  -  RANDOM
+               -  147
+            *  -  FRONT
+               -  148
+            *  -  REAR
+               -  149
+            *  -  SADDLE
+               -  150
+            *  -  MILL
+               -  151
+            *  -  THRU
+               -  152
+            *  -  DEEP
+               -  153
+            *  -  TRAV
+               -  154
+            *  -  SETOOL
+               -  155
+            *  -  SETANG
+               -  156
+            *  -  HOLDER
+               -  157
+            *  -  MANUAL
+               -  158
+            *  -  ADJUST
+               -  159
+            *  -  CUTANG
+               -  160
+            *  -  NOW
+               -  161
+            *  -  NEXT
+               -  162
+            *  -  DRILL
+               -  163
+            *  -  BINARY
+               -  164
+            *  -  BCD
+               -  165
+            *  -  NEUTRL
+               -  166
+            *  -  RTCP
+               -  167
+            *  -  TAP
+               -  168
+            *  -  SETTCP
+               -  169
+            *  -  TOOL
+               -  170
+            *  -  MM
+               -  171
+            *  -  CM
+               -  172
+            *  -  INCHES
+               -  173
+            *  -  FEET
+               -  174
+            *  -  OXYGEN
+               -  175
+            *  -  INHIBT
+               -  176
+            *  -  TABLE
+               -  177
+            *  -  CNC
+               -  178
+            *  -  POST
+               -  179
+            *  -  ABSOL
+               -  180
+            *  -  CLEAR
+               -  181
+            *  -  ARC
+               -  182
+            *  -  RETAIN
+               -  184
+            *  -  ZIGZAG
+               -  185
+            *  -  OMIT
+               -  186
+            *  -  AVOID
+               -  187
+            *  -  AT
+               -  189
+            *  -  WATTS
+               -  192
+            *  -  FINE
+               -  193
+            *  -  COARSE
+               -  195
+            *  -  SIZE
+               -  196
+            *  -  XDIST
+               -  197
+            *  -  YDIST
+               -  198
+            *  -  ZDIST
+               -  199
+            *  -  PNT
+               -  202
+            *  -  MINPOS
+               -  203
+            *  -  MAXPOS
+               -  204
+            *  -  UNKPOS
+               -  205
+            *  -  CONTUR
+               -  206
+            *  -  DEEPCL
+               -  208
+            *  -  FIXTUR
+               -  209
+            *  -  MINDST
+               -  210
+            *  -  MAXDST
+               -  211
+            *  -  AIRCUT
+               -  212
+            *  -  PROTCT
+               -  213
+            *  -  MINSTP
+               -  214
+            *  -  DEEPBK
+               -  216
+            *  -  WAXIS
+               -  220
+            *  -  FLUTES
+               -  223
+            *  -  ARBOR
+               -  226
+            *  -  VAXIS
+               -  228
+            *  -  ID
+               -  229
+            *  -  OD
+               -  230
+            *  -  LOWER
+               -  231
+            *  -  SYMBOL
+               -  235
+            *  -  NIBBLE
+               -  236
+            *  -  CHAMFR
+               -  238
+            *  -  PALLET
+               -  239
+            *  -  UAXIS
+               -  241
+            *  -  CUSP
+               -  242
+            *  -  DAXIS
+               -  243
+            *  -  DRAW
+               -  244
+            *  -  ORIENT
+               -  246
+            *  -  QAXIS
+               -  248
+            *  -  RAXIS
+               -  249
+            *  -  ANGLE
+               -  252
+            *  -  REVTRN
+               -  255
+            *  -  CSINK
+               -  256
+            *  -  REAM
+               -  262
+            *  -  ROUND
+               -  263
+            *  -  SHEAR
+               -  264
+            *  -  UPPER
+               -  266
+            *  -  XDIM
+               -  270
+            *  -  YDIM
+               -  272
+            *  -  CORNER
+               -  274
+            *  -  OFSETL
+               -  275
+            *  -  RETURN
+               -  276
+            *  -  DRAG
+               -  278
+            *  -  DWELL
+               -  279
+            *  -  RAPTO
+               -  280
+            *  -  FEDTO
+               -  281
+            *  -  FEED
+               -  282
+            *  -  FLOAT
+               -  285
+            *  -  RIGID
+               -  282
+            *  -  VOLUME
+               -  285
+            *  -  RATIO
+               -  286
+            *  -  QUILL
+               -  287
+            *  -  BRKCHP
+               -  288
+            *  -  NODRAG
+               -  289
+            *  -  XOFF
+               -  290
+            *  -  YOFF
+               -  291
+            *  -  ZOFF
+               -  292
+            *  -  HOLDIA
+               -  293
+            *  -  TLANGL
+               -  294
+            *  -  RTRCTO
+               -  295
+            *  -  CSKDIA
+               -  297
+            *  -  COND
+               -  300
+            *  -  GRIND
+               -  305
+            *  -  EXPAND
+               -  307
+            *  -  PART
+               -  313
+            *  -  ZDIM
+               -  314
+            *  -  MMPM
+               -  315
+            *  -  MMPR
+               -  316
+            *  -  BACK
+               -  317
+            *  -  WIRE
+               -  318
+            *  -  CSS
+               -  319
+            *  -  NOREVR
+               -  329
+            *  -  BOLTC
+               -  331
+            *  -  PAXIS
+               -  333
+            *  -  PULSE
+               -  334
+            *  -  NRMTRN
+               -  342
+            *  -  FUEL
+               -  350
+            *  -  PRSSUR
+               -  352
+            *  -  RECALL
+               -  353
+            *  -  SAVE
+               -  354
+            *  -  EAXIS
+               -  360
+            *  -  PIPE
+               -  361
+            *  -  PROFIL
+               -  362
+            *  -  RAPOUT
+               -  363
+            *  -  SYSTEM
+               -  364
+            *  -  PERSEC
+               -  366
+            *  -  SFACE
+               -  369
+            *  -  NITRGN
+               -  371
+            *  -  DEDM
+               -  373
+            *  -  ARGON
+               -  375
+            *  -  TLMATL
+               -  393
+            *  -  DIST
+               -  400
+            *  -  ALIGN
+               -  401
+            *  -  OVRLAP
+               -  402
+            *  -  RCTNGL
+               -  403
+            *  -  ROUGH
+               -  404
+            *  -  SCAN
+               -  405
+            *  -  FPT
+               -  406
+            *  -  GROOVE
+               -  407
+            *  -  THICKD
+               -  409
+            *  -  THICKF
+               -  410
+            *  -  WEDM
+               -  411
+            *  -  SAFE
+               -  412
+            *  -  WALL
+               -  413
+            *  -  FLOOR
+               -  414
+            *  -  GROUP
+               -  415
+            *  -  AXIS
+               -  420
+            *  -  COORD
+               -  421
+            *  -  EDM
+               -  423
+            *  -  FLAME
+               -  425
+            *  -  LAG
+               -  426
+            *  -  LASER
+               -  427
+            *  -  LEAD
+               -  428
+            *  -  PUNCH
+               -  430
+            *  -  SIMUL
+               -  433
+            *  -  STRVTM
+               -  434
+            *  -  TIME
+               -  435
+            *  -  TLVEC
+               -  437
+            *  -  WIDTH
+               -  439
+            *  -  MODAL
+               -  440
+            *  -  AXIAL
+               -  441
+            *  -  BAR
+               -  451
+            *  -  PSI
+               -  452
+            *  -  PA
+               -  453
+            *  -  TORR
+               -  454
+            *  -  RAM
+               -  500
+            *  -  PERMIN
+               -  501
+            *  -  PERREV
+               -  504
+            *  -  SMM
+               -  505
+            *  -  MXMMPM
+               -  506
+            *  -  MXPERM
+               -  507
+            *  -  OSETNO
+               -  508
+            *  -  DIAMET
+               -  509
+            *  -  DEPTH
+               -  510
+            *  -  CUTS
+               -  511
+            *  -  FINCUT
+               -  512
+            *  -  MAIN
+               -  513
+            *  -  XREF
+               -  514
+            *  -  WIND
+               -  515
+            *  -  SMOOTH
+               -  516
+            *  -  UNWIND
+               -  517
+            *  -  FEDOPT
+               -  520
+            *  -  CHPLD
+               -  521
+            *  -  CHPTHK
+               -  522
+            *  -  MRR
+               -  523
+            *  -  ACCEL
+               -  524
+            *  -  SETUP
+               -  530
+            *  -  DESIGN
+               -  535
+            *  -  STOCK
+               -  536
+            *  -  TAPER
+               -  540
+            *  -  POLAR
+               -  544
+            *  -  FPM
+               -  560
+            *  -  FPR
+               -  561
+            *  -  XDIR
+               -  563
+            *  -  YDIR
+               -  564
+            *  -  ZDIR
+               -  565
+
+..
