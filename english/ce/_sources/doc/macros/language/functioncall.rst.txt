@@ -1,0 +1,245 @@
+.. _macro_function_calls:
+
+Function Calls
+--------------
+
+Built-in Functions
+~~~~~~~~~~~~~~~~~~
+
+The macro language provides a wide variety of functions to simplify
+the task of writing macros. Functions accept zero or more arguments
+as input and return a value of a specific type (e.g., real or
+logical), although there are a few functions that can return various
+result types. The input arguments and return values of all functions
+are listed in :ref:`“Macro Functions”<macro_functions>`
+
+The general syntax of a function call is as follows:
+
+   :math:`\mathbf{\$F}\mathit{function\_name} \, \textbf{(} \,
+   \Big[\,\mathit{argument}\
+   \big[,\mathit{argument} \ldots \big] \Big] \, \textbf{)}`
+
+The order in which the arguments are specified is very important.
+Some functions require no arguments, but the parentheses must still
+be specified. For example, the $FGETCWD() function (always called
+without parameters) returns the file path of the current working
+directory.
+
+A function can be used in an expression anywhere a value is
+permitted, provided that the function returns a data type consistent
+with the rest of the expression. Functions can be called as arguments
+to other functions.
+
+Here are some examples of macro lines that call macro functions:
+
+   .. code-block::
+
+      D=$FSQRT(X**2+Y**2)
+      %L01=$FCESAC(CODE_POSITION_ABSOLUTE)
+
+.. _external_functions:
+
+External Functions
+~~~~~~~~~~~~~~~~~~
+
+The macro processor supports the use of global user functions written
+in C++ that have been compiled and linked into a shareable library
+(i.e., a “.dll” file). User functions written in Python (i.e., a “.py” file)
+are also supported. Sample source files, an API development kit
+and HTML documentation can all be found in the installation
+“Samples/ExternalFunctions” directory.
+
+External functions must be defined before they can be used, so that
+the macro processor will know the name of the function and the number
+and data types of the parameters that are passed to the function.
+External functions are global in scope, meaning that they need only
+be defined once, preferably in the declaration macro. The declaration
+syntax is as follows:
+
+   :math:`\textbf{DECLAR / EXTERN},\textbf{FUNCTION},\mathit{'filename\,'} \,
+   \big[,\mathit{type}\,\big]
+   ,\mathit{name}\,\textbf{(}\,\Big[\mathit{type} \big[,\ldots \big]\Big] \,\textbf{)}`
+
+The *filename* string specifies the name of the shareable library. If
+the filename does not include the file type, “.dll” will be used. If
+the filename does not include a file path, or if the file path is
+relative, then the default path is the installation
+“bin/\ *system-type*\ ” directory. A DLL file stored in the control emulator
+File Storage section can be referenced by starting the file
+path name with “//ICAMFS/”.
+
+The *name* defines the name of the function. External function names
+must always start with an alphabetic character. The remaining
+characters can be any combination of letters, digits and the
+underscore character. The maximum size of an external function name
+is 32 characters. The chosen name must not conflict with any local,
+object or global variable already defined, or with any Major, Minor
+or reserved keyword name.
+
+External functions return a value to the macro processor in the same
+way that built-in functions do. Functions have no type by default,
+meaning that they can return any type of data (real, logical,
+etcetera). Run-time checking of the function return type can be
+enforced by specifying one of the REAL, LOGICAL, STRING, SEQUENCE,
+KEYWORD, RECORD, CODE or REG type keywords just in front of the function name.
+
+External functions can take zero or more parameters. External
+functions cannot change the value of any parameter passed to it
+(i.e., parameters are passed “by value”). The count of allowable
+parameters and the data type of each is specified by a parenthesized
+list of ALL, REAL, LOGICAL, STRING, SEQUENCE, KEYWORD, RECORD, CODE
+or REG type keywords. The ALL keyword identifies a parameter that
+can be of any type.
+
+The following example declares and uses an external function named
+“myfunc”, residing in a shared library named “myfile.dll” that has
+been copied to the File Storage section of the control emulator. The
+myfunc function must be called with a numeric parameter and a string
+parameter, in that order. It returns a numeric value:
+
+   ::
+
+      DECLAR/EXTERN,FUNCTION,'//ICAMFS/myfile.dll',REAL,MYFUNC(REAL,STRING)
+      …
+      %L01=MYFUNC(25.4,'metric')
+
+The same declaration syntax is used for referencing a python script. The script “.py”
+extension is enough to detect the Python language.
+
+   ::
+
+      DECLAR/EXTERN,FUNCTION,'//ICAMFS/myfile.py',REAL,MYFUNC(REAL,STRING)
+      …
+      %L01=MYFUNC(25.4,'metric')
+
+.. _user_function_macros_1:
+
+User Function Macros
+~~~~~~~~~~~~~~~~~~~~
+
+The QUEST post-processor, control emulator and model customization
+chapters each provide a “User Function Macros” section that can be
+used to define custom functions using the macro language. This
+section also provides the ability to export and import user functions
+to and from external files.
+
+Function Declaration
+````````````````````
+
+User functions defined in the “User Function Macros” section are
+automatically declared with OBJECT scope (i.e., they are visible to
+the macros of the object in which they are defined).
+
+User function macros can also be included from an external file at
+run-time using an INCLUD command that identifies the external file,
+as follows:
+
+   :math:`\textbf{INCLUD / } \mathit{'filename\,'}`
+
+Each file can contain one or more user macro functions. Each function
+is declared with OBJECT scope and cannot conflict with a function
+already defined. The search order for the file is as follows:
+
+1. relative to the //ICAMFS internal file storage root directory
+
+2. relative to the $ICAM_APPDATA\\macro directory
+
+3. relative to the file in which the INCLUD command is coded (if
+   applicable)
+
+4. relative to the current working directory (CWD)
+
+When using “Strong” data typing, external user function macros must
+be declared by coding the INCLUD commands in the Declaration macro.
+Otherwise, the external function macros must be declared using an
+INCLUD command at some point during macro processing before the user
+function is used (i.e., called). The macro processor will only
+include an external macro file once, no matter how many times it is
+included.
+
+Function Definition
+```````````````````
+
+The first non-comment line of a user function macro defines an
+optional function return value type, the function name, and an
+optional list of parameter types and names within parentheses (the
+parentheses are required). This first line is called an SDL, which is
+short for Syntax Definition Line. The remaining lines of the user
+function macro (i.e., the body) define the action to take when the
+function is called.
+
+External user macro function definition files can contain multiple
+user function definitions, separated by ENDMAC commands.
+
+Function Name
+`````````````
+
+The SDL must be the first non-comment line of the user function
+macro. The SDL defines the function name, its optional parameters,
+and optionally the data type of the function return value and of the
+parameters. The SDL of a user function macro is as follows:
+
+   :math:`\textbf{MACRO /} \big[\,\mathit{returntype},\big]\;
+   \mathit{name}\,\textbf{(}\,
+   \Big[\big[ \mathit{type_1}, \big] \mathit{param_1} \;\big[, \ldots \big]\Big] \, \textbf{)}`
+
+The SDL starts with the string “MACRO/”, which identifies an user
+function macro. An optional function return data type follows, which
+can be any of the data type keywords listed in :ref:`“Macro Data Types”<macro_data_types>`.
+It is recommended to strongly type the return value of a function if it will only return data of a
+particular type, since the macro processor can then diagnose if the
+wrong type is attempted to be returned. The function name follows the
+optional data type. The function name must start with a letter (A-Z)
+and consist only of letters, digits (0-9) and the underscore (\_)
+character, to a maximum of 32 characters. The function name must be unique.
+
+Function Parameters
+```````````````````
+
+The SDL function name definition is followed by a parenthesized list
+of optional parameters. The parentheses are required; the parameters
+are optional. Each parameter name can optionally be preceded by a
+data type. It is recommended to strongly type parameters if they will
+only contain data of a particular type, since the macro processor can
+then diagnose if the wrong type is used by the calling function.
+Parameter names must start with a letter (A-Z) and consist only of
+letters, digits (0-9) and the underscore (\_) character, to a maximum
+of 32 characters. The parameter names must be unique for each
+function.
+
+Parameters are passed “by value”, meaning that the macro processor
+makes a copy of the variables and/or constant used by the caller. The
+macro function can modify the parameter values in the body of the
+macro, but this will not modify the variables and/or constants used
+by the caller.
+
+Function Body
+`````````````
+
+The body of the user function macro follows the SDL, and continues up
+to an ENDMAC command. It can contain any combination of macro and
+control emulator commands that are allowed to be used by the caller of
+the user macro function.
+
+Once a user function macro is running, it cannot be matched again
+until the macro has completed execution. This means that user
+function macros cannot be written to be recursive.
+
+The function return value is set by assigning a value to a variable
+having the same name as the function name. If the return value is set
+multiple times, only the last setting will be returned to the caller.
+If a return value is not set, the function will return a value of
+$NULL. Functions return to the caller when a TERMAC or ENDMAC command
+is processed.
+
+For example:
+
+   ::
+
+      MACRO/REAL,DIVIDE(REAL,DIVIDEND,REAL,DIVISOR)
+      IF/DIVISOR.NE.0
+         DIVIDE=DIVIDEND/DIVISOR
+      ELSE
+         DIVIDE=0
+      ENDOF/IF
+      ENDMAC
