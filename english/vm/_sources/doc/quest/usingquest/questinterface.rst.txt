@@ -1,0 +1,137 @@
+QUEST User Interface
+--------------------
+
+The QUEST user interface consists of three main windows (:ref:`see the image
+<using_quest>`).
+
+1. The left hand window is the **Navigator**, which is used to view the
+   list of models in a database as well as to access the different
+   information components of a model. Select the “Database” tab at the
+   bottom of the navigator window to see the list of databases.
+   Individual models can be read into QUEST from a database so they can
+   be viewed or modified. Each model, once loaded, can be accessed by
+   selecting its named tab at the bottom of the navigator window. The
+   Help tab in the Information window displays information about the
+   entry selected in the Navigator, including a preview of the model
+   automatically taken when it was last saved or generated. Double-click
+   on a section entry in the Navigator window to make changes to that
+   section.
+
+   \
+
+2. The upper right window is the **Main** working window. This window
+   will change to show the machine model, lists of questions, dialog
+   panels, macros, etc., resulting from selections made in the
+   Navigator. Most of your interaction with QUEST will occur in the main
+   window. You can press the F1 function key to obtain context sensitive
+   on-line help on how to use the main window.
+
+   \
+
+3. The lower right window is the **Information** window. This window
+   holds various types of information, each of which can be accessed by
+   selecting one of the organizational tabs arranged along the bottom
+   edge of the window. Most of the time, QUEST will automatically select
+   the proper tab for you based on the last feature or action requested.
+   The tab names and their purpose are as follows:
+
+   -  The **Help** tab provides detailed help when the Main window focus is
+      on a question, or when a section is selected in the Navigator window.
+
+   -  The **Build** tab lists informational and diagnostic messages when
+      they occur. You can often double-click on a diagnostic message to
+      address the problem in the Main window.
+
+   -  The **Finder** tab lists the results of the last search operation.
+      Use the Tools»Finder menu-bar selection (Ctrl Shift F shortcut) to
+      find questions, dialogs and macros containing text matching a
+      “search” string (press F1 to obtain help on search features).
+      Double-click on any line listed in the Finder tab to change the Main
+      window focus to the selected item. Use F4 and Shift F4 to
+      sequentially shift the Finder tab focus (and indirectly the Main
+      window focus) forwards and backwards through the list of items found.
+
+   -  The **Diffs** tab lists the differences between two selected models.
+      Use the Tools»Diffs menu-bar selection (Ctrl I shortcut) to identify
+      the objects to compare (press F1 to obtain help on comparison
+      features). You can double-click on any line with a solid arrow to
+      change the Main window focus to the selected item. Various
+      right-mouse context menu functions are also available in the Diffs
+      tab to help view the comparison results.
+
+   -  The **Axes** tab contains sliders that can be used to exercise the
+      axes of the model. It also has buttons to exercise the spindle(s) and
+      reset axes to their default state.
+
+The menu-bar at the top of the application window provides access to
+QUEST functions. Not all menu actions are available at all times. For
+example, some database actions are only available when a database or
+model is selected in the navigator. Other menu actions are related to
+the macro and dialog editors. These actions will only be available when
+a macro or dialog is being edited. Keyboard shortcuts are available for
+some common menu actions (the shortcut key is listed in the menus to the
+right of the menu item).
+
+The most common menu actions are also available through toolbar
+shortcuts (the little icons arranged below the menu-bar). Toolbars are
+dockable, meaning that they can be dragged to any side of the
+application window, or even be made to appear as a separate window. Like
+the menu-bar selections they represent, toolbar icons may not be
+selectable at all times.
+
+The right-mouse button can be used to bring up a pop-up menu (context
+sensitive menu), listing the most common menu choices that can be made
+in the current window or on the item last selected. Pop-up menus also
+provide access to modal display and processing options. This feature is
+highly recommended, since it lists the most common actions based on the
+current context.
+
+The vertical splitter bar can be used to increase or decrease the width
+of the Navigator window. The horizontal splitter bar likewise determines
+how the main working window and informational window share the full
+application window height. You can double-click on the splitter bar to
+quickly reset it to its last position.
+
+Interface differences between Developer and Run-time Environments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Virtual Machine interface used in QUEST is nearly identical to the
+one used in GENER and CERUN, with the following differences.
+
+-  QUEST supports a single Virtual Machine simulation window only.
+
+   \
+
+-  QUEST does not include the Tools/Holders/Heads dialog, nor does it
+   include the Parts/Fixtures dialog, nor is it concerned with
+   Fixture/Length/Diameter compensations defined in the simulation
+   Controller, nor concerned with setups as defined in the simulation
+   Manager. These types of information are stored (using GENER or CERUN)
+   in the verification setup (.vsw) file associated with the part
+   program.
+
+   \
+
+-  QUEST is primarily concerned with machine components and kinematics,
+   which are stored in the database (.dbf) file as a part of the model.
+   QUEST also stores the preferred Grid setup, Lighting arrangement and
+   predefined camera positions with the model. Selecting the Reset
+   button in Lighting and Grid dialogs inside QUEST resets to safe
+   defaults.
+
+   \
+
+-  GENER and CERUN on the other hand cannot change the model or its
+   kinematics. They use the Grid, Lighting and camera definitions from
+   the model as default values. Changes made in GENER and CERUN to these
+   features are saved in the verification setup (.vsw) file. Selecting
+   the Reset button in Lighting and Grid dialogs inside GENER and CERUN
+   resets these functions to their model defaults.
+
+   \
+
+-  QUEST shares the same “heads-up” display dialog as GENER and CERUN.
+   The HUD schemes are stored in the Windows Registry. QUEST is only
+   concerned with the current selected HUD colors and fonts, which it
+   uses during interactive component creation. You can edit or change
+   schemes from within QUEST (as you would from GENER and CERUN).
