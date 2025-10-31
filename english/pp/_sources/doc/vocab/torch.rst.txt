@@ -1,0 +1,13 @@
+.. _command_torch:
+
+The TORCH Command :kbd:`[PC]`
+=============================
+
+The TORCH command is used to control the torch status. It is
+available with punch press machines with contouring attachments and
+contouring machines that are of type “Flame”.
+
+   :math:`\textbf{TORCH /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+Specify TORCH/ON to start the cutting process. Specify TORCH/OFF to
+stop the cutting process.
