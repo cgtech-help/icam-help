@@ -1,0 +1,338 @@
+.. _tooling_variables:
+.. _var_cutter:
+.. index:: Variables; $CUTTER
+.. _var_fh:
+.. index:: Variables; $FH
+.. _var_h:
+.. index:: Variables; $H
+.. _var_hi:
+.. index:: Variables; $HI
+.. _var_hp:
+.. index:: Variables; $HP
+.. _var_hldsiz:
+.. index:: Variables; $HLDSIZ
+.. _var_hldtab:
+.. index:: Variables; $HLDTAB
+.. _var_hs:
+.. index:: Variables; $HS
+.. _var_lh:
+.. index:: Variables; $LH
+.. _var_nh:
+.. index:: Variables; $NH
+.. _var_stoolx:
+.. index:: Variables; $STOOLX
+.. _var_stooly:
+.. index:: Variables; $STOOLY
+.. _var_stoolz:
+.. index:: Variables; $STOOLZ
+.. _var_td:
+.. index:: Variables; $TD
+.. _var_tlmerge:
+.. index:: Variables; $TLMERGE
+
+Tooling Variables
+=================
+
+There is a built-in limit of 200 tools
+that can be recorded, after which processing will fail if new tools
+are attempted to be defined or loaded.
+
+.. _var_ft:
+.. index:: Variables; $FT
+
++------------------+------------------------------------------+
+| **$FT**          | First tool number                        |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the first tool number used in the program,
+   or 0 if a tool has not been loaded yet.
+
+.. _var_lt:
+.. index:: Variables; $LT
+
++------------------+------------------------------------------+
+| **$LT**          | Last tool loaded (<1:?)                  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the tool ID or pocket number of the last
+   (i.e., previous) tool loaded.
+
+.. _var_nt:
+.. index:: Variables; $NT
+
++------------------+------------------------------------------+
+| **$NT**          | Next tool to be loaded (<1:?)            |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the tool ID or pocket number for the next tool
+   to be loaded.
+   It has the same value as $TS (i.e., preselected tool number).
+
+.. _var_t:
+.. index:: Variables; $T
+
++------------------+------------------------------------------+
+| **$T**           | Current tool loaded (<1:?)               |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the tool ID or pocket number (depending upon
+   the machine type) for the currently loaded tool. Although the $T
+   variable can be set within macros, it will have a limited effect.
+
+.. _var_ti:
+.. index:: Variables; $TI
+
++------------------+------------------------------------------+
+| **$TI**          | Current tool index                       |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable can be used as a row number index into the $TLSUM,
+   $TLTAB, $TLMIN and
+   $TLMAX tables. It will be set to 1 if a tool is not loaded (i.e., the
+   $TL\ *xxx* row number for the dummy tool). Otherwise, it will be set
+   to the $TL\ *xxx* row for the currently loaded tool. For example, the
+   tool number of the current tool can be obtained by the expression:
+   $TLTAB(1,$TI).
+
+.. _var_tlmax:
+.. index:: Variables; $TLMAX
+.. _var_tlmin:
+.. index:: Variables; $TLMIN
+
++------------------+------------------------------------------+
+| **$TLMAX**       | Maximum tool travel table                |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+| **$TLMIN**       | Minimum tool travel table                |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   These tables contain maximum and minimum axes travel information for
+   each tool. The tables are organized as $TLMAX(*column,row*) and
+   $TLMIN(*column,row*), where each row contains information for a
+   specific tool and each column contains the travel for each of the 15
+   possible machine axes, as follows (only $TLMAX shown):
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  $TLMAX(1-3,\ *n*)
+            -  X, Y and Z linear axes
+         *  -  $TLMAX(4-6,\ *n*)
+            -  U, V and W secondary linear axes
+         *  -  $TLMAX(7-9,\ *n*)
+            -  A’, B’ and C’ rotary table axes
+         *  -  $TLMAX(10-12,\ *n*)
+            -  A, B and C rotary head axes
+         *  -  $TLMAX(13,\ *n*)
+            -  Extending (quill) axis
+         *  -  $TLMAX(14-15,\ *n*)
+            -  N1 and N2 removable rotary head axes
+
+   Row 1 contains travel for the entire program to date. Rows 2 and
+   later contain travel information for specific tools. The number of
+   rows is defined by $TLSIZ. Use the $TI variable as a row index to
+   access travel information for the current tool.
+
+   Travel information represents the travel to the current point in the
+   program. A value of $NULL indicates that the axes has not moved or
+   been referenced in a motion block.
+
+.. _var_tlname:
+.. index:: Variables; $TLNAME
+
++------------------+------------------------------------------+
+| **$TLNAME**      | Current tool name                        |
+|                  |                                          |
+|                  | Type: String, Read/Write                 |
++------------------+------------------------------------------+
+
+   This variable can optionally be set in macros to identify the name of
+   the next tool to be loaded.
+   The $TLNAME variable will be automatically cleared after a tool change,
+   but the tool name will be retained in the $TLTAB table.
+
+.. _var_tlsiz:
+.. index:: Variables; $TLSIZ
+
++------------------+------------------------------------------+
+| **$TLSIZ**       | Size of tooling tables                   |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable indicates the number of tool entries in the $TL\ *xxx*
+   tables.
+
+.. _var_tlsort:
+.. index:: Variables; $TLSORT
+
++------------------+------------------------------------------+
+| **$TLSORT**      | $TLTAB sort column                       |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable controls the row sorting order of the $TLTAB and
+   related $TLMIN, $TLMAX and $TLSUM tables.
+   By default these tables are not sorted, instead listing tools in
+   the order that they were first defined
+   in the MCD.
+   Changing the sort order of the tooling tables also affects the order
+   in which they are listed in the CERUN listing file tool summary.
+   $TLSORT can be set as follows:
+
+   :+n: Sort tooling information by the specified $TLTAB column number *n* (1-50).
+   : 0: Do not sort tooling information; list in the order as defined in the program.
+   :–n: Sort only the listing tool summary by the specified $TLTAB column number \|\ *n\|.*
+
+.. _var_tlsum:
+.. index:: Variables; $TLSUM
+
++-----------------+------------------------------------------+
+| **$TLSUM**      | Tool summary table                       |
+|                 |                                          |
+|                 | Type: Numeric, Read-only                 |
++-----------------+------------------------------------------+
+
+   This table contains timing and feed information for all tools defined
+   in the program. The table is organized as $TLSUM(*column,row*), where
+   each row contains information for a specific tool and each column
+   contains a specific type of summary information, as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  $TLSUM(1,\ *n*
+            -  Total feed time (in seconds)
+         *  -  $TLSUM(2,\ *n*)
+            -  Total positioning time (in seconds)
+         *  -  $TLSUM(3,\ *n*)
+            -  Total of all other time (in seconds)
+         *  -  $TLSUM(4,\ *n*)
+            -  Minimum feed rate (in uPM)
+         *  -  $TLSUM(5,\ *n*)
+            -  Maximum feed rate (in uPM)
+         *  -  $TLSUM(6,\ *n*)
+            -  Minimum spindle speed (in RPM)
+         *  -  $TLSUM(7,\ *n*)
+            -  Maximum spindle speed (in RPM)
+
+   Row 1 is reserved for the dummy tool. Other tools appear at rows 2
+   and later in the order in which they were defined in the program. The
+   number of rows is defined by $TLSIZ. Use the $TI variable as a row
+   index to access summary information for the current tool. The minimum
+   and maximum feed rate values are initialized to 10000 and –1
+   respectively, and are recorded at the endpoint of each motion. The
+   minimum and maximum spindle speeds are initialized to zero, and are
+   recorded at the endpoint of each motion if the spindle is turning.
+
+.. _var_tltab:
+.. index:: Variables; $TLTAB
+
++------------------+------------------------------------------+
+| **$TLTAB**       | Tool table                               |
+|                  |                                          |
+|                  | Type: Numeric/String, Read/Write         |
++------------------+------------------------------------------+
+
+   This table contains tool information for all tools defined in the
+   program. The table is organized as
+
+   $TLTAB(*column,row*), where each row contains information for a
+   specific tool and each column contains a specific type of tool
+   information, as follows:
+
+      .. list-table::
+         :widths: auto
+         :header-rows: 0
+         :class: wrap-last
+
+         *  -  $TLTAB(1,\ *n*)
+            -  Tool number
+         *  -  $TLTAB(2-4,\ *n*)
+            -  Unused
+         *  -  $TLTAB(5,\ *n*)
+            -  OSETNO value, $NULL:NA
+         *  -  $TLTAB(6,\ *n*)
+            -  Tool length
+         *  -  $TLTAB(7-8,\ *n*)
+            -  Unused
+         *  -  $TLTAB(9,\ *n*)
+            -  Tool ID (same as tool number)
+         *  -  $TLTAB(10,\ *n*)
+            -  Unused
+         *  -  $TLTAB(11,\ *n*)
+            -  Tool diameter
+         *  -  $TLTAB(12-19,\ *n*)
+            -  Unused
+         *  -  $TLTAB(20,\ *n*)
+            -  Tool name (string)
+         *  -  $TLTAB(21-50,\ *n*)
+            -  Available for use
+
+   Row 1 is reserved for the dummy tool. Other tools appear at rows 2
+   and later, by default in the order in which they were defined in the
+   program. The number of rows is defined by $TLSIZ. Use the $TI
+   variable as a row index to access tooling information for the current
+   tool. $TLSORT can affect the row ordering. There is a built-in limit
+   of 200 rows (i.e. tools) that can be recorded, including the dummy
+   tool, after which further new tool definitions will be ignored with
+   an error.
+
+   The table is writable.
+   Columns 21 through 50 are currently not used for any built-in purpose
+   and therefore are available to store information of any type
+   (including SEQUENCE).
+
+.. _var_toz:
+.. index:: Variables; $TOZ
+
++------------------+------------------------------------------+
+| **$TOZ**         | Tool offset in the Z direction (length)  |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the tool offset in Z (i.e., the tool length).
+
+.. _var_tp:
+.. index:: Variables; $TP
+
++------------------+------------------------------------------+
+| **$TP**          | Current tool pocket number               |
+|                  |                                          |
+|                  | Type: Numeric, Read-only                 |
++------------------+------------------------------------------+
+
+   This variable contains the pocket number for the tool that is
+   currently loaded.
+   It has the same value as $T (i.e., current tool loaded).
+
+.. _var_ts:
+.. index:: Variables; $TS
+
++------------------+------------------------------------------+
+| **$TS**          | Preselected tool number (<1:?)           |
+|                  |                                          |
+|                  | Type: Numeric, Read/Write                |
++------------------+------------------------------------------+
+
+   This variable contains the number of last tool selected. If the value
+   is less than one (1), no tool has been preselected.
