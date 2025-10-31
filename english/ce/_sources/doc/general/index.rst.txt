@@ -1,0 +1,27 @@
+.. _general_information:
+
+General Information
+*******************
+
+This chapter provide a general overview of Control Emulator and describes its two main applications:
+The first is QUEST, a questionnaire based control emulator developer; the second is CERUN, the
+run-time CNC machine NC program (i.e., G code) simulator.
+
+.. toctree::
+   :hidden:
+
+   aboutce
+   questcerun
+   portal
+
+-  :ref:`“About Control Emulator”<about_ce>` provides a brief description of Control Emulator and the types of CNC machines it supports.
+
+   \
+
+-  :ref:`“About QUEST and CERUN”<about_quest_cerun>` provides a brief description about
+   the QUEST and CERUN software applications that make up Control Emulator.
+
+   \
+
+-  :ref:`“About the ICAM Portal”<about_portal>` describes the operation of the ICAM
+   Portal, which is a utility that manage all things ICAM related.
