@@ -1,0 +1,266 @@
+Display Functions
+=================
+
+Display functions control how the simulation is viewed and captured.
+These functions allow you to adjust the camera position, configure visual settings, and capture snapshots of the simulation environment.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 0
+      :class: wrap-last
+
+      *  -  :ref:`$FMSTPS<func_fmstps>`
+         -  Set tool path trace line style
+      *  -  :ref:`$FMSCMRA<func_fmscmra>` 
+         -  Set camera position and/or display settings
+      *  -  :ref:`$FMSPIC<func_fmspic>`
+         -  Take a picture of the simulation
+
+.. _func_fmstps:
+.. index:: Functions; $FMSTPS
+
+.. |fmstps0| image:: ../../media/fmstps0.png
+.. |fmstps1| image:: ../../media/fmstps1.png
+.. |fmstps2| image:: ../../media/fmstps2.png
+.. |fmstps3| image:: ../../media/fmstps3.png
+.. |fmstps4| image:: ../../media/fmstps4.png
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSTPS(**\ *...*\ **)**                     | Sets tool path tracing properties                 |
+|                                                |                                                   |
+|                                                | Returns: Numeric (always returns 1)               |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSTPS}\boldsymbol{(}\, red,green,blue\, \Big[,width\, \big[,pattern\,\big]\Big] \,\boldsymbol{)}`
+
+   The first form of this function sets the Simulation window tool path
+   tracing color, width and pattern, overriding the default tracing format.
+   The *red*, *green* and *blue* parameters are values in the range 0-255,
+   specifying the intensity of the three different color components that
+   when combined will produce the desired color. The *width* of the trace
+   can be specified in screen pixels, in the range 1-5 (default is 1). A
+   drawing *pattern* can also be specified, in the range 0-5 (default is 0).
+
+   :0: |fmstps0|
+   :1: |fmstps1|
+   :2: |fmstps2|
+   :3: |fmstps3|
+   :4: |fmstps4|
+   :5: *transparent*
+
+   \
+
+      :math:`\mathit{result} = \mathbf{\$FMSTPS}\boldsymbol{(} \begin{array}{l} \mathbf{ON} \\ \mathbf{OFF} \end{array} \boldsymbol{)}`
+
+   The second form of the $FMSTPS function enables or disables custom tool
+   path styling. When enabled (ON), VM will output tool path tracing in the
+   style last defined. When disabled (OFF), VM will output tool path
+   tracing in the default style as defied in the Simulation»Options dialog
+   Tool Path tab.
+
+.. _func_fmscmra:
+.. index:: Functions; $FMSCMRA
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSCMRA(**\ *...*\ **)**                    | Set the Simulation window viewpoint               |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSCMRA}\boldsymbol{(} \big[\,n,\big] \, \Big[\,'property\,', value \big[,... \big]\Big] \,\boldsymbol{)}`
+
+   This function can be used to set the Simulation window viewpoint to a
+   predefined model camera position, equivalent to selecting one of the
+   CTRL 0 through CTRL 9 hot-key combinations. Specify the camera position
+   using a whole number *n* in the range 0-9. No camera motion is taken if
+   the predefined position has not been defined.
+
+   This function can also be used to set various Simulation window display
+   settings, by optionally specifying a series of display property names
+   and desired property values. Property name keyword(s) are case
+   insensitive strings that can be abbreviated to the bolded text as shown
+   in the table below. Property values with a few exceptions are numeric.
+   Names and values can be specified as any combination of variables and/or
+   constants, including sequences.
+
+   .. list-table::
+      :widths: auto
+      :header-rows: 1
+      :class: wrap-last
+
+      *  -  Menu setting
+         -  Property name
+         -  Values(s)
+      *  -  Camera»Fit
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.FI`:mono:`T`
+         -  -1:as-is, 0:default,  *n*:$FMSID of object(s) to fit in view (multiple IDs permitted)
+      *  -  Camera»Center
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.C`:mono:`ENTER`
+         -  -1:as-is, 0:default,  *n*:$FMSID of object(s) to center in view (multiple IDs permitted)
+      *  -  Camera»Pivot
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.PI`:mono:`VOT`
+         -  -1:as-is, 0:default,  *n*:$FMSID of object(s) to pivot around (multiple IDs permitted)
+      *  -  Camera»Attach
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.A`:mono:`TTACH`
+         -  -1:as-is, 0:default, *n*:$FMSID of object to attach camera to
+      *  -  Camera»Perspective
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.PE`:mono:`RSPECTIVE`
+         -  -1:as-is, 0:orthogonal, 1:perspective
+      *  -  Camera»Front
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.FR`:mono:`ONT`
+         -  -1:as-is, 0:unlock, 1:lock
+      *  -  Camera»Back
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.BA`:mono:`CK`
+         -  -1:as-is, 0:unlock, 1:lock
+      *  -  Camera»Top
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.T`:mono:`OP`
+         -  -1:as-is, 0:unlock, 1:lock
+      *  -  Camera»Bottom
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.BO`:mono:`TTOM`
+         -  -1:as-is, 0:unlock, 1:lock
+      *  -  Camera»Left
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.LE`:mono:`FT`
+         -  -1:as-is, 0:unlock, 1:lock
+      *  -  Camera»Right
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.R`:mono:`IGHT`
+         -  -1:as-is, 0:unlock, 1:lock
+      *  -  Camera»Load
+         -  :boldmono:`C`:mono:`AMERA`:boldmono:`.LO`:mono:`AD`
+         -  -1:as-is, 0-9:predefined, *n*:$FMSCMRA return value
+      *  -  Show»Wireframe
+         -  :boldmono:`W`:mono:`IREFRAME`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Tool Path
+         -  :boldmono:`T`:mono:`OOL`:boldmono:`.P`:mono:`ATH`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Tool Vector  
+         -  :boldmono:`T`:mono:`OOL`:boldmono:`.V`:mono:`ECTOR`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Tool Path as Overlay
+         -  :boldmono:`T`:mono:`OOL`:boldmono:`.O`:mono:`VERLAY`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»Machine
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.M`:mono:`ACHINE`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»Tools
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.T`:mono:`OOLS`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»Fixtures
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.F`:mono:`IXTURES`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»Stock
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.S`:mono:`STOCK`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»Parts
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.P`:mono:`ARTS`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»In-process Stock
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.I`:mono:`STOCK`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Filters»Stock Checkpoints
+         -  :boldmono:`F`:mono:`ILTERS`:boldmono:`.C`:mono:`HECKPOINTS`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»XY Plane Grid
+         -  :boldmono:`G`:mono:`RID`:boldmono:`.X`:mono:`YPLANE`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»YZ Plane Grid
+         -  :boldmono:`G`:mono:`RID`:boldmono:`.Y`:mono:`ZPLANE`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»ZX Plane Grid
+         -  :boldmono:`G`:mono:`RID`:boldmono:`.Z`:mono:`XPLANE`
+         -  -1:as-is, 0:off, 1:on
+      *  -  *na*
+         -  :boldmono:`G`:mono:`RID`
+         -  -1:as-is, 0:off,  *n*:$FMSID of grid reference
+      *  -  Show»Axes Marker
+         -  :boldmono:`A`:mono:`XES`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Kinematics
+         -  :boldmono:`K`:mono:`INEMATICS`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Workpiece Reference
+         -  :boldmono:`R`:mono:`EFERENCE`:boldmono:`.W`:mono:`ORKPIECE`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Tool Reference
+         -  :boldmono:`R`:mono:`EFERENCE`:boldmono:`.T`:mono:`OOL`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Safety
+         -  :boldmono:`SA`:mono:`FETY`
+         -  -1:as-is, 0:off, 1:on
+      *  -  Show»Display
+         -  :boldmono:`D`:mono:`ISPLAY`
+         -  -1:as-is, 0:off, 1:on, or scheme name (string)
+      *  -  Hide
+         -  :boldmono:`H`:mono:`IDE`
+         -  -1:as-is, 0:hide all, *n*:$FMSID of object(s) to hide (multiple IDs permitted)
+      *  -  Show
+         -  :boldmono:`S`:mono:`HOW`
+         -  -1:as-is, 0:hide all, *n*:$FMSID of object(s) to show (multiple IDs permitted)
+      *  -  Options»Misc»World
+         -  :boldmono:`B`:mono:`ACKGROUND`:boldmono:`.T`:mono:`OP`
+         -  -1:as-is, 0-255:RGB (3 values), or $FMSCOLR name (string)
+      *  -  Options»Misc»World
+         -  :boldmono:`B`:mono:`ACKGROUND`:boldmono:`.B`:mono:`OTTOM`
+         -  -1:as-is, 0-255:RGB (3 values), or $FMSCOLR name (string)
+      *  -  Options»Misc»World
+         -  :boldmono:`B`:mono:`ACKGROUND`
+         -  sets both TOP and BOTTOM
+      *  -  Options»Tool Path»Trace
+         -  :boldmono:`T`:mono:`OOL`:boldmono:`.T`:mono:`RACE`
+         -  -1:as-is, 0:Tool tip, 1:SCP
+      *  -  Options»Tool Path»Mode
+         -  :boldmono:`T`:mono:`OOL`:boldmono:`.M`:mono:`ODE`
+         -  -1:as-is, 0:off, 1:all, 2:seconds, 3:tools, 4:operations; optional 2\ :sup:`nd` parameter specifies seconds|tools|operations value (-1:as-is)
+
+   If successful, this function returns a positive numeric value
+   identifying the camera position and state before changes were applied.
+   This returned value can be used in place of the predefined position *n*
+   in a later call to $FMSCMRA, to reset the camera position and display
+   settings back to their original settings.
+
+.. _func_fmspic:
+.. index:: Functions; $FMSPIC
+
++------------------------------------------------+---------------------------------------------------+
+| **$FMSPIC(**\ *...*\ **)**                     | Takes a picture of the simulation window          |
+|                                                |                                                   |
+|                                                | Returns: Numeric                                  |
++------------------------------------------------+---------------------------------------------------+
+
+      :math:`\mathit{result} = \mathbf{\$FMSPIC}\boldsymbol{(}
+      \big[\, width,height \,\big] \,
+      \big[,\mathit{file}\,\big] \,
+      \big[,\mathbf{TIME},s\,\big] \,
+      \big[,\mathbf{CAMERA},\ldots\big]
+      \,\boldsymbol{)}`
+
+   This function takes a picture of the simulation window. All parameters
+   are optional, but if specified they must be in the order shown above.
+
+   If an optional *width* and *height* are specified and both are positive
+   values, then the image will have the specified dimensions in pixels. The
+   simulation window will not be affected nor need it be visible when
+   picture dimensions are specified.
+
+   An optional *file* parameter (string variable or constant) can be
+   specified to override the default directory and/or file name for the
+   resulting PNG formatted picture. If *file* is omitted or does not
+   specify a directory, then pictures will be saved in the folder
+   identified by the ``vm_picture_dir`` configuration (i.e., DEF file)
+   variable. If this variable is not defined or is blank, then pictures
+   will be saved in the user's “Pictures\\ICAM\\260” folder. If *file* is
+   omitted or does not specify a file name, then pictures will be saved in
+   “pic\ *nnn*.png” files where “\ *nnn*\ ” is a unique 3-digit value.
+
+   An optional TIME,\ *s* couplet can be specified to take a picture of the
+   simulation at an earlier moment time (where *s* is measured in seconds
+   from the start of the simulation).
+
+   An optional CAMERA parameter list can be used to temporarily set the
+   camera and display settings to desired values before taking the picture.
+   The original camera and display settings will be restored after the
+   picture is taken. See the :ref:`$FMSCMRA function<func_fmscmra>` for a list of
+   available settings.
+
+   This function returns a value of 1 if a picture was taken; otherwise a
+   value of 0 (zero) is returned to indicate failure.
