@@ -1,0 +1,409 @@
+.. _cldata_parsing_functions:
+
+CL Data Parsing Functions
+=========================
+
+The CL data parsing functions provide access to the last CL record
+read by GENER during normal processing, or from within a macro using
+the TAPERD or $FGET command. Note that the TAPEWT and CLPUT commands
+will modify the content of the current CL record.
+
+Each CL record contains a header section and an optional data
+section. The header section consists of three values, which are the
+CL record number, CL class code and CL subclass code. These can be
+accessed using the $FCLREC, $FCLASS and $FSUBCL functions. The size
+and meaning of the data section varies depending on the record class
+and subclass. The individual arguments can be accessed using the $FCL
+function; a list of arguments can be accessed using the $FCLS
+function; the number of arguments is determined using the $FSIZE
+function.
+
+Note that GENER supports International Standard ISO 3592 CL data.
+User’s are encouraged to consult this standard for more information
+on CL data record formats.
+
+.. _func_fcl:
+.. index:: Functions; $FCL
+
++------------------------------------------------+------------------------------------------+
+| **$FCL(**\ *n*\ **)**                          | Extract an argument from a CL record     |
+|                                                |                                          |
+|                                                | Returns: Any                             |
++------------------------------------------------+------------------------------------------+
+
+   The $FCL function returns the value of the *n*\ th argument of the
+   data portion of the last CL record read.
+
+.. _func_fclinfo:
+.. index:: Functions; $FCLINFO
+
++-----------------------------------------------------------------+--------------------------+
+| **$FCLINFO(**\ [ALL,TOOL\|(ID\|CLREC),n)][[,start],end]\ **)**  | Generate CL file map     |
+|                                                                 |                          |
+|                                                                 | Returns: Sequence        |
++-----------------------------------------------------------------+--------------------------+
+
+   The $FCLINFO function can generate a CL file map showing how the manufacturing
+   process is organized into different operations and how the tools are
+   utilized.
+   When $FCLINFO(TOOL) is called the actions are the same as when calling the
+   :ref:`$FTLTAB function<func_ftltab>` but the returned sequence is as described below.
+   When $FCLINFO(ALL) is specified (default) the scan collects other
+   information about the CL file in addition to tooling
+   information.
+   The $FCLINFO function returns a sequence as follows:
+
+   :*Index*:   *Description*
+   :1: the number of collected operations
+   :2: the Cl record number of the first collected operation
+   :3: the number of collected tools
+   :4: not used
+   :5: not used
+   :6: $TLTAB location of the first collected tool
+   :…: $TLTAB location of the following tool
+   :n: $TLTAB location of the last collected tool
+
+   For example, if $FCLINFO([ALL]) is called at the start of the program (e.g.,
+   from the Machine Startup macro) as follows:
+
+      ::
+
+         OPTCOUNT=$FCLINFO()
+
+   then later, other data can be retrieved on an operation by operation basis by calling:
+
+      ::
+
+         OPTDATA=$FCLINFO((ID|CLREC),n)
+
+   The OPDATA sequence holds the description of the OPTYPE operation located at
+   ID==\ *n* in the last searched CL range. The specified number *n* must be
+   within the range:
+
+      1 <= *n* <= OPTCOUNT(1)
+
+   When CLREC,*n* is specified then the function will return the description of an
+   operation OPTYPE found at the CL record *n*.
+
+   The following information for each scanned operation is provided:
+
+   :*Index*:   *Description*
+   : 1:  ID number of the found operation (1,2,...)
+   : 2:  CL record number of the related OPTYPE command
+   : 3:  CL record number of the next operation (0: not found) [#f1]_
+   : 4:  OPTYPE coded operation type (same as :ref:`$OPTYPE<var_optype>`) [#f2]_
+   : 5:  Calculated operation type: 3, 32, 320, 5 [#f3]_
+   : 6:  Cycle type (same as :ref:`$CYTYPE<var_cytype>`)
+   : 7:  CL record number of the first cutting motion in operation
+   : 8:  CL record number of the last cutting motion in operation
+   : 9:  Set to 1 of the last cut is followed by RAPID before a tool change [#f4]_
+   :10: $TLTAB id of the tool active at the first cut [#f5]_
+   :11: Operation name [#f6]_
+
+   Additional comments concerning the above:
+
+   .. [#f1] OPDATA(3) This is the CL record number of next OPTYPE found in CL file
+       following the current operation. The number is <0 if there is no
+       following OPTYPE command.
+   .. [#f2] OPDATA(4) is the type as coded on command and OPDATA(5) is type based on
+       analysis of motions following operation start. The analysis of operation
+       motions continues until the operation type is fully determined.
+   .. [#f3] OPDATA(5) Type of operation calculated based on the IJK tool axis vector
+       positions: 3-tool axis is parallel to the Z-axis; 32-tool axis vector
+       is not moving but is not parallel to the Z-axis; 320-there are multiple
+       groups of cutting motion, each group has constant IJK but direction may
+       differ between groups; 5-countinuous multi-axis motions has been detected.
+   .. [#f4] OPDATA(9) indicates if there is a RAPID GOTO between last cut and the
+       LOADTL or GOHOME command.
+   .. [#f5] OPDATA(10) returns the $TLTAB() location of the tool active in the operation.
+       “Active in the operation” is considered as the tool active at the first
+       cutting motion in the operation.
+   .. [#f6] OPDATA(11) holds operation name as declared by OPNAME command preceding
+       OPTYPE command.
+
+   The recommended usage is to execute OPCOUNT=$FCLINFO() in the Machine Startup
+   macro. Later, as needed, execute OPDATA=$FCLINFO(CLREC,*cln*) or
+   OPDATA=$FCLINFO(ID,*id*). These will retrieve the information for a particular
+   operation.
+
+   Some further notes:
+
+   1. The use of variable names OPCOUNT and OPDATA in the examples
+      above is arbitrary; any variable names can be used.
+   2. The $FCLINFO function is not executed when called from a macro
+      that is being processed while look-ahead is active. However $FCLINFO
+      will be executed when called during $FLOOK processing.
+   3. The OE operation event macro does not run when $FCLINFO processes
+      an OPTYPE command, since $FCLINFO is simply gathering operational
+      information and not actually processing the operations.
+   4. $TCLINFO uses the OPTYPE command to recognize operations.
+
+.. _func_fclass:
+.. index:: Functions; $FCLASS
+
++------------------------------------------------+------------------------------------------+
+| **$FCLASS( )**                                 | CL record class code                     |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   Returns the class code of the last CL record read. For ISO standard
+   CL files, the record class is a whole number in units of 1000. GENER
+   recognizes the following class numbers:
+
+      +---------+---------------------------------------------------------------+
+      |**Class**| **Description**                                               |
+      +=========+===============================================================+
+      | 1000    | ISN number identification                                     |
+      +---------+---------------------------------------------------------------+
+      | 2000    | Post-processor command                                        |
+      +---------+---------------------------------------------------------------+
+      | 3000    | Circular drive surface description                            |
+      +---------+---------------------------------------------------------------+
+      | 5000    | FROM, GODLTA and GOTO motion                                  |
+      +---------+---------------------------------------------------------------+
+      | 6000    | CUT, DNTCUT, CUTTER, INTOL, OUTTOL and TOLER commands         |
+      +---------+---------------------------------------------------------------+
+      | 9000    | UNITS, MULTAX and TLAXIS commands                             |
+      +---------+---------------------------------------------------------------+
+      | 13000   | Error detected when converting CAM CL file is ICAM binary     |
+      +---------+---------------------------------------------------------------+
+      | 14000   | FINI record (end-of-file)                                     |
+      +---------+---------------------------------------------------------------+
+      | 15000   | Unsegmented circular and spline motion                        |
+      +---------+---------------------------------------------------------------+
+
+.. _func_fclrec:
+.. index:: Functions; $FCLREC
+
++------------------------------------------------+------------------------------------------+
+| **$FCLREC()**                                  | CL record number                         |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   Returns the record number of the last CL record input.
+
+.. _func_fcls:
+.. index:: Functions; $FCLS
+
++------------------------------------------------+---------------------------------------------+
+| **$FCLS(**\ [*n1* [*,n2*]]\ **)**              | Extract multiple arguments from a CL record |
+|                                                |                                             |
+|                                                | Returns: Sequence                           |
++------------------------------------------------+---------------------------------------------+
+
+   The $FCLS function returns the values of the arguments *n1* (start of
+   record by default) through *n2* (end of record by default) of the
+   data portion of the last CL record read. The return value is a
+   sequence.
+
+.. _func_feof_cldata:
+.. index:: Functions; $FEOF_CLDATA
+
++------------------------------------------------+------------------------------------------+
+| **$FEOF( )**                                   | Test for end-of-file in CL data          |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   If the $FEOF function is called without arguments, it tests the
+   end-of-file status of the input CL file. It returns $TRUE if the
+   current CL record is a FINI record and $FALSE otherwise.
+
+   Note that this function can be called with an argument to test
+   for an end-of-file on any unit. See the :ref:`$FEOF function<func_feof>`
+   in :ref:`“File and Directory Functions”<file_directory_functions>`.
+
+.. _func_fget:
+.. index:: Functions; $FGET
+.. _func_fgetr:
+.. index:: Functions; $FGETR
+
++--------------------------------------------------+-------------------------------------------+
+| **$FGET(**\ *record* [*,start* [*,end*]]\ **)**  | Search forwards for a matching CL record  |
+|                                                  |                                           |
+|                                                  | Returns: Numeric                          |
++--------------------------------------------------+-------------------------------------------+
+| **$FGETR(**\ *record* [*,start* [*,end*]]\ **)** | Search backwards for a matching CL record |
+|                                                  |                                           |
+|                                                  | Returns: Numeric                          |
++--------------------------------------------------+-------------------------------------------+
+
+   The $FGET function searches forward in the CL file and the $FGETR
+   function searches backward in the CL file, looking for a record that
+   matches the one (or ones) defined by the *record* argument. Either a
+   single record or a sequence of records can be specified. The order of
+   records in the sequence is not important; the search ends at the
+   first CL record matching any of the listed records. A record can be
+   defined either by its Major word, or by using a string regular
+   expression (RE) that is matched against the ASCII representation of
+   the binary record (i.e., as is shown in the run-time Source window).
+   See  :ref:`the $FEDIT function<func_fedit>` for a description of RE’s.
+
+   The search starts at the current CL file record if the optional
+   parameter *start* is not specified or is specified as 0 (zero). An
+   $FGET search ends at the end of the CL file or the record designated
+   by *end* if specified. An $FGETR search ends at the start of the CL
+   file or the record designated by *end* if specified. The functions
+   return the CL record number of the first matching record. If the
+   function returns 0, no matching record was found.
+
+   All of the CL file parsing functions can be used to examine the
+   contents of the record. The TAPEWT function can be used to process
+   the record. These functions do not affect the current CL file
+   location.
+
+   Examples:
+
+      ::
+
+         %L01=$FGET({LOAD,LOADTL,TURRET},0,$FCLREC()+20)
+
+   will search the CL file for LOAD, LOADTL and TURRET commands,
+   starting at the current record and ending 20 records beyond. %L01
+   will contain the CL record number of the first command found, or 0 if
+   none were found.
+
+      ::
+
+         %L01=$FGET('CUTCOM.*ADJUST')
+
+   will search the CL file for a CUTCOM command containing the word
+   ADJUST, starting at the current record and ending at FINI. %L01 will
+   contain the first matching CL record number, or 0.
+
+.. _func_fgetarg:
+.. index:: Functions; $FGETARG
+
++------------------------------------------------+--------------------------------------------+
+| **$FGETARG(**\ *minor_word*\ **)**             | Find value associated with keyword couplet |
+|                                                |                                            |
+|                                                | Returns: Keyword, Numeric or String        |
++------------------------------------------------+--------------------------------------------+
+
+   The $FGETARG function returns the couplet value associated with a
+   minor word. A value of
+   $NULL is returned if the keyword is not found in the current CL
+   record. For example, if the following CL file record is being
+   processed by a macro:
+
+      ::
+
+         CYCLE/DRILL,DEPTH,1.25,IPM,20,CLEAR,.15
+
+   and a macro command such as
+
+     ::
+
+        %L01=$FGETARG(IPM)
+
+   was issued, the variable %L01 would contain the value 20, which is
+   the couplet value associated with the minor word IPM. If the minor
+   word is NOW was used, the function would return $NULL.
+
+.. _func_fgetsb:
+.. index:: Functions; $FGETSB
+
++------------------------------------------------+------------------------------------------+
+| **$FGETSB(**\ [*,start* [*,end*]]\ **)**       | Get stock boundary from CL feed motions  |
+|                                                |                                          |
+|                                                | Returns: Sequence                        |
++------------------------------------------------+------------------------------------------+
+
+   This function searches in the CL file for feed motion records and
+   returns a sequence of 6 values defining the CL *xyz* coordinate
+   minimum and maximum bounds as follows { xmin, ymin, zmin, xmax, ymax,
+   zmax }.
+
+   The search starts at the current CL file record if the optional
+   parameter *start* is not specified or is specified as 0 (zero). The
+   search ends at the end of the CL file or the record designated by
+   *end* if specified.
+
+   An empty sequence { } is returned if no feed motions are found.
+
+   For example, the following macro code outputs the workpiece blank
+   dimensions as expected by a Heidenhain Conversational controller:
+
+      ::
+
+         %L01=$FGETSB(1,0)
+         IF/$FLEN(%L01).GT.0
+           %L02=$FIK(%L01(1:3))
+           INSERT/'BLK FORM 0.1 Z !(@X) !(@Y) !(@Z)',%L02(1),%L02(2),%L02(3)
+           %L02=$FIK(%L01(4:6))
+           INSERT/'BLK FORM 0.2 !(@X) !(@Y) !(@Z)',%L02(1),%L02(2),%L02(3)
+         ENDOF/IF
+
+   Macro processing is not enabled during $FGETSB look-ahead processing.
+
+.. _func_fsize:
+.. index:: Functions; $FSIZE
+
++------------------------------------------------+------------------------------------------+
+| **$FSIZE( )**                                  | Size of CL record                        |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   The $FSIZE function returns the number of arguments in the data
+   portion of the last CL record read. The expression $FCL($FSIZE())
+   will return the last argument of the CL record.
+
+.. _func_fsubcl:
+.. index:: Functions; $FSUBCL
+
++------------------------------------------------+------------------------------------------+
+| **$FSUBCL( )**                                 | CL record subclass code                  |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   Returns the subclass code of the last CL record input. GENER
+   recognizes the following subclass values associated with the class
+   numbers listed in the following table:
+
+       +-----------+--------------+---------------------------------------------+
+       | **Class** | **Subclass** | **Description**                             |
+       +===========+==============+=============================================+
+       | 1000      | n            | ISN number                                  |
+       +-----------+--------------+---------------------------------------------+
+       | 2000      | n            | Post-processor command major word code      |
+       +-----------+--------------+---------------------------------------------+
+       | 3000      | ?            | Circle drive surface, *subclass ignored*    |
+       +-----------+--------------+---------------------------------------------+
+       | 5000      | 3            | FROM                                        |
+       +           +--------------+---------------------------------------------+
+       |           | 5            | GOTO                                        |
+       +           +--------------+---------------------------------------------+
+       |           | 6            | CONT (Continuation of a GOTO)               |
+       +-----------+--------------+---------------------------------------------+
+       | 6000      | 0            | CUT                                         |
+       +           +--------------+---------------------------------------------+
+       |           | 1            | DNTCUT                                      |
+       +           +--------------+---------------------------------------------+
+       |           | 3            | TOLER                                       |
+       +           +--------------+---------------------------------------------+
+       |           | 4            | INTOL                                       |
+       +           +--------------+---------------------------------------------+
+       |           | 5            | OUTTOL                                      |
+       +           +--------------+---------------------------------------------+
+       |           | 6            | CUTTER                                      |
+       +-----------+--------------+---------------------------------------------+
+       | 9000      | 2            | MULTAX                                      |
+       +           +--------------+---------------------------------------------+
+       |           | 9            | UNITS                                       |
+       +           +--------------+---------------------------------------------+
+       |           | 10           | TLAXIS                                      |
+       +-----------+--------------+---------------------------------------------+
+       | 13000     | 3            | Traditional ARLEM error                     |
+       +           +--------------+---------------------------------------------+
+       |           | 901          | Error processing APT-like input             |
+       +-----------+--------------+---------------------------------------------+
+       | 14000     | *ignored*    | FINI                                        |
+       +-----------+--------------+---------------------------------------------+
+       | 15000     | 4,5          | MOVARC                                      |
+       +           +--------------+---------------------------------------------+
+       |           | 25           | Spline                                      |
+       +-----------+--------------+---------------------------------------------+
