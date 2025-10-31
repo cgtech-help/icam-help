@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>String Formatting &mdash; Control Emulator V26 26.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9d1847ac" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4e8aab9e"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>window.MathJax = {"tex": {"macros": {"icamrange": ["{\\scriptsize \\raise#1em\\hbox{#2:n}}\\!", 2]}}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../_static/custom.js?v=ccbe9243"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Macro System Variables" href="../variables/index.html" />
+    <link rel="prev" title="Control Emulator Macro Commands" href="cemacrocommands.html" />
+    <link href="../../_static/custom.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Control Emulator V26
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../front/copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front/using.html">Using this manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../section_intro.html">Control Emulator: Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/index.html">General Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../general/aboutce.html">About Control Emulator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../general/aboutce.html#types-of-machines-supported">Types of Machines Supported</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../general/questcerun.html">About QUEST and CERUN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general/portal.html">About the ICAM Portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install/index.html">Installation and Upgrade</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install/license.html">Licensing Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icam-key-server-connection-file">icam.key server connection file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/license.html#icamls-key-server-license-file">icamls.key server license file</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/server.html">License Server Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#new-license-server-installation">New license server installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#uninstall-the-license-server">Uninstall the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#repair-the-license-server">Repair the license server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/server.html#upgrade-the-license-server">Upgrade the license server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install.html">Control Emulator Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-usb-flash-drive">Installing from USB flash drive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#installing-from-download-link">Installing from download link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#new-control-emulator-installation">New Control Emulator installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#uninstall-control-emulator">Uninstall Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#modify-or-repair-control-emulator">Modify or Repair Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../install/install.html#upgrade-control-emulator-installation">Upgrade Control Emulator Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../install/dbupgrade.html">Database Upgrade Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config/index.html">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../config/configutil.html">The ICAM Configuration Utility</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#configuration-storage-and-application-data">Configuration Storage and Application Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-the-desktop">Starting CONFIG from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-a-command-prompt">Starting CONFIG from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#starting-config-from-quest-and-cerun">Starting CONFIG from QUEST and CERUN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/configutil.html#using-the-configuration-utility">Using the Configuration Utility</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/content.html">Installation Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#installation-directory">Installation directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/content.html#application-data-directory">Application Data Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../config/envvar.html">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config/deffile.html">The ICAM.DEF File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../section_quest.html">QUEST: Control Emulator Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../quest/index.html">QUEST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quest/startquest.html">Starting QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-the-desktop">Starting QUEST from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#starting-quest-from-a-command-prompt">Starting QUEST from a Command Prompt</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/startquest.html#qualifiers">qualifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#importing-control-emulators">Importing Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/startquest.html#creating-a-database-listing">Creating a Database Listing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/questinout.html">QUEST Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#the-icam-database">The ICAM Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#exported-imported-control-emulator">Exported/Imported Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#dedicated-control-emulators">Dedicated Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#basic-control-emulators">Basic Control Emulators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/questinout.html#the-quest-listing">The QUEST Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/questinout.html#html-listing-format">HTML Listing Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/questinout.html#standard-listing-format">Standard Listing Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/usingquest.html">Using QUEST</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#the-quest-interface">The QUEST Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#creating-a-new-control-emulator">Creating a New Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#control-emulator-definition">Control Emulator Definition</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest.html#creating-a-ce-linked-to-a-post-processor">Creating a CE linked to a Post-Processor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest.html#creating-a-ce-based-on-a-post-processor">Creating a CE based on a Post-Processor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest.html#creating-a-ce-from-scratch">Creating a CE from scratch</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/usingquest.html#specifying-a-pre-processor">Specifying a Pre-Processor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#questionnaire-chapters-and-sections">Questionnaire Chapters and Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#saving-and-generating-your-work">Saving and Generating your work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#testing-your-control-emulator">Testing your Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#modifying-an-existing-control-emulator">Modifying an Existing Control Emulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/usingquest.html#wrapping-up">Wrapping Up</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/icamdb.html">The ICAM Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#control-emulator-file-name-conventions">Control Emulator File Name Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/icamdb.html#the-database-navigator">The Database Navigator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#databases">Databases</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/icamdb.html#control-emulators">Control Emulators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/customization.html">Control Emulator Customization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#code-customization">Code Customization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#modifying-code-identifiers">Modifying Code Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#creating-custom-codes">Creating Custom Codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#deleting-custom-codes">Deleting Custom Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#data-customization">Data Customization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#modifying-data-identifiers">Modifying Data Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#creating-custom-data-identifiers">Creating Custom Data Identifiers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#deleting-custom-data-identifiers">Deleting Custom Data Identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#tape-editor">Tape Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#startup-shutdown-macros">Startup/Shutdown Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#startup-shutdown-macro-types">Startup/Shutdown Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#declaration-macro">Declaration Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#machine-startup-shutdown-macros">Machine Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#program-startup-shutdown-macros">Program Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#subprogram-startup-shutdown-macros">Subprogram Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#pre-processor-startup-shutdown-macros">Pre-Processor Startup/Shutdown Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#block-startup-shutdown-macros">Block Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#create-or-modify-startup-shutdown-macros">Create or Modify Startup/Shutdown Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-macro-editor">The Macro Editor</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#compiling-and-saving-macros">Compiling and Saving Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#delete-or-disable-startup-shutdown-macros">Delete or Disable Startup/Shutdown Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#event-macros">Event Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#event-macro-types">Event Macro Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#motion-event-macros">Motion Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#cycle-event-macros">Cycle Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#tool-event-macros">Tool Event Macros</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#diagnostic-event-macro">Diagnostic Event Macro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#pre-processor-identification-macros">Pre-Processor Identification Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#create-or-modify-event-macros">Create or Modify Event Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-event-macro-editor">The Event Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#delete-or-disable-event-macros">Delete or Disable Event Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#code-macros">Code Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#create-code-macros">Create Code Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#the-code-macro-editor">The Code Macro Editor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#code-macros-match-order">Code Macros Match Order</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#modify-code-macro-matching-conditions">Modify Code Macro Matching Conditions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#delete-or-disable-code-macros">Delete or Disable Code Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#data-macros">Data Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#create-data-macros">Create Data Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#the-data-macro-editor">The Data Macro Editor</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#data-macros-match-order">Data Macros Match Order</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#modify-data-macro-matching-conditions">Modify Data Macro Matching Conditions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../quest/customization.html#delete-or-disable-data-macros">Delete or Disable Data Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#create-user-function-macro">Create User Function Macro</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-user-function-macro-editor">The User Function Macro Editor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#delete-or-disable-user-function-macros">Delete or Disable User Function Macros</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#export-user-function-macros">Export User Function Macros</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#the-dialog-editor">The Dialog Editor</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/customization.html#the-dialog-template-editor">The Dialog Template Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/customization.html#file-storage">File Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../quest/ceprocessing.html">Control Emulator Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../quest/ceprocessing.html#cerun-startup-processing">CERUN Startup Processing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../quest/ceprocessing.html#normal-ce">Normal CE</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../quest/ceprocessing.html#multi-kernel-ce">Multi-Kernel CE</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/ceprocessing.html#cerun-main-processing-loop">CERUN Main Processing Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/ceprocessing.html#cerun-code-processing-loop">CERUN Code Processing Loop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quest/ceprocessing.html#cerun-shutdown-processing">CERUN Shutdown Processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Control Emulator Macros</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="language/index.html">The Macro Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="language/fundamentals.html">Fundamentals of the Macro Language</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="language/fundamentals.html#basic-macro-syntax">Basic Macro Syntax</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/fundamentals.html#macro-data-types">Macro Data Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/fundamentals.html#macro-variables">Macro Variables</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/fundamentals.html#explicit-type-declaration-declar">Explicit Type Declaration (DECLAR)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#variable-scope">Variable Scope</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#variable-type">Variable Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#variable-name">Variable Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#variable-array">Variable Array</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#variable-assignment">Variable Assignment</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#variable-default">Variable Default</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="language/fundamentals.html#operators">Operators</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#numeric-string-and-sequence-operators">Numeric, String and Sequence Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#assignment-operators">Assignment Operators</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/fundamentals.html#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="language/fundamentals.html#detecting-data-type-mismatching">Detecting Data Type Mismatching</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="language/functioncall.html">Function Calls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="language/functioncall.html#built-in-functions">Built-in Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/functioncall.html#external-functions">External Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/functioncall.html#user-function-macros">User Function Macros</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="language/functioncall.html#function-declaration">Function Declaration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/functioncall.html#function-definition">Function Definition</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/functioncall.html#function-name">Function Name</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/functioncall.html#function-parameters">Function Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="language/functioncall.html#function-body">Function Body</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="language/flowcontrol.html">Flow Control in a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#the-if-block">The IF Block</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#the-case-statement">The CASE Statement</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#the-while-loop">The WHILE Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#the-repeat-loop">The REPEAT Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#the-do-loop">The DO Loop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#exiting-loops-exit">Exiting Loops (EXIT)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#unconditional-jumps-jumpto">Unconditional Jumps (JUMPTO)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#exiting-a-macro-termac">Exiting a Macro (TERMAC)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/flowcontrol.html#ending-a-macro-endmac">Ending a Macro (ENDMAC)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="language/invocation.html">Macro Invocation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="language/invocation.html#enable-disable-macro-matching-match">Enable/Disable Macro Matching (MATCH)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/invocation.html#outputting-the-identifier-or-event-output">Outputting the Identifier or Event (OUTPUT)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="language/textio.html">Text File I/O from a Macro</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="language/textio.html#opening-a-text-file-open">Opening a Text File (OPEN)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/textio.html#closing-a-text-file-close">Closing a Text File (CLOSE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/textio.html#writing-to-a-text-file-write">Writing to a Text File (WRITE)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/textio.html#reading-from-a-text-file-read">Reading from a Text File (READ)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/textio.html#reading-from-a-string-value-read">Reading from a String Value (READ)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="language/others.html">Other Macro Commands</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="language/others.html#outputting-error-messages-error">Outputting Error Messages (ERROR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="language/others.html#calling-other-programs-system">Calling other programs (SYSTEM)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cemacrocommands.html">Control Emulator Macro Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-exec-command">The EXEC Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-lprint-command">The LPRINT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-pprint-command">The PPRINT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-taperd-command">The TAPERD Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-tapewt-command">The TAPEWT Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-search-command">The SEARCH Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-rstmodal-command">The RSTMODAL Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cemacrocommands.html#the-savmodal-command">The SAVMODAL Command</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">String Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#output-string-format">Output String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#numeric-output-format">Numeric Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#time-output-format">Time Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#string-output-format">String Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#minor-word-output-format">Minor Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#major-word-output-format">Major Word Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#logical-output-format">Logical Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#tab-output-format">Tab Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#wildcard-output-format">Wildcard Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#register-index-output-formats">Register Index Output Formats</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#predefined-register-output-format">Predefined Register Output Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#current-predefined-register-value">Current Predefined Register Value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#ascii-value-output-format">ASCII Value Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#input-string-format">Input String Format</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#space-input-format-character">Space Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#exclamation-input-format-character">Exclamation Input Format Character</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#numeric-input-format">Numeric Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#time-input-format">Time Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#string-input-format">String Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#minor-word-input-format">Minor Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#major-word-input-format">Major Word Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#logical-input-format">Logical Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#tab-input-format">Tab Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#skip-character-input-format">Skip Character Input Format</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#wildcard-input-format">Wildcard Input Format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../variables/index.html">Macro System Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../variables/summaryvar.html">Variable Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#canned-cycle-variables">Canned cycle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#composite-control-emulator-variables">Composite control emulator variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#constants">Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#control-emulator-variables">Control emulator variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#conversion-factor-variables">Conversion factor variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#coolant-feed-rate-and-spindle-variables">Coolant feed rate and spindle variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#cutter-compensation-variables">Cutter compensation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#error-message-variables">Error message variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#lathe-variables">Lathe variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machine-and-workpiece-coordinate-variables">Machine and Workpiece coordinate variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#machining-time-variables">Machining time variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#macro-variables">Macro variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#mcd-tape-variables">MCD/Tape variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#miscellaneous-variables">Miscellaneous variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#motion-related-variables">Motion related variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#multi-kernel-variables">Multi-kernel variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#operation-variables">Operation variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#subprogram-variables">Subprogram variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/summaryvar.html#tooling-variables">Tooling variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/constantvar.html">Variables Defining Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coordinatevar.html">Machine &amp; Workpiece Coordinate Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/motionvar.html">Motion-Related Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/macrovar.html">Macro Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/conversionvar.html">Conversion Factor Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/coolfedspinvar.html">Coolant, Feed Rate and Spindle Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cuttercompvar.html">Cutter Compensation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/opvar.html">Operation Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/toolvar.html">Tooling Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/lathevar.html">Lathe Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/cyclevar.html">Automated Canned Cycle Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#drill-cycle-variables">Drill Cycle Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../variables/cyclevar.html#thread-cycle-variables">Thread Cycle Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/tapevar.html">MCD/Tape Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/machtimevar.html">Machining Time Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/defvar.html">Control Emulator Definition Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/errorvar.html">Error Message Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/multikernelvar.html">Multi-Kernel Control Emulator Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/compositevar.html">Composite Control Emulator Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/subprogvar.html">Subprogram Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variables/miscvar.html">Miscellaneous Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/index.html">Macro Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../functions/summaryfunc.html">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/mathfunc.html">Mathematical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/numericfunc.html">Numeric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/geometricfunc.html">Geometric Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/vectorfunc.html">Vector Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/matrixfunc.html">Matrix Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conditionalfunc.html">Conditional Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/conversionfunc.html">Conversion Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/charseqfunc.html">Character and Sequence Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/commandlinefunc.html">Command Line Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/filedirecfunc.html">File and Directory Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/cefunc.html">Control Emulator Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/delmiafunc.html">DELMIA Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../functions/otherfunc.html">Other Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../section_cerun.html">CERUN: The Control-Emulator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cevm/index.html">CERUN with Virtual Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/startcerun.html">Starting CERUN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-an-extractor">Starting CERUN from an Extractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-the-desktop">Starting CERUN from the Desktop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-cerun-from-the-command-prompt">Starting CERUN from the Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#starting-pse-from-a-command-prompt">Starting PSE from a Command Prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#cerun-return-codes">CERUN Return Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/startcerun.html#the-launch-panel">The Launch Panel</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#cerun-tab">CERUN Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#vm-tab">VM Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#preferences-tab">Preferences Tab</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#options-dialog">Options Dialog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#db-manager">DB Manager</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/startcerun.html#job-button">JOB Button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/ceruninout.html">CERUN Inputs and Outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#input-mcd-file">Input MCD File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#subprograms">Subprograms</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#segmented-programs">Segmented Programs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-verification-listing">Output Verification Listing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-identification">Program Identification</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-listing">Program Listing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/ceruninout.html#program-summary">Program Summary</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tooling-summary">Tooling Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tool-flute-length-summary">Tool Flute Length Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#tool-travel-summary">Tool Travel Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#machining-time-summary">Machining Time Summary</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/ceruninout.html#diagnostic-summary">Diagnostic Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-log-file">Output Log File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/ceruninout.html#output-review-file">Output Review File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cevm/usingcerun.html">Using CERUN with Virtual Machine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#diagnostics">Diagnostics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#tracing">Tracing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#simulation">Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#debugging">Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cevm/usingcerun.html#menus">Menus</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/file.html">File Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/run.html">Run Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/view.html">View Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/debug.html">Debug Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/cerun.html">CERUN Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/simulation.html">Simulation Menu</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/main.html">Simulation»Virtual Machine</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-panning">Camera panning</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-rotation">Camera rotation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-roll">Camera roll</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-origin-and-attachment">Camera origin and attachment</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#camera-viewpoint">Camera viewpoint</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/main.html#to-summarize">To summarize</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/controller.html">Simulation»Controller</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-axes">Simulation»Controller: Axes</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-fixture-compensation">Simulation»Controller: Fixture Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-tool-compensation">Simulation»Controller: Tool Compensation</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-time-line">Simulation»Controller: Time Line</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-code-groups">Simulation»Controller: Code Groups</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-mdi">Simulation»Controller: MDI</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/controller.html#simulationcontroller-opskip">Simulation»Controller: Opskip</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/manager.html">Simulation»Manager</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/mode.html">Simulation»Mode</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodecamera">Simulation»Mode»Camera</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodeselection">Simulation»Mode»Selection</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodemeasurement">Simulation»Mode»Measurement</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodepause-material-removal">Simulation»Mode»Pause Material Removal</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/mode.html#simulationmodepause-gouge-detection">Simulation»Mode»Pause Gouge Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/partfixture.html">Simulation»Parts/Fixtures (Ctrl Alt P)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/toolholderhead.html">Simulation»Tools/Holders/Heads (Ctrl Alt T)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#tools">Tools</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#holders">Holders</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/toolholderhead.html#heads">Heads</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/camera.html">Simulation»Camera</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerafit-ctrl-space">Simulation»Camera»Fit (Ctrl Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameracenter-ctrl-shift-space">Simulation»Camera»Center (Ctrl Shift Space)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerapivot-ctrl-p">Simulation»Camera»Pivot (Ctrl P)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraattach">Simulation»Camera»Attach</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraperspective">Simulation»Camera»Perspective</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerafront">Simulation»Camera»Front</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraback">Simulation»Camera»Back</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameratop">Simulation»Camera»Top</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerabottom">Simulation»Camera»Bottom</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraleft">Simulation»Camera»Left</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraright">Simulation»Camera»Right</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraspeed-ctrl-ctrl">Simulation»Camera»Speed (Ctrl +, Ctrl –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraview-angle-shift-shift">Simulation»Camera»View Angle (Shift +, Shift –)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcameraload-ctrl-0-9">Simulation»Camera»Load (Ctrl 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerasave-ctrl-alt-0-9">Simulation»Camera»Save (Ctrl Alt 0-9)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/camera.html#simulationcamerareset">Simulation»Camera»Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/show.html">Simulation»Show</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowwireframe">Simulation»Show»Wireframe</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-path-ctrl-t">Simulation»Show»Tool Path (Ctrl T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-vector">Simulation»Show»Tool Vector</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-path-as-overlay-ctrl-shift-t">Simulation»Show»Tool Path as Overlay (Ctrl Shift T)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowfilters">Simulation»Show»Filters</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowcross-section">Simulation»Show»Cross Section</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowxy-plane-grid">Simulation»Show»XY Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowyz-plane-grid">Simulation»Show»YZ Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowzx-plane-grid">Simulation»Show»ZX Plane Grid</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowaxes-marker">Simulation»Show»Axes Marker</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowkinematics">Simulation»Show»Kinematics</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowworkpiece-reference">Simulation»Show»Workpiece Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowtool-reference">Simulation»Show»Tool Reference</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowsafety-zones">Simulation»Show»Safety Zones</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowworkpiece-coords-ctrl-w">Simulation»Show»Workpiece Coords (Ctrl W)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowdisplay">Simulation»Show»Display</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshownext-display-ctrl-d">Simulation»Show»Next Display (Ctrl D)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/show.html#simulationshowprevious-display-ctrl-shift-d">Simulation»Show»Previous Display (Ctrl Shift D)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/measure.html">Simulation»Measure</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/annotation.html">Simulation»Annotation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/selection.html">Simulation»Selection</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionhide-in-view-ctrl-b">Simulation»Selection»Hide in View (Ctrl B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionhide-in-all-views">Simulation»Selection»Hide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionshow-all-rehide-ctrl-alt-b">Simulation»Selection»Show All/Rehide (Ctrl Alt B)</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectionshow-all-rehide-in-all-views">Simulation»Selection»Show All/Rehide in All Views</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/selection.html#simulationselectioninvert-hide-state-ctrl-shift-b">Simulation»Selection»Invert Hide State (Ctrl Shift B)</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/grid.html">Simulation»Grid (Ctrl Alt G)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/lights.html">Simulation»Lights (Ctrl Alt L)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/material.html">Simulation»Material (Ctrl Alt M)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/display.html">Simulation»Display (Ctrl Alt D)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/chip.html">Simulation»Chip and Split (Ctrl Alt C)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/compare.html">Simulation»Compare (Ctrl Alt Q)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/options.html">Simulation»Options (Ctrl Alt O)</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#time-line-options">Time Line Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#tool-path-options">Tool Path Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#mrs-options">MRS Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#tolerance-options">Tolerance Options</a></li>
+<li class="toctree-l7"><a class="reference internal" href="../cevm/simulation/options.html#miscellaneous-options">Miscellaneous Options</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/setup.html">Simulation»Open Setup</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../cevm/simulation/setup.html#simulationsave-setup">Simulation»Save Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/tools.html">Tools Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/window.html">Window Menu</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cevm/uirmenus/help.html">Help Menu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cedelmia/index.html">CERUN with DELMIA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/setupce.html">Setup CERUN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/setupce.html#cam-selection">CAM Selection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/setupce.html#cam-integration">CAM Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html">MCD Based Simulation with CATIA V5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#machining-and-simulation-setup">Machining and Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#part-operation-settings">Part Operation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#post-processing-with-gener">Post-Processing with GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#mcd-file-selection-override">MCD File Selection Override</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#tool-and-workpiece-compensation-settings">Tool and Workpiece Compensation Settings</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#cutter-compensation-panel">Cutter Compensation Panel</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#origin-compensation-panel">Origin Compensation Panel</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsimcatv5.html#using-cerun-with-catia">Using CERUN with CATIA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../cedelmia/mcdsim3dx.html">MCD Based Simulation with 3DEXPERIENCE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#machining-and-simulation-setup">Machining and Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#part-operation-settings">Part Operation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#post-processing-with-gener">Post-Processing with GENER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#mcd-file-selection-override">MCD File Selection Override</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#tool-and-workpiece-compensation-settings">Tool and Workpiece Compensation Settings</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#cutter-compensation-management-for-simulation">Cutter Compensation Management for Simulation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#define-workpiece-compensation">Define Workpiece Compensation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../cedelmia/mcdsim3dx.html#using-cerun-with-3dexperience">Using CERUN with 3DEXPERIENCE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../diag/index.html">Diagnostic Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../diag/geninfo.html">General Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/modify.html">Modifying Diagnostic Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../diag/errorfile.html">Error File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../back/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back/annex.html">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../back/characterset.html">Character Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/codeident.html">Code Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/dataident.html">Data Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/reservedwords.html">Reserved Words</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../back/userdefquest.html">User-Defined Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#question-tags">Question Tags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#s-user-defined-section">/S User-defined section</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#q-number-type">/Q number type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#p-prompt-text-or-short-description-text">/P prompt text, or short description text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#t-question-text">/T question text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#d-default-answer">/D default answer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#l-response-location">/L response location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#o-options">/O options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#comment-character">! comment character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#case">CASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cchar">CCHAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#cvalue">CVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#ivalue">IVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#wvalue">WVALUE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../back/userdefquest.html#yesno">YESNO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#macro-system-variables">Macro System Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/userdefquest.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../back/cemacrosample.html">Control Emulator Macro Samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../back/cemacrosample.html#macro-example-1">Macro Example #1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../back/cemacrosample.html#macro-example-2">Macro Example #2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Control Emulator V26</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../section_quest.html">QUEST: Control Emulator Development</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Control Emulator Macros</a></li>
+      <li class="breadcrumb-item active">String Formatting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="string-formatting">
+<span id="id1"></span><h1>String Formatting<a class="headerlink" href="#string-formatting" title="Link to this heading"></a></h1>
+<p>String formatting is used to read and write variables to external
+files and to write information to the
+CERUN listing.
+Output string formatting converts variables to a text string. Input
+string formatting extracts information from a text string and loads
+it into variables.</p>
+<section id="output-string-format">
+<span id="id2"></span><h2>Output String Format<a class="headerlink" href="#output-string-format" title="Link to this heading"></a></h2>
+<p>Output string formatting is used to transfer different data types
+into a text format depending upon the control characters in a format
+string. The output format processing described below is used by the
+$FSWRIT function,
+the ERROR and WRITE macro commands, and the PPRINT command.</p>
+<p>An output format statement is composed of two parts: the format
+string and an optional list of arguments to be formatted for output.
+The format string contains text to be output as well as special
+format codes that specify how the arguments in the list are to be
+converted to text.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathtt{'}\mathit{format}\,\mathit{string}\,\mathtt{'} \;
+\bigg[, \mathit{argument_1} \,\Big[,\mathit{argument_2} \,\big[,\ldots \big]\Big]\bigg]\)</span></p>
+</div></blockquote>
+<p>There must be as many format codes in the format string as there are
+arguments in the argument list. The exclamation character (!) is used
+to differentiate between the text in the format string to be output
+as-is and the special format codes that identify where and how
+arguments are to be output. If an exclamation character is required
+in the format string, specify two exclamation characters in a row.
+For example, “Error!!”</p>
+<p>The following sections describe the output formats that are
+available.</p>
+<section id="numeric-output-format">
+<span id="id3"></span><h3>Numeric Output Format<a class="headerlink" href="#numeric-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big(\;\begin{matrix}
+\begin{vmatrix}\,\begin{array}{c} V \\ F \\ X \end{array}\,\end{vmatrix}_{\text{(1)}} &amp;
++_{\text{(2)}} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{\text{(3)}} &amp;
+9_{\text{(4)}} &amp;
+\begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{\text{(5)}} &amp;
+9_{\text{(6)}} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{\text{(7)}}
+\end{matrix}\;\big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output value as a variable “V” (default), fixed “F”, or extended “X” length string</div>
+<div class="line">② Output plus sign for positive numbers</div>
+<div class="line">③ Suppress leading “s” or excess “e” zeroes to the left of the decimal</div>
+<div class="line">④ Number of whole digits “0-9”</div>
+<div class="line">⑤ Output decimal point always “.” or only for fractional numbers “f”</div>
+<div class="line">⑥ Number of fractional digits “0-9”</div>
+<div class="line">⑦ Suppress trailing “s” or excess “e” zeroes to the right of the decimal</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>This format is used to place a value into the character string using
+a given “format”. This format requires a numeric argument for each
+occurrence of the format. This value can be any numeric
+value. The macro processor will take this value and format it using
+the specified “format”, which can be as follows:</p>
+<p>The “V”, “F” or “X” character provides for variable or fixed length
+output. When using the F and X formats, leading and trailing zeroes
+that are converted to blanks will remain significant. This is useful
+when outputting tables of values that should be aligned. The X format
+reserves an extra space for the sign. With the F format, the sign if
+present occupies one of the digit positions to the left of the
+decimal. The default is variable length output. The V format
+character can be omitted.</p>
+<p>The “+” character is used to force a plus sign to be output if the
+value is a positive number. This character is optional and if
+omitted, positive values will not have a plus sign output.</p>
+<p>The “s” or “S” character is used to suppress leading and/or trailing
+zeroes from the number to be output. The “e” or “E” character is used
+to ensure that at least one digit will exist on the given side of the
+decimal point. For example, the number “.22” would be represented by
+“0.22”. The suppression character is optional and if omitted all
+leading and/or trailing zeroes will be output. If the decimal point
+is not to be output then it is recommended that either leading or
+trailing zeroes not be suppressed depending on the machine control
+specifications.</p>
+<p>The “9” character is used to indicate the number of digits to be
+output before and/or after the decimal point. A maximum of 9 digits
+can be output before and/or after the decimal point giving a maximum
+of 18 digits of precision. This character may be replaced with any
+digit from 0 through 9.</p>
+<p>The “f” or “F” character is optional and signifies that only
+fractional numbers will have the decimal character. Whole numbers are
+represented without the decimal character.</p>
+<p>The “.” character is used to force the decimal point selected in the
+“Punching Requirements” section of QUEST to be output. This character
+is optional and if omitted, the decimal point will not be output.</p>
+<p>For example:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>S=(12*350)/(2*$PI*1.5)
+WRITE/22,&#39;Set the spindle to !(s5) RPM&#39;,S
+%L12=$FSWRIT( $
+  &#39;Position the tool to X=!(s3.3) then cycle start&#39;,$
+  $P1)
+WRITE/29,&#39;PI = !(2.9)&#39;,$PI
+</pre></div>
+</div>
+</div></blockquote>
+<p>In the WRITE/22,… line, the following string is written to unit 22:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Set</span> <span class="n">the</span> <span class="n">spindle</span> <span class="n">to</span> <span class="mi">446</span> <span class="n">RPM</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>and in the next line the variable %L12 is set to the string:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Position</span> <span class="n">the</span> <span class="n">tool</span> <span class="n">to</span> <span class="n">X</span><span class="o">=</span><span class="mf">5.456</span> <span class="n">then</span> <span class="n">cycle</span> <span class="n">start</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>the last line writes the following string to unit 29:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PI</span> <span class="o">=</span> <span class="mf">03.141592654</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="time-output-format">
+<h3>Time Output Format<a class="headerlink" href="#time-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big(\;\begin{matrix}
+\begin{vmatrix}\,\begin{array}{c} V \\ F \\ X \end{array}\,\end{vmatrix}_{(1)} &amp;
++_{(2)} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(3)} &amp;
+9_{(4)} &amp;
+\begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(5)} &amp;
+\begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(6)} &amp;
+\begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{(7)} &amp;
+9_{(8)} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(9)}
+\end{matrix}\;\big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output time as a variable “V” (default), fixed “F”, or extended “X” length string</div>
+<div class="line">② Output plus sign for positive times.</div>
+<div class="line">③ Suppress leading “s” or excess “e” zeroes to the left of the colon</div>
+<div class="line">④ Number of whole digits “0-9”</div>
+<div class="line">⑤ Output colon and 2 digit minutes (optional)</div>
+<div class="line">⑥ Output colon and 2 digit seconds (required)</div>
+<div class="line">⑦ Output decimal point always “.” or only for fractional times “f”</div>
+<div class="line">⑧ Number of fractional digits “0-9”</div>
+<div class="line">⑨ Suppress trailing “s” or excess “e” zeroes to the right of decimal</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A time output format is indicated by one or two
+“<strong>:</strong>[<strong>se</strong>]<strong>2</strong>” time format descriptors appearing in the
+numeric output format as described earlier. A single time format
+descriptor will output a value in “<em>minutes</em><strong>:</strong><em>seconds</em>”
+format. Two format descriptors will output a value in
+“<em>hours</em><strong>:</strong><em>minutes</em><strong>:</strong><em>seconds</em>” format.</p>
+<p>The “:” and the “2” characters are required.</p>
+<p>The optional “s” or “S” following the colon suppresses both the
+leading zeros in the time value and the leading colon if there is no
+value to the left to be output. The optional “e” or “E” suppresses
+both the excess zeros in the time value and the leading colon if
+there is no value to the left to be output. If neither is specified,
+the time component is output with a colon followed by two digits.</p>
+<p>All other format descriptor characters are as described in <a class="reference internal" href="#numeric-output-format"><span class="std std-ref">“Numeric
+Output Format”</span></a>.</p>
+<p>For example:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Statements:
+  PPRINT/&#39;Total cutting time is !(s9:2) m:ss&#39;,$FEDTIM
+  PPRINT/&#39;Total positioning time is !(s9:2) m:ss&#39;,$RAPTIM
+  PPRINT/&#39;Total job time is !(e3:2:2) h:mm:ss&#39;,$FEDTIM+$RAPTIM
+Produces:
+  Total cutting time is 147:35 m:ss
+  Total positioning time is 2:12 m:ss
+  Total job time is 2:29:47 h:mm:ss
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="string-output-format">
+<h3>String Output Format<a class="headerlink" href="#string-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{A}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output a text string argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A string format is specified by the character “A” or “a” optionally
+followed by an integer value from 0 to 999. The “a” format will force
+all letters of the string to lower case while “A” will preserve the
+case. The integer value is used to specify the maximum number of
+characters to be output. If no value or 0 is specified, the number of
+characters output is dependent on the size of the string specified as
+the argument for this format. If a size is specified and the string
+is larger than the size, then the remaining characters will be
+truncated. If the string is shorter than the size, blanks will be
+added to extend the string to the size specified. This format
+requires a string argument for each occurrence of the format. This
+value can be any string value of any length.</p>
+<p>For example, the following code will truncate the argument string
+since it is longer than the size specified with the “A” format.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Statements:
+  %L8=&#39;too long&#39;
+  WRITE/21, $
+    &#39;This string is !(A3), so it will be truncated.&#39;, $
+    %L8
+Produce:
+  This string is too, so it will be truncated.
+</pre></div>
+</div>
+</div></blockquote>
+<p>This next example shows the reverse. The following code will pad the
+argument string with trailing blanks since it is shorter than the
+size specified with the “A” format.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Statements:
+  %L12=&#39;adds&#39;
+  WRITE/22,&#39;This format !(A9) extra blanks.&#39;,%L12
+Produce:
+  This format adds extra blanks.
+</pre></div>
+</div>
+</div></blockquote>
+<p>Specifying !(A) would automatically adjust the format to fit the size
+of the string argument.</p>
+</section>
+<section id="minor-word-output-format">
+<h3>Minor Word Output Format<a class="headerlink" href="#minor-word-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{M}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output a minor word argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A minor word format is specified by the character “M” or “m”
+optionally followed by an integer value from 0 to 999. The “m” format
+will force the minor word name to be presented in lower case. The
+length processing is performed in the same manner as the string
+formats. This format requires
+a minor word argument for each occurrence of the format. A 2000 class
+major word can also be used, provided the subclass code exceeds 1000.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Statements:
+  $P1=ON
+  PPRINT/&#39;Coolant is !(M).&#39;,$P1
+Produce:
+  Coolant is ON.
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="major-word-output-format">
+<h3>Major Word Output Format<a class="headerlink" href="#major-word-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{R}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output a macro major word (i.e. record) argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A major word (or record) format is specified by the character “R” or
+“r” optionally followed by an integer value from 0 to 999. The “r”
+format will force the record name to be presented in lower case. The
+length processing is performed in the same manner as the string
+formats. This format requires a macro variable of type record as an
+argument for each occurrence of the format.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Statements:
+  %L3=CUTTER
+  PPRINT/&#39;The current setting of %L3=!(R).&#39;,%L3
+Produce:
+  The current setting of %L3=CUTTER.
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="logical-output-format">
+<h3>Logical Output Format<a class="headerlink" href="#logical-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{L}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output a macro logical argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A logical format is specified by the character “L” or “l” optionally
+followed by an integer value from 0 to 999. The “l” format will force
+the logical argument value to be presented in lower case. The length
+processing is performed in the same manner as the string formats. A
+string of “TRUE” or “FALSE” will be output depending upon the value
+of the logical argument. This format requires a logical argument for
+each occurrence of the format.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Statements:
+  %L9=$TRUE
+  PPRINT/&#39;The current setting of %L9=!(L).&#39;,%L9
+Produce:
+  The current setting of %L9=TRUE.
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="tab-output-format">
+<h3>Tab Output Format<a class="headerlink" href="#tab-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{T}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Tab to a position</div>
+<div class="line">② Position from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A tab format is specified by the character “T” or “t” followed by an
+integer value from 0 to 999, which specifies the position in the
+output record to advance to. With the “T” format, subsequent output
+will start at the specified position or the current record length,
+whichever is higher. With the “t” format, subsequent output will
+start at the specified position, truncating the record if necessary.
+This format does not take an argument.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Statement:
+  PPRINT/&#39;Tool !(S6):!(T14)!(A)&#39;,$T,$TLNAME
+Produces:
+  Tool 12:     10mm drill
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="wildcard-output-format">
+<h3>Wildcard Output Format<a class="headerlink" href="#wildcard-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \, \boldsymbol{*} \, \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Output an argument using the default formatting rules</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A wildcard format is specified by the character “*”. This format is
+used to output any type of argument in a fixed format. The following
+table shows the equivalent formats that would be used depending upon
+the type of argument specified when “!(*)” is used as a format
+descriptor.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type of argument</p></th>
+<th class="head"><p>Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Numeric</p></td>
+<td><p>!(s9f9s)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Minor</p></td>
+<td><p>!(M)</p></td>
+</tr>
+<tr class="row-even"><td><p>Text string</p></td>
+<td><p>!(A)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Logical</p></td>
+<td><p>!(L)</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>In addition to the equivalent types shown, two more types can be
+output. If the argument is a $NULL type, the characters “$NULL” will
+be output. If the argument type is a “sequence” type, the characters
+“&lt;sq<sub>1</sub>,sq<sub>2</sub>,…,sqn&gt;” will be output. Where
+“sq<sub>1</sub>” represents the first argument of the sequence and
+“sqn” represents the last. Each argument of the sequence is output
+as though they were specified individually using a wildcard format.</p>
+</section>
+<section id="register-index-output-formats">
+<h3>Register Index Output Formats<a class="headerlink" href="#register-index-output-formats" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \;
+\begin{vmatrix}\,\begin{array}{c} \boldsymbol{&#64;} \\ \boldsymbol{\#} \end{array}\,\end{vmatrix}_{(1)}
+\enspace n_{(2)}
+\; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output register <em>n</em> word address “&#64;” or value “#”</div>
+<div class="line">② Register index from 1 through 99</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>This format is specified by the character “&#64;” or “#” followed by an
+integer index value of a register as defined in QUEST (from 1 through
+99). The “&#64;” format outputs a numeric argument as a register word
+address, which includes the register letter “before” and “after”
+characters. The “#” format outputs just the numeric portion of the
+register. This format requires a numeric argument for each occurrence
+of the format.</p>
+<p>In the following example, register number “2” as defined in QUEST has
+a descriptor of “Gs2”.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Statement:
+  EXEC/&#39;!(@2)&#39;,25
+Produces:
+  G25
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="predefined-register-output-format">
+<h3>Predefined Register Output Format<a class="headerlink" href="#predefined-register-output-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \;
+\begin{vmatrix}\,\begin{array}{c} \boldsymbol{&#64;} \\ \boldsymbol{\#} \end{array}\,\end{vmatrix}_{(1)}
+\enspace t_{(2)}
+\; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output register type <em>t</em> word address “&#64;” or value “#”</div>
+<div class="line">② Register type as defined in the table of <a class="reference internal" href="#std-register-format-names"><span class="std std-ref">“Standard register format names”</span></a></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>This format is specified by the character “&#64;” or “#” followed by an
+single alphabetic character where the character identifies a specific
+type of register as listed in the table below. Note that some
+register types may not be available for specific machines. Also note
+that the single letter codes refer to specific register functions and
+only coincidentally to actual registers starting with the same
+character. The “&#64;” format outputs a numeric argument as a register
+word address, which includes the register letter “before” and “after”
+characters. The “#” format outputs just the numeric portion of the
+register. This format requires a numeric argument for each occurrence
+of the format.</p>
+<blockquote id="std-register-format-names">
+<div><table class="wrap-last docutils align-default" id="id6">
+<caption><span class="caption-text">Standard register format names</span><a class="headerlink" href="#id6" title="Link to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>A</p></td>
+<td><p>Current machine YZ rotation register and/or value</p></td>
+</tr>
+<tr class="row-even"><td><p>B</p></td>
+<td><p>Current machine ZX rotation register and/or value</p></td>
+</tr>
+<tr class="row-odd"><td><p>C</p></td>
+<td><p>Current machine XY rotation register and/or value</p></td>
+</tr>
+<tr class="row-even"><td><p>D</p></td>
+<td><p>Current diameter compensation register and/or value</p></td>
+</tr>
+<tr class="row-odd"><td><p>E</p></td>
+<td><p>Current thread lead Z-axis register and /or value</p></td>
+</tr>
+<tr class="row-even"><td><p>F</p></td>
+<td><p>Current feed rate register and/or value in $FMODE</p></td>
+</tr>
+<tr class="row-odd"><td><p>H</p></td>
+<td><p>Current length compensation register and/or value</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>Current sequence number register and/or value</p></td>
+</tr>
+<tr class="row-odd"><td><p>S</p></td>
+<td><p>Current spindle speed register and/or value in $SMODE</p></td>
+</tr>
+<tr class="row-even"><td><p>T</p></td>
+<td><p>Current tool register and/or value</p></td>
+</tr>
+<tr class="row-odd"><td><p>X</p></td>
+<td><p>Current X axis register and/or value</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>Current Y axis register and/or value</p></td>
+</tr>
+<tr class="row-odd"><td><p>Z</p></td>
+<td><p>Current Z axis register and/or value</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>In the following example, the format descriptor of the Z axis
+register is “Z34s”.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Statement:
+  EXEC/&#39;!(@Z)&#39;,2.5
+Produces:
+  Z0025
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="current-predefined-register-value">
+<h3>Current Predefined Register Value<a class="headerlink" href="#current-predefined-register-value" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(! \;
+\begin{vmatrix}\,\begin{array}{c} \boldsymbol{&#64;} \\ \boldsymbol{\#} \end{array}\,\end{vmatrix}_{(1)}
+\enspace t_{(2)}\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Output register type <em>t</em> current word address “&#64;” or value “#”</div>
+<div class="line">② Register type as defined in the table of <a class="reference internal" href="#std-register-format-names"><span class="std std-ref">“Standard register format names”</span></a></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>This format is similar to the Predefined Register format, but omits
+the ( ) parentheses. This format will output the current value
+corresponding to the specific type of register as listed in
+the table of <a class="reference internal" href="#std-register-format-names"><span class="std std-ref">“Standard register format names”</span></a>
+above. This format does not require an argument.</p>
+<p>In the following example,
+the format descriptor of the Z axis register is “Zs34” and
+the current Z axis position is “7.35”.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Statement:
+    EXEC/&#39;G00 !@Z M02&#39;
+Produces:
+    G00 Z73500 M02
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="ascii-value-output-format">
+<h3>ASCII Value Output Format<a class="headerlink" href="#ascii-value-output-format" title="Link to this heading"></a></h3>
+<p>The circumflex character (<strong>^</strong>) is used as an attention character to
+indicate that an ASCII character is to be output in its place. If a
+circumflex character is required on the output string, specify two
+circumflex characters (<strong>^^</strong>). This control character requires a numeric
+argument and is processed in the same manner as the $FCHAR function.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Statement:
+  PPRINT/&#39;ASCII character 67=^&#39;,67
+Produces:
+  ASCII character 67=C
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="input-string-format">
+<span id="id4"></span><h2>Input String Format<a class="headerlink" href="#input-string-format" title="Link to this heading"></a></h2>
+<p>Input string formatting is used to read text from a string variable
+or an I/O unit, extracting information from the input text and
+storing it in macro variables. The input format processing described
+below is used by the READ command.</p>
+<p>An input format statement is composed of two parts: the format string
+and a list of one or more macro variables to receive the input. The
+format string contains spacing characters and the special format
+codes that specify how the input string is to be converted and stored
+into the macro variables in the argument list.</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\mathtt{'}\mathit{format}\,\mathit{string}\,\mathtt{'} \;
+\bigg[, \mathit{variable_1} \,\Big[,\mathit{variable_2} \,\big[,\ldots \big]\Big]\bigg]\)</span></p>
+</div></blockquote>
+<p>There must be as many format codes in the format string as there are
+variables in the argument list. Format codes are identified by an
+exclamation character (!). The following sections describe the input
+format codes that are available to convert text to macro variables of
+various types. The input string formats are similar to the output
+string formats with some exceptions.</p>
+<section id="space-input-format-character">
+<h3>Space Input Format Character<a class="headerlink" href="#space-input-format-character" title="Link to this heading"></a></h3>
+<p>The space character is used to advance the internal pointer on the
+input string to the next character that is neither a space nor a tab.
+This allows you to reposition the internal pointer to the next “word”
+of the input string.</p>
+</section>
+<section id="exclamation-input-format-character">
+<h3>Exclamation Input Format Character<a class="headerlink" href="#exclamation-input-format-character" title="Link to this heading"></a></h3>
+<p>The exclamation character (<strong>!</strong>) is used as an attention character to
+indicate that the characters to follow are to be validated as formats
+for different input types. The following formats should be placed
+between parentheses. For example, “!(<em>format</em>)”. The type of argument
+created depends upon the input format type.</p>
+</section>
+<section id="numeric-input-format">
+<span id="id5"></span><h3>Numeric Input Format<a class="headerlink" href="#numeric-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big(\;\begin{matrix}
++_{(1)} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(2)} &amp;
+9_{(3)} &amp;
+\begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{(4)} &amp;
+9_{(5)} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(6)}
+\end{matrix}\;\big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Expect a plus sign for positive numbers</div>
+<div class="line">② All “s” or excess “e” leading zeroes might be suppressed</div>
+<div class="line">③ Number of whole digits “0-9”</div>
+<div class="line">④ Always “.” or optionally “f” expect a decimal point</div>
+<div class="line">⑤ Number of fractional digits “0-9”</div>
+<div class="line">⑥ All “s” or excess “e” trailing zeroes might be suppressed</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>This format is used to read a numeric value from the character string
+using a given “format”. The main objective is to ensure that the
+input number (in string format) conforms to the given format.
+This is especially useful if the input number has an implied decimal
+place (does not have a decimal point punched). The wildcard format
+can be used if the format of the input number is not important.</p>
+<p>The control emulator will read a numeric value from the input string
+using the specified “format”. It is recommended that the same format
+used to write the numeric value be used to read the numeric value.
+The “format” is the same as for output string formatting.</p>
+<p>The following example shows how a numeric value is first written into
+a character string (%L02) using the $FSWRIT function. Then, using the
+READ command, converted from character representation back to a
+numeric value (%L03). Due to some loss of precision on the READ
+command and $FSWRIT function, the value read into %L03 will not be
+equal to $PI.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>%L02=$FSWRIT(&#39;!(1.9)&#39;,$PI)
+READ/%L02,&#39;!(1.9)&#39;,%L03
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="time-input-format">
+<h3>Time Input Format<a class="headerlink" href="#time-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big(\;\begin{matrix}
++_{(1)} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(2)} &amp;
+9_{(3)} &amp;
+\begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(4)} &amp;
+\begin{vmatrix}\,\begin{array}{c} :s2 \\ e \end{array}\,\end{vmatrix}_{(5)} &amp;
+\begin{vmatrix}\,\begin{array}{c} . \\ f \end{array}\,\end{vmatrix}_{(6)} &amp;
+9_{(7)} &amp;
+\begin{vmatrix}\,\begin{array}{c} s \\ e \end{array}\,\end{vmatrix}_{(8)}
+\end{matrix}\;\big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Expect a plus sign for positive times</div>
+<div class="line">② All “s” or excess “e” leading zeroes might be suppressed</div>
+<div class="line">③ Number of whole digits “0-9”</div>
+<div class="line">④ Minutes input (optional) might have all “s” or excess “e” leading zeros and colon suppressed</div>
+<div class="line">⑤ Seconds input (required) might have all “s” or excess “e” leading zeros and colon suppressed</div>
+<div class="line">⑥ Always “.” or optionally “f” expect a decimal point</div>
+<div class="line">⑦ Number of fractional digits “0-9”</div>
+<div class="line">⑧ All “s” or excess “e” trailing zeroes might be suppressed</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A time input format is indicated by one or two
+“<strong>:</strong>[<strong>se</strong>]<strong>2</strong>” time format descriptors appearing in the
+numeric input format as described earlier. A single time format
+descriptor will input a value in “minutes:seconds” format. Two format
+descriptors are required to input a value in “hours:minutes:seconds” format.</p>
+<p>The “:” and the “2” characters are required. The optional “s” or “S”,
+“e” or “E” format characters indicate that the colon and leading zero
+digits of the time value can be omitted from the input string. It is
+recommended that the same format used to write the time value be used
+to read the time value.</p>
+<p>All other format descriptor characters are as described in
+<a class="reference internal" href="#numeric-input-format"><span class="std std-ref">“Numeric Input Format”</span></a>. The wildcard
+format can be used if the format of the input time is not important.</p>
+</section>
+<section id="string-input-format">
+<h3>String Input Format<a class="headerlink" href="#string-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{A}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Input a text string argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A string format is specified by the character “A” or “a” followed by
+an integer value from 0 to 999. This format is used to transfer
+characters from one location to another. The integer length value is
+used to specify the number of characters to be read from the input
+string. Omitting the length value or specifying a length of zero (0)
+reads the remainder of the input. If the length specified exceeds the
+record length, the length of the argument is set to the record
+length. This format creates a string argument for each occurrence of
+the format.</p>
+<p>The following example transfers all data from a file opened on unit
+20 to a file opened on unit 21. Input records longer than 100
+characters will be truncated (i.e., the characters after card column
+100 will be ignored).</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>WHILE/.NOT.$FEOF(20)
+  READ/20,&#39;!(A100)&#39;,%L01
+  WRITE/21,&#39;!(A)&#39;,%L01
+ENDOF/WHILE
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="minor-word-input-format">
+<h3>Minor Word Input Format<a class="headerlink" href="#minor-word-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{M}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Input a minor word argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A minor word format is specified by the character “M” or “m”
+optionally followed by an integer value from 0 to 999. A value of 0
+results in the same action as if no value was specified. The value
+specified indicates the number of characters on the input string that
+are to be validated as a minor word. Any trailing spaces read from
+the input string will be ignored. A valid minor word can be a maximum
+of 24 alphanumeric characters or have the form #<em>n</em>, where <em>n</em> is
+the minor word integer code. If no size value is specified, then all
+characters up to the next non-alphanumeric will be validated as a
+minor word. This format creates a minor word argument for each
+occurrence of the format. Note that 2000 class major words and other
+record types are not acceptable with this format.</p>
+</section>
+<section id="major-word-input-format">
+<h3>Major Word Input Format<a class="headerlink" href="#major-word-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{R}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Input a major word or record argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A major word (i.e., record) format is specified by the character “R”
+or “r” optionally followed by an integer value from 0 to 999. A value
+of 0 results in the same action as if no value was specified. The
+value specified indicates the number of characters on the input
+string that are to be validated as a major word. Any trailing spaces
+read from the input string will be ignored. A valid major word can be
+a maximum of 24 alphanumeric characters or have the form #<em>m</em><strong>:</strong><em>n</em>,
+where <em>m</em> is the record class integer code and
+<em>n</em> is the record subclass integer code. If no size value is
+specified, then all characters up to the next non-alphanumeric will
+be validated as a major word. This format creates a record word
+argument for each occurrence of the format.</p>
+</section>
+<section id="logical-input-format">
+<h3>Logical Input Format<a class="headerlink" href="#logical-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{L}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Input a logical argument</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A logical format is specified by the character “L” or “l” optionally
+followed by an integer value from 0 to 999. The length processing is
+performed in the same manner as the minor word formats. The input
+string should match one of “TRUE” or “FALSE”. This format creates a
+logical argument for each occurrence of the format.</p>
+</section>
+<section id="tab-input-format">
+<h3>Tab Input Format<a class="headerlink" href="#tab-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{T}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Tab to a position</div>
+<div class="line">② Position from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A tab format is specified by the character “T” or “t” followed by an
+integer value from 0 to 999, which specifies the position in the
+input string to advance to. With the “T” format, subsequent input
+will start at the specified position or the current input string
+position, whichever is higher. With the “t” format, subsequent input
+will start at the specified position, reprocessing portions of the
+input string if necessary. This format does not take an argument.</p>
+</section>
+<section id="skip-character-input-format">
+<h3>Skip Character Input Format<a class="headerlink" href="#skip-character-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \; \textbf{X}_{(1)} \enspace n_{(2)} \; \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">① Ignore characters</div>
+<div class="line">② Length from 0 through 999</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A skip character format is specified by the character “X” or “x”
+optionally followed by an integer value from 0 to 999. A value of 0
+results in the same action as if a value of 1 was specified. This
+format is used to advance the internal pointer on the input string by
+the specified number of characters. No argument is required for this
+format.</p>
+<p>In the following example, the first 5 characters of the input string
+are ignored, then a logical format reads TRUE and assigns this value
+to %L01.</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>READ/&#39;%L01=TRUE&#39;,&#39;!(X5)!(L)&#39;,%L01
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="wildcard-input-format">
+<h3>Wildcard Input Format<a class="headerlink" href="#wildcard-input-format" title="Link to this heading"></a></h3>
+<p></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(!\big( \, \boldsymbol{*} \, \big)\)</span></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Input an argument using the default formatting rules</div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p>A wildcard format is specified by the character “<strong>*</strong>”. This format is
+used to read any type of value in a fixed format. Before the read is
+performed the internal pointer on the input string is advanced to the
+next “word”. This is equivalent to specifying a space character
+before the format. The type of argument created by this format is
+dependent upon the first character of the word:</p>
+<ul class="simple">
+<li><p>If the first character is a dollar sign ($), the following characters
+should be one of “NULL”, “TRUE”, or “FALSE”, resulting in a NULL or
+LOGICAL value.</p></li>
+<li><p>If the first character is a single quote ('), the following
+characters up to the matching quote are converted to a string value.
+The starting and ending single quotes will not be part of the resultant
+string. If quotes are desired in the resultant string, the input
+string should contain two quotes together.</p></li>
+<li><p>If the first character is a (#), the input string is read as minor
+(#<em>n</em>) or major (#<em>class</em>:<em>subclass</em>) word code.</p></li>
+<li><p>If the first character is a letter, the input string is read as a
+minor or major keyword name.</p></li>
+<li><p>If the first character is a plus sign, minus sign, digit or decimal
+point, the input string is read as a numeric value.</p></li>
+<li><p>If the first character is a colon (:), or if a colon is encountered
+when reading a numeric value, then the string is read as a time
+value.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cemacrocommands.html" class="btn btn-neutral float-left" title="Control Emulator Macro Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../variables/index.html" class="btn btn-neutral float-right" title="Macro System Variables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CGTech.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
