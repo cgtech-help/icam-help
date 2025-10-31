@@ -1,0 +1,433 @@
+.. _command_smartp:
+
+The SMARTP Command :kbd:`[M]`
+=============================
+
+The SMARTP command provides access to the SmartPACK family of
+advanced optimizations. These use *Virtual Machine* and/or *Material
+Removal Simulation* to optimize positioning tool paths, eliminate air
+cutting, and optimize feed rates.
+
+-  :ref:`“SmartPATH”<smartpath>`
+-  :ref:`“SmartCUT”<smartcut>`
+-  :ref:`“SmartFEED”<smartfeed>`
+
+.. _smartpath:
+
+SmartPATH
+---------
+
+The SmartPATH add-on (**sph260** license option) optimizes part
+program positioning motions. It can replace unsafe or inefficient CAM
+generated positioning motions, with safe optimized motions based on
+the machine’s kinematics, physical travel limitations and axes
+positioning rates. SmartPATH ensures the generated multi-axis
+motions do not cause collisions with dynamically changing in-process
+stock and all other surroundings, such as the fixtures and moving as
+well as non-moving components of the machine.
+
+SmartPATH is activated using the following command:
+
+   :math:`\textbf{SMARTP /} \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+ON and OFF enable or disable positioning motion optimization. When
+activated, RAPID and high feed positioning motions (see :ref:`“Set High Feed Threshold”<set_high_feed_threshold>`
+will be replaced by SmartPATH so as to minimize positioning time, while avoiding
+collisions and overtravel conditions.
+
+SmartPATH relies on an integrated *Virtual Machine* simulation
+(**vmr260** license option) to test for collision and overtravel
+conditions during post-processing. SmartPATH relies on *Material
+Removal Simulation* (**xmr260** license option) to test for
+collisions between the in-process stock and all other components in
+the simulation (e.g., machine, fixtures, tooling).
+
+Positioning Clearance:
+~~~~~~~~~~~~~~~~~~~~~~
+
+There are various commands that can be used to specify minimum
+clearance distances to respect when generating positioning tool
+paths:
+
+   :math:`\textbf{SMARTP / SAFE}, \mathit{dist}`
+
+The SAFE parameter specifies a minimum safety distance to apply
+between the tool and all other components in the simulation during
+positioning motions. The tool will be positioned at the cutting feed
+rate when approaching or disengaging from the cut within this
+distance to the stock. This can be used to ensure the tool is always
+moving at feed when cutting stock. Specify a distance of 0 (zero) to
+inhibit this safety test.
+
+   :math:`\textbf{SMARTP / WALL}, \mathit{dist}`
+
+The WALL parameter specifies a minimum safety distance to apply
+between the side of the tool and the stock at the start and end of
+positioning motions. The tool will be positioned laterally at the
+cutting feed rate when within this distance to the stock. This can be
+used to ensure the tool does not leave dwell marks due to contact
+along the side of the tool. Specify a distance of 0 (zero) to inhibit
+this safety test.
+
+   :math:`\textbf{SMARTP / CLEAR}, \mathit{dist}`
+
+The CLEAR parameter specifies a minimum axial safety distance to
+apply at rapid when approaching or disengaging from the cut. This
+ensures a “squared-off” style of motion, with the last positioning
+approach motion being a plunge and the first positioning clearance
+motion being a retract. Specify a distance of 0 (zero) to inhibit
+additional axial positioning clearance.
+
+   :math:`\textbf{SMARTP / }
+   \big[\,\textbf{BACK},\mathit{bdist}\,\big] \;
+   \big[\,\textbf{FEDTO},\mathit{fdist}\,\big]`
+
+The BACK parameter specifies a minimum axial safety retract distance
+to apply at cutting feed when disengaging from the cut. This is
+applied before any CLEAR axial clearance retract, but after any WALL
+lateral clearance. The FEDTO parameter specifies a minimum axial
+safety plunge distance to apply at cutting feed when engaging to the
+start of the cut. This is applied after any CLEAR axial clearance
+plunge, but before any WALL lateral clearance. Specify a distance of
+0 (zero) to inhibit additional axial feed clearance.
+
+   :math:`\textbf{SMARTP / CYCLE}, \begin{pmatrix}\begin{array}{l} \textbf{RETURN} \\ \textbf{CLEAR} \end{array}\end{pmatrix}`
+
+The CYCLE parameter determines where in a cycle that SmartPATH can
+connect positioning motions. RETURN uses the higher of the cycle
+return or clearance planes. CLEAR (the default) uses the cycle
+clearance plane, ignoring any RETURN value coded in CYCLE commands.
+
+Positioning Velocity:
+~~~~~~~~~~~~~~~~~~~~~
+
+There are various commands that can be used to specify the velocity
+to use when approaching or disengaging from the cut:
+
+   :math:`\textbf{SMARTP / RAPID } \big[,\textbf{OFF}\,\big]`
+
+   :math:`\textbf{SMARTP /} \begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix} ,
+   \begin{pmatrix} \begin{array}{l} \mathit{feed} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+By default SmartPATH uses RAPID positioning when replacing CAM
+generated RAPID positioning motions, or uses high feed positioning
+if the CAM generated positioning path includes one or more high feed
+moves. The RAPID qualifier (alone) forces all rapid positioning;
+alternately a positioning *feed* can be specified. The OFF qualifier
+selects the default behavior.
+
+   :math:`\textbf{SMARTP /} \begin{pmatrix} \begin{array}{l} \textbf{FEDTO} \\ \textbf{BACK} \\ \textbf{WALL} \end{array} \end{pmatrix} ,  \begin{pmatrix} \begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array} \end{pmatrix} ,\mathit{feed}`
+
+   :math:`\textbf{SMARTP /} \begin{pmatrix} \begin{array}{l} \textbf{FEDTO} \\ \textbf{BACK} \\ \textbf{WALL} \end{array} \end{pmatrix} ,\textbf{OFF}`
+
+By default SmartPATH uses the programmed feed for final approach
+(FEDTO), initial retract (BACK) and wall clearance (WALL) motions. An
+alternate *feed* can be individually specified for each of these
+types of motions. The OFF qualifier selects the default behavior.
+
+Reference Home Positioning:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SmartPATH can optionally compute the positioning path to and from the
+machine reference home and/or tool change positions.
+
+   :math:`\textbf{SMARTP / SAFETY}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+ON and OFF enable or disable positioning motion optimization to and
+from machine reference positions.
+
+OFF is the default, which requires that the NC programmer include one
+clearance positioning motion following each tool change and another
+just before the next tool change or end of program. When OFF, it is
+the NC programmers responsibility to safely position between these
+clearance points and the machine reference frame. When ON, the
+Virtual Machine model must contain the reference home and/or tool
+change positions, so that SmartPATH can determine the motion of the
+tool as it moves between the workpiece coordinate system and the
+machine reference frame.
+
+Additional SMARTP/SAFETY commands described below can be used to fine
+tune motions to and from machine reference positions:
+
+   :math:`\textbf{SMARTP / SAFETY},\textbf{TOOL}
+   \begin{pmatrix} \!,\! \begin{array}{l} \mathit{dist} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The TOOL parameter specifies a minimum safety distance to apply
+between the cutting tool and other objects, specifically when moving
+to or from the machine reference home. This additional safety can
+help account for any uncertainty involved when making the transition
+between workpiece and machine frames. The OFF qualifier disables
+additional tool safety distance; the ON restores the last specified
+safety distance.
+
+   :math:`\textbf{SMARTP / SAFETY},\textbf{GROUP} \;
+   \big[,\mathtt{'}name \,\mathtt{'}\,\big] \,
+   \begin{pmatrix} \!,\! \begin{array}{l} \mathit{dist} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The GROUP parameter specifies a minimum safety distance to apply
+between the named model component group (default name ‘smartpath’)
+and other objects, specifically when moving to or from the machine
+reference home. The OFF qualifier disables additional group safety
+distance; the ON restores the last specified safety distance.
+
+   :math:`\textbf{SMARTP / SAFETY},
+   \begin{pmatrix}\begin{array}{l} \textbf{POSX} \\ \textbf{POSY} \\ \textbf{POSZ} \\ \textbf{RADIUS} \end{array}\end{pmatrix}
+   , \begin{pmatrix} \begin{array}{l} \mathit{dist} \\ \textbf{OFF} \end{array} \end{pmatrix}`
+
+The above command provides the ability to tightly control the entry
+and exit position when making the transition between workpiece and
+machine reference frames. One axis of the machine can be constrained
+to position to a specified machine value, where POSX, POSY or POSZ
+define the X, Y or Z axis value of the positioning move. Alternately,
+the machine can be forced to position to the surface of a sphere,
+centered at the workpiece origin with a specified radius. The OFF
+qualifier disables special entry/exit positioning.
+
+   :math:`\textbf{SMARTP / AIRCUT},\textbf{AP}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+When the above command is set to **ON** (default), SmartPATH is applied to all air-cutting motions with aggressive optimization. This means SmartCUT will automatically detect and remove unnecessary air cuts wherever possible, replacing them with optimal and safe positioning motions. For example, SmartPATH can eliminate redundant pocket machining passes caused by CAM programs designed for the “maximal” size of stock material. SmartCUT-SmartPATH ensures efficient motion by removing superfluous air-cutting operations.
+
+However, there may be situations where the programmer's intention is to maintain full control over feed motions. In such cases, setting the above command to **OFF** prevents SmartPATH from automatically modifying all air-cutting motions. Instead, SmartPATH can be applied selectively to specific air-cutting motions as required.
+
+This will happen when the SmartCUT positioning feed is above the threshold
+established by the :ref:`FEDRAT/RAPID,...,feed<set_high_feed_threshold>` command.
+
+.. _smartcut:
+
+SmartCUT
+--------
+
+The SmartCUT add-on (**sct260** license option) optimizes part
+program cutting motions. It uses material removal simulation to
+detect when the tool is not engaged with the material (i.e., is not
+cutting) while at the same time being programmed to move at a cutting
+feed. Where feasible SmartCUT changes these time wasting
+“air-cutting” motions to RAPID or high-feed.
+
+SmartCUT also detects RAPID or high-feed motions that cut into the
+in-process stock and (in addition to generating warning diagnostics)
+automatically reduces the feed rate to the upcoming programmed feed
+to avoid tool breakage. Similarly, when leaving the material,
+SmartCUT detects RAPID motions that cut the stock when leaving the
+part, and automatically slows down these cutting motions to the last
+programmed feed.
+
+SmartCUT is activated using the following command:
+
+   :math:`\textbf{SMARTP / AIRCUT}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+ON and OFF enable or disable air-cut optimization. When active,
+SmartCUT uses *Material Removal Simulation* (**xmr260** license
+option) to detect when material is being removed by the cutting tool.
+
+SmartCUT and SmartPATH when used together can significantly improve
+NC programs containing time wasting air cuts. SmartCUT will detect
+the start point and subsequent end points of air-cut segments as
+normal, but instead of increasing the velocity along the programmed
+path will instead use SmartPATH to compute the fastest path to the
+start of the next cut. SmartPATH takes into account the current state
+of the in-process stock as well as part, fixtures and machine
+components, when computing the shortest path to the start of cut.
+
+Where desired, optimization can be restricted to air-cutting motion
+segments meeting a basic length requirement:
+
+   :math:`\textbf{SMARTP / AIRCUT},\textbf{LENGTH}, \mathit{dist}`
+
+The LENGTH parameter specifies the minimum length of an air-cutting
+tool path that can be a candidate for SmartCUT optimization.
+Air-cutting tool paths less than this length are left unchanged.
+Specify a distance of 0 (zero) to remove the minimum length
+restriction (the default).
+
+Air-cut Clearance:
+~~~~~~~~~~~~~~~~~~
+
+The following commands that can be used to specify minimum clearance
+distances to respect when performing air-cut optimizations:
+
+   :math:`\textbf{SMARTP / AIRCUT},\textbf{MINDST}, \mathit{dist}`
+
+The MINDST parameter specifies a minimum safety clearance distance
+that must exist between tool and in-process stock, before the motion
+is considered air-cutting. Specify a distance of 0 (zero) to inhibit
+this safety test.
+
+   :math:`\textbf{SMARTP / AIRCUT }
+   \big[,\textbf{BACK},\mathit{bdist}\,\big] \;
+   \big[,\textbf{FEDTO},\mathit{fdist}\,\big]`
+
+The BACK parameter specifies a minimum safe disengage distance to use
+when making the transition from cutting feed to air-cut positioning;
+the FEDTO parameter specifies a minimum safe engage distance to use
+when making the transition from air-cut positioning to cutting feed.
+These are the distances to continue interpolating at feed, despite
+being in an air-cut condition. Specify a distance of 0 (zero) to
+inhibit additional disengage/engage clearances.
+
+Air-cut Velocity:
+~~~~~~~~~~~~~~~~~
+
+   :math:`\textbf{SMARTP / AIRCUT},\textbf{RAPID} \; \big[,\textbf{OFF}\,\big]`
+
+   :math:`\textbf{ SMARTP / AIRCUT},
+   \begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix} ,
+   \begin{pmatrix}\begin{array}{l} \mathit{feed} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+By default, the maximum machine feed is assigned to all air-cut
+motions. This can be changed by specifying a different *feed* value.
+Specify the RAPID qualifier (alone) to replace air-cut feed motions
+by rapid positioning options. The OFF qualifier resets air-cut
+positioning to use the default maximum machine feed.
+
+.. _smartfeed:
+
+SmartFEED
+---------
+
+The SmartFEED add-on (**sfd260** license option) optimizes part
+program cutting motions. It uses material removal simulation to
+automatically recalculate the best machining feed rate based on the
+machine tool capabilities, tool reference cuts, and the real-time
+volume of in-process stock removed by the tool.
+
+SmartFEED is activated using the following command:
+
+   :math:`\textbf{ SMARTP / FEDOPT}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \\ \textbf{SIMUL} \end{array}\end{pmatrix}`
+
+This command enables (ON) or disables (OFF) feed-rate optimization.
+When enabled, SmartFEED uses *Material Removal Simulation*
+(**xmr260** license option) to compute the volume of material being
+removed by the cutting tool. This information is then used to
+optimize cutting feed rates, with a graphical analysis displayed in
+the Virtual Machine Controller»Time Line window (see :ref:`“Display feed
+optimization”<disply_feed_optimization>`). The SIMUL option
+performs the same feed rate analysis and display, but leaves the
+programmed feed rates unchanged in the NC program.
+
+SmartFEED relies on reference cut information to perform material
+removal rate (MRR) based feed optimization. A reference cut defines
+the spindle speed, feed rate and material removal rate of a
+successful cut, which the software then uses to determine the feed to
+use for the cutting motions present in the NC program. Reference cut
+information can be provided in the following ways:
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{XREF},\textbf{RPM}, \mathit{speed}, \textbf{PERMIN}, \mathit{feed}, \textbf{MRR}, \mathit{volume}`
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{XREF},\textbf{RPM}, \mathit{speed}, \textbf{FPT}, \mathit{feed}, \textbf{WIDTH}, \mathit{width}, \textbf{DEPTH}, \mathit{depth}`
+
+Feed, width and depth values are in units as specified on the last
+UNITS command. The material removal rate (MRR) value is the volume of
+material removed in cubic units per minute. A reference cut must be
+specified using either of the above two formats for feed optimization
+to occur. Reference cut information is modal.
+
+SmartFEED permits limitations to be optionally enforced on the
+calculated feed, speed and spindle power:
+
+   :math:`\textbf{SMARTP / FEDOPT},
+   \begin{pmatrix}\,\begin{array}{l} \textbf{FPT} \\ \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\,\end{pmatrix} ,
+   \begin{pmatrix} \begin{array}{l} \mathit{min,max} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{RPM},
+   \begin{pmatrix}\begin{array}{l} \mathit{min,max} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{POWER},
+   \begin{pmatrix}\begin{array}{l} \big[\,\textbf{WATTS},\big] \mathit{limit,power} \\ \,\textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The OFF qualifier individually removes any limitations that were
+previously imposed. The spindle power *limit* can be specified either
+in horsepower (the default) or in watts. The *power* parameter is the
+horsepower (or watts) required to remove one cubic unit of material.
+
+SmartFEED provides various other settings that affect optimization,
+as follows:
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{STEP}, \mathit{dist}`
+
+Feed optimization uses material removal simulation to compute the
+amount of material being removed. The sampling distance can be set
+using the STEP,\ *dist* couplet, where *dist* is the maximum distance
+between any two samples. The default sampling distance is 5 mm or 0.2
+inches, depending on output units.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{FLOOR},\begin{pmatrix}\begin{array}{l}
+   \begin{pmatrix}\begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array}\end{pmatrix}, \mathit{feed} \\ \\ \textbf{AUTO} \\ \textbf{OFF}
+   \end{array}\end{pmatrix}`
+
+By default, the maximum machine feed is assigned to all moves where
+the calculated material volume removal rate is insignificant. This
+can be changed by specifying a different *feed* value. The AUTO
+keyword generates a high feed value calculated using the reference
+cut MRR and the maximum possible “insignificant” volume. The OFF
+qualifier resets to the default maximum machine feed.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{FLUTE}, \begin{pmatrix}\begin{array}{l} n \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The number of flutes for the current tool is normally defined in the
+Virtual Machine tooling information, which is automatically set by
+the appropriate CAM Extractor when setting up the simulation session.
+This can be overridden by specifying the FLUTES,\ *n* couplet, where
+*n* is the number of flutes. The OFF qualifier (the default) uses the
+Virtual Machine tool definition.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{RETAIN} \begin{bmatrix} ,\! \begin{array}{l} \textbf{IPM} \\ \textbf{MMPM} \\ \textbf{PERMIN} \end{array} \end{bmatrix} , \mathit{min}`
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{RETAIN},\textbf{OFF}`
+
+The RETAIN qualifier specifies the minimum change in feed necessary
+to warrant a change in feed being output to the NC program.
+Calculated changes in feed that are less than the specified minimum
+will be ignored. If the feed type qualifier is omitted, then the
+*min* value is the percentage change in feed. The OFF qualifier will
+result in the calculated feed being output on every NC block, if
+different.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{CUTS}, \begin{pmatrix}\,\begin{array}{l} n \\  \textbf{ALL},n \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The CUTS,\ *n* qualifier limits the increase in number of motions of
+the feed optimized tool path to be no larger than *n* for any given
+input block. Specify *n* as a whole number greater than zero. A value
+of 1 does not permit an increase. This is a local limit applied to
+individual motions.
+
+The CUTS,ALL,\ *n* qualifier limits the increase in number of motions
+of the feed optimized tool path to be no larger than *n* % of the
+unoptimized tool path. This is a global limit applied to the entire
+cutting path.
+
+The OFF qualifier (the default) does not limit the number of
+additional motions that can be added to optimize the feed rate.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{STRVTM}, \begin{pmatrix}\begin{array}{l} \mathit{seconds} \\ \textbf{ON} \\ \textbf{OFF} \end{array}\,\end{pmatrix}`
+
+The STRVTM qualifier specifies a minimum block processing time limit
+in seconds to be applied when SmartFEED subdivides motions, which
+guards against NC block processing queue starvation on the machine.
+ON enables the last specified starvation time; OFF disables
+starvation time limit checking. The starvation time can also be set
+using the $SCSTRV macro system variable.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{ACCEL}, \begin{pmatrix}\begin{array}{l} \textbf{ON} \\ \textbf{OFF} \end{array}\end{pmatrix}`
+
+The ACCEL qualifier specifies feed acceleration (and deceleration)
+limits to be applied when changing feed rates in the output NC
+program. ON enables feed acceleration analysis, which adjusts the
+calculated optimal feed downwards if necessary to avoid accelerating
+the axes of the machine beyond their physical limits. These limits
+can be specified in the QUEST *Control Description / High Speed
+Machining* section and overridden using the command below. OFF
+disables feed acceleration analysis. Feed acceleration analysis will
+be on by default if QUEST defined limits are specified.
+
+   :math:`\textbf{SMARTP / FEDOPT},\textbf{ACCEL} \!\icamrange{17}{1}\! \begin{pmatrix} ,
+   \begin{pmatrix}\begin{array}{l} \textbf{ALL} \\ \textbf{LINEAR} \\ \textbf{REV} \\ \\ \textbf{XAXIS} \\ \textbf{YAXIS} \\ \textbf{ZAXIS} \\ \textbf{UAXIS} \\ \textbf{VAXIS} \\ \textbf{WAXIS} \\ \textbf{QUILL} \\ \textbf{AAXIS} \\ \textbf{BAXIS} \\ \textbf{CAXIS} \\ \textbf{AAXIS},\textbf{TABLE} \\ \textbf{BAXIS},\textbf{TABLE} \\ \textbf{CAXIS},\textbf{TABLE} \\ \textbf{RAM} \big[,n \,\big] \end{array}\end{pmatrix}
+   , \mathit{value}
+   \end{pmatrix}`
+
+This command specifies the earth acceleration limit to be applied to
+various axes of the machine. ALL sets the same earth acceleration
+limit *value* for all axes, LINEAR sets the same limit for all linear
+axes and REV for all rotary axes. Limits can also be set for
+individual axes. See :ref:`here<axis_names>` for a table
+correlating axes name keywords with machine axes.
