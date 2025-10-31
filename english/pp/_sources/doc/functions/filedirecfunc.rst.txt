@@ -1,0 +1,224 @@
+.. _file_directory_functions:
+
+File and Directory Functions
+============================
+
+The following file and directory functions return information
+regarding their status.
+
+To access a file in the internal File Storage, specify an absolute
+file path using an “//ICAMFS/” universal file descriptor (e.g.,
+“//ICAMFS/toolno.dat”).
+Files in the internal File Storage area are read-only.
+
+.. _func_faccess:
+.. index:: Functions; $FACCESS
+
++------------------------------------------------+------------------------------------------+
+| **$FACCESS(**\ *s* [,\ *n*] **)**              | Get file access information              |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns $TRUE if the specified file or directory *s*
+   can be accessed. By default the file is tested for both READ and
+   WRITE access rights, but a specific access type can be checked by
+   specifying an access mode value of *n*. The $FACCESS function returns
+   $FALSE if the specified name is invalid or does not exist, or the
+   file does not support the access rights. The syntax is as follows.
+
+      ::
+
+         logical = $FACCESS(path_string [, mode])
+
+   The following values are supported for mode *n* (Windows file systems
+   cannot differentiate the “run” mode type):
+
+   :0: File exists?
+   :1: File can be run?
+   :2: File can be written?
+   :3: File can be written or run?
+   :4: File can be read?
+   :5: File can be read or run?
+   :6: File can be written or read? (default)
+   :7: File can be written, read or run?
+
+.. _func_fbasnam:
+.. index:: Functions; $FBASNAM
+
++------------------------------------------------+------------------------------------------+
+| **$FBASNAM(**\ *s1*\ [,\ *s2*]\ **)**          | Return file name portion of path string  |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function extracts and returns the file name portion of a file
+   path string *s1*, optionally removing any trailing portion *s2* of
+   the file name that matched the suffix string. The syntax is as
+   follows:
+
+      ::
+
+         file_name_string = $FBASNAM(path_string [,suffix_string])
+
+   For example, “test.cld” is the base portion of “C:\\temp\\test.cld”.
+   When removing a trailing suffix, the $FBASNAM function looks for the
+   last occurrence of the suffix in the file name and then removes the
+   remainder of the file name from the matched point onwards. Case is
+   significant, Continuing the example, “test” would be returned if “.”
+   is specified as a suffix.
+
+.. _func_fctime:
+.. index:: Functions; $FCTIME
+
++------------------------------------------------+-----------------------------------------------+
+| **$FCTIME(**\ *n*\ **)**                       | Convert numeric value to date and time string |
+|                                                |                                               |
+|                                                | Returns: String                               |
++------------------------------------------------+-----------------------------------------------+
+
+   This function returns the date and time in string format, given a
+   real number *n* specifying the number of seconds since a operating
+   system specific “epoch” time. This function can be used to convert
+   time values from the $FSTAT function to a human readable format. The
+   syntax is as follows:
+
+      ::
+
+         date_string = $FCTIME(real)
+
+   The date string is output in the following format with a single blank
+   between the date and time portions:
+
+      ::
+
+         dd-mm-yyyy hh:mm:ssdd-mm-yyyy hh:mm:ss
+
+.. _func_fdirnam:
+.. index:: Functions; $FDIRNAM
+
++------------------------------------------------+------------------------------------------+
+| **$FDIRNAM(**\ *s*\ **)**                      | Return directory portion of path string  |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function extracts and returns the directory name portion of a
+   file path string *s*. The path string need not contain directory name
+   information. The syntax is as follows:
+
+      ::
+
+         path_string = $FDIRNAM(path_string)
+
+.. _func_feof:
+.. index:: Functions; $FEOF
+
++------------------------------------------------+------------------------------------------+
+| **$FEOF(**\ *n*\ **)**                         | Test for end-of-file                     |
+|                                                |                                          |
+|                                                | Returns: Logical                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns the end-of-file status of unit *n*. A status of
+   $TRUE is returned if the specified unit is at the end-of-file mark.
+   $FEOF should be used to check the end-of-file status of a text file
+   unit before reading from that file. If the unit specified has not
+   been opened using the OPEN command, an error will be output.
+
+   Note that the this function can also be called without an argument
+   to test for the end of the CL file. See the :ref:`$FEOF function<func_feof_cldata>`
+   in :ref:`“CL Data Parsing Functions”<cldata_parsing_functions>`.
+
+.. _func_fgetcwd:
+.. index:: Functions; $FGETCWD
+
++------------------------------------------------+------------------------------------------+
+| **$FGETCWD( )**                                | Return current working directory         |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function returns a string set to the current working directory
+   name. The current working directory is typically the directory from
+   which GENER was run. File names that exclude a directory
+   component are assumed to be located in the default (or current)
+   working directory. The syntax is as follows.
+
+      ::
+
+         path_string = $FGETCWD( )
+
+.. _func_fsetcwd:
+.. index:: Functions; $FSETCWD
+
++------------------------------------------------+------------------------------------------+
+| **$FSETCWD(**\ *s*\ **)**                      | Set current working directory            |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function changes the current working directory and returns a
+   string set to the new current working directory defined by string
+   *s*. By default, file names that exclude a directory component are
+   assumed to be in the default (or current) working directory. The
+   syntax is as follows:
+
+   ::
+
+      path_string = $FSETCWD(path_string)
+
+.. _func_fstat:
+.. index:: Functions; $FSTAT
+
++------------------------------------------------+------------------------------------------+
+| **$FSTAT(**\ *s1,s2*\ **)**                    | Get file status information              |
+|                                                |                                          |
+|                                                | Returns: Numeric                         |
++------------------------------------------------+------------------------------------------+
+
+   This function returns various statistics about the specified file or
+   directory defined by string *s1*. The syntax is as follows:
+
+      ::
+
+         real = $FSTAT(path_string,type_string)
+
+   The following literal string values are supported for the type string *s2*:
+
+   :size:  File size in bytes
+   :atime: Time of last file access
+   :ctime: Time of last file status change (typically creation time)
+   :mtime: Time of last file modification
+   :mode:  File mode (operating system specific)
+   :owner: Numeric ID of owner
+   :group: Numeric ID of file group
+
+   The type string *s2* is case insignificant. Values can be abbreviated
+   (although “m” will return the modification time, not the file mode).
+   Dates are returned as the number of seconds since the “epoch” (an
+   operating system dependent base value). The $FCTIME function can be
+   used to convert numeric dates to a string format. Mode information is
+   operating system specific. Use the $FACCESS function to determine
+   file access rights. Ownership information is not available for
+   Windows file systems (a value of zero will be returned).
+
+.. _func_ftmpfile:
+.. index:: Functions; $FTMPFILE
+
++------------------------------------------------+------------------------------------------+
+| **$FTMPFILE(**\ [*s*]\ **)**                   | Create temporary file                    |
+|                                                |                                          |
+|                                                | Returns: String                          |
++------------------------------------------------+------------------------------------------+
+
+   This function creates a temporary file, with a unique file name, in
+   the Windows default temporary file directory. The full path and name
+   of the temporary file is returned. The temporary file will be deleted
+   when GENER processing is completed.
+
+   The temporary file can be created as a copy of an existing file, by
+   specifying the optional filename parameter *s*. To create a temporary
+   copy of a file in the internal File Storage, specify an absolute file
+   path using an “//ICAMFS/” universal file descriptor (e.g.,
+   “//ICAMFS/toolno.dat”).
